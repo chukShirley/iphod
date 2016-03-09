@@ -13,8 +13,13 @@ use Mix.Config
 # which you typically run after static files are built.
 config :iphod, Iphod.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "example.com", port: 80],
+  url: [  scheme: "https",
+          host: "iphod.herokuapp.com", 
+          port: 443
+       ],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]]
   cache_static_manifest: "priv/static/manifest.json"
+  secret_key_base: "0b0ly5fphaXAnUk6vbZ6JMnJN5bX1SvcMUoGReUWHPlMWoPeHzRWFWYGrYQRtL/x"
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -24,12 +29,15 @@ config :logger, level: :info
 # To get SSL working, you will need to add the `https` key
 # to the previous section and set your `:url` port to 443:
 #
-#     config :iphod, Iphod.Endpoint,
-#       ...
-#       url: [host: "example.com", port: 443],
-#       https: [port: 443,
-#               keyfile: System.get_env("SOME_APP_SSL_KEY_PATH"),
-#               certfile: System.get_env("SOME_APP_SSL_CERT_PATH")]
+config :iphod, Iphod.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: System.get_env("DB_USER"),
+  password: System.get_env("DB_PASSWORD"),
+  database: "decacbqfc40fbf",
+  hostname: System.get_env("DB_HOSTNAME"),
+  url: System.get_env("DB_URL")[host: "example.com", port: 443],
+  pool_size: 10
+
 #
 # Where those two env variables return an absolute path to
 # the key and cert in disk or a relative path inside priv,
