@@ -17,8 +17,8 @@ config :iphod, Iphod.Endpoint,
           host: "iphod.herokuapp.com", 
           port: 443
        ],
-  force_ssl: [rewrite_on: [:x_forwarded_proto]]
-  cache_static_manifest: "priv/static/manifest.json"
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  cache_static_manifest: "priv/static/manifest.json",
   secret_key_base: "0b0ly5fphaXAnUk6vbZ6JMnJN5bX1SvcMUoGReUWHPlMWoPeHzRWFWYGrYQRtL/x"
 
 # Do not print debug messages in production
