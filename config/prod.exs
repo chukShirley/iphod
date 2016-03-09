@@ -19,7 +19,7 @@ config :iphod, Iphod.Endpoint,
        ],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/manifest.json",
-  secret_key_base: "0b0ly5fphaXAnUk6vbZ6JMnJN5bX1SvcMUoGReUWHPlMWoPeHzRWFWYGrYQRtL/x"
+  secret_key_base: System.get_env("SECRET_KEY_BASE")
 
 # Do not print debug messages in production
 config :logger, level: :info
@@ -33,7 +33,7 @@ config :iphod, Iphod.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: System.get_env("DB_USER"),
   password: System.get_env("DB_PASSWORD"),
-  database: "decacbqfc40fbf",
+  database: System.get_env("DB_NAME"),
   hostname: System.get_env("DB_HOSTNAME"),
   url: System.get_env("DB_URL")[host: "example.com", port: 443],
   pool_size: 10
@@ -70,4 +70,4 @@ config :iphod, Iphod.Repo,
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
