@@ -14,7 +14,7 @@ defmodule Iphod do
       # Here you could define other workers and supervisors as children
       # worker(Iphod.Worker, [arg1, arg2, arg3]),
       worker(SundayLectionary, []),
-      worker(Psalms, []),
+      # worker(Psalms, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
