@@ -45,6 +45,10 @@ var elmDiv = document.getElementById('elm-container')
       , ps: []
       , nt: []
       , gs: []
+      , ot_text: ""
+      , nt_text: ""
+      , ps_text: ""
+      , gs_text: ""
     }
   , initialState = {
       nextSunday: {
