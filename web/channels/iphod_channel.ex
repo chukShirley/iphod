@@ -22,6 +22,7 @@ defmodule Iphod.IphodChannel do
               nextFeastDay: jsonify_reading(SundayLectionary.next_holy_day),
               today:        Timex.Date.local |> SundayLectionary.formatted_date
             }
+    IO.puts "\nMSG...\n#{inspect msg}\n"
     push socket, "next_sunday", msg
     {:noreply, socket}
   end
@@ -34,11 +35,7 @@ defmodule Iphod.IphodChannel do
         ot:     r.ot,
         ps:     r.ps,
         nt:     r.nt,
-        gs:     r.gs,
-        ot_text: "",
-        nt_text: "",
-        ps_text: "",
-        gs_text: ""
+        gs:     r.gs
       }
   end
 

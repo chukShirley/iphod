@@ -6,15 +6,11 @@ import StartApp
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Http
-import Regex
 import Json.Decode as Json exposing ((:=))
 import Effects exposing (Effects, Never)
 import Task exposing (Task)
 import String exposing (join)
 import Helper exposing (onClickLimited, hideAble)
-
-esvKey = "10b28dac7c57fd96"
 
 app =
   StartApp.start
@@ -46,10 +42,6 @@ type alias Readings =
   , ps:     List String
   , nt:     List String
   , gs:     List String
-  , ot_text: String
-  , nt_text: String
-  , ps_text: String
-  , gs_text: String
   }
 
 
@@ -63,10 +55,6 @@ initReadings =
   , ps      = []
   , nt      = []
   , gs      = []
-  , ot_text = ""
-  , nt_text = ""
-  , ps_text = ""
-  , gs_text = ""
   }
 
 type alias Model =
@@ -121,39 +109,13 @@ port nextSunday: Signal Model
 type Action
   = NoOp
   | SetReadings Model
-  | RequestEsvText (List String)
-  | NewEsvText (Maybe String)
 
 update: Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     NoOp -> (model, Effects.none)
     SetReadings readings -> (readings, Effects.none)
-    RequestEsvText vss ->
-      (model, getEsvText vss)
-    NewEsvText maybeResp ->
-      let
-        foo = Debug.log "ESV TEXT" maybeResp
-      in
-        (model, Effects.none)
 
-getEsvText: List String -> Effects Action
-getEsvText vss =
-  let
-    url = esvUrl (List.head vss |> Maybe.withDefault "")
-  in
-    Http.getString url
-    |> Task.toMaybe
-    |> Task.map NewEsvText
-    |> Effects.task
-
-esvUrl: String -> String
-esvUrl vss =
-  Http.url "http://www.esvapi.org/v2/rest/passageQuery"
-      [ ("key", esvKey)
-      , ("passage", vss)
-      , ("include-headings", "false")
-      ]
 
 -- VIEW
 
@@ -189,10 +151,10 @@ basicNav address model =
 theseReadings: Signal.Address Action -> Readings -> List Html
 theseReadings address readings =
   [ li [] [text readings.title]
-  , li [onClick address (RequestEsvText readings.ot) ] [text ("OT: " ++ (readingList readings.ot))]
-  , li [onClick address (RequestEsvText readings.ps) ] [text ("PS: " ++ (readingList readings.ps))]
-  , li [onClick address (RequestEsvText readings.nt) ] [text ("NT: " ++ (readingList readings.nt))]
-  , li [onClick address (RequestEsvText readings.gs) ] [text ("GS: " ++ (readingList readings.gs))]
+  , li [] [text ("OT: " ++ (readingList readings.ot))]
+  , li [] [text ("PS: " ++ (readingList readings.ps))]
+  , li [] [text ("NT: " ++ (readingList readings.nt))]
+  , li [] [text ("GS: " ++ (readingList readings.gs))]
   ]
 
 readingList: List String -> String
