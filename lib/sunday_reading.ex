@@ -13,7 +13,7 @@ end
 
 defmodule SundayLectionary do
   use Timex
-  def slMap do
+  def yrMap do
     %{  "advent"            => add_services(4),
         "christmasDay"      => add_services(3),
         "christmas"         => add_services(2),
@@ -44,7 +44,7 @@ defmodule SundayLectionary do
     import String
     File.open!("./data/acna_sunday.csv", [:read, :utf8])
       |> IO.stream(:line)
-      |> Enum.reduce(slMap, fn(ln, d) ->
+      |> Enum.reduce(yrMap, fn(ln, d) ->
         ln
           |> split("|")
           |> Enum.map(&strip(&1))

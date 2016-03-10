@@ -33,6 +33,10 @@ channel.on('nextSundayReadings', data => {
   elmApp.ports.nextSundayReadings.send(data)
 })
 
+channel.on('esv_text', data => {
+  elmApp.ports.esvText.send(data)
+})
+
 // Hook up Elm
 
 var elmDiv = document.getElementById('elm-container')
@@ -56,7 +60,11 @@ var elmDiv = document.getElementById('elm-container')
         nextFeastDay: lect_model,
         today: ""
       }
-    }
+      , esvText: {
+        reading: "",
+        body: ""
+      }
+  }
   , elmApp = Elm.embed(Elm.Iphod, elmDiv, initialState)
 
 elmApp.ports.requestNextSunday.subscribe(function(this_day) {
@@ -66,3 +74,8 @@ elmApp.ports.requestNextSunday.subscribe(function(this_day) {
 elmApp.ports.requestLastSunday.subscribe(function(this_day) {
   channel.push("request_last_sunday", this_day)
 });
+
+elmApp.ports.requestText.subscribe(function(request) {
+  console.log("REQUEST TEXT: ", request)
+  channel.push("request_text", request)
+})

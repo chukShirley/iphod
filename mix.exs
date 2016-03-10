@@ -21,7 +21,8 @@ defmodule Iphod.Mixfile do
   def application do
     [mod: {Iphod, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :timex]]
+                    :phoenix_ecto, :postgrex, :timex, :httpoison]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -40,7 +41,8 @@ defmodule Iphod.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
      {:timex, "~> 1.0.2"},
-     {:mock, github: "jjh42/mock"}
+     {:mock, github: "jjh42/mock"},
+     {:httpoison, "~> 0.8.1"}
     ]
   end
 

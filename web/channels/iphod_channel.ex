@@ -5,6 +5,7 @@ defmodule Iphod.IphodChannel do
   use Iphod.Web, :channel
   import SundayLectionary
   import Lityear
+  import EsvText
 
 #  alias Saints.Donor
 
@@ -73,6 +74,12 @@ defmodule Iphod.IphodChannel do
           
     {:noreply, socket}  
   end
+
+  def handle_in("request_text", [reading, vss], socket) do
+    body = EsvText.request(hd vss)
+    push socket, "esv_text", %{reading: reading, body: body}
+    {:noreply, socket}
+  end 
 
   def handle_in("shout", payload, socket) do
     broadcast socket, "shout", payload

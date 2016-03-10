@@ -14,14 +14,12 @@ import Task exposing (Task)
 import String exposing (join)
 import Helper exposing (onClickLimited, hideAble)
 
-esvKey = "10b28dac7c57fd96"
-
 app =
   StartApp.start
     { init = init
     , update = update
     , view = view
-    , inputs = [incomingActions]
+    , inputs = [incomingActions, newText]
     }
 
 -- MAIN
@@ -36,6 +34,17 @@ port tasks =
 
 
 -- MODEL
+
+type alias EsvText =
+  { reading:  String
+  , body:     String
+  }
+
+initEsvText: EsvText
+initEsvText =
+  { reading = ""
+  , body    = ""
+  }
 
 type alias Readings =
   { date:   String
@@ -94,6 +103,10 @@ incomingActions: Signal Action
 incomingActions =
   Signal.map SetReadings nextSunday
 
+newText: Signal Action
+newText =
+  Signal.map NewEsvText esvText
+
 nextSundayFrom: Signal.Mailbox String
 nextSundayFrom =
   Signal.mailbox ""
@@ -102,6 +115,9 @@ lastSundayFrom: Signal.Mailbox String
 lastSundayFrom =
   Signal.mailbox ""
 
+getText : Signal.Mailbox (String, List String)
+getText =
+  Signal.mailbox ("", [])
 
 -- PORTS
 
@@ -113,7 +129,12 @@ port requestLastSunday: Signal String
 port requestLastSunday = 
   lastSundayFrom.signal
 
+port requestText: Signal (String, List String)
+port requestText =
+  getText.signal
+
 port nextSunday: Signal Model
+port esvText: Signal EsvText
 
 
 -- UPDATE
@@ -122,7 +143,7 @@ type Action
   = NoOp
   | SetReadings Model
   | RequestEsvText (List String)
-  | NewEsvText (Maybe String)
+  | NewEsvText EsvText
 
 update: Action -> Model -> (Model, Effects Action)
 update action model =
@@ -130,30 +151,19 @@ update action model =
     NoOp -> (model, Effects.none)
     SetReadings readings -> (readings, Effects.none)
     RequestEsvText vss ->
-      (model, getEsvText vss)
-    NewEsvText maybeResp ->
+      (model, Effects.none)
+    NewEsvText resp ->
       let
-        foo = Debug.log "ESV TEXT" maybeResp
+        foo = Debug.log "ESV TEXT" resp.reading
+        sunday = model.sunday
+        newSunday = case resp.reading of
+          "ot" -> {sunday | ot_text = resp.body}
+          "ps" -> {sunday | ps_text = resp.body}
+          "nt" -> {sunday | nt_text = resp.body}
+          "gs" -> {sunday | ot_text = resp.body}
+          true -> sunday
       in
-        (model, Effects.none)
-
-getEsvText: List String -> Effects Action
-getEsvText vss =
-  let
-    url = esvUrl (List.head vss |> Maybe.withDefault "")
-  in
-    Http.getString url
-    |> Task.toMaybe
-    |> Task.map NewEsvText
-    |> Effects.task
-
-esvUrl: String -> String
-esvUrl vss =
-  Http.url "http://www.esvapi.org/v2/rest/passageQuery"
-      [ ("key", esvKey)
-      , ("passage", vss)
-      , ("include-headings", "false")
-      ]
+        ({ model | sunday = newSunday }, Effects.none)
 
 -- VIEW
 
@@ -188,11 +198,15 @@ basicNav address model =
 
 theseReadings: Signal.Address Action -> Readings -> List Html
 theseReadings address readings =
-  [ li [] [text readings.title]
-  , li [onClick address (RequestEsvText readings.ot) ] [text ("OT: " ++ (readingList readings.ot))]
-  , li [onClick address (RequestEsvText readings.ps) ] [text ("PS: " ++ (readingList readings.ps))]
-  , li [onClick address (RequestEsvText readings.nt) ] [text ("NT: " ++ (readingList readings.nt))]
-  , li [onClick address (RequestEsvText readings.gs) ] [text ("GS: " ++ (readingList readings.gs))]
+  [ li [readingTitleStyle] [text readings.title]
+  , li [readingTitleStyle, onClick getText.address ("ot", readings.ot) ] [text ("OT: " ++ (readingList readings.ot))]
+  , li [esvTextStyle] [text readings.ot_text]
+  , li [readingTitleStyle, onClick getText.address ("ps", readings.ps) ] [text ("PS: " ++ (readingList readings.ps))]
+  , li [esvTextStyle] [text readings.ps_text]
+  , li [readingTitleStyle, onClick getText.address ("nt", readings.nt) ] [text ("NT: " ++ (readingList readings.nt))]
+  , li [esvTextStyle] [text readings.nt_text]
+  , li [readingTitleStyle, onClick getText.address ("gs", readings.gs) ] [text ("GS: " ++ (readingList readings.gs))]
+  , li [esvTextStyle] [text readings.gs_text]
   ]
 
 readingList: List String -> String
@@ -201,12 +215,22 @@ readingList listOfStrings =
 
 -- STYLE
 
+readingTitleStyle: Attribute
+readingTitleStyle =
+  style
+    [ ("font-size", "0.8em")]
+
+esvTextStyle: Attribute
+esvTextStyle =
+  style
+    [ ("font-size", "0.8em")]
+
 buttonStyle: Attribute
 buttonStyle =
   style
     [ ("position", "relative")
     , ("float", "left")
-    , ("padding", "0px 2px")
+    , ("padding", "1px 2px")
     , ("line-height", "0.8")
     , ("display", "inline-block")
     ]
@@ -215,7 +239,7 @@ inactiveButtonStyle =
   style
     [ ("position", "relative")
     , ("float", "left")
-    , ("padding", "0px 2px")
+    , ("padding", "1px 2px")
     , ("line-height", "0.8")
     , ("display", "inline-block")
     , ("color", "lightgrey")
