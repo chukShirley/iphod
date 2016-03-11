@@ -9,8 +9,7 @@ defmodule EsvText do
     query =
       %{ "key" => @esvKey,
         "passage" => Regex.replace(~r/\:/, vss, "."), # no colons!
-        "include-headings" => "false",
-        "output-format" => "plain-text"
+        "include-headings" => "false"
       } |> URI.encode_query
     url = URI.encode("www.esvapi.org/v2/rest/passageQuery?#{query}")
     case  HTTPoison.get(url) do

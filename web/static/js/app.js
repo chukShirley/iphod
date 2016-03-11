@@ -26,6 +26,7 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on("next_sunday", data => {
+  $(".esv_text").text("");
   elmApp.ports.nextSunday.send(data)
 })
 
@@ -34,14 +35,16 @@ channel.on('nextSundayReadings', data => {
 })
 
 channel.on('esv_text', data => {
-  elmApp.ports.esvText.send(data)
+//  elmApp.ports.esvText.send(data)
+document.getElementById(data.reading).innerHTML = data.body;
 })
 
 // Hook up Elm
 
 var elmDiv = document.getElementById('elm-container')
   , lect_model = {
-        date: ""
+        ofType: ""
+      , date: ""
       , season: ""
       , week: ""
       , title: ""
@@ -49,20 +52,12 @@ var elmDiv = document.getElementById('elm-container')
       , ps: []
       , nt: []
       , gs: []
-      , ot_text: ""
-      , nt_text: ""
-      , ps_text: ""
-      , gs_text: ""
     }
   , initialState = {
       nextSunday: {
         sunday: lect_model,
         nextFeastDay: lect_model,
         today: ""
-      }
-      , esvText: {
-        reading: "",
-        body: ""
       }
   }
   , elmApp = Elm.embed(Elm.Iphod, elmDiv, initialState)
@@ -76,6 +71,5 @@ elmApp.ports.requestLastSunday.subscribe(function(this_day) {
 });
 
 elmApp.ports.requestText.subscribe(function(request) {
-  console.log("REQUEST TEXT: ", request)
   channel.push("request_text", request)
 })

@@ -19,16 +19,17 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_info(:after_join, socket) do
-    msg = %{  sunday:       jsonify_reading(SundayLectionary.next_sunday),
-              nextFeastDay: jsonify_reading(SundayLectionary.next_holy_day),
+    msg = %{  sunday:       jsonify_reading("sunday", SundayLectionary.next_sunday),
+              nextFeastDay: jsonify_reading("feastDay", SundayLectionary.next_holy_day),
               today:        Timex.Date.local |> SundayLectionary.formatted_date
             }
     push socket, "next_sunday", msg
     {:noreply, socket}
   end
 
-  def jsonify_reading(r) do
-    %{  date:   r.date,
+  def jsonify_reading(ofType, r) do
+    %{  ofType: ofType,
+        date:   r.date,
         season: r.season,
         week:   r.week,
         title:  r.title,
@@ -55,8 +56,8 @@ defmodule Iphod.IphodChannel do
 
   def handle_in("request_next_sunday", this_date, socket) do
     date = Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
-    msg = %{ sunday:       jsonify_reading( SundayLectionary.next_sunday(date) ),
-             nextFeastDay: jsonify_reading( SundayLectionary.next_holy_day(date) ),
+    msg = %{ sunday:       jsonify_reading( "sunday", SundayLectionary.next_sunday(date) ),
+             nextFeastDay: jsonify_reading( "feastDay", SundayLectionary.next_holy_day(date) ),
              today:        date |> date_next_sunday |> SundayLectionary.formatted_date
           }
     push  socket, "next_sunday", msg
@@ -66,8 +67,8 @@ defmodule Iphod.IphodChannel do
 
   def handle_in("request_last_sunday", this_date, socket) do
     date = Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
-    msg = %{ sunday:       jsonify_reading( SundayLectionary.last_sunday(date) ),
-             nextFeastDay: jsonify_reading( SundayLectionary.next_holy_day(date) ),
+    msg = %{ sunday:       jsonify_reading( "sunday", SundayLectionary.last_sunday(date) ),
+             nextFeastDay: jsonify_reading( "feastDay", SundayLectionary.next_holy_day(date) ),
              today:        date |> Lityear.date_last_sunday |> SundayLectionary.formatted_date
           }
     push  socket, "next_sunday", msg

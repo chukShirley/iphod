@@ -19,7 +19,7 @@ app =
     { init = init
     , update = update
     , view = view
-    , inputs = [incomingActions, newText]
+    , inputs = [incomingActions]
     }
 
 -- MAIN
@@ -47,7 +47,8 @@ initEsvText =
   }
 
 type alias Readings =
-  { date:   String
+  { ofType: String
+  , date:   String
   , season: String
   , week:   String
   , title:  String
@@ -55,16 +56,13 @@ type alias Readings =
   , ps:     List String
   , nt:     List String
   , gs:     List String
-  , ot_text: String
-  , nt_text: String
-  , ps_text: String
-  , gs_text: String
   }
 
 
 initReadings: Readings
 initReadings =
-  { date    = ""
+  { ofType  = ""
+  , date    = ""
   , season  = ""
   , week    = ""
   , title   = ""
@@ -72,10 +70,6 @@ initReadings =
   , ps      = []
   , nt      = []
   , gs      = []
-  , ot_text = ""
-  , nt_text = ""
-  , ps_text = ""
-  , gs_text = ""
   }
 
 type alias Model =
@@ -102,10 +96,6 @@ init =
 incomingActions: Signal Action
 incomingActions =
   Signal.map SetReadings nextSunday
-
-newText: Signal Action
-newText =
-  Signal.map NewEsvText esvText
 
 nextSundayFrom: Signal.Mailbox String
 nextSundayFrom =
@@ -134,7 +124,6 @@ port requestText =
   getText.signal
 
 port nextSunday: Signal Model
-port esvText: Signal EsvText
 
 
 -- UPDATE
@@ -143,7 +132,6 @@ type Action
   = NoOp
   | SetReadings Model
   | RequestEsvText (List String)
-  | NewEsvText EsvText
 
 update: Action -> Model -> (Model, Effects Action)
 update action model =
@@ -152,18 +140,6 @@ update action model =
     SetReadings readings -> (readings, Effects.none)
     RequestEsvText vss ->
       (model, Effects.none)
-    NewEsvText resp ->
-      let
-        foo = Debug.log "ESV TEXT" resp.reading
-        sunday = model.sunday
-        newSunday = case resp.reading of
-          "ot" -> {sunday | ot_text = resp.body}
-          "ps" -> {sunday | ps_text = resp.body}
-          "nt" -> {sunday | nt_text = resp.body}
-          "gs" -> {sunday | ot_text = resp.body}
-          true -> sunday
-      in
-        ({ model | sunday = newSunday }, Effects.none)
 
 -- VIEW
 
@@ -198,16 +174,38 @@ basicNav address model =
 
 theseReadings: Signal.Address Action -> Readings -> List Html
 theseReadings address readings =
-  [ li [readingTitleStyle] [text readings.title]
-  , li [readingTitleStyle, onClick getText.address ("ot", readings.ot) ] [text ("OT: " ++ (readingList readings.ot))]
-  , li [esvTextStyle] [text readings.ot_text]
-  , li [readingTitleStyle, onClick getText.address ("ps", readings.ps) ] [text ("PS: " ++ (readingList readings.ps))]
-  , li [esvTextStyle] [text readings.ps_text]
-  , li [readingTitleStyle, onClick getText.address ("nt", readings.nt) ] [text ("NT: " ++ (readingList readings.nt))]
-  , li [esvTextStyle] [text readings.nt_text]
-  , li [readingTitleStyle, onClick getText.address ("gs", readings.gs) ] [text ("GS: " ++ (readingList readings.gs))]
-  , li [esvTextStyle] [text readings.gs_text]
-  ]
+  let
+    named s = readings.ofType ++ "_" ++ s
+    esv = class "esv_text"
+  in
+    [ li 
+        [] 
+        [text readings.title]
+    , li 
+        [readingTitleStyle, onClick getText.address (named "ot", readings.ot) ] 
+        [text ("OT: " ++ (readingList readings.ot))]
+    , li 
+        [id (named "ot"), esv, esvTextStyle] 
+        [text ""] -- place holder
+    , li 
+        [readingTitleStyle, onClick getText.address (named "ps", readings.ps) ] 
+        [text ("PS: " ++ (readingList readings.ps))]
+    , li 
+        [id (named "ps"), esv, esvTextStyle] 
+        [text ""] -- place holder
+    , li 
+        [readingTitleStyle, onClick getText.address (named "nt", readings.nt) ] 
+        [text ("NT: " ++ (readingList readings.nt))]
+    , li 
+        [id (named "nt"), esv, esvTextStyle] 
+        [text ""] -- place holder
+    , li 
+        [readingTitleStyle, onClick getText.address (named "gs", readings.gs) ] 
+        [text ("GS: " ++ (readingList readings.gs))]
+    , li 
+        [id (named "gs"), esv, esvTextStyle] 
+        [text ""] -- place holder
+    ]
 
 readingList: List String -> String
 readingList listOfStrings =
