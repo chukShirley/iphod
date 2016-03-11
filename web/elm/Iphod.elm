@@ -232,8 +232,8 @@ buttonStyle =
   style
     [ ("position", "relative")
     , ("float", "left")
-    , ("padding", "1px 2px")
-    , ("line-height", "0.8")
+    , ("padding", "2px 2px")
+    , ("font-size", "0.8em")
     , ("display", "inline-block")
     ]
 inactiveButtonStyle: Attribute
@@ -241,8 +241,8 @@ inactiveButtonStyle =
   style
     [ ("position", "relative")
     , ("float", "left")
-    , ("padding", "1px 2px")
-    , ("line-height", "0.8")
+    , ("padding", "2px 2px")
+    , ("font-size", "0.8em")
     , ("display", "inline-block")
     , ("color", "lightgrey")
     ]

@@ -12406,16 +12406,16 @@ Elm.Iphod.make = function (_elm) {
                                                              ,_0: "position"
                                                              ,_1: "relative"}
                                                             ,{ctor: "_Tuple2",_0: "float",_1: "left"}
-                                                            ,{ctor: "_Tuple2",_0: "padding",_1: "1px 2px"}
-                                                            ,{ctor: "_Tuple2",_0: "line-height",_1: "0.8"}
+                                                            ,{ctor: "_Tuple2",_0: "padding",_1: "2px 2px"}
+                                                            ,{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
                                                             ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
                                                             ,{ctor: "_Tuple2",_0: "color",_1: "lightgrey"}]));
    var buttonStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                                      ,_0: "position"
                                                      ,_1: "relative"}
                                                     ,{ctor: "_Tuple2",_0: "float",_1: "left"}
-                                                    ,{ctor: "_Tuple2",_0: "padding",_1: "1px 2px"}
-                                                    ,{ctor: "_Tuple2",_0: "line-height",_1: "0.8"}
+                                                    ,{ctor: "_Tuple2",_0: "padding",_1: "2px 2px"}
+                                                    ,{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
                                                     ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}]));
    var esvTextStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                                       ,_0: "font-size"
