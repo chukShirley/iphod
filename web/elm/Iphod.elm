@@ -218,7 +218,9 @@ readingList listOfStrings =
 readingTitleStyle: Attribute
 readingTitleStyle =
   style
-    [ ("font-size", "0.8em")]
+    [ ("font-size", "0.8em")
+    , ("color", "blue")
+    ]
 
 esvTextStyle: Attribute
 esvTextStyle =
