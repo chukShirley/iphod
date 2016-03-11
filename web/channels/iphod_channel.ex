@@ -77,6 +77,7 @@ defmodule Iphod.IphodChannel do
 
   def handle_in("request_text", [reading, vss], socket) do
     body = EsvText.request(hd vss)
+    Logger.info "Requesting Text: #{vss}"
     push socket, "esv_text", %{reading: reading, body: body}
     {:noreply, socket}
   end 

@@ -15,7 +15,7 @@ defmodule EsvText do
     url = URI.encode("www.esvapi.org/v2/rest/passageQuery?#{query}")
     case  HTTPoison.get(url) do
       {:ok, resp} ->
-        Logger.debug "ESV URL: #{url}"
+        Logger.info "ESV URL: #{url}"
         resp.body
       {:error, _reason} ->
         "ESV text Failed badly"
