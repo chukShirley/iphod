@@ -1,4 +1,5 @@
 require IEx
+require Logger
 defmodule EsvText do
   @esvKey "10b28dac7c57fd96"
 
@@ -14,7 +15,7 @@ defmodule EsvText do
     url = URI.encode("www.esvapi.org/v2/rest/passageQuery?#{query}")
     case  HTTPoison.get(url) do
       {:ok, resp} ->
-        IO.puts "\n#{url}\n"
+        Logger.debug "ESV URL: #{url}"
         resp.body
       {:error, _reason} ->
         "ESV text Failed badly"
