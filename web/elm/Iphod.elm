@@ -12,14 +12,20 @@ import Json.Decode as Json exposing ((:=))
 import Effects exposing (Effects, Never)
 import Task exposing (Task)
 import String exposing (join)
-import Helper exposing (onClickLimited, hideAble)
+import Helper exposing (onClickLimited, hideable)
+
+import Iphod.Sunday exposing (getText)
+import Iphod.Sunday as Sunday
+import Iphod.MorningPrayer as MorningPrayer
+import Iphod.Daily as Daily
+
 
 app =
   StartApp.start
     { init = init
     , update = update
     , view = view
-    , inputs = [incomingActions]
+    , inputs = [incomingActions, incomingSundayText]
     }
 
 -- MAIN
@@ -35,54 +41,30 @@ port tasks =
 
 -- MODEL
 
-type alias EsvText =
-  { reading:  String
+type alias NewSundayText = 
+  { model:    String -- sunday, daily, redletter
+  , section:  String -- ot, ps, nt, gs
+  , id:       String -- id-ified reading, e.g. "Lk_22_39-71"
   , body:     String
   }
 
-initEsvText: EsvText
-initEsvText =
-  { reading = ""
-  , body    = ""
-  }
-
-type alias Readings =
-  { ofType: String
-  , date:   String
-  , season: String
-  , week:   String
-  , title:  String
-  , ot:     List String
-  , ps:     List String
-  , nt:     List String
-  , gs:     List String
-  }
-
-
-initReadings: Readings
-initReadings =
-  { ofType  = ""
-  , date    = ""
-  , season  = ""
-  , week    = ""
-  , title   = ""
-  , ot      = []
-  , ps      = []
-  , nt      = []
-  , gs      = []
-  }
-
 type alias Model =
-  { sunday: Readings
-  , nextFeastDay: Readings
-  , today: String
+  { today:        String
+  , sunday:       Sunday.Model
+  , redLetter:    Sunday.Model
+  , daily:        MorningPrayer.Model
+--  , ep: EveningPrayer.Model
+--  , daily: Daily.Model  
   }
 
 initModel: Model
 initModel =
-  { sunday = initReadings
-  , nextFeastDay = initReadings
-  , today = ""
+  { today =         ""
+  , sunday =        Sunday.init
+  , redLetter =     Sunday.init
+  , daily =         MorningPrayer.init
+--  , ep = EveningPrayer.init
+--  , daily= Daily.init
   }
 
 init: (Model, Effects Action)
@@ -95,7 +77,11 @@ init =
 
 incomingActions: Signal Action
 incomingActions =
-  Signal.map SetReadings nextSunday
+  Signal.map SetSunday nextSunday
+
+incomingSundayText: Signal Action
+incomingSundayText =
+  Signal.map UpdateSunday newSundayText
 
 nextSundayFrom: Signal.Mailbox String
 nextSundayFrom =
@@ -104,10 +90,6 @@ nextSundayFrom =
 lastSundayFrom: Signal.Mailbox String
 lastSundayFrom =
   Signal.mailbox ""
-
-getText : Signal.Mailbox (String, List String)
-getText =
-  Signal.mailbox ("", [])
 
 -- PORTS
 
@@ -119,27 +101,69 @@ port requestLastSunday: Signal String
 port requestLastSunday = 
   lastSundayFrom.signal
 
-port requestText: Signal (String, List String)
+port requestText: Signal (String, String, String, String)
 port requestText =
   getText.signal
 
 port nextSunday: Signal Model
-
+port newSundayText: Signal NewSundayText
 
 -- UPDATE
 
 type Action
   = NoOp
-  | SetReadings Model
+  | SetSunday Model
+  | UpdateSunday NewSundayText
   | RequestEsvText (List String)
+  | Modify Sunday.Model Sunday.Action
+  | ModMP MorningPrayer.Model MorningPrayer.Action
 
 update: Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     NoOp -> (model, Effects.none)
-    SetReadings readings -> (readings, Effects.none)
+    SetSunday readings -> (readings, Effects.none)
+    UpdateSunday text ->
+      let 
+        this_model = if text.model == "redletter" then model.redLetter
+                    else model.sunday -- default to sunday. Why? beats me.
+        this_section = if text.section == "ot" then this_model.ot
+                  else if text.section == "ps" then this_model.ps
+                  else if text.section == "nt" then this_model.nt
+                  else this_model.gs -- default to gs. Why? beats me.
+        update_text this_lesson =
+          if this_lesson.id == text.id 
+            then 
+              {this_lesson | body = text.body, show = True}
+            else 
+              this_lesson
+        newSection = List.map update_text this_section
+        newDayModel = case text.section of
+          "ot" -> {this_model | ot = newSection}
+          "ps" -> {this_model | ps = newSection}
+          "nt" -> {this_model | nt = newSection}
+          _    -> {this_model | gs = newSection}
+
+        newModel = case text.model of
+          "redletter" -> {model | redLetter = newDayModel}
+          _           -> {model | sunday = newDayModel}
+      in
+        (newModel, Effects.none)
     RequestEsvText vss ->
       (model, Effects.none)
+    Modify reading readingAction->
+      let
+        newModel = {model | sunday = Sunday.update readingAction reading}
+      in 
+        (newModel, Effects.none)
+    ModMP reading mpAction->
+      let
+        foo = Debug.log "DAILY MODIFY READING" reading
+        bar = Debug.log "DAILY READING ACTION" mpAction
+        newModel = MorningPrayer.update mpAction reading
+      in 
+        (model, Effects.none)
+
 
 -- VIEW
 
@@ -151,14 +175,18 @@ view address model =
       []
       [ li [] [text ("From: " ++ model.today)]
       , li [] [text (model.sunday.title ++ " - " ++ model.sunday.date)]
-      , li [] [text ("Next Feast Day: " ++ model.nextFeastDay.title ++ " - " ++ model.nextFeastDay.date)]
+      , li [] [text ("Next Feast Day: " ++ model.redLetter.title ++ " - " ++ model.redLetter.date)]
       , li [] (basicNav address model)
       , li 
           []
-          [ ul [] (theseReadings address model.sunday) ]
+-- [ ul [] (theseSunday address model.sunday) ]
+          [ ul [] (Sunday.view (Signal.forwardTo address (Modify model.sunday)) model.sunday) ]
       , li 
           []
-          [ ul [] (theseReadings address model.nextFeastDay) ]
+          [ ul [] (Sunday.view (Signal.forwardTo address (Modify model.redLetter)) model.redLetter) ]
+      , li
+        []
+        [ (MorningPrayer.view (Signal.forwardTo address (ModMP model.daily)) model.daily) ]
       ]
     ]
 
@@ -172,58 +200,7 @@ basicNav address model =
       , br [] []
       ]
 
-theseReadings: Signal.Address Action -> Readings -> List Html
-theseReadings address readings =
-  let
-    named s = readings.ofType ++ "_" ++ s
-    esv = class "esv_text"
-  in
-    [ li 
-        [] 
-        [text readings.title]
-    , li 
-        [readingTitleStyle, onClick getText.address (named "ot", readings.ot) ] 
-        [text ("OT: " ++ (readingList readings.ot))]
-    , li 
-        [id (named "ot"), esv, esvTextStyle] 
-        [text ""] -- place holder
-    , li 
-        [readingTitleStyle, onClick getText.address (named "ps", readings.ps) ] 
-        [text ("PS: " ++ (readingList readings.ps))]
-    , li 
-        [id (named "ps"), esv, esvTextStyle] 
-        [text ""] -- place holder
-    , li 
-        [readingTitleStyle, onClick getText.address (named "nt", readings.nt) ] 
-        [text ("NT: " ++ (readingList readings.nt))]
-    , li 
-        [id (named "nt"), esv, esvTextStyle] 
-        [text ""] -- place holder
-    , li 
-        [readingTitleStyle, onClick getText.address (named "gs", readings.gs) ] 
-        [text ("GS: " ++ (readingList readings.gs))]
-    , li 
-        [id (named "gs"), esv, esvTextStyle] 
-        [text ""] -- place holder
-    ]
-
-readingList: List String -> String
-readingList listOfStrings =
-  String.join " " listOfStrings
-
 -- STYLE
-
-readingTitleStyle: Attribute
-readingTitleStyle =
-  style
-    [ ("font-size", "0.8em")
-    , ("color", "blue")
-    ]
-
-esvTextStyle: Attribute
-esvTextStyle =
-  style
-    [ ("font-size", "0.8em")]
 
 buttonStyle: Attribute
 buttonStyle =

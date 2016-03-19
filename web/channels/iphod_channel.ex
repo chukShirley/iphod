@@ -3,7 +3,8 @@ require Logger
 require Poison
 defmodule Iphod.IphodChannel do
   use Iphod.Web, :channel
-  import SundayLectionary
+  import SundayReading
+  import DailyReading
   import Lityear
   import EsvText
 
@@ -19,9 +20,10 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_info(:after_join, socket) do
-    msg = %{  sunday:       jsonify_reading("sunday", SundayLectionary.next_sunday),
-              nextFeastDay: jsonify_reading("feastDay", SundayLectionary.next_holy_day),
-              today:        Timex.Date.local |> SundayLectionary.formatted_date
+    msg = %{  sunday:    jsonify_reading("sunday", SundayReading.next_sunday),
+              redLetter: jsonify_reading("redletter", SundayReading.next_holy_day),
+              today:     Timex.Date.local |> SundayReading.formatted_date,
+              daily:     Timex.Date.local |> DailyReading.readings |> jsonify_daily
             }
     push socket, "next_sunday", msg
     {:noreply, socket}
@@ -36,12 +38,24 @@ defmodule Iphod.IphodChannel do
         ot:     r.ot,
         ps:     r.ps,
         nt:     r.nt,
-        gs:     r.gs,
-        ot_text: "",
-        nt_text: "",
-        ps_text: "",
-        gs_text: ""
+        gs:     r.gs
       }
+  end
+
+  def jsonify_daily(r) do
+    %{  date: r.date,
+        season: r.season,
+        week: r.week,
+        day: r.day,
+        title: r.title,
+        morning1: r.mp1,
+        morning2: r.mp2,
+        evening1: r.ep1,
+        evening2: r.ep2,
+        show: false,
+        justToday: false
+    }
+
   end
 
   defp ready_page(request) do
@@ -56,9 +70,10 @@ defmodule Iphod.IphodChannel do
 
   def handle_in("request_next_sunday", this_date, socket) do
     date = Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
-    msg = %{ sunday:       jsonify_reading( "sunday", SundayLectionary.next_sunday(date) ),
-             nextFeastDay: jsonify_reading( "feastDay", SundayLectionary.next_holy_day(date) ),
-             today:        date |> date_next_sunday |> SundayLectionary.formatted_date
+    msg = %{ sunday:    jsonify_reading( "sunday", SundayReading.next_sunday(date) ),
+             redLetter: jsonify_reading( "redletter", SundayReading.next_holy_day(date) ),
+             today:     date |> date_next_sunday |> SundayReading.formatted_date,
+             daily:     date |> DailyReading.readings
           }
     push  socket, "next_sunday", msg
           
@@ -67,19 +82,20 @@ defmodule Iphod.IphodChannel do
 
   def handle_in("request_last_sunday", this_date, socket) do
     date = Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
-    msg = %{ sunday:       jsonify_reading( "sunday", SundayLectionary.last_sunday(date) ),
-             nextFeastDay: jsonify_reading( "feastDay", SundayLectionary.next_holy_day(date) ),
-             today:        date |> Lityear.date_last_sunday |> SundayLectionary.formatted_date
+    msg = %{ sunday:    jsonify_reading( "sunday", SundayReading.last_sunday(date) ),
+             redLetter: jsonify_reading( "redletter", SundayReading.next_holy_day(date) ),
+             today:     date |> Lityear.date_last_sunday |> SundayReading.formatted_date,
+             daily:     date |> DailyReading.readings
           }
     push  socket, "next_sunday", msg
           
     {:noreply, socket}  
   end
 
-  def handle_in("request_text", [reading, vss], socket) do
-    body = EsvText.request(hd vss)
+  def handle_in("request_text", [model, section, id, vss], socket) do
+    body = EsvText.request(vss)
     Logger.info "Requesting Text: #{vss}"
-    push socket, "esv_text", %{reading: reading, body: body}
+    push socket, "esv_text", %{model: model, section: section, id: id, body: body}
     {:noreply, socket}
   end 
 

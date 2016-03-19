@@ -26,23 +26,25 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on("next_sunday", data => {
-  $(".esv_text").text("");
+//  $(".esv_text").text("");
+  console.log("NEW TEXT", data);
   elmApp.ports.nextSunday.send(data)
 })
 
-channel.on('nextSundayReadings', data => {
-  elmApp.ports.nextSundayReadings.send(data)
-})
+//channel.on('nextSundayReadings', data => {
+//  elmApp.ports.nextSundayReadings.send(data)
+//})
 
 channel.on('esv_text', data => {
-//  elmApp.ports.esvText.send(data)
-document.getElementById(data.reading).innerHTML = data.body;
+  console.log("NEW TEXT", data);
+  elmApp.ports.newSundayText.send(data);
+// document.getElementById(data.reading).innerHTML = data.body;
 })
 
 // Hook up Elm
 
 var elmDiv = document.getElementById('elm-container')
-  , lect_model = {
+  , sunday_model = {
         ofType: ""
       , date: ""
       , season: ""
@@ -53,11 +55,31 @@ var elmDiv = document.getElementById('elm-container')
       , nt: []
       , gs: []
     }
+  , daily_reading = {
+        date: ""
+      , season: ""
+      , week: ""
+      , day: ""
+      , title: ""
+      , morning1: []
+      , morning2: []
+      , evening1: []
+      , evening2: []
+      , show: false
+      , justToday: false
+    }
   , initialState = {
       nextSunday: {
-        sunday: lect_model,
-        nextFeastDay: lect_model,
-        today: ""
+          today:      ""
+        , sunday:     sunday_model
+        , redLetter:  sunday_model
+        , daily:      daily_reading
+      }
+    , newSundayText:   { 
+        model:    ""
+      , section:  ""
+      , id:       ""
+      , body:     ""
       }
   }
   , elmApp = Elm.embed(Elm.Iphod, elmDiv, initialState)
@@ -71,5 +93,7 @@ elmApp.ports.requestLastSunday.subscribe(function(this_day) {
 });
 
 elmApp.ports.requestText.subscribe(function(request) {
-  channel.push("request_text", request)
+  console.log("REQUEST TEXT", request)
+  if ( $("#" + request[0]).text().length == 0 ) {channel.push("request_text", request)}
+  
 })

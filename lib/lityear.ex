@@ -16,7 +16,7 @@ defmodule  Lityear do
       d.year
     end
   end
-  def abc(d), do: {"C", "A", "B"} |> elem(d|>lityear|>rem(3))
+  def abc(d), do: {"c", "a", "b"} |> elem(d|>lityear|>rem(3))
   def abc_atom(d), do: {:c, :a, :b} |> elem(d|>lityear|>rem(3))
   def is_sunday?(), do: Date.local |> Date.weekday == @sunday
   def is_sunday?(d), do: Date.weekday(d) == @sunday
@@ -28,14 +28,14 @@ defmodule  Lityear do
   def date_next_sunday(d),  do: Date.shift(d, days: days_till_sunday(d))
   def date_last_sunday(),   do: date_last_sunday(Date.local)
   def date_last_sunday(d),  do: Date.shift(d, days: -Date.weekday(d))
-  def last_sunday(),        do: readings date_last_sunday
-  def last_sunday(d),       do: readings date_last_sunday(d)
-  def next_sunday(),        do: readings date_next_sunday(Date.local)
-  def next_sunday(d),       do: readings date_next_sunday(d)
-  def readings(sunday) do
-    IO.puts "READINGS: #{inspect sunday}"
+  def last_sunday(),        do: date_last_sunday              |> to_season
+  def last_sunday(d),       do: date_last_sunday(d)           |> to_season
+  def next_sunday(),        do: date_next_sunday(Date.local)  |> to_season
+  def next_sunday(d),       do: date_next_sunday(d)           |> to_season
+  def to_season(day) do
+    sunday = if day |> is_sunday?, do: day, else: day |> date_last_sunday
     y = lityear sunday
-    yrABC = abc_atom sunday
+    yrABC = abc sunday
     till_advent = Date.diff(sunday, advent(1, sunday.year), :weeks)
     from_christmas = Date.diff(sunday, christmas(1, y), :weeks)
     from_easter = Date.diff(easter_day(y), sunday, :weeks)
@@ -44,23 +44,23 @@ defmodule  Lityear do
     cond do
       # to whom it may concern...
       # changes the order of these conditions at your paril
-      sunday == epiphany(y)   -> {"theEpiphany", "1", yrABC, sunday}
-      sunday == christmas(y)  -> {"christmasDay", "1", yrABC, sunday}
-      till_epiphany in 1..4   -> {"christmas", "2", yrABC, sunday}
-      till_epiphany == 5      -> {"holyName", "1", yrABC, sunday}
-      till_epiphany in 6..11  -> {"christmas", "1", yrABC, sunday}
-      from_easter == 0        -> {"easterDay", "1", yrABC, sunday}
-      from_easter == -1       -> {"palmSunday", "1", yrABC, sunday}
-      from_easter in -2..-6   -> {"lent", to_string(7 + from_easter), yrABC, sunday}
-      from_easter == -7       -> {"epiphany", "9", yrABC, sunday}
-      from_easter == -8       -> {"epiphany", "8", yrABC, sunday}
-      from_easter in 0..6     -> {"easter", to_string(1 + from_easter), yrABC, sunday}
-      from_easter in 7..8     -> {"proper", to_string(from_easter - 6), yrABC, sunday}
-      till_advent in 1..27    -> {"proper", to_string(30 - till_advent), yrABC, sunday}
-      till_advent in 0..-3    -> {"advent", to_string(1 - till_advent), yrABC, sunday}
-      from_christmas in 0..1  -> {"christmas", to_string(from_christmas + 1), sunday}
-      from_epiphany in 0..8   -> {"epiphany", to_string(from_epiphany + 1), yrABC, sunday}
-      true -> {"unknown", "unknown", :unknown, sunday}
+      day == epiphany(y)   -> {"theEpiphany", "1", yrABC, day}
+      day == christmas(y)  -> {"christmasDay", "1", yrABC, day}
+      till_epiphany in 1..4   -> {"christmas", "2", yrABC, day}
+      till_epiphany == 5      -> {"holyName", "1", yrABC, day}
+      till_epiphany in 6..11  -> {"christmas", "1", yrABC, day}
+      from_easter == 0        -> {"easterDay", "1", yrABC, day}
+      from_easter == -1       -> {"palmSunday", "1", yrABC, day}
+      from_easter in -2..-6   -> {"lent", to_string(7 + from_easter), yrABC, day}
+      from_easter == -7       -> {"epiphany", "9", yrABC, day}
+      from_easter == -8       -> {"epiphany", "8", yrABC, day}
+      from_easter in 0..6     -> {"easter", to_string(1 + from_easter), yrABC, day}
+      from_easter in 7..8     -> {"proper", to_string(from_easter - 6), yrABC, day}
+      till_advent in 1..27    -> {"proper", to_string(30 - till_advent), yrABC, day}
+      till_advent in 0..-3    -> {"advent", to_string(1 - till_advent), yrABC, day}
+      from_christmas in 0..1  -> {"christmas", to_string(from_christmas + 1), day}
+      from_epiphany in 0..8   -> {"epiphany", to_string(from_epiphany + 1), yrABC, day}
+      true -> {"unknown", "unknown", :unknown, day}
     end
    end
 

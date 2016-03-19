@@ -13,7 +13,8 @@ defmodule Iphod do
       supervisor(Iphod.Repo, []),
       # Here you could define other workers and supervisors as children
       # worker(Iphod.Worker, [arg1, arg2, arg3]),
-      worker(SundayLectionary, []),
+      worker(SundayReading, []),
+      worker(DailyReading, [])
       # worker(Psalms, []),
     ]
 
