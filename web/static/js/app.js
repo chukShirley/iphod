@@ -27,7 +27,6 @@ channel.join()
 
 channel.on("next_sunday", data => {
 //  $(".esv_text").text("");
-  console.log("NEW TEXT", data);
   elmApp.ports.nextSunday.send(data)
 })
 
@@ -36,7 +35,6 @@ channel.on("next_sunday", data => {
 //})
 
 channel.on('esv_text', data => {
-  console.log("NEW TEXT", data);
   elmApp.ports.newSundayText.send(data);
 // document.getElementById(data.reading).innerHTML = data.body;
 })
@@ -93,7 +91,6 @@ elmApp.ports.requestLastSunday.subscribe(function(this_day) {
 });
 
 elmApp.ports.requestText.subscribe(function(request) {
-  console.log("REQUEST TEXT", request)
   if ( $("#" + request[0]).text().length == 0 ) {channel.push("request_text", request)}
   
 })
