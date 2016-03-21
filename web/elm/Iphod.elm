@@ -268,6 +268,7 @@ about =  """
   * Days with more than one service (Like Easter)
   * Complicated times (like Holy Week and Week following)
   * Psalms are shown as ESV rather than Coverdale
+  * partial verses mean nothing to the ESV API, so in this app only complete verses are shown
 * Path forward
   * Daily readings
   * Daily Office
