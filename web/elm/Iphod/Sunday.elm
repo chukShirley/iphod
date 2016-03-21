@@ -158,7 +158,7 @@ req_style: Lesson -> Attribute
 req_style lesson =
   style
     [ ("color", "black")
-    , ("display", "inline")
+    , ("display", "inline-block")
     , ("padding","0 1em 0 1em")
     ]
 
@@ -167,7 +167,7 @@ opt_style: Lesson -> Attribute
 opt_style lesson =
   style
     [ ("color", "grey")
-    , ("display", "inline")
+    , ("display", "inline-block")
     , ("padding", "0 1em 0 1em")
     ]
 
@@ -176,7 +176,7 @@ alt_style: Lesson -> Attribute
 alt_style lesson =
   style
     [ ("color", "blue")
-    , ("display", "inline")
+    , ("display", "inline-block")
     , ("padding", "0 1em 0 1em")
     ]
 
@@ -185,7 +185,7 @@ bogis_style: Lesson -> Attribute
 bogis_style lesson =
   style
     [ ("color", "red")
-    , ("display", "inline")
+    , ("display", "inline-block")
     , ("padding", "0 1em 0 1em")
     ]
 

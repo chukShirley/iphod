@@ -16,6 +16,7 @@ defmodule SundayReading do
   def last_sunday(date), do: Lityear.last_sunday(date) |> _sunday
 
   defp _sunday({season, wk, yr, sunday}) do
+    if identity[season][wk][yr] |> is_nil, do: IEx.pry
     identity[season][wk][yr]
       |> add_ids
       |> Map.merge %{
@@ -723,10 +724,10 @@ defmodule SundayReading do
     "easterDayVigil" =>
       %{  "1" =>
           %{  "title" => "The Great Vigil of Easter", 
-              "a" => %{ ot: [ %{style: "req", read: "Genesis 1.1―2.2"},
-                              %{style: "req", read: "Genesis 7.1-5, 11-18; 8.8-18; 9.8-13"},
+              "a" => %{ ot: [ %{style: "req", read: "Genesis through Gen 2:2"},
+                              %{style: "req", read: "Genesis 7.1-5 & 7.11-18 & 8.8-18 & 9.8-13"},
                               %{style: "req", read: "Genesis 22.1-18"},
-                              %{style: "req", read: "Exodus 14.10―15.1"},
+                              %{style: "req", read: "Exodus 14.10 through 15.1"},
                               %{style: "req", read: "Isiah 4.2-6"},
                               %{style: "req", read: "Isiah 55.1-11"},
                               %{style: "req", read: "Ezekiel 36.24-28"},
@@ -737,10 +738,10 @@ defmodule SundayReading do
                         nt: [ %{style: "req", read: "Romans 6.3-11"}], 
                         gs: [ %{style: "req", read: "Matthew 28.1-10"}]
                       },
-              "b" => %{ ot: [ %{style: "req", read: "Genesis 1.1―2.2"},
-                              %{style: "req", read: "Genesis 7.1-5, 11-18; 8.8-18; 9.8-13"},
+              "b" => %{ ot: [ %{style: "req", read: "Genesis through Gen 2:2"},
+                              %{style: "req", read: "Genesis 7.1-5 & 7.11-18 & 8.8-18 & 9.8-13"},
                               %{style: "req", read: "Genesis 22.1-18"},
-                              %{style: "req", read: "Exodus 14.10―15.1"},
+                              %{style: "req", read: "Exodus 14.10 through 15.1"},
                               %{style: "req", read: "Isiah 4.2-6"},
                               %{style: "req", read: "Isiah 55.1-11"},
                               %{style: "req", read: "Ezekiel 36.24-28"},
@@ -751,10 +752,10 @@ defmodule SundayReading do
                         nt: [ %{style: "req", read: "Romans 6.3-11"}], 
                         gs: [ %{style: "req", read: "Matthew 28.1-10"}]
                       },
-              "c" => %{ ot: [ %{style: "req", read: "Genesis 1.1―2.2"},
-                              %{style: "req", read: "Genesis 7.1-5, 11-18; 8.8-18; 9.8-13"},
+              "c" => %{ ot: [ %{style: "req", read: "Genesis through Gen 2:2"},
+                              %{style: "req", read: "Genesis 7.1-5 & 7.11-18 & 8.8-18 & 9.8-13"},
                               %{style: "req", read: "Genesis 22.1-18"},
-                              %{style: "req", read: "Exodus 14.10―15.1"},
+                              %{style: "req", read: "Exodus 14.10 through 15.1"},
                               %{style: "req", read: "Isiah 4.2-6"},
                               %{style: "req", read: "Isiah 55.1-11"},
                               %{style: "req", read: "Ezekiel 36.24-28"},
@@ -770,10 +771,10 @@ defmodule SundayReading do
     "easterDay" =>
     %{ "1" =>
       %{  "title" => "Easter Day: Early Service",
-          "a" => %{ ot: [ %{style: "alt", read: "Genesis 1.1―2.2"},
-                          %{style: "alt", read: "Genesis 7.1-5, 11-18; 8.8-18; 9.8-13"},
+          "a" => %{ ot: [ %{style: "alt", read: "Genesis through Gen 2:2"},
+                          %{style: "alt", read: "Genesis 7.1-5 & 7.11-18 & 8.8-18 & 9.8-13"},
                           %{style: "alt", read: "Genesis 22.1-18"},
-                          %{style: "alt", read: "Exodus 14.10―15.1"},
+                          %{style: "alt", read: "Exodus 14.10 through 15.1"},
                           %{style: "alt", read: "Isiah 4.2-6"},
                           %{style: "alt", read: "Isiah 55.1-11"},
                           %{style: "alt", read: "Ezekiel 36.24-28"},
@@ -783,10 +784,10 @@ defmodule SundayReading do
                     nt: [%{style: "req", read: "Rom 6.3-11"}],
                     gs: [%{style: "req", read: "Mt 28.1-10"}]
                     },
-          "b" => %{ ot: [ %{style: "alt", read: "Genesis 1.1―2.2"},
-                          %{style: "alt", read: "Genesis 7.1-5, 11-18; 8.8-18; 9.8-13"},
+          "b" => %{ ot: [ %{style: "alt", read: "Genesis through Gen 2:2"},
+                          %{style: "alt", read: "Genesis 7.1-5 & 7.11-18 & 8.8-18 & 9.8-13"},
                           %{style: "alt", read: "Genesis 22.1-18"},
-                          %{style: "alt", read: "Exodus 14.10―15.1"},
+                          %{style: "alt", read: "Exodus 14.10 through 15.1"},
                           %{style: "alt", read: "Isiah 4.2-6"},
                           %{style: "alt", read: "Isiah 55.1-11"},
                           %{style: "alt", read: "Ezekiel 36.24-28"},
@@ -796,10 +797,10 @@ defmodule SundayReading do
                     nt: [%{style: "req", read: "Rom 6.3-11"}],
                     gs: [%{style: "req", read: "Mt 28.1-10"}]
                     },
-          "c" => %{ ot: [ %{style: "alt", read: "Genesis 1.1―2.2"},
-                          %{style: "alt", read: "Genesis 7.1-5, 11-18; 8.8-18; 9.8-13"},
+          "c" => %{ ot: [ %{style: "alt", read: "Genesis through Gen 2:2"},
+                          %{style: "alt", read: "Genesis 7.1-5 & 7.11-18 & 8.8-18 & 9.8-13"},
                           %{style: "alt", read: "Genesis 22.1-18"},
-                          %{style: "alt", read: "Exodus 14.10―15.1"},
+                          %{style: "alt", read: "Exodus 14.10 through 15.1"},
                           %{style: "alt", read: "Isiah 4.2-6"},
                           %{style: "alt", read: "Isiah 55.1-11"},
                           %{style: "alt", read: "Ezekiel 36.24-28"},
@@ -958,7 +959,7 @@ defmodule SundayReading do
             }
           },
     "easter" =>
-      %{  "2" =>
+      %{"2" =>
           %{  "title" => "The Second Sunday of Easter",
               "a" => %{ ot: [%{style: "req", read: "Acts3.12a, 13-15,17-26"},%{style: "alt", read: "Is 26.1-9,19"}],
                         ps: [%{style: "req", read: "Ps 111"}],
@@ -976,7 +977,7 @@ defmodule SundayReading do
                         gs: [%{style: "req", read: "Jn 20.19-31"}]
                       }
           },      
-          "3" =>
+        "3" =>
             %{  "title" => "The Third Sunday of Easter",
                 "a" => %{ ot: [%{style: "req", read: "Acts 2.14a,36-47"},%{style: "alt", read: "Is 43.1-12"}],
                           ps: [%{style: "req", read: "Ps 116.10-17"}],
@@ -994,7 +995,7 @@ defmodule SundayReading do
                           gs: [%{style: "req", read: "Jn 21.1-14"}]
                         }
             },
-          "4" =>
+        "4" =>
             %{  "title" => "The Fourth Sunday of Easter [Good Shepherd]",
                 "a" => %{ ot: [%{style: "req", read: "Acts 6.1-9, 7.2a,51-60"},%{style: "opt", read: "Neh 9:(1-3)6-15"}],
                           ps: [%{style: "req", read: "Ps 23"}],
@@ -1012,7 +1013,7 @@ defmodule SundayReading do
                           gs: [%{style: "req", read: "Jn 10.22-30"}]
                         }
             },
-          "5" =>
+        "5" =>
             %{  "title" => "The Fifth Sunday of Easter",
                 "a" => %{ ot: [%{style: "req", read: "Acts 17.1-15"},%{style: "alt", read: "Deut 6.20-25"}],
                           ps: [%{style: "req", read: "Ps 66.1-11"},%{style: "alt", read: "66.1-8"}],
@@ -1047,6 +1048,24 @@ defmodule SundayReading do
                       nt: [%{style: "req", read: "Rev 21.1-4,22-22.5"}],
                       gs: [%{style: "req", read: "Jn 14.21-29"}]
                     }
+        },
+      "7" =>
+        %{"title" => "The Sunday after Ascension Day",
+            "a" => %{ ot: [%{style: "req", read: "Acts 1:(1-5)6-14"},%{style: "alt", read: "Ezek 39.21-29"}],
+                      ps: [%{style: "req", read: "Ps 68.1-20"},%{style: "alt", read: "Ps 47"}],
+                      nt: [%{style: "req", read: "1 Pet 4 12-19"}],
+                      gs: [%{style: "req", read: "Jn 17.1-11"}]
+                      },
+            "b" => %{ ot: [%{style: "req", read: "Acts 1.15-26"},%{style: "alt", read: "Ex 28.1-4,9-10,29-30"}],
+                      ps: [%{style: "req", read: "Ps 68.1-20"},%{style: "alt", read: "Ps 47"}],
+                      nt: [%{style: "req", read: "1 Jn 5.6-15"}],
+                      gs: [%{style: "req", read: "Jn 17.11b-19"}]
+                      },
+            "c" => %{ ot: [%{style: "req", read: "Acts 16.16-34"},%{style: "alt", read: "1 Sam 12.19-24"}],
+                      ps: [%{style: "req", read: "Ps 68.1-20"},%{style: "alt", read: "Ps 47"}],
+                      nt: [%{style: "req", read: "Rev 22.10-21"}],
+                      gs: [%{style: "req", read: "Jn 17.20-26"}]
+                    }
         }
       },
     "ascension" =>
@@ -1069,26 +1088,6 @@ defmodule SundayReading do
                       }
           }
     },
-    "easter" =>
-      %{  "7" =>
-        %{"title" => "The Sunday after Ascension Day",
-            "a" => %{ ot: [%{style: "req", read: "Acts 1:(1-5)6-14"},%{style: "alt", read: "Ezek 39.21-29"}],
-                      ps: [%{style: "req", read: "Ps 68.1-20"},%{style: "alt", read: "Ps 47"}],
-                      nt: [%{style: "req", read: "1 Pet 4 12-19"}],
-                      gs: [%{style: "req", read: "Jn 17.1-11"}]
-                      },
-            "b" => %{ ot: [%{style: "req", read: "Acts 1.15-26"},%{style: "alt", read: "Ex 28.1-4,9-10,29-30"}],
-                      ps: [%{style: "req", read: "Ps 68.1-20"},%{style: "alt", read: "Ps 47"}],
-                      nt: [%{style: "req", read: "1 Jn 5.6-15"}],
-                      gs: [%{style: "req", read: "Jn 17.11b-19"}]
-                      },
-            "c" => %{ ot: [%{style: "req", read: "Acts 16.16-34"},%{style: "alt", read: "1 Sam 12.19-24"}],
-                      ps: [%{style: "req", read: "Ps 68.1-20"},%{style: "alt", read: "Ps 47"}],
-                      nt: [%{style: "req", read: "Rev 22.10-21"}],
-                      gs: [%{style: "req", read: "Jn 17.20-26"}]
-                    }
-        }
-      },
     "proper" =>
       %{  "1" =>
             %{"title" => "Pentecost ",

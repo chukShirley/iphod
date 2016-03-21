@@ -26,17 +26,11 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on("next_sunday", data => {
-//  $(".esv_text").text("");
   elmApp.ports.nextSunday.send(data)
 })
 
-//channel.on('nextSundayReadings', data => {
-//  elmApp.ports.nextSundayReadings.send(data)
-//})
-
-channel.on('esv_text', data => {
-  elmApp.ports.newSundayText.send(data);
-// document.getElementById(data.reading).innerHTML = data.body;
+channel.on('new_text', data => {
+  elmApp.ports.newText.send(data);
 })
 
 // Hook up Elm
@@ -59,10 +53,10 @@ var elmDiv = document.getElementById('elm-container')
       , week: ""
       , day: ""
       , title: ""
-      , morning1: []
-      , morning2: []
-      , evening1: []
-      , evening2: []
+      , mp1: []
+      , mp2: []
+      , ep1: []
+      , ep2: []
       , show: false
       , justToday: false
     }
@@ -73,7 +67,7 @@ var elmDiv = document.getElementById('elm-container')
         , redLetter:  sunday_model
         , daily:      daily_reading
       }
-    , newSundayText:   { 
+    , newText:   { 
         model:    ""
       , section:  ""
       , id:       ""

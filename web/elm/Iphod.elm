@@ -25,7 +25,7 @@ app =
     { init = init
     , update = update
     , view = view
-    , inputs = [incomingActions, incomingSundayText]
+    , inputs = [incomingActions, incomingText]
     }
 
 -- MAIN
@@ -41,7 +41,7 @@ port tasks =
 
 -- MODEL
 
-type alias NewSundayText = 
+type alias NewText = 
   { model:    String -- sunday, daily, redletter
   , section:  String -- ot, ps, nt, gs
   , id:       String -- id-ified reading, e.g. "Lk_22_39-71"
@@ -79,9 +79,9 @@ incomingActions: Signal Action
 incomingActions =
   Signal.map SetSunday nextSunday
 
-incomingSundayText: Signal Action
-incomingSundayText =
-  Signal.map UpdateSunday newSundayText
+incomingText: Signal Action
+incomingText =
+  Signal.map UpdateText newText
 
 nextSundayFrom: Signal.Mailbox String
 nextSundayFrom =
@@ -106,56 +106,32 @@ port requestText =
   getText.signal
 
 port nextSunday: Signal Model
-port newSundayText: Signal NewSundayText
+port newText: Signal NewText
 
 -- UPDATE
 
 type Action
   = NoOp
   | SetSunday Model
-  | UpdateSunday NewSundayText
-  | RequestEsvText (List String)
-  | Modify Sunday.Model Sunday.Action
+  | UpdateText NewText
   | ModMP MorningPrayer.Model MorningPrayer.Action
+  | Modify Sunday.Model Sunday.Action
 
 update: Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     NoOp -> (model, Effects.none)
     SetSunday readings -> (readings, Effects.none)
-    UpdateSunday text ->
+    UpdateText text ->
       let 
-        this_model = if text.model == "redletter" then model.redLetter
-                    else model.sunday -- default to sunday. Why? beats me.
-        this_section = if text.section == "ot" then this_model.ot
-                  else if text.section == "ps" then this_model.ps
-                  else if text.section == "nt" then this_model.nt
-                  else this_model.gs -- default to gs. Why? beats me.
-        update_text this_lesson =
-          if this_lesson.id == text.id 
-            then 
-              {this_lesson | body = text.body, show = True}
-            else 
-              this_lesson
-        newSection = List.map update_text this_section
-        newDayModel = case text.section of
-          "ot" -> {this_model | ot = newSection}
-          "ps" -> {this_model | ps = newSection}
-          "nt" -> {this_model | nt = newSection}
-          _    -> {this_model | gs = newSection}
-
         newModel = case text.model of
-          "redletter" -> {model | redLetter = newDayModel}
-          _           -> {model | sunday = newDayModel}
+        --  "daily"     -> {model | daily = updateDailyText model.daily text}
+          "sunday"    -> {model | sunday = updateSundayText model.sunday text}
+          "redletter" -> {model | redLetter = updateSundayText model.redLetter text}
+          _           -> model
       in
         (newModel, Effects.none)
-    RequestEsvText vss ->
-      (model, Effects.none)
-    Modify reading readingAction->
-      let
-        newModel = {model | sunday = Sunday.update readingAction reading}
-      in 
-        (newModel, Effects.none)
+
     ModMP reading mpAction->
       let
         foo = Debug.log "DAILY MODIFY READING" reading
@@ -164,6 +140,61 @@ update action model =
       in 
         (model, Effects.none)
 
+    Modify reading readingAction->
+      let
+        newModel = {model | sunday = Sunday.update readingAction reading}
+      in 
+        (newModel, Effects.none)
+
+
+-- HELPERS
+
+updateSundayText: Sunday.Model -> NewText -> Sunday.Model
+updateSundayText sunday text =
+  let 
+    this_section = case text.section of
+      "ot" -> sunday.ot
+      "ps" -> sunday.ps
+      "nt" -> sunday.nt
+      _    -> sunday.gs
+    update_text this_lesson =
+      if this_lesson.id == text.id 
+        then 
+          {this_lesson | body = text.body, show = True}
+        else 
+          this_lesson
+    newSection = List.map update_text this_section
+    newSunday = case text.section of
+      "ot" -> {sunday | ot = newSection}
+      "ps" -> {sunday | ps = newSection}
+      "nt" -> {sunday | nt = newSection}
+      _    -> {sunday | gs = newSection}
+  in
+    newSunday
+
+
+updateDailyText: Daily.Model -> NewText -> Daily.Model
+updateDailyText daily text =
+  let 
+    this_section = case text.section of
+      "mp1" -> daily.mp1
+      "mp2" -> daily.mp2
+      "ep1" -> daily.ep1
+      _     -> daily.ep2
+    update_text this_lesson =
+      if this_lesson.id == text.id 
+        then 
+          {this_lesson | body = text.body, show = True}
+        else 
+          this_lesson
+    newSection = List.map update_text this_section
+    newDaily = case text.section of
+      "mp1" -> {daily | mp1 = newSection}
+      "mp2" -> {daily | mp2 = newSection}
+      "ep1" -> {daily | ep1 = newSection}
+      _     -> {daily | ep2 = newSection}
+  in 
+    newDaily
 
 -- VIEW
 
