@@ -20,11 +20,12 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_info(:after_join, socket) do
-    msg = %{  sunday:    jsonify_reading("sunday", SundayReading.next_sunday),
-              redLetter: jsonify_reading("redletter", SundayReading.next_holy_day),
-              today:     Timex.Date.local |> SundayReading.formatted_date,
-              daily:     Timex.Date.local |> DailyReading.readings |> jsonify_daily,
-              about:     false
+    msg = %{  sunday:         jsonify_reading("sunday", SundayReading.next_sunday),
+              redLetter:      jsonify_reading("redletter", SundayReading.next_holy_day),
+              today:          Timex.Date.local |> SundayReading.formatted_date,
+              daily:          Timex.Date.local |> DailyReading.readings |> jsonify_daily,
+              morningPrayer:  Timex.Date.local |> DailyReading.readings |> jsonify_daily,
+              about:          false
             }
     push socket, "next_sunday", msg
     {:noreply, socket}
@@ -39,7 +40,8 @@ defmodule Iphod.IphodChannel do
         ot:     r.ot,
         ps:     r.ps,
         nt:     r.nt,
-        gs:     r.gs
+        gs:     r.gs,
+        show:   false
       }
   end
 
@@ -75,6 +77,7 @@ defmodule Iphod.IphodChannel do
              redLetter: jsonify_reading( "redletter", SundayReading.next_holy_day(date) ),
              today:     date |> date_next_sunday |> SundayReading.formatted_date,
              daily:     date |> DailyReading.readings |> jsonify_daily,
+             morningPrayer:  Timex.Date.local |> DailyReading.readings |> jsonify_daily,
              about:     false
           }
     push  socket, "next_sunday", msg
@@ -88,6 +91,7 @@ defmodule Iphod.IphodChannel do
              redLetter: jsonify_reading( "redletter", SundayReading.next_holy_day(date) ),
              today:     date |> Lityear.date_last_sunday |> SundayReading.formatted_date,
              daily:     date |> DailyReading.readings |> jsonify_daily,
+             morningPrayer:  Timex.Date.local |> DailyReading.readings |> jsonify_daily,
              about:     false
           }
     push  socket, "next_sunday", msg

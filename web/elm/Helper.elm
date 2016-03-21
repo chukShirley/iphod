@@ -14,4 +14,10 @@ hideable: Bool -> List (String, String) -> Attribute
 hideable show attr =
   if show then style attr else style [("display", "none")]
 
+-- SIGNALS
+
+getText : Signal.Mailbox (String, String, String, String)
+getText =
+  Signal.mailbox ("", "", "", "") -- e.g. sunday, ot, Isaiah_52_13-53_12, Isaiah 52.13-53.12
+
 

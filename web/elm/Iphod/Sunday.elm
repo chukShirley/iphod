@@ -1,56 +1,27 @@
-module Iphod.Sunday ( Model, Lesson, init, Action, update, view, getText,
+module Iphod.Sunday ( Model, init, Action, update, view,
                       textStyle) where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Helper exposing (onClickLimited, hideable)
+import Helper exposing (onClickLimited, hideable, getText)
 import String exposing (join)
 import Regex exposing (..)
 import Markdown
+import Iphod.Models as Models
 
 -- MODEL
 
-type alias Lesson =
-  { style:    String
-  , show:     Bool
-  , read:     String
-  , body:     String
-  , id:       String
-  , section:  String
-  }
-
-type alias Model =
-  { ofType:   String
-  , date:     String
-  , season:   String
-  , week:     String
-  , title:    String
-  , ot:       List Lesson
-  , ps:       List Lesson
-  , nt:       List Lesson
-  , gs:       List Lesson
-}
+type alias Model = Models.Sunday
 
 init: Model
-init =
-  { ofType  = ""
-  , date    = ""
-  , season  = ""
-  , week    = ""
-  , title   = ""
-  , ot      = []
-  , ps      = []
-  , nt      = []
-  , gs      = []
-  }
-
+init = Models.sundayInit
 
 -- SIGNALS
 
-getText : Signal.Mailbox (String, String, String, String)
-getText =
-  Signal.mailbox ("", "", "", "") -- e.g. sunday, ot, Isaiah_52_13-53_12, Isaiah 52.13-53.12
+-- getText : Signal.Mailbox (String, String, String, String)
+-- getText =
+--   Signal.mailbox ("", "", "", "") -- e.g. sunday, ot, Isaiah_52_13-53_12, Isaiah 52.13-53.12
 
 
 -- UPDATE
@@ -58,12 +29,14 @@ getText =
 type Action
   = NoOp
   | SetReading Model
-  | ToggleShow Lesson
+  | ToggleShow Models.Lesson
+  | ToggleModelShow
 
 update: Action -> Model -> Model
 update action model =
   case action of
     NoOp -> model
+    ToggleModelShow -> {model | show = not model.show}
     SetReading newModel -> newModel
     ToggleShow lesson ->
       let 
@@ -91,17 +64,17 @@ update action model =
 
 view: Signal.Address Action -> Model -> List Html
 view address model =
-  [ li [] [text model.title]
-  , ul [textStyle] (thisReading address model.ot ++ thisText model.ot)
-  , ul [textStyle] (thisReading address model.ps ++ thisText model.ps)
-  , ul [textStyle] (thisReading address model.nt ++ thisText model.nt)
-  , ul [textStyle] (thisReading address model.gs ++ thisText model.gs)
+  [ li [titleStyle, onClick address ToggleModelShow] [text model.title]
+  , ul [textStyle model] (thisReading address model.ot ++ thisText model.ot)
+  , ul [textStyle model] (thisReading address model.ps ++ thisText model.ps)
+  , ul [textStyle model] (thisReading address model.nt ++ thisText model.nt)
+  , ul [textStyle model] (thisReading address model.gs ++ thisText model.gs)
   ]
 
 
 -- HELPERS
 
-thisText: List Lesson -> List Html
+thisText: List Models.Lesson -> List Html
 thisText lessons =
   let
     this_text l =
@@ -109,7 +82,7 @@ thisText lessons =
   in
     List.map this_text lessons
 
-thisReading: Signal.Address Action ->List Lesson -> List Html
+thisReading: Signal.Address Action ->List Models.Lesson -> List Html
 thisReading address lessons =
   let
     this_lesson l =
@@ -121,7 +94,7 @@ thisReading address lessons =
   in
     List.map this_lesson lessons
   
-this_style: Lesson -> Attribute
+this_style: Models.Lesson -> Attribute
 this_style l =
   case l.style of
     "req"     -> req_style  l
@@ -135,7 +108,7 @@ this_style l =
 
 -- STYLE
 
-bodyStyle: Lesson -> Attribute
+bodyStyle: Models.Lesson -> Attribute
 bodyStyle lesson =
   hideable
     lesson.show
@@ -149,14 +122,15 @@ titleStyle =
     , ("height", "2em")
     ]
 
-textStyle: Attribute
-textStyle =
-  style
+textStyle: Model -> Attribute
+textStyle model =
+  hideable
+    model.show
     [ ("font-size", "0.8em")
     , ("margin", "0")
     ]
 
-req_style: Lesson -> Attribute
+req_style: Models.Lesson -> Attribute
 req_style lesson =
   style
     [ ("color", "black")
@@ -165,7 +139,7 @@ req_style lesson =
     ]
 
 
-opt_style: Lesson -> Attribute
+opt_style: Models.Lesson -> Attribute
 opt_style lesson =
   style
     [ ("color", "grey")
@@ -174,7 +148,7 @@ opt_style lesson =
     ]
 
 
-alt_style: Lesson -> Attribute
+alt_style: Models.Lesson -> Attribute
 alt_style lesson =
   style
     [ ("color", "darkblue")
@@ -182,7 +156,7 @@ alt_style lesson =
     , ("padding", "0 1em 0 1em")
     ]
 
-altOpt_style: Lesson -> Attribute
+altOpt_style: Models.Lesson -> Attribute
 altOpt_style lesson =
   style
     [ ("color", "indego")
@@ -191,7 +165,7 @@ altOpt_style lesson =
     ]
 
 
-bogis_style: Lesson -> Attribute
+bogis_style: Models.Lesson -> Attribute
 bogis_style lesson =
   style
     [ ("color", "red")

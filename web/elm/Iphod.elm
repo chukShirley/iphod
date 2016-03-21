@@ -12,11 +12,10 @@ import Json.Decode as Json exposing ((:=))
 import Effects exposing (Effects, Never)
 import Task exposing (Task)
 import String exposing (join)
-import Helper exposing (onClickLimited, hideable)
+import Helper exposing (onClickLimited, hideable, getText)
 import Markdown
 import Graphics.Element as Graphics
 
-import Iphod.Sunday exposing (getText)
 import Iphod.Sunday as Sunday
 import Iphod.MorningPrayer as MorningPrayer
 import Iphod.Daily as Daily
@@ -51,13 +50,13 @@ type alias NewText =
   }
 
 type alias Model =
-  { today:        String
-  , sunday:       Sunday.Model
-  , redLetter:    Sunday.Model
-  , daily:        MorningPrayer.Model
-  , about:        Bool
+  { today:          String
+  , sunday:         Sunday.Model
+  , redLetter:      Sunday.Model
+  , daily:          Daily.Model  
+  , morningPrayer:  MorningPrayer.Model
 --  , ep: EveningPrayer.Model
---  , daily: Daily.Model  
+  , about:          Bool
   }
 
 initModel: Model
@@ -65,10 +64,10 @@ initModel =
   { today =         ""
   , sunday =        Sunday.init
   , redLetter =     Sunday.init
-  , daily =         MorningPrayer.init
+  , daily =         Daily.init
+  , morningPrayer = MorningPrayer.init
   , about =         False
 --  , ep = EveningPrayer.init
---  , daily= Daily.init
   }
 
 init: (Model, Effects Action)
@@ -117,39 +116,55 @@ port newText: Signal NewText
 type Action
   = NoOp
   | ToggleAbout
+  | ToggleMp
   | SetSunday Model
   | UpdateText NewText
   | ModMP MorningPrayer.Model MorningPrayer.Action
-  | Modify Sunday.Model Sunday.Action
+  | ModSunday Sunday.Model Sunday.Action
+  | ModDaily Daily.Model Daily.Action
 
 update: Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     NoOp -> (model, Effects.none)
     ToggleAbout -> ({model | about = not model.about}, Effects.none)
+    ToggleMp ->
+      let
+        mp = model.daily
+        newmp = {mp | show = not mp.show}
+        newModel = {model | daily = newmp}
+      in 
+        (newModel, Effects.none)
     SetSunday readings -> (readings, Effects.none)
     UpdateText text ->
       let 
         newModel = case text.model of
-        --  "daily"     -> {model | daily = updateDailyText model.daily text}
           "sunday"    -> {model | sunday = updateSundayText model.sunday text}
           "redletter" -> {model | redLetter = updateSundayText model.redLetter text}
+          "daily"     -> {model | daily = updateDailyText model.daily text}
           _           -> model
       in
         (newModel, Effects.none)
 
     ModMP reading mpAction->
       let
-        foo = Debug.log "DAILY MODIFY READING" reading
-        bar = Debug.log "DAILY READING ACTION" mpAction
         newModel = MorningPrayer.update mpAction reading
       in 
         (model, Effects.none)
 
-    Modify reading readingAction->
+    ModSunday reading readingAction ->
       let
-        newModel = {model | sunday = Sunday.update readingAction reading}
+        newModel = case reading.ofType of
+          "sunday"    -> {model | sunday = Sunday.update readingAction reading}
+          "redletter" -> {model | redLetter = Sunday.update readingAction reading}
+          _           -> model
       in 
+        (newModel, Effects.none)
+
+    ModDaily reading readingAction ->
+      let
+        newModel = {model | daily = Daily.update readingAction reading}
+      in
         (newModel, Effects.none)
 
 
@@ -222,14 +237,16 @@ view address model =
       , li [] (basicNav address model)
       , li 
           []
--- [ ul [] (theseSunday address model.sunday) ]
-          [ ul [] (Sunday.view (Signal.forwardTo address (Modify model.sunday)) model.sunday) ]
+          [ ul [] (Sunday.view (Signal.forwardTo address (ModSunday model.sunday)) model.sunday) ]
       , li 
           []
-          [ ul [] (Sunday.view (Signal.forwardTo address (Modify model.redLetter)) model.redLetter) ]
+          [ ul [] (Sunday.view (Signal.forwardTo address (ModSunday model.redLetter)) model.redLetter) ]
+      , li 
+          []
+          [ ul [] (Daily.view (Signal.forwardTo address (ModDaily model.daily)) model.daily) ]
       , li
         []
-        [ (MorningPrayer.view (Signal.forwardTo address (ModMP model.daily)) model.daily) ]
+        [ (MorningPrayer.view (Signal.forwardTo address (ModMP model.morningPrayer)) model.morningPrayer) ]
       ]
     ]
 
@@ -239,10 +256,10 @@ basicNav address model =
       , button [buttonStyle, onClick nextSundayFrom.address model.sunday.date] [text "next Sunday"]
       , button [aboutButtonStyle, onClick address ToggleAbout] [text "About"]
       , br [] []
-      , button [inactiveButtonStyle] [text "Yesterday"]
-      , button [inactiveButtonStyle] [text "Today"]
-      , button [inactiveButtonStyle] [text "Tomorrow"]
-      , button [inactiveButtonStyle] [text "Daily Office"]
+      , button [inactiveButtonStyle] [text "Readings Yesterday"]
+      , button [inactiveButtonStyle] [text "Readings Today"]
+      , button [inactiveButtonStyle] [text "Readings Tomorrow"]
+      , button [buttonStyle, onClick address ToggleMp] [text "Daily Office"]
       , button [inactiveButtonStyle] [text "Morning Psalms"]
       , button [inactiveButtonStyle] [text "Evening Psalms"]
       , br [] []

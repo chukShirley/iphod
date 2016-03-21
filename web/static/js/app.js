@@ -46,6 +46,7 @@ var elmDiv = document.getElementById('elm-container')
       , ps: []
       , nt: []
       , gs: []
+      , show: false
     }
   , daily_reading = {
         date: ""
@@ -62,11 +63,12 @@ var elmDiv = document.getElementById('elm-container')
     }
   , initialState = {
       nextSunday: {
-          today:      ""
-        , sunday:     sunday_model
-        , redLetter:  sunday_model
-        , daily:      daily_reading
-        , about:      false
+          today:         ""
+        , sunday:        sunday_model
+        , redLetter:     sunday_model
+        , daily:         daily_reading
+        , morningPrayer: daily_reading
+        , about:         false
       }
     , newText:   { 
         model:    ""
