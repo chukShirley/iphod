@@ -13,6 +13,8 @@ import Effects exposing (Effects, Never)
 import Task exposing (Task)
 import String exposing (join)
 import Helper exposing (onClickLimited, hideable)
+import Markdown
+import Graphics.Element as Graphics
 
 import Iphod.Sunday exposing (getText)
 import Iphod.Sunday as Sunday
@@ -53,6 +55,7 @@ type alias Model =
   , sunday:       Sunday.Model
   , redLetter:    Sunday.Model
   , daily:        MorningPrayer.Model
+  , about:        Bool
 --  , ep: EveningPrayer.Model
 --  , daily: Daily.Model  
   }
@@ -63,6 +66,7 @@ initModel =
   , sunday =        Sunday.init
   , redLetter =     Sunday.init
   , daily =         MorningPrayer.init
+  , about =         False
 --  , ep = EveningPrayer.init
 --  , daily= Daily.init
   }
@@ -112,6 +116,7 @@ port newText: Signal NewText
 
 type Action
   = NoOp
+  | ToggleAbout
   | SetSunday Model
   | UpdateText NewText
   | ModMP MorningPrayer.Model MorningPrayer.Action
@@ -121,6 +126,7 @@ update: Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     NoOp -> (model, Effects.none)
+    ToggleAbout -> ({model | about = not model.about}, Effects.none)
     SetSunday readings -> (readings, Effects.none)
     UpdateText text ->
       let 
@@ -202,7 +208,13 @@ view: Signal.Address Action -> Model -> Html
 view address model =
   div 
     []
-    [ ul 
+    [ p [ class "about"
+          , aboutStyle model
+          , onClick address ToggleAbout
+        ] 
+        [Markdown.toHtml about]
+    , br [] []
+    , ul 
       []
       [ li [] [text ("From: " ++ model.today)]
       , li [] [text (model.sunday.title ++ " - " ++ model.sunday.date)]
@@ -225,13 +237,66 @@ basicNav: Signal.Address Action -> Model -> List Html
 basicNav address model =
       [ button [buttonStyle, onClick lastSundayFrom.address model.sunday.date] [text "last Sunday"]
       , button [buttonStyle, onClick nextSundayFrom.address model.sunday.date] [text "next Sunday"]
+      , button [aboutButtonStyle, onClick address ToggleAbout] [text "About"]
+      , br [] []
+      , button [inactiveButtonStyle] [text "Yesterday"]
+      , button [inactiveButtonStyle] [text "Today"]
+      , button [inactiveButtonStyle] [text "Tomorrow"]
       , button [inactiveButtonStyle] [text "Daily Office"]
       , button [inactiveButtonStyle] [text "Morning Psalms"]
       , button [inactiveButtonStyle] [text "Evening Psalms"]
       , br [] []
       ]
 
+about =  """
+
+#### How to use
+
+* click on stuff
+  * click on the reading "title" and the text appears below
+  * click on the title again and the text is hidden
+* colors
+  * Black is a required reading
+  * Grey is optional
+  * Dark Blue is alternative
+
+#### About Iphod
+
+* It is a work in progress
+* Inerrancy is not gauranteed, so don't expect it
+* shows the readings for the ACNA Red Letter andSunday Lectionary. Current fails include...
+  * Days with more than one service (Like Easter)
+  * Complicated times (like Holy Week and Week following)
+  * Psalms are shown as ESV rather than Coverdale
+* Path forward
+  * Daily readings
+  * Daily Office
+  * Daily Office with redings inserted
+  * Canticals
+  * Coverdale
+  * Printable readings
+    * so you don't have to cut and paste
+
+#### Contact
+* questions or comments email frpaulas at gmail dot com
+* at this point in time I am looking for
+  * error reports
+  * useability suggestions
+  * suggestions for features
+
+#### Want to help?
+* this is an open source project
+* you can fork the project at https://github.com/frpaulas/iphod
+
+"""
+
 -- STYLE
+
+aboutStyle: Model -> Attribute
+aboutStyle model =
+  hideable
+    model.about
+    [ ("font-size", "0.7em")]
 
 buttonStyle: Attribute
 buttonStyle =
@@ -242,6 +307,18 @@ buttonStyle =
     , ("font-size", "0.8em")
     , ("display", "inline-block")
     ]
+
+aboutButtonStyle: Attribute
+aboutButtonStyle =
+  style
+    [ ("position", "relative")
+    , ("float", "right")
+--    , ("float", "left")
+    , ("padding", "2px 2px")
+    , ("font-size", "0.8em")
+    , ("display", "inline-block")
+    ]
+
 inactiveButtonStyle: Attribute
 inactiveButtonStyle =
   style

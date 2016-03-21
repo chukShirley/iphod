@@ -66,6 +66,7 @@ var elmDiv = document.getElementById('elm-container')
         , sunday:     sunday_model
         , redLetter:  sunday_model
         , daily:      daily_reading
+        , about:      false
       }
     , newText:   { 
         model:    ""

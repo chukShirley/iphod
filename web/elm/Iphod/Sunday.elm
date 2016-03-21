@@ -124,10 +124,12 @@ thisReading address lessons =
 this_style: Lesson -> Attribute
 this_style l =
   case l.style of
-    "req" -> req_style  l
-    "opt" -> opt_style l
-    "alt" -> alt_style l
-    _     -> bogis_style l
+    "req"     -> req_style  l
+    "opt"     -> opt_style l
+    "alt"     -> alt_style l
+    "alt-req" -> alt_style l
+    "alt-opt" -> altOpt_style l
+    _         -> bogis_style l
 
 
 
@@ -175,7 +177,15 @@ opt_style lesson =
 alt_style: Lesson -> Attribute
 alt_style lesson =
   style
-    [ ("color", "blue")
+    [ ("color", "darkblue")
+    , ("display", "inline-block")
+    , ("padding", "0 1em 0 1em")
+    ]
+
+altOpt_style: Lesson -> Attribute
+altOpt_style lesson =
+  style
+    [ ("color", "indego")
     , ("display", "inline-block")
     , ("padding", "0 1em 0 1em")
     ]

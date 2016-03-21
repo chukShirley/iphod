@@ -356,6 +356,10 @@ ul.donor_details li p{
     transition-delay: 0.6s;
 } 
 
+.about, .about div ul li {
+  font-size: 07.em;
+}
+
 
 
 
