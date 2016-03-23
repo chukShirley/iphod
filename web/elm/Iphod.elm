@@ -94,6 +94,14 @@ lastSundayFrom: Signal.Mailbox String
 lastSundayFrom =
   Signal.mailbox ""
 
+yesterdayFrom: Signal.Mailbox String
+yesterdayFrom =
+  Signal.mailbox ""
+
+tomorrowFrom: Signal.Mailbox String
+tomorrowFrom =
+  Signal.mailbox ""
+
 -- PORTS
 
 port requestNextSunday: Signal String
@@ -103,6 +111,14 @@ port requestNextSunday =
 port requestLastSunday: Signal String
 port requestLastSunday = 
   lastSundayFrom.signal
+
+port requestYesterday: Signal String
+port requestYesterday = 
+  yesterdayFrom.signal
+
+port requestTomorrow: Signal String
+port requestTomorrow = 
+  tomorrowFrom.signal
 
 port requestText: Signal (String, String, String, String)
 port requestText =
@@ -117,6 +133,9 @@ type Action
   = NoOp
   | ToggleAbout
   | ToggleMp
+  | ToggleDaily
+  | ToggleSunday
+  | ToggleRedLetter
   | SetSunday Model
   | UpdateText NewText
   | ModMP MorningPrayer.Model MorningPrayer.Action
@@ -130,11 +149,33 @@ update action model =
     ToggleAbout -> ({model | about = not model.about}, Effects.none)
     ToggleMp ->
       let
-        mp = model.daily
+        mp = model.morningPrayer
         newmp = {mp | show = not mp.show}
-        newModel = {model | daily = newmp}
+        newModel = {model | morningPrayer = newmp}
       in 
         (newModel, Effects.none)
+    ToggleDaily ->
+      let
+        daily = model.daily
+        newdaily = {daily | show = not daily.show}
+        newModel = {model | daily = newdaily}
+      in 
+        (newModel, Effects.none)
+    ToggleSunday ->
+      let
+        sunday = model.sunday
+        newSunday = {sunday | show = not sunday.show}
+        newModel = {model | sunday = newSunday}
+      in 
+        (newModel, Effects.none)
+    ToggleRedLetter ->
+      let
+        rl = model.redLetter
+        newRL = {rl | show = not rl.show}
+        newModel = {model | redLetter = newRL}
+      in 
+        (newModel, Effects.none)
+
     SetSunday readings -> (readings, Effects.none)
     UpdateText text ->
       let 
@@ -148,6 +189,8 @@ update action model =
 
     ModMP reading mpAction->
       let
+        foo = Debug.log "READING" reading
+        bar = Debug.log "MPACTION" mpAction
         newModel = MorningPrayer.update mpAction reading
       in 
         (model, Effects.none)
@@ -223,47 +266,120 @@ view: Signal.Address Action -> Model -> Html
 view address model =
   div 
     []
+    [ fancyNav address model
+    , aboutDiv address model
+    , br [] []
+    , listDates address model
+    , dateNav address model
+    , readingNav address model
+    , listReadings address model
+    , morningPrayerDiv address model
+    ]
+
+aboutDiv: Signal.Address Action -> Model -> Html
+aboutDiv address model =
+  div []
     [ p [ class "about"
           , aboutStyle model
           , onClick address ToggleAbout
         ] 
         [Markdown.toHtml about]
-    , br [] []
-    , ul 
-      []
+    ]
+
+listDates: Signal.Address Action -> Model -> Html
+listDates address model =
+  div []
+    [ ul []
       [ li [] [text ("From: " ++ model.today)]
       , li [] [text (model.sunday.title ++ " - " ++ model.sunday.date)]
       , li [] [text ("Next Feast Day: " ++ model.redLetter.title ++ " - " ++ model.redLetter.date)]
-      , li [] (basicNav address model)
-      , li 
-          []
-          [ ul [] (Sunday.view (Signal.forwardTo address (ModSunday model.sunday)) model.sunday) ]
-      , li 
-          []
-          [ ul [] (Sunday.view (Signal.forwardTo address (ModSunday model.redLetter)) model.redLetter) ]
-      , li 
-          []
-          [ ul [] (Daily.view (Signal.forwardTo address (ModDaily model.daily)) model.daily) ]
-      , li
-        []
-        [ (MorningPrayer.view (Signal.forwardTo address (ModMP model.morningPrayer)) model.morningPrayer) ]
       ]
     ]
 
-basicNav: Signal.Address Action -> Model -> List Html
-basicNav address model =
-      [ button [buttonStyle, onClick lastSundayFrom.address model.sunday.date] [text "last Sunday"]
-      , button [buttonStyle, onClick nextSundayFrom.address model.sunday.date] [text "next Sunday"]
-      , button [aboutButtonStyle, onClick address ToggleAbout] [text "About"]
-      , br [] []
-      , button [inactiveButtonStyle] [text "Readings Yesterday"]
-      , button [inactiveButtonStyle] [text "Readings Today"]
-      , button [inactiveButtonStyle] [text "Readings Tomorrow"]
-      , button [buttonStyle, onClick address ToggleMp] [text "Daily Office"]
-      , button [inactiveButtonStyle] [text "Morning Psalms"]
-      , button [inactiveButtonStyle] [text "Evening Psalms"]
-      , br [] []
+
+fancyNav: Signal.Address Action -> Model -> Html
+fancyNav address model =
+  div [class "cssmenu"] [
+    ul []
+      [ li [onClick address ToggleMp] [ a [href "#"] [ text "Morning Prayer"] ]
+      , li [] [ a [href "#"] [ text "Evening Prayer"] ]
+      , li [class "has-sub"] 
+          [ a [href "#"] [ text "Easter"]
+          , ul [] 
+              [ li [] [ a [href "#"] [ text "Liturgy of the Palms"] ]
+              , li [] [ a [href "#"] [ text "Palm Sunday"] ]
+              , li [class "has-sub"]
+                  [ a [href "#"] [ text "Holy Week"]
+                  , ul [] 
+                      [ li [] [ a [href "#"] [ text "Monday of Holy Week"] ]
+                      , li [] [ a [href "#"] [ text "Tuesday of Holy Week"] ]
+                      , li [] [ a [href "#"] [ text "Wednesday of Holy Week"] ]
+                      , li [] [ a [href "#"] [ text "Maunday Thursday"] ]
+                      , li [] [ a [href "#"] [ text "Good Friday"] ]
+                      , li [] [ a [href "#"] [ text "Holy Saturday"] ]
+                      ]
+                  ]
+              , li [] [ a [href "#"] [ text "Great Vigil of Easter"] ]
+              , li [] [ a [href "#"] [ text "Easter Day: Early"] ]
+              , li [] [ a [href "#"] [ text "Easter Day: Early"] ]
+              , li [] [ a [href "#"] [ text "Easter Day Principle"] ]
+              , li [] [ a [href "#"] [ text "Easter Day Evening"] ]
+              , li [class "has-sub"] 
+                  [ a [href "#"] [ text "Week Following"]
+                  , ul [] 
+                    [ li [] [ a [href "#"] [ text "Easter Monday"] ]
+                    , li [] [ a [href "#"] [ text "Easter Tuesday"] ]
+                    , li [] [ a [href "#"] [ text "Easter Wednesday"] ]
+                    , li [] [ a [href "#"] [ text "Easter Thursday"] ]
+                    , li [] [ a [href "#"] [ text "Easter Friday"] ]
+                    , li [] [ a [href "#"] [ text "Easter Saturday"] ]
+                    ]
+                  ]
+              ]
+          ]
+      , li [onClick address ToggleAbout] [ a [href "#"] [ text "About"] ]
+      , li [] [ a [href "#"] [ text "Contact"] ]
+    ]
+  ]
+
+dateNav: Signal.Address Action -> Model -> Html
+dateNav address model =
+  div [class "cssmenu"] 
+  [ ul []
+      [ li [onClick lastSundayFrom.address model.sunday.date] [ a [href "#"] [ text "Last Sunday"] ]
+      , li [onClick yesterdayFrom.address model.today] [ a [href "#"] [ text "Yesterday"] ]
+      , li [style [("width", "22%"), ("text-align", "center")]] [ a [href "#"] [ text model.today] ]
+      , li [onClick tomorrowFrom.address model.today] [ a [href "#"] [ text "Tomorrow"] ]
+      , li [onClick nextSundayFrom.address model.sunday.date] [ a [href "#"] [ text "Next Sunday"] ]
       ]
+  ]
+
+    
+readingNav: Signal.Address Action -> Model -> Html
+readingNav address model =
+  div [class "cssmenu"] 
+  [ ul []
+      [ li [onClick address ToggleDaily] [ a [href "#"] [ text "Daily"] ]
+      , li [onClick address ToggleSunday ] [ a [href "#"] [ text "Sunday"] ]
+      , li [onClick address ToggleRedLetter] [ a [href "#"] [ text "Red Letter"] ]
+      ]
+  ]
+
+    
+listReadings: Signal.Address Action -> Model -> Html
+listReadings address model =
+  div [style [("margin-top", "0em")]]
+    [ ul [] (Sunday.view (Signal.forwardTo address (ModSunday model.sunday)) model.sunday)
+    , ul [] (Sunday.view (Signal.forwardTo address (ModSunday model.redLetter)) model.redLetter)
+    , ul [] (Daily.view (Signal.forwardTo address (ModDaily model.daily)) model.daily) 
+    ]
+
+morningPrayerDiv: Signal.Address Action -> Model -> Html
+morningPrayerDiv address model =
+  div []
+    [ (MorningPrayer.view (Signal.forwardTo address (ModMP model.morningPrayer)) model.morningPrayer)
+    ]
+
 
 about =  """
 

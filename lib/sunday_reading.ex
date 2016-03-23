@@ -9,11 +9,11 @@ defmodule SundayReading do
 
   def identity(), do: Agent.get(__MODULE__, &(&1))
   def readings(season, wk, yr), do: identity[season][wk][yr]
-  def next_sunday, do: Date.local |> next_sunday
-  def next_sunday(date), do: Lityear.next_sunday(date) |> _sunday
-
-  def last_sunday(), do: Date.local |> last_sunday
-  def last_sunday(date), do: Lityear.last_sunday(date) |> _sunday
+  def next_sunday,        do: Date.local |> next_sunday
+  def next_sunday(date),  do: date |> Lityear.next_sunday |> _sunday
+  def this_sunday(date),  do: date |> Lityear.to_season |> _sunday
+  def last_sunday(),      do: Date.local |> last_sunday
+  def last_sunday(date),  do: date |> Lityear.last_sunday |> _sunday
 
   defp _sunday({season, wk, yr, sunday}) do
     if identity[season][wk][yr] |> is_nil, do: IEx.pry

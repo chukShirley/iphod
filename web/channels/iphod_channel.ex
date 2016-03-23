@@ -7,6 +7,7 @@ defmodule Iphod.IphodChannel do
   import DailyReading
   import Lityear
   import EsvText
+  use Timex
 
 #  alias Saints.Donor
 
@@ -72,24 +73,33 @@ defmodule Iphod.IphodChannel do
   # broadcast to everyone in the current topic (donors:lobby).
 
   def handle_in("request_next_sunday", this_date, socket) do
-    date = Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
-    msg = %{ sunday:    jsonify_reading( "sunday", SundayReading.next_sunday(date) ),
-             redLetter: jsonify_reading( "redletter", SundayReading.next_holy_day(date) ),
-             today:     date |> date_next_sunday |> SundayReading.formatted_date,
-             daily:     date |> DailyReading.readings |> jsonify_daily,
-             morningPrayer:  Timex.Date.local |> DailyReading.readings |> jsonify_daily,
-             about:     false
-          }
-    push  socket, "next_sunday", msg
-          
-    {:noreply, socket}  
-  end
+    Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
+    |> Lityear.date_next_sunday
+    |> request_date socket
+ end
 
   def handle_in("request_last_sunday", this_date, socket) do
-    date = Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
-    msg = %{ sunday:    jsonify_reading( "sunday", SundayReading.last_sunday(date) ),
+    Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
+    |> Lityear.date_last_sunday
+    |> request_date socket
+  end
+
+  def handle_in("request_yesterday", this_date, socket) do
+    Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
+    |> Date.shift(days: -1)
+    |> request_date socket
+  end
+
+  def handle_in("request_tomorrow", this_date, socket) do
+    Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
+    |> Date.shift(days: 1)
+    |> request_date socket
+  end
+
+  def request_date(date, socket) do
+    msg = %{ sunday:    jsonify_reading( "sunday", SundayReading.this_sunday(date) ),
              redLetter: jsonify_reading( "redletter", SundayReading.next_holy_day(date) ),
-             today:     date |> Lityear.date_last_sunday |> SundayReading.formatted_date,
+             today:     date |> SundayReading.formatted_date,
              daily:     date |> DailyReading.readings |> jsonify_daily,
              morningPrayer:  Timex.Date.local |> DailyReading.readings |> jsonify_daily,
              about:     false
@@ -97,6 +107,7 @@ defmodule Iphod.IphodChannel do
     push  socket, "next_sunday", msg
           
     {:noreply, socket}  
+    
   end
 
   def handle_in("request_text", [model, section, id, vss], socket) do

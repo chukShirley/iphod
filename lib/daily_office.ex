@@ -21,7 +21,10 @@ defmodule DailyReading do
   end
   # readings(d) is last otherwise there will be confusion between
   # Timex.Date tuple of {season, wk, _litYr, date}
-  def readings(d), do: d |> Lityear.to_season |> readings # expecting a Timex date
+  def readings(date) do 
+    {season, wk, litYr, sunday} = date |> Lityear.to_season 
+    readings {season, wk, litYr, date}
+  end
 
   defp add_ids(map) do
     map

@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Iphod.Daily as Daily
 import Helper exposing (onClickLimited, hideable)
+import String
 
 -- MODEL
 
@@ -94,6 +95,14 @@ section s =
 
 default: String -> List Html
 default s =
+  [ formattedText s
+      [ ("font-size", "1.0em")
+      , ("font-family", "Georgia, Times New Roman, Times, serif")
+      ]
+  ]
+
+reading: Model -> String -> List Html
+reading model s =
   [ formattedText s
       [ ("font-size", "1.0em")
       , ("font-family", "Georgia, Times New Roman, Times, serif")
@@ -362,7 +371,8 @@ view address model =
 
   ++ (section "The Lessons")
   ++ (rubric "One or more Lessons, as appointed, are read, the Reader first saying")
-  ++ (default "A Reading from _____________.")
+  ++ (reading model (String.join " " (List.concat[["The First Lesson from"], (List.map (\m -> m.read) model.mp1)] )))
+  ++ (reading model (String.join " " (List.concat[["The Second Lesson from"], (List.map (\m -> m.read) model.mp2)] )))
   ++ (rubric "A citation giving chapter and verse may be added.")
   ++ (rubric "After each Lesson the Reader may say")
   ++ (versical "" "The Word of the Lord.")

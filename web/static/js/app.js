@@ -17,7 +17,7 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 //
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
-
+import "./menu"
 import socket from "./socket"
 let channel = socket.channel("iphod")
 
@@ -85,6 +85,14 @@ elmApp.ports.requestNextSunday.subscribe(function(this_day) {
 
 elmApp.ports.requestLastSunday.subscribe(function(this_day) {
   channel.push("request_last_sunday", this_day)
+});
+
+elmApp.ports.requestYesterday.subscribe(function(this_day) {
+  channel.push("request_yesterday", this_day)
+});
+
+elmApp.ports.requestTomorrow.subscribe(function(this_day) {
+  channel.push("request_tomorrow", this_day)
 });
 
 elmApp.ports.requestText.subscribe(function(request) {

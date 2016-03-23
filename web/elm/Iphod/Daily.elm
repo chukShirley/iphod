@@ -61,7 +61,7 @@ update action model =
 
 view: Signal.Address Action -> Model -> List Html
 view address model =
-  [ li [titleStyle, onClick address ToggleModelShow] [text model.title]
+  [ li [titleStyle model, onClick address ToggleModelShow] [text model.title]
   , ul [textStyle model] ([text "Morning 1: "] ++ thisReading address model.mp1 ++ thisText model.mp1)
   , ul [textStyle model] ([text "Morning 2: "] ++ thisReading address model.mp2 ++ thisText model.mp2)
   , ul [textStyle model] ([text "Evening 1: "] ++ thisReading address model.ep1 ++ thisText model.ep1)
@@ -111,9 +111,10 @@ bodyStyle lesson =
     lesson.show
     []
 
-titleStyle: Attribute
-titleStyle =
-  style
+titleStyle: Model -> Attribute
+titleStyle model =
+  hideable
+    model.show
     [ ("font-size", "0.8em")
     , ("color", "blue")
     , ("height", "2em")

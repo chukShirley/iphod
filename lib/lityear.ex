@@ -33,7 +33,7 @@ defmodule  Lityear do
   def next_sunday(),        do: date_next_sunday(Date.local)  |> to_season
   def next_sunday(d),       do: date_next_sunday(d)           |> to_season
   def to_season(day) do
-    sunday = if day |> is_sunday?, do: day, else: day |> date_last_sunday
+    sunday = if day |> is_sunday?, do: day, else: day |> date_next_sunday
     y = lityear sunday
     yrABC = abc sunday
     till_advent = Date.diff(sunday, advent(1, sunday.year), :weeks)

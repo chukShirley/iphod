@@ -12814,11 +12814,13 @@ Elm.Iphod.Sunday.make = function (_elm) {
       _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
               ,{ctor: "_Tuple2",_0: "margin",_1: "0"}]));
    };
-   var titleStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                    ,_0: "font-size"
-                                                    ,_1: "0.8em"}
-                                                   ,{ctor: "_Tuple2",_0: "color",_1: "blue"}
-                                                   ,{ctor: "_Tuple2",_0: "height",_1: "2em"}]));
+   var titleStyle = function (model) {
+      return A2($Helper.hideable,
+      model.show,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
+              ,{ctor: "_Tuple2",_0: "color",_1: "blue"}
+              ,{ctor: "_Tuple2",_0: "height",_1: "2em"}]));
+   };
    var bodyStyle = function (lesson) {
       return A2($Helper.hideable,lesson.show,_U.list([]));
    };
@@ -12897,7 +12899,7 @@ Elm.Iphod.Sunday.make = function (_elm) {
    });
    var view = F2(function (address,model) {
       return _U.list([A2($Html.li,
-                     _U.list([titleStyle
+                     _U.list([titleStyle(model)
                              ,A2($Html$Events.onClick,address,ToggleModelShow)]),
                      _U.list([$Html.text(model.title)]))
                      ,A2($Html.ul,
@@ -12995,11 +12997,13 @@ Elm.Iphod.Daily.make = function (_elm) {
       _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
               ,{ctor: "_Tuple2",_0: "margin",_1: "0"}]));
    };
-   var titleStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                    ,_0: "font-size"
-                                                    ,_1: "0.8em"}
-                                                   ,{ctor: "_Tuple2",_0: "color",_1: "blue"}
-                                                   ,{ctor: "_Tuple2",_0: "height",_1: "2em"}]));
+   var titleStyle = function (model) {
+      return A2($Helper.hideable,
+      model.show,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
+              ,{ctor: "_Tuple2",_0: "color",_1: "blue"}
+              ,{ctor: "_Tuple2",_0: "height",_1: "2em"}]));
+   };
    var bodyStyle = function (lesson) {
       return A2($Helper.hideable,lesson.show,_U.list([]));
    };
@@ -13081,7 +13085,7 @@ Elm.Iphod.Daily.make = function (_elm) {
    var ToggleModelShow = {ctor: "ToggleModelShow"};
    var view = F2(function (address,model) {
       return _U.list([A2($Html.li,
-                     _U.list([titleStyle
+                     _U.list([titleStyle(model)
                              ,A2($Html$Events.onClick,address,ToggleModelShow)]),
                      _U.list([$Html.text(model.title)]))
                      ,A2($Html.ul,
@@ -13139,7 +13143,8 @@ Elm.Iphod.MorningPrayer.make = function (_elm) {
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm);
+   $Signal = Elm.Signal.make(_elm),
+   $String = Elm.String.make(_elm);
    var _op = {};
    var mpStyle = function (model) {
       return A2($Helper.hideable,
@@ -13219,6 +13224,14 @@ Elm.Iphod.MorningPrayer.make = function (_elm) {
                ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
    };
    var vs = function (s) {    return $default(s);};
+   var reading = F2(function (model,s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
+   });
    var italic = function (s) {
       return _U.list([A2(formattedText,
       s,
@@ -13567,7 +13580,19 @@ Elm.Iphod.MorningPrayer.make = function (_elm) {
       A2($Basics._op["++"],
       rubric("One or more Lessons, as appointed, are read, the Reader first saying"),
       A2($Basics._op["++"],
-      $default("A Reading from _____________."),
+      A2(reading,
+      model,
+      A2($String.join,
+      " ",
+      $List.concat(_U.list([_U.list(["The First Lesson from"])
+                           ,A2($List.map,function (m) {    return m.read;},model.mp1)])))),
+      A2($Basics._op["++"],
+      A2(reading,
+      model,
+      A2($String.join,
+      " ",
+      $List.concat(_U.list([_U.list(["The Second Lesson from"])
+                           ,A2($List.map,function (m) {    return m.read;},model.mp2)])))),
       A2($Basics._op["++"],
       rubric("A citation giving chapter and verse may be added."),
       A2($Basics._op["++"],
@@ -14084,7 +14109,7 @@ Elm.Iphod.MorningPrayer.make = function (_elm) {
       italicIndent("Glory to the Father, and to the Son, and to the Holy Spirit:"),
       A2($Basics._op["++"],
       italicIndent("As it was in the beginning, is now, and will be forever. Amen."),
-      italic("A sermon may also be preached after the Office or after the hymn or anthem (if\n  sung) following the collects."))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
+      italic("A sermon may also be preached after the Office or after the hymn or anthem (if\n  sung) following the collects.")))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
    });
    var update = F2(function (action,model) {
       var _p0 = action;
@@ -14156,6 +14181,29 @@ Elm.Iphod.make = function (_elm) {
       _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.7em"}]));
    };
    var about = "\n\n#### How to use\n\n* click on stuff\n  * click on the reading \"title\" and the text appears below\n  * click on the title again and the text is hidden\n* colors\n  * Black is a required reading\n  * Grey is optional\n  * Dark Blue is alternative\n\n#### About Iphod\n\n* It is a work in progress\n* Inerrancy is not gauranteed, so don\'t expect it\n* shows the readings for the ACNA Red Letter andSunday Lectionary. Current fails include...\n  * Days with more than one service (Like Easter)\n  * Complicated times (like Holy Week and Week following)\n  * Psalms are shown as ESV rather than Coverdale\n  * partial verses mean nothing to the ESV API, so in this app only complete verses are shown\n* Path forward\n  * Daily readings\n  * Daily Office\n  * Daily Office with redings inserted\n  * Canticals\n  * Coverdale\n  * Printable readings\n    * so you don\'t have to cut and paste\n\n#### Contact\n* questions or comments email frpaulas at gmail dot com\n* at this point in time I am looking for\n  * error reports\n  * useability suggestions\n  * suggestions for features\n\n#### Want to help?\n* this is an open source project\n* you can fork the project at https://github.com/frpaulas/iphod\n\n";
+   var listDates = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.ul,
+      _U.list([]),
+      _U.list([A2($Html.li,
+              _U.list([]),
+              _U.list([$Html.text(A2($Basics._op["++"],
+              "From: ",
+              model.today))]))
+              ,A2($Html.li,
+              _U.list([]),
+              _U.list([$Html.text(A2($Basics._op["++"],
+              model.sunday.title,
+              A2($Basics._op["++"]," - ",model.sunday.date)))]))
+              ,A2($Html.li,
+              _U.list([]),
+              _U.list([$Html.text(A2($Basics._op["++"],
+              "Next Feast Day: ",
+              A2($Basics._op["++"],
+              model.redLetter.title,
+              A2($Basics._op["++"]," - ",model.redLetter.date))))]))]))]));
+   });
    var updateDailyText = F2(function (daily,text) {
       var update_text = function (this_lesson) {
          return _U.eq(this_lesson.id,text.id) ? _U.update(this_lesson,
@@ -14213,9 +14261,22 @@ Elm.Iphod.make = function (_elm) {
          case "ToggleAbout": return {ctor: "_Tuple2"
                                     ,_0: _U.update(model,{about: $Basics.not(model.about)})
                                     ,_1: $Effects.none};
-         case "ToggleMp": var mp = model.daily;
+         case "ToggleMp": var mp = model.morningPrayer;
            var newmp = _U.update(mp,{show: $Basics.not(mp.show)});
-           var newModel = _U.update(model,{daily: newmp});
+           var newModel = _U.update(model,{morningPrayer: newmp});
+           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+         case "ToggleDaily": var daily = model.daily;
+           var newdaily = _U.update(daily,{show: $Basics.not(daily.show)});
+           var newModel = _U.update(model,{daily: newdaily});
+           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+         case "ToggleSunday": var sunday = model.sunday;
+           var newSunday = _U.update(sunday,
+           {show: $Basics.not(sunday.show)});
+           var newModel = _U.update(model,{sunday: newSunday});
+           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+         case "ToggleRedLetter": var rl = model.redLetter;
+           var newRL = _U.update(rl,{show: $Basics.not(rl.show)});
+           var newModel = _U.update(model,{redLetter: newRL});
            return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
          case "SetSunday": return {ctor: "_Tuple2"
                                   ,_0: _p4._0
@@ -14233,19 +14294,21 @@ Elm.Iphod.make = function (_elm) {
                  default: return model;}
            }();
            return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
-         case "ModMP": var newModel = A2($Iphod$MorningPrayer.update,
-           _p4._1,
-           _p4._0);
+         case "ModMP": var _p8 = _p4._0;
+           var _p7 = _p4._1;
+           var newModel = A2($Iphod$MorningPrayer.update,_p7,_p8);
+           var bar = A2($Debug.log,"MPACTION",_p7);
+           var foo = A2($Debug.log,"READING",_p8);
            return {ctor: "_Tuple2",_0: model,_1: $Effects.none};
-         case "ModSunday": var _p9 = _p4._1;
-           var _p8 = _p4._0;
+         case "ModSunday": var _p11 = _p4._1;
+           var _p10 = _p4._0;
            var newModel = function () {
-              var _p7 = _p8.ofType;
-              switch (_p7)
+              var _p9 = _p10.ofType;
+              switch (_p9)
               {case "sunday": return _U.update(model,
-                   {sunday: A2($Iphod$Sunday.update,_p9,_p8)});
+                   {sunday: A2($Iphod$Sunday.update,_p11,_p10)});
                  case "redletter": return _U.update(model,
-                   {redLetter: A2($Iphod$Sunday.update,_p9,_p8)});
+                   {redLetter: A2($Iphod$Sunday.update,_p11,_p10)});
                  default: return model;}
            }();
            return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
@@ -14259,8 +14322,36 @@ Elm.Iphod.make = function (_elm) {
    var ModSunday = F2(function (a,b) {
       return {ctor: "ModSunday",_0: a,_1: b};
    });
+   var listReadings = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                               ,_0: "margin-top"
+                                               ,_1: "0em"}]))]),
+      _U.list([A2($Html.ul,
+              _U.list([]),
+              A2($Iphod$Sunday.view,
+              A2($Signal.forwardTo,address,ModSunday(model.sunday)),
+              model.sunday))
+              ,A2($Html.ul,
+              _U.list([]),
+              A2($Iphod$Sunday.view,
+              A2($Signal.forwardTo,address,ModSunday(model.redLetter)),
+              model.redLetter))
+              ,A2($Html.ul,
+              _U.list([]),
+              A2($Iphod$Daily.view,
+              A2($Signal.forwardTo,address,ModDaily(model.daily)),
+              model.daily))]));
+   });
    var ModMP = F2(function (a,b) {
       return {ctor: "ModMP",_0: a,_1: b};
+   });
+   var morningPrayerDiv = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Iphod$MorningPrayer.view,
+      A2($Signal.forwardTo,address,ModMP(model.morningPrayer)),
+      model.morningPrayer)]));
    });
    var UpdateText = function (a) {
       return {ctor: "UpdateText",_0: a};
@@ -14268,8 +14359,183 @@ Elm.Iphod.make = function (_elm) {
    var SetSunday = function (a) {
       return {ctor: "SetSunday",_0: a};
    };
+   var ToggleRedLetter = {ctor: "ToggleRedLetter"};
+   var ToggleSunday = {ctor: "ToggleSunday"};
+   var ToggleDaily = {ctor: "ToggleDaily"};
+   var readingNav = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([$Html$Attributes.$class("cssmenu")]),
+      _U.list([A2($Html.ul,
+      _U.list([]),
+      _U.list([A2($Html.li,
+              _U.list([A2($Html$Events.onClick,address,ToggleDaily)]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Daily")]))]))
+              ,A2($Html.li,
+              _U.list([A2($Html$Events.onClick,address,ToggleSunday)]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Sunday")]))]))
+              ,A2($Html.li,
+              _U.list([A2($Html$Events.onClick,address,ToggleRedLetter)]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Red Letter")]))]))]))]));
+   });
    var ToggleMp = {ctor: "ToggleMp"};
    var ToggleAbout = {ctor: "ToggleAbout"};
+   var aboutDiv = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.p,
+      _U.list([$Html$Attributes.$class("about")
+              ,aboutStyle(model)
+              ,A2($Html$Events.onClick,address,ToggleAbout)]),
+      _U.list([$Markdown.toHtml(about)]))]));
+   });
+   var fancyNav = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([$Html$Attributes.$class("cssmenu")]),
+      _U.list([A2($Html.ul,
+      _U.list([]),
+      _U.list([A2($Html.li,
+              _U.list([A2($Html$Events.onClick,address,ToggleMp)]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Morning Prayer")]))]))
+              ,A2($Html.li,
+              _U.list([]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Evening Prayer")]))]))
+              ,A2($Html.li,
+              _U.list([$Html$Attributes.$class("has-sub")]),
+              _U.list([A2($Html.a,
+                      _U.list([$Html$Attributes.href("#")]),
+                      _U.list([$Html.text("Easter")]))
+                      ,A2($Html.ul,
+                      _U.list([]),
+                      _U.list([A2($Html.li,
+                              _U.list([]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Liturgy of the Palms")]))]))
+                              ,A2($Html.li,
+                              _U.list([]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Palm Sunday")]))]))
+                              ,A2($Html.li,
+                              _U.list([$Html$Attributes.$class("has-sub")]),
+                              _U.list([A2($Html.a,
+                                      _U.list([$Html$Attributes.href("#")]),
+                                      _U.list([$Html.text("Holy Week")]))
+                                      ,A2($Html.ul,
+                                      _U.list([]),
+                                      _U.list([A2($Html.li,
+                                              _U.list([]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Monday of Holy Week")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Tuesday of Holy Week")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Wednesday of Holy Week")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Maunday Thursday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Good Friday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Holy Saturday")]))]))]))]))
+                              ,A2($Html.li,
+                              _U.list([]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Great Vigil of Easter")]))]))
+                              ,A2($Html.li,
+                              _U.list([]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Easter Day: Early")]))]))
+                              ,A2($Html.li,
+                              _U.list([]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Easter Day: Early")]))]))
+                              ,A2($Html.li,
+                              _U.list([]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Easter Day Principle")]))]))
+                              ,A2($Html.li,
+                              _U.list([]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Easter Day Evening")]))]))
+                              ,A2($Html.li,
+                              _U.list([$Html$Attributes.$class("has-sub")]),
+                              _U.list([A2($Html.a,
+                                      _U.list([$Html$Attributes.href("#")]),
+                                      _U.list([$Html.text("Week Following")]))
+                                      ,A2($Html.ul,
+                                      _U.list([]),
+                                      _U.list([A2($Html.li,
+                                              _U.list([]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Easter Monday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Easter Tuesday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Easter Wednesday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Easter Thursday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Easter Friday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Easter Saturday")]))]))]))]))]))]))
+              ,A2($Html.li,
+              _U.list([A2($Html$Events.onClick,address,ToggleAbout)]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("About")]))]))
+              ,A2($Html.li,
+              _U.list([]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Contact")]))]))]))]));
+   });
    var NoOp = {ctor: "NoOp"};
    var newText = Elm.Native.Port.make(_elm).inboundSignal("newText",
    "Iphod.NewText",
@@ -14632,6 +14898,18 @@ Elm.Iphod.make = function (_elm) {
       return [v._0,v._1,v._2,v._3];
    },
    $Helper.getText.signal);
+   var tomorrowFrom = $Signal.mailbox("");
+   var requestTomorrow = Elm.Native.Port.make(_elm).outboundSignal("requestTomorrow",
+   function (v) {
+      return v;
+   },
+   tomorrowFrom.signal);
+   var yesterdayFrom = $Signal.mailbox("");
+   var requestYesterday = Elm.Native.Port.make(_elm).outboundSignal("requestYesterday",
+   function (v) {
+      return v;
+   },
+   yesterdayFrom.signal);
    var lastSundayFrom = $Signal.mailbox("");
    var requestLastSunday = Elm.Native.Port.make(_elm).outboundSignal("requestLastSunday",
    function (v) {
@@ -14644,100 +14922,59 @@ Elm.Iphod.make = function (_elm) {
       return v;
    },
    nextSundayFrom.signal);
-   var basicNav = F2(function (address,model) {
-      return _U.list([A2($Html.button,
-                     _U.list([buttonStyle
-                             ,A2($Html$Events.onClick,
-                             lastSundayFrom.address,
-                             model.sunday.date)]),
-                     _U.list([$Html.text("last Sunday")]))
-                     ,A2($Html.button,
-                     _U.list([buttonStyle
-                             ,A2($Html$Events.onClick,
-                             nextSundayFrom.address,
-                             model.sunday.date)]),
-                     _U.list([$Html.text("next Sunday")]))
-                     ,A2($Html.button,
-                     _U.list([aboutButtonStyle
-                             ,A2($Html$Events.onClick,address,ToggleAbout)]),
-                     _U.list([$Html.text("About")]))
-                     ,A2($Html.br,_U.list([]),_U.list([]))
-                     ,A2($Html.button,
-                     _U.list([inactiveButtonStyle]),
-                     _U.list([$Html.text("Readings Yesterday")]))
-                     ,A2($Html.button,
-                     _U.list([inactiveButtonStyle]),
-                     _U.list([$Html.text("Readings Today")]))
-                     ,A2($Html.button,
-                     _U.list([inactiveButtonStyle]),
-                     _U.list([$Html.text("Readings Tomorrow")]))
-                     ,A2($Html.button,
-                     _U.list([buttonStyle
-                             ,A2($Html$Events.onClick,address,ToggleMp)]),
-                     _U.list([$Html.text("Daily Office")]))
-                     ,A2($Html.button,
-                     _U.list([inactiveButtonStyle]),
-                     _U.list([$Html.text("Morning Psalms")]))
-                     ,A2($Html.button,
-                     _U.list([inactiveButtonStyle]),
-                     _U.list([$Html.text("Evening Psalms")]))
-                     ,A2($Html.br,_U.list([]),_U.list([]))]);
+   var dateNav = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([$Html$Attributes.$class("cssmenu")]),
+      _U.list([A2($Html.ul,
+      _U.list([]),
+      _U.list([A2($Html.li,
+              _U.list([A2($Html$Events.onClick,
+              lastSundayFrom.address,
+              model.sunday.date)]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Last Sunday")]))]))
+              ,A2($Html.li,
+              _U.list([A2($Html$Events.onClick,
+              yesterdayFrom.address,
+              model.today)]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Yesterday")]))]))
+              ,A2($Html.li,
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                       ,_0: "width"
+                                                       ,_1: "22%"}
+                                                      ,{ctor: "_Tuple2",_0: "text-align",_1: "center"}]))]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text(model.today)]))]))
+              ,A2($Html.li,
+              _U.list([A2($Html$Events.onClick,
+              tomorrowFrom.address,
+              model.today)]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Tomorrow")]))]))
+              ,A2($Html.li,
+              _U.list([A2($Html$Events.onClick,
+              nextSundayFrom.address,
+              model.sunday.date)]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Next Sunday")]))]))]))]));
    });
    var view = F2(function (address,model) {
       return A2($Html.div,
       _U.list([]),
-      _U.list([A2($Html.p,
-              _U.list([$Html$Attributes.$class("about")
-                      ,aboutStyle(model)
-                      ,A2($Html$Events.onClick,address,ToggleAbout)]),
-              _U.list([$Markdown.toHtml(about)]))
+      _U.list([A2(fancyNav,address,model)
+              ,A2(aboutDiv,address,model)
               ,A2($Html.br,_U.list([]),_U.list([]))
-              ,A2($Html.ul,
-              _U.list([]),
-              _U.list([A2($Html.li,
-                      _U.list([]),
-                      _U.list([$Html.text(A2($Basics._op["++"],
-                      "From: ",
-                      model.today))]))
-                      ,A2($Html.li,
-                      _U.list([]),
-                      _U.list([$Html.text(A2($Basics._op["++"],
-                      model.sunday.title,
-                      A2($Basics._op["++"]," - ",model.sunday.date)))]))
-                      ,A2($Html.li,
-                      _U.list([]),
-                      _U.list([$Html.text(A2($Basics._op["++"],
-                      "Next Feast Day: ",
-                      A2($Basics._op["++"],
-                      model.redLetter.title,
-                      A2($Basics._op["++"]," - ",model.redLetter.date))))]))
-                      ,A2($Html.li,_U.list([]),A2(basicNav,address,model))
-                      ,A2($Html.li,
-                      _U.list([]),
-                      _U.list([A2($Html.ul,
-                      _U.list([]),
-                      A2($Iphod$Sunday.view,
-                      A2($Signal.forwardTo,address,ModSunday(model.sunday)),
-                      model.sunday))]))
-                      ,A2($Html.li,
-                      _U.list([]),
-                      _U.list([A2($Html.ul,
-                      _U.list([]),
-                      A2($Iphod$Sunday.view,
-                      A2($Signal.forwardTo,address,ModSunday(model.redLetter)),
-                      model.redLetter))]))
-                      ,A2($Html.li,
-                      _U.list([]),
-                      _U.list([A2($Html.ul,
-                      _U.list([]),
-                      A2($Iphod$Daily.view,
-                      A2($Signal.forwardTo,address,ModDaily(model.daily)),
-                      model.daily))]))
-                      ,A2($Html.li,
-                      _U.list([]),
-                      _U.list([A2($Iphod$MorningPrayer.view,
-                      A2($Signal.forwardTo,address,ModMP(model.morningPrayer)),
-                      model.morningPrayer)]))]))]));
+              ,A2(listDates,address,model)
+              ,A2(dateNav,address,model)
+              ,A2(readingNav,address,model)
+              ,A2(listReadings,address,model)
+              ,A2(morningPrayerDiv,address,model)]));
    });
    var incomingText = A2($Signal.map,UpdateText,newText);
    var incomingActions = A2($Signal.map,SetSunday,nextSunday);
@@ -14777,9 +15014,14 @@ Elm.Iphod.make = function (_elm) {
                               ,incomingText: incomingText
                               ,nextSundayFrom: nextSundayFrom
                               ,lastSundayFrom: lastSundayFrom
+                              ,yesterdayFrom: yesterdayFrom
+                              ,tomorrowFrom: tomorrowFrom
                               ,NoOp: NoOp
                               ,ToggleAbout: ToggleAbout
                               ,ToggleMp: ToggleMp
+                              ,ToggleDaily: ToggleDaily
+                              ,ToggleSunday: ToggleSunday
+                              ,ToggleRedLetter: ToggleRedLetter
                               ,SetSunday: SetSunday
                               ,UpdateText: UpdateText
                               ,ModMP: ModMP
@@ -14789,7 +15031,13 @@ Elm.Iphod.make = function (_elm) {
                               ,updateSundayText: updateSundayText
                               ,updateDailyText: updateDailyText
                               ,view: view
-                              ,basicNav: basicNav
+                              ,aboutDiv: aboutDiv
+                              ,listDates: listDates
+                              ,fancyNav: fancyNav
+                              ,dateNav: dateNav
+                              ,readingNav: readingNav
+                              ,listReadings: listReadings
+                              ,morningPrayerDiv: morningPrayerDiv
                               ,about: about
                               ,aboutStyle: aboutStyle
                               ,buttonStyle: buttonStyle
@@ -25683,6 +25931,8 @@ for (var i = 0; i < len; ++i) {
 
 require("deps/phoenix_html/web/static/js/phoenix_html");
 
+require("./menu");
+
 var _socket = require("./socket");
 
 var _socket2 = _interopRequireDefault(_socket);
@@ -25703,12 +25953,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
 
-var channel = _socket2.default.channel("iphod");
 
 // Import local files
 //
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
+
+var channel = _socket2.default.channel("iphod");
 
 channel.join().receive("ok", function (resp) {
   console.log("Joined successfully", resp);
@@ -25778,6 +26029,14 @@ elmApp.ports.requestLastSunday.subscribe(function (this_day) {
   channel.push("request_last_sunday", this_day);
 });
 
+elmApp.ports.requestYesterday.subscribe(function (this_day) {
+  channel.push("request_yesterday", this_day);
+});
+
+elmApp.ports.requestTomorrow.subscribe(function (this_day) {
+  channel.push("request_tomorrow", this_day);
+});
+
 elmApp.ports.requestText.subscribe(function (request) {
   if ($("#" + request[0]).text().length == 0) {
     channel.push("request_text", request);
@@ -25785,7 +26044,26 @@ elmApp.ports.requestText.subscribe(function (request) {
 });
 });
 
-;require.register("web/static/js/socket", function(exports, require, module) {
+;require.register("web/static/js/menu", function(exports, require, module) {
+'use strict';
+
+(function ($) {
+  $(document).ready(function () {
+
+    $('#cssmenu').prepend('<div id="menu-button">Menu</div>');
+    $('#cssmenu #menu-button').on('click', function () {
+      var menu = $(this).next('ul');
+      if (menu.hasClass('open')) {
+        menu.removeClass('open');
+      } else {
+        menu.addClass('open');
+      }
+    });
+  });
+})(jQuery);
+});
+
+require.register("web/static/js/socket", function(exports, require, module) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
