@@ -1,6 +1,7 @@
 require IEx
 
 defmodule SundayReading do
+  import Lityear, only: [namedDayDate: 2]
   use Timex
 
   def start_link do
@@ -25,6 +26,17 @@ defmodule SundayReading do
           week:   wk, 
           title:  identity[season][wk]["title"]
         }
+  end
+
+  def namedReadings(season, wk) do
+    identity[season][wk]["a"]
+    |> add_ids
+    |> Map.merge %{
+        date: Lityear.namedDayDate(season, wk) |> DateFormat.format!("{WDfull} {Mfull} {D}, {YYYY}"),
+        season: season,
+        week: wk,
+        title: identity[season][wk]["title"]
+    }
   end
 
   defp add_ids( map ) do
@@ -200,17 +212,17 @@ defmodule SundayReading do
   "christmas" =>
     %{  "1" =>
           %{  "title" => "The First Sunday of Christmas",
-              "a" => %{ ot: [%{style: "req", read: "Isaiah 61.10 through 62.5"}],
+              "a" => %{ ot: [%{style: "req", read: "Isaiah 61.10-end 62.1-5"}],
                         ps: [%{style: "req", read: "Ps 147.13-21"}],
                         nt: [%{style: "req", read: "Gal 3.23-4.7"}],
                         gs: [%{style: "req", read: "Jn 1.1-18"}]
                         },
-              "b" => %{ ot: [%{style: "req", read: "Isaiah 61.10 through 62.5"}],
+              "b" => %{ ot: [%{style: "req", read: "Isaiah 61.10-end 62.1-5"}],
                         ps: [%{style: "req", read: "Ps 147.13-21"}],
                         nt: [%{style: "req", read: "Gal 3.23-4.7"}],
                         gs: [%{style: "req", read: "Jn 1.1-18"}]
                         },
-              "c" => %{ ot: [%{style: "req", read: "Isaiah 61.10 through 62.5"}],
+              "c" => %{ ot: [%{style: "req", read: "Isaiah 61.10-end 62.1-5"}],
                         ps: [%{style: "req", read: "Ps 147.13-21"}],
                         nt: [%{style: "req", read: "Gal 3.23-4.7"}],
                         gs: [%{style: "req", read: "Jn 1.1-18"}]
@@ -482,7 +494,7 @@ defmodule SundayReading do
     "lent" =>
       %{  "1" =>
           %{  "title" => "The First Sunday in Lent",
-              "a" => %{ ot: [%{style: "req", read: "Gen 2.4-9 2.15-17 2.25 through 3.7"}],
+              "a" => %{ ot: [%{style: "req", read: "Gen 2.4-9 2.15-17 2.25-end 3.1-7"}],
                         ps: [%{style: "req", read: "Ps 51"}, %{style: "alt", read: "Ps 51.1-13"}],
                         nt: [%{style: "req", read: "Rom 5.12-19"},%{style: "opt", read: "Rom 5.21-22"}],
                         gs: [%{style: "req", read: "Mt 4.1-11"}]
@@ -571,7 +583,7 @@ defmodule SundayReading do
                         }
             }
     },
-    "PalmSundayPalms" =>
+    "palmSundayPalms" =>
       %{  "1" =>
           %{"title" => "Palm Sunday: Liturgy of the Palms",
             "a" => %{ ot: [],
@@ -594,17 +606,17 @@ defmodule SundayReading do
     "palmSunday" =>
       %{  "1" =>
           %{  "title" => "Palm Sunday",
-              "a" => %{ ot: [%{style: "req", read: "Isaiah 52.13 through 53.12"}],
+              "a" => %{ ot: [%{style: "req", read: "Isaiah 52.13-end 53.1-12"}],
                         ps: [%{style: "req", read: "Ps 22.1-21"},%{style: "alt", read: "Ps 22.1-11"}],
                         nt: [%{style: "req", read: "Phil 2.5-11"}],
                         gs: [%{style: "opt", read: "Mt 26.36-75"},%{style: "req", read: "Mt 27.1-54"}, %{style: "opt", read: "Mt 27.55-66"}]
                         },
-              "b" => %{ ot: [%{style: "req", read: "Isaiah 52.13 through 53.12"}],
+              "b" => %{ ot: [%{style: "req", read: "Isaiah 52.13-end 53.1-12"}],
                         ps: [%{style: "req", read: "Ps 22.1-11"},%{style: "alt", read: "Ps 22.1-21"}],
                         nt: [%{style: "req", read: "Phil 2.5-11"}],
                         gs: [%{style: "opt", read: "Mk 14.32-72"},%{style: "req", read: "Mt 15.1-39"}, %{style: "opt", read: "Mt 15.40-47"}]
                         },
-              "c" => %{ ot: [%{style: "req", read: "Isaiah 52.13 through 53.12"}],
+              "c" => %{ ot: [%{style: "req", read: "Isaiah 52.13-end 53.1-12"}],
                         ps: [%{style: "req", read: "Ps 22.1-11"},%{style: "alt", read: "Ps 22.1-21"}],
                         nt: [%{style: "req", read: "Phil 2.5-11"}],
                         gs: [%{style: "opt", read: "Lk 22.39-71"},%{style: "req", read: "Lk 23.1-49"}, %{style: "opt", read: "Lk 23.50-56"}]
@@ -727,7 +739,7 @@ defmodule SundayReading do
               "a" => %{ ot: [ %{style: "req", read: "Genesis 1 Gen 2.1-2"},
                               %{style: "req", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
                               %{style: "req", read: "Genesis 22.1-18"},
-                              %{style: "req", read: "Exodus 14.10 through 15.1"},
+                              %{style: "req", read: "Exodus 14.10-end 15.1"},
                               %{style: "req", read: "Isiah 4.2-6"},
                               %{style: "req", read: "Isiah 55.1-11"},
                               %{style: "req", read: "Ezekiel 36.24-28"},
@@ -741,7 +753,7 @@ defmodule SundayReading do
               "b" => %{ ot: [ %{style: "req", read: "Genesis 1 Gen 2.1-2"},
                               %{style: "req", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
                               %{style: "req", read: "Genesis 22.1-18"},
-                              %{style: "req", read: "Exodus 14.10 through 15.1"},
+                              %{style: "req", read: "Exodus 14.10-end 15.1"},
                               %{style: "req", read: "Isiah 4.2-6"},
                               %{style: "req", read: "Isiah 55.1-11"},
                               %{style: "req", read: "Ezekiel 36.24-28"},
@@ -755,7 +767,7 @@ defmodule SundayReading do
               "c" => %{ ot: [ %{style: "req", read: "Genesis 1 Gen 2.1-2"},
                               %{style: "req", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
                               %{style: "req", read: "Genesis 22.1-18"},
-                              %{style: "req", read: "Exodus 14.10 through 15.1"},
+                              %{style: "req", read: "Exodus 14.10-end 15.1"},
                               %{style: "req", read: "Isiah 4.2-6"},
                               %{style: "req", read: "Isiah 55.1-11"},
                               %{style: "req", read: "Ezekiel 36.24-28"},
@@ -774,7 +786,7 @@ defmodule SundayReading do
           "a" => %{ ot: [ %{style: "alt", read: "Genesis 1 Gen 2.1-2"},
                           %{style: "alt", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
                           %{style: "alt", read: "Genesis 22.1-18"},
-                          %{style: "alt", read: "Exodus 14.10 through 15.1"},
+                          %{style: "alt", read: "Exodus 14.10-end 15.1"},
                           %{style: "alt", read: "Isiah 4.2-6"},
                           %{style: "alt", read: "Isiah 55.1-11"},
                           %{style: "alt", read: "Ezekiel 36.24-28"},
@@ -787,7 +799,7 @@ defmodule SundayReading do
           "b" => %{ ot: [ %{style: "alt", read: "Genesis 1 Gen 2.1-2"},
                           %{style: "alt", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
                           %{style: "alt", read: "Genesis 22.1-18"},
-                          %{style: "alt", read: "Exodus 14.10 through 15.1"},
+                          %{style: "alt", read: "Exodus 14.10-end 15.1"},
                           %{style: "alt", read: "Isiah 4.2-6"},
                           %{style: "alt", read: "Isiah 55.1-11"},
                           %{style: "alt", read: "Ezekiel 36.24-28"},
@@ -800,7 +812,7 @@ defmodule SundayReading do
           "c" => %{ ot: [ %{style: "alt", read: "Genesis 1 Gen 2.1-2"},
                           %{style: "alt", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
                           %{style: "alt", read: "Genesis 22.1-18"},
-                          %{style: "alt", read: "Exodus 14.10 through 15.1"},
+                          %{style: "alt", read: "Exodus 14.10-end 15.1"},
                           %{style: "alt", read: "Isiah 4.2-6"},
                           %{style: "alt", read: "Isiah 55.1-11"},
                           %{style: "alt", read: "Ezekiel 36.24-28"},
@@ -1045,7 +1057,7 @@ defmodule SundayReading do
                     },
             "c" => %{ ot: [%{style: "req", read: "Acts 14.8-18"},%{style: "alt", read: "Joel 2.21-27"}],
                       ps: [%{style: "req", read: "Ps 67"}],
-                      nt: [%{style: "req", read: "Rev 21.1-4 21.22 through 22.5"}],
+                      nt: [%{style: "req", read: "Rev 21.1-4 21.22-end 22.1-5"}],
                       gs: [%{style: "req", read: "Jn 14.21-29"}]
                     }
         },
@@ -1109,7 +1121,7 @@ defmodule SundayReading do
             },
           "2" =>
             %{"title" => "Trinity Sunday",
-                "a" => %{ ot: [%{style: "req", read: "Gen 1.1 through 2.3"}],
+                "a" => %{ ot: [%{style: "req", read: "Gen 1.1-end 2.1-3"}],
                           ps: [%{style: "req", read: "Ps 150"}],
                           nt: [%{style: "req", read: "2 Cor 13.5-14"}],
                           gs: [%{style: "req", read: "Mt 28.16-20"}]
@@ -1203,7 +1215,7 @@ defmodule SundayReading do
             },
           "5" =>
             %{  "title" => "Sunday Closest to June 8",
-                "a" => %{ ot: [%{style: "req", read: "Hos 5.15 through 6.6"}],
+                "a" => %{ ot: [%{style: "req", read: "Hos 5.15-end 6.1-6"}],
                           ps: [%{style: "req", read: "Ps 50"}],
                           nt: [%{style: "req", read: "Rom 4.13-18"}],
                           gs: [%{style: "req", read: "Mt 9.9-13"}]
@@ -1231,7 +1243,7 @@ defmodule SundayReading do
                           nt: [%{style: "req", read: "2 Cor 5.1-10"}],
                           gs: [%{style: "req", read: "Mk 4.26-34"}]
                         },
-                "c" => %{ ot: [%{style: "req", read: "2 Sam 11.26 through 12.15"}],
+                "c" => %{ ot: [%{style: "req", read: "2 Sam 11.26-end 12.1-15"}],
                           ps: [%{style: "req", read: "Ps 32.1-6"},%{style: "opt", read: "Ps 32.7-12"}],
                           nt: [%{style: "req", read: "Gal 2.11-21"}],
                           gs: [%{style: "req", read: "Lk 7.36-50"}]
@@ -1357,7 +1369,7 @@ defmodule SundayReading do
                           nt: [%{style: "req", read: "Eph 4.17-25"}],
                           gs: [%{style: "req", read: "Jn 6.24-35"}]
                         },
-                "c" => %{ ot: [%{style: "req", read: "Eccl 1.12 through 2.11"}],
+                "c" => %{ ot: [%{style: "req", read: "Eccl 1.12-end 2.1-11"}],
                           ps: [%{style: "req", read: "Ps 49.1-12"},%{style: "opt", read: "Ps 49.13-20"}],
                           nt: [%{style: "req", read: "Col 3.5-17"}],
                           gs: [%{style: "req", read: "Lk 12.13-21"}]
@@ -1455,7 +1467,7 @@ defmodule SundayReading do
             },
           "19" =>
             %{  "title" => "Sunday Closest to September 14",
-                "a" => %{ ot: [%{style: "req", read: "Ecclesiasticus 27.30 through 28.7"}],
+                "a" => %{ ot: [%{style: "req", read: "Ecclesiasticus 27.30-end 28.1-7"}],
                           ps: [%{style: "req", read: "Ps 103"},%{style: "alt", read: "Ps 103.1-14"}],
                           nt: [%{style: "req", read: "Rom 14.5-12"}],
                           gs: [%{style: "req", read: "Mt 18.21-35"}]
@@ -1480,7 +1492,7 @@ defmodule SundayReading do
                         },
                 "b" => %{ ot: [%{style: "req", read: "Wis 1.16-2.1 1.12-22"}],
                           ps: [%{style: "req", read: "Ps 54"}],
-                          nt: [%{style: "req", read: "James 3.16 through 4.6"}],
+                          nt: [%{style: "req", read: "James 3.16-end 4.1-6"}],
                           gs: [%{style: "req", read: "Mk 9.30-37"}]
                         },
                 "c" => %{ ot: [%{style: "req", read: "Amos 8.4-12"}],
@@ -1498,7 +1510,7 @@ defmodule SundayReading do
                         },
                 "b" => %{ ot: [%{style: "req", read: "Num 11.4-6 11.10-17 11.24-29"}],
                           ps: [%{style: "opt", read: "Ps 19.1-6"},%{style: "req", read: "Ps 19.7-14"}],
-                          nt: [%{style: "req", read: "James 4.7-12"},%{style: "opt", read: "James 4.13 through 5.6"}],
+                          nt: [%{style: "req", read: "James 4.7-12"},%{style: "opt", read: "James 4.13-end 5.1-6"}],
                           nt: [%{style: "req", read: "Mk 9.38-48"}]
                         },
                 "c" => %{ ot: [%{style: "req", read: "Amos 6.1-7"}],
@@ -1557,7 +1569,7 @@ defmodule SundayReading do
                         },
                 "c" => %{ ot: [%{style: "req", read: "Gen 32.3-8 32.22-30"}],
                           ps: [%{style: "req", read: "Ps 121"}],
-                          nt: [%{style: "req", read: "2 Tim 3.14 through 4.5"}],
+                          nt: [%{style: "req", read: "2 Tim 3.14-end 4.1-5"}],
                           gs: [%{style: "req", read: "Lk 18.1-8"}]
                         }
             },
@@ -1570,7 +1582,7 @@ defmodule SundayReading do
                         },
                 "b" => %{ ot: [%{style: "req", read: "Isaiah 59.9-20"}],
                           ps: [%{style: "req", read: "Ps 13"}],
-                          nt: [%{style: "req", read: "Heb 5.11 through 6.12"}],
+                          nt: [%{style: "req", read: "Heb 5.11-end 6.1-12"}],
                           gs: [%{style: "req", read: "Mk 10.46-52"}]
                         },
                 "c" => %{ ot: [%{style: "opt", read: "Jer 14.1-6"},%{style: "req", read: "Jer 14.7-10 14.19-22,"}],
@@ -1611,7 +1623,7 @@ defmodule SundayReading do
                         },
                 "c" => %{ ot: [%{style: "req", read: "Job 19.23-27a"}],
                           ps: [%{style: "req", read: "Ps 17"}],
-                          nt: [%{style: "req", read: "2 Thess 2.13 through 3.5"}],
+                          nt: [%{style: "req", read: "2 Thess 2.13-end 3.1-5"}],
                           gs: [%{style: "req", read: "Lk 20.27-38"}]
                         }
             },
@@ -1627,7 +1639,7 @@ defmodule SundayReading do
                           nt: [%{style: "req", read: "Heb 10.31-39"}],
                           gs: [%{style: "req", read: "Mk 13.14-23"}]
                         },
-                "c" => %{ ot: [%{style: "req", read: "Mal 3.13 through 4.6"}],
+                "c" => %{ ot: [%{style: "req", read: "Mal 3.13-end 4.1-6"}],
                           ps: [%{style: "req", read: "Ps 98"}],
                           nt: [%{style: "req", read: "2 Thess 3.6-16"}],
                           gs: [%{style: "req", read: "Lk 21.5-19"}]
@@ -1695,17 +1707,17 @@ defmodule SundayReading do
             %{  "title" => "St. Thomas (December 21)",
                 "a" => %{ ot: [%{style: "req", read: "Hab 2.1-4"}],
                           ps: [%{style: "req", read: "Ps 126"}],
-                          nt: [%{style: "req", read: "Heb 10.35 through 11.1"}],
+                          nt: [%{style: "req", read: "Heb 10.35-end 11.1"}],
                           gs: [%{style: "req", read: "Jn 20.19-29"}]
               },
                 "b" => %{ ot: [%{style: "req", read: "Hab 2.1-4"}],
                           ps: [%{style: "req", read: "Ps 126"}],
-                          nt: [%{style: "req", read: "Heb 10.35 through 11.1"}],
+                          nt: [%{style: "req", read: "Heb 10.35-end 11.1"}],
                           gs: [%{style: "req", read: "Jn 20.19-29"}]
               },
                 "c" => %{ ot: [%{style: "req", read: "Hab 2.1-4"}],
                           ps: [%{style: "req", read: "Ps 126"}],
-                          nt: [%{style: "req", read: "Heb 10.35 through 11.1"}],
+                          nt: [%{style: "req", read: "Heb 10.35-end 11.1"}],
                           gs: [%{style: "req", read: "Jn 20.19-29"}]
               }
             },
@@ -2019,17 +2031,17 @@ defmodule SundayReading do
             %{  "title" => "St. James (July 25)",
                 "a" => %{ ot: [%{style: "req", read: "Jer 45.1-5"}],
                           ps: [%{style: "req", read: "Ps 7.1-11"},%{style: "opt", read: "Ps 7.12-18"}],
-                          nt: [%{style: "req", read: "Acts 11.27 through 12.3"}],
+                          nt: [%{style: "req", read: "Acts 11.27-end 12.1-3"}],
                           gs: [%{style: "req", read: "Mt 20.20-28"}]
                         },
                 "b" => %{ ot: [%{style: "req", read: "Jer 45.1-5"}],
                           ps: [%{style: "req", read: "Ps 7.1-11"},%{style: "opt", read: "Ps 7.12-18"}],
-                          nt: [%{style: "req", read: "Acts 11.27 through 12.3"}],
+                          nt: [%{style: "req", read: "Acts 11.27-end 12.1-3"}],
                           gs: [%{style: "req", read: "Mt 20.20-28"}]
                         },
                 "c" => %{ ot: [%{style: "req", read: "Jer 45.1-5"}],
                           ps: [%{style: "req", read: "Ps 7.1-11"},%{style: "opt", read: "Ps 7.12-18"}],
-                          nt: [%{style: "req", read: "Acts 11.27 through 12.3"}],
+                          nt: [%{style: "req", read: "Acts 11.27-end 12.1-3"}],
                           gs: [%{style: "req", read: "Mt 20.20-28"}]
                         }
             },

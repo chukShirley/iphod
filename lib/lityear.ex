@@ -206,6 +206,16 @@ defmodule  Lityear do
       {date, holy_days[day]}
   end
 
+  def namedDayDate("palmSundayPalms", _wk), do: palm_sunday
+  def namedDayDate("palmSunday", _wk), do: palm_sunday
+  def namedDayDate("holyWeek", wk) when wk |> is_bitstring, do: namedDayDate("holyWeek", wk |> String.to_integer)
+  def namedDayDate("holyWeek", wk), do: palm_sunday |> Date.shift(days: wk)
+  def namedDayDate("easterDayVigil", _wk), do: easter |> Date.shift(days: -1)
+#  def namedDayDate("easterDay", wk) when wk |> is_bitstring, do: namedDayDate("easterDay", wk |> String.to_integer) 
+  def namedDayDate("easterDay", _wk), do: easter  
+  def namedDayDate("easterWeek", wk) when wk |> is_bitstring, do: namedDayDate("easterWeek", wk |> String.to_integer) 
+  def namedDayDate("easterWeek", wk), do: easter |> Date.shift(days: wk)  
+
   def stAndrew(), do: stAndrew(Date.local.year)
   def stAndrew(year), do: Date.from {year, 11, 30}
   def stThomas(), do: stThomas(Date.local.year)

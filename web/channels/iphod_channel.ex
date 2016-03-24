@@ -21,10 +21,10 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_info(:after_join, socket) do
-    msg = %{  sunday:         jsonify_reading("sunday", SundayReading.next_sunday),
-              redLetter:      jsonify_reading("redletter", SundayReading.next_holy_day),
+    msg = %{  sunday:         jsonify_reading("sunday", SundayReading.next_sunday, true),
+              redLetter:      jsonify_reading("redletter", SundayReading.next_holy_day, true),
               today:          Timex.Date.local |> SundayReading.formatted_date,
-              daily:          Timex.Date.local |> DailyReading.readings |> jsonify_daily,
+              daily:          Timex.Date.local |> DailyReading.readings |> jsonify_daily(true),
               morningPrayer:  Timex.Date.local |> DailyReading.readings |> jsonify_daily,
               about:          false
             }
@@ -32,7 +32,7 @@ defmodule Iphod.IphodChannel do
     {:noreply, socket}
   end
 
-  def jsonify_reading(ofType, r) do
+  def jsonify_reading(ofType, r, show \\ false) do
     %{  ofType: ofType,
         date:   r.date,
         season: r.season,
@@ -42,11 +42,11 @@ defmodule Iphod.IphodChannel do
         ps:     r.ps,
         nt:     r.nt,
         gs:     r.gs,
-        show:   false
+        show:   show
       }
   end
 
-  def jsonify_daily(r) do
+  def jsonify_daily(r, show \\ false) do
     %{  date: r.date,
         season: r.season,
         week: r.week,
@@ -56,7 +56,7 @@ defmodule Iphod.IphodChannel do
         mp2: r.mp2,
         ep1: r.ep1,
         ep2: r.ep2,
-        show: false,
+        show: show,
         justToday: false
     }
 
@@ -75,32 +75,32 @@ defmodule Iphod.IphodChannel do
   def handle_in("request_next_sunday", this_date, socket) do
     Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
     |> Lityear.date_next_sunday
-    |> request_date socket
+    |> request_date(socket, {true, false})
  end
 
   def handle_in("request_last_sunday", this_date, socket) do
     Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
     |> Lityear.date_last_sunday
-    |> request_date socket
+    |> request_date(socket, {true, false})
   end
 
   def handle_in("request_yesterday", this_date, socket) do
     Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
     |> Date.shift(days: -1)
-    |> request_date socket
+    |> request_date(socket, {false, true})
   end
 
   def handle_in("request_tomorrow", this_date, socket) do
     Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
     |> Date.shift(days: 1)
-    |> request_date socket
+    |> request_date(socket, {false, true})
   end
 
-  def request_date(date, socket) do
-    msg = %{ sunday:    jsonify_reading( "sunday", SundayReading.this_sunday(date) ),
+  def request_date(date, socket, {show_sunday, show_daily}) do
+    msg = %{ sunday:    jsonify_reading( "sunday", SundayReading.this_sunday(date), show_sunday ),
              redLetter: jsonify_reading( "redletter", SundayReading.next_holy_day(date) ),
              today:     date |> SundayReading.formatted_date,
-             daily:     date |> DailyReading.readings |> jsonify_daily,
+             daily:     date |> DailyReading.readings |> jsonify_daily(show_daily),
              morningPrayer:  Timex.Date.local |> DailyReading.readings |> jsonify_daily,
              about:     false
           }
@@ -115,6 +115,21 @@ defmodule Iphod.IphodChannel do
     push socket, "new_text", %{model: model, section: section, id: id, body: body}
     {:noreply, socket}
   end 
+
+  def handle_in("request_named_day", [season, week], socket) do
+    date = Date.local
+    msg = %{ sunday:    jsonify_reading( "sunday", SundayReading.namedReadings(season, week), true ),
+             redLetter: jsonify_reading( "redletter", SundayReading.next_holy_day(date) ),
+             today:     date |> SundayReading.formatted_date,
+             daily:     date |> DailyReading.readings |> jsonify_daily,
+             morningPrayer:  Timex.Date.local |> DailyReading.readings |> jsonify_daily,
+             about:     false
+          }
+    push  socket, "next_sunday", msg
+          
+    {:noreply, socket}  
+    
+  end
 
   def handle_in("shout", payload, socket) do
     broadcast socket, "shout", payload

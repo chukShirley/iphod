@@ -14570,148 +14570,6 @@ Elm.Iphod.make = function (_elm) {
               ,A2($Html$Events.onClick,address,ToggleAbout)]),
       _U.list([$Markdown.toHtml(about)]))]));
    });
-   var fancyNav = F2(function (address,model) {
-      return A2($Html.div,
-      _U.list([$Html$Attributes.$class("cssmenu")]),
-      _U.list([A2($Html.ul,
-      _U.list([]),
-      _U.list([A2($Html.li,
-              _U.list([A2($Html$Events.onClick,address,ToggleMp)]),
-              _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href("#")]),
-              _U.list([$Html.text("Morning Prayer")]))]))
-              ,A2($Html.li,
-              _U.list([]),
-              _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href("#")]),
-              _U.list([$Html.text("Evening Prayer")]))]))
-              ,A2($Html.li,
-              _U.list([$Html$Attributes.$class("has-sub")]),
-              _U.list([A2($Html.a,
-                      _U.list([$Html$Attributes.href("#")]),
-                      _U.list([$Html.text("Easter")]))
-                      ,A2($Html.ul,
-                      _U.list([]),
-                      _U.list([A2($Html.li,
-                              _U.list([]),
-                              _U.list([A2($Html.a,
-                              _U.list([$Html$Attributes.href("#")]),
-                              _U.list([$Html.text("Liturgy of the Palms")]))]))
-                              ,A2($Html.li,
-                              _U.list([]),
-                              _U.list([A2($Html.a,
-                              _U.list([$Html$Attributes.href("#")]),
-                              _U.list([$Html.text("Palm Sunday")]))]))
-                              ,A2($Html.li,
-                              _U.list([$Html$Attributes.$class("has-sub")]),
-                              _U.list([A2($Html.a,
-                                      _U.list([$Html$Attributes.href("#")]),
-                                      _U.list([$Html.text("Holy Week")]))
-                                      ,A2($Html.ul,
-                                      _U.list([]),
-                                      _U.list([A2($Html.li,
-                                              _U.list([]),
-                                              _U.list([A2($Html.a,
-                                              _U.list([$Html$Attributes.href("#")]),
-                                              _U.list([$Html.text("Monday of Holy Week")]))]))
-                                              ,A2($Html.li,
-                                              _U.list([]),
-                                              _U.list([A2($Html.a,
-                                              _U.list([$Html$Attributes.href("#")]),
-                                              _U.list([$Html.text("Tuesday of Holy Week")]))]))
-                                              ,A2($Html.li,
-                                              _U.list([]),
-                                              _U.list([A2($Html.a,
-                                              _U.list([$Html$Attributes.href("#")]),
-                                              _U.list([$Html.text("Wednesday of Holy Week")]))]))
-                                              ,A2($Html.li,
-                                              _U.list([]),
-                                              _U.list([A2($Html.a,
-                                              _U.list([$Html$Attributes.href("#")]),
-                                              _U.list([$Html.text("Maunday Thursday")]))]))
-                                              ,A2($Html.li,
-                                              _U.list([]),
-                                              _U.list([A2($Html.a,
-                                              _U.list([$Html$Attributes.href("#")]),
-                                              _U.list([$Html.text("Good Friday")]))]))
-                                              ,A2($Html.li,
-                                              _U.list([]),
-                                              _U.list([A2($Html.a,
-                                              _U.list([$Html$Attributes.href("#")]),
-                                              _U.list([$Html.text("Holy Saturday")]))]))]))]))
-                              ,A2($Html.li,
-                              _U.list([]),
-                              _U.list([A2($Html.a,
-                              _U.list([$Html$Attributes.href("#")]),
-                              _U.list([$Html.text("Great Vigil of Easter")]))]))
-                              ,A2($Html.li,
-                              _U.list([]),
-                              _U.list([A2($Html.a,
-                              _U.list([$Html$Attributes.href("#")]),
-                              _U.list([$Html.text("Easter Day: Early")]))]))
-                              ,A2($Html.li,
-                              _U.list([]),
-                              _U.list([A2($Html.a,
-                              _U.list([$Html$Attributes.href("#")]),
-                              _U.list([$Html.text("Easter Day: Early")]))]))
-                              ,A2($Html.li,
-                              _U.list([]),
-                              _U.list([A2($Html.a,
-                              _U.list([$Html$Attributes.href("#")]),
-                              _U.list([$Html.text("Easter Day Principle")]))]))
-                              ,A2($Html.li,
-                              _U.list([]),
-                              _U.list([A2($Html.a,
-                              _U.list([$Html$Attributes.href("#")]),
-                              _U.list([$Html.text("Easter Day Evening")]))]))
-                              ,A2($Html.li,
-                              _U.list([$Html$Attributes.$class("has-sub")]),
-                              _U.list([A2($Html.a,
-                                      _U.list([$Html$Attributes.href("#")]),
-                                      _U.list([$Html.text("Week Following")]))
-                                      ,A2($Html.ul,
-                                      _U.list([]),
-                                      _U.list([A2($Html.li,
-                                              _U.list([]),
-                                              _U.list([A2($Html.a,
-                                              _U.list([$Html$Attributes.href("#")]),
-                                              _U.list([$Html.text("Easter Monday")]))]))
-                                              ,A2($Html.li,
-                                              _U.list([]),
-                                              _U.list([A2($Html.a,
-                                              _U.list([$Html$Attributes.href("#")]),
-                                              _U.list([$Html.text("Easter Tuesday")]))]))
-                                              ,A2($Html.li,
-                                              _U.list([]),
-                                              _U.list([A2($Html.a,
-                                              _U.list([$Html$Attributes.href("#")]),
-                                              _U.list([$Html.text("Easter Wednesday")]))]))
-                                              ,A2($Html.li,
-                                              _U.list([]),
-                                              _U.list([A2($Html.a,
-                                              _U.list([$Html$Attributes.href("#")]),
-                                              _U.list([$Html.text("Easter Thursday")]))]))
-                                              ,A2($Html.li,
-                                              _U.list([]),
-                                              _U.list([A2($Html.a,
-                                              _U.list([$Html$Attributes.href("#")]),
-                                              _U.list([$Html.text("Easter Friday")]))]))
-                                              ,A2($Html.li,
-                                              _U.list([]),
-                                              _U.list([A2($Html.a,
-                                              _U.list([$Html$Attributes.href("#")]),
-                                              _U.list([$Html.text("Easter Saturday")]))]))]))]))]))]))
-              ,A2($Html.li,
-              _U.list([A2($Html$Events.onClick,address,ToggleAbout)]),
-              _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href("#")]),
-              _U.list([$Html.text("About")]))]))
-              ,A2($Html.li,
-              _U.list([]),
-              _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href("#")]),
-              _U.list([$Html.text("Contact")]))]))]))]));
-   });
    var NoOp = {ctor: "NoOp"};
    var newText = Elm.Native.Port.make(_elm).inboundSignal("newText",
    "Iphod.NewText",
@@ -15074,6 +14932,185 @@ Elm.Iphod.make = function (_elm) {
       return [v._0,v._1,v._2,v._3];
    },
    $Helper.getText.signal);
+   var namedDay = $Signal.mailbox({ctor: "_Tuple2",_0: "",_1: ""});
+   var requestNamedDay = Elm.Native.Port.make(_elm).outboundSignal("requestNamedDay",
+   function (v) {
+      return [v._0,v._1];
+   },
+   namedDay.signal);
+   var fancyNav = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([$Html$Attributes.$class("cssmenu")]),
+      _U.list([A2($Html.ul,
+      _U.list([]),
+      _U.list([A2($Html.li,
+              _U.list([A2($Html$Events.onClick,address,ToggleMp)]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Morning Prayer")]))]))
+              ,A2($Html.li,
+              _U.list([]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Evening Prayer")]))]))
+              ,A2($Html.li,
+              _U.list([$Html$Attributes.$class("has-sub")]),
+              _U.list([A2($Html.a,
+                      _U.list([$Html$Attributes.href("#")]),
+                      _U.list([$Html.text("Easter")]))
+                      ,A2($Html.ul,
+                      _U.list([]),
+                      _U.list([A2($Html.li,
+                              _U.list([A2($Html$Events.onClick,
+                              namedDay.address,
+                              {ctor: "_Tuple2",_0: "palmSundayPalms",_1: "1"})]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Liturgy of the Palms")]))]))
+                              ,A2($Html.li,
+                              _U.list([A2($Html$Events.onClick,
+                              namedDay.address,
+                              {ctor: "_Tuple2",_0: "palmSunday",_1: "1"})]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Palm Sunday")]))]))
+                              ,A2($Html.li,
+                              _U.list([$Html$Attributes.$class("has-sub")]),
+                              _U.list([A2($Html.a,
+                                      _U.list([$Html$Attributes.href("#")]),
+                                      _U.list([$Html.text("Holy Week")]))
+                                      ,A2($Html.ul,
+                                      _U.list([]),
+                                      _U.list([A2($Html.li,
+                                              _U.list([A2($Html$Events.onClick,
+                                              namedDay.address,
+                                              {ctor: "_Tuple2",_0: "holyWeek",_1: "1"})]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Monday of Holy Week")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([A2($Html$Events.onClick,
+                                              namedDay.address,
+                                              {ctor: "_Tuple2",_0: "holyWeek",_1: "2"})]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Tuesday of Holy Week")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([A2($Html$Events.onClick,
+                                              namedDay.address,
+                                              {ctor: "_Tuple2",_0: "holyWeek",_1: "3"})]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Wednesday of Holy Week")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([A2($Html$Events.onClick,
+                                              namedDay.address,
+                                              {ctor: "_Tuple2",_0: "holyWeek",_1: "4"})]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Maunday Thursday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([A2($Html$Events.onClick,
+                                              namedDay.address,
+                                              {ctor: "_Tuple2",_0: "holyWeek",_1: "5"})]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Good Friday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([A2($Html$Events.onClick,
+                                              namedDay.address,
+                                              {ctor: "_Tuple2",_0: "holyWeek",_1: "6"})]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Holy Saturday")]))]))]))]))
+                              ,A2($Html.li,
+                              _U.list([A2($Html$Events.onClick,
+                              namedDay.address,
+                              {ctor: "_Tuple2",_0: "easterDayVigil",_1: "1"})]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Great Vigil of Easter")]))]))
+                              ,A2($Html.li,
+                              _U.list([A2($Html$Events.onClick,
+                              namedDay.address,
+                              {ctor: "_Tuple2",_0: "easterDay",_1: "1"})]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Easter Day: Early")]))]))
+                              ,A2($Html.li,
+                              _U.list([A2($Html$Events.onClick,
+                              namedDay.address,
+                              {ctor: "_Tuple2",_0: "easterDay",_1: "2"})]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Easter Day Principle")]))]))
+                              ,A2($Html.li,
+                              _U.list([A2($Html$Events.onClick,
+                              namedDay.address,
+                              {ctor: "_Tuple2",_0: "easterDay",_1: "3"})]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Easter Day Evening")]))]))
+                              ,A2($Html.li,
+                              _U.list([$Html$Attributes.$class("has-sub")]),
+                              _U.list([A2($Html.a,
+                                      _U.list([$Html$Attributes.href("#")]),
+                                      _U.list([$Html.text("Week Following")]))
+                                      ,A2($Html.ul,
+                                      _U.list([]),
+                                      _U.list([A2($Html.li,
+                                              _U.list([A2($Html$Events.onClick,
+                                              namedDay.address,
+                                              {ctor: "_Tuple2",_0: "easterWeek",_1: "1"})]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Easter Monday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([A2($Html$Events.onClick,
+                                              namedDay.address,
+                                              {ctor: "_Tuple2",_0: "easterWeek",_1: "2"})]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Easter Tuesday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([A2($Html$Events.onClick,
+                                              namedDay.address,
+                                              {ctor: "_Tuple2",_0: "easterWeek",_1: "3"})]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Easter Wednesday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([A2($Html$Events.onClick,
+                                              namedDay.address,
+                                              {ctor: "_Tuple2",_0: "easterWeek",_1: "4"})]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Easter Thursday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([A2($Html$Events.onClick,
+                                              namedDay.address,
+                                              {ctor: "_Tuple2",_0: "easterWeek",_1: "5"})]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Easter Friday")]))]))
+                                              ,A2($Html.li,
+                                              _U.list([A2($Html$Events.onClick,
+                                              namedDay.address,
+                                              {ctor: "_Tuple2",_0: "easterWeek",_1: "6"})]),
+                                              _U.list([A2($Html.a,
+                                              _U.list([$Html$Attributes.href("#")]),
+                                              _U.list([$Html.text("Easter Saturday")]))]))]))]))]))]))
+              ,A2($Html.li,
+              _U.list([A2($Html$Events.onClick,address,ToggleAbout)]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("About")]))]))
+              ,A2($Html.li,
+              _U.list([]),
+              _U.list([A2($Html.a,
+              _U.list([$Html$Attributes.href("#")]),
+              _U.list([$Html.text("Contact")]))]))]))]));
+   });
    var tomorrowFrom = $Signal.mailbox("");
    var requestTomorrow = Elm.Native.Port.make(_elm).outboundSignal("requestTomorrow",
    function (v) {
@@ -15195,6 +15232,7 @@ Elm.Iphod.make = function (_elm) {
                               ,lastSundayFrom: lastSundayFrom
                               ,yesterdayFrom: yesterdayFrom
                               ,tomorrowFrom: tomorrowFrom
+                              ,namedDay: namedDay
                               ,NoOp: NoOp
                               ,ToggleAbout: ToggleAbout
                               ,ToggleMp: ToggleMp
@@ -26220,6 +26258,10 @@ elmApp.ports.requestText.subscribe(function (request) {
   if ($("#" + request[0]).text().length == 0) {
     channel.push("request_text", request);
   }
+});
+
+elmApp.ports.requestNamedDay.subscribe(function (request) {
+  channel.push("request_named_day", request);
 });
 });
 

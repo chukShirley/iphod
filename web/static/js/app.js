@@ -97,5 +97,8 @@ elmApp.ports.requestTomorrow.subscribe(function(this_day) {
 
 elmApp.ports.requestText.subscribe(function(request) {
   if ( $("#" + request[0]).text().length == 0 ) {channel.push("request_text", request)}
-  
+})
+
+elmApp.ports.requestNamedDay.subscribe(function(request) {
+  channel.push("request_named_day", request)
 })

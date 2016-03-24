@@ -102,6 +102,10 @@ tomorrowFrom: Signal.Mailbox String
 tomorrowFrom =
   Signal.mailbox ""
 
+namedDay: Signal.Mailbox (String, String)
+namedDay =
+  Signal.mailbox ("", "")
+
 -- PORTS
 
 port requestNextSunday: Signal String
@@ -124,8 +128,13 @@ port requestText: Signal (String, String, String, String)
 port requestText =
   getText.signal
 
+port requestNamedDay: Signal (String, String)
+port requestNamedDay =
+  namedDay.signal
+
 port nextSunday: Signal Model
 port newText: Signal NewText
+
 
 -- UPDATE
 
@@ -306,33 +315,32 @@ fancyNav address model =
       , li [class "has-sub"] 
           [ a [href "#"] [ text "Easter"]
           , ul [] 
-              [ li [] [ a [href "#"] [ text "Liturgy of the Palms"] ]
-              , li [] [ a [href "#"] [ text "Palm Sunday"] ]
+              [ li [onClick namedDay.address ("palmSundayPalms", "1")] [ a [href "#"] [ text "Liturgy of the Palms"] ]
+              , li [onClick namedDay.address ("palmSunday", "1")] [ a [href "#"] [ text "Palm Sunday"] ]
               , li [class "has-sub"]
                   [ a [href "#"] [ text "Holy Week"]
                   , ul [] 
-                      [ li [] [ a [href "#"] [ text "Monday of Holy Week"] ]
-                      , li [] [ a [href "#"] [ text "Tuesday of Holy Week"] ]
-                      , li [] [ a [href "#"] [ text "Wednesday of Holy Week"] ]
-                      , li [] [ a [href "#"] [ text "Maunday Thursday"] ]
-                      , li [] [ a [href "#"] [ text "Good Friday"] ]
-                      , li [] [ a [href "#"] [ text "Holy Saturday"] ]
+                      [ li [onClick namedDay.address ("holyWeek", "1")] [ a [href "#"] [ text "Monday of Holy Week"] ]
+                      , li [onClick namedDay.address ("holyWeek", "2")] [ a [href "#"] [ text "Tuesday of Holy Week"] ]
+                      , li [onClick namedDay.address ("holyWeek", "3")] [ a [href "#"] [ text "Wednesday of Holy Week"] ]
+                      , li [onClick namedDay.address ("holyWeek", "4")] [ a [href "#"] [ text "Maunday Thursday"] ]
+                      , li [onClick namedDay.address ("holyWeek", "5")] [ a [href "#"] [ text "Good Friday"] ]
+                      , li [onClick namedDay.address ("holyWeek", "6")] [ a [href "#"] [ text "Holy Saturday"] ]
                       ]
                   ]
-              , li [] [ a [href "#"] [ text "Great Vigil of Easter"] ]
-              , li [] [ a [href "#"] [ text "Easter Day: Early"] ]
-              , li [] [ a [href "#"] [ text "Easter Day: Early"] ]
-              , li [] [ a [href "#"] [ text "Easter Day Principle"] ]
-              , li [] [ a [href "#"] [ text "Easter Day Evening"] ]
+              , li [onClick namedDay.address ("easterDayVigil", "1")] [ a [href "#"] [ text "Great Vigil of Easter"] ]
+              , li [onClick namedDay.address ("easterDay", "1")] [ a [href "#"] [ text "Easter Day: Early"] ]
+              , li [onClick namedDay.address ("easterDay", "2")] [ a [href "#"] [ text "Easter Day Principle"] ]
+              , li [onClick namedDay.address ("easterDay", "3")] [ a [href "#"] [ text "Easter Day Evening"] ]
               , li [class "has-sub"] 
                   [ a [href "#"] [ text "Week Following"]
                   , ul [] 
-                    [ li [] [ a [href "#"] [ text "Easter Monday"] ]
-                    , li [] [ a [href "#"] [ text "Easter Tuesday"] ]
-                    , li [] [ a [href "#"] [ text "Easter Wednesday"] ]
-                    , li [] [ a [href "#"] [ text "Easter Thursday"] ]
-                    , li [] [ a [href "#"] [ text "Easter Friday"] ]
-                    , li [] [ a [href "#"] [ text "Easter Saturday"] ]
+                    [ li [onClick namedDay.address ("easterWeek", "1")] [ a [href "#"] [ text "Easter Monday"] ]
+                    , li [onClick namedDay.address ("easterWeek", "2")] [ a [href "#"] [ text "Easter Tuesday"] ]
+                    , li [onClick namedDay.address ("easterWeek", "3")] [ a [href "#"] [ text "Easter Wednesday"] ]
+                    , li [onClick namedDay.address ("easterWeek", "4")] [ a [href "#"] [ text "Easter Thursday"] ]
+                    , li [onClick namedDay.address ("easterWeek", "5")] [ a [href "#"] [ text "Easter Friday"] ]
+                    , li [onClick namedDay.address ("easterWeek", "6")] [ a [href "#"] [ text "Easter Saturday"] ]
                     ]
                   ]
               ]
