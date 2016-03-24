@@ -7,6 +7,7 @@ import Helper exposing (onClickLimited, hideable, getText)
 import String
 import Markdown
 import Iphod.Models as Models
+import DynamicStyle exposing (hover)
 
 -- MODEL
 
@@ -59,14 +60,40 @@ update action model =
       in
         newModel
 
-view: Signal.Address Action -> Model -> List Html
+view: Signal.Address Action -> Model -> Html
 view address model =
-  [ li [titleStyle model, onClick address ToggleModelShow] [text model.title]
-  , ul [textStyle model] ([text "Morning 1: "] ++ thisReading address model.mp1 ++ thisText model.mp1)
-  , ul [textStyle model] ([text "Morning 2: "] ++ thisReading address model.mp2 ++ thisText model.mp2)
-  , ul [textStyle model] ([text "Evening 1: "] ++ thisReading address model.ep1 ++ thisText model.ep1)
-  , ul [textStyle model] ([text "Evening 2: "] ++ thisReading address model.ep2 ++ thisText model.ep2)
-  ]
+  div
+  []
+  [ table [tableStyle model]
+      [ caption [titleStyle model, onClick address ToggleModelShow] [text model.title] 
+      , tr
+          [ rowStyle ]
+          [ th [] [ text "Morning 1"]
+          , th [] [ text "Morning 2"]
+          , th [] [ text "Evening 1"]
+          , th [] [ text "Evening 2"]
+          ]
+      , tr
+          [ rowStyle ]
+          [ td 
+              [tdStyle]
+              [ ul [textStyle model] ( thisReading address model.mp1 ) ]
+          , td
+              [tdStyle]
+              [ ul [textStyle model] ( thisReading address model.mp2 ) ]
+           , td
+              [tdStyle]
+              [ ul [textStyle model] ( thisReading address model.ep1 ) ]
+           , td
+              [tdStyle]
+              [ ul [textStyle model] ( thisReading address model.ep2) ]
+          ] -- end of row
+      ] -- end of table
+    , div [] (thisText model.mp1)
+    , div [] (thisText model.mp2)
+    , div [] (thisText model.ep1)
+    , div [] (thisText model.ep2)
+  ] -- end of div 
 
 
 -- HELPERS
@@ -85,26 +112,51 @@ thisReading address lessons =
     this_lesson l =
       if String.length l.body == 0
         then
-          li [this_style l, onClick getText.address ("daily", l.section, l.id, l.read)] [text l.read]
+          li 
+            ( hoverable [ this_style l, onClick getText.address ("daily", l.section, l.id, l.read) ] )
+            [text l.read]
         else
-          li [this_style l, onClick address (ToggleShow l)] [text l.read]
+          li 
+            ( hoverable [ this_style l , onClick address (ToggleShow l) ] )
+            [text l.read]
   in
     List.map this_lesson lessons
   
 this_style: Models.Lesson -> Attribute
 this_style l =
   case l.style of
-    "req"     -> req_style  l
+    "req"     -> req_style l
     "opt"     -> opt_style l
     "alt"     -> alt_style l
     "alt-req" -> alt_style l
     "alt-opt" -> altOpt_style l
     _         -> bogis_style l
 
+hoverable: List Attribute -> List Attribute
+hoverable attrs =
+  hover [("background-color", "white", "skyblue")] ++ attrs
+  
+ 
 
 
 -- STYLE
- 
+
+tableStyle: Model -> Attribute
+tableStyle model =
+  hideable
+    model.show
+    [ ("width", "100%")]
+
+rowStyle: Attribute
+rowStyle =
+  style [("text-align", "left")]
+
+tdStyle: Attribute
+tdStyle =
+  style [("vertical-align", "top")]
+
+
+
 bodyStyle: Models.Lesson -> Attribute
 bodyStyle lesson =
   hideable
@@ -115,7 +167,7 @@ titleStyle: Model -> Attribute
 titleStyle model =
   hideable
     model.show
-    [ ("font-size", "0.8em")
+    [ ("font-size", "0.9em")
     , ("color", "blue")
     , ("height", "2em")
     ]
@@ -124,8 +176,11 @@ textStyle: Model -> Attribute
 textStyle model =
   hideable
     model.show
-    [ ("font-size", "0.8em")
+    [ ("font-size", "1em")
     , ("margin", "0")
+    , ("padding", "0em")
+    , ("list-style-type", "none")
+    , ("display", "inline-block")
     ]
 
 req_style: Models.Lesson -> Attribute
@@ -134,6 +189,7 @@ req_style lesson =
     [ ("color", "black")
     , ("display", "inline-block")
     , ("padding","0 1em 0 1em")
+    , ("cursor", "pointer")
     ]
 
 
@@ -143,6 +199,7 @@ opt_style lesson =
     [ ("color", "grey")
     , ("display", "inline-block")
     , ("padding", "0 1em 0 1em")
+    , ("cursor", "pointer")
     ]
 
 
@@ -152,6 +209,7 @@ alt_style lesson =
     [ ("color", "darkblue")
     , ("display", "inline-block")
     , ("padding", "0 1em 0 1em")
+    , ("cursor", "pointer")
     ]
 
 altOpt_style: Models.Lesson -> Attribute
@@ -160,6 +218,7 @@ altOpt_style lesson =
     [ ("color", "indego")
     , ("display", "inline-block")
     , ("padding", "0 1em 0 1em")
+    , ("cursor", "pointer")
     ]
 
 
@@ -169,6 +228,7 @@ bogis_style lesson =
     [ ("color", "red")
     , ("display", "inline-block")
     , ("padding", "0 1em 0 1em")
+    , ("cursor", "pointer")
     ]
 
 

@@ -724,7 +724,7 @@ defmodule SundayReading do
     "easterDayVigil" =>
       %{  "1" =>
           %{  "title" => "The Great Vigil of Easter", 
-              "a" => %{ ot: [ %{style: "req", read: "Genesis through Gen 2:2"},
+              "a" => %{ ot: [ %{style: "req", read: "Genesis 1 Gen 2.1-2"},
                               %{style: "req", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
                               %{style: "req", read: "Genesis 22.1-18"},
                               %{style: "req", read: "Exodus 14.10 through 15.1"},
@@ -738,7 +738,7 @@ defmodule SundayReading do
                         nt: [ %{style: "req", read: "Romans 6.3-11"}], 
                         gs: [ %{style: "req", read: "Matthew 28.1-10"}]
                       },
-              "b" => %{ ot: [ %{style: "req", read: "Genesis through Gen 2:2"},
+              "b" => %{ ot: [ %{style: "req", read: "Genesis 1 Gen 2.1-2"},
                               %{style: "req", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
                               %{style: "req", read: "Genesis 22.1-18"},
                               %{style: "req", read: "Exodus 14.10 through 15.1"},
@@ -752,7 +752,7 @@ defmodule SundayReading do
                         nt: [ %{style: "req", read: "Romans 6.3-11"}], 
                         gs: [ %{style: "req", read: "Matthew 28.1-10"}]
                       },
-              "c" => %{ ot: [ %{style: "req", read: "Genesis through Gen 2:2"},
+              "c" => %{ ot: [ %{style: "req", read: "Genesis 1 Gen 2.1-2"},
                               %{style: "req", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
                               %{style: "req", read: "Genesis 22.1-18"},
                               %{style: "req", read: "Exodus 14.10 through 15.1"},
@@ -771,7 +771,7 @@ defmodule SundayReading do
     "easterDay" =>
     %{ "1" =>
       %{  "title" => "Easter Day: Early Service",
-          "a" => %{ ot: [ %{style: "alt", read: "Genesis through Gen 2:2"},
+          "a" => %{ ot: [ %{style: "alt", read: "Genesis 1 Gen 2.1-2"},
                           %{style: "alt", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
                           %{style: "alt", read: "Genesis 22.1-18"},
                           %{style: "alt", read: "Exodus 14.10 through 15.1"},
@@ -784,7 +784,7 @@ defmodule SundayReading do
                     nt: [%{style: "req", read: "Rom 6.3-11"}],
                     gs: [%{style: "req", read: "Mt 28.1-10"}]
                     },
-          "b" => %{ ot: [ %{style: "alt", read: "Genesis through Gen 2:2"},
+          "b" => %{ ot: [ %{style: "alt", read: "Genesis 1 Gen 2.1-2"},
                           %{style: "alt", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
                           %{style: "alt", read: "Genesis 22.1-18"},
                           %{style: "alt", read: "Exodus 14.10 through 15.1"},
@@ -797,7 +797,7 @@ defmodule SundayReading do
                     nt: [%{style: "req", read: "Rom 6.3-11"}],
                     gs: [%{style: "req", read: "Mt 28.1-10"}]
                     },
-          "c" => %{ ot: [ %{style: "alt", read: "Genesis through Gen 2:2"},
+          "c" => %{ ot: [ %{style: "alt", read: "Genesis 1 Gen 2.1-2"},
                           %{style: "alt", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
                           %{style: "alt", read: "Genesis 22.1-18"},
                           %{style: "alt", read: "Exodus 14.10 through 15.1"},

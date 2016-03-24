@@ -344,7 +344,7 @@ fancyNav address model =
 
 dateNav: Signal.Address Action -> Model -> Html
 dateNav address model =
-  div [class "cssmenu"] 
+  div [class "cssmenu", style [("z-index", "99")] ] 
   [ ul []
       [ li [onClick lastSundayFrom.address model.sunday.date] [ a [href "#"] [ text "Last Sunday"] ]
       , li [onClick yesterdayFrom.address model.today] [ a [href "#"] [ text "Yesterday"] ]
@@ -357,7 +357,7 @@ dateNav address model =
     
 readingNav: Signal.Address Action -> Model -> Html
 readingNav address model =
-  div [class "cssmenu"] 
+  div [class "cssmenu", style [("z-index", "99")] ] 
   [ ul []
       [ li [onClick address ToggleDaily] [ a [href "#"] [ text "Daily"] ]
       , li [onClick address ToggleSunday ] [ a [href "#"] [ text "Sunday"] ]
@@ -368,10 +368,10 @@ readingNav address model =
     
 listReadings: Signal.Address Action -> Model -> Html
 listReadings address model =
-  div [style [("margin-top", "0em")]]
-    [ ul [] (Sunday.view (Signal.forwardTo address (ModSunday model.sunday)) model.sunday)
-    , ul [] (Sunday.view (Signal.forwardTo address (ModSunday model.redLetter)) model.redLetter)
-    , ul [] (Daily.view (Signal.forwardTo address (ModDaily model.daily)) model.daily) 
+  div [style [("margin-top", "0em"), ("z-index", "99")]]
+    [ (Sunday.view (Signal.forwardTo address (ModSunday model.sunday)) model.sunday)
+    , (Sunday.view (Signal.forwardTo address (ModSunday model.redLetter)) model.redLetter)
+    , (Daily.view (Signal.forwardTo address (ModDaily model.daily)) model.daily)
     ]
 
 morningPrayerDiv: Signal.Address Action -> Model -> Html

@@ -8,6 +8,7 @@ import Helper exposing (onClickLimited, hideable, getText)
 import String exposing (join)
 import Regex exposing (..)
 import Markdown
+import DynamicStyle exposing (hover, hover')
 import Iphod.Models as Models
 
 -- MODEL
@@ -62,14 +63,43 @@ update action model =
 
 -- VIEW
 
-view: Signal.Address Action -> Model -> List Html
+view: Signal.Address Action -> Model -> Html
 view address model =
-  [ li [titleStyle model, onClick address ToggleModelShow] [text model.title]
-  , ul [textStyle model] (thisReading address model.ot ++ thisText model.ot)
-  , ul [textStyle model] (thisReading address model.ps ++ thisText model.ps)
-  , ul [textStyle model] (thisReading address model.nt ++ thisText model.nt)
-  , ul [textStyle model] (thisReading address model.gs ++ thisText model.gs)
-  ]
+  div
+  []
+  [ table [tableStyle model]
+      [ caption [titleStyle model, onClick address ToggleModelShow] [text model.title]
+      , tr 
+          [ rowStyle ]
+          [ th [] [ text "1st Lesson"]
+          , th [] [ text "Psalm"]
+          , th [] [ text "2nd Lesson"]
+          , th [] [ text "Gospel"]
+          ]
+      , tr
+          [ rowStyle ]
+          [ td 
+              [tdStyle]
+              [ ul [textStyle model] ( thisReading address model.ofType model.ot ) ]
+          , td
+              [tdStyle]
+              [ ul [textStyle model] ( thisReading address model.ofType model.ps ) ]
+           , td
+              [tdStyle]
+              [ ul [textStyle model] ( thisReading address model.ofType model.nt ) ]
+           , td
+              [tdStyle]
+              [ ul [textStyle model] ( thisReading address model.ofType model.gs) ]
+          ] -- end of row
+      ] -- end of table
+    , div [] (thisText model.ot)
+    , div [] (thisText model.ps)
+    , div [] (thisText model.nt)
+    , div [] (thisText model.gs)
+
+--    [ li [titleStyle model, onClick address ToggleModelShow] [text model.title]
+ 
+  ] -- end of div 
 
 
 -- HELPERS
@@ -82,15 +112,19 @@ thisText lessons =
   in
     List.map this_text lessons
 
-thisReading: Signal.Address Action ->List Models.Lesson -> List Html
-thisReading address lessons =
+thisReading: Signal.Address Action -> String -> List Models.Lesson -> List Html
+thisReading address ofType lessons =
   let
     this_lesson l =
       if String.length l.body == 0
         then
-          li [this_style l, onClick getText.address ("sunday", l.section, l.id, l.read)] [text l.read]
+          li 
+            (hoverable [this_style l, onClick getText.address (ofType, l.section, l.id, l.read)] )
+            [text l.read]
         else
-          li [this_style l, onClick address (ToggleShow l)] [text l.read]
+          li 
+            (hoverable [this_style l, onClick address (ToggleShow l)] )
+            [text l.read]
   in
     List.map this_lesson lessons
   
@@ -104,21 +138,40 @@ this_style l =
     "alt-opt" -> altOpt_style l
     _         -> bogis_style l
 
+hoverable: List Attribute -> List Attribute
+hoverable attrs =
+  hover [("background-color", "white", "skyblue")] ++ attrs
+  
 
 
 -- STYLE
+
+tableStyle: Model -> Attribute
+tableStyle model =
+  hideable
+    model.show
+    [ ("width", "100%")]
+
+rowStyle: Attribute
+rowStyle =
+  style [("text-align", "left")]
+
+tdStyle: Attribute
+tdStyle =
+  style [("vertical-align", "top")]
 
 bodyStyle: Models.Lesson -> Attribute
 bodyStyle lesson =
   hideable
     lesson.show
-    []
+    [ ("background-color", "white")
+    ]
 
 titleStyle: Model -> Attribute
 titleStyle model =
   hideable
     model.show
-    [ ("font-size", "0.8em")
+    [ ("font-size", "0.9em")
     , ("color", "blue")
     , ("height", "2em")
     ]
@@ -127,15 +180,20 @@ textStyle: Model -> Attribute
 textStyle model =
   hideable
     model.show
-    [ ("font-size", "0.8em")
-    , ("margin", "0")
+    [ ("font-size", "1em")
+    , ("background-color", "white")
+    , ("margin", "0em")
+    , ("padding", "0em")
+    , ("list-style-type", "none")
+    , ("display", "inline-block")
     ]
 
 req_style: Models.Lesson -> Attribute
 req_style lesson =
   style
     [ ("color", "black")
-    , ("display", "inline-block")
+    , ("background-color", "white")
+    , ("display", "block")
     , ("padding","0 1em 0 1em")
     ]
 
@@ -144,7 +202,8 @@ opt_style: Models.Lesson -> Attribute
 opt_style lesson =
   style
     [ ("color", "grey")
-    , ("display", "inline-block")
+    , ("background-color", "white")
+    , ("display", "block")
     , ("padding", "0 1em 0 1em")
     ]
 
@@ -153,7 +212,8 @@ alt_style: Models.Lesson -> Attribute
 alt_style lesson =
   style
     [ ("color", "darkblue")
-    , ("display", "inline-block")
+    , ("background-color", "white")
+    , ("display", "block")
     , ("padding", "0 1em 0 1em")
     ]
 
@@ -161,7 +221,8 @@ altOpt_style: Models.Lesson -> Attribute
 altOpt_style lesson =
   style
     [ ("color", "indego")
-    , ("display", "inline-block")
+    , ("background-color", "white")
+    , ("display", "block")
     , ("padding", "0 1em 0 1em")
     ]
 
@@ -170,7 +231,8 @@ bogis_style: Models.Lesson -> Attribute
 bogis_style lesson =
   style
     [ ("color", "red")
-    , ("display", "inline-block")
+    , ("background-color", "white")
+    , ("display", "block")
     , ("padding", "0 1em 0 1em")
     ]
 

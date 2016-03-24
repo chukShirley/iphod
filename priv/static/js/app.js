@@ -12601,6 +12601,95 @@ Elm.StartApp.make = function (_elm) {
                                  ,Config: Config
                                  ,App: App};
 };
+Elm.DynamicStyle = Elm.DynamicStyle || {};
+Elm.DynamicStyle.make = function (_elm) {
+   "use strict";
+   _elm.DynamicStyle = _elm.DynamicStyle || {};
+   if (_elm.DynamicStyle.values) return _elm.DynamicStyle.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $String = Elm.String.make(_elm);
+   var _op = {};
+   var cssStateEffect = F4(function (jsEventInactives,
+   jsEventActive,
+   constantStyles,
+   dynamicStyles) {
+      var activeStyles = A2($List.map,
+      function (_p0) {
+         var _p1 = _p0;
+         return {ctor: "_Tuple2",_0: _p1._0,_1: _p1._2};
+      },
+      dynamicStyles);
+      var inactiveStyles = A2($List.map,
+      function (_p2) {
+         var _p3 = _p2;
+         return {ctor: "_Tuple2",_0: _p3._0,_1: _p3._1};
+      },
+      dynamicStyles);
+      var applyToFirstChar = F2(function (f,s) {
+         return A2($Basics._op["++"],
+         f(A2($String.left,1,s)),
+         A2($String.dropLeft,1,s));
+      });
+      var jsName = function (_p4) {
+         return A2(applyToFirstChar,
+         $String.toLower,
+         A2($String.join,
+         "",
+         A2($List.map,
+         applyToFirstChar($String.toUpper),
+         A2($String.split,"-",_p4))));
+      };
+      var toJS = A2($List.foldl,
+      F2(function (_p5,x) {
+         var _p6 = _p5;
+         return A2($Basics._op["++"],
+         x,
+         A2($Basics._op["++"],
+         "this.style.",
+         A2($Basics._op["++"],
+         jsName(_p6._0),
+         A2($Basics._op["++"],
+         "=\'",
+         A2($Basics._op["++"],_p6._1,"\';")))));
+      }),
+      "");
+      var styleUpdater = F2(function (styles,event) {
+         return A2($Html$Attributes.attribute,event,toJS(styles));
+      });
+      return A2($Basics._op["++"],
+      _U.list([$Html$Attributes.style(A2($Basics._op["++"],
+              constantStyles,
+              inactiveStyles))
+              ,A2(styleUpdater,activeStyles,jsEventActive)]),
+      A2($List.map,styleUpdater(inactiveStyles),jsEventInactives));
+   });
+   var focus$ = A2(cssStateEffect,_U.list(["onblur"]),"onfocus");
+   var focus = focus$(_U.list([]));
+   var pressure$ = A2(cssStateEffect,
+   _U.list(["onmouseup","onmouseout"]),
+   "onmousedown");
+   var pressure = pressure$(_U.list([]));
+   var hover$ = A2(cssStateEffect,
+   _U.list(["onmouseout"]),
+   "onmouseover");
+   var hover = hover$(_U.list([]));
+   return _elm.DynamicStyle.values = {_op: _op
+                                     ,hover: hover
+                                     ,hover$: hover$
+                                     ,pressure: pressure
+                                     ,pressure$: pressure$
+                                     ,focus: focus
+                                     ,focus$: focus$
+                                     ,cssStateEffect: cssStateEffect};
+};
 Elm.Helper = Elm.Helper || {};
 Elm.Helper.make = function (_elm) {
    "use strict";
@@ -12761,6 +12850,7 @@ Elm.Iphod.Sunday.make = function (_elm) {
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
+   $DynamicStyle = Elm.DynamicStyle.make(_elm),
    $Helper = Elm.Helper.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
@@ -12777,52 +12867,84 @@ Elm.Iphod.Sunday.make = function (_elm) {
       return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                              ,_0: "color"
                                              ,_1: "red"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
+                                            ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
+                                            ,{ctor: "_Tuple2",_0: "display",_1: "block"}
                                             ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
    };
    var altOpt_style = function (lesson) {
       return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                              ,_0: "color"
                                              ,_1: "indego"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
+                                            ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
+                                            ,{ctor: "_Tuple2",_0: "display",_1: "block"}
                                             ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
    };
    var alt_style = function (lesson) {
       return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                              ,_0: "color"
                                              ,_1: "darkblue"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
+                                            ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
+                                            ,{ctor: "_Tuple2",_0: "display",_1: "block"}
                                             ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
    };
    var opt_style = function (lesson) {
       return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                              ,_0: "color"
                                              ,_1: "grey"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
+                                            ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
+                                            ,{ctor: "_Tuple2",_0: "display",_1: "block"}
                                             ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
    };
    var req_style = function (lesson) {
       return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                              ,_0: "color"
                                              ,_1: "black"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
+                                            ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
+                                            ,{ctor: "_Tuple2",_0: "display",_1: "block"}
                                             ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
    };
    var textStyle = function (model) {
       return A2($Helper.hideable,
       model.show,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
-              ,{ctor: "_Tuple2",_0: "margin",_1: "0"}]));
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1em"}
+              ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
+              ,{ctor: "_Tuple2",_0: "margin",_1: "0em"}
+              ,{ctor: "_Tuple2",_0: "padding",_1: "0em"}
+              ,{ctor: "_Tuple2",_0: "list-style-type",_1: "none"}
+              ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}]));
    };
    var titleStyle = function (model) {
       return A2($Helper.hideable,
       model.show,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.9em"}
               ,{ctor: "_Tuple2",_0: "color",_1: "blue"}
               ,{ctor: "_Tuple2",_0: "height",_1: "2em"}]));
    };
    var bodyStyle = function (lesson) {
-      return A2($Helper.hideable,lesson.show,_U.list([]));
+      return A2($Helper.hideable,
+      lesson.show,
+      _U.list([{ctor: "_Tuple2"
+               ,_0: "background-color"
+               ,_1: "white"}]));
+   };
+   var tdStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                 ,_0: "vertical-align"
+                                                 ,_1: "top"}]));
+   var rowStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                  ,_0: "text-align"
+                                                  ,_1: "left"}]));
+   var tableStyle = function (model) {
+      return A2($Helper.hideable,
+      model.show,
+      _U.list([{ctor: "_Tuple2",_0: "width",_1: "100%"}]));
+   };
+   var hoverable = function (attrs) {
+      return A2($Basics._op["++"],
+      $DynamicStyle.hover(_U.list([{ctor: "_Tuple3"
+                                   ,_0: "background-color"
+                                   ,_1: "white"
+                                   ,_2: "skyblue"}])),
+      attrs);
    };
    var this_style = function (l) {
       var _p0 = l.style;
@@ -12879,49 +13001,67 @@ Elm.Iphod.Sunday.make = function (_elm) {
    var ToggleShow = function (a) {
       return {ctor: "ToggleShow",_0: a};
    };
-   var thisReading = F2(function (address,lessons) {
+   var thisReading = F3(function (address,ofType,lessons) {
       var this_lesson = function (l) {
          return _U.eq($String.length(l.body),0) ? A2($Html.li,
-         _U.list([this_style(l)
-                 ,A2($Html$Events.onClick,
-                 $Helper.getText.address,
-                 {ctor: "_Tuple4"
-                 ,_0: "sunday"
-                 ,_1: l.section
-                 ,_2: l.id
-                 ,_3: l.read})]),
+         hoverable(_U.list([this_style(l)
+                           ,A2($Html$Events.onClick,
+                           $Helper.getText.address,
+                           {ctor: "_Tuple4"
+                           ,_0: ofType
+                           ,_1: l.section
+                           ,_2: l.id
+                           ,_3: l.read})])),
          _U.list([$Html.text(l.read)])) : A2($Html.li,
-         _U.list([this_style(l)
-                 ,A2($Html$Events.onClick,address,ToggleShow(l))]),
+         hoverable(_U.list([this_style(l)
+                           ,A2($Html$Events.onClick,address,ToggleShow(l))])),
          _U.list([$Html.text(l.read)]));
       };
       return A2($List.map,this_lesson,lessons);
    });
    var view = F2(function (address,model) {
-      return _U.list([A2($Html.li,
-                     _U.list([titleStyle(model)
-                             ,A2($Html$Events.onClick,address,ToggleModelShow)]),
-                     _U.list([$Html.text(model.title)]))
-                     ,A2($Html.ul,
-                     _U.list([textStyle(model)]),
-                     A2($Basics._op["++"],
-                     A2(thisReading,address,model.ot),
-                     thisText(model.ot)))
-                     ,A2($Html.ul,
-                     _U.list([textStyle(model)]),
-                     A2($Basics._op["++"],
-                     A2(thisReading,address,model.ps),
-                     thisText(model.ps)))
-                     ,A2($Html.ul,
-                     _U.list([textStyle(model)]),
-                     A2($Basics._op["++"],
-                     A2(thisReading,address,model.nt),
-                     thisText(model.nt)))
-                     ,A2($Html.ul,
-                     _U.list([textStyle(model)]),
-                     A2($Basics._op["++"],
-                     A2(thisReading,address,model.gs),
-                     thisText(model.gs)))]);
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.table,
+              _U.list([tableStyle(model)]),
+              _U.list([A2($Html.caption,
+                      _U.list([titleStyle(model)
+                              ,A2($Html$Events.onClick,address,ToggleModelShow)]),
+                      _U.list([$Html.text(model.title)]))
+                      ,A2($Html.tr,
+                      _U.list([rowStyle]),
+                      _U.list([A2($Html.th,
+                              _U.list([]),
+                              _U.list([$Html.text("1st Lesson")]))
+                              ,A2($Html.th,_U.list([]),_U.list([$Html.text("Psalm")]))
+                              ,A2($Html.th,_U.list([]),_U.list([$Html.text("2nd Lesson")]))
+                              ,A2($Html.th,_U.list([]),_U.list([$Html.text("Gospel")]))]))
+                      ,A2($Html.tr,
+                      _U.list([rowStyle]),
+                      _U.list([A2($Html.td,
+                              _U.list([tdStyle]),
+                              _U.list([A2($Html.ul,
+                              _U.list([textStyle(model)]),
+                              A3(thisReading,address,model.ofType,model.ot))]))
+                              ,A2($Html.td,
+                              _U.list([tdStyle]),
+                              _U.list([A2($Html.ul,
+                              _U.list([textStyle(model)]),
+                              A3(thisReading,address,model.ofType,model.ps))]))
+                              ,A2($Html.td,
+                              _U.list([tdStyle]),
+                              _U.list([A2($Html.ul,
+                              _U.list([textStyle(model)]),
+                              A3(thisReading,address,model.ofType,model.nt))]))
+                              ,A2($Html.td,
+                              _U.list([tdStyle]),
+                              _U.list([A2($Html.ul,
+                              _U.list([textStyle(model)]),
+                              A3(thisReading,address,model.ofType,model.gs))]))]))]))
+              ,A2($Html.div,_U.list([]),thisText(model.ot))
+              ,A2($Html.div,_U.list([]),thisText(model.ps))
+              ,A2($Html.div,_U.list([]),thisText(model.nt))
+              ,A2($Html.div,_U.list([]),thisText(model.gs))]));
    });
    var SetReading = function (a) {
       return {ctor: "SetReading",_0: a};
@@ -12944,6 +13084,7 @@ Elm.Iphod.Daily.make = function (_elm) {
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
+   $DynamicStyle = Elm.DynamicStyle.make(_elm),
    $Helper = Elm.Helper.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
@@ -12961,51 +13102,78 @@ Elm.Iphod.Daily.make = function (_elm) {
                                              ,_0: "color"
                                              ,_1: "red"}
                                             ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
-                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
+                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}
+                                            ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]));
    };
    var altOpt_style = function (lesson) {
       return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                              ,_0: "color"
                                              ,_1: "indego"}
                                             ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
-                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
+                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}
+                                            ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]));
    };
    var alt_style = function (lesson) {
       return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                              ,_0: "color"
                                              ,_1: "darkblue"}
                                             ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
-                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
+                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}
+                                            ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]));
    };
    var opt_style = function (lesson) {
       return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                              ,_0: "color"
                                              ,_1: "grey"}
                                             ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
-                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
+                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}
+                                            ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]));
    };
    var req_style = function (lesson) {
       return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                              ,_0: "color"
                                              ,_1: "black"}
                                             ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
-                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
+                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}
+                                            ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]));
    };
    var textStyle = function (model) {
       return A2($Helper.hideable,
       model.show,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
-              ,{ctor: "_Tuple2",_0: "margin",_1: "0"}]));
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1em"}
+              ,{ctor: "_Tuple2",_0: "margin",_1: "0"}
+              ,{ctor: "_Tuple2",_0: "padding",_1: "0em"}
+              ,{ctor: "_Tuple2",_0: "list-style-type",_1: "none"}
+              ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}]));
    };
    var titleStyle = function (model) {
       return A2($Helper.hideable,
       model.show,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.9em"}
               ,{ctor: "_Tuple2",_0: "color",_1: "blue"}
               ,{ctor: "_Tuple2",_0: "height",_1: "2em"}]));
    };
    var bodyStyle = function (lesson) {
       return A2($Helper.hideable,lesson.show,_U.list([]));
+   };
+   var tdStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                 ,_0: "vertical-align"
+                                                 ,_1: "top"}]));
+   var rowStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                  ,_0: "text-align"
+                                                  ,_1: "left"}]));
+   var tableStyle = function (model) {
+      return A2($Helper.hideable,
+      model.show,
+      _U.list([{ctor: "_Tuple2",_0: "width",_1: "100%"}]));
+   };
+   var hoverable = function (attrs) {
+      return A2($Basics._op["++"],
+      $DynamicStyle.hover(_U.list([{ctor: "_Tuple3"
+                                   ,_0: "background-color"
+                                   ,_1: "white"
+                                   ,_2: "skyblue"}])),
+      attrs);
    };
    var this_style = function (l) {
       var _p0 = l.style;
@@ -13067,55 +13235,65 @@ Elm.Iphod.Daily.make = function (_elm) {
    var thisReading = F2(function (address,lessons) {
       var this_lesson = function (l) {
          return _U.eq($String.length(l.body),0) ? A2($Html.li,
-         _U.list([this_style(l)
-                 ,A2($Html$Events.onClick,
-                 $Helper.getText.address,
-                 {ctor: "_Tuple4"
-                 ,_0: "daily"
-                 ,_1: l.section
-                 ,_2: l.id
-                 ,_3: l.read})]),
+         hoverable(_U.list([this_style(l)
+                           ,A2($Html$Events.onClick,
+                           $Helper.getText.address,
+                           {ctor: "_Tuple4"
+                           ,_0: "daily"
+                           ,_1: l.section
+                           ,_2: l.id
+                           ,_3: l.read})])),
          _U.list([$Html.text(l.read)])) : A2($Html.li,
-         _U.list([this_style(l)
-                 ,A2($Html$Events.onClick,address,ToggleShow(l))]),
+         hoverable(_U.list([this_style(l)
+                           ,A2($Html$Events.onClick,address,ToggleShow(l))])),
          _U.list([$Html.text(l.read)]));
       };
       return A2($List.map,this_lesson,lessons);
    });
    var ToggleModelShow = {ctor: "ToggleModelShow"};
    var view = F2(function (address,model) {
-      return _U.list([A2($Html.li,
-                     _U.list([titleStyle(model)
-                             ,A2($Html$Events.onClick,address,ToggleModelShow)]),
-                     _U.list([$Html.text(model.title)]))
-                     ,A2($Html.ul,
-                     _U.list([textStyle(model)]),
-                     A2($Basics._op["++"],
-                     _U.list([$Html.text("Morning 1: ")]),
-                     A2($Basics._op["++"],
-                     A2(thisReading,address,model.mp1),
-                     thisText(model.mp1))))
-                     ,A2($Html.ul,
-                     _U.list([textStyle(model)]),
-                     A2($Basics._op["++"],
-                     _U.list([$Html.text("Morning 2: ")]),
-                     A2($Basics._op["++"],
-                     A2(thisReading,address,model.mp2),
-                     thisText(model.mp2))))
-                     ,A2($Html.ul,
-                     _U.list([textStyle(model)]),
-                     A2($Basics._op["++"],
-                     _U.list([$Html.text("Evening 1: ")]),
-                     A2($Basics._op["++"],
-                     A2(thisReading,address,model.ep1),
-                     thisText(model.ep1))))
-                     ,A2($Html.ul,
-                     _U.list([textStyle(model)]),
-                     A2($Basics._op["++"],
-                     _U.list([$Html.text("Evening 2: ")]),
-                     A2($Basics._op["++"],
-                     A2(thisReading,address,model.ep2),
-                     thisText(model.ep2))))]);
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.table,
+              _U.list([tableStyle(model)]),
+              _U.list([A2($Html.caption,
+                      _U.list([titleStyle(model)
+                              ,A2($Html$Events.onClick,address,ToggleModelShow)]),
+                      _U.list([$Html.text(model.title)]))
+                      ,A2($Html.tr,
+                      _U.list([rowStyle]),
+                      _U.list([A2($Html.th,
+                              _U.list([]),
+                              _U.list([$Html.text("Morning 1")]))
+                              ,A2($Html.th,_U.list([]),_U.list([$Html.text("Morning 2")]))
+                              ,A2($Html.th,_U.list([]),_U.list([$Html.text("Evening 1")]))
+                              ,A2($Html.th,_U.list([]),_U.list([$Html.text("Evening 2")]))]))
+                      ,A2($Html.tr,
+                      _U.list([rowStyle]),
+                      _U.list([A2($Html.td,
+                              _U.list([tdStyle]),
+                              _U.list([A2($Html.ul,
+                              _U.list([textStyle(model)]),
+                              A2(thisReading,address,model.mp1))]))
+                              ,A2($Html.td,
+                              _U.list([tdStyle]),
+                              _U.list([A2($Html.ul,
+                              _U.list([textStyle(model)]),
+                              A2(thisReading,address,model.mp2))]))
+                              ,A2($Html.td,
+                              _U.list([tdStyle]),
+                              _U.list([A2($Html.ul,
+                              _U.list([textStyle(model)]),
+                              A2(thisReading,address,model.ep1))]))
+                              ,A2($Html.td,
+                              _U.list([tdStyle]),
+                              _U.list([A2($Html.ul,
+                              _U.list([textStyle(model)]),
+                              A2(thisReading,address,model.ep2))]))]))]))
+              ,A2($Html.div,_U.list([]),thisText(model.mp1))
+              ,A2($Html.div,_U.list([]),thisText(model.mp2))
+              ,A2($Html.div,_U.list([]),thisText(model.ep1))
+              ,A2($Html.div,_U.list([]),thisText(model.ep2))]));
    });
    var NoOp = {ctor: "NoOp"};
    var init = $Iphod$Models.dailyInit;
@@ -14326,22 +14504,17 @@ Elm.Iphod.make = function (_elm) {
       return A2($Html.div,
       _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                                ,_0: "margin-top"
-                                               ,_1: "0em"}]))]),
-      _U.list([A2($Html.ul,
-              _U.list([]),
-              A2($Iphod$Sunday.view,
+                                               ,_1: "0em"}
+                                              ,{ctor: "_Tuple2",_0: "z-index",_1: "99"}]))]),
+      _U.list([A2($Iphod$Sunday.view,
               A2($Signal.forwardTo,address,ModSunday(model.sunday)),
-              model.sunday))
-              ,A2($Html.ul,
-              _U.list([]),
-              A2($Iphod$Sunday.view,
+              model.sunday)
+              ,A2($Iphod$Sunday.view,
               A2($Signal.forwardTo,address,ModSunday(model.redLetter)),
-              model.redLetter))
-              ,A2($Html.ul,
-              _U.list([]),
-              A2($Iphod$Daily.view,
+              model.redLetter)
+              ,A2($Iphod$Daily.view,
               A2($Signal.forwardTo,address,ModDaily(model.daily)),
-              model.daily))]));
+              model.daily)]));
    });
    var ModMP = F2(function (a,b) {
       return {ctor: "ModMP",_0: a,_1: b};
@@ -14364,7 +14537,10 @@ Elm.Iphod.make = function (_elm) {
    var ToggleDaily = {ctor: "ToggleDaily"};
    var readingNav = F2(function (address,model) {
       return A2($Html.div,
-      _U.list([$Html$Attributes.$class("cssmenu")]),
+      _U.list([$Html$Attributes.$class("cssmenu")
+              ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                               ,_0: "z-index"
+                                               ,_1: "99"}]))]),
       _U.list([A2($Html.ul,
       _U.list([]),
       _U.list([A2($Html.li,
@@ -14924,7 +15100,10 @@ Elm.Iphod.make = function (_elm) {
    nextSundayFrom.signal);
    var dateNav = F2(function (address,model) {
       return A2($Html.div,
-      _U.list([$Html$Attributes.$class("cssmenu")]),
+      _U.list([$Html$Attributes.$class("cssmenu")
+              ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                               ,_0: "z-index"
+                                               ,_1: "99"}]))]),
       _U.list([A2($Html.ul,
       _U.list([]),
       _U.list([A2($Html.li,
