@@ -781,7 +781,7 @@ defmodule SundayReading do
           }
       },
     "easterDay" =>
-    %{ "1" =>
+    %{ "2" =>
       %{  "title" => "Easter Day: Early Service",
           "a" => %{ ot: [ %{style: "alt", read: "Genesis 1 Gen 2.1-2"},
                           %{style: "alt", read: "Genesis 7.1-5 7.11-18 8.8-18 9.8-13"},
@@ -823,7 +823,7 @@ defmodule SundayReading do
                     gs: [%{style: "req", read: "Mt 28.1-10"}]
                   }
       },
-      "2" =>
+      "1" =>
         %{"title" => "Easter Day: Principal Service",
             "a" => %{ ot: [%{style: "req", read: "Acts 10.34-43"},%{style: "alt", read: "Ex 14.10-14 14.21-31"}],
                       ps: [%{style: "req", read: "Ps 118.14-17 118.22-24"}],
