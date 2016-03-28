@@ -44,8 +44,10 @@ type alias Daily =
   , title:    String
   , mp1: List Lesson
   , mp2: List Lesson
+  , mpp: List Lesson
   , ep1: List Lesson
   , ep2: List Lesson
+  , epp: List Lesson
   , show:     Bool
   , justToday: Bool
   }
@@ -59,8 +61,10 @@ dailyInit =
   , title     = ""
   , mp1  = []
   , mp2  = []
+  , mpp  = []
   , ep1  = []
   , ep2  = []
+  , epp  = []
   , show      = False
   , justToday = False
   }

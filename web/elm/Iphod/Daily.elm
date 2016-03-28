@@ -65,13 +65,15 @@ view address model =
   div
   []
   [ table [tableStyle model]
-      [ caption [titleStyle model, onClick address ToggleModelShow] [text model.title] 
+      [ caption [titleStyle model, onClick address ToggleModelShow] [text ("Daily Office: " ++ model.title)] 
       , tr
           [ rowStyle ]
           [ th [] [ text "Morning 1"]
           , th [] [ text "Morning 2"]
+          , th [] [ text "Morning Ps"]
           , th [] [ text "Evening 1"]
           , th [] [ text "Evening 2"]
+          , th [] [ text "Evening Ps"]
           ]
       , tr
           [ rowStyle ]
@@ -81,18 +83,26 @@ view address model =
           , td
               [tdStyle]
               [ ul [textStyle model] ( thisReading address model.mp2 ) ]
+          , td
+              [tdStyle]
+              [ ul [textStyle model] ( thisReading address model.mpp ) ]
            , td
               [tdStyle]
               [ ul [textStyle model] ( thisReading address model.ep1 ) ]
            , td
               [tdStyle]
               [ ul [textStyle model] ( thisReading address model.ep2) ]
+           , td
+              [tdStyle]
+              [ ul [textStyle model] ( thisReading address model.epp) ]
           ] -- end of row
       ] -- end of table
     , div [] (thisText model.mp1)
     , div [] (thisText model.mp2)
+    , div [] (thisText model.mpp)
     , div [] (thisText model.ep1)
     , div [] (thisText model.ep2)
+    , div [] (thisText model.epp)
   ] -- end of div 
 
 
@@ -153,7 +163,11 @@ rowStyle =
 
 tdStyle: Attribute
 tdStyle =
-  style [("vertical-align", "top")]
+  style 
+  [ ("vertical-align", "top")
+  , ("text-align", "left")
+  , ("width", "16%")
+  ]
 
 
 
@@ -188,7 +202,7 @@ req_style lesson =
   style
     [ ("color", "black")
     , ("display", "inline-block")
-    , ("padding","0 1em 0 1em")
+    , ("padding-right","1em" )
     , ("cursor", "pointer")
     ]
 
@@ -198,7 +212,7 @@ opt_style lesson =
   style
     [ ("color", "grey")
     , ("display", "inline-block")
-    , ("padding", "0 1em 0 1em")
+    , ("padding-right", "1em")
     , ("cursor", "pointer")
     ]
 
@@ -208,7 +222,7 @@ alt_style lesson =
   style
     [ ("color", "darkblue")
     , ("display", "inline-block")
-    , ("padding", "0 1em 0 1em")
+    , ("padding-right", "1em")
     , ("cursor", "pointer")
     ]
 
@@ -217,7 +231,7 @@ altOpt_style lesson =
   style
     [ ("color", "indego")
     , ("display", "inline-block")
-    , ("padding", "0 1em 0 1em")
+    , ("padding-right", "1em")
     , ("cursor", "pointer")
     ]
 
@@ -227,7 +241,7 @@ bogis_style lesson =
   style
     [ ("color", "red")
     , ("display", "inline-block")
-    , ("padding", "0 1em 0 1em")
+    , ("padding-right", "1em")
     , ("cursor", "pointer")
     ]
 

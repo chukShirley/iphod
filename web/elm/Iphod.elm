@@ -252,8 +252,11 @@ updateDailyText daily text =
     this_section = case text.section of
       "mp1" -> daily.mp1
       "mp2" -> daily.mp2
+      "mpp" -> daily.mpp
       "ep1" -> daily.ep1
-      _     -> daily.ep2
+      "ep2" -> daily.ep2
+      "epp" -> daily.epp
+      _     -> daily.epp
     update_text this_lesson =
       if this_lesson.id == text.id 
         then 
@@ -264,8 +267,11 @@ updateDailyText daily text =
     newDaily = case text.section of
       "mp1" -> {daily | mp1 = newSection}
       "mp2" -> {daily | mp2 = newSection}
+      "mpp" -> {daily | mpp = newSection}
       "ep1" -> {daily | ep1 = newSection}
-      _     -> {daily | ep2 = newSection}
+      "ep2" -> {daily | ep2 = newSection}
+      "epp" -> {daily | epp = newSection}
+      _     -> {daily | epp = newSection}
   in 
     newDaily
 
@@ -308,7 +314,7 @@ listDates address model =
 
 fancyNav: Signal.Address Action -> Model -> Html
 fancyNav address model =
-  div [class "cssmenu"] [
+  div [id "menu2", class "cssmenu"] [
     ul []
       [ li [onClick address ToggleMp] [ a [href "#"] [ text "Morning Prayer"] ]
       , li [] [ a [href "#"] [ text "Evening Prayer"] ]
@@ -352,11 +358,11 @@ fancyNav address model =
 
 dateNav: Signal.Address Action -> Model -> Html
 dateNav address model =
-  div [class "cssmenu", style [("z-index", "99")] ] 
+  div [id "menu2", class "cssmenu", style [("z-index", "99")] ] 
   [ ul []
       [ li [onClick lastSundayFrom.address model.sunday.date] [ a [href "#"] [ text "Last Sunday"] ]
       , li [onClick yesterdayFrom.address model.today] [ a [href "#"] [ text "Yesterday"] ]
-      , li [style [("width", "22%"), ("text-align", "center")]] [ a [href "#"] [ text model.today] ]
+      , li [style [("width", "22%"), ("text-align", "center")]] [ a [href "#"] [ text model.today ] ]
       , li [onClick tomorrowFrom.address model.today] [ a [href "#"] [ text "Tomorrow"] ]
       , li [onClick nextSundayFrom.address model.sunday.date] [ a [href "#"] [ text "Next Sunday"] ]
       ]
@@ -365,7 +371,7 @@ dateNav address model =
     
 readingNav: Signal.Address Action -> Model -> Html
 readingNav address model =
-  div [class "cssmenu", style [("z-index", "99")] ] 
+  div [id "menu3", class "cssmenu", style [("z-index", "99")] ] 
   [ ul []
       [ li [onClick address ToggleDaily] [ a [href "#"] [ text "Daily"] ]
       , li [onClick address ToggleSunday ] [ a [href "#"] [ text "Sunday"] ]
@@ -377,9 +383,9 @@ readingNav address model =
 listReadings: Signal.Address Action -> Model -> Html
 listReadings address model =
   div [style [("margin-top", "0em"), ("z-index", "99")]]
-    [ (Sunday.view (Signal.forwardTo address (ModSunday model.sunday)) model.sunday)
+    [ (Daily.view (Signal.forwardTo address (ModDaily model.daily)) model.daily)
+    , (Sunday.view (Signal.forwardTo address (ModSunday model.sunday)) model.sunday)
     , (Sunday.view (Signal.forwardTo address (ModSunday model.redLetter)) model.redLetter)
-    , (Daily.view (Signal.forwardTo address (ModDaily model.daily)) model.daily)
     ]
 
 morningPrayerDiv: Signal.Address Action -> Model -> Html

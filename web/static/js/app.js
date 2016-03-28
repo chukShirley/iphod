@@ -56,8 +56,10 @@ var elmDiv = document.getElementById('elm-container')
       , title: ""
       , mp1: []
       , mp2: []
+      , mpp: []
       , ep1: []
       , ep2: []
+      , epp: []
       , show: false
       , justToday: false
     }

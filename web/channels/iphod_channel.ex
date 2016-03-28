@@ -5,6 +5,7 @@ defmodule Iphod.IphodChannel do
   use Iphod.Web, :channel
   import SundayReading
   import DailyReading
+  import Psalms
   import Lityear
   import EsvText
   use Timex
@@ -21,7 +22,7 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_info(:after_join, socket) do
-    msg = %{  sunday:         jsonify_reading("sunday", SundayReading.next_sunday, true),
+    msg = %{  sunday:         jsonify_reading("sunday", SundayReading.from_now, true),
               redLetter:      jsonify_reading("redletter", SundayReading.next_holy_day, true),
               today:          Timex.Date.local |> SundayReading.formatted_date,
               daily:          Timex.Date.local |> DailyReading.readings |> jsonify_daily(true),
@@ -54,8 +55,10 @@ defmodule Iphod.IphodChannel do
         title: r.title,
         mp1: r.mp1,
         mp2: r.mp2,
+        mpp: r.mpp,
         ep1: r.ep1,
         ep2: r.ep2,
+        epp: r.epp,
         show: show,
         justToday: false
     }
@@ -111,7 +114,12 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_in("request_text", [model, section, id, vss], socket) do
-    body = EsvText.request(vss)
+    body = 
+      if Regex.match?(~r/Psalm/, id) do
+        Psalms.to_html vss
+      else
+        EsvText.request(vss)
+      end
     push socket, "new_text", %{model: model, section: section, id: id, body: body}
     {:noreply, socket}
   end 

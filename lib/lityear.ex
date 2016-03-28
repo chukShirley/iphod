@@ -32,6 +32,7 @@ defmodule  Lityear do
   def last_sunday(d),       do: date_last_sunday(d)           |> to_season
   def next_sunday(),        do: date_next_sunday(Date.local)  |> to_season
   def next_sunday(d),       do: date_next_sunday(d)           |> to_season
+  def from_now(), do: to_season Date.local
   def to_season(day) do
     sunday = if day |> is_sunday?, do: day, else: day |> date_next_sunday
     y = lityear sunday

@@ -106,6 +106,25 @@ button {
   font-size: 100%;
 }
 
+.ps_title {
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+.ps_vs_num {
+  position: relative;
+  top: -5px;
+  color: blue;
+}
+
+.ps_first {
+  margin-left: 0.2em;
+}
+
+.ps_second {
+  margin-left: 3em;
+}
+
 /*
 
 ul {

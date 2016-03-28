@@ -244,7 +244,7 @@
     display: block;
   }
   .cssmenu > ul > li > a {
-    padding: 18px 25px 18px 25px;
+    padding: 10px 25px 8px 25px;
     border-right: 0;
   }
   .cssmenu > ul > li:hover > a,
@@ -254,13 +254,13 @@
   .cssmenu #menu-button {
     display: block;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 0.8em;
     font-weight: 700;
     color: #d3eced;
-    padding: 18px 25px 18px 25px;
+    padding: 10px 25px 8px 25px;
     text-transform: uppercase;
     letter-spacing: 1px;
-    background: url('images/bg.png');
+    background: url('/images/bg.png');
     cursor: pointer;
   }
   .cssmenu ul ul,
@@ -309,7 +309,7 @@
     border-top: 2px solid #d3eced;
     border-bottom: 2px solid #d3eced;
     right: 25px;
-    top: 18px;
+    top: 10px;
   }
   .cssmenu #menu-button::before {
     display: block;
@@ -319,7 +319,7 @@
     width: 22px;
     border-top: 2px solid #d3eced;
     right: 25px;
-    top: 28px;
+    top: 20px;
   }
   .cssmenu > ul > li.has-sub > a::after,
   .cssmenu ul ul li.has-sub > a::after {
