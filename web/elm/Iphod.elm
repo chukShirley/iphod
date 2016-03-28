@@ -314,7 +314,7 @@ listDates address model =
 
 fancyNav: Signal.Address Action -> Model -> Html
 fancyNav address model =
-  div [id "menu2", class "cssmenu"] [
+  div [id "menu1", class "cssmenu"] [
     ul []
       [ li [onClick address ToggleMp] [ a [href "#"] [ text "Morning Prayer"] ]
       , li [] [ a [href "#"] [ text "Evening Prayer"] ]

@@ -385,7 +385,7 @@ ul.donor_details li p{
 .cssmenu ul,
 .cssmenu ul li,
 .cssmenu ul li a,
-.cssmenu #menu-button {
+.cssmenu .menu-button {
   margin: 0;
   padding: 0;
   border: 0;
@@ -406,7 +406,7 @@ ul.donor_details li p{
   line-height: 0;
   height: 0;
 }
-.cssmenu #menu-button {
+.cssmenu .menu-button {
   display: none;
 }
 .cssmenu {
@@ -633,7 +633,7 @@ ul.donor_details li p{
   .cssmenu > ul > li.active > a {
     background: rgba(0, 0, 0, 0.1);
   }
-  .cssmenu #menu-button {
+  .cssmenu .menu-button {
     display: block;
     text-decoration: none;
     font-size: 0.8em;
@@ -679,7 +679,7 @@ ul.donor_details li p{
   .cssmenu ul ul li:last-child > a {
     border-radius: 0;
   }
-  .cssmenu #menu-button::after {
+  .cssmenu .menu-button::after {
     display: block;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
@@ -693,7 +693,7 @@ ul.donor_details li p{
     right: 25px;
     top: 10px;
   }
-  .cssmenu #menu-button::before {
+  .cssmenu .menu-button::before {
     display: block;
     content: '';
     position: absolute;

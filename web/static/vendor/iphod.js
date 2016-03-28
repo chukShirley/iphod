@@ -14948,7 +14948,7 @@ Elm.Iphod.make = function (_elm) {
    namedDay.signal);
    var fancyNav = F2(function (address,model) {
       return A2($Html.div,
-      _U.list([$Html$Attributes.id("menu2")
+      _U.list([$Html$Attributes.id("menu1")
               ,$Html$Attributes.$class("cssmenu")]),
       _U.list([A2($Html.ul,
       _U.list([]),
