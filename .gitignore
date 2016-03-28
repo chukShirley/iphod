@@ -4,6 +4,8 @@
 /deps
 /*.ez
 /*.DS_Store
+web/elm/elm-stuff/build-artifacts
+/data
 
 # Generate on crash by the VM
 erl_crash.dump
@@ -26,6 +28,5 @@ erl_crash.dump
 web/elm/elm-stuff/build-artifacts/0.16.0/user/project/1.0.0/*.elmo
 priv/static/images/ic_mode_edit_black_24dp_1x.png
 web/elm/elm-stuff/build-artifacts/0.16.0/user/project/1.0.0/*.elmi
-elm-stuff/build-artifacts
 priv/static/js/*.map
 priv/static/css/*.map
