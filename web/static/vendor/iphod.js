@@ -14300,13 +14300,10 @@ Elm.Iphod.make = function (_elm) {
       _U.list([A2($Html.li,
               _U.list([]),
               _U.list([$Html.text(A2($Basics._op["++"],
-              "From: ",
-              model.today))]))
-              ,A2($Html.li,
-              _U.list([]),
-              _U.list([$Html.text(A2($Basics._op["++"],
-              model.sunday.title,
-              A2($Basics._op["++"]," - ",model.sunday.date)))]))
+              "Next Sunday from ",
+              A2($Basics._op["++"],
+              model.today,
+              A2($Basics._op["++"]," is ",model.sunday.title))))]))
               ,A2($Html.li,
               _U.list([]),
               _U.list([$Html.text(A2($Basics._op["++"],
@@ -14484,17 +14481,26 @@ Elm.Iphod.make = function (_elm) {
       _U.list([A2($Html.ul,
       _U.list([]),
       _U.list([A2($Html.li,
-              _U.list([A2($Html$Events.onClick,address,ToggleDaily)]),
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                       ,_0: "width"
+                                                       ,_1: "33%"}]))
+                      ,A2($Html$Events.onClick,address,ToggleDaily)]),
               _U.list([A2($Html.a,
               _U.list([$Html$Attributes.href("#")]),
               _U.list([$Html.text("Daily")]))]))
               ,A2($Html.li,
-              _U.list([A2($Html$Events.onClick,address,ToggleSunday)]),
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                       ,_0: "width"
+                                                       ,_1: "33%"}]))
+                      ,A2($Html$Events.onClick,address,ToggleSunday)]),
               _U.list([A2($Html.a,
               _U.list([$Html$Attributes.href("#")]),
               _U.list([$Html.text("Sunday")]))]))
               ,A2($Html.li,
-              _U.list([A2($Html$Events.onClick,address,ToggleRedLetter)]),
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                       ,_0: "width"
+                                                       ,_1: "33%"}]))
+                      ,A2($Html$Events.onClick,address,ToggleRedLetter)]),
               _U.list([A2($Html.a,
               _U.list([$Html$Attributes.href("#")]),
               _U.list([$Html.text("Red Letter")]))]))]))]));
@@ -15146,49 +15152,57 @@ Elm.Iphod.make = function (_elm) {
    nextSundayFrom.signal);
    var dateNav = F2(function (address,model) {
       return A2($Html.div,
-      _U.list([$Html$Attributes.id("menu2")
-              ,$Html$Attributes.$class("cssmenu")
-              ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                               ,_0: "z-index"
-                                               ,_1: "99"}]))]),
-      _U.list([A2($Html.ul,
       _U.list([]),
-      _U.list([A2($Html.li,
-              _U.list([A2($Html$Events.onClick,
-              lastSundayFrom.address,
-              model.sunday.date)]),
-              _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href("#")]),
-              _U.list([$Html.text("Last Sunday")]))]))
-              ,A2($Html.li,
-              _U.list([A2($Html$Events.onClick,
-              yesterdayFrom.address,
-              model.today)]),
-              _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href("#")]),
-              _U.list([$Html.text("Yesterday")]))]))
-              ,A2($Html.li,
+      _U.list([A2($Html.p,
               _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                       ,_0: "width"
-                                                       ,_1: "22%"}
-                                                      ,{ctor: "_Tuple2",_0: "text-align",_1: "center"}]))]),
-              _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href("#")]),
-              _U.list([$Html.text(model.today)]))]))
-              ,A2($Html.li,
-              _U.list([A2($Html$Events.onClick,
-              tomorrowFrom.address,
-              model.today)]),
-              _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href("#")]),
-              _U.list([$Html.text("Tomorrow")]))]))
-              ,A2($Html.li,
-              _U.list([A2($Html$Events.onClick,
-              nextSundayFrom.address,
-              model.sunday.date)]),
-              _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href("#")]),
-              _U.list([$Html.text("Next Sunday")]))]))]))]));
+                                                       ,_0: "text-align"
+                                                       ,_1: "center"}
+                                                      ,{ctor: "_Tuple2",_0: "margin-bottom",_1: "-0.3em"}]))]),
+              _U.list([$Html.text(model.today)]))
+              ,A2($Html.div,
+              _U.list([$Html$Attributes.id("menu2")
+                      ,$Html$Attributes.$class("cssmenu")
+                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                       ,_0: "z-index"
+                                                       ,_1: "99"}]))]),
+              _U.list([A2($Html.ul,
+              _U.list([]),
+              _U.list([A2($Html.li,
+                      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                               ,_0: "width"
+                                                               ,_1: "25%"}]))
+                              ,A2($Html$Events.onClick,
+                              lastSundayFrom.address,
+                              model.sunday.date)]),
+                      _U.list([A2($Html.a,
+                      _U.list([$Html$Attributes.href("#")]),
+                      _U.list([$Html.text("Last Sunday")]))]))
+                      ,A2($Html.li,
+                      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                               ,_0: "width"
+                                                               ,_1: "25%"}]))
+                              ,A2($Html$Events.onClick,yesterdayFrom.address,model.today)]),
+                      _U.list([A2($Html.a,
+                      _U.list([$Html$Attributes.href("#")]),
+                      _U.list([$Html.text("Yesterday")]))]))
+                      ,A2($Html.li,
+                      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                               ,_0: "width"
+                                                               ,_1: "25%"}]))
+                              ,A2($Html$Events.onClick,tomorrowFrom.address,model.today)]),
+                      _U.list([A2($Html.a,
+                      _U.list([$Html$Attributes.href("#")]),
+                      _U.list([$Html.text("Tomorrow")]))]))
+                      ,A2($Html.li,
+                      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                               ,_0: "width"
+                                                               ,_1: "25%"}]))
+                              ,A2($Html$Events.onClick,
+                              nextSundayFrom.address,
+                              model.sunday.date)]),
+                      _U.list([A2($Html.a,
+                      _U.list([$Html$Attributes.href("#")]),
+                      _U.list([$Html.text("Next Sunday")]))]))]))]))]));
    });
    var view = F2(function (address,model) {
       return A2($Html.div,

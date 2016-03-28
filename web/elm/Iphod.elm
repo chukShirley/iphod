@@ -305,8 +305,7 @@ listDates: Signal.Address Action -> Model -> Html
 listDates address model =
   div []
     [ ul []
-      [ li [] [text ("From: " ++ model.today)]
-      , li [] [text (model.sunday.title ++ " - " ++ model.sunday.date)]
+      [ li [] [text ("Next Sunday from " ++ model.today ++ " is " ++ model.sunday.title)]
       , li [] [text ("Next Feast Day: " ++ model.redLetter.title ++ " - " ++ model.redLetter.date)]
       ]
     ]
@@ -358,24 +357,27 @@ fancyNav address model =
 
 dateNav: Signal.Address Action -> Model -> Html
 dateNav address model =
-  div [id "menu2", class "cssmenu", style [("z-index", "99")] ] 
-  [ ul []
-      [ li [onClick lastSundayFrom.address model.sunday.date] [ a [href "#"] [ text "Last Sunday"] ]
-      , li [onClick yesterdayFrom.address model.today] [ a [href "#"] [ text "Yesterday"] ]
-      , li [style [("width", "22%"), ("text-align", "center")]] [ a [href "#"] [ text model.today ] ]
-      , li [onClick tomorrowFrom.address model.today] [ a [href "#"] [ text "Tomorrow"] ]
-      , li [onClick nextSundayFrom.address model.sunday.date] [ a [href "#"] [ text "Next Sunday"] ]
+  div []
+    [ p [style [("text-align", "center"), ("margin-bottom", "-0.3em")]] [ text model.today ]
+    , div [id "menu2", class "cssmenu", style [("z-index", "99")] ] 
+        [ ul []
+          [ li [style [("width", "25%")], onClick lastSundayFrom.address model.sunday.date] [ a [href "#"] [ text "Last Sunday"] ]
+          , li [style [("width", "25%")], onClick yesterdayFrom.address model.today] [ a [href "#"] [ text "Yesterday"] ]
+    --      , li [style [("width", "22%"), ("text-align", "center")]] [ text model.today ]
+          , li [style [("width", "25%")], onClick tomorrowFrom.address model.today] [ a [href "#"] [ text "Tomorrow"] ]
+          , li [style [("width", "25%")], onClick nextSundayFrom.address model.sunday.date] [ a [href "#"] [ text "Next Sunday"] ]
+          ]
       ]
-  ]
+    ]
 
     
 readingNav: Signal.Address Action -> Model -> Html
 readingNav address model =
   div [id "menu3", class "cssmenu", style [("z-index", "99")] ] 
   [ ul []
-      [ li [onClick address ToggleDaily] [ a [href "#"] [ text "Daily"] ]
-      , li [onClick address ToggleSunday ] [ a [href "#"] [ text "Sunday"] ]
-      , li [onClick address ToggleRedLetter] [ a [href "#"] [ text "Red Letter"] ]
+      [ li [style [("width", "33%")], onClick address ToggleDaily] [ a [href "#"] [ text "Daily"] ]
+      , li [style [("width", "33%")], onClick address ToggleSunday ] [ a [href "#"] [ text "Sunday"] ]
+      , li [style [("width", "33%")], onClick address ToggleRedLetter] [ a [href "#"] [ text "Red Letter"] ]
       ]
   ]
 
