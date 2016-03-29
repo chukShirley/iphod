@@ -67,7 +67,7 @@ view address model =
   [ table [tableStyle model]
       [ caption [titleStyle model, onClick address ToggleModelShow] [text ("Daily Office: " ++ model.title)] 
       , tr
-          [ rowStyle ]
+          [ class "rowStyle" ]
           [ th [] [ text "Morning 1"]
           , th [] [ text "Morning 2"]
           , th [] [ text "Morning Ps"]
@@ -76,24 +76,24 @@ view address model =
           , th [] [ text "Evening Ps"]
           ]
       , tr
-          [ rowStyle ]
+          [ class "rowStyle" ]
           [ td 
-              [tdStyle]
+              [class "tdStyle", style [("width", "16%")] ]
               [ ul [textStyle model] ( thisReading address model.mp1 ) ]
           , td
-              [tdStyle]
+              [class "tdStyle", style [("width", "16%")] ]
               [ ul [textStyle model] ( thisReading address model.mp2 ) ]
           , td
-              [tdStyle]
+              [class "tdStyle", style [("width", "16%")] ]
               [ ul [textStyle model] ( thisReading address model.mpp ) ]
            , td
-              [tdStyle]
+              [class "tdStyle", style [("width", "16%")] ]
               [ ul [textStyle model] ( thisReading address model.ep1 ) ]
            , td
-              [tdStyle]
+              [class "tdStyle", style [("width", "16%")] ]
               [ ul [textStyle model] ( thisReading address model.ep2) ]
            , td
-              [tdStyle]
+              [class "tdStyle", style [("width", "16%")] ]
               [ ul [textStyle model] ( thisReading address model.epp) ]
           ] -- end of row
       ] -- end of table
@@ -135,12 +135,12 @@ thisReading address lessons =
 this_style: Models.Lesson -> Attribute
 this_style l =
   case l.style of
-    "req"     -> req_style l
-    "opt"     -> opt_style l
-    "alt"     -> alt_style l
-    "alt-req" -> alt_style l
-    "alt-opt" -> altOpt_style l
-    _         -> bogis_style l
+    "req"     -> class "req_style"
+    "opt"     -> class "opt_style"
+    "alt"     -> class "alt_style"
+    "alt-req" -> class "alt_style"
+    "alt-opt" -> class "altOpt_style"
+    _         -> class "bogis_style"
 
 hoverable: List Attribute -> List Attribute
 hoverable attrs =
@@ -156,19 +156,6 @@ tableStyle model =
   hideable
     model.show
     [ ("width", "100%")]
-
-rowStyle: Attribute
-rowStyle =
-  style [("text-align", "left")]
-
-tdStyle: Attribute
-tdStyle =
-  style 
-  [ ("vertical-align", "top")
-  , ("text-align", "left")
-  , ("width", "16%")
-  ]
-
 
 
 bodyStyle: Models.Lesson -> Attribute
@@ -195,54 +182,6 @@ textStyle model =
     , ("padding", "0em")
     , ("list-style-type", "none")
     , ("display", "inline-block")
-    ]
-
-req_style: Models.Lesson -> Attribute
-req_style lesson =
-  style
-    [ ("color", "black")
-    , ("display", "inline-block")
-    , ("padding-right","1em" )
-    , ("cursor", "pointer")
-    ]
-
-
-opt_style: Models.Lesson -> Attribute
-opt_style lesson =
-  style
-    [ ("color", "grey")
-    , ("display", "inline-block")
-    , ("padding-right", "1em")
-    , ("cursor", "pointer")
-    ]
-
-
-alt_style: Models.Lesson -> Attribute
-alt_style lesson =
-  style
-    [ ("color", "darkblue")
-    , ("display", "inline-block")
-    , ("padding-right", "1em")
-    , ("cursor", "pointer")
-    ]
-
-altOpt_style: Models.Lesson -> Attribute
-altOpt_style lesson =
-  style
-    [ ("color", "indego")
-    , ("display", "inline-block")
-    , ("padding-right", "1em")
-    , ("cursor", "pointer")
-    ]
-
-
-bogis_style: Models.Lesson -> Attribute
-bogis_style lesson =
-  style
-    [ ("color", "red")
-    , ("display", "inline-block")
-    , ("padding-right", "1em")
-    , ("cursor", "pointer")
     ]
 
 

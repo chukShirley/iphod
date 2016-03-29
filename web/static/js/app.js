@@ -81,20 +81,9 @@ var elmDiv = document.getElementById('elm-container')
   }
   , elmApp = Elm.embed(Elm.Iphod, elmDiv, initialState)
 
-elmApp.ports.requestNextSunday.subscribe(function(this_day) {
-  channel.push("request_next_sunday", this_day)
-});
 
-elmApp.ports.requestLastSunday.subscribe(function(this_day) {
-  channel.push("request_last_sunday", this_day)
-});
-
-elmApp.ports.requestYesterday.subscribe(function(this_day) {
-  channel.push("request_yesterday", this_day)
-});
-
-elmApp.ports.requestTomorrow.subscribe(function(this_day) {
-  channel.push("request_tomorrow", this_day)
+elmApp.ports.requestMoveDay.subscribe(function(request) {
+  channel.push("request_move_day", request)
 });
 
 elmApp.ports.requestText.subscribe(function(request) {

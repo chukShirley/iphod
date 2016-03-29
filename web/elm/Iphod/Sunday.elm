@@ -70,25 +70,25 @@ view address model =
   [ table [tableStyle model]
       [ caption [titleStyle model, onClick address ToggleModelShow] [text model.title]
       , tr 
-          [ rowStyle ]
+          [ class "rowStyle" ]
           [ th [] [ text "1st Lesson"]
           , th [] [ text "Psalm"]
           , th [] [ text "2nd Lesson"]
           , th [] [ text "Gospel"]
           ]
       , tr
-          [ rowStyle ]
+          [ class "rowStyle" ]
           [ td 
-              [tdStyle]
+              [class "tdStyle", style [("width", "25%")] ]
               [ ul [textStyle model] ( thisReading address model.ofType model.ot ) ]
           , td
-              [tdStyle]
+              [class "tdStyle", style [("width", "25%")] ]
               [ ul [textStyle model] ( thisReading address model.ofType model.ps ) ]
            , td
-              [tdStyle]
+              [class "tdStyle", style [("width", "25%")] ]
               [ ul [textStyle model] ( thisReading address model.ofType model.nt ) ]
            , td
-              [tdStyle]
+              [class "tdStyle", style [("width", "25%")] ]
               [ ul [textStyle model] ( thisReading address model.ofType model.gs) ]
           ] -- end of row
       ] -- end of table
@@ -131,12 +131,12 @@ thisReading address ofType lessons =
 this_style: Models.Lesson -> Attribute
 this_style l =
   case l.style of
-    "req"     -> req_style  l
-    "opt"     -> opt_style l
-    "alt"     -> alt_style l
-    "alt-req" -> alt_style l
-    "alt-opt" -> altOpt_style l
-    _         -> bogis_style l
+    "req"     -> class "req_style" 
+    "opt"     -> class "opt_style"
+    "alt"     -> class "alt_style"
+    "alt-req" -> class "alt_style"
+    "alt-opt" -> class "altOpt_style"
+    _         -> class "bogis_style"
 
 hoverable: List Attribute -> List Attribute
 hoverable attrs =
@@ -151,14 +151,6 @@ tableStyle model =
   hideable
     model.show
     [ ("width", "100%")]
-
-rowStyle: Attribute
-rowStyle =
-  style [("text-align", "left")]
-
-tdStyle: Attribute
-tdStyle =
-  style [("vertical-align", "top")]
 
 bodyStyle: Models.Lesson -> Attribute
 bodyStyle lesson =
@@ -186,54 +178,6 @@ textStyle model =
     , ("padding", "0em")
     , ("list-style-type", "none")
     , ("display", "inline-block")
-    ]
-
-req_style: Models.Lesson -> Attribute
-req_style lesson =
-  style
-    [ ("color", "black")
-    , ("background-color", "white")
-    , ("display", "block")
-    , ("padding","0 1em 0 1em")
-    ]
-
-
-opt_style: Models.Lesson -> Attribute
-opt_style lesson =
-  style
-    [ ("color", "grey")
-    , ("background-color", "white")
-    , ("display", "block")
-    , ("padding", "0 1em 0 1em")
-    ]
-
-
-alt_style: Models.Lesson -> Attribute
-alt_style lesson =
-  style
-    [ ("color", "darkblue")
-    , ("background-color", "white")
-    , ("display", "block")
-    , ("padding", "0 1em 0 1em")
-    ]
-
-altOpt_style: Models.Lesson -> Attribute
-altOpt_style lesson =
-  style
-    [ ("color", "indego")
-    , ("background-color", "white")
-    , ("display", "block")
-    , ("padding", "0 1em 0 1em")
-    ]
-
-
-bogis_style: Models.Lesson -> Attribute
-bogis_style lesson =
-  style
-    [ ("color", "red")
-    , ("background-color", "white")
-    , ("display", "block")
-    , ("padding", "0 1em 0 1em")
     ]
 
 

@@ -75,28 +75,25 @@ defmodule Iphod.IphodChannel do
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (donors:lobby).
 
-  def handle_in("request_next_sunday", this_date, socket) do
+  def handle_in("request_move_day", [this_far, this_date], socket) do
     Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
-    |> Lityear.date_next_sunday
-    |> request_date(socket, {true, false})
- end
-
-  def handle_in("request_last_sunday", this_date, socket) do
-    Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
-    |> Lityear.date_last_sunday
-    |> request_date(socket, {true, false})
+      |> move_day(this_far, socket)
   end
 
-  def handle_in("request_yesterday", this_date, socket) do
-    Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
-    |> Date.shift(days: -1)
-    |> request_date(socket, {false, true})
+  def move_day(date, "tomorrow", socket) do
+    date |> Date.shift(days: 1) |> request_date(socket, {false, true})
   end
 
-  def handle_in("request_tomorrow", this_date, socket) do
-    Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
-    |> Date.shift(days: 1)
-    |> request_date(socket, {false, true})
+  def move_day(date, "yesterday", socket) do
+    date |> Date.shift(days: -1) |> request_date(socket, {false, true})
+  end
+
+  def move_day(date, "nextSunday", socket) do
+    date |> Lityear.date_next_sunday |> request_date(socket, {true, false})
+  end
+
+  def move_day(date, "lastSunday", socket) do
+    date |> Lityear.date_last_sunday |> request_date(socket, {true, false})
   end
 
   def request_date(date, socket, {show_sunday, show_daily}) do

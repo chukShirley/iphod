@@ -12871,46 +12871,6 @@ Elm.Iphod.Sunday.make = function (_elm) {
    $Signal = Elm.Signal.make(_elm),
    $String = Elm.String.make(_elm);
    var _op = {};
-   var bogis_style = function (lesson) {
-      return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                             ,_0: "color"
-                                             ,_1: "red"}
-                                            ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "block"}
-                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
-   };
-   var altOpt_style = function (lesson) {
-      return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                             ,_0: "color"
-                                             ,_1: "indego"}
-                                            ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "block"}
-                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
-   };
-   var alt_style = function (lesson) {
-      return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                             ,_0: "color"
-                                             ,_1: "darkblue"}
-                                            ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "block"}
-                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
-   };
-   var opt_style = function (lesson) {
-      return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                             ,_0: "color"
-                                             ,_1: "grey"}
-                                            ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "block"}
-                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
-   };
-   var req_style = function (lesson) {
-      return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                             ,_0: "color"
-                                             ,_1: "black"}
-                                            ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "block"}
-                                            ,{ctor: "_Tuple2",_0: "padding",_1: "0 1em 0 1em"}]));
-   };
    var textStyle = function (model) {
       return A2($Helper.hideable,
       model.show,
@@ -12935,12 +12895,6 @@ Elm.Iphod.Sunday.make = function (_elm) {
                ,_0: "background-color"
                ,_1: "white"}]));
    };
-   var tdStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                 ,_0: "vertical-align"
-                                                 ,_1: "top"}]));
-   var rowStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                  ,_0: "text-align"
-                                                  ,_1: "left"}]));
    var tableStyle = function (model) {
       return A2($Helper.hideable,
       model.show,
@@ -12957,12 +12911,12 @@ Elm.Iphod.Sunday.make = function (_elm) {
    var this_style = function (l) {
       var _p0 = l.style;
       switch (_p0)
-      {case "req": return req_style(l);
-         case "opt": return opt_style(l);
-         case "alt": return alt_style(l);
-         case "alt-req": return alt_style(l);
-         case "alt-opt": return altOpt_style(l);
-         default: return bogis_style(l);}
+      {case "req": return $Html$Attributes.$class("req_style");
+         case "opt": return $Html$Attributes.$class("opt_style");
+         case "alt": return $Html$Attributes.$class("alt_style");
+         case "alt-req": return $Html$Attributes.$class("alt_style");
+         case "alt-opt": return $Html$Attributes.$class("altOpt_style");
+         default: return $Html$Attributes.$class("bogis_style");}
    };
    var thisText = function (lessons) {
       var this_text = function (l) {
@@ -13037,7 +12991,7 @@ Elm.Iphod.Sunday.make = function (_elm) {
                               ,A2($Html$Events.onClick,address,ToggleModelShow)]),
                       _U.list([$Html.text(model.title)]))
                       ,A2($Html.tr,
-                      _U.list([rowStyle]),
+                      _U.list([$Html$Attributes.$class("rowStyle")]),
                       _U.list([A2($Html.th,
                               _U.list([]),
                               _U.list([$Html.text("1st Lesson")]))
@@ -13045,24 +12999,36 @@ Elm.Iphod.Sunday.make = function (_elm) {
                               ,A2($Html.th,_U.list([]),_U.list([$Html.text("2nd Lesson")]))
                               ,A2($Html.th,_U.list([]),_U.list([$Html.text("Gospel")]))]))
                       ,A2($Html.tr,
-                      _U.list([rowStyle]),
+                      _U.list([$Html$Attributes.$class("rowStyle")]),
                       _U.list([A2($Html.td,
-                              _U.list([tdStyle]),
+                              _U.list([$Html$Attributes.$class("tdStyle")
+                                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                       ,_0: "width"
+                                                                       ,_1: "25%"}]))]),
                               _U.list([A2($Html.ul,
                               _U.list([textStyle(model)]),
                               A3(thisReading,address,model.ofType,model.ot))]))
                               ,A2($Html.td,
-                              _U.list([tdStyle]),
+                              _U.list([$Html$Attributes.$class("tdStyle")
+                                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                       ,_0: "width"
+                                                                       ,_1: "25%"}]))]),
                               _U.list([A2($Html.ul,
                               _U.list([textStyle(model)]),
                               A3(thisReading,address,model.ofType,model.ps))]))
                               ,A2($Html.td,
-                              _U.list([tdStyle]),
+                              _U.list([$Html$Attributes.$class("tdStyle")
+                                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                       ,_0: "width"
+                                                                       ,_1: "25%"}]))]),
                               _U.list([A2($Html.ul,
                               _U.list([textStyle(model)]),
                               A3(thisReading,address,model.ofType,model.nt))]))
                               ,A2($Html.td,
-                              _U.list([tdStyle]),
+                              _U.list([$Html$Attributes.$class("tdStyle")
+                                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                       ,_0: "width"
+                                                                       ,_1: "25%"}]))]),
                               _U.list([A2($Html.ul,
                               _U.list([textStyle(model)]),
                               A3(thisReading,address,model.ofType,model.gs))]))]))]))
@@ -13105,46 +13071,6 @@ Elm.Iphod.Daily.make = function (_elm) {
    $Signal = Elm.Signal.make(_elm),
    $String = Elm.String.make(_elm);
    var _op = {};
-   var bogis_style = function (lesson) {
-      return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                             ,_0: "color"
-                                             ,_1: "red"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
-                                            ,{ctor: "_Tuple2",_0: "padding-right",_1: "1em"}
-                                            ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]));
-   };
-   var altOpt_style = function (lesson) {
-      return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                             ,_0: "color"
-                                             ,_1: "indego"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
-                                            ,{ctor: "_Tuple2",_0: "padding-right",_1: "1em"}
-                                            ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]));
-   };
-   var alt_style = function (lesson) {
-      return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                             ,_0: "color"
-                                             ,_1: "darkblue"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
-                                            ,{ctor: "_Tuple2",_0: "padding-right",_1: "1em"}
-                                            ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]));
-   };
-   var opt_style = function (lesson) {
-      return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                             ,_0: "color"
-                                             ,_1: "grey"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
-                                            ,{ctor: "_Tuple2",_0: "padding-right",_1: "1em"}
-                                            ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]));
-   };
-   var req_style = function (lesson) {
-      return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                             ,_0: "color"
-                                             ,_1: "black"}
-                                            ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}
-                                            ,{ctor: "_Tuple2",_0: "padding-right",_1: "1em"}
-                                            ,{ctor: "_Tuple2",_0: "cursor",_1: "pointer"}]));
-   };
    var textStyle = function (model) {
       return A2($Helper.hideable,
       model.show,
@@ -13164,14 +13090,6 @@ Elm.Iphod.Daily.make = function (_elm) {
    var bodyStyle = function (lesson) {
       return A2($Helper.hideable,lesson.show,_U.list([]));
    };
-   var tdStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                 ,_0: "vertical-align"
-                                                 ,_1: "top"}
-                                                ,{ctor: "_Tuple2",_0: "text-align",_1: "left"}
-                                                ,{ctor: "_Tuple2",_0: "width",_1: "16%"}]));
-   var rowStyle = $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                  ,_0: "text-align"
-                                                  ,_1: "left"}]));
    var tableStyle = function (model) {
       return A2($Helper.hideable,
       model.show,
@@ -13188,12 +13106,12 @@ Elm.Iphod.Daily.make = function (_elm) {
    var this_style = function (l) {
       var _p0 = l.style;
       switch (_p0)
-      {case "req": return req_style(l);
-         case "opt": return opt_style(l);
-         case "alt": return alt_style(l);
-         case "alt-req": return alt_style(l);
-         case "alt-opt": return altOpt_style(l);
-         default: return bogis_style(l);}
+      {case "req": return $Html$Attributes.$class("req_style");
+         case "opt": return $Html$Attributes.$class("opt_style");
+         case "alt": return $Html$Attributes.$class("alt_style");
+         case "alt-req": return $Html$Attributes.$class("alt_style");
+         case "alt-opt": return $Html$Attributes.$class("altOpt_style");
+         default: return $Html$Attributes.$class("bogis_style");}
    };
    var thisText = function (lessons) {
       var this_text = function (l) {
@@ -13273,7 +13191,7 @@ Elm.Iphod.Daily.make = function (_elm) {
                       "Daily Office: ",
                       model.title))]))
                       ,A2($Html.tr,
-                      _U.list([rowStyle]),
+                      _U.list([$Html$Attributes.$class("rowStyle")]),
                       _U.list([A2($Html.th,
                               _U.list([]),
                               _U.list([$Html.text("Morning 1")]))
@@ -13283,34 +13201,52 @@ Elm.Iphod.Daily.make = function (_elm) {
                               ,A2($Html.th,_U.list([]),_U.list([$Html.text("Evening 2")]))
                               ,A2($Html.th,_U.list([]),_U.list([$Html.text("Evening Ps")]))]))
                       ,A2($Html.tr,
-                      _U.list([rowStyle]),
+                      _U.list([$Html$Attributes.$class("rowStyle")]),
                       _U.list([A2($Html.td,
-                              _U.list([tdStyle]),
+                              _U.list([$Html$Attributes.$class("tdStyle")
+                                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                       ,_0: "width"
+                                                                       ,_1: "16%"}]))]),
                               _U.list([A2($Html.ul,
                               _U.list([textStyle(model)]),
                               A2(thisReading,address,model.mp1))]))
                               ,A2($Html.td,
-                              _U.list([tdStyle]),
+                              _U.list([$Html$Attributes.$class("tdStyle")
+                                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                       ,_0: "width"
+                                                                       ,_1: "16%"}]))]),
                               _U.list([A2($Html.ul,
                               _U.list([textStyle(model)]),
                               A2(thisReading,address,model.mp2))]))
                               ,A2($Html.td,
-                              _U.list([tdStyle]),
+                              _U.list([$Html$Attributes.$class("tdStyle")
+                                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                       ,_0: "width"
+                                                                       ,_1: "16%"}]))]),
                               _U.list([A2($Html.ul,
                               _U.list([textStyle(model)]),
                               A2(thisReading,address,model.mpp))]))
                               ,A2($Html.td,
-                              _U.list([tdStyle]),
+                              _U.list([$Html$Attributes.$class("tdStyle")
+                                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                       ,_0: "width"
+                                                                       ,_1: "16%"}]))]),
                               _U.list([A2($Html.ul,
                               _U.list([textStyle(model)]),
                               A2(thisReading,address,model.ep1))]))
                               ,A2($Html.td,
-                              _U.list([tdStyle]),
+                              _U.list([$Html$Attributes.$class("tdStyle")
+                                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                       ,_0: "width"
+                                                                       ,_1: "16%"}]))]),
                               _U.list([A2($Html.ul,
                               _U.list([textStyle(model)]),
                               A2(thisReading,address,model.ep2))]))
                               ,A2($Html.td,
-                              _U.list([tdStyle]),
+                              _U.list([$Html$Attributes.$class("tdStyle")
+                                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                       ,_0: "width"
+                                                                       ,_1: "16%"}]))]),
                               _U.list([A2($Html.ul,
                               _U.list([textStyle(model)]),
                               A2(thisReading,address,model.epp))]))]))]))
@@ -14459,70 +14395,6 @@ Elm.Iphod.make = function (_elm) {
       }();
       return newSunday;
    });
-   var update = F2(function (action,model) {
-      var _p4 = action;
-      switch (_p4.ctor)
-      {case "NoOp": return {ctor: "_Tuple2"
-                           ,_0: model
-                           ,_1: $Effects.none};
-         case "ToggleAbout": return {ctor: "_Tuple2"
-                                    ,_0: _U.update(model,{about: $Basics.not(model.about)})
-                                    ,_1: $Effects.none};
-         case "ToggleMp": var mp = model.morningPrayer;
-           var newmp = _U.update(mp,{show: $Basics.not(mp.show)});
-           var newModel = _U.update(model,{morningPrayer: newmp});
-           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
-         case "ToggleDaily": var daily = model.daily;
-           var newdaily = _U.update(daily,{show: $Basics.not(daily.show)});
-           var newModel = _U.update(model,{daily: newdaily});
-           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
-         case "ToggleSunday": var sunday = model.sunday;
-           var newSunday = _U.update(sunday,
-           {show: $Basics.not(sunday.show)});
-           var newModel = _U.update(model,{sunday: newSunday});
-           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
-         case "ToggleRedLetter": var rl = model.redLetter;
-           var newRL = _U.update(rl,{show: $Basics.not(rl.show)});
-           var newModel = _U.update(model,{redLetter: newRL});
-           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
-         case "SetSunday": return {ctor: "_Tuple2"
-                                  ,_0: _p4._0
-                                  ,_1: $Effects.none};
-         case "UpdateText": var _p6 = _p4._0;
-           var newModel = function () {
-              var _p5 = _p6.model;
-              switch (_p5)
-              {case "sunday": return _U.update(model,
-                   {sunday: A2(updateSundayText,model.sunday,_p6)});
-                 case "redletter": return _U.update(model,
-                   {redLetter: A2(updateSundayText,model.redLetter,_p6)});
-                 case "daily": return _U.update(model,
-                   {daily: A2(updateDailyText,model.daily,_p6)});
-                 default: return model;}
-           }();
-           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
-         case "ModMP": var _p8 = _p4._0;
-           var _p7 = _p4._1;
-           var newModel = A2($Iphod$MorningPrayer.update,_p7,_p8);
-           var bar = A2($Debug.log,"MPACTION",_p7);
-           var foo = A2($Debug.log,"READING",_p8);
-           return {ctor: "_Tuple2",_0: model,_1: $Effects.none};
-         case "ModSunday": var _p11 = _p4._1;
-           var _p10 = _p4._0;
-           var newModel = function () {
-              var _p9 = _p10.ofType;
-              switch (_p9)
-              {case "sunday": return _U.update(model,
-                   {sunday: A2($Iphod$Sunday.update,_p11,_p10)});
-                 case "redletter": return _U.update(model,
-                   {redLetter: A2($Iphod$Sunday.update,_p11,_p10)});
-                 default: return model;}
-           }();
-           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
-         default: var newModel = _U.update(model,
-           {daily: A2($Iphod$Daily.update,_p4._1,_p4._0)});
-           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};}
-   });
    var ModDaily = F2(function (a,b) {
       return {ctor: "ModDaily",_0: a,_1: b};
    });
@@ -14608,6 +14480,59 @@ Elm.Iphod.make = function (_elm) {
               ,aboutStyle(model)
               ,A2($Html$Events.onClick,address,ToggleAbout)]),
       _U.list([$Markdown.toHtml(about)]))]));
+   });
+   var ChangeDay = function (a) {
+      return {ctor: "ChangeDay",_0: a};
+   };
+   var dateNav = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([]),
+      _U.list([A2($Html.p,
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                       ,_0: "text-align"
+                                                       ,_1: "center"}
+                                                      ,{ctor: "_Tuple2",_0: "margin-bottom",_1: "-0.3em"}]))]),
+              _U.list([$Html.text(model.today)]))
+              ,A2($Html.div,
+              _U.list([$Html$Attributes.id("menu2")
+                      ,$Html$Attributes.$class("cssmenu")
+                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                       ,_0: "z-index"
+                                                       ,_1: "99"}]))]),
+              _U.list([A2($Html.ul,
+              _U.list([]),
+              _U.list([A2($Html.li,
+                      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                               ,_0: "width"
+                                                               ,_1: "25%"}]))
+                              ,A2($Html$Events.onClick,address,ChangeDay("lastSunday"))]),
+                      _U.list([A2($Html.a,
+                      _U.list([$Html$Attributes.href("#")]),
+                      _U.list([$Html.text("Last Sunday")]))]))
+                      ,A2($Html.li,
+                      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                               ,_0: "width"
+                                                               ,_1: "25%"}]))
+                              ,A2($Html$Events.onClick,address,ChangeDay("yesterday"))]),
+                      _U.list([A2($Html.a,
+                      _U.list([$Html$Attributes.href("#")]),
+                      _U.list([$Html.text("Yesterday")]))]))
+                      ,A2($Html.li,
+                      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                               ,_0: "width"
+                                                               ,_1: "25%"}]))
+                              ,A2($Html$Events.onClick,address,ChangeDay("tomorrow"))]),
+                      _U.list([A2($Html.a,
+                      _U.list([$Html$Attributes.href("#")]),
+                      _U.list([$Html.text("Tomorrow")]))]))
+                      ,A2($Html.li,
+                      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                               ,_0: "width"
+                                                               ,_1: "25%"}]))
+                              ,A2($Html$Events.onClick,address,ChangeDay("nextSunday"))]),
+                      _U.list([A2($Html.a,
+                      _U.list([$Html$Attributes.href("#")]),
+                      _U.list([$Html.text("Next Sunday")]))]))]))]))]));
    });
    var NoOp = {ctor: "NoOp"};
    var newText = Elm.Native.Port.make(_elm).inboundSignal("newText",
@@ -15219,84 +15144,6 @@ Elm.Iphod.make = function (_elm) {
               _U.list([$Html$Attributes.href("#")]),
               _U.list([$Html.text("Contact")]))]))]))]));
    });
-   var tomorrowFrom = $Signal.mailbox("");
-   var requestTomorrow = Elm.Native.Port.make(_elm).outboundSignal("requestTomorrow",
-   function (v) {
-      return v;
-   },
-   tomorrowFrom.signal);
-   var yesterdayFrom = $Signal.mailbox("");
-   var requestYesterday = Elm.Native.Port.make(_elm).outboundSignal("requestYesterday",
-   function (v) {
-      return v;
-   },
-   yesterdayFrom.signal);
-   var lastSundayFrom = $Signal.mailbox("");
-   var requestLastSunday = Elm.Native.Port.make(_elm).outboundSignal("requestLastSunday",
-   function (v) {
-      return v;
-   },
-   lastSundayFrom.signal);
-   var nextSundayFrom = $Signal.mailbox("");
-   var requestNextSunday = Elm.Native.Port.make(_elm).outboundSignal("requestNextSunday",
-   function (v) {
-      return v;
-   },
-   nextSundayFrom.signal);
-   var dateNav = F2(function (address,model) {
-      return A2($Html.div,
-      _U.list([]),
-      _U.list([A2($Html.p,
-              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                       ,_0: "text-align"
-                                                       ,_1: "center"}
-                                                      ,{ctor: "_Tuple2",_0: "margin-bottom",_1: "-0.3em"}]))]),
-              _U.list([$Html.text(model.today)]))
-              ,A2($Html.div,
-              _U.list([$Html$Attributes.id("menu2")
-                      ,$Html$Attributes.$class("cssmenu")
-                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                       ,_0: "z-index"
-                                                       ,_1: "99"}]))]),
-              _U.list([A2($Html.ul,
-              _U.list([]),
-              _U.list([A2($Html.li,
-                      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                               ,_0: "width"
-                                                               ,_1: "25%"}]))
-                              ,A2($Html$Events.onClick,
-                              lastSundayFrom.address,
-                              model.sunday.date)]),
-                      _U.list([A2($Html.a,
-                      _U.list([$Html$Attributes.href("#")]),
-                      _U.list([$Html.text("Last Sunday")]))]))
-                      ,A2($Html.li,
-                      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                               ,_0: "width"
-                                                               ,_1: "25%"}]))
-                              ,A2($Html$Events.onClick,yesterdayFrom.address,model.today)]),
-                      _U.list([A2($Html.a,
-                      _U.list([$Html$Attributes.href("#")]),
-                      _U.list([$Html.text("Yesterday")]))]))
-                      ,A2($Html.li,
-                      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                               ,_0: "width"
-                                                               ,_1: "25%"}]))
-                              ,A2($Html$Events.onClick,tomorrowFrom.address,model.today)]),
-                      _U.list([A2($Html.a,
-                      _U.list([$Html$Attributes.href("#")]),
-                      _U.list([$Html.text("Tomorrow")]))]))
-                      ,A2($Html.li,
-                      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                               ,_0: "width"
-                                                               ,_1: "25%"}]))
-                              ,A2($Html$Events.onClick,
-                              nextSundayFrom.address,
-                              model.sunday.date)]),
-                      _U.list([A2($Html.a,
-                      _U.list([$Html$Attributes.href("#")]),
-                      _U.list([$Html.text("Next Sunday")]))]))]))]))]));
-   });
    var view = F2(function (address,model) {
       return A2($Html.div,
       _U.list([]),
@@ -15308,6 +15155,86 @@ Elm.Iphod.make = function (_elm) {
               ,A2(readingNav,address,model)
               ,A2(listReadings,address,model)
               ,A2(morningPrayerDiv,address,model)]));
+   });
+   var moveDay = $Signal.mailbox({ctor: "_Tuple2",_0: "",_1: ""});
+   var requestMoveDay = Elm.Native.Port.make(_elm).outboundSignal("requestMoveDay",
+   function (v) {
+      return [v._0,v._1];
+   },
+   moveDay.signal);
+   var changeDay = F2(function (day,model) {
+      return $Effects.task(A2($Task.map,
+      $Basics.always(NoOp),
+      $Task.toMaybe(A2($Signal.send,
+      moveDay.address,
+      {ctor: "_Tuple2",_0: day,_1: model.today}))));
+   });
+   var update = F2(function (action,model) {
+      var _p4 = action;
+      switch (_p4.ctor)
+      {case "NoOp": return {ctor: "_Tuple2"
+                           ,_0: model
+                           ,_1: $Effects.none};
+         case "ChangeDay": return {ctor: "_Tuple2"
+                                  ,_0: model
+                                  ,_1: A2(changeDay,_p4._0,model)};
+         case "ToggleAbout": return {ctor: "_Tuple2"
+                                    ,_0: _U.update(model,{about: $Basics.not(model.about)})
+                                    ,_1: $Effects.none};
+         case "ToggleMp": var mp = model.morningPrayer;
+           var newmp = _U.update(mp,{show: $Basics.not(mp.show)});
+           var newModel = _U.update(model,{morningPrayer: newmp});
+           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+         case "ToggleDaily": var daily = model.daily;
+           var newdaily = _U.update(daily,{show: $Basics.not(daily.show)});
+           var newModel = _U.update(model,{daily: newdaily});
+           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+         case "ToggleSunday": var sunday = model.sunday;
+           var newSunday = _U.update(sunday,
+           {show: $Basics.not(sunday.show)});
+           var newModel = _U.update(model,{sunday: newSunday});
+           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+         case "ToggleRedLetter": var rl = model.redLetter;
+           var newRL = _U.update(rl,{show: $Basics.not(rl.show)});
+           var newModel = _U.update(model,{redLetter: newRL});
+           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+         case "SetSunday": return {ctor: "_Tuple2"
+                                  ,_0: _p4._0
+                                  ,_1: $Effects.none};
+         case "UpdateText": var _p6 = _p4._0;
+           var newModel = function () {
+              var _p5 = _p6.model;
+              switch (_p5)
+              {case "sunday": return _U.update(model,
+                   {sunday: A2(updateSundayText,model.sunday,_p6)});
+                 case "redletter": return _U.update(model,
+                   {redLetter: A2(updateSundayText,model.redLetter,_p6)});
+                 case "daily": return _U.update(model,
+                   {daily: A2(updateDailyText,model.daily,_p6)});
+                 default: return model;}
+           }();
+           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+         case "ModMP": var _p8 = _p4._0;
+           var _p7 = _p4._1;
+           var newModel = A2($Iphod$MorningPrayer.update,_p7,_p8);
+           var bar = A2($Debug.log,"MPACTION",_p7);
+           var foo = A2($Debug.log,"READING",_p8);
+           return {ctor: "_Tuple2",_0: model,_1: $Effects.none};
+         case "ModSunday": var _p11 = _p4._1;
+           var _p10 = _p4._0;
+           var newModel = function () {
+              var _p9 = _p10.ofType;
+              switch (_p9)
+              {case "sunday": return _U.update(model,
+                   {sunday: A2($Iphod$Sunday.update,_p11,_p10)});
+                 case "redletter": return _U.update(model,
+                   {redLetter: A2($Iphod$Sunday.update,_p11,_p10)});
+                 default: return model;}
+           }();
+           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+         default: var newModel = _U.update(model,
+           {daily: A2($Iphod$Daily.update,_p4._1,_p4._0)});
+           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};}
    });
    var incomingText = A2($Signal.map,UpdateText,newText);
    var incomingActions = A2($Signal.map,SetSunday,nextSunday);
@@ -15345,12 +15272,10 @@ Elm.Iphod.make = function (_elm) {
                               ,init: init
                               ,incomingActions: incomingActions
                               ,incomingText: incomingText
-                              ,nextSundayFrom: nextSundayFrom
-                              ,lastSundayFrom: lastSundayFrom
-                              ,yesterdayFrom: yesterdayFrom
-                              ,tomorrowFrom: tomorrowFrom
+                              ,moveDay: moveDay
                               ,namedDay: namedDay
                               ,NoOp: NoOp
+                              ,ChangeDay: ChangeDay
                               ,ToggleAbout: ToggleAbout
                               ,ToggleMp: ToggleMp
                               ,ToggleDaily: ToggleDaily
@@ -15362,6 +15287,7 @@ Elm.Iphod.make = function (_elm) {
                               ,ModSunday: ModSunday
                               ,ModDaily: ModDaily
                               ,update: update
+                              ,changeDay: changeDay
                               ,updateSundayText: updateSundayText
                               ,updateDailyText: updateDailyText
                               ,view: view
@@ -26357,20 +26283,8 @@ var elmDiv = document.getElementById('elm-container'),
 },
     elmApp = Elm.embed(Elm.Iphod, elmDiv, initialState);
 
-elmApp.ports.requestNextSunday.subscribe(function (this_day) {
-  channel.push("request_next_sunday", this_day);
-});
-
-elmApp.ports.requestLastSunday.subscribe(function (this_day) {
-  channel.push("request_last_sunday", this_day);
-});
-
-elmApp.ports.requestYesterday.subscribe(function (this_day) {
-  channel.push("request_yesterday", this_day);
-});
-
-elmApp.ports.requestTomorrow.subscribe(function (this_day) {
-  channel.push("request_tomorrow", this_day);
+elmApp.ports.requestMoveDay.subscribe(function (request) {
+  channel.push("request_move_day", request);
 });
 
 elmApp.ports.requestText.subscribe(function (request) {
@@ -26391,7 +26305,7 @@ elmApp.ports.requestNamedDay.subscribe(function (request) {
   $(document).ready(function () {
 
     $('#menu1').prepend('<div class="menu-button">MP etc.</div>');
-    /* $('#menu2').prepend('<div class="menu-button">Days</div>'); */
+    $('#menu2').prepend('<div class="menu-button">Days</div>');
     $('#menu3').prepend('<div class="menu-button">Service</div>');
     $('.cssmenu .menu-button').on('click', function () {
       var menu = $(this).next('ul');

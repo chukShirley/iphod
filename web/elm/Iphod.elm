@@ -86,21 +86,9 @@ incomingText: Signal Action
 incomingText =
   Signal.map UpdateText newText
 
-nextSundayFrom: Signal.Mailbox String
-nextSundayFrom =
-  Signal.mailbox ""
-
-lastSundayFrom: Signal.Mailbox String
-lastSundayFrom =
-  Signal.mailbox ""
-
-yesterdayFrom: Signal.Mailbox String
-yesterdayFrom =
-  Signal.mailbox ""
-
-tomorrowFrom: Signal.Mailbox String
-tomorrowFrom =
-  Signal.mailbox ""
+moveDay: Signal.Mailbox (String, String)
+moveDay =
+  Signal.mailbox ("", "")
 
 namedDay: Signal.Mailbox (String, String)
 namedDay =
@@ -108,21 +96,9 @@ namedDay =
 
 -- PORTS
 
-port requestNextSunday: Signal String
-port requestNextSunday = 
-  nextSundayFrom.signal
-
-port requestLastSunday: Signal String
-port requestLastSunday = 
-  lastSundayFrom.signal
-
-port requestYesterday: Signal String
-port requestYesterday = 
-  yesterdayFrom.signal
-
-port requestTomorrow: Signal String
-port requestTomorrow = 
-  tomorrowFrom.signal
+port requestMoveDay: Signal (String, String)
+port requestMoveDay =
+  moveDay.signal
 
 port requestText: Signal (String, String, String, String)
 port requestText =
@@ -140,6 +116,7 @@ port newText: Signal NewText
 
 type Action
   = NoOp
+  | ChangeDay String
   | ToggleAbout
   | ToggleMp
   | ToggleDaily
@@ -155,6 +132,7 @@ update: Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     NoOp -> (model, Effects.none)
+    ChangeDay day -> (model, changeDay day model)
     ToggleAbout -> ({model | about = not model.about}, Effects.none)
     ToggleMp ->
       let
@@ -221,6 +199,15 @@ update action model =
 
 
 -- HELPERS
+
+changeDay: String -> Model -> Effects Action
+changeDay day model =
+  Signal.send moveDay.address (day, model.today)
+  |> Task.toMaybe
+  |> Task.map (always NoOp)
+  |> Effects.task
+
+  -- end with NoOp
 
 updateSundayText: Sunday.Model -> NewText -> Sunday.Model
 updateSundayText sunday text =
@@ -361,11 +348,10 @@ dateNav address model =
     [ p [style [("text-align", "center"), ("margin-bottom", "-0.3em")]] [ text model.today ]
     , div [id "menu2", class "cssmenu", style [("z-index", "99")] ] 
         [ ul []
-          [ li [style [("width", "25%")], onClick lastSundayFrom.address model.sunday.date] [ a [href "#"] [ text "Last Sunday"] ]
-          , li [style [("width", "25%")], onClick yesterdayFrom.address model.today] [ a [href "#"] [ text "Yesterday"] ]
-    --      , li [style [("width", "22%"), ("text-align", "center")]] [ text model.today ]
-          , li [style [("width", "25%")], onClick tomorrowFrom.address model.today] [ a [href "#"] [ text "Tomorrow"] ]
-          , li [style [("width", "25%")], onClick nextSundayFrom.address model.sunday.date] [ a [href "#"] [ text "Next Sunday"] ]
+          [ li [style [("width", "25%")], onClick address (ChangeDay "lastSunday")] [ a [href "#"] [ text "Last Sunday"] ]
+          , li [style [("width", "25%")], onClick address (ChangeDay "yesterday")] [ a [href "#"] [ text "Yesterday"] ]
+          , li [style [("width", "25%")], onClick address (ChangeDay "tomorrow")] [ a [href "#"] [ text "Tomorrow"] ]
+          , li [style [("width", "25%")], onClick address (ChangeDay "nextSunday")] [ a [href "#"] [ text "Next Sunday"] ]
           ]
       ]
     ]
