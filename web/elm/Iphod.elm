@@ -386,7 +386,6 @@ morningPrayerDiv address model =
 about =  """
 
 #### How to use
-
 * click on stuff
   * click on the reading "title" and the text appears below
   * click on the title again and the text is hidden
@@ -396,20 +395,18 @@ about =  """
   * Dark Blue is alternative
 
 #### About Iphod
-
 * It is a work in progress
 * Inerrancy is not gauranteed, so don't expect it
-* shows the readings for the ACNA Red Letter andSunday Lectionary. Current fails include...
-  * Days with more than one service (Like Easter)
-  * Complicated times (like Holy Week and Week following)
-  * Psalms are shown as ESV rather than Coverdale
+* Facebook group at https://www.facebook.com/groups/471879323003692/
+  * report errors
+  * make suggestions
+  * ask questions
+* shows assigned readings and ESV text for the ACNA Red Letter, Sunday Lectionary, and Daily Prayer. Current fails include...
   * partial verses mean nothing to the ESV API, so in this app only complete verses are shown
 * Path forward
-  * Daily readings
   * Daily Office
   * Daily Office with redings inserted
   * Canticals
-  * Coverdale
   * Printable readings
     * so you don't have to cut and paste
 
