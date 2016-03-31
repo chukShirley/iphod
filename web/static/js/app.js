@@ -93,3 +93,7 @@ elmApp.ports.requestText.subscribe(function(request) {
 elmApp.ports.requestNamedDay.subscribe(function(request) {
   channel.push("request_named_day", request)
 })
+
+elmApp.ports.requestAllText.subscribe(function(request) {
+  channel.push("request_all_text", request)
+})

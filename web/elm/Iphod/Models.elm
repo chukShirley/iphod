@@ -37,10 +37,10 @@ sundayInit =
   }
 
 type alias Daily =
-  { date:     String
-  , season:   String
-  , week:     String
-  , day:      String
+  { date:     String  -- "Thursday March 31, 2016"
+  , season:   String  -- e.g. "easter"
+  , week:     String  -- e.g. "2"
+  , day:      String  -- e.g. "Thursday"
   , title:    String
   , mp1: List Lesson
   , mp2: List Lesson

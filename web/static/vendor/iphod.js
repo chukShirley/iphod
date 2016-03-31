@@ -12956,6 +12956,1387 @@ Elm.Iphod.Sunday.make = function (_elm) {
                                      ,textStyle: textStyle};
 };
 Elm.Iphod = Elm.Iphod || {};
+Elm.Iphod.MorningPrayer = Elm.Iphod.MorningPrayer || {};
+Elm.Iphod.MorningPrayer.make = function (_elm) {
+   "use strict";
+   _elm.Iphod = _elm.Iphod || {};
+   _elm.Iphod.MorningPrayer = _elm.Iphod.MorningPrayer || {};
+   if (_elm.Iphod.MorningPrayer.values)
+   return _elm.Iphod.MorningPrayer.values;
+   var _U = Elm.Native.Utils.make(_elm),
+   $Basics = Elm.Basics.make(_elm),
+   $Debug = Elm.Debug.make(_elm),
+   $Helper = Elm.Helper.make(_elm),
+   $Html = Elm.Html.make(_elm),
+   $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Iphod$Models = Elm.Iphod.Models.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Markdown = Elm.Markdown.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Regex = Elm.Regex.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $String = Elm.String.make(_elm);
+   var _op = {};
+   var mpStyle = function (model) {
+      return A2($Helper.hideable,
+      model.show,
+      _U.list([{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}
+              ,{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}]));
+   };
+   var cycleDay = F2(function (model,n) {
+      return A2($Basics.rem,
+      n,
+      A2($Result.withDefault,
+      0,
+      $String.toInt(A2($Maybe.withDefault,
+      "0",
+      $List.head(A2($List.drop,
+      2,
+      A3($Regex.split,
+      $Regex.All,
+      $Regex.regex("[ ,]"),
+      model.date)))))));
+   });
+   var eoPrayer = _U.list([A2($Html.table,
+   _U.list([]),
+   _U.list([A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}
+                                                           ,{ctor: "_Tuple2",_0: "padding-right",_1: "3em"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("Let us bless the Lord")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("Thanks be to God")]))]))]))]);
+   var theWordOfTheLord = _U.list([A2($Html.table,
+   _U.list([]),
+   _U.list([A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("The Word of the Lord")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}
+                                                           ,{ctor: "_Tuple2",_0: "padding-right",_1: "3em"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("Thanks be to God")]))]))]))]);
+   var thePrayers2 = _U.list([A2($Html.table,
+   _U.list([]),
+   _U.list([A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}
+                                                           ,{ctor: "_Tuple2",_0: "padding-right",_1: "3em"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("O Lord, show us your mercy;")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("And grant us your salvation.")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("O Lord, save our nations;")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("And guide us in the way of justice and truth.")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("Clothe your ministers with righteousness;")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("And make your chosen people joyful.")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("O Lord, save your people;")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("And bless your inheritance.")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("Give peace in our time, O Lord;")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("For only in you can we live in safety.")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("Let not the needy, O Lord, be forgotten;")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("Nor the hope of the poor be taken away.")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("Create in us clean hearts, O God;")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("And take not your Holy Spirit from us.")]))]))]))]);
+   var thePrayers1 = _U.list([A2($Html.table,
+   _U.list([]),
+   _U.list([A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}
+                                                           ,{ctor: "_Tuple2",_0: "padding-right",_1: "3em"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("The Lord be with you.")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("And with your spirit.")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("Let us pray.")]))]))]))]);
+   var invitatory = _U.list([A2($Html.table,
+   _U.list([]),
+   _U.list([A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}
+                                                           ,{ctor: "_Tuple2",_0: "padding-right",_1: "3em"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("O Lord, open our lips;")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("And our mouth shall proclaim your praise.")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("O God, make speed to save us;")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("O Lord, make haste to help us.")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("Glory to the Father, and to the Son, and to the Holy Spirit;")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("People")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("As it was in the beginning, is now, and ever shall be, world without end. Amen.")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("Officiant")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("Praise the Lord.")]))]))
+           ,A2($Html.tr,
+           _U.list([]),
+           _U.list([A2($Html.td,
+                   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                            ,_0: "font-style"
+                                                            ,_1: "italic"}]))]),
+                   _U.list([$Html.text("Peopel")]))
+                   ,A2($Html.td,
+                   _U.list([]),
+                   _U.list([$Html.text("The Lord’s name be praised.")]))]))]))]);
+   var mercy3 = _U.list([A2($Html.p,
+                        _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                 ,_0: "margin"
+                                                                 ,_1: "0"}
+                                                                ,{ctor: "_Tuple2",_0: "padding",_1: "0"}]))]),
+                        _U.list([$Html.text("Lord, have mercy [upon us].")]))
+                        ,A2($Html.p,
+                        _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                 ,_0: "margin"
+                                                                 ,_1: "0"}
+                                                                ,{ctor: "_Tuple2",_0: "padding",_1: "0"}
+                                                                ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}]))]),
+                        _U.list([$Html.text("Christ, have mercy [upon us].")]))
+                        ,A2($Html.p,
+                        _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                                 ,_0: "margin"
+                                                                 ,_1: "0"}
+                                                                ,{ctor: "_Tuple2",_0: "padding",_1: "0"}]))]),
+                        _U.list([$Html.text("Lord, have mercy [upon us].")]))]);
+   var canticle = F2(function (title,name) {
+      return _U.list([A2($Html.p,
+      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                               ,_0: "font-size"
+                                               ,_1: "1.0em"}
+                                              ,{ctor: "_Tuple2"
+                                               ,_0: "font-family"
+                                               ,_1: "Georgia, Times New Roman, Times, serif"}
+                                              ,{ctor: "_Tuple2",_0: "margin",_1: "0"}]))]),
+      _U.list([A2($Html.span,
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                       ,_0: "font-weight"
+                                                       ,_1: "bold"}
+                                                      ,{ctor: "_Tuple2",_0: "padding",_1: "0 2em 0 0"}]))]),
+              _U.list([$Html.text(title)]))
+              ,A2($Html.span,
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                       ,_0: "font-style"
+                                                       ,_1: "italic"}]))]),
+              _U.list([$Html.text(name)]))]))]);
+   });
+   var versical = F2(function (speaker,says) {
+      return _U.list([A2($Html.p,
+      _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                               ,_0: "font-size"
+                                               ,_1: "1.0em"}
+                                              ,{ctor: "_Tuple2"
+                                               ,_0: "font-family"
+                                               ,_1: "Georgia, Times New Roman, Times, serif"}
+                                              ,{ctor: "_Tuple2",_0: "margin",_1: "0"}]))]),
+      _U.list([A2($Html.span,
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                       ,_0: "font-style"
+                                                       ,_1: "italic"}
+                                                      ,{ctor: "_Tuple2",_0: "padding",_1: "0 2em 0 0"}]))]),
+              _U.list([$Html.text(speaker)]))
+              ,A2($Html.span,
+              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                       ,_0: "position"
+                                                       ,_1: "absolute"}
+                                                      ,{ctor: "_Tuple2",_0: "left",_1: "10em"}]))]),
+              _U.list([$Html.text(says)]))]))]);
+   });
+   var htmlText = F2(function (s,attr) {
+      return A2($Html.p,
+      _U.list([$Html$Attributes.style(attr)]),
+      _U.list([$Markdown.toHtml(s)]));
+   });
+   var reading = F2(function (model,s) {
+      return _U.list([A2(htmlText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
+   });
+   var formattedText = F2(function (s,attr) {
+      return A2($Html.p,
+      _U.list([$Html$Attributes.style(attr)]),
+      _U.list([$Html.text(s)]));
+   });
+   var title1 = function (s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.2em"}
+              ,{ctor: "_Tuple2",_0: "text-align",_1: "center"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
+   };
+   var title2 = function (s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.1em"}
+              ,{ctor: "_Tuple2",_0: "text-align",_1: "center"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
+   };
+   var title2Italic = function (s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.1em"}
+              ,{ctor: "_Tuple2",_0: "text-align",_1: "center"}
+              ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
+   };
+   var rubric = function (s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
+              ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}
+              ,{ctor: "_Tuple2",_0: "color",_1: "red"}]))]);
+   };
+   var rubricBlack = function (s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
+              ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
+   };
+   var bibleRef = function (s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
+              ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}
+              ,{ctor: "_Tuple2",_0: "margin",_1: "-1em 0 1em 0"}
+              ,{ctor: "_Tuple2",_0: "padding",_1: "0"}]))]);
+   };
+   var section = function (s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
+              ,{ctor: "_Tuple2",_0: "font-weight",_1: "bold"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
+   };
+   var $default = function (s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
+   };
+   var openingSentences = function (model) {
+      var _p0 = model.season;
+      switch (_p0)
+      {case "advent": return A2($Basics._op["++"],
+           rubricBlack("Advent"),
+           A2($Basics._op["++"],
+           $default("In the wilderness prepare the way of the Lord; make straight in the desert a highway for our God."),
+           bibleRef("Isaiah 40:3")));
+         case "christmas": return A2($Basics._op["++"],
+           rubricBlack("Christmas"),
+           A2($Basics._op["++"],
+           $default("Fear not, for behold, I bring you good news of a great joy that will be for all people. For unto you is born this day in the city of David a Savior, who is Christ the Lord."),
+           bibleRef("Luke 2:10-11")));
+         case "epiphany": return A2($Basics._op["++"],
+           rubricBlack("Epiphany"),
+           A2($Basics._op["++"],
+           $default("For from the rising of the sun to its setting my name will be great among the nations, and in every place incense will be offered to my name, and a pure offering. For my name will be great among the nations, says the Lord of hosts."),
+           bibleRef("Malachi 1:11")));
+         case "lent": return A2($Basics._op["++"],
+           rubricBlack("Lent"),
+           A2($Basics._op["++"],
+           $default("Repent, for the kingdom of heaven is at hand."),
+           bibleRef("Matthew 3:2")));
+         case "goodFriday": return A2($Basics._op["++"],
+           rubricBlack("Good Friday"),
+           A2($Basics._op["++"],
+           $default("Is it nothing to you, all you who pass by? Look and see if there is any sorrow like my sorrow, which was brought upon me, which the Lord inflicted on the day of his fierce anger."),
+           bibleRef("Lamentations 1:12")));
+         case "easter": return A2($Basics._op["++"],
+           rubricBlack("Easter"),
+           A2($Basics._op["++"],
+           $default("Christ is risen! The Lord is risen indeed!"),
+           bibleRef("Mark 16:6 and Luke 24:34")));
+         case "ascension": return A2($Basics._op["++"],
+           rubricBlack("Ascension"),
+           A2($Basics._op["++"],
+           $default("Since then we have a great high priest who has passed through the heavens, Jesus, the Son of God, let us hold fast our confession. Let us then with confidence draw near to the throne of grace, that we may receive mercy and find grace to help in time of need."),
+           bibleRef("Hebrews 4:14, 16")));
+         case "pentecost": return A2($Basics._op["++"],
+           rubricBlack("Pentecost"),
+           A2($Basics._op["++"],
+           $default("You will receive power when the Holy Spirit has come upon you, and you will be my witnesses in Jerusalem and in all Judea and Samaria, and to the end of the earth."),
+           bibleRef("Acts 1:8")));
+         case "trinity": return A2($Basics._op["++"],
+           rubricBlack("Trinity Sunday"),
+           A2($Basics._op["++"],
+           $default("Holy, holy, holy, is the Lord God Almighty, who was and is and is to come!"),
+           bibleRef("Revelation 4:8")));
+         case "thanksgiving": return A2($Basics._op["++"],
+           rubricBlack("Days of Thanksgiving"),
+           A2($Basics._op["++"],
+           $default("Honor the Lord with your wealth and with the firstfruits of all your produce; then your barns will be filled with plenty, and your vats will be bursting with wine."),
+           bibleRef("Proverbs 3:9-10")));
+         default: var os = function () {
+              var _p1 = A2(cycleDay,model,7);
+              switch (_p1)
+              {case 0: return A2($Basics._op["++"],
+                   $default("The Lord is in his holy temple; let all the earth keep silence before him."),
+                   bibleRef("Habakkuk 2:20"));
+                 case 1: return A2($Basics._op["++"],
+                   $default("I was glad when they said to me, “Let us go to the house of the Lord!”"),
+                   bibleRef("Psalm 122:1"));
+                 case 2: return A2($Basics._op["++"],
+                   $default("Let the words of my mouth and the meditation of my heart be acceptable in your sight, O Lord, my rock and my redeemer."),
+                   bibleRef("Psalm 19:14"));
+                 case 3: return A2($Basics._op["++"],
+                   $default("Send out your light and your truth; let them lead me; let them bring me to your holy hill and to your dwelling!"),
+                   bibleRef("Psalm 43:3"));
+                 case 4: return A2($Basics._op["++"],
+                   $default("For thus says the One who is high and lifted up, who inhabits eternity, whose name is Holy: “I dwell in the high and holy place, and also with him who is of a contrite and lowly spirit, to revive the spirit of the lowly, and to revive the heart of the contrite.”"),
+                   bibleRef("Isaiah 57:15"));
+                 case 5: return A2($Basics._op["++"],
+                   $default("The hour is coming, and is now here, when the true worshipers will worship the Father in spirit and truth, for the Father is seeking such people to worship him."),
+                   bibleRef("John 4:23"));
+                 default: return A2($Basics._op["++"],
+                   $default("Grace to you and peace from God our Father and the Lord Jesus Christ."),
+                   bibleRef("Philippians 1:2"));}
+           }();
+           return os;}
+   };
+   var antiphon = function (model) {
+      var _p2 = model.season;
+      switch (_p2)
+      {case "advent": return A2($Basics._op["++"],
+           rubricBlack("Advent"),
+           $default("Our King and Savior now draws near: O come, let us adore him."));
+         case "christmas": return A2($Basics._op["++"],
+           rubricBlack("Christmas"),
+           $default("Alleluia, to us a child is born: O come, let us adore him. Alleluia."));
+         case "epiphany": return A2($Basics._op["++"],
+           rubricBlack("Epiphany through the Baptism of Christ and the Transfiguration"),
+           $default("The Lord has shown forth his glory: O come, let us adore him."));
+         case "lent": return A2($Basics._op["++"],
+           rubricBlack("Lent"),
+           $default("The Lord is full of compassion and mercy: O come, let us adore him."));
+         case "palmSunday": return A2($Basics._op["++"],
+           rubricBlack("Lent"),
+           $default("The Lord is full of compassion and mercy: O come, let us adore him."));
+         case "easterDay": return A2($Basics._op["++"],
+           rubricBlack("Easter until Ascension"),
+           $default("Alleluia. The Lord is risen indeed: O come, let us adore him. Alleluia."));
+         case "easter": return A2($Basics._op["++"],
+           rubricBlack("Easter until Ascension"),
+           $default("Alleluia. The Lord is risen indeed: O come, let us adore him. Alleluia."));
+         case "proper": var a = function () {
+              var _p3 = A2(cycleDay,model,3);
+              switch (_p3)
+              {case 0: return A2($Basics._op["++"],
+                   rubricBlack("For use at any time"),
+                   $default("The earth is the Lord\'s for he made it: O Come let us adore him."));
+                 case 1: return A2($Basics._op["++"],
+                   rubricBlack("Or this"),
+                   $default("Worship the Lord in the beauty of holiness: O Come let us adore him."));
+                 default: return A2($Basics._op["++"],
+                   rubricBlack("Or this"),
+                   $default("The mercy of the Lord is everlasting: O Come let us adore him."));}
+           }();
+           return a;
+         default: return A2($Basics._op["++"],
+           rubricBlack("Or this"),
+           $default("Worship the Lord in the beauty of holiness: O Come let us adore him."));}
+   };
+   var collectOfDay = function (model) {
+      var _p4 = model.day;
+      switch (_p4)
+      {case "Monday": return A2($Basics._op["++"],
+           $default("A Collect for the Renewal of Life (Monday)"),
+           $default("O God, the King eternal, whose light divides the day from the night and turns the shadow of death into the morning: Drive far from us all wrong desires, incline our hearts to keep your law, and guide our feet into the way of peace; that, having done your will with cheerfulness during the day, we may, when night comes, rejoice to give you thanks; through Jesus Christ our Lord. Amen."));
+         case "Tuesday": return A2($Basics._op["++"],
+           $default("A Collect for Peace (Tuesday)"),
+           $default("O God, the author of peace and lover of concord, to know you is eternal life and to serve you is perfect freedom: Defend us, your humble servants, in all assaults of our enemies; that we, surely trusting in your defense, may not fear the power of any adversaries, through the might of Jesus Christ our Lord. Amen."));
+         case "Wednesday": return A2($Basics._op["++"],
+           $default("A Collect for Grace (Wednesday)"),
+           $default("O Lord, our heavenly Father, almighty and everlasting God, you have\n      brought us safely to the beginning of this day: Defend us by your\n      mighty power, that we may not fall into sin nor run into any danger;\n      and that guided by your Spirit, we may do what is righteous in your\n      sight; through Jesus Christ our Lord. Amen."));
+         case "Thursday": return A2($Basics._op["++"],
+           $default("A Collect for Guidance (Thursday)"),
+           $default("Heavenly Father, in you we live and move and have our being: We\n      humbly pray you so to guide and govern us by your Holy Spirit, that\n      in all the cares and occupations of our life we may not forget you, but\n      may remember that we are ever walking in your sight; through Jesus\n      Christ our Lord. Amen."));
+         case "Friday": return A2($Basics._op["++"],
+           $default("A Collect for Endurance (Friday)"),
+           $default("Almighty God, whose most dear Son went not up to joy but first he\n      suffered pain, and entered not into glory before he was crucified:\n      Mercifully grant that we, walking in the way of the cross, may find it\n      none other than the way of life and peace; through Jesus Christ your\n      Son our Lord. Amen."));
+         case "Saturday": return A2($Basics._op["++"],
+           $default("A Collect for Sabbath Rest (Saturday)"),
+           $default("Almighty God, who after the creation of the world rested from all\n      your works and sanctified a day of rest for all your creatures: Grant\n      that we, putting away all earthly anxieties, may be duly prepared for\n      the service of your sanctuary, and that our rest here upon earth may\n      be a preparation for the eternal rest promised to your people in\n      heaven; through Jesus Christ our Lord. Amen."));
+         case "Sunday": return A2($Basics._op["++"],
+           $default("A Collect for Strength to Await Christ’s Return (Sunday)"),
+           $default("O God our King, by the resurrection of your Son Jesus Christ on the first day of the week, you conquered sin, put death to flight, and gave us the hope of everlasting life: Redeem all our days by this victory; forgive our sins, banish our fears, make us bold to praise you and to do your will; and steel us to wait for the consummation of your kingdom on the last great Day; through the same Jesus Christ our Lord. Amen."));
+         default: return _U.list([]);}
+   };
+   var forMission = function (model) {
+      var _p5 = A2(cycleDay,model,3);
+      switch (_p5)
+      {case 0:
+         return $default("Almighty and everlasting God, who alone works great marvels: Send\n      down upon our clergy and the congregations committed to their\n      charge the life-giving Spirit of your grace, shower them with the\n      continual dew of your blessing, and ignite in them a zealous love of\n      your Gospel, through Jesus Christ our Lord. Amen.");
+         case 1:
+         return $default("O God, you have made of one blood all the peoples of the earth, and\n      sent your blessed Son to preach peace to those who are far off and to\n      those who are near: Grant that people everywhere may seek after you\n      and find you; bring the nations into your fold; pour out your Spirit\n      upon all flesh; and hasten the coming of your kingdom; through\n      Jesus Christ our Lord. Amen.");
+         default:
+         return $default("Lord Jesus Christ, you stretched out your arms of love on the hard\n      wood of the cross that everyone might come within the reach of your\n      saving embrace: So clothe us in your Spirit that we, reaching forth \n      our hands in love, may bring those who do not know you to the\n      knowledge and love of you; for the honor of your Name. Amen.");}
+   };
+   var theGraces = function (model) {
+      var _p6 = A2(cycleDay,model,3);
+      switch (_p6)
+      {case 0: return A2($Basics._op["++"],
+           $default("The grace of our Lord Jesus Christ, and the love of God, and the\n      fellowship of the Holy Spirit, be with us all evermore. Amen."),
+           bibleRef("2 Corinthians 13:14"));
+         case 1: return A2($Basics._op["++"],
+           $default("May the God of hope fill us with all joy and peace in believing\n      through the power of the Holy Spirit. Amen."),
+           bibleRef("Romans 15:13"));
+         default: return A2($Basics._op["++"],
+           $default("Glory to God whose power, working in us, can do infinitely more\n      than we can ask or imagine: Glory to him from generation to\n      generation in the Church, and in Christ Jesus forever and ever. Amen."),
+           bibleRef("Ephesians 3:20-21"));}
+   };
+   var italic = function (s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}
+              ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}]))]);
+   };
+   var italicIndent = function (s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}
+              ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}
+              ,{ctor: "_Tuple2",_0: "margin",_1: "0 0 0 2em"}
+              ,{ctor: "_Tuple2",_0: "padding",_1: "0"}]))]);
+   };
+   var vs = function (s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}
+              ,{ctor: "_Tuple2",_0: "margin",_1: "0"}
+              ,{ctor: "_Tuple2",_0: "padding",_1: "0"}]))]);
+   };
+   var vsIndent = function (s) {
+      return _U.list([A2(formattedText,
+      s,
+      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
+              ,{ctor: "_Tuple2"
+               ,_0: "font-family"
+               ,_1: "Georgia, Times New Roman, Times, serif"}
+              ,{ctor: "_Tuple2",_0: "margin",_1: "0"}
+              ,{ctor: "_Tuple2",_0: "padding",_1: "0 0 0 2em"}]))]);
+   };
+   var canticalAfterLesson1 = function (model) {
+      var _p7 = model.season;
+      if (_p7 === "lent") {
+            return A2($Basics._op["++"],
+            rubric("During Lent the Benedictus es, Domine usually replaces the Te Deum. The Benedictus es, Domine may be used at other times as well."),
+            A2($Basics._op["++"],
+            A2(canticle,"Benedictus es, Domine","A Song of Praise"),
+            A2($Basics._op["++"],
+            rubricBlack("Song of the Three Young Men, 29-34"),
+            A2($Basics._op["++"],
+            vs("Glory to you, Lord God of our fathers;"),
+            A2($Basics._op["++"],
+            vsIndent("you are worthy of praise; glory to you."),
+            A2($Basics._op["++"],
+            vs("Glory to you for the radiance of your holy Name;"),
+            A2($Basics._op["++"],
+            vsIndent("we will praise you and highly exalt you for ever."),
+            A2($Basics._op["++"],
+            vs("Glory to you in the splendor of your temple;"),
+            A2($Basics._op["++"],
+            vsIndent("on the throne of your majesty, glory to you."),
+            A2($Basics._op["++"],
+            vs("Glory to you, seated between the Cherubim;"),
+            A2($Basics._op["++"],
+            vsIndent("we will praise you and highly exalt you for ever."),
+            A2($Basics._op["++"],
+            vs("Glory to you, beholding the depths;"),
+            A2($Basics._op["++"],
+            vsIndent("in the high vault of heaven, glory to you."),
+            A2($Basics._op["++"],
+            vs("Glory to the Father, and to the Son, and to the Holy Spirit;"),
+            vsIndent("we will praise you and highly exalt you for ever.")))))))))))))));
+         } else {
+            return A2($Basics._op["++"],
+            A2(canticle,"Te Deum Laudamus","We Praise You, O God"),
+            A2($Basics._op["++"],
+            vs("We praise you, O God,"),
+            A2($Basics._op["++"],
+            vsIndent("we acclaim you as Lord;"),
+            A2($Basics._op["++"],
+            vsIndent("all creation worships you,"),
+            A2($Basics._op["++"],
+            vsIndent("the Father everlasting."),
+            A2($Basics._op["++"],
+            vs("To you all angels, all the powers of heaven,"),
+            A2($Basics._op["++"],
+            vs("The cherubim and seraphim, sing in endless praise:"),
+            A2($Basics._op["++"],
+            vsIndent("Holy, Holy, Holy, Lord God of power and might,"),
+            A2($Basics._op["++"],
+            vsIndent("heaven and earth are full of your glory."),
+            A2($Basics._op["++"],
+            vs("The glorious company of apostles praise you."),
+            A2($Basics._op["++"],
+            vs("The noble fellowship of prophets praise you."),
+            A2($Basics._op["++"],
+            vs("The white-robed army of martyrs praise you."),
+            A2($Basics._op["++"],
+            vs("Throughout the world the holy Church acclaims you:"),
+            A2($Basics._op["++"],
+            vsIndent("Father, of majesty unbounded,"),
+            A2($Basics._op["++"],
+            vsIndent("your true and only Son, worthy of all praise,"),
+            A2($Basics._op["++"],
+            vsIndent("the Holy Spirit, advocate and guide."),
+            A2($Basics._op["++"],
+            vs("You, Christ, are the king of glory,"),
+            A2($Basics._op["++"],
+            vsIndent("the eternal Son of the Father."),
+            A2($Basics._op["++"],
+            vs("When you took our flesh to set us free"),
+            A2($Basics._op["++"],
+            vsIndent("you humbly chose the Virgin’s womb."),
+            A2($Basics._op["++"],
+            vs("You overcame the sting of death"),
+            A2($Basics._op["++"],
+            vsIndent("and opened the kingdom of heaven to all believers."),
+            A2($Basics._op["++"],
+            vs("You are seated at God’s right hand in glory."),
+            A2($Basics._op["++"],
+            vsIndent("We believe that you will come to be our judge."),
+            A2($Basics._op["++"],
+            vs("Come then, Lord, and help your people,"),
+            A2($Basics._op["++"],
+            vsIndent("bought with the price of your own blood,"),
+            A2($Basics._op["++"],
+            vsIndent("and bring us with your saints"),
+            A2($Basics._op["++"],
+            vsIndent("to glory everlasting."),
+            A2($Basics._op["++"],
+            vs("Save your people, Lord, and bless your inheritance;"),
+            A2($Basics._op["++"],
+            vsIndent("govern and uphold them now and always."),
+            A2($Basics._op["++"],
+            vs("Day by day we bless you;"),
+            A2($Basics._op["++"],
+            vsIndent("we praise your name forever."),
+            A2($Basics._op["++"],
+            vs("Keep us today, Lord, from all sin;"),
+            A2($Basics._op["++"],
+            vsIndent("have mercy on us, Lord, have mercy."),
+            A2($Basics._op["++"],
+            vs("Lord, show us your love and mercy,"),
+            A2($Basics._op["++"],
+            vsIndent("for we have put our trust in you."),
+            A2($Basics._op["++"],
+            vs("In you, Lord, is our hope,"),
+            vsIndent("let us never be put to shame."))))))))))))))))))))))))))))))))))))));
+         }
+   };
+   var blankline = _U.list([A2($Html.p,
+   _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                            ,_0: "margin-top"
+                                            ,_1: "1em"}]))]),
+   _U.list([]))]);
+   var venite = function (model) {
+      var s = A2($Basics._op["++"],
+      A2(canticle,"Venite","O Come"),
+      A2($Basics._op["++"],
+      rubricBlack("Psalm 95:1-7; 8-11"),
+      A2($Basics._op["++"],
+      vs("O come, let us sing to the Lord;"),
+      A2($Basics._op["++"],
+      vs("Let us make a joyful noise to the rock of our salvation!"),
+      A2($Basics._op["++"],
+      vs("Let us come into his presence with thanksgiving;"),
+      A2($Basics._op["++"],
+      vs("Let us make a joyful noise to him with songs of praise!"),
+      A2($Basics._op["++"],
+      vs("For the Lord is a great God, and a great King above all gods."),
+      A2($Basics._op["++"],
+      vs("In his hand are the depths of the earth;"),
+      A2($Basics._op["++"],
+      vsIndent("the heights of the mountains are his also."),
+      A2($Basics._op["++"],
+      vs("The sea is his, for he made it,"),
+      A2($Basics._op["++"],
+      vsIndent("and his hands formed the dry land."),
+      A2($Basics._op["++"],
+      vs("O come, let us worship and bow down;"),
+      A2($Basics._op["++"],
+      vsIndent("Let us kneel before the Lord, our Maker!"),
+      A2($Basics._op["++"],
+      vs("For he is our God, and we are the people of his pasture,"),
+      A2($Basics._op["++"],
+      vsIndent("and the sheep of his hand."),
+      A2($Basics._op["++"],
+      vs("O, that today you would hearken to his voice!"),
+      blankline))))))))))))))));
+      var v = A2($Basics._op["++"],
+      s,
+      _U.eq(model.season,"lent") ? A2($Basics._op["++"],
+      rubric("In Lent, and on other penitential occasions, the following verses are added."),
+      A2($Basics._op["++"],
+      vs("Do not harden your hearts, as at Meribah,"),
+      A2($Basics._op["++"],
+      vsIndent("as on the day at Massah in the wilderness,"),
+      A2($Basics._op["++"],
+      vsIndent("when your fathers put me to the test"),
+      A2($Basics._op["++"],
+      vsIndent("and put me to the proof, though they had seen my work."),
+      A2($Basics._op["++"],
+      vs("For forty years I loathed that generation"),
+      A2($Basics._op["++"],
+      vsIndent("and said, “They are a people who go astray in their heart,"),
+      A2($Basics._op["++"],
+      vsIndent("and they have not known my ways.”"),
+      A2($Basics._op["++"],
+      vs("Therefore I swore in my wrath,"),
+      A2($Basics._op["++"],
+      vsIndent("“They shall not enter my rest.”"),
+      blankline)))))))))) : _U.list([]));
+      return v;
+   };
+   var invitatoryCantical = function (model) {
+      var ic = function () {
+         if (_U.eq(model.season,"easterDay"))
+         return A2($Basics._op["++"],
+            rubric("During the first week of Easter, the Pascha Nostrum will be used in place of the Invitatory Psalm. It is appropriate to use this canticle throughout Eastertide."),
+            A2($Basics._op["++"],
+            A2(canticle,"Pascha Nostrum","Christ our Passover"),
+            A2($Basics._op["++"],
+            rubricBlack("1 Corinthians 5:7-8; Romans 6:9-11; 1 Corinthians 15:20-22"),
+            A2($Basics._op["++"],
+            vs("Alleluia. Christ our Passover has been sacrificed for us;"),
+            A2($Basics._op["++"],
+            vsIndent("therefore let us keep the feast,"),
+            A2($Basics._op["++"],
+            vs("Not with the old leaven, the leaven of malice and evil,"),
+            A2($Basics._op["++"],
+            vsIndent("but with the unleavened bread of sincerity and truth. Alleluia."),
+            A2($Basics._op["++"],
+            vs("Christ being raised from the dead will never die again;"),
+            A2($Basics._op["++"],
+            vsIndent("death no longer has dominion over him."),
+            A2($Basics._op["++"],
+            vs("The death that he died, he died to sin, once for all;"),
+            A2($Basics._op["++"],
+            vsIndent("but the life he lives, he lives to God."),
+            A2($Basics._op["++"],
+            vs("So also consider yourselves dead to sin,"),
+            A2($Basics._op["++"],
+            vsIndent("and alive to God in Jesus Christ our Lord. Alleluia."),
+            A2($Basics._op["++"],
+            vs("Christ has been raised from the dead,"),
+            A2($Basics._op["++"],
+            vsIndent("the first fruits of those who have fallen asleep."),
+            A2($Basics._op["++"],
+            vs("For since by a man came death,"),
+            A2($Basics._op["++"],
+            vsIndent("by a man has come also the resurrection of the dead."),
+            A2($Basics._op["++"],
+            vs("For as in Adam all die,"),
+            vsIndent("so also in Christ shall all be made alive. Alleluia.")))))))))))))))))));
+         else {
+               var _p8 = A2(cycleDay,model,2);
+               if (_p8 === 0) {
+                     return venite(model);
+                  } else {
+                     return A2($Basics._op["++"],
+                     A2(canticle,"Jubilate","Be Joyful"),
+                     A2($Basics._op["++"],
+                     rubricBlack("Psalm 100"),
+                     A2($Basics._op["++"],
+                     vs("Be joyful in the Lord, all you lands;"),
+                     A2($Basics._op["++"],
+                     vsIndent("serve the Lord with gladness"),
+                     A2($Basics._op["++"],
+                     vsIndent("and come before his presence with a song."),
+                     A2($Basics._op["++"],
+                     vs("Know this: the Lord himself is God;"),
+                     A2($Basics._op["++"],
+                     vsIndent("he himself has made us, and we are his;"),
+                     A2($Basics._op["++"],
+                     vsIndent("we are his people and the sheep of his pasture."),
+                     A2($Basics._op["++"],
+                     vs("Enter his gates with thanksgiving;"),
+                     A2($Basics._op["++"],
+                     vsIndent("go into his courts with praise;"),
+                     A2($Basics._op["++"],
+                     vsIndent("give thanks to him and call upon his Name."),
+                     A2($Basics._op["++"],
+                     vs("For the Lord is good;"),
+                     A2($Basics._op["++"],
+                     vsIndent("his mercy is everlasting;"),
+                     vsIndent("and his faithfulness endures from age to age."))))))))))))));
+                  }
+            }
+      }();
+      return ic;
+   };
+   var view = F2(function (address,model) {
+      return A2($Html.div,
+      _U.list([mpStyle(model)]),
+      A2($Basics._op["++"],
+      title1("Daily Morning Prayer"),
+      A2($Basics._op["++"],
+      title2Italic("Approved for Provincial Use"),
+      A2($Basics._op["++"],
+      title2("The Anglican Church in North America"),
+      A2($Basics._op["++"],
+      title2Italic("Petertide, A.D. 2013"),
+      A2($Basics._op["++"],
+      rubric("The Officiant may begin Morning Prayer by reading an opening sentence of Scripture found on pages 17-19 or another appropriate Scripture. The Confession of Sin may be said, or the Office may continue with “O Lord, open our lips.”"),
+      A2($Basics._op["++"],
+      section("Opening Sentences of Scripture"),
+      A2($Basics._op["++"],
+      openingSentences(model),
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      section("Confession of Sin"),
+      A2($Basics._op["++"],
+      rubric("The Officiant says to the People"),
+      A2($Basics._op["++"],
+      $default("Dearly beloved, the Scriptures teach us to acknowledge our many sins and offenses, not concealing them from our heavenly Father, but confessing them with humble and obedient hearts that we may obtain forgiveness by his infinite goodness and mercy. We ought at all times humbly to acknowledge our sins before Almighty God, but especially when we come together in his presence to give thanks for the great benefits we have received at his hands, to declare his most worthy praise, to hear his holy Word, and to ask, for ourselves and others, those things necessary for our life and our salvation. Therefore, come with me to the throne of heavenly grace."),
+      A2($Basics._op["++"],
+      rubric("or this"),
+      A2($Basics._op["++"],
+      $default("Let us humbly confess our sins to Almighty God."),
+      A2($Basics._op["++"],
+      rubric("Silence is kept. All kneeling the Officiant and People say"),
+      A2($Basics._op["++"],
+      vs("Almighty and most merciful Father,"),
+      A2($Basics._op["++"],
+      vs("we have erred and strayed from your ways like lost sheep."),
+      A2($Basics._op["++"],
+      vs("we have followed too much the deceits and desires of our"),
+      A2($Basics._op["++"],
+      vsIndent("own hearts."),
+      A2($Basics._op["++"],
+      vs("we have offended against your holy laws."),
+      A2($Basics._op["++"],
+      vs("we have left undone those things which we ought to have done"),
+      A2($Basics._op["++"],
+      vs("and we have done those things which we ought not to have done;"),
+      A2($Basics._op["++"],
+      vs("and apart from your grace, there is no health in us."),
+      A2($Basics._op["++"],
+      vs("O Lord, have mercy upon us."),
+      A2($Basics._op["++"],
+      vs("Spare those who confess their faults."),
+      A2($Basics._op["++"],
+      vs("Restore those who are penitent, according to your promises declared"),
+      A2($Basics._op["++"],
+      vsIndent("to all people in Christ Jesus our Lord;"),
+      A2($Basics._op["++"],
+      vs("And grant, O most merciful Father, for his sake,"),
+      A2($Basics._op["++"],
+      vsIndent("that we may now live a godly, righteous, and sober life,"),
+      A2($Basics._op["++"],
+      vsIndent("to the glory of your holy Name. Amen."),
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      rubric("The Priest alone stands and says"),
+      A2($Basics._op["++"],
+      $default("Almighty God, the Father of our Lord Jesus Christ, desires not the death of sinners, but that they may turn from their wickedness and live. He has empowered and commanded his ministers to pronounce to his people, being penitent, the absolution and remission of their sins. He pardons all who truly repent and genuinely believe his holy Gospel. For this reason, we beseech him to grant us true repentance and his Holy Spirit, that our present deeds may please him, the rest of our lives may be pure and holy, and that at the last we may come to his eternal joy; through Jesus Christ our Lord. Amen."),
+      A2($Basics._op["++"],
+      rubric("or this"),
+      A2($Basics._op["++"],
+      $default("The Almighty and merciful Lord grant you absolution and remission of all your sins, true repentance, amendment of life, and the grace and consolation of his Holy Spirit. Amen."),
+      A2($Basics._op["++"],
+      rubric("A deacon or layperson remains kneeling and prays"),
+      A2($Basics._op["++"],
+      $default("Grant your faithful people, merciful Lord, pardon and peace; that we may be cleansed from all our sins, and serve you with a quiet mind; through Jesus Christ our Lord. Amen."),
+      A2($Basics._op["++"],
+      section("The Invitatory"),
+      A2($Basics._op["++"],
+      rubric("All stand."),
+      A2($Basics._op["++"],
+      invitatory,
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      rubric("Then follows the Venite. Alternatively, the Jubilate may be used."),
+      A2($Basics._op["++"],
+      rubric("These seasonal antiphons may be sung or said before and after the Invitatory Psalm."),
+      A2($Basics._op["++"],
+      antiphon(model),
+      A2($Basics._op["++"],
+      invitatoryCantical(model),
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      rubric("Then follows"),
+      A2($Basics._op["++"],
+      section("The Psalm or Psalms Appointed"),
+      A2($Basics._op["++"],
+      A2(reading,
+      model,
+      A2($String.join,
+      " ",
+      $List.concat(_U.list([_U.list(["Appointed Psalms"])
+                           ,A2($List.map,function (m) {    return m.body;},model.mpp)])))),
+      A2($Basics._op["++"],
+      rubric("At the end of the Psalms is sung or said"),
+      A2($Basics._op["++"],
+      vs("Glory to the Father, and to the Son, and to the Holy Spirit;"),
+      A2($Basics._op["++"],
+      vsIndent("as it was in the beginning, is now, and ever shall be,"),
+      A2($Basics._op["++"],
+      vsIndent("world without end. Amen."),
+      A2($Basics._op["++"],
+      section("The Lessons"),
+      A2($Basics._op["++"],
+      rubric("One or more Lessons, as appointed, are read, the Reader first saying"),
+      A2($Basics._op["++"],
+      A2(reading,
+      model,
+      A2($String.join,
+      " ",
+      $List.concat(_U.list([_U.list(["The First Lesson from"])
+                           ,A2($List.map,function (m) {    return m.body;},model.mp1)])))),
+      A2($Basics._op["++"],
+      rubric("A citation giving chapter and verse may be added."),
+      A2($Basics._op["++"],
+      rubric("After each Lesson the Reader may say"),
+      A2($Basics._op["++"],
+      theWordOfTheLord,
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      rubric("Or the Reader may say"),
+      A2($Basics._op["++"],
+      A2(versical,"","Here ends the Reading."),
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      rubric("The following Canticles are normally sung or said after each of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."),
+      A2($Basics._op["++"],
+      canticalAfterLesson1(model),
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      A2(reading,
+      model,
+      A2($String.join,
+      " ",
+      $List.concat(_U.list([_U.list(["The Second Lesson from"])
+                           ,A2($List.map,function (m) {    return m.body;},model.mp2)])))),
+      A2($Basics._op["++"],
+      theWordOfTheLord,
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      A2(canticle,"Benedictus","The Song of Zechariah"),
+      A2($Basics._op["++"],
+      rubricBlack("Luke 1:68-79"),
+      A2($Basics._op["++"],
+      vs("Blessed be the Lord, the God of Israel;"),
+      A2($Basics._op["++"],
+      vsIndent("he has come to his people and set them free."),
+      A2($Basics._op["++"],
+      vs("He has raised up for us a mighty savior,"),
+      A2($Basics._op["++"],
+      vsIndent("born of the house of his servant David."),
+      A2($Basics._op["++"],
+      vs("Through his holy prophets he promised of old,"),
+      A2($Basics._op["++"],
+      vs("that he would save us from our enemies,"),
+      A2($Basics._op["++"],
+      vsIndent("from the hands of all who hate us."),
+      A2($Basics._op["++"],
+      vs("He promised to show mercy to our fathers"),
+      A2($Basics._op["++"],
+      vsIndent("and to remember his holy covenant."),
+      A2($Basics._op["++"],
+      vs("This was the oath he swore to our father Abraham,"),
+      A2($Basics._op["++"],
+      vsIndent("to set us free from the hands of our enemies,"),
+      A2($Basics._op["++"],
+      vs("Free to worship him without fear,"),
+      A2($Basics._op["++"],
+      vsIndent("holy and righteous in his sight"),
+      A2($Basics._op["++"],
+      vsIndent("all the days of our life."),
+      A2($Basics._op["++"],
+      vs("You, my child, shall be called the prophet of the Most High,"),
+      A2($Basics._op["++"],
+      vsIndent("for you will go before the Lord to prepare his way,"),
+      A2($Basics._op["++"],
+      vs("To give his people knowledge of salvation"),
+      A2($Basics._op["++"],
+      vsIndent("by the forgiveness of their sins."),
+      A2($Basics._op["++"],
+      vs("In the tender compassion of our God"),
+      A2($Basics._op["++"],
+      vsIndent("the dawn from on high shall break upon us,"),
+      A2($Basics._op["++"],
+      vs("To shine on those who dwell in darkness and the shadow of death,"),
+      A2($Basics._op["++"],
+      vsIndent("and to guide our feet into the way of peace."),
+      A2($Basics._op["++"],
+      vs("Glory to the Father, and to the Son, and to the Holy Spirit;"),
+      A2($Basics._op["++"],
+      vsIndent("as it was in the beginning, is now, and ever shall be,"),
+      A2($Basics._op["++"],
+      vsIndent("world without end. Amen."),
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      rubric("If desired, a sermon on the Morning Lessons may be preached."),
+      A2($Basics._op["++"],
+      section("The Apostles’ Creed"),
+      A2($Basics._op["++"],
+      rubric("Officiant and People together, all standing"),
+      A2($Basics._op["++"],
+      vs("I believe in God, the Father almighty,"),
+      A2($Basics._op["++"],
+      vsIndent("creator of heaven and earth."),
+      A2($Basics._op["++"],
+      vs("I believe in Jesus Christ, his only Son, our Lord."),
+      A2($Basics._op["++"],
+      vsIndent("He was conceived by the Holy Spirit"),
+      A2($Basics._op["++"],
+      vsIndent("and born of the Virgin Mary."),
+      A2($Basics._op["++"],
+      vsIndent("He suffered under Pontius Pilate,"),
+      A2($Basics._op["++"],
+      vsIndent("was crucified, died, and was buried."),
+      A2($Basics._op["++"],
+      vsIndent("He descended to the dead."),
+      A2($Basics._op["++"],
+      vsIndent("On the third day he rose again."),
+      A2($Basics._op["++"],
+      vsIndent("He ascended into heaven,"),
+      A2($Basics._op["++"],
+      vsIndent("and is seated at the right hand of the Father."),
+      A2($Basics._op["++"],
+      vsIndent("He will come again to judge the living and the dead."),
+      A2($Basics._op["++"],
+      vs("I believe in the Holy Spirit,"),
+      A2($Basics._op["++"],
+      vsIndent("the holy catholic Church,"),
+      A2($Basics._op["++"],
+      vsIndent("the communion of saints,"),
+      A2($Basics._op["++"],
+      vsIndent("the forgiveness of sins,"),
+      A2($Basics._op["++"],
+      vsIndent("the resurrection of the body,"),
+      A2($Basics._op["++"],
+      vsIndent("and the life everlasting. Amen."),
+      A2($Basics._op["++"],
+      section("The Prayers"),
+      A2($Basics._op["++"],
+      rubric("The People kneel or stand."),
+      A2($Basics._op["++"],
+      thePrayers1,
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      mercy3,
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      rubric("Officiant and People"),
+      A2($Basics._op["++"],
+      vs("Our Father, who art in heaven, hallowed be thy Name."),
+      A2($Basics._op["++"],
+      vs("Thy kingdom come, thy will be done, on earth as it is in heaven."),
+      A2($Basics._op["++"],
+      vs("Give us this day our readings bread."),
+      A2($Basics._op["++"],
+      vs("And forgive us our trespasses, as we forgive those who trespass"),
+      A2($Basics._op["++"],
+      vsIndent("against us."),
+      A2($Basics._op["++"],
+      vs("And lead us not into temptation, but deliver us from evil."),
+      A2($Basics._op["++"],
+      vs("For thine is the kingdom, and the power, and the glory,"),
+      A2($Basics._op["++"],
+      vsIndent("forever and ever. Amen."),
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      rubric("or this"),
+      A2($Basics._op["++"],
+      vs("Our Father in heaven, hallowed be your Name."),
+      A2($Basics._op["++"],
+      vs("Your kingdom come, your will be done, on earth as it is in heaven."),
+      A2($Basics._op["++"],
+      vs("Give us today our readings bread."),
+      A2($Basics._op["++"],
+      vs("And forgive us our sins as we forgive those who sin against us."),
+      A2($Basics._op["++"],
+      vs("Save us from the time of trial, and deliver us from evil."),
+      A2($Basics._op["++"],
+      vs("For the kingdom, the power, and the glory are yours,"),
+      A2($Basics._op["++"],
+      vsIndent("now and forever. Amen."),
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      thePrayers2,
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      rubric("The Officiant then prays one or more of the following collects. It is traditional to pray the Collects for Peace and Grace readings. Alternatively, one may pray the collects on a weekly rotation, using the suggestions in parentheses."),
+      A2($Basics._op["++"],
+      section("The Collect of the Day"),
+      A2($Basics._op["++"],
+      collectOfDay(model),
+      A2($Basics._op["++"],
+      rubric("Unless The Great Litany or the Eucharist is to follow, one of the following prayers for mission is added."),
+      A2($Basics._op["++"],
+      rubric("Here may be sung a hymn or anthem."),
+      A2($Basics._op["++"],
+      rubric("The Officiant may invite the People to offer intercessions and thanksgivings."),
+      A2($Basics._op["++"],
+      rubric("Before the close of the Office one or both of the following may be used."),
+      A2($Basics._op["++"],
+      forMission(model),
+      A2($Basics._op["++"],
+      section("The General Thanksgiving"),
+      A2($Basics._op["++"],
+      rubric("Officiant and People"),
+      A2($Basics._op["++"],
+      vs("Almighty God, Father of all mercies,"),
+      A2($Basics._op["++"],
+      vs("we your unworthy servants give you humble thanks"),
+      A2($Basics._op["++"],
+      vs("for all your goodness and loving-kindness"),
+      A2($Basics._op["++"],
+      vsIndent("to us and to all whom you have made."),
+      A2($Basics._op["++"],
+      vs("We bless you for our creation, preservation,"),
+      A2($Basics._op["++"],
+      vsIndent("and all the blessings of this life;"),
+      A2($Basics._op["++"],
+      vs("but above all for your immeasurable love"),
+      A2($Basics._op["++"],
+      vs("in the redemption of the world by our Lord Jesus Christ;"),
+      A2($Basics._op["++"],
+      vs("for the means of grace, and for the hope of glory."),
+      A2($Basics._op["++"],
+      vs("And, we pray, give us such an awareness of your mercies,"),
+      A2($Basics._op["++"],
+      vs("that with truly thankful hearts we may show forth your praise,"),
+      A2($Basics._op["++"],
+      vs("not only with our lips, but in our lives,"),
+      A2($Basics._op["++"],
+      vs("by giving up our selves to your service,"),
+      A2($Basics._op["++"],
+      vs("and by walking before you"),
+      A2($Basics._op["++"],
+      vsIndent("in holiness and righteousness all our days;"),
+      A2($Basics._op["++"],
+      vs("through Jesus Christ our Lord,"),
+      A2($Basics._op["++"],
+      vs("to whom, with you and the Holy Spirit,"),
+      A2($Basics._op["++"],
+      vs("be honor and glory throughout all ages. Amen."),
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      section("A Prayer of St. John Chrysostom"),
+      A2($Basics._op["++"],
+      $default("Almighty God, you have given us grace at this time with one accord\n  to make our common supplications to you; and you have promised \n  through your well beloved Son that when two or three are gathered\n  together in his name you will be in the midst of them: Fulfill now, O\n  Lord, our desires and petitions as may be best for us; granting us in\n  this world knowledge of your truth, and in the age to come life\n  everlasting. Amen."),
+      A2($Basics._op["++"],
+      eoPrayer,
+      A2($Basics._op["++"],
+      blankline,
+      A2($Basics._op["++"],
+      rubric("From Easter Day through the Day of Pentecost “Alleluia, alleluia” may be added to the\n  preceding versicle and response."),
+      A2($Basics._op["++"],
+      rubric("The Officiant may invite the People to join in one of the Graces."),
+      A2($Basics._op["++"],
+      rubric("Officiant"),
+      A2($Basics._op["++"],
+      theGraces(model),
+      A2($Basics._op["++"],
+      section("General Instructions: Morning and Evening Prayer"),
+      A2($Basics._op["++"],
+      italic("The Confession and Apostles’ Creed may be omitted, provided they have been said\n  once during the course of the day."),
+      A2($Basics._op["++"],
+      italic("In the opening versicles, the Officiant and People may join in saying “Alleluia”\n  (outside of Lent) as an alternative to the versicles “Praise the Lord/The Lord’s\n  name be praised.”"),
+      A2($Basics._op["++"],
+      italic("The following form of the Gloria Patri may be used:"),
+      A2($Basics._op["++"],
+      italicIndent("Glory to the Father, and to the Son, and to the Holy Spirit:"),
+      A2($Basics._op["++"],
+      italicIndent("As it was in the beginning, is now, and will be forever. Amen."),
+      A2($Basics._op["++"],
+      blankline,
+      italic("A sermon may also be preached after the Office or after the hymn or anthem (if\n  sung) following the collects."))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
+   });
+   var update = F2(function (action,model) {
+      var _p9 = action;
+      switch (_p9.ctor)
+      {case "NoOp": return model;
+         case "Show": return _U.update(model,
+           {show: $Basics.not(model.show)});
+         default: return _U.update(model,
+           {justToday: $Basics.not(model.justToday)});}
+   });
+   var JustToday = {ctor: "JustToday"};
+   var Show = {ctor: "Show"};
+   var NoOp = {ctor: "NoOp"};
+   var init = $Iphod$Models.dailyInit;
+   return _elm.Iphod.MorningPrayer.values = {_op: _op
+                                            ,init: init
+                                            ,update: update
+                                            ,view: view};
+};
+Elm.Iphod = Elm.Iphod || {};
 Elm.Iphod.Daily = Elm.Iphod.Daily || {};
 Elm.Iphod.Daily.make = function (_elm) {
    "use strict";
@@ -13171,1010 +14552,6 @@ Elm.Iphod.Daily.make = function (_elm) {
                                     ,update: update
                                     ,view: view
                                     ,textStyle: textStyle};
-};
-Elm.Iphod = Elm.Iphod || {};
-Elm.Iphod.MorningPrayer = Elm.Iphod.MorningPrayer || {};
-Elm.Iphod.MorningPrayer.make = function (_elm) {
-   "use strict";
-   _elm.Iphod = _elm.Iphod || {};
-   _elm.Iphod.MorningPrayer = _elm.Iphod.MorningPrayer || {};
-   if (_elm.Iphod.MorningPrayer.values)
-   return _elm.Iphod.MorningPrayer.values;
-   var _U = Elm.Native.Utils.make(_elm),
-   $Basics = Elm.Basics.make(_elm),
-   $Debug = Elm.Debug.make(_elm),
-   $Helper = Elm.Helper.make(_elm),
-   $Html = Elm.Html.make(_elm),
-   $Html$Attributes = Elm.Html.Attributes.make(_elm),
-   $Iphod$Daily = Elm.Iphod.Daily.make(_elm),
-   $List = Elm.List.make(_elm),
-   $Maybe = Elm.Maybe.make(_elm),
-   $Result = Elm.Result.make(_elm),
-   $Signal = Elm.Signal.make(_elm),
-   $String = Elm.String.make(_elm);
-   var _op = {};
-   var mpStyle = function (model) {
-      return A2($Helper.hideable,
-      model.show,
-      _U.list([{ctor: "_Tuple2"
-               ,_0: "font-family"
-               ,_1: "Georgia, Times New Roman, Times, serif"}
-              ,{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}]));
-   };
-   var formattedText = F2(function (s,attr) {
-      return A2($Html.p,
-      _U.list([$Html$Attributes.style(attr)]),
-      _U.list([$Html.text(s)]));
-   });
-   var title1 = function (s) {
-      return _U.list([A2(formattedText,
-      s,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.2em"}
-              ,{ctor: "_Tuple2",_0: "text-align",_1: "center"}
-              ,{ctor: "_Tuple2"
-               ,_0: "font-family"
-               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
-   };
-   var title2 = function (s) {
-      return _U.list([A2(formattedText,
-      s,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.1em"}
-              ,{ctor: "_Tuple2",_0: "text-align",_1: "center"}
-              ,{ctor: "_Tuple2"
-               ,_0: "font-family"
-               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
-   };
-   var title2Italic = function (s) {
-      return _U.list([A2(formattedText,
-      s,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.1em"}
-              ,{ctor: "_Tuple2",_0: "text-align",_1: "center"}
-              ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}
-              ,{ctor: "_Tuple2"
-               ,_0: "font-family"
-               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
-   };
-   var rubric = function (s) {
-      return _U.list([A2(formattedText,
-      s,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
-              ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}
-              ,{ctor: "_Tuple2"
-               ,_0: "font-family"
-               ,_1: "Georgia, Times New Roman, Times, serif"}
-              ,{ctor: "_Tuple2",_0: "color",_1: "red"}]))]);
-   };
-   var rubricBlack = function (s) {
-      return _U.list([A2(formattedText,
-      s,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
-              ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}
-              ,{ctor: "_Tuple2"
-               ,_0: "font-family"
-               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
-   };
-   var section = function (s) {
-      return _U.list([A2(formattedText,
-      s,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
-              ,{ctor: "_Tuple2",_0: "font-weight",_1: "bold"}
-              ,{ctor: "_Tuple2"
-               ,_0: "font-family"
-               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
-   };
-   var $default = function (s) {
-      return _U.list([A2(formattedText,
-      s,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
-              ,{ctor: "_Tuple2"
-               ,_0: "font-family"
-               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
-   };
-   var vs = function (s) {    return $default(s);};
-   var reading = F2(function (model,s) {
-      return _U.list([A2(formattedText,
-      s,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
-              ,{ctor: "_Tuple2"
-               ,_0: "font-family"
-               ,_1: "Georgia, Times New Roman, Times, serif"}]))]);
-   });
-   var italic = function (s) {
-      return _U.list([A2(formattedText,
-      s,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
-              ,{ctor: "_Tuple2"
-               ,_0: "font-family"
-               ,_1: "Georgia, Times New Roman, Times, serif"}
-              ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}]))]);
-   };
-   var italicIndent = function (s) {
-      return _U.list([A2(formattedText,
-      s,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
-              ,{ctor: "_Tuple2"
-               ,_0: "font-family"
-               ,_1: "Georgia, Times New Roman, Times, serif"}
-              ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}
-              ,{ctor: "_Tuple2",_0: "margin-left",_1: "2em"}]))]);
-   };
-   var versical = F2(function (speaker,says) {
-      return _U.list([A2(formattedText,
-                     speaker,
-                     _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
-                             ,{ctor: "_Tuple2"
-                              ,_0: "font-family"
-                              ,_1: "Georgia, Times New Roman, Times, serif"}
-                             ,{ctor: "_Tuple2",_0: "font-style",_1: "italic"}
-                             ,{ctor: "_Tuple2",_0: "padding-right",_1: "2em"}]))
-                     ,A2(formattedText,
-                     says,
-                     _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
-                             ,{ctor: "_Tuple2"
-                              ,_0: "font-family"
-                              ,_1: "Georgia, Times New Roman, Times, serif"}
-                             ,{ctor: "_Tuple2",_0: "padding-right",_1: "2em"}]))]);
-   });
-   var vsIndent = function (s) {
-      return _U.list([A2(formattedText,
-      s,
-      _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1.0em"}
-              ,{ctor: "_Tuple2"
-               ,_0: "font-family"
-               ,_1: "Georgia, Times New Roman, Times, serif"}
-              ,{ctor: "_Tuple2",_0: "padding-left",_1: "2em"}]))]);
-   };
-   var canticle = F2(function (title,name) {
-      return _U.list([A2(formattedText,
-                     title,
-                     _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1em"}
-                             ,{ctor: "_Tuple2"
-                              ,_0: "font-family"
-                              ,_1: "Georgia, Times New Roman, Times, serif"}
-                             ,{ctor: "_Tuple2",_0: "font-weight",_1: "bold"}
-                             ,{ctor: "_Tuple2",_0: "padding-right",_1: "2em"}]))
-                     ,A2(formattedText,
-                     name,
-                     _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1em"}
-                             ,{ctor: "_Tuple2"
-                              ,_0: "font-family"
-                              ,_1: "Georgia, Times New Roman, Times, serif"}
-                             ,{ctor: "_Tuple2",_0: "font-style",_1: "italics"}]))]);
-   });
-   var view = F2(function (address,model) {
-      return A2($Html.div,
-      _U.list([mpStyle(model)]),
-      A2($Basics._op["++"],
-      title1("Daily Morning Prayer"),
-      A2($Basics._op["++"],
-      title2Italic("Approved for Provincial Use"),
-      A2($Basics._op["++"],
-      title2("The Anglican Church in North America"),
-      A2($Basics._op["++"],
-      title2Italic("Petertide, A.D. 2013"),
-      A2($Basics._op["++"],
-      rubric("The Officiant may begin Morning Prayer by reading an opening sentence of Scripture found on pages 17-19 or another appropriate Scripture. The Confession of Sin may be said, or the Office may continue with “O Lord, open our lips.”"),
-      A2($Basics._op["++"],
-      section("Confession of Sin"),
-      A2($Basics._op["++"],
-      rubric("The Officiant says to the People"),
-      A2($Basics._op["++"],
-      $default("Dearly beloved, the Scriptures teach us to acknowledge our many sins and offenses, not concealing them from our heavenly Father, but confessing them with humble and obedient hearts that we may obtain forgiveness by his infinite goodness and mercy. We ought at all times humbly to acknowledge our sins before Almighty God, but especially when we come together in his presence to give thanks for the great benefits we have received at his hands, to declare his most worthy praise, to hear his holy Word, and to ask, for ourselves and others, those things necessary for our life and our salvation. Therefore, come with me to the throne of heavenly grace."),
-      A2($Basics._op["++"],
-      rubric("or this"),
-      A2($Basics._op["++"],
-      $default("Let us humbly confess our sins to Almighty God."),
-      A2($Basics._op["++"],
-      rubric("Silence is kept. All kneeling the Officiant and People say"),
-      A2($Basics._op["++"],
-      vs("Almighty and most merciful Father,"),
-      A2($Basics._op["++"],
-      vs("we have erred and strayed from your ways like lost sheep."),
-      A2($Basics._op["++"],
-      vs("we have followed too much the deceits and desires of our"),
-      A2($Basics._op["++"],
-      vsIndent("own hearts."),
-      A2($Basics._op["++"],
-      vs("we have offended against your holy laws."),
-      A2($Basics._op["++"],
-      vs("we have left undone those things which we ought to have done"),
-      A2($Basics._op["++"],
-      vs("and we have done those things which we ought not to have done;"),
-      A2($Basics._op["++"],
-      vs("and apart from your grace, there is no health in us."),
-      A2($Basics._op["++"],
-      vs("O Lord, have mercy upon us."),
-      A2($Basics._op["++"],
-      vs("Spare those who confess their faults."),
-      A2($Basics._op["++"],
-      vs("Restore those who are penitent, according to your promises declared"),
-      A2($Basics._op["++"],
-      vsIndent("to all people in Christ Jesus our Lord;"),
-      A2($Basics._op["++"],
-      vs("And grant, O most merciful Father, for his sake,"),
-      A2($Basics._op["++"],
-      vsIndent("that we may now live a godly, righteous, and sober life,"),
-      A2($Basics._op["++"],
-      vsIndent("to the glory of your holy Name. Amen."),
-      A2($Basics._op["++"],
-      rubric("The Priest alone stands and says"),
-      A2($Basics._op["++"],
-      $default("Almighty God, the Father of our Lord Jesus Christ, desires not the death of sinners, but that they may turn from their wickedness and live. He has empowered and commanded his ministers to pronounce to his people, being penitent, the absolution and remission of their sins. He pardons all who truly repent and genuinely believe his holy Gospel. For this reason, we beseech him to grant us true repentance and his Holy Spirit, that our present deeds may please him, the rest of our lives may be pure and holy, and that at the last we may come to his eternal joy; through Jesus Christ our Lord. Amen."),
-      A2($Basics._op["++"],
-      rubric("or this"),
-      A2($Basics._op["++"],
-      $default("The Almighty and merciful Lord grant you absolution and remission of all your sins, true repentance, amendment of life, and the grace and consolation of his Holy Spirit. Amen."),
-      A2($Basics._op["++"],
-      rubric("A deacon or layperson remains kneeling and prays"),
-      A2($Basics._op["++"],
-      $default("Grant your faithful people, merciful Lord, pardon and peace; that we may be cleansed from all our sins, and serve you with a quiet mind; through Jesus Christ our Lord. Amen."),
-      A2($Basics._op["++"],
-      section("The Invitatory"),
-      A2($Basics._op["++"],
-      rubric("All stand."),
-      A2($Basics._op["++"],
-      A2(versical,"Officiant","O Lord, open our lips;"),
-      A2($Basics._op["++"],
-      A2(versical,
-      "People",
-      "And our mouth shall proclaim your praise."),
-      A2($Basics._op["++"],
-      A2(versical,"Officiant","O God, make speed to save us;"),
-      A2($Basics._op["++"],
-      A2(versical,"People","O Lord, make haste to help us."),
-      A2($Basics._op["++"],
-      A2(versical,
-      "Officiant",
-      "Glory to the Father, and to the Son, and to the Holy Spirit;"),
-      A2($Basics._op["++"],
-      A2(versical,
-      "People",
-      "As it was in the beginning, is now, and ever shall be, world without end. Amen."),
-      A2($Basics._op["++"],
-      A2(versical,"Officiant","Praise the Lord."),
-      A2($Basics._op["++"],
-      A2(versical,"People","The Lord’s name be praised."),
-      A2($Basics._op["++"],
-      rubric("Then follows the Venite. Alternatively, the Jubilate may be used."),
-      A2($Basics._op["++"],
-      rubric("These seasonal antiphons may be sung or said before and after the Invitatory Psalm."),
-      A2($Basics._op["++"],
-      rubricBlack("Advent"),
-      A2($Basics._op["++"],
-      $default("Our King and Savior now draws near: O come, let us adore him."),
-      A2($Basics._op["++"],
-      rubricBlack("Christmas"),
-      A2($Basics._op["++"],
-      $default("Alleluia, to us a child is born: O come, let us adore him. Alleluia."),
-      A2($Basics._op["++"],
-      rubricBlack("Epiphany through the Baptism of Christ and the Transfiguration"),
-      A2($Basics._op["++"],
-      $default("The Lord has shown forth his glory: O come, let us adore him."),
-      A2($Basics._op["++"],
-      rubricBlack("Lent"),
-      A2($Basics._op["++"],
-      $default("The Lord is full of compassion and mercy: O come, let us adore him."),
-      A2($Basics._op["++"],
-      rubricBlack("Easter until Ascension"),
-      A2($Basics._op["++"],
-      $default("Alleluia. The Lord is risen indeed: O come, let us adore him. Alleluia."),
-      A2($Basics._op["++"],
-      rubricBlack("Ascension until Pentecost"),
-      A2($Basics._op["++"],
-      $default("Alleluia. Christ the Lord has ascended into heaven: O come, let us adore him. Alleluia."),
-      A2($Basics._op["++"],
-      rubricBlack("Pentecost and the week following"),
-      A2($Basics._op["++"],
-      $default("Alleluia. The Spirit of the Lord renews the face of the earth: O come, let us adore him. Alleluia."),
-      A2($Basics._op["++"],
-      rubricBlack("Trinity Sunday"),
-      A2($Basics._op["++"],
-      $default("Father, Son and Holy Spirit, one God: O come, let us adore him."),
-      A2($Basics._op["++"],
-      rubricBlack("On feasts of the Incarnation"),
-      A2($Basics._op["++"],
-      $default("The Word was made flesh and dwelt among us: O come, let us adore him."),
-      A2($Basics._op["++"],
-      rubricBlack("On All Saints and other major saints’ days"),
-      A2($Basics._op["++"],
-      $default("The Lord is glorious in his saints: O come, let us adore him."),
-      A2($Basics._op["++"],
-      rubricBlack("For use at any time"),
-      A2($Basics._op["++"],
-      $default("The earth is the Lord\'s for he made it: O Come let us adore him."),
-      A2($Basics._op["++"],
-      rubricBlack("Or this"),
-      A2($Basics._op["++"],
-      $default("Worship the Lord in the beauty of holiness: O Come let us adore him."),
-      A2($Basics._op["++"],
-      rubricBlack("Or this"),
-      A2($Basics._op["++"],
-      $default("The mercy of the Lord is everlasting: O Come let us adore him."),
-      A2($Basics._op["++"],
-      A2(canticle,"Venite","O Come"),
-      A2($Basics._op["++"],
-      rubricBlack("Psalm 95:1-7; 8-11"),
-      A2($Basics._op["++"],
-      vs("O come, let us sing to the Lord;"),
-      A2($Basics._op["++"],
-      vs("Let us make a joyful noise to the rock of our salvation!"),
-      A2($Basics._op["++"],
-      vs("Let us come into his presence with thanksgiving;"),
-      A2($Basics._op["++"],
-      vs("Let us make a joyful noise to him with songs of praise!"),
-      A2($Basics._op["++"],
-      vs("For the Lord is a great God, and a great King above all gods."),
-      A2($Basics._op["++"],
-      vs("In his hand are the depths of the earth;"),
-      A2($Basics._op["++"],
-      vsIndent("the heights of the mountains are his also."),
-      A2($Basics._op["++"],
-      vs("The sea is his, for he made it,"),
-      A2($Basics._op["++"],
-      vsIndent("and his hands formed the dry land."),
-      A2($Basics._op["++"],
-      vs("O come, let us worship and bow down;"),
-      A2($Basics._op["++"],
-      vsIndent("Let us kneel before the Lord, our Maker!"),
-      A2($Basics._op["++"],
-      vs("For he is our God, and we are the people of his pasture,"),
-      A2($Basics._op["++"],
-      vsIndent("and the sheep of his hand."),
-      A2($Basics._op["++"],
-      vs("O, that today you would hearken to his voice!"),
-      A2($Basics._op["++"],
-      rubric("In Lent, and on other penitential occasions, the following verses are added."),
-      A2($Basics._op["++"],
-      vs("Do not harden your hearts, as at Meribah,"),
-      A2($Basics._op["++"],
-      vsIndent("as on the day at Massah in the wilderness,"),
-      A2($Basics._op["++"],
-      vsIndent("when your fathers put me to the test"),
-      A2($Basics._op["++"],
-      vsIndent("and put me to the proof, though they had seen my work."),
-      A2($Basics._op["++"],
-      vs("For forty years I loathed that generation"),
-      A2($Basics._op["++"],
-      vsIndent("and said, “They are a people who go astray in their heart,"),
-      A2($Basics._op["++"],
-      vsIndent("and they have not known my ways.”"),
-      A2($Basics._op["++"],
-      vs("Therefore I swore in my wrath,"),
-      A2($Basics._op["++"],
-      vsIndent("“They shall not enter my rest.”"),
-      A2($Basics._op["++"],
-      rubric("or this"),
-      A2($Basics._op["++"],
-      A2(canticle,"Jubilate","Be Joyful"),
-      A2($Basics._op["++"],
-      rubricBlack("Psalm 100"),
-      A2($Basics._op["++"],
-      vs("Be joyful in the Lord, all you lands;"),
-      A2($Basics._op["++"],
-      vsIndent("serve the Lord with gladness"),
-      A2($Basics._op["++"],
-      vsIndent("and come before his presence with a song."),
-      A2($Basics._op["++"],
-      vs("Know this: the Lord himself is God;"),
-      A2($Basics._op["++"],
-      vsIndent("he himself has made us, and we are his;"),
-      A2($Basics._op["++"],
-      vsIndent("we are his people and the sheep of his pasture."),
-      A2($Basics._op["++"],
-      vs("Enter his gates with thanksgiving;"),
-      A2($Basics._op["++"],
-      vsIndent("go into his courts with praise;"),
-      A2($Basics._op["++"],
-      vsIndent("give thanks to him and call upon his Name."),
-      A2($Basics._op["++"],
-      vs("For the Lord is good;"),
-      A2($Basics._op["++"],
-      vsIndent("his mercy is everlasting;"),
-      A2($Basics._op["++"],
-      vsIndent("and his faithfulness endures from age to age."),
-      A2($Basics._op["++"],
-      rubric("During the first week of Easter, the Pascha Nostrum will be used in place of the Invitatory Psalm. It is appropriate to use this canticle throughout Eastertide."),
-      A2($Basics._op["++"],
-      A2(canticle,"Pascha Nostrum","Christ our Passover"),
-      A2($Basics._op["++"],
-      rubricBlack("1 Corinthians 5:7-8; Romans 6:9-11; 1 Corinthians 15:20-22"),
-      A2($Basics._op["++"],
-      vs("Alleluia. Christ our Passover has been sacrificed for us;"),
-      A2($Basics._op["++"],
-      vsIndent("therefore let us keep the feast,"),
-      A2($Basics._op["++"],
-      vs("Not with the old leaven, the leaven of malice and evil,"),
-      A2($Basics._op["++"],
-      vsIndent("but with the unleavened bread of sincerity and truth. Alleluia."),
-      A2($Basics._op["++"],
-      vs("Christ being raised from the dead will never die again;"),
-      A2($Basics._op["++"],
-      vsIndent("death no longer has dominion over him."),
-      A2($Basics._op["++"],
-      vs("The death that he died, he died to sin, once for all;"),
-      A2($Basics._op["++"],
-      vsIndent("but the life he lives, he lives to God."),
-      A2($Basics._op["++"],
-      vs("So also consider yourselves dead to sin,"),
-      A2($Basics._op["++"],
-      vsIndent("and alive to God in Jesus Christ our Lord. Alleluia."),
-      A2($Basics._op["++"],
-      vs("Christ has been raised from the dead,"),
-      A2($Basics._op["++"],
-      vsIndent("the first fruits of those who have fallen asleep."),
-      A2($Basics._op["++"],
-      vs("For since by a man came death,"),
-      A2($Basics._op["++"],
-      vsIndent("by a man has come also the resurrection of the dead."),
-      A2($Basics._op["++"],
-      vs("For as in Adam all die,"),
-      A2($Basics._op["++"],
-      vsIndent("so also in Christ shall all be made alive. Alleluia."),
-      A2($Basics._op["++"],
-      rubric("Then follows"),
-      A2($Basics._op["++"],
-      section("The Psalm or Psalms Appointed"),
-      A2($Basics._op["++"],
-      rubric("At the end of the Psalms is sung or said"),
-      A2($Basics._op["++"],
-      vs("Glory to the Father, and to the Son, and to the Holy Spirit;"),
-      A2($Basics._op["++"],
-      vsIndent("as it was in the beginning, is now, and ever shall be,"),
-      A2($Basics._op["++"],
-      vsIndent("world without end. Amen."),
-      A2($Basics._op["++"],
-      section("The Lessons"),
-      A2($Basics._op["++"],
-      rubric("One or more Lessons, as appointed, are read, the Reader first saying"),
-      A2($Basics._op["++"],
-      A2(reading,
-      model,
-      A2($String.join,
-      " ",
-      $List.concat(_U.list([_U.list(["The First Lesson from"])
-                           ,A2($List.map,function (m) {    return m.read;},model.mp1)])))),
-      A2($Basics._op["++"],
-      A2(reading,
-      model,
-      A2($String.join,
-      " ",
-      $List.concat(_U.list([_U.list(["The Second Lesson from"])
-                           ,A2($List.map,function (m) {    return m.read;},model.mp2)])))),
-      A2($Basics._op["++"],
-      rubric("A citation giving chapter and verse may be added."),
-      A2($Basics._op["++"],
-      rubric("After each Lesson the Reader may say"),
-      A2($Basics._op["++"],
-      A2(versical,"","The Word of the Lord."),
-      A2($Basics._op["++"],
-      A2(versical,"People","Thanks be to God."),
-      A2($Basics._op["++"],
-      rubric("Or the Reader may say"),
-      A2($Basics._op["++"],
-      A2(versical,"","Here ends the Reading."),
-      A2($Basics._op["++"],
-      rubric("The following Canticles are normally sung or said after each of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."),
-      A2($Basics._op["++"],
-      A2(canticle,"Te Deum Laudamus","We Praise You, O God"),
-      A2($Basics._op["++"],
-      vs("We praise you, O God,"),
-      A2($Basics._op["++"],
-      vsIndent("we acclaim you as Lord;"),
-      A2($Basics._op["++"],
-      vsIndent("all creation worships you,"),
-      A2($Basics._op["++"],
-      vsIndent("the Father everlasting."),
-      A2($Basics._op["++"],
-      vs("To you all angels, all the powers of heaven,"),
-      A2($Basics._op["++"],
-      vs("The cherubim and seraphim, sing in endless praise:"),
-      A2($Basics._op["++"],
-      vsIndent("Holy, Holy, Holy, Lord God of power and might,"),
-      A2($Basics._op["++"],
-      vsIndent("heaven and earth are full of your glory."),
-      A2($Basics._op["++"],
-      vs("The glorious company of apostles praise you."),
-      A2($Basics._op["++"],
-      vs("The noble fellowship of prophets praise you."),
-      A2($Basics._op["++"],
-      vs("The white-robed army of martyrs praise you."),
-      A2($Basics._op["++"],
-      vs("Throughout the world the holy Church acclaims you:"),
-      A2($Basics._op["++"],
-      vsIndent("Father, of majesty unbounded,"),
-      A2($Basics._op["++"],
-      vsIndent("your true and only Son, worthy of all praise,"),
-      A2($Basics._op["++"],
-      vsIndent("the Holy Spirit, advocate and guide."),
-      A2($Basics._op["++"],
-      vs("You, Christ, are the king of glory,"),
-      A2($Basics._op["++"],
-      vsIndent("the eternal Son of the Father."),
-      A2($Basics._op["++"],
-      vs("When you took our flesh to set us free"),
-      A2($Basics._op["++"],
-      vsIndent("you humbly chose the Virgin’s womb."),
-      A2($Basics._op["++"],
-      vs("You overcame the sting of death"),
-      A2($Basics._op["++"],
-      vsIndent("and opened the kingdom of heaven to all believers."),
-      A2($Basics._op["++"],
-      vs("You are seated at God’s right hand in glory."),
-      A2($Basics._op["++"],
-      vsIndent("We believe that you will come to be our judge."),
-      A2($Basics._op["++"],
-      vs("Come then, Lord, and help your people,"),
-      A2($Basics._op["++"],
-      vsIndent("bought with the price of your own blood,"),
-      A2($Basics._op["++"],
-      vsIndent("and bring us with your saints"),
-      A2($Basics._op["++"],
-      vsIndent("to glory everlasting."),
-      A2($Basics._op["++"],
-      vs("Save your people, Lord, and bless your inheritance;"),
-      A2($Basics._op["++"],
-      vsIndent("govern and uphold them now and always."),
-      A2($Basics._op["++"],
-      vs("Day by day we bless you;"),
-      A2($Basics._op["++"],
-      vsIndent("we praise your name forever."),
-      A2($Basics._op["++"],
-      vs("Keep us today, Lord, from all sin;"),
-      A2($Basics._op["++"],
-      vsIndent("have mercy on us, Lord, have mercy."),
-      A2($Basics._op["++"],
-      vs("Lord, show us your love and mercy,"),
-      A2($Basics._op["++"],
-      vsIndent("for we have put our trust in you."),
-      A2($Basics._op["++"],
-      vs("In you, Lord, is our hope,"),
-      A2($Basics._op["++"],
-      vsIndent("let us never be put to shame."),
-      A2($Basics._op["++"],
-      rubric("During Lent the Benedictus es, Domine usually replaces the Te Deum. The Benedictus es, Domine may be used at other times as well."),
-      A2($Basics._op["++"],
-      A2(canticle,"Benedictus es, Domine","A Song of Praise"),
-      A2($Basics._op["++"],
-      rubricBlack("Song of the Three Young Men, 29-34"),
-      A2($Basics._op["++"],
-      vs("Glory to you, Lord God of our fathers;"),
-      A2($Basics._op["++"],
-      vsIndent("you are worthy of praise; glory to you."),
-      A2($Basics._op["++"],
-      vs("Glory to you for the radiance of your holy Name;"),
-      A2($Basics._op["++"],
-      vsIndent("we will praise you and highly exalt you for ever."),
-      A2($Basics._op["++"],
-      vs("Glory to you in the splendor of your temple;"),
-      A2($Basics._op["++"],
-      vsIndent("on the throne of your majesty, glory to you."),
-      A2($Basics._op["++"],
-      vs("Glory to you, seated between the Cherubim;"),
-      A2($Basics._op["++"],
-      vsIndent("we will praise you and highly exalt you for ever."),
-      A2($Basics._op["++"],
-      vs("Glory to you, beholding the depths;"),
-      A2($Basics._op["++"],
-      vsIndent("in the high vault of heaven, glory to you."),
-      A2($Basics._op["++"],
-      vs("Glory to the Father, and to the Son, and to the Holy Spirit;"),
-      A2($Basics._op["++"],
-      vsIndent("we will praise you and highly exalt you for ever."),
-      A2($Basics._op["++"],
-      A2(canticle,"Benedictus","The Song of Zechariah"),
-      A2($Basics._op["++"],
-      rubricBlack("Luke 1:68-79"),
-      A2($Basics._op["++"],
-      vs("Blessed be the Lord, the God of Israel;"),
-      A2($Basics._op["++"],
-      vsIndent("he has come to his people and set them free."),
-      A2($Basics._op["++"],
-      vs("He has raised up for us a mighty savior,"),
-      A2($Basics._op["++"],
-      vsIndent("born of the house of his servant David."),
-      A2($Basics._op["++"],
-      vs("Through his holy prophets he promised of old,"),
-      A2($Basics._op["++"],
-      vs("that he would save us from our enemies,"),
-      A2($Basics._op["++"],
-      vsIndent("from the hands of all who hate us."),
-      A2($Basics._op["++"],
-      vs("He promised to show mercy to our fathers"),
-      A2($Basics._op["++"],
-      vsIndent("and to remember his holy covenant."),
-      A2($Basics._op["++"],
-      vs("This was the oath he swore to our father Abraham,"),
-      A2($Basics._op["++"],
-      vsIndent("to set us free from the hands of our enemies,"),
-      A2($Basics._op["++"],
-      vs("Free to worship him without fear,"),
-      A2($Basics._op["++"],
-      vsIndent("holy and righteous in his sight"),
-      A2($Basics._op["++"],
-      vsIndent("all the days of our life."),
-      A2($Basics._op["++"],
-      vs("You, my child, shall be called the prophet of the Most High,"),
-      A2($Basics._op["++"],
-      vsIndent("for you will go before the Lord to prepare his way,"),
-      A2($Basics._op["++"],
-      vs("To give his people knowledge of salvation"),
-      A2($Basics._op["++"],
-      vsIndent("by the forgiveness of their sins."),
-      A2($Basics._op["++"],
-      vs("In the tender compassion of our God"),
-      A2($Basics._op["++"],
-      vsIndent("the dawn from on high shall break upon us,"),
-      A2($Basics._op["++"],
-      vs("To shine on those who dwell in darkness and the shadow of death,"),
-      A2($Basics._op["++"],
-      vsIndent("and to guide our feet into the way of peace."),
-      A2($Basics._op["++"],
-      vs("Glory to the Father, and to the Son, and to the Holy Spirit;"),
-      A2($Basics._op["++"],
-      vsIndent("as it was in the beginning, is now, and ever shall be,"),
-      A2($Basics._op["++"],
-      vsIndent("world without end. Amen."),
-      A2($Basics._op["++"],
-      rubric("If desired, a sermon on the Morning Lessons may be preached."),
-      A2($Basics._op["++"],
-      section("The Apostles’ Creed"),
-      A2($Basics._op["++"],
-      rubric("Officiant and People together, all standing"),
-      A2($Basics._op["++"],
-      vs("I believe in God, the Father almighty,"),
-      A2($Basics._op["++"],
-      vsIndent("creator of heaven and earth."),
-      A2($Basics._op["++"],
-      vs("I believe in Jesus Christ, his only Son, our Lord."),
-      A2($Basics._op["++"],
-      vsIndent("He was conceived by the Holy Spirit"),
-      A2($Basics._op["++"],
-      vsIndent("and born of the Virgin Mary."),
-      A2($Basics._op["++"],
-      vsIndent("He suffered under Pontius Pilate,"),
-      A2($Basics._op["++"],
-      vsIndent("was crucified, died, and was buried."),
-      A2($Basics._op["++"],
-      vsIndent("He descended to the dead."),
-      A2($Basics._op["++"],
-      vsIndent("On the third day he rose again."),
-      A2($Basics._op["++"],
-      vsIndent("He ascended into heaven,"),
-      A2($Basics._op["++"],
-      vsIndent("and is seated at the right hand of the Father."),
-      A2($Basics._op["++"],
-      vsIndent("He will come again to judge the living and the dead."),
-      A2($Basics._op["++"],
-      vs("I believe in the Holy Spirit,"),
-      A2($Basics._op["++"],
-      vsIndent("the holy catholic Church,"),
-      A2($Basics._op["++"],
-      vsIndent("the communion of saints,"),
-      A2($Basics._op["++"],
-      vsIndent("the forgiveness of sins,"),
-      A2($Basics._op["++"],
-      vsIndent("the resurrection of the body,"),
-      A2($Basics._op["++"],
-      vsIndent("and the life everlasting. Amen."),
-      A2($Basics._op["++"],
-      section("The Prayers"),
-      A2($Basics._op["++"],
-      rubric("The People kneel or stand."),
-      A2($Basics._op["++"],
-      A2(versical,"Officiant","The Lord be with you."),
-      A2($Basics._op["++"],
-      A2(versical,"People","And with your spirit."),
-      A2($Basics._op["++"],
-      A2(versical,"Officiant","Let us pray."),
-      A2($Basics._op["++"],
-      $default("Lord, have mercy [upon us]."),
-      A2($Basics._op["++"],
-      italic("Christ, have mercy [upon us]."),
-      A2($Basics._op["++"],
-      $default("Lord, have mercy [upon us]."),
-      A2($Basics._op["++"],
-      rubric("Officiant and People"),
-      A2($Basics._op["++"],
-      vs("Our Father, who art in heaven, hallowed be thy Name."),
-      A2($Basics._op["++"],
-      vs("Thy kingdom come, thy will be done, on earth as it is in heaven."),
-      A2($Basics._op["++"],
-      vs("Give us this day our readings bread."),
-      A2($Basics._op["++"],
-      vs("And forgive us our trespasses, as we forgive those who trespass"),
-      A2($Basics._op["++"],
-      vsIndent("against us."),
-      A2($Basics._op["++"],
-      vs("And lead us not into temptation, but deliver us from evil."),
-      A2($Basics._op["++"],
-      vs("For thine is the kingdom, and the power, and the glory,"),
-      A2($Basics._op["++"],
-      vsIndent("forever and ever. Amen."),
-      A2($Basics._op["++"],
-      rubric("or this"),
-      A2($Basics._op["++"],
-      vs("Our Father in heaven, hallowed be your Name."),
-      A2($Basics._op["++"],
-      vs("Your kingdom come, your will be done, on earth as it is in heaven."),
-      A2($Basics._op["++"],
-      vs("Give us today our readings bread."),
-      A2($Basics._op["++"],
-      vs("And forgive us our sins as we forgive those who sin against us."),
-      A2($Basics._op["++"],
-      vs("Save us from the time of trial, and deliver us from evil."),
-      A2($Basics._op["++"],
-      vs("For the kingdom, the power, and the glory are yours,"),
-      A2($Basics._op["++"],
-      vsIndent("now and forever. Amen."),
-      A2($Basics._op["++"],
-      A2(versical,"Officiant","O Lord, show us your mercy;"),
-      A2($Basics._op["++"],
-      A2(versical,"People","And grant us your salvation."),
-      A2($Basics._op["++"],
-      A2(versical,"Officiant","O Lord, save our nations;"),
-      A2($Basics._op["++"],
-      A2(versical,
-      "People",
-      "And guide us in the way of justice and truth."),
-      A2($Basics._op["++"],
-      A2(versical,
-      "Officiant",
-      "Clothe your ministers with righteousness;"),
-      A2($Basics._op["++"],
-      A2(versical,"People","And make your chosen people joyful."),
-      A2($Basics._op["++"],
-      A2(versical,"Officiant","O Lord, save your people;"),
-      A2($Basics._op["++"],
-      A2(versical,"People","And bless your inheritance."),
-      A2($Basics._op["++"],
-      A2(versical,"Officiant","Give peace in our time, O Lord;"),
-      A2($Basics._op["++"],
-      A2(versical,"People","For only in you can we live in safety."),
-      A2($Basics._op["++"],
-      A2(versical,
-      "Officiant",
-      "Let not the needy, O Lord, be forgotten;"),
-      A2($Basics._op["++"],
-      A2(versical,"People","Nor the hope of the poor be taken away."),
-      A2($Basics._op["++"],
-      A2(versical,"Officiant","Create in us clean hearts, O God;"),
-      A2($Basics._op["++"],
-      A2(versical,"People","And take not your Holy Spirit from us."),
-      A2($Basics._op["++"],
-      rubric("The Officiant then prays one or more of the following collects. It is traditional to pray the Collects for Peace and Grace readings. Alternatively, one may pray the collects on a weekly rotation, using the suggestions in parentheses."),
-      A2($Basics._op["++"],
-      section("The Collect of the Day"),
-      A2($Basics._op["++"],
-      $default("A Collect for Strength to Await Christ’s Return (Sunday)"),
-      A2($Basics._op["++"],
-      $default("O God our King, by the resurrection of your Son Jesus Christ on the first day of the week, you conquered sin, put death to flight, and gave us the hope of everlasting life: Redeem all our days by this victory; forgive our sins, banish our fears, make us bold to praise you and to do your will; and steel us to wait for the consummation of your kingdom on the last great Day; through the same Jesus Christ our Lord. Amen."),
-      A2($Basics._op["++"],
-      $default("A Collect for the Renewal of Life (Monday)"),
-      A2($Basics._op["++"],
-      $default("O God, the King eternal, whose light divides the day from the night and turns the shadow of death into the morning: Drive far from us all wrong desires, incline our hearts to keep your law, and guide our feet into the way of peace; that, having done your will with cheerfulness during the day, we may, when night comes, rejoice to give you thanks; through Jesus Christ our Lord. Amen."),
-      A2($Basics._op["++"],
-      $default("A Collect for Peace (Tuesday)"),
-      A2($Basics._op["++"],
-      $default("O God, the author of peace and lover of concord, to know you is eternal life and to serve you is perfect freedom: Defend us, your humble servants, in all assaults of our enemies; that we, surely trusting in your defense, may not fear the power of any adversaries, through the might of Jesus Christ our Lord. Amen."),
-      A2($Basics._op["++"],
-      $default("A Collect for Grace (Wednesday)"),
-      A2($Basics._op["++"],
-      $default("O Lord, our heavenly Father, almighty and everlasting God, you have\n  brought us safely to the beginning of this day: Defend us by your\n  mighty power, that we may not fall into sin nor run into any danger;\n  and that guided by your Spirit, we may do what is righteous in your\n  sight; through Jesus Christ our Lord. Amen."),
-      A2($Basics._op["++"],
-      $default("A Collect for Guidance (Thursday)"),
-      A2($Basics._op["++"],
-      $default("Heavenly Father, in you we live and move and have our being: We\n  humbly pray you so to guide and govern us by your Holy Spirit, that\n  in all the cares and occupations of our life we may not forget you, but\n  may remember that we are ever walking in your sight; through Jesus\n  Christ our Lord. Amen."),
-      A2($Basics._op["++"],
-      $default("A Collect for Endurance (Friday)"),
-      A2($Basics._op["++"],
-      $default("Almighty God, whose most dear Son went not up to joy but first he\n  suffered pain, and entered not into glory before he was crucified:\n  Mercifully grant that we, walking in the way of the cross, may find it\n  none other than the way of life and peace; through Jesus Christ your\n  Son our Lord. Amen."),
-      A2($Basics._op["++"],
-      $default("A Collect for Sabbath Rest (Saturday)"),
-      A2($Basics._op["++"],
-      $default("Almighty God, who after the creation of the world rested from all\n  your works and sanctified a day of rest for all your creatures: Grant\n  that we, putting away all earthly anxieties, may be duly prepared for\n  the service of your sanctuary, and that our rest here upon earth may\n  be a preparation for the eternal rest promised to your people in\n  heaven; through Jesus Christ our Lord. Amen."),
-      A2($Basics._op["++"],
-      rubric("Unless The Great Litany or the Eucharist is to follow, one of the following prayers for mission is added."),
-      A2($Basics._op["++"],
-      $default("Almighty and everlasting God, who alone works great marvels: Send\n  down upon our clergy and the congregations committed to their\n  charge the life-giving Spirit of your grace, shower them with the\n  continual dew of your blessing, and ignite in them a zealous love of\n  your Gospel, through Jesus Christ our Lord. Amen."),
-      A2($Basics._op["++"],
-      $default("O God, you have made of one blood all the peoples of the earth, and\n  sent your blessed Son to preach peace to those who are far off and to\n  those who are near: Grant that people everywhere may seek after you\n  and find you; bring the nations into your fold; pour out your Spirit\n  upon all flesh; and hasten the coming of your kingdom; through\n  Jesus Christ our Lord. Amen."),
-      A2($Basics._op["++"],
-      $default("Lord Jesus Christ, you stretched out your arms of love on the hard\n  wood of the cross that everyone might come within the reach of your\n  saving embrace: So clothe us in your Spirit that we, reaching forth \n  our hands in love, may bring those who do not know you to the\n  knowledge and love of you; for the honor of your Name. Amen."),
-      A2($Basics._op["++"],
-      rubric("Here may be sung a hymn or anthem."),
-      A2($Basics._op["++"],
-      rubric("The Officiant may invite the People to offer intercessions and thanksgivings."),
-      A2($Basics._op["++"],
-      rubric("Before the close of the Office one or both of the following may be used."),
-      A2($Basics._op["++"],
-      section("The General Thanksgiving"),
-      A2($Basics._op["++"],
-      rubric("Officiant and People"),
-      A2($Basics._op["++"],
-      vs("Almighty God, Father of all mercies,"),
-      A2($Basics._op["++"],
-      vs("we your unworthy servants give you humble thanks"),
-      A2($Basics._op["++"],
-      vs("for all your goodness and loving-kindness"),
-      A2($Basics._op["++"],
-      vsIndent("to us and to all whom you have made."),
-      A2($Basics._op["++"],
-      vs("We bless you for our creation, preservation,"),
-      A2($Basics._op["++"],
-      vsIndent("and all the blessings of this life;"),
-      A2($Basics._op["++"],
-      vs("but above all for your immeasurable love"),
-      A2($Basics._op["++"],
-      vs("in the redemption of the world by our Lord Jesus Christ;"),
-      A2($Basics._op["++"],
-      vs("for the means of grace, and for the hope of glory."),
-      A2($Basics._op["++"],
-      vs("And, we pray, give us such an awareness of your mercies,"),
-      A2($Basics._op["++"],
-      vs("that with truly thankful hearts we may show forth your praise,"),
-      A2($Basics._op["++"],
-      vs("not only with our lips, but in our lives,"),
-      A2($Basics._op["++"],
-      vs("by giving up our selves to your service,"),
-      A2($Basics._op["++"],
-      vs("and by walking before you"),
-      A2($Basics._op["++"],
-      vsIndent("in holiness and righteousness all our days;"),
-      A2($Basics._op["++"],
-      vs("through Jesus Christ our Lord,"),
-      A2($Basics._op["++"],
-      vs("to whom, with you and the Holy Spirit,"),
-      A2($Basics._op["++"],
-      vs("be honor and glory throughout all ages. Amen."),
-      A2($Basics._op["++"],
-      section("A Prayer of St. John Chrysostom"),
-      A2($Basics._op["++"],
-      $default("Almighty God, you have given us grace at this time with one accord\n  to make our common supplications to you; and you have promised \n  through your well beloved Son that when two or three are gathered\n  together in his name you will be in the midst of them: Fulfill now, O\n  Lord, our desires and petitions as may be best for us; granting us in\n  this world knowledge of your truth, and in the age to come life\n  everlasting. Amen."),
-      A2($Basics._op["++"],
-      A2(versical,"Officiant","Let us bless the Lord."),
-      A2($Basics._op["++"],
-      A2(versical,"People","Thanks be to God."),
-      A2($Basics._op["++"],
-      rubric("From Easter Day through the Day of Pentecost “Alleluia, alleluia” may be added to the\n  preceding versicle and response."),
-      A2($Basics._op["++"],
-      rubric("The Officiant may invite the People to join in one of the Graces."),
-      A2($Basics._op["++"],
-      rubric("Officiant"),
-      A2($Basics._op["++"],
-      $default("The grace of our Lord Jesus Christ, and the love of God, and the\n  fellowship of the Holy Spirit, be with us all evermore. Amen."),
-      A2($Basics._op["++"],
-      rubricBlack("2 Corinthians 13:14"),
-      A2($Basics._op["++"],
-      $default("May the God of hope fill us with all joy and peace in believing\n  through the power of the Holy Spirit. Amen."),
-      A2($Basics._op["++"],
-      rubricBlack("Romans 15:13"),
-      A2($Basics._op["++"],
-      $default("Glory to God whose power, working in us, can do infinitely more\n  than we can ask or imagine: Glory to him from generation to\n  generation in the Church, and in Christ Jesus forever and ever. Amen."),
-      A2($Basics._op["++"],
-      rubricBlack("Ephesians 3:20-21"),
-      A2($Basics._op["++"],
-      section("Opening Sentences of Scripture"),
-      A2($Basics._op["++"],
-      rubricBlack("Advent"),
-      A2($Basics._op["++"],
-      $default("In the wilderness prepare the way of the Lord; make straight in the\n  desert a highway for our God."),
-      A2($Basics._op["++"],
-      rubricBlack("Isaiah 40:3"),
-      A2($Basics._op["++"],
-      rubricBlack("Christmas"),
-      A2($Basics._op["++"],
-      $default("Fear not, for behold, I bring you good news of a great joy that will be\n  for all people. For unto you is born this day in the city of David a\n  Savior, who is Christ the Lord."),
-      A2($Basics._op["++"],
-      rubricBlack("Luke 2:10-11"),
-      A2($Basics._op["++"],
-      rubricBlack("Epiphany"),
-      A2($Basics._op["++"],
-      $default("For from the rising of the sun to its setting my name will be great\n  among the nations, and in every place incense will be offered to my\n  name, and a pure offering. For my name will be great among the\n  nations, says the Lord of hosts."),
-      A2($Basics._op["++"],
-      rubricBlack("Malachi 1:11"),
-      A2($Basics._op["++"],
-      rubricBlack("Lent"),
-      A2($Basics._op["++"],
-      $default("Repent, for the kingdom of heaven is at hand."),
-      A2($Basics._op["++"],
-      rubricBlack("Matthew 3:2"),
-      A2($Basics._op["++"],
-      rubricBlack("Good Friday"),
-      A2($Basics._op["++"],
-      $default("Is it nothing to you, all you who pass by? Look and see if there is any\n  sorrow like my sorrow, which was brought upon me, which the Lord\n  inflicted on the day of his fierce anger."),
-      A2($Basics._op["++"],
-      rubricBlack("Lamentations 1:12"),
-      A2($Basics._op["++"],
-      rubricBlack("Easter"),
-      A2($Basics._op["++"],
-      $default("Christ is risen! The Lord is risen indeed!"),
-      A2($Basics._op["++"],
-      rubricBlack("Mark 16:6 and Luke 24:34"),
-      A2($Basics._op["++"],
-      rubricBlack("Ascension"),
-      A2($Basics._op["++"],
-      $default("Since then we have a great high priest who has passed through the\n  heavens, Jesus, the Son of God, let us hold fast our confession. Let\n  us then with confidence draw near to the throne of grace, that we\n  may receive mercy and find grace to help in time of need."),
-      A2($Basics._op["++"],
-      rubricBlack("Hebrews 4:14, 16"),
-      A2($Basics._op["++"],
-      rubricBlack("Pentecost"),
-      A2($Basics._op["++"],
-      $default("You will receive power when the Holy Spirit has come upon you, and\n  you will be my witnesses in Jerusalem and in all Judea and Samaria,\n  and to the end of the earth."),
-      A2($Basics._op["++"],
-      rubricBlack("Acts 1:8"),
-      A2($Basics._op["++"],
-      rubricBlack("Trinity Sunday"),
-      A2($Basics._op["++"],
-      $default("Holy, holy, holy, is the Lord God Almighty, who was and is and is to come!"),
-      A2($Basics._op["++"],
-      rubricBlack("Revelation 4:8"),
-      A2($Basics._op["++"],
-      rubricBlack("Days of Thanksgiving"),
-      A2($Basics._op["++"],
-      $default("Honor the Lord with your wealth and with the firstfruits of all your\n  produce; then your barns will be filled with plenty, and your vats will\n  be bursting with wine."),
-      A2($Basics._op["++"],
-      rubricBlack("Proverbs 3:9-10"),
-      A2($Basics._op["++"],
-      rubricBlack("At any time"),
-      A2($Basics._op["++"],
-      $default("The Lord is in his holy temple; let all the earth keep silence before him."),
-      A2($Basics._op["++"],
-      rubricBlack("Habakkuk 2:20"),
-      A2($Basics._op["++"],
-      $default("I was glad when they said to me, “Let us go to the house of the Lord!”"),
-      A2($Basics._op["++"],
-      rubricBlack("Psalm 122:1"),
-      A2($Basics._op["++"],
-      $default("Let the words of my mouth and the meditation of my heart be\n  acceptable in your sight, O Lord, my rock and my redeemer."),
-      A2($Basics._op["++"],
-      rubricBlack("Psalm 19:14"),
-      A2($Basics._op["++"],
-      $default("Send out your light and your truth; let them lead me; let them bring\n  me to your holy hill and to your dwelling!"),
-      A2($Basics._op["++"],
-      rubricBlack("Psalm 43:3"),
-      A2($Basics._op["++"],
-      $default("For thus says the One who is high and lifted up, who inhabits\n  eternity, whose name is Holy: “I dwell in the high and holy place, and\n  also with him who is of a contrite and lowly spirit, to revive the spirit\n  of the lowly, and to revive the heart of the contrite.”"),
-      A2($Basics._op["++"],
-      rubricBlack("Isaiah 57:15"),
-      A2($Basics._op["++"],
-      $default("The hour is coming, and is now here, when the true worshipers will\n  worship the Father in spirit and truth, for the Father is seeking such\n  people to worship him."),
-      A2($Basics._op["++"],
-      rubricBlack("John 4:23"),
-      A2($Basics._op["++"],
-      $default("Grace to you and peace from God our Father and the Lord Jesus Christ."),
-      A2($Basics._op["++"],
-      rubricBlack("Philippians 1:2"),
-      A2($Basics._op["++"],
-      section("General Instructions: Morning and Evening Prayer"),
-      A2($Basics._op["++"],
-      italic("The Confession and Apostles’ Creed may be omitted, provided they have been said\n  once during the course of the day."),
-      A2($Basics._op["++"],
-      italic("In the opening versicles, the Officiant and People may join in saying “Alleluia”\n  (outside of Lent) as an alternative to the versicles “Praise the Lord/The Lord’s\n  name be praised.”"),
-      A2($Basics._op["++"],
-      italic("The following form of the Gloria Patri may be used:"),
-      A2($Basics._op["++"],
-      italicIndent("Glory to the Father, and to the Son, and to the Holy Spirit:"),
-      A2($Basics._op["++"],
-      italicIndent("As it was in the beginning, is now, and will be forever. Amen."),
-      italic("A sermon may also be preached after the Office or after the hymn or anthem (if\n  sung) following the collects.")))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
-   });
-   var update = F2(function (action,model) {
-      var _p0 = action;
-      switch (_p0.ctor)
-      {case "NoOp": return model;
-         case "Show": return _U.update(model,
-           {show: $Basics.not(model.show)});
-         default: return _U.update(model,
-           {justToday: $Basics.not(model.justToday)});}
-   });
-   var JustToday = {ctor: "JustToday"};
-   var Show = {ctor: "Show"};
-   var NoOp = {ctor: "NoOp"};
-   var init = $Iphod$Daily.init;
-   return _elm.Iphod.MorningPrayer.values = {_op: _op
-                                            ,init: init
-                                            ,update: update
-                                            ,view: view};
 };
 Elm.Iphod = Elm.Iphod || {};
 Elm.Iphod.make = function (_elm) {
@@ -14871,6 +15248,21 @@ Elm.Iphod.make = function (_elm) {
       return [v._0,v._1,v._2,v._3];
    },
    $Helper.getText.signal);
+   var gatherAllText = $Signal.mailbox({ctor: "_Tuple2"
+                                       ,_0: ""
+                                       ,_1: ""});
+   var requestAllText = Elm.Native.Port.make(_elm).outboundSignal("requestAllText",
+   function (v) {
+      return [v._0,v._1];
+   },
+   gatherAllText.signal);
+   var gatherText = function (model) {
+      return $Effects.task(A2($Task.map,
+      $Basics.always(NoOp),
+      $Task.toMaybe(A2($Signal.send,
+      gatherAllText.address,
+      {ctor: "_Tuple2",_0: "morningPrayer",_1: model.today}))));
+   };
    var namedDay = $Signal.mailbox({ctor: "_Tuple2",_0: "",_1: ""});
    var requestNamedDay = Elm.Native.Port.make(_elm).outboundSignal("requestNamedDay",
    function (v) {
@@ -15091,7 +15483,8 @@ Elm.Iphod.make = function (_elm) {
          case "ToggleMp": var mp = model.morningPrayer;
            var newmp = _U.update(mp,{show: $Basics.not(mp.show)});
            var newModel = _U.update(model,{morningPrayer: newmp});
-           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+           var effect = newmp.show ? gatherText(model) : $Effects.none;
+           return {ctor: "_Tuple2",_0: newModel,_1: effect};
          case "ToggleDaily": var daily = model.daily;
            var newdaily = _U.update(daily,{show: $Basics.not(daily.show)});
            var newModel = _U.update(model,{daily: newdaily});
@@ -15118,6 +15511,8 @@ Elm.Iphod.make = function (_elm) {
                    {redLetter: A2(updateSundayText,model.redLetter,_p6)});
                  case "daily": return _U.update(model,
                    {daily: A2(updateDailyText,model.daily,_p6)});
+                 case "morningPrayer": return _U.update(model,
+                   {morningPrayer: A2(updateDailyText,model.morningPrayer,_p6)});
                  default: return model;}
            }();
            return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
@@ -15181,6 +15576,7 @@ Elm.Iphod.make = function (_elm) {
                               ,incomingText: incomingText
                               ,moveDay: moveDay
                               ,namedDay: namedDay
+                              ,gatherAllText: gatherAllText
                               ,NoOp: NoOp
                               ,ChangeDay: ChangeDay
                               ,ToggleAbout: ToggleAbout
@@ -15194,6 +15590,7 @@ Elm.Iphod.make = function (_elm) {
                               ,ModSunday: ModSunday
                               ,ModDaily: ModDaily
                               ,update: update
+                              ,gatherText: gatherText
                               ,changeDay: changeDay
                               ,updateSundayText: updateSundayText
                               ,updateDailyText: updateDailyText

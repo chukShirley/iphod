@@ -94,6 +94,10 @@ namedDay: Signal.Mailbox (String, String)
 namedDay =
   Signal.mailbox ("", "")
 
+gatherAllText: Signal.Mailbox (String, String)
+gatherAllText =
+  Signal.mailbox ("", "")
+
 -- PORTS
 
 port requestMoveDay: Signal (String, String)
@@ -107,6 +111,10 @@ port requestText =
 port requestNamedDay: Signal (String, String)
 port requestNamedDay =
   namedDay.signal
+
+port requestAllText: Signal (String, String)
+port requestAllText =
+  gatherAllText.signal
 
 port nextSunday: Signal Model
 port newText: Signal NewText
@@ -139,8 +147,9 @@ update action model =
         mp = model.morningPrayer
         newmp = {mp | show = not mp.show}
         newModel = {model | morningPrayer = newmp}
+        effect = if newmp.show then gatherText model else Effects.none
       in 
-        (newModel, Effects.none)
+        (newModel, effect)
     ToggleDaily ->
       let
         daily = model.daily
@@ -167,9 +176,10 @@ update action model =
     UpdateText text ->
       let 
         newModel = case text.model of
-          "sunday"    -> {model | sunday = updateSundayText model.sunday text}
-          "redletter" -> {model | redLetter = updateSundayText model.redLetter text}
-          "daily"     -> {model | daily = updateDailyText model.daily text}
+          "sunday"    ->  {model | sunday = updateSundayText model.sunday text}
+          "redletter" ->  {model | redLetter = updateSundayText model.redLetter text}
+          "daily"     ->  {model | daily = updateDailyText model.daily text}
+          "morningPrayer" -> {model | morningPrayer = updateDailyText model.morningPrayer text}
           _           -> model
       in
         (newModel, Effects.none)
@@ -198,7 +208,14 @@ update action model =
         (newModel, Effects.none)
 
 
--- HELPERS
+-- HELPERS|> Task.toMaybe
+
+gatherText: Model -> Effects Action
+gatherText model =
+  Signal.send gatherAllText.address ("morningPrayer", model.today)
+  |> Task.toMaybe
+  |> Task.map (always NoOp)
+  |> Effects.task
 
 changeDay: String -> Model -> Effects Action
 changeDay day model =

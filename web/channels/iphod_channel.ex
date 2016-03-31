@@ -74,6 +74,25 @@ defmodule Iphod.IphodChannel do
 
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (donors:lobby).
+  def handle_in("request_all_text", ["morningPrayer", this_date], socket) do
+    readings = 
+      Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
+      |> DailyReading.readings
+    readings.mp1 ++ readings.mp2
+      |> Enum.each(fn(r)-> 
+          push_text "morningPrayer", r, EsvText.request(r.read), socket
+      end)
+    readings.mpp
+      |> Enum.each(fn(r)-> 
+          push_text "morningPrayer", r, Psalms.to_html(r.read), socket
+      end)
+    {:noreply, socket}
+  end
+
+  def push_text(model, reading, body, socket) do
+    push socket, "new_text", %{model: model, section: reading.section, id: reading.id, body: body}
+  end
+
 
   def handle_in("request_move_day", [this_far, this_date], socket) do
     Timex.DateFormat.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
@@ -97,12 +116,12 @@ defmodule Iphod.IphodChannel do
   end
 
   def request_date(date, socket, {show_sunday, show_daily}) do
-    msg = %{ sunday:    jsonify_reading( "sunday", SundayReading.this_sunday(date), show_sunday ),
-             redLetter: jsonify_reading( "redletter", SundayReading.next_holy_day(date) ),
-             today:     date |> SundayReading.formatted_date,
-             daily:     date |> DailyReading.readings |> jsonify_daily(show_daily),
-             morningPrayer:  Timex.Date.local |> DailyReading.readings |> jsonify_daily,
-             about:     false
+    msg = %{ sunday:        jsonify_reading( "sunday", SundayReading.this_sunday(date), show_sunday ),
+             redLetter:     jsonify_reading( "redletter", SundayReading.next_holy_day(date) ),
+             today:         date |> SundayReading.formatted_date,
+             daily:         date |> DailyReading.readings |> jsonify_daily(show_daily),
+             morningPrayer: date |> DailyReading.readings |> jsonify_daily,
+             about:         false
           }
     push  socket, "next_sunday", msg
           
