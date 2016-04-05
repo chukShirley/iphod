@@ -71,25 +71,35 @@ defmodule Iphod.IphodChannel do
 
   # It is also common to receive messages from the client and
   # broadcast to everyone in the current topic (donors:lobby).
-  def push_text(model, reading, body, socket) do
-    push socket, "new_text", %{model: model, section: reading.section, id: reading.id, body: body}
+  def push_text(model, reading, body, ver, socket) do
+    push socket, "new_text", %{model: model, section: reading.section, id: reading.id, body: body, version: ver}
   end
 
 
   def move_day(date, "tomorrow", socket) do
-    date |> Timex.shift(days: 1) |> request_date(socket, {false, true})
+    date 
+    |> Timex.shift(days: 1) 
+    |> Timex.to_date
+    |> request_date(socket, {false, true})
   end
 
   def move_day(date, "yesterday", socket) do
-    date |> Timex.shift(days: -1) |> request_date(socket, {false, true})
+    date 
+    |> Timex.shift(days: -1) 
+    |> Timex.to_date
+    |> request_date(socket, {false, true})
   end
 
   def move_day(date, "nextSunday", socket) do
-    date |> Lityear.date_next_sunday |> request_date(socket, {true, false})
+    date 
+    |> Lityear.date_next_sunday 
+    |> request_date(socket, {true, false})
   end
 
   def move_day(date, "lastSunday", socket) do
-    date |> Lityear.date_last_sunday |> request_date(socket, {true, false})
+    date 
+    |> Lityear.date_last_sunday 
+    |> request_date(socket, {true, false})
   end
 
   def request_date(date, socket, {show_sunday, show_daily}) do
@@ -112,11 +122,11 @@ defmodule Iphod.IphodChannel do
       |> DailyReading.readings
     readings.mp1 ++ readings.mp2
       |> Enum.each(fn(r)-> 
-          push_text "morningPrayer", r, EsvText.request(r.read), socket
+          push_text "morningPrayer", r, EsvText.request(r.read), "ESV", socket
       end)
     readings.mpp
       |> Enum.each(fn(r)-> 
-          push_text "morningPrayer", r, Psalms.to_html(r.read), socket
+          push_text "morningPrayer", r, Psalms.to_html(r.read, "Coverdale"), "Coverdale", socket
       end)
     {:noreply, socket}
   end

@@ -13990,6 +13990,8 @@ Elm.Iphod.MorningPrayer.make = function (_elm) {
       A2($Basics._op["++"],
       title1("Daily Morning Prayer"),
       A2($Basics._op["++"],
+      title1(model.date),
+      A2($Basics._op["++"],
       title2Italic("Approved for Provincial Use"),
       A2($Basics._op["++"],
       title2("The Anglican Church in North America"),
@@ -14378,7 +14380,7 @@ Elm.Iphod.MorningPrayer.make = function (_elm) {
       italicIndent("As it was in the beginning, is now, and will be forever. Amen."),
       A2($Basics._op["++"],
       blankline,
-      italic("A sermon may also be preached after the Office or after the hymn or anthem (if\n  sung) following the collects."))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
+      italic("A sermon may also be preached after the Office or after the hymn or anthem (if\n  sung) following the collects.")))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))))));
    });
    var update = F2(function (action,model) {
       var _p9 = action;
@@ -15673,21 +15675,19 @@ Elm.Iphod.make = function (_elm) {
                  default: return model;}
            }();
            return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
-         case "ModMP": var _p8 = _p4._0;
-           var _p7 = _p4._1;
-           var newModel = A2($Iphod$MorningPrayer.update,_p7,_p8);
-           var bar = A2($Debug.log,"MPACTION",_p7);
-           var foo = A2($Debug.log,"READING",_p8);
+         case "ModMP": var newModel = A2($Iphod$MorningPrayer.update,
+           _p4._1,
+           _p4._0);
            return {ctor: "_Tuple2",_0: model,_1: $Effects.none};
-         case "ModSunday": var _p11 = _p4._1;
-           var _p10 = _p4._0;
+         case "ModSunday": var _p9 = _p4._1;
+           var _p8 = _p4._0;
            var newModel = function () {
-              var _p9 = _p10.ofType;
-              switch (_p9)
+              var _p7 = _p8.ofType;
+              switch (_p7)
               {case "sunday": return _U.update(model,
-                   {sunday: A2($Iphod$Sunday.update,_p11,_p10)});
+                   {sunday: A2($Iphod$Sunday.update,_p9,_p8)});
                  case "redletter": return _U.update(model,
-                   {redLetter: A2($Iphod$Sunday.update,_p11,_p10)});
+                   {redLetter: A2($Iphod$Sunday.update,_p9,_p8)});
                  default: return model;}
            }();
            return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};

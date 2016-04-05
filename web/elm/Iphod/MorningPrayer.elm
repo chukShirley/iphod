@@ -771,6 +771,7 @@ view address model =
   div 
   [ mpStyle model ]
   ( (title1 "Daily Morning Prayer")
+  ++ (title1 model.date)
   ++ (title2Italic "Approved for Provincial Use")
   ++ (title2 "The Anglican Church in North America")
   ++ (title2Italic "Petertide, A.D. 2013")

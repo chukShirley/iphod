@@ -19,8 +19,8 @@ defmodule Iphod.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Iphod, []},
-     applications: [:phoenix, :phoenix_html, :phoenix_live_reload, 
-                    :cowboy, :logger, :gettext, :mock,
+     applications: [:phoenix, :phoenix_html, 
+                    :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :timex, :httpoison
                   ]
     ]

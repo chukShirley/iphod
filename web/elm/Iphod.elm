@@ -187,8 +187,6 @@ update action model =
 
     ModMP reading mpAction->
       let
-        foo = Debug.log "READING" reading
-        bar = Debug.log "MPACTION" mpAction
         newModel = MorningPrayer.update mpAction reading
       in 
         (model, Effects.none)
