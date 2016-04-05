@@ -1,6 +1,6 @@
 require IEx
 defmodule DailyReading do
-  import Psalms, only: [morning: 1, evening: 1]
+  # import Psalms, only: [morning: 1, evening: 1]
   use Timex
 
   def start_link, do: Agent.start_link fn -> build end, name: __MODULE__
@@ -8,23 +8,23 @@ defmodule DailyReading do
   def identity(), do: Agent.get(__MODULE__, &(&1))
   def readings(season, wk, day), do: identity[season][wk][day]
   def readings({season, wk, _litYr, date}) do
-    dow = date |> DateFormat.format!("{WDfull}")
+    dow = date |> Timex.format!("{WDfull}")
     if readings(season, wk, dow) |> is_nil, do: IEx.pry
     readings(season, wk, dow)
       |> add_psalms(date.day)
       |> to_lessons
-      |> Map.merge %{  
-          season: season, 
-          week:   wk, 
-          day:    dow,
-          title:  identity[season][wk][dow].title, 
-          date:   date |> DateFormat.format!("{WDfull} {Mfull} {D}, {YYYY}")
-      }
+      |> Map.merge( %{  
+                season: season, 
+                week:   wk, 
+                day:    dow,
+                title:  identity[season][wk][dow].title, 
+                date:   date |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
+            })
   end
   # readings(d) is last otherwise there will be confusion between
   # Timex.Date tuple of {season, wk, _litYr, date}
   def readings(date) do
-    {season, wk, litYr, sunday} =
+    {season, wk, litYr, _sunday} =
       if date |> Lityear.is_sunday? do
         date |> Lityear.to_season
       else
@@ -61,7 +61,7 @@ defmodule DailyReading do
       |> Map.update(:epp, [], fn(el)-> _to_lessons_for("epp", el) end)
   end
 
-  defp _to_lessons_for(section, []), do: []
+  defp _to_lessons_for(_section, []), do: []
   defp _to_lessons_for(section, list) do
     list |> Enum.map(fn(el)-> _add_keys_for(section, el) end)
   end
@@ -75,6 +75,7 @@ defmodule DailyReading do
     |> Map.put_new(:section, section)
     |> Map.put_new(:body, "")
     |> Map.put_new(:show, false)
+    |> Map.put_new(:version, "")
   end
 
   def build do

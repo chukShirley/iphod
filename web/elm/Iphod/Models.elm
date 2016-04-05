@@ -7,6 +7,7 @@ type alias Lesson =
   , body:     String
   , id:       String
   , section:  String
+  , version:  String
   }
 
 type alias Sunday =

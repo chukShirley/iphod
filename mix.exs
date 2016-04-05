@@ -4,14 +4,13 @@ defmodule Iphod.Mixfile do
   def project do
     [app: :iphod,
      version: "0.0.1",
-     elixir: "~> 1.2",
+     elixir: "~> 1.2.0",
      elixirc_paths: elixirc_paths(Mix.env),
-     timex: "~> 0.13.4",
-
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      aliases: aliases,
+     timex: "~> 0.13.4",
      deps: deps]
   end
 
@@ -20,8 +19,10 @@ defmodule Iphod.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Iphod, []},
-     applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :timex, :httpoison]
+     applications: [:phoenix, :phoenix_html, :phoenix_live_reload, 
+                    :cowboy, :logger, :gettext, :mock,
+                    :phoenix_ecto, :postgrex, :timex, :httpoison
+                  ]
     ]
   end
 
@@ -33,16 +34,17 @@ defmodule Iphod.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1.1"},
+    [{:phoenix, "~> 1.1.4"},
      {:phoenix_ecto, "~> 2.0"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.3"},
+     {:phoenix_html, "~> 2.4"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
-     {:timex, "~> 1.0.2"},
-     {:mock, github: "jjh42/mock"},
-     {:httpoison, "~> 0.8.1"}
+     {:timex, github: "frpaulas/timex"},
+     {:exrm, "~> 1.0.3"},
+     {:mock, github: "jjh42/mock", only: :dev},
+     {:httpoison, "~> 0.8.2"}
     ]
   end
 
@@ -54,6 +56,7 @@ defmodule Iphod.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+     "ecto.reset": ["ecto.drop", "ecto.setup"]
+    ]
   end
 end

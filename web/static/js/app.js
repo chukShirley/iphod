@@ -77,6 +77,7 @@ var elmDiv = document.getElementById('elm-container')
       , section:  ""
       , id:       ""
       , body:     ""
+      , version:  ""
       }
   }
   , elmApp = Elm.embed(Elm.Iphod, elmDiv, initialState)

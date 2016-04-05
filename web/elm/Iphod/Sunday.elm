@@ -92,10 +92,10 @@ view address model =
               [ ul [textStyle model] ( thisReading address model.ofType model.gs) ]
           ] -- end of row
       ] -- end of table
-    , div [] (thisText model.ot)
-    , div [] (thisText model.ps)
-    , div [] (thisText model.nt)
-    , div [] (thisText model.gs)
+    , div [] (thisText address model.ofType model.ot)
+    , div [] (thisText address model.ofType model.ps)
+    , div [] (thisText address model.ofType model.nt)
+    , div [] (thisText address model.ofType model.gs)
 
 --    [ li [titleStyle model, onClick address ToggleModelShow] [text model.title]
  
@@ -104,11 +104,36 @@ view address model =
 
 -- HELPERS
 
-thisText: List Models.Lesson -> List Html
-thisText lessons =
+thisText: Signal.Address Action -> String -> List Models.Lesson -> List Html
+thisText address ofType lessons =
   let
     this_text l =
-      li [id l.id, bodyStyle l, class "esv_text"] [Markdown.toHtml l.body] -- place holder
+      if l.section == "ps"
+        then
+          div [id l.id, bodyStyle l, class "esv_text"] 
+             [ button 
+              [ class "translationButton"
+              , onClick getText.address (ofType, l.section, l.id, l.read, "Coverdale")
+              ] 
+              [text "Coverdale"]
+             , button 
+              [ class "translationButton"
+              , onClick getText.address (ofType, l.section, l.id, l.read, "ESV")
+              ] 
+              [text "ESV"]
+             , button 
+              [ class "translationButton"
+              , onClick getText.address (ofType, l.section, l.id, l.read, "BCP")
+              ] 
+              [text "BCP"]
+             , button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
+             , Markdown.toHtml l.body
+             ]
+        else
+          div [id l.id, bodyStyle l, class "esv_text"] 
+          [ button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
+          , Markdown.toHtml l.body
+          ]
   in
     List.map this_text lessons
 
@@ -116,15 +141,18 @@ thisReading: Signal.Address Action -> String -> List Models.Lesson -> List Html
 thisReading address ofType lessons =
   let
     this_lesson l =
-      if String.length l.body == 0
-        then
-          li 
-            (hoverable [this_style l, onClick getText.address (ofType, l.section, l.id, l.read)] )
-            [text l.read]
-        else
-          li 
-            (hoverable [this_style l, onClick address (ToggleShow l)] )
-            [text l.read]
+      let
+        ver = if l.section == "ps" then "Coverdale" else "ESV"
+      in
+        if String.length l.body == 0
+          then
+            li 
+              (hoverable [this_style l, onClick getText.address (ofType, l.section, l.id, l.read, ver)] )
+              [text l.read]
+          else
+            li 
+              (hoverable [this_style l, onClick address (ToggleShow l)] )
+              [text l.read]
   in
     List.map this_lesson lessons
   

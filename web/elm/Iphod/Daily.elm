@@ -43,8 +43,10 @@ update action model =
         this_section = case lesson.section of
           "mp1" -> model.mp1
           "mp2" -> model.mp2
+          "mpp" -> model.mpp
           "ep1" -> model.ep1
-          _     -> model.ep2
+          "ep2" -> model.ep2
+          _     -> model.epp
         update_text this_lesson =
           if this_lesson.id == lesson.id 
             then 
@@ -55,8 +57,10 @@ update action model =
         newModel = case lesson.section of
           "mp1" -> {model | mp1 = newSection}
           "mp2" -> {model | mp2 = newSection}
+          "mpp" -> {model | mpp = newSection}
           "ep1" -> {model | ep1 = newSection}
-          _     -> {model | ep2 = newSection}
+          "ep2" -> {model | ep2 = newSection}
+          _     -> {model | epp = newSection}
       in
         newModel
 
@@ -97,41 +101,71 @@ view address model =
               [ ul [textStyle model] ( thisReading address model.epp) ]
           ] -- end of row
       ] -- end of table
-    , div [] (thisText model.mp1)
-    , div [] (thisText model.mp2)
-    , div [] (thisText model.mpp)
-    , div [] (thisText model.ep1)
-    , div [] (thisText model.ep2)
-    , div [] (thisText model.epp)
+    , div [] (thisText address model.mp1)
+    , div [] (thisText address model.mp2)
+    , div [] (thisText address model.mpp)
+    , div [] (thisText address model.ep1)
+    , div [] (thisText address model.ep2)
+    , div [] (thisText address model.epp)
   ] -- end of div 
 
 
 -- HELPERS
 
-thisText: List Models.Lesson -> List Html
-thisText lessons =
+thisText: Signal.Address Action -> List Models.Lesson -> List Html
+thisText address lessons =
   let
     this_text l =
-      li [id l.id, bodyStyle l, class "esv_text"] [Markdown.toHtml l.body]
+      if l.section == "mpp" || l.section == "epp"
+        then
+          div [id l.id, bodyStyle l, class "esv_text"] 
+             [ button 
+              [ class "translationButton"
+              , onClick getText.address ("daily", l.section, l.id, l.read, "Coverdale")
+              ] 
+              [text "Coverdale"]
+             , button 
+              [ class "translationButton"
+              , onClick getText.address ("daily", l.section, l.id, l.read, "ESV")
+              ] 
+              [text "ESV"]
+             , button 
+              [ class "translationButton"
+              , onClick getText.address ("daily", l.section, l.id, l.read, "BCP")
+              ] 
+              [text "BCP"]
+             , button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
+             , Markdown.toHtml l.body
+             ]
+        else
+          div [id l.id, bodyStyle l, class "esv_text"] 
+          [ button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
+          , Markdown.toHtml l.body
+          ]
   in
     List.map this_text lessons
+
+
 
 thisReading: Signal.Address Action ->List Models.Lesson -> List Html
 thisReading address lessons =
   let
     this_lesson l =
-      if String.length l.body == 0
-        then
-          li 
-            ( hoverable [ this_style l, onClick getText.address ("daily", l.section, l.id, l.read) ] )
-            [text l.read]
-        else
-          li 
-            ( hoverable [ this_style l , onClick address (ToggleShow l) ] )
-            [text l.read]
+      let
+        ver = if l.section == "mpp" || "l.section" == "epp" then "Coverdale" else "ESV"
+      in
+        if String.length l.body == 0
+          then
+            li 
+              ( hoverable [ this_style l, onClick getText.address ("daily", l.section, l.id, l.read, ver) ] )
+              [text l.read]
+          else
+            li 
+              ( hoverable [ this_style l , onClick address (ToggleShow l) ] )
+              [ text l.read ]
   in
     List.map this_lesson lessons
-  
+
 this_style: Models.Lesson -> Attribute
 this_style l =
   case l.style of
@@ -146,7 +180,7 @@ hoverable: List Attribute -> List Attribute
 hoverable attrs =
   hover [("background-color", "white", "skyblue")] ++ attrs
   
- 
+
 
 
 -- STYLE

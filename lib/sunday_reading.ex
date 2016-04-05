@@ -3,6 +3,7 @@ require IEx
 defmodule SundayReading do
   import Lityear, only: [namedDayDate: 2]
   use Timex
+  @tz "America/Los_Angeles"
 
   def start_link do
     Agent.start_link fn -> build end, name: __MODULE__
@@ -10,34 +11,34 @@ defmodule SundayReading do
 
   def identity(), do: Agent.get(__MODULE__, &(&1))
   def readings(season, wk, yr), do: identity[season][wk][yr]
-  def next_sunday,        do: Date.local |> next_sunday
+  def next_sunday,        do: Date.now(@tz) |> next_sunday
   def next_sunday(date),  do: date |> Lityear.next_sunday |> _sunday
   def this_sunday(date),  do: date |> Lityear.to_season |> _sunday
-  def last_sunday(),      do: Date.local |> last_sunday
+  def last_sunday(),      do: Date.now(@tz) |> last_sunday
   def last_sunday(date),  do: date |> Lityear.last_sunday |> _sunday
-  def from_now,           do: Date.local |> this_sunday
+  def from_now,           do: Date.now(@tz) |> this_sunday
 
   defp _sunday({season, wk, yr, sunday}) do
     if identity[season][wk][yr] |> is_nil, do: IEx.pry
     identity[season][wk][yr]
       |> add_ids
-      |> Map.merge %{
-          date:   sunday |> DateFormat.format!("{WDfull} {Mfull} {D}, {YYYY}"), 
-          season: season, 
-          week:   wk, 
-          title:  identity[season][wk]["title"]
-        }
+      |> Map.merge( %{
+                date:   sunday |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"), 
+                season: season, 
+                week:   wk, 
+                title:  identity[season][wk]["title"]
+              })
   end
 
   def namedReadings(season, wk) do
     identity[season][wk]["a"]
     |> add_ids
-    |> Map.merge %{
-        date: Lityear.namedDayDate(season, wk) |> DateFormat.format!("{WDfull} {Mfull} {D}, {YYYY}"),
-        season: season,
-        week: wk,
-        title: identity[season][wk]["title"]
-    }
+    |> Map.merge( %{
+            date: namedDayDate(season, wk) |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"),
+            season: season,
+            week: wk,
+            title: identity[season][wk]["title"]
+        })
   end
 
   defp add_ids( map ) do
@@ -48,7 +49,7 @@ defmodule SundayReading do
       |> Map.update(:gs, [], fn(el)-> _add_ids_for("gs", el) end)
   end
 
-  defp _add_ids_for(section, []), do: []
+  defp _add_ids_for(_section, []), do: []
   defp _add_ids_for(section,  list) do
     list |> Enum.map(fn(el)-> _add_this_id(section, el) end)
   end
@@ -62,9 +63,10 @@ defmodule SundayReading do
     |> Map.put_new(:section, section)
     |> Map.put_new(:body, "")
     |> Map.put_new(:show, false)
+    |> Map.put_new(:version, "")
   end
 
-  def next_holy_day(), do: next_holy_day(Date.local)
+  def next_holy_day(), do: next_holy_day(Date.now(@tz))
   def next_holy_day(date) do
     {st_date, festival} = Lityear.next_holy_day(date)
     _sunday({"redLetter", festival, "a", st_date})
@@ -72,7 +74,7 @@ defmodule SundayReading do
     #   %{date: st_date, season: "", week: "", title: identity["redLetter"][festival]["title"]}
   end
 
-  def formatted_date(d), do: d |> DateFormat.format!("{WDfull} {Mfull} {D}, {YYYY}")
+  def formatted_date(d), do: d |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
 
   def build do
   # to whom it may concern...
@@ -2172,7 +2174,7 @@ defmodule SundayReading do
                         gs: [%{style: "req", read: "Lk 4.14-21"}]
                       }
             },
-          "stJames" =>
+          "stJamesOfJerusalem" =>
             %{  "title" => "St. James of Jerusalem (October 23)",
               "a" => %{ ot: [%{style: "req", read: "Acts 15.12-22a"}],
                         ps: [%{style: "req", read: "Psalm 1"}],

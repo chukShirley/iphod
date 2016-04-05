@@ -47,6 +47,7 @@ type alias NewText =
   , section:  String -- ot, ps, nt, gs
   , id:       String -- id-ified reading, e.g. "Lk_22_39-71"
   , body:     String
+  , version:  String -- esv, bcp, coverdale, etc.
   }
 
 type alias Model =
@@ -104,7 +105,7 @@ port requestMoveDay: Signal (String, String)
 port requestMoveDay =
   moveDay.signal
 
-port requestText: Signal (String, String, String, String)
+port requestText: Signal (String, String, String, String, String)
 port requestText =
   getText.signal
 
