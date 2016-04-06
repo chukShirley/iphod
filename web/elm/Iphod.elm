@@ -18,6 +18,7 @@ import Graphics.Element as Graphics
 
 import Iphod.Sunday as Sunday
 import Iphod.MorningPrayer as MorningPrayer
+import Iphod.EveningPrayer as EveningPrayer
 import Iphod.Daily as Daily
 
 
@@ -56,7 +57,7 @@ type alias Model =
   , redLetter:      Sunday.Model
   , daily:          Daily.Model  
   , morningPrayer:  MorningPrayer.Model
---  , ep: EveningPrayer.Model
+  , eveningPrayer:  EveningPrayer.Model
   , about:          Bool
   }
 
@@ -68,7 +69,7 @@ initModel =
   , daily =         Daily.init
   , morningPrayer = MorningPrayer.init
   , about =         False
---  , ep = EveningPrayer.init
+  , eveningPrayer = EveningPrayer.init
   }
 
 init: (Model, Effects Action)
@@ -128,12 +129,14 @@ type Action
   | ChangeDay String
   | ToggleAbout
   | ToggleMp
+  | ToggleEp
   | ToggleDaily
   | ToggleSunday
   | ToggleRedLetter
   | SetSunday Model
   | UpdateText NewText
   | ModMP MorningPrayer.Model MorningPrayer.Action
+  | ModEP EveningPrayer.Model EveningPrayer.Action
   | ModSunday Sunday.Model Sunday.Action
   | ModDaily Daily.Model Daily.Action
 
@@ -148,7 +151,19 @@ update action model =
         mp = model.morningPrayer
         newmp = {mp | show = not mp.show}
         newModel = {model | morningPrayer = newmp}
-        effect = if newmp.show then gatherText model else Effects.none
+        effect = if newmp.show 
+                  then gatherText model "morningPrayer" 
+                  else Effects.none
+      in 
+        (newModel, effect)
+    ToggleEp ->
+      let
+        ep = model.eveningPrayer
+        newep = {ep | show = not ep.show}
+        newModel = {model | eveningPrayer = newep}
+        effect = if newep.show 
+                  then gatherText model "eveningPrayer" 
+                  else Effects.none
       in 
         (newModel, effect)
     ToggleDaily ->
@@ -181,6 +196,7 @@ update action model =
           "redletter" ->  {model | redLetter = updateSundayText model.redLetter text}
           "daily"     ->  {model | daily = updateDailyText model.daily text}
           "morningPrayer" -> {model | morningPrayer = updateDailyText model.morningPrayer text}
+          "eveningPrayer" -> {model | eveningPrayer = updateDailyText model.eveningPrayer text}
           _           -> model
       in
         (newModel, Effects.none)
@@ -188,6 +204,12 @@ update action model =
     ModMP reading mpAction->
       let
         newModel = MorningPrayer.update mpAction reading
+      in 
+        (model, Effects.none)
+
+    ModEP reading mpAction->
+      let
+        newModel = EveningPrayer.update mpAction reading
       in 
         (model, Effects.none)
 
@@ -209,9 +231,9 @@ update action model =
 
 -- HELPERS|> Task.toMaybe
 
-gatherText: Model -> Effects Action
-gatherText model =
-  Signal.send gatherAllText.address ("morningPrayer", model.today)
+gatherText: Model -> String -> Effects Action
+gatherText model prayer =
+  Signal.send gatherAllText.address (prayer, model.today)
   |> Task.toMaybe
   |> Task.map (always NoOp)
   |> Effects.task
@@ -292,6 +314,7 @@ view address model =
     , readingNav address model
     , listReadings address model
     , morningPrayerDiv address model
+    , eveningPrayerDiv address model
     ]
 
 aboutDiv: Signal.Address Action -> Model -> Html
@@ -319,7 +342,7 @@ fancyNav address model =
   div [id "menu1", class "cssmenu"] [
     ul []
       [ li [onClick address ToggleMp] [ a [href "#"] [ text "Morning Prayer"] ]
-      , li [] [ a [href "#"] [ text "Evening Prayer"] ]
+      , li [onClick address ToggleEp] [ a [href "#"] [ text "Evening Prayer"] ]
       , li [class "has-sub"] 
           [ a [href "#"] [ text "Easter"]
           , ul [] 
@@ -396,6 +419,12 @@ morningPrayerDiv: Signal.Address Action -> Model -> Html
 morningPrayerDiv address model =
   div []
     [ (MorningPrayer.view (Signal.forwardTo address (ModMP model.morningPrayer)) model.morningPrayer)
+    ]
+
+eveningPrayerDiv: Signal.Address Action -> Model -> Html
+eveningPrayerDiv address model =
+  div []
+    [ (EveningPrayer.view (Signal.forwardTo address (ModEP model.eveningPrayer)) model.eveningPrayer)
     ]
 
 

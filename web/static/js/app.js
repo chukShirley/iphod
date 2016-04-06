@@ -70,6 +70,7 @@ var elmDiv = document.getElementById('elm-container')
         , redLetter:     sunday_model
         , daily:         daily_reading
         , morningPrayer: daily_reading
+        , eveningPrayer: daily_reading
         , about:         false
       }
     , newText:   { 

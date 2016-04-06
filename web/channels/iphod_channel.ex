@@ -28,6 +28,7 @@ defmodule Iphod.IphodChannel do
               today:          Date.now(@tz) |> SundayReading.formatted_date,
               daily:          Date.now(@tz) |> DailyReading.readings |> jsonify_daily(true),
               morningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
+              eveningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
               about:          false
             }
     push socket, "next_sunday", msg
@@ -108,6 +109,7 @@ defmodule Iphod.IphodChannel do
              today:         date |> SundayReading.formatted_date,
              daily:         date |> DailyReading.readings |> jsonify_daily(show_daily),
              morningPrayer: date |> DailyReading.readings |> jsonify_daily,
+             eveningPrayer: date |> DailyReading.readings |> jsonify_daily,
              about:         false
           }
     push  socket, "next_sunday", msg
@@ -127,6 +129,21 @@ defmodule Iphod.IphodChannel do
     readings.mpp
       |> Enum.each(fn(r)-> 
           push_text "morningPrayer", r, Psalms.to_html(r.read, "Coverdale"), "Coverdale", socket
+      end)
+    {:noreply, socket}
+  end
+
+  def handle_in("request_all_text", ["eveningPrayer", this_date], socket) do
+    readings = 
+      Timex.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
+      |> DailyReading.readings
+    readings.ep1 ++ readings.ep2
+      |> Enum.each(fn(r)-> 
+          push_text "eveningPrayer", r, EsvText.request(r.read), "ESV", socket
+      end)
+    readings.epp
+      |> Enum.each(fn(r)-> 
+          push_text "eveningPrayer", r, Psalms.to_html(r.read, "Coverdale"), "Coverdale", socket
       end)
     {:noreply, socket}
   end
@@ -156,6 +173,7 @@ defmodule Iphod.IphodChannel do
              today:     date |> SundayReading.formatted_date,
              daily:     date |> DailyReading.readings |> jsonify_daily,
              morningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
+             eveningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
              about:     false
           }
     push  socket, "next_sunday", msg

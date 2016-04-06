@@ -431,6 +431,31 @@ canticalAfterLesson1 model =
       ++ (vs "In you, Lord, is our hope,")
       ++ (vsIndent "let us never be put to shame.")
 
+apostlesCreed: List Html
+apostlesCreed =
+     (rubric "If desired, a sermon on the Morning Lessons may be preached.")
+  ++ (section "The Apostles’ Creed")
+  ++ (rubric "Officiant and People together, all standing")
+  ++ (vs "I believe in God, the Father almighty,")
+  ++ (vsIndent "creator of heaven and earth.")
+  ++ (vs "I believe in Jesus Christ, his only Son, our Lord.")
+  ++ (vsIndent "He was conceived by the Holy Spirit")
+  ++ (vsIndent "and born of the Virgin Mary.")
+  ++ (vsIndent "He suffered under Pontius Pilate,")
+  ++ (vsIndent "was crucified, died, and was buried.")
+  ++ (vsIndent "He descended to the dead.")
+  ++ (vsIndent "On the third day he rose again.")
+  ++ (vsIndent "He ascended into heaven,")
+  ++ (vsIndent "and is seated at the right hand of the Father.")
+  ++ (vsIndent "He will come again to judge the living and the dead.")
+  ++ (vs "I believe in the Holy Spirit,")
+  ++ (vsIndent "the holy catholic Church,")
+  ++ (vsIndent "the communion of saints,")
+  ++ (vsIndent "the forgiveness of sins,")
+  ++ (vsIndent "the resurrection of the body,")
+  ++ (vsIndent "and the life everlasting. Amen.")
+
+
 thePrayers1: List Html
 thePrayers1 =
   [ table []
@@ -892,28 +917,7 @@ view address model =
   ++ (vsIndent "world without end. Amen.")
   ++ (blankline)
 
-  ++ (rubric "If desired, a sermon on the Morning Lessons may be preached.")
-
-  ++ (section "The Apostles’ Creed")
-  ++ (rubric "Officiant and People together, all standing")
-  ++ (vs "I believe in God, the Father almighty,")
-  ++ (vsIndent "creator of heaven and earth.")
-  ++ (vs "I believe in Jesus Christ, his only Son, our Lord.")
-  ++ (vsIndent "He was conceived by the Holy Spirit")
-  ++ (vsIndent "and born of the Virgin Mary.")
-  ++ (vsIndent "He suffered under Pontius Pilate,")
-  ++ (vsIndent "was crucified, died, and was buried.")
-  ++ (vsIndent "He descended to the dead.")
-  ++ (vsIndent "On the third day he rose again.")
-  ++ (vsIndent "He ascended into heaven,")
-  ++ (vsIndent "and is seated at the right hand of the Father.")
-  ++ (vsIndent "He will come again to judge the living and the dead.")
-  ++ (vs "I believe in the Holy Spirit,")
-  ++ (vsIndent "the holy catholic Church,")
-  ++ (vsIndent "the communion of saints,")
-  ++ (vsIndent "the forgiveness of sins,")
-  ++ (vsIndent "the resurrection of the body,")
-  ++ (vsIndent "and the life everlasting. Amen.")
+  ++ (apostlesCreed)
 
   ++ (section "The Prayers")
   ++ (rubric "The People kneel or stand.")
