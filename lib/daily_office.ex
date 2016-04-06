@@ -1014,7 +1014,7 @@ defmodule DailyReading do
                             ep2: [%{style: "req", read: "Acts 4.5-31"}],},
             "Thursday" => %{title: "Thursday",
                             mp1: [%{style: "req", read: "Deut 4.41-end"}],
-                            mp2: [%{style: "req", read: "Acts 4.32-5.11"}],
+                            mp2: [%{style: "req", read: "Acts 4.32-5.http://www.leevalley.com/us/garden/page.aspx?p=68894&cat=2,10719,33068&ap=111"}],
                             ep1: [%{style: "req", read: "Deut 5.1-21"}],
                             ep2: [%{style: "req", read: "Acts 5.12-end"}],},
             "Friday" =>   %{title: "Friday",
