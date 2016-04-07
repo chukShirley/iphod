@@ -67,7 +67,7 @@ view: Signal.Address Action -> Model -> Html
 view address model =
   div
   []
-  [ table [tableStyle model]
+  [ table [class "readings_table", tableStyle model]
       [ caption [titleStyle model, onClick address ToggleModelShow] [text model.title]
       , tr 
           [ class "rowStyle" ]

@@ -29,6 +29,7 @@ defmodule Iphod.IphodChannel do
               daily:          Date.now(@tz) |> DailyReading.readings |> jsonify_daily(true),
               morningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
               eveningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
+             email:          %{ addr: "", subj: "", msg: "", show: false},
               about:          false
             }
     push socket, "next_sunday", msg
@@ -110,6 +111,7 @@ defmodule Iphod.IphodChannel do
              daily:         date |> DailyReading.readings |> jsonify_daily(show_daily),
              morningPrayer: date |> DailyReading.readings |> jsonify_daily,
              eveningPrayer: date |> DailyReading.readings |> jsonify_daily,
+             email:          %{ addr: "", subj: "", msg: "", show: false},
              about:         false
           }
     push  socket, "next_sunday", msg
@@ -174,6 +176,7 @@ defmodule Iphod.IphodChannel do
              daily:     date |> DailyReading.readings |> jsonify_daily,
              morningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
              eveningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
+             email:          %{ addr: "", subj: "", msg: "", show: false},
              about:     false
           }
     push  socket, "next_sunday", msg

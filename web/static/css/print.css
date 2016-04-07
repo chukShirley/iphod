@@ -1,0 +1,19 @@
+/*!
+* print.css
+* for printing stuff from iphod
+*/
+
+@media print {
+  .audio { display: none; }
+  #date_nav { display: none; }
+  .cssmenu { display: none; }
+  .about { display: none; }
+  .list_dates { display: none; }
+  .translationButton { display: none;}
+  .readings_table { display: none; }
+  .esv_text { 
+    page-break-after: always; 
+    display: block;
+    font-size: 16px;
+  }
+}

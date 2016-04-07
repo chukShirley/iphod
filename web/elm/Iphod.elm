@@ -20,6 +20,7 @@ import Iphod.Sunday as Sunday
 import Iphod.MorningPrayer as MorningPrayer
 import Iphod.EveningPrayer as EveningPrayer
 import Iphod.Daily as Daily
+import Iphod.Email as Email
 
 
 app =
@@ -58,6 +59,7 @@ type alias Model =
   , daily:          Daily.Model  
   , morningPrayer:  MorningPrayer.Model
   , eveningPrayer:  EveningPrayer.Model
+  , email:          Email.Model
   , about:          Bool
   }
 
@@ -68,6 +70,7 @@ initModel =
   , redLetter =     Sunday.init
   , daily =         Daily.init
   , morningPrayer = MorningPrayer.init
+  , email =         Email.init
   , about =         False
   , eveningPrayer = EveningPrayer.init
   }
@@ -128,6 +131,7 @@ type Action
   = NoOp
   | ChangeDay String
   | ToggleAbout
+  | ToggleEmail
   | ToggleMp
   | ToggleEp
   | ToggleDaily
@@ -135,6 +139,7 @@ type Action
   | ToggleRedLetter
   | SetSunday Model
   | UpdateText NewText
+  | ModEmail Email.Model Email.Action
   | ModMP MorningPrayer.Model MorningPrayer.Action
   | ModEP EveningPrayer.Model EveningPrayer.Action
   | ModSunday Sunday.Model Sunday.Action
@@ -146,6 +151,13 @@ update action model =
     NoOp -> (model, Effects.none)
     ChangeDay day -> (model, changeDay day model)
     ToggleAbout -> ({model | about = not model.about}, Effects.none)
+    ToggleEmail -> 
+      let 
+        email = model.email
+        newEmail = {email | show = not email.show}
+        newModel = {model | email = newEmail}
+      in
+        (newModel, Effects.none)
     ToggleMp ->
       let
         mp = model.morningPrayer
@@ -228,6 +240,13 @@ update action model =
       in
         (newModel, Effects.none)
 
+    ModEmail emodel eaction ->
+      let
+      --  foo = Debug.log "ACTION" eaction
+      --  bar = Debug.log "MODEL" model
+        newModel = {model | email = Email.update eaction emodel }
+      in
+        (newModel, Effects.none)
 
 -- HELPERS|> Task.toMaybe
 
@@ -307,6 +326,7 @@ view address model =
   div 
     []
     [ fancyNav address model
+    , emailMe address model
     , aboutDiv address model
     , br [] []
     , listDates address model
@@ -317,9 +337,15 @@ view address model =
     , eveningPrayerDiv address model
     ]
 
+emailMe: Signal.Address Action -> Model -> Html
+emailMe address model =
+  div []
+    [(Email.view (Signal.forwardTo address (ModEmail model.email)) model.email)]
+-- Sunday.view (Signal.forwardTo address (ModSunday model.sunday)) model.sunday
+
 aboutDiv: Signal.Address Action -> Model -> Html
 aboutDiv address model =
-  div []
+  div [class "about"]
     [ p [ class "about"
           , aboutStyle model
           , onClick address ToggleAbout
@@ -329,8 +355,8 @@ aboutDiv address model =
 
 listDates: Signal.Address Action -> Model -> Html
 listDates address model =
-  div []
-    [ ul []
+  div [class "list_dates"]
+    [ ul [class "list_dates"]
       [ li [] [text ("Next Sunday from " ++ model.today ++ " is " ++ model.sunday.title)]
       , li [] [text ("Next Feast Day: " ++ model.redLetter.title ++ " - " ++ model.redLetter.date)]
       ]
@@ -377,13 +403,13 @@ fancyNav address model =
               ]
           ]
       , li [onClick address ToggleAbout] [ a [href "#"] [ text "About"] ]
-      , li [] [ a [href "#"] [ text "Contact"] ]
+      , li [onClick address ToggleEmail] [ a [href "#"] [ text "Contact"] ]
     ]
   ]
 
 dateNav: Signal.Address Action -> Model -> Html
 dateNav address model =
-  div []
+  div [id "date_nav"]
     [ p [style [("text-align", "center"), ("margin-bottom", "-0.3em")]] [ text model.today ]
     , div [id "menu2", class "cssmenu", style [("z-index", "99")] ] 
         [ ul []
@@ -409,7 +435,7 @@ readingNav address model =
     
 listReadings: Signal.Address Action -> Model -> Html
 listReadings address model =
-  div [style [("margin-top", "0em"), ("z-index", "99")]]
+  div [class "list_readings", style [("margin-top", "0em"), ("z-index", "99")]]
     [ (Daily.view (Signal.forwardTo address (ModDaily model.daily)) model.daily)
     , (Sunday.view (Signal.forwardTo address (ModSunday model.sunday)) model.sunday)
     , (Sunday.view (Signal.forwardTo address (ModSunday model.redLetter)) model.redLetter)
