@@ -1,4 +1,38 @@
-module Iphod.Models (Lesson, Sunday, Daily, sundayInit, dailyInit) where
+module Iphod.Models ( Config, Lesson, Sunday, Daily, Email, 
+                      configInit, sundayInit, dailyInit, emailInit
+                    ) where
+
+type alias Config =
+  { ot: String
+  , ps: String
+  , nt: String
+  , gs: String
+  , fnotes: Bool
+  }
+
+configInit: Config
+configInit =
+  { ot = "ESV"
+  , ps = "Coverdale"
+  , nt = "ESV"
+  , gs = "ESV"
+  , fnotes = True
+  }
+
+type alias Email =
+  { addr: String
+  , subj: String
+  , msg:  String
+  , show: Bool
+  }
+
+emailInit: Email
+emailInit = 
+  { addr = ""
+  , subj = ""
+  , msg = ""
+  , show = False
+  }
 
 type alias Lesson =
   { style:    String

@@ -152,7 +152,7 @@ thisReading address lessons =
   let
     this_lesson l =
       let
-        ver = if l.section == "mpp" || "l.section" == "epp" then "Coverdale" else "ESV"
+        ver = if l.section == "mpp" || l.section == "epp" then "Coverdale" else "ESV"
       in
         if String.length l.body == 0
           then

@@ -21,6 +21,8 @@ import Iphod.MorningPrayer as MorningPrayer
 import Iphod.EveningPrayer as EveningPrayer
 import Iphod.Daily as Daily
 import Iphod.Email as Email
+import Iphod.Config as Config
+import Iphod.Models as Models
 
 
 app =
@@ -54,25 +56,27 @@ type alias NewText =
 
 type alias Model =
   { today:          String
-  , sunday:         Sunday.Model
-  , redLetter:      Sunday.Model
-  , daily:          Daily.Model  
-  , morningPrayer:  MorningPrayer.Model
-  , eveningPrayer:  EveningPrayer.Model
-  , email:          Email.Model
+  , sunday:         Models.Sunday
+  , redLetter:      Models.Sunday
+  , daily:          Models.Daily
+  , morningPrayer:  Models.Daily
+  , eveningPrayer:  Models.Daily
+  , email:          Models.Email
+  , config:         Models.Config
   , about:          Bool
   }
 
 initModel: Model
 initModel =
   { today =         ""
-  , sunday =        Sunday.init
-  , redLetter =     Sunday.init
-  , daily =         Daily.init
-  , morningPrayer = MorningPrayer.init
-  , email =         Email.init
+  , sunday =        Models.sundayInit
+  , redLetter =     Models.sundayInit
+  , daily =         Models.dailyInit
+  , morningPrayer = Models.dailyInit
+  , eveningPrayer = Models.dailyInit
+  , email =         Models.emailInit
+  , config =        Models.configInit
   , about =         False
-  , eveningPrayer = EveningPrayer.init
   }
 
 init: (Model, Effects Action)
@@ -144,6 +148,7 @@ type Action
   | ModEP EveningPrayer.Model EveningPrayer.Action
   | ModSunday Sunday.Model Sunday.Action
   | ModDaily Daily.Model Daily.Action
+  | ModConfig Config.Model Config.Action
 
 update: Action -> Model -> (Model, Effects Action)
 update action model =
@@ -242,9 +247,13 @@ update action model =
 
     ModEmail emodel eaction ->
       let
-      --  foo = Debug.log "ACTION" eaction
-      --  bar = Debug.log "MODEL" model
         newModel = {model | email = Email.update eaction emodel }
+      in
+        (newModel, Effects.none)
+
+    ModConfig cmodel caction ->
+      let
+        newModel = {model | config = Config.update caction cmodel }
       in
         (newModel, Effects.none)
 
@@ -332,6 +341,7 @@ view address model =
     , listDates address model
     , dateNav address model
     , readingNav address model
+--    , config address model
     , listReadings address model
     , morningPrayerDiv address model
     , eveningPrayerDiv address model
@@ -410,7 +420,7 @@ fancyNav address model =
 dateNav: Signal.Address Action -> Model -> Html
 dateNav address model =
   div [id "date_nav"]
-    [ p [style [("text-align", "center"), ("margin-bottom", "-0.3em")]] [ text model.today ]
+    [ p [style [("text-align", "center"), ("margin-bottom", "0.1em")]] [ text model.today ]
     , div [id "menu2", class "cssmenu", style [("z-index", "99")] ] 
         [ ul []
           [ li [style [("width", "25%")], onClick address (ChangeDay "lastSunday")] [ a [href "#"] [ text "Last Sunday"] ]
@@ -431,6 +441,11 @@ readingNav address model =
       , li [style [("width", "33%")], onClick address ToggleRedLetter] [ a [href "#"] [ text "Red Letter"] ]
       ]
   ]
+
+config: Signal.Address Action -> Model -> Html
+config address model = 
+  div []
+    [(Config.view (Signal.forwardTo address (ModConfig model.config)) model.config)]
 
     
 listReadings: Signal.Address Action -> Model -> Html

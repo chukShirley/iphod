@@ -36,6 +36,13 @@ channel.on('new_text', data => {
 // Hook up Elm
 
 var elmDiv = document.getElementById('elm-container')
+  , config_model = {
+        ot: "ESV"
+      , ps: "Coverdale"
+      , nt: "ESV"
+      , gs: "ESV"
+      , fnotes: true
+    }
   , email_model = {
         addr: ""
       , msg: ""
@@ -78,6 +85,7 @@ var elmDiv = document.getElementById('elm-container')
         , morningPrayer: daily_reading
         , eveningPrayer: daily_reading
         , email:         email_model
+        , config:        config_model
         , about:         false
       }
     , newText:   { 

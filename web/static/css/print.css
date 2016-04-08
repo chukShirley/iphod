@@ -11,6 +11,7 @@
   .list_dates { display: none; }
   .translationButton { display: none;}
   .readings_table { display: none; }
+  .config { display: none; }
   .esv_text { 
     page-break-after: always; 
     display: block;

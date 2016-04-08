@@ -10,8 +10,18 @@ defmodule Iphod.IphodChannel do
   # import EsvText
   use Timex
   @tz "America/Los_Angeles"
+  @email %{ addr: "", subj: "", msg: "", show: false}
+  @config %{ ot: "ESV",
+             ps: "Coverdale",
+             nt: "ESV",
+             gs: "ESV",
+             fnotes: true
+            }
+
 
 #  alias Saints.Donor
+
+
 
   def join("iphod", payload, socket) do
     if authorized?(payload) do
@@ -22,6 +32,7 @@ defmodule Iphod.IphodChannel do
     end
   end
 
+
   def handle_info(:after_join, socket) do
     msg = %{  sunday:         jsonify_reading("sunday", SundayReading.from_now, true),
               redLetter:      jsonify_reading("redletter", SundayReading.next_holy_day, true),
@@ -29,7 +40,8 @@ defmodule Iphod.IphodChannel do
               daily:          Date.now(@tz) |> DailyReading.readings |> jsonify_daily(true),
               morningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
               eveningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
-             email:          %{ addr: "", subj: "", msg: "", show: false},
+              email:          @email,
+              config:         @config, 
               about:          false
             }
     push socket, "next_sunday", msg
@@ -111,7 +123,8 @@ defmodule Iphod.IphodChannel do
              daily:         date |> DailyReading.readings |> jsonify_daily(show_daily),
              morningPrayer: date |> DailyReading.readings |> jsonify_daily,
              eveningPrayer: date |> DailyReading.readings |> jsonify_daily,
-             email:          %{ addr: "", subj: "", msg: "", show: false},
+             email:          @email,
+             config:         @config, 
              about:         false
           }
     push  socket, "next_sunday", msg
@@ -176,7 +189,8 @@ defmodule Iphod.IphodChannel do
              daily:     date |> DailyReading.readings |> jsonify_daily,
              morningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
              eveningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
-             email:          %{ addr: "", subj: "", msg: "", show: false},
+             email:          @email,
+             config:         @config, 
              about:     false
           }
     push  socket, "next_sunday", msg

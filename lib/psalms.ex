@@ -50,6 +50,7 @@ defmodule Psalms do
     s = ~s(<h3>#{ps["name"]} <span class="ps_title">#{ps["title"]}</span></h3></br>)
     ps 
       |> Enum.to_list
+      |> Enum.sort
       |> Enum.reduce(s, fn(el, acc)->
           acc <> vs_to_html(el) end)
   end
