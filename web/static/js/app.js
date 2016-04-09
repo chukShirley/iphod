@@ -26,23 +26,72 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on("next_sunday", data => {
-  elmApp.ports.nextSunday.send(data)
+  var z = data,
+      icm = init_config_model();
+  z.config = icm;
+  z.daily.config = icm;
+  z.sunday.config = icm;
+  z.redLetter.config = icm;
+  z.eveningPrayer.config = icm;
+  z.morningPrayer.config = icm;
+  elmApp.ports.nextSunday.send(z)
 })
 
 channel.on('new_text', data => {
   elmApp.ports.newText.send(data);
 })
 
+// Local Storage
+function storageAvailable(of_type) {
+  try {
+    var storage = window[of_type],
+        x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+  }
+  catch(e) { return false;}
+}
+
+function get_init(arg, arg2) {
+  var s = window.localStorage
+    , t = s.getItem(arg)
+  if (t == null) { 
+        s.setItem(arg, arg2);
+        t = arg2;
+      }
+  return t;
+}
+
+function init_config_model() {
+  var m = { ot: "ESV"
+    , ps: "Coverdale"
+    , nt: "ESV"
+    , gs: "ESV"
+    , fnotes: "fnotes"
+    }
+  if ( storageAvailable('localStorage') ) {
+    m = { ot: get_init("iphod_ot", "ESV")
+        , ps: get_init("iphod_ps", "Coverdale")
+        , nt: get_init("iphod_nt", "ESV")
+        , gs: get_init("iphod_gs", "ESV")
+        , fnotes: get_init("iphod_fnotes", "fnotes")
+        }
+  }
+  return m;
+}
+
 // Hook up Elm
+
 
 var elmDiv = document.getElementById('elm-container')
   , config_model = {
-        ot: "ESV"
-      , ps: "Coverdale"
-      , nt: "ESV"
-      , gs: "ESV"
-      , fnotes: true
-    }
+      ot: ""
+    , ps: ""
+    , nt: ""
+    , gs: ""
+    , fnotes: ""
+  }
   , email_model = {
         addr: ""
       , msg: ""
@@ -60,6 +109,7 @@ var elmDiv = document.getElementById('elm-container')
       , nt: []
       , gs: []
       , show: false
+      , config: config_model
     }
   , daily_reading = {
         date: ""
@@ -75,6 +125,7 @@ var elmDiv = document.getElementById('elm-container')
       , epp: []
       , show: false
       , justToday: false
+      , config: config_model
     }
   , initialState = {
       nextSunday: {
@@ -104,7 +155,11 @@ elmApp.ports.requestMoveDay.subscribe(function(request) {
 });
 
 elmApp.ports.requestText.subscribe(function(request) {
-  if ( $("#" + request[0]).text().length == 0 ) {channel.push("request_text", request)}
+  var model = {};
+  request.forEach( function(tuple) {
+    model[tuple[0]] = tuple[1];
+  })
+if ( $("#" + request[0]).text().length == 0 ) {channel.push("request_text", model)}
 })
 
 elmApp.ports.requestNamedDay.subscribe(function(request) {
@@ -114,3 +169,17 @@ elmApp.ports.requestNamedDay.subscribe(function(request) {
 elmApp.ports.requestAllText.subscribe(function(request) {
   channel.push("request_all_text", request)
 })
+
+elmApp.ports.savingConfig.subscribe(function(config) {
+  // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
+  if ( storageAvailable('localStorage') ) {
+    let s = window.localStorage
+    s.setItem("iphod_ot", config.ot)
+    s.setItem("iphod_ps", config.ps)
+    s.setItem("iphod_nt", config.nt)
+    s.setItem("iphod_gs", config.ot)
+    s.setItem("iphod_fnotes", config.fnotes)
+  }
+})
+
+

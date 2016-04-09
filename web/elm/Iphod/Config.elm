@@ -16,6 +16,7 @@ type alias Model = Config
 init: Model
 init = configInit
 
+
 -- UPDATE
 
 type Key
@@ -23,11 +24,11 @@ type Key
   | PS
   | NT
   | GS
-  | Footnotes
 
 type Action
   = NoOp
   | Change Key String
+  | ChangeFootnote Bool
 
 update: Action -> Model -> Model
 update action model =
@@ -35,16 +36,20 @@ update action model =
     NoOp -> model
     Change key val -> 
       let
-        foo = Debug.log "CHANGE" (key, val)
+        newModel = case key of
+          OT -> {model | ot = val}
+          PS -> {model | ps = val}
+          NT -> {model | nt = val}
+          GS -> {model | gs = val}
+      in 
+        newModel
+    ChangeFootnote torf ->
+      let
+        newModel = if torf 
+          then {model | fnotes = "fnotes"}
+          else {model | fnotes = ""}
       in
-        model
-
---      case key of
---        OT -> {model | ot = val}
---        PS -> {model | ps = val}
---        NT -> {model | nt = val}
---        GS -> {model | gs = val}
---        Footnotes -> {model | fnotes = (val == "True")}
+        newModel
 
 
 -- VIEW
@@ -53,10 +58,18 @@ view: Signal.Address Action -> Model -> Html
 view address model =
   div
     [ class "config"]
-    [ text "Psalms in: "
-    , psRadio address model PS "Coverdale"
-    , psRadio address model PS "ESV"
-    , psRadio address model PS "BCP"
+    [ span 
+        []
+        [ text "Psalms in: "
+        , psRadio address model PS "Coverdale"
+        , psRadio address model PS "ESV"
+        , psRadio address model PS "BCP"
+        ]
+    , span 
+        [style [("margin-left", "2em")]]
+        [ text "FootNotes: "
+        , ftnoteCheck address model "fnotes"
+        ]
     ]
 
 
@@ -75,4 +88,19 @@ psRadio address model key val =
       ]
       []
   , label [class "radio_label", for val] [text val]
+  ]
+
+ftnoteCheck: Signal.Address Action -> Model -> String -> Html
+ftnoteCheck address model val =
+  span [class "config_checkbox"]
+  [ input
+      [ type' "checkbox"
+      , id val
+      , checked (model.fnotes == val)
+      , on "change" targetChecked (\resp -> Signal.message address (ChangeFootnote resp))
+      , name val
+      , class "config_checkbox"
+      ]
+      []
+  , label [class "checkbox_label", for val] [text "Show"]
   ]

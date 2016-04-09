@@ -7,7 +7,7 @@ type alias Config =
   , ps: String
   , nt: String
   , gs: String
-  , fnotes: Bool
+  , fnotes: String
   }
 
 configInit: Config
@@ -16,7 +16,7 @@ configInit =
   , ps = "Coverdale"
   , nt = "ESV"
   , gs = "ESV"
-  , fnotes = True
+  , fnotes = "fnotes"
   }
 
 type alias Email =
@@ -55,6 +55,7 @@ type alias Sunday =
   , nt:       List Lesson
   , gs:       List Lesson
   , show:     Bool
+  , config:   Config
 }
 
 sundayInit: Sunday
@@ -69,6 +70,7 @@ sundayInit =
   , nt      = []
   , gs      = []
   , show    = False
+  , config  = configInit
   }
 
 type alias Daily =
@@ -85,6 +87,7 @@ type alias Daily =
   , epp: List Lesson
   , show:     Bool
   , justToday: Bool
+  , config:   Config
   }
 
 dailyInit: Daily
@@ -102,4 +105,5 @@ dailyInit =
   , epp  = []
   , show      = False
   , justToday = False
+  , config    = configInit
   }

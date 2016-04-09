@@ -16,8 +16,8 @@ hideable show attr =
 
 -- SIGNALS
 
-getText : Signal.Mailbox (String, String, String, String, String)
+getText : Signal.Mailbox (List (String, String))
 getText =
-  Signal.mailbox ("", "", "", "", "") -- e.g. sunday, ot, Isaiah_52_13-53_12, Isaiah 52.13-53.12
+  Signal.mailbox [] -- e.g. sunday, ot, Isaiah_52_13-53_12, Isaiah 52.13-53.12
 
 

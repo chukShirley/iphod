@@ -7,6 +7,7 @@ import Helper exposing (onClickLimited, hideable, getText)
 import String
 import Markdown
 import Iphod.Models as Models
+import Iphod.Config as Config
 import DynamicStyle exposing (hover)
 
 -- MODEL
@@ -25,6 +26,14 @@ init = Models.dailyInit
 
 
 -- UPDATE
+
+type Section
+  = MP1
+  | MP2
+  | MPP
+  | EP1
+  | EP2
+  | EPP
 
 type Action 
   = NoOp
@@ -83,22 +92,28 @@ view address model =
           [ class "rowStyle" ]
           [ td 
               [class "tdStyle", style [("width", "16%")] ]
-              [ ul [textStyle model] ( thisReading address model.mp1 ) ]
+              [ ul [textStyle model] ( thisReading address model MP1)]
+              -- [ ul [textStyle model] ( thisReading address model.mp1 model.config.mp1 model.config.fnotes ) ]
           , td
               [class "tdStyle", style [("width", "16%")] ]
-              [ ul [textStyle model] ( thisReading address model.mp2 ) ]
+              [ ul [textStyle model] ( thisReading address model MP2)]
+              -- [ ul [textStyle model] ( thisReading address model.mp2 model.config.mp2 model.config.fnotes ) ]
           , td
               [class "tdStyle", style [("width", "16%")] ]
-              [ ul [textStyle model] ( thisReading address model.mpp ) ]
+              [ ul [textStyle model] ( thisReading address model MPP)]
+              -- [ ul [textStyle model] ( thisReading address model.mpp model.config.mpp model.config.fnotes ) ]
            , td
               [class "tdStyle", style [("width", "16%")] ]
-              [ ul [textStyle model] ( thisReading address model.ep1 ) ]
+              [ ul [textStyle model] ( thisReading address model EP1)]
+              -- [ ul [textStyle model] ( thisReading address model.ep1 model.config.ep1 model.config.fnotes ) ]
            , td
               [class "tdStyle", style [("width", "16%")] ]
-              [ ul [textStyle model] ( thisReading address model.ep2) ]
+              [ ul [textStyle model] ( thisReading address model EP2)]
+              -- [ ul [textStyle model] ( thisReading address model.ep2 model.config.ep2 model.config.fnotes) ]
            , td
               [class "tdStyle", style [("width", "16%")] ]
-              [ ul [textStyle model] ( thisReading address model.epp) ]
+              [ ul [textStyle model] ( thisReading address model EPP)]
+              -- [ ul [textStyle model] ( thisReading address model.epp model.config.epp model.config.fnotes) ]
           ] -- end of row
       ] -- end of table
     , div [] (thisText address model.mp1)
@@ -116,55 +131,88 @@ thisText: Signal.Address Action -> List Models.Lesson -> List Html
 thisText address lessons =
   let
     this_text l =
-      if l.section == "mpp" || l.section == "epp"
-        then
-          div [id l.id, bodyStyle l, class "esv_text"] 
-             [ button 
-              [ class "translationButton"
-              , onClick getText.address ("daily", l.section, l.id, l.read, "Coverdale")
-              ] 
-              [text "Coverdale"]
-             , button 
-              [ class "translationButton"
-              , onClick getText.address ("daily", l.section, l.id, l.read, "ESV")
-              ] 
-              [text "ESV"]
-             , button 
-              [ class "translationButton"
-              , onClick getText.address ("daily", l.section, l.id, l.read, "BCP")
-              ] 
-              [text "BCP"]
-             , button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
-             , Markdown.toHtml l.body
-             ]
-        else
-          div [id l.id, bodyStyle l, class "esv_text"] 
-          [ button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
-          , Markdown.toHtml l.body
-          ]
+      let
+        getTranslation s = 
+          onClick getText.address [("ofType", "daily"), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", "fnotes")]
+      in
+        if l.section == "mpp" || l.section == "epp"
+          then
+            div [id l.id, bodyStyle l, class "esv_text"] 
+               [ button 
+                [ class "translationButton", getTranslation "Coverdale"]
+                [text "Coverdale"]
+               , button 
+                [ class "translationButton", getTranslation "ESV"]
+                [text "ESV"]
+               , button 
+                [ class "translationButton", getTranslation "BCP"]
+                [text "BCP"]
+               , button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
+               , Markdown.toHtml l.body
+               ]
+          else
+            div [id l.id, bodyStyle l, class "esv_text"] 
+            [ button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
+            , Markdown.toHtml l.body
+            ]
   in
     List.map this_text lessons
 
-
-
-thisReading: Signal.Address Action ->List Models.Lesson -> List Html
-thisReading address lessons =
+thisReading: Signal.Address Action -> Model -> Section -> List Html
+thisReading address model section =
   let
-    this_lesson l =
-      let
-        ver = if l.section == "mpp" || l.section == "epp" then "Coverdale" else "ESV"
-      in
-        if String.length l.body == 0
-          then
-            li 
-              ( hoverable [ this_style l, onClick getText.address ("daily", l.section, l.id, l.read, ver) ] )
-              [text l.read]
-          else
-            li 
-              ( hoverable [ this_style l , onClick address (ToggleShow l) ] )
-              [ text l.read ]
+    lessons = case section of
+      MP1 -> model.mp1
+      MP2 -> model.mp2
+      MPP -> model.mpp
+      EP1 -> model.ep1
+      EP2 -> model.ep2
+      EPP -> model.epp
+
+    req l = case section of
+      MP1 -> [("ofType", "daily"), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.ot), ("fnotes", model.config.fnotes)]
+      MP2 -> [("ofType", "daily"), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.nt), ("fnotes", model.config.fnotes)]
+      MPP -> [("ofType", "daily"), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.ps), ("fnotes", model.config.fnotes)]
+      EP1 -> [("ofType", "daily"), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.nt), ("fnotes", model.config.fnotes)]
+      EP2 -> [("ofType", "daily"), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.gs), ("fnotes", model.config.fnotes)]
+      EPP -> [("ofType", "daily"), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.ps), ("fnotes", model.config.fnotes)]
+
+    this_lesson l = 
+      if String.length l.body == 0
+        then
+          li
+            (hoverable [this_style l, onClick getText.address (req l)] )
+            [text l.read]
+        else
+          li 
+            (hoverable [this_style l, onClick address (ToggleShow l)] )
+            [text l.read]
   in
     List.map this_lesson lessons
+
+
+
+-- thisReading: Signal.Address Action ->List Models.Lesson -> String -> String -> List Html
+-- thisReading address lessons ver fnotes =
+--   let
+--     this_lesson l =
+--       let
+--         -- ver = if l.section == "mpp" || l.section == "epp" then "Coverdale" else "ESV"
+--         req = ["daily", l.section, l.id, l.read, ver, fnotes]
+--         -- ver = [l.section, l.id, l.read] ++ Config.translation l.section
+--       in
+--         if String.length l.body == 0
+--           then
+--             li 
+--               -- ( hoverable [ this_style l, onClick getText.address ("daily", ver) ] )
+--               ( hoverable [ this_style l, onClick getText.address req ] )
+--               [text l.read]
+--           else
+--             li 
+--               ( hoverable [ this_style l , onClick address (ToggleShow l) ] )
+--               [ text l.read ]
+--   in
+--     List.map this_lesson lessons
 
 this_style: Models.Lesson -> Attribute
 this_style l =

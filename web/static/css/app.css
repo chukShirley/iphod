@@ -181,6 +181,18 @@ button {
   margin-right: 1em;
 }
 
+.config {
+  height: 2em;
+  padding-left: 1em;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-family: 'Open Sans', Helvetica, sans-serif;
+  font-size: 0.8em;
+  font-weight: 700;
+  color: #d3eced;
+
+}
+
 .radio_button {
   padding-left: 1em;
 }
@@ -189,22 +201,22 @@ input[type=radio].radio_button {
             }
 
             input[type=radio].radio_button + label.radio_label {
-              padding-left:25px;
-              height:20px; 
-              display:inline-block;
-              line-height:20px;
-              background-repeat:no-repeat;
+              padding-left: 25px;
+              height: 20px; 
+              display:i nline-block;
+              line-height: 20px;
+              background-repeat: no-repeat;
               background-position: 0 0;
-              font-size:20px;
-              vertical-align:middle;
-              cursor:pointer;
-
+              font-size: 0.8em;
+              vertical-align: middle;
+              cursor: pointer;
+              padding-bottom: 8px;
             }
 
             input[type=radio].radio_button:checked + label.radio_label {
               background-position: 0 -20px;
             }
-            label.css-label {
+            label.radio_label {
         background-image: url("/images/checkbox.png");
         -webkit-touch-callout: none;
         -webkit-user-select: none;

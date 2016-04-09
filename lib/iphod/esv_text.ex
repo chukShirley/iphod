@@ -3,9 +3,9 @@ require Logger
 defmodule EsvText do
   @esvKey "10b28dac7c57fd96"
 
-  def request(vss, footnotes \\ "true") do
+  def request(vss, fnotes \\ "fnotes") do
 # http://www.esvapi.org/v2/rest/passageQuery?key=IP&passage=Gen+1&include-headings=false
-
+    footnotes = if fnotes == "fnotes", do: "true", else: "false"
     query =
       %{ "key" => @esvKey,
         "passage" => Regex.replace(~r/\:/, vss, "."), # no colons!

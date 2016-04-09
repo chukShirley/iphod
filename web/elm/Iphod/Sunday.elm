@@ -27,6 +27,12 @@ init = Models.sundayInit
 
 -- UPDATE
 
+type Section
+  = OT
+  | PS
+  | NT
+  | GS
+
 type Action
   = NoOp
   | SetReading Model
@@ -80,22 +86,26 @@ view address model =
           [ class "rowStyle" ]
           [ td 
               [class "tdStyle", style [("width", "25%")] ]
-              [ ul [textStyle model] ( thisReading address model.ofType model.ot ) ]
+              [ ul [textStyle model] ( thisReading address model OT) ]
+              -- [ ul [textStyle model] ( thisReading address model.ofType model.ot model.config.gs model.config.fnotes) ]
           , td
               [class "tdStyle", style [("width", "25%")] ]
-              [ ul [textStyle model] ( thisReading address model.ofType model.ps ) ]
+              [ ul [textStyle model] ( thisReading address model PS)]
+              -- [ ul [textStyle model] ( thisReading address model.ofType model.ps model.config.gs model.config.fnotes) ]
            , td
               [class "tdStyle", style [("width", "25%")] ]
-              [ ul [textStyle model] ( thisReading address model.ofType model.nt ) ]
+              [ ul [textStyle model] ( thisReading address model NT)]
+              -- [ ul [textStyle model] ( thisReading address model.ofType model.nt model.config.gs model.config.fnotes) ]
            , td
               [class "tdStyle", style [("width", "25%")] ]
-              [ ul [textStyle model] ( thisReading address model.ofType model.gs) ]
+              [ ul [textStyle model] ( thisReading address model GS)]
+              -- [ ul [textStyle model] ( thisReading address model.ofType model.gs model.config.gs model.config.fnotes) ]
           ] -- end of row
       ] -- end of table
-    , div [] (thisText address model.ofType model.ot)
-    , div [] (thisText address model.ofType model.ps)
-    , div [] (thisText address model.ofType model.nt)
-    , div [] (thisText address model.ofType model.gs)
+    , div [] (thisText address model.ofType model.ot )
+    , div [] (thisText address model.ofType model.ps )
+    , div [] (thisText address model.ofType model.nt )
+    , div [] (thisText address model.ofType model.gs )
 
 --    [ li [titleStyle model, onClick address ToggleModelShow] [text model.title]
  
@@ -108,53 +118,82 @@ thisText: Signal.Address Action -> String -> List Models.Lesson -> List Html
 thisText address ofType lessons =
   let
     this_text l =
-      if l.section == "ps"
-        then
-          div [id l.id, bodyStyle l, class "esv_text"] 
-             [ button 
-              [ class "translationButton"
-              , onClick getText.address (ofType, l.section, l.id, l.read, "Coverdale")
-              ] 
-              [text "Coverdale"]
-             , button 
-              [ class "translationButton"
-              , onClick getText.address (ofType, l.section, l.id, l.read, "ESV")
-              ] 
-              [text "ESV"]
-             , button 
-              [ class "translationButton"
-              , onClick getText.address (ofType, l.section, l.id, l.read, "BCP")
-              ] 
-              [text "BCP"]
-             , button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
-             , Markdown.toHtml l.body
-             ]
-        else
-          div [id l.id, bodyStyle l, class "esv_text"] 
-          [ button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
-          , Markdown.toHtml l.body
-          ]
+      let
+        getTranslation s = 
+          onClick getText.address [("ofType", ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", "fnotes")]
+      in
+        if l.section == "ps"
+          then
+            div [id l.id, bodyStyle l, class "esv_text"] 
+               [ button 
+                [ class "translationButton", getTranslation "Coverdale"]
+                [text "Coverdale"]
+               , button 
+                [ class "translationButton", getTranslation "ESV"]
+                [text "ESV"]
+               , button 
+                [ class "translationButton", getTranslation "BCP"]
+                [text "BCP"]
+               , button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
+               , Markdown.toHtml l.body
+               ]
+          else
+            div [id l.id, bodyStyle l, class "esv_text"] 
+            [ button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
+            , Markdown.toHtml l.body
+            ]
   in
     List.map this_text lessons
 
-thisReading: Signal.Address Action -> String -> List Models.Lesson -> List Html
-thisReading address ofType lessons =
+thisReading: Signal.Address Action -> Model -> Section -> List Html
+thisReading address model section =
   let
-    this_lesson l =
-      let
-        ver = if l.section == "ps" then "Coverdale" else "ESV"
-      in
-        if String.length l.body == 0
-          then
-            li 
-              (hoverable [this_style l, onClick getText.address (ofType, l.section, l.id, l.read, ver)] )
-              [text l.read]
-          else
-            li 
-              (hoverable [this_style l, onClick address (ToggleShow l)] )
-              [text l.read]
+    lessons = case section of
+      OT -> model.ot
+      PS -> model.ps
+      NT -> model.nt
+      GS -> model.gs
+
+    req l = case section of
+      OT -> [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.ot), ("fnotes", model.config.fnotes)]
+      PS -> [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.ps), ("fnotes", model.config.fnotes)]
+      NT -> [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.nt), ("fnotes", model.config.fnotes)]
+      GS -> [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.gs), ("fnotes", model.config.fnotes)]
+
+    this_lesson l = 
+      if String.length l.body == 0
+        then
+          li
+            (hoverable [this_style l, onClick getText.address (req l)] )
+            [text l.read]
+        else
+          li 
+            (hoverable [this_style l, onClick address (ToggleShow l)] )
+            [text l.read]
   in
     List.map this_lesson lessons
+
+-- thisReading: Signal.Address Action -> String -> List Models.Lesson -> String -> String -> List Html
+-- thisReading address ofType lessons ver fnotes=
+--   let
+--     this_lesson l =
+--       let
+--         -- ver = if l.section == "mpp" || l.section == "epp" then "Coverdale" else "ESV"
+--         req = [ofType, l.section, l.id, l.read, ver, fnotes]
+-- 
+--         -- ver = if l.section == "ps" then "Coverdale" else "ESV"
+--       in
+--         if String.length l.body == 0
+--           then
+--             li 
+--               (hoverable [this_style l, onClick getText.address req] )
+--               [text l.read]
+--           else
+--             li 
+--               (hoverable [this_style l, onClick address (ToggleShow l)] )
+--               [text l.read]
+--   in
+--     List.map this_lesson lessons
   
 this_style: Models.Lesson -> Attribute
 this_style l =

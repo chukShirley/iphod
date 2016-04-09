@@ -103,9 +103,13 @@ namedDay: Signal.Mailbox (String, String)
 namedDay =
   Signal.mailbox ("", "")
 
-gatherAllText: Signal.Mailbox (String, String)
+gatherAllText: Signal.Mailbox (String, String, Models.Config)
 gatherAllText =
-  Signal.mailbox ("", "")
+  Signal.mailbox ("", "", Models.configInit)
+
+saveThisConfig: Signal.Mailbox Models.Config
+saveThisConfig =
+  Signal.mailbox Models.configInit
 
 -- PORTS
 
@@ -113,7 +117,7 @@ port requestMoveDay: Signal (String, String)
 port requestMoveDay =
   moveDay.signal
 
-port requestText: Signal (String, String, String, String, String)
+port requestText: Signal (List (String, String))
 port requestText =
   getText.signal
 
@@ -121,9 +125,13 @@ port requestNamedDay: Signal (String, String)
 port requestNamedDay =
   namedDay.signal
 
-port requestAllText: Signal (String, String)
+port requestAllText: Signal (String, String, Models.Config)
 port requestAllText =
   gatherAllText.signal
+
+port savingConfig: Signal Models.Config
+port savingConfig = 
+  saveThisConfig.signal
 
 port nextSunday: Signal Model
 port newText: Signal NewText
@@ -253,15 +261,26 @@ update action model =
 
     ModConfig cmodel caction ->
       let
-        newModel = {model | config = Config.update caction cmodel }
+        newConfig = Config.update caction cmodel
+        sunday = model.sunday 
+        newSunday = {sunday | config = newConfig}
+        red = model.redLetter 
+        newRed = {red | config = newConfig}
+        daily = model.daily
+        newDaily = {daily | config = newConfig}
+        newModel = {model | config = newConfig, 
+                            sunday = newSunday, 
+                            redLetter = newRed, 
+                            daily = newDaily
+                    }
       in
-        (newModel, Effects.none)
+        (newModel, saveConfig newModel.config)
 
 -- HELPERS|> Task.toMaybe
 
 gatherText: Model -> String -> Effects Action
 gatherText model prayer =
-  Signal.send gatherAllText.address (prayer, model.today)
+  Signal.send gatherAllText.address (prayer, model.today, model.config)
   |> Task.toMaybe
   |> Task.map (always NoOp)
   |> Effects.task
@@ -269,6 +288,13 @@ gatherText model prayer =
 changeDay: String -> Model -> Effects Action
 changeDay day model =
   Signal.send moveDay.address (day, model.today)
+  |> Task.toMaybe
+  |> Task.map (always NoOp)
+  |> Effects.task
+
+saveConfig: Models.Config -> Effects Action
+saveConfig config =
+  Signal.send saveThisConfig.address (config)
   |> Task.toMaybe
   |> Task.map (always NoOp)
   |> Effects.task
@@ -341,7 +367,7 @@ view address model =
     , listDates address model
     , dateNav address model
     , readingNav address model
---    , config address model
+    , config address model
     , listReadings address model
     , morningPrayerDiv address model
     , eveningPrayerDiv address model
@@ -444,7 +470,7 @@ readingNav address model =
 
 config: Signal.Address Action -> Model -> Html
 config address model = 
-  div []
+  div [class "cssmenu"]
     [(Config.view (Signal.forwardTo address (ModConfig model.config)) model.config)]
 
     

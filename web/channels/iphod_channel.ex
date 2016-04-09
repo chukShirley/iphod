@@ -11,12 +11,12 @@ defmodule Iphod.IphodChannel do
   use Timex
   @tz "America/Los_Angeles"
   @email %{ addr: "", subj: "", msg: "", show: false}
-  @config %{ ot: "ESV",
-             ps: "Coverdale",
-             nt: "ESV",
-             gs: "ESV",
-             fnotes: true
-            }
+#  @config %{ ot: "ESV",
+#             ps: "Coverdale",
+#             nt: "ESV",
+#             gs: "ESV",
+#             fnotes: "fnotes"
+#            }
 
 
 #  alias Saints.Donor
@@ -41,7 +41,7 @@ defmodule Iphod.IphodChannel do
               morningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
               eveningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
               email:          @email,
-              config:         @config, 
+              config:         nil, 
               about:          false
             }
     push socket, "next_sunday", msg
@@ -124,7 +124,7 @@ defmodule Iphod.IphodChannel do
              morningPrayer: date |> DailyReading.readings |> jsonify_daily,
              eveningPrayer: date |> DailyReading.readings |> jsonify_daily,
              email:          @email,
-             config:         @config, 
+             config:         nil, 
              about:         false
           }
     push  socket, "next_sunday", msg
@@ -133,32 +133,32 @@ defmodule Iphod.IphodChannel do
     
   end
 
-  def handle_in("request_all_text", ["morningPrayer", this_date], socket) do
+  def handle_in("request_all_text", ["morningPrayer", this_date, config], socket) do
     readings = 
       Timex.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
       |> DailyReading.readings
     readings.mp1 ++ readings.mp2
       |> Enum.each(fn(r)-> 
-          push_text "morningPrayer", r, EsvText.request(r.read), "ESV", socket
+          push_text "morningPrayer", r, EsvText.request(r.read, config["fnotes"]), "ESV", socket
       end)
     readings.mpp
       |> Enum.each(fn(r)-> 
-          push_text "morningPrayer", r, Psalms.to_html(r.read, "Coverdale"), "Coverdale", socket
+          push_text "morningPrayer", r, Psalms.to_html(r.read, config["ps"]), config["ps"], socket
       end)
     {:noreply, socket}
   end
 
-  def handle_in("request_all_text", ["eveningPrayer", this_date], socket) do
+  def handle_in("request_all_text", ["eveningPrayer", this_date, config], socket) do
     readings = 
       Timex.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
       |> DailyReading.readings
     readings.ep1 ++ readings.ep2
       |> Enum.each(fn(r)-> 
-          push_text "eveningPrayer", r, EsvText.request(r.read), "ESV", socket
+          push_text "eveningPrayer", r, EsvText.request(r.read, config["fnotes"]), "ESV", socket
       end)
     readings.epp
       |> Enum.each(fn(r)-> 
-          push_text "eveningPrayer", r, Psalms.to_html(r.read, "Coverdale"), "Coverdale", socket
+          push_text "eveningPrayer", r, Psalms.to_html(r.read, config["ps"]), config["ps"], socket
       end)
     {:noreply, socket}
   end
@@ -168,18 +168,9 @@ defmodule Iphod.IphodChannel do
       |> move_day(this_far, socket)
   end
 
-  def handle_in("request_text", [model, section, id, vss, "ESV"], socket) do
-    body = EsvText.request(vss)
-    push socket, "new_text", %{model: model, section: section, id: id, body: body, version: "ESV"}
-    {:noreply, socket}
-  end 
-
-  def handle_in("request_text", [model, section, id, vss, version], socket) do
-    # this should only happen on psalms
-    body = Psalms.to_html vss, version
-    push socket, "new_text", %{model: model, section: section, id: id, body: body, version: version}
-    {:noreply, socket}
-  end 
+  def handle_in("request_text", request_model, socket) do
+    request_text(request_model["ver"], request_model, socket)
+  end
 
   def handle_in("request_named_day", [season, week], socket) do
     date = Date.now(@tz)
@@ -190,7 +181,7 @@ defmodule Iphod.IphodChannel do
              morningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
              eveningPrayer:  Date.now(@tz) |> DailyReading.readings |> jsonify_daily,
              email:          @email,
-             config:         @config, 
+             config:         nil, 
              about:     false
           }
     push  socket, "next_sunday", msg
@@ -210,6 +201,21 @@ defmodule Iphod.IphodChannel do
   def handle_out(_event, _payload, socket) do
     {:noreply, socket}
   end
+
+  def request_text("ESV", m, socket) do
+    body = EsvText.request(m["read"], m["fnotes"])
+    # {ofType: "sunday", section: "ot", id: "Acts_9_1-19a", read: "Acts 9.1-19a", ver: "ESV"…}
+    push socket, "new_text", %{model: m["ofType"], section: m["section"], id: m["id"], body: body, version: "ESV"}
+    {:noreply, socket}
+  end 
+
+  def request_text(ver, m, socket) do
+    # this should only happen on psalms
+    # {ofType: "sunday", section: "ot", id: "Acts_9_1-19a", read: "Acts 9.1-19a", ver: "ESV"…}
+    body = Psalms.to_html m["read"], m["ver"]
+    push socket, "new_text", %{model: m["ofType"], section: m["section"], id: m["id"], body: body, version: m["ver"]}
+    {:noreply, socket}
+  end  
 
   # Add authorization logic here as required.
   defp authorized?(_payload) do
