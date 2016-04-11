@@ -342,6 +342,7 @@ updateDailyText daily text =
           {this_lesson | body = text.body, show = True}
         else 
           this_lesson
+
     newSection = List.map update_text this_section
     newDaily = case text.section of
       "mp1" -> {daily | mp1 = newSection}

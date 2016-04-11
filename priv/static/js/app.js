@@ -16052,9 +16052,9 @@ Elm.Iphod.Daily.make = function (_elm) {
               _U.list([A2($Html.caption,
                       _U.list([titleStyle(model)
                               ,A2($Html$Events.onClick,address,ToggleModelShow)]),
-                      _U.list([$Html.text(A2($Basics._op["++"],
-                      "Daily Office: ",
-                      model.title))]))
+                      _U.list([$Html.text(A2($String.join,
+                      " ",
+                      _U.list(["Daily Office:",model.date])))]))
                       ,A2($Html.tr,
                       _U.list([$Html$Attributes.$class("rowStyle")]),
                       _U.list([A2($Html.th,

@@ -93,14 +93,12 @@ defmodule Iphod.IphodChannel do
   def move_day(date, "tomorrow", socket) do
     date 
     |> Timex.shift(days: 1) 
-    |> Timex.to_date
     |> request_date(socket, {false, true})
   end
 
   def move_day(date, "yesterday", socket) do
     date 
     |> Timex.shift(days: -1) 
-    |> Timex.to_date
     |> request_date(socket, {false, true})
   end
 
@@ -136,6 +134,7 @@ defmodule Iphod.IphodChannel do
   def handle_in("request_all_text", ["morningPrayer", this_date, config], socket) do
     readings = 
       Timex.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
+      |> Timex.to_date
       |> DailyReading.readings
     readings.mp1 ++ readings.mp2
       |> Enum.each(fn(r)-> 
@@ -151,6 +150,7 @@ defmodule Iphod.IphodChannel do
   def handle_in("request_all_text", ["eveningPrayer", this_date, config], socket) do
     readings = 
       Timex.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
+      |> Timex.to_date
       |> DailyReading.readings
     readings.ep1 ++ readings.ep2
       |> Enum.each(fn(r)-> 
@@ -165,6 +165,7 @@ defmodule Iphod.IphodChannel do
 
   def handle_in("request_move_day", [this_far, this_date], socket) do
     Timex.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
+      |> Timex.to_date
       |> move_day(this_far, socket)
   end
 

@@ -78,7 +78,7 @@ view address model =
   div
   []
   [ table [class "readings_table", tableStyle model]
-      [ caption [titleStyle model, onClick address ToggleModelShow] [text ("Daily Office: " ++ model.title)] 
+      [ caption [titleStyle model, onClick address ToggleModelShow] [text (String.join " " ["Daily Office:", model.date])] 
       , tr
           [ class "rowStyle" ]
           [ th [] [ text "Morning 1"]

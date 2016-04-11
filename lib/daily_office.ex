@@ -24,13 +24,13 @@ defmodule DailyReading do
   # readings(d) is last otherwise there will be confusion between
   # Timex.Date tuple of {season, wk, _litYr, date}
   def readings(date) do
-    {season, wk, litYr, _sunday} =
-      if date |> Lityear.is_sunday? do
-        date |> Lityear.to_season
-      else
-        date |> Lityear.last_sunday
-      end
-    readings {season, wk, litYr, date}
+    {season, wk, lityr, _sundayDate} = if date |> Lityear.is_sunday? do
+      date |> Lityear.to_season
+    else
+      date |> Lityear.last_sunday
+    end
+    # IMPORTANT - send the real date, not the sundayDate
+    readings {season, wk, lityr, date}
   end
 
   def add_psalms(map, day) do
@@ -1031,7 +1031,7 @@ defmodule DailyReading do
           },
           "3" =>
           %{"Sunday" =>   %{title: "Third Sunday of Easter",
-                            mp1: [%{style: "req", read: "Num 13.1, 2, 17- end"}],
+                            mp1: [%{style: "req", read: "Num 13.1-2, 17-end"}],
                             mp2: [%{style: "req", read: "Mark 5.21-end"}],
                             ep1: [%{style: "req", read: "Deut 4.25-40"}],
                             ep2: [%{style: "req", read: "John 21.1-14"}],},

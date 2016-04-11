@@ -46,7 +46,7 @@ defmodule Psalms do
     |> _to_html(ver)
   end
   def _to_html(n, ver) when n |> is_integer, do: _to_html(psalm(n, ver), ver)
-  
+
   def _to_html(ps, "ESV"), do: ps # ESV comes ready to go
   def _to_html(ps, ver) do
     s = ~s(<h3>#{ps["name"]} <span class="ps_title">#{ps["title"]}</span></h3></br>)
@@ -58,9 +58,9 @@ defmodule Psalms do
   end
 
   def vs_to_html({key, val}) when key |> is_integer do
-    ~s( <span class="ps_vs_num">#{key} </span>
-        <span class="ps_first">#{val.first}</span></br>
-        <span class="ps_second">#{val.second}</span></br>
+    ~s( <p class="ps_vs_num">#{key} </p>
+        <p class="ps_first">#{val.first}</p>
+        <p class="ps_second">#{val.second}</p>
     ) 
   end
   def vs_to_html(_), do: ""
