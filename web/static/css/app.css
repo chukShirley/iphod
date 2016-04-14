@@ -103,7 +103,36 @@ button.delete {
 
 button {
   outline: none;
-  font-size: 100%;
+  font-size: 0.8em;
+}
+
+.collect_hide{
+  position: relative;
+  margin-left: 0em;
+}
+
+.collect_instruction {
+  font-size: 0.8em;
+  font-style: italic;
+  color: red;
+  margin-bottom: 1em;
+}
+
+.collect_title {
+  margin-bottom: -1em;
+  margin-top: 0em;
+  font-variant: small-caps;
+}
+
+.collect_text {
+  padding: 0 2em;
+}
+
+.proper {
+  margin-top: 0em;
+  color: darkred;
+  font-variant: small-caps;
+  font-weight: bold;
 }
 
 .ps_title {

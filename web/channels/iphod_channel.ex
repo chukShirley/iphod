@@ -49,16 +49,17 @@ defmodule Iphod.IphodChannel do
   end
 
   def jsonify_reading(ofType, r, show \\ false) do
-    %{  ofType: ofType,
-        date:   r.date,
-        season: r.season,
-        week:   r.week,
-        title:  r.title,
-        ot:     r.ot,
-        ps:     r.ps,
-        nt:     r.nt,
-        gs:     r.gs,
-        show:   show
+    %{  ofType:   ofType,
+        date:     r.date,
+        season:   r.season,
+        week:     r.week,
+        title:    r.title,
+        collect:  r.collect,
+        ot:       r.ot,
+        ps:       r.ps,
+        nt:       r.nt,
+        gs:       r.gs,
+        show:     show
       }
   end
 

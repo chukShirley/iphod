@@ -26,7 +26,8 @@ defmodule SundayReading do
                 date:   sunday |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"), 
                 season: season, 
                 week:   wk, 
-                title:  identity[season][wk]["title"]
+                title:  identity[season][wk]["title"],
+                collect: Collects.get(season, wk)
               })
   end
 
@@ -1103,7 +1104,7 @@ defmodule SundayReading do
                       }
           }
     },
-    "proper" =>
+    "pentecost" =>
       %{  "1" =>
             %{"title" => "Pentecost ",
                 "a" => %{ ot: [%{style: "req", read: "Acts 2.1-11"}],
@@ -1180,7 +1181,43 @@ defmodule SundayReading do
             }
           },
     "proper" =>
-      %{  "3" =>
+        %{"1" =>
+          %{  "title" => "Sunday Closest to May 11",
+              "a" => %{ ot: [%{style: "req", read: "Isaiah 49.1-7"}],
+                        ps: [%{style: "req", read: "Psalm 67"}],
+                        nt: [%{style: "req", read: "Acts 1.1-8"}],
+                        gs: [%{style: "req", read: "Matthew 9.35-38"}]
+                        },
+              "b" => %{ ot: [%{style: "req", read: "Gen 12.1-3"}],
+                        ps: [%{style: "req", read: "Psalm 86.8-13"}],
+                        nt: [%{style: "req", read: "Rev 7.9-17"}],
+                        gs: [%{style: "req", read: "Mt 28.16-20"}]
+                        },
+              "c" => %{ ot: [%{style: "req", read: "Isaiah 61.1-4"}],
+                        ps: [%{style: "req", read: "Psalm 96"}],
+                        nt: [%{style: "req", read: "Rom 10.9-17"}],
+                        gs: [%{style: "req", read: "Jn 20.19-31"}]
+                      }
+          },
+        "2" =>
+          %{  "title" => "Sunday Closest to May 18",
+              "a" => %{ ot: [%{style: "req", read: "Ex 24.12-18"}],
+                        ps: [%{style: "req", read: "Psalm 99"}],
+                        nt: [%{style: "req", read: "Phil 3.7-14"}],
+                        gs: [%{style: "req", read: "Mt 17.1-9"}]
+                        },
+              "b" => %{ ot: [%{style: "req", read: "1 Kings 19.9-18"}],
+                        ps: [%{style: "req", read: "Psalm 27"}],
+                        nt: [%{style: "req", read: "2 Pet 1.13-21"}],
+                        gs: [%{style: "req", read: "Mk 9.2-9"}]
+                        },
+              "c" => %{ ot: [%{style: "req", read: "Ex 34.29-35"}],
+                        ps: [%{style: "req", read: "Psalm 99"}],
+                        nt: [%{style: "req", read: "1 Cor 12.27-13.13"}],
+                        gs: [%{style: "req", read: "Lk 9.28-36"}]
+                      }
+          },
+        "3" =>
             %{  "title" => "Sunday Closest to May 25",
                 "a" => %{ ot: [%{style: "req", read: "Isaiah 49.8-18"}],
                           ps: [%{style: "req", read: "Psalm 62"}],

@@ -1,5 +1,7 @@
-module Iphod.Models ( Config, Lesson, Sunday, Daily, Email, 
-                      configInit, sundayInit, dailyInit, emailInit
+module Iphod.Models ( Config, Lesson, Sunday, Daily, 
+                      Email, Collect, SundayCollect,
+                      configInit, sundayInit, dailyInit,
+                      emailInit, initCollect, initSundayCollect
                     ) where
 
 type alias Config =
@@ -44,12 +46,40 @@ type alias Lesson =
   , version:  String
   }
 
+type alias Proper = String
+type alias Collect =
+  { collect: String
+  , propers: List Proper
+  }
+
+initCollect: Collect
+initCollect =
+  { collect = ""
+  , propers = []
+  } 
+
+type alias SundayCollect =
+  { instruction: String
+  , title: String
+  , collects: List Collect
+  , show: Bool
+  }
+
+initSundayCollect: SundayCollect
+initSundayCollect =
+  { instruction = ""
+  , title = ""
+  , collects = []
+  , show = False
+  }
+
 type alias Sunday =
   { ofType:   String
   , date:     String
   , season:   String
   , week:     String
   , title:    String
+  , collect:  SundayCollect
   , ot:       List Lesson
   , ps:       List Lesson
   , nt:       List Lesson
@@ -65,6 +95,7 @@ sundayInit =
   , season  = ""
   , week    = ""
   , title   = ""
+  , collect = initSundayCollect
   , ot      = []
   , ps      = []
   , nt      = []

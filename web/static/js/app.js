@@ -92,6 +92,12 @@ var elmDiv = document.getElementById('elm-container')
     , gs: ""
     , fnotes: ""
   }
+  , sunday_collect_model = {
+      instruction: "String"
+    , title: ""
+    , collects: []
+    , show: false
+  }
   , email_model = {
         addr: ""
       , msg: ""
@@ -104,6 +110,7 @@ var elmDiv = document.getElementById('elm-container')
       , season: ""
       , week: ""
       , title: ""
+      , collect: sunday_collect_model
       , ot: []
       , ps: []
       , nt: []

@@ -38,6 +38,7 @@ type Action
   | SetReading Model
   | ToggleShow Models.Lesson
   | ToggleModelShow
+  | ToggleCollect
 
 update: Action -> Model -> Model
 update action model =
@@ -66,6 +67,13 @@ update action model =
           _    -> {model | gs = newSection}
       in
         newModel
+    ToggleCollect ->
+      let
+        collect = model.collect
+        newCollect = {collect | show = not collect.show}
+        newModel = {model | collect = newCollect}
+      in
+        newModel
 
 -- VIEW
 
@@ -74,7 +82,16 @@ view address model =
   div
   []
   [ table [class "readings_table", tableStyle model]
-      [ caption [titleStyle model, onClick address ToggleModelShow] [text model.title]
+      [ caption 
+        [titleStyle model]
+        [ span [onClick address ToggleModelShow] [text model.title]
+        , br [] []
+        , button 
+          [ class "button"
+          , onClick address ToggleCollect
+          ] 
+          [text "Collect"]
+        ]
       , tr 
           [ class "rowStyle" ]
           [ th [] [ text "1st Lesson"]
@@ -85,27 +102,27 @@ view address model =
       , tr
           [ class "rowStyle" ]
           [ td 
-              [class "tdStyle", style [("width", "25%")] ]
+              [class "tdStyle", style [("width", "20%")] ]
               [ ul [textStyle model] ( thisReading address model OT) ]
               -- [ ul [textStyle model] ( thisReading address model.ofType model.ot model.config.gs model.config.fnotes) ]
           , td
-              [class "tdStyle", style [("width", "25%")] ]
+              [class "tdStyle", style [("width", "20%")] ]
               [ ul [textStyle model] ( thisReading address model PS)]
               -- [ ul [textStyle model] ( thisReading address model.ofType model.ps model.config.gs model.config.fnotes) ]
            , td
-              [class "tdStyle", style [("width", "25%")] ]
+              [class "tdStyle", style [("width", "20%")] ]
               [ ul [textStyle model] ( thisReading address model NT)]
               -- [ ul [textStyle model] ( thisReading address model.ofType model.nt model.config.gs model.config.fnotes) ]
            , td
-              [class "tdStyle", style [("width", "25%")] ]
+              [class "tdStyle", style [("width", "20%")] ]
               [ ul [textStyle model] ( thisReading address model GS)]
-              -- [ ul [textStyle model] ( thisReading address model.ofType model.gs model.config.gs model.config.fnotes) ]
           ] -- end of row
       ] -- end of table
     , div [] (thisText address model.ofType model.ot )
     , div [] (thisText address model.ofType model.ps )
     , div [] (thisText address model.ofType model.nt )
     , div [] (thisText address model.ofType model.gs )
+    , div [ collectStyle model.collect ] (thisCollect address model.collect)
 
 --    [ li [titleStyle model, onClick address ToggleModelShow] [text model.title]
  
@@ -113,6 +130,35 @@ view address model =
 
 
 -- HELPERS
+
+thisCollect: Signal.Address Action -> Models.SundayCollect -> List Html
+thisCollect address sundayCollect =
+  let
+    this_collect c = 
+      p 
+      [] 
+      ([text c.collect] ++ List.map thisProper c.propers)
+  in
+    [ p 
+        [class "collect_instruction"]
+        [ text sundayCollect.instruction ]
+    , button 
+        [ class "collect_hide"
+        , onClick address ToggleCollect
+        ] 
+        [text "hide"]
+    , p
+        [class "collect_title"]
+        [ text sundayCollect.title ]
+    , div
+        [class "collect_text"]
+        (List.map this_collect sundayCollect.collects)
+    ]
+
+thisProper: String -> Html
+thisProper proper =
+  p [class "proper"] [text ("Proper: " ++ proper)]
+
 
 thisText: Signal.Address Action -> String -> List Models.Lesson -> List Html
 thisText address ofType lessons =
@@ -232,7 +278,7 @@ titleStyle model =
     model.show
     [ ("font-size", "0.9em")
     , ("color", "blue")
-    , ("height", "2em")
+    , ("height", "2.3em")
     ]
 
 textStyle: Model -> Attribute
@@ -246,5 +292,18 @@ textStyle model =
     , ("list-style-type", "none")
     , ("display", "inline-block")
     ]
+
+collectStyle: Models.SundayCollect -> Attribute
+collectStyle model =
+  hideable
+    model.show
+    [ ("font-size", "1em")
+    , ("background-color", "white")
+    , ("margin", "0em")
+    , ("padding", "0em")
+    , ("list-style-type", "none")
+    , ("display", "inline-block")
+    ]
+
 
 
