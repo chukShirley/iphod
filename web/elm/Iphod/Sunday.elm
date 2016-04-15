@@ -155,10 +155,12 @@ thisCollect address sundayCollect =
         (List.map this_collect sundayCollect.collects)
     ]
 
-thisProper: String -> Html
+thisProper: Models.Proper -> Html
 thisProper proper =
-  p [class "proper"] [text ("Proper: " ++ proper)]
-
+  div []
+      [ p [class "proper_title"] [text ("Proper: " ++ proper.title)]
+      , p [class "proper_text"] [text proper.text]
+      ]
 
 thisText: Signal.Address Action -> String -> List Models.Lesson -> List Html
 thisText address ofType lessons =

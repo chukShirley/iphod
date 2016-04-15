@@ -4,9 +4,11 @@ defmodule Collects do
   end
   def identity(), do: Agent.get(__MODULE__, &(&1))
   def get(key) when key |> is_bitstring do
-    {instruction, title, collects} =  identity[key]
+    {instruction, title, collects} =  identity.collects[key]
     cmap = collects
-      |> Enum.map( fn({c, propers}) -> %{ collect: c, propers: propers} end)
+      |> Enum.map( fn({c, pkeys}) -> 
+        %{ collect: c, propers: list_propers(pkeys)} 
+      end)
     %{ instruction: instruction, title: title, collects: cmap, show: false }
   end
   def get({season, week, _lityear, _date}) do
@@ -15,10 +17,20 @@ defmodule Collects do
   def get("redLetter", week), do: week |> get
   def get(season, week), do: season <> week |> get
 
+  def proper(key), do: identity.propers[key]
+  def list_propers(pkeys) do
+    pkeys
+    |> Enum.map( fn(key)->
+        {title, text} = proper(key)
+        %{title: title, text: text}
+      end)
+  end
+
+
   def build do
     # model...
     # {instruction, title, list_of[collect, list_of[propers]]}
-    %{ 
+    %{ collects: %{
       "advent1" =>
         { "",
           "The First Sunday in Advent",
@@ -27,7 +39,7 @@ defmodule Collects do
                 the last day, when he shall come again in his glorious majesty to judge both the living and the dead,
                 we may rise to the life immortal; through him who lives and reigns with you and the Holy Spirit, one
                 God, now and forever. Amen.",
-              ["Preface of Advent"]
+              [:advent]
             }
           ]
         },
@@ -39,7 +51,7 @@ defmodule Collects do
                 may embrace and ever hold fast the blessed hope of everlasting life, which you have given us in our
                 Savior Jesus Christ; who lives and reigns with you and the Holy Spirit, one God, for ever and ever.
                 Amen.",
-              ["Preface of Advent"]
+              [:advent]
             }
           ]
         },
@@ -51,7 +63,7 @@ defmodule Collects do
                 your way, by turning the hearts of the disobedient to the wisdom of the just, that at your second
                 coming to judge the world, we may be found a people acceptable in your sight; who with the Father
                 and the Holy Spirit, lives and reigns, one God, now and forever. Amen.",
-              ["Preface of Advent"]
+              [:advent]
             }
           ]
         },
@@ -62,7 +74,7 @@ defmodule Collects do
                 our sins from running the race that is set before us, let your bountiful grace and mercy speedily help
                 and deliver us; through Jesus Christ our Lord, to whom, with you and the Holy Spirit, be honor and
                 glory, now and forever. Amen",
-              ["Preface of Advent"]
+              [:advent]
             }
           ]
         },
@@ -72,7 +84,7 @@ defmodule Collects do
           [ { "O God, you have caused this holy night to shine with the brightness of the true Light: Grant that we,
                 who have known the revelation of that Light on earth, may also enjoy him perfectly in heaven; where 
                 with you and the Holy Spirit he lives and reigns, one God, in glory everlasting. Amen.",
-              ["Preface of the Incarnation"]
+              [:incarnation]
             }
           ]
         },
@@ -85,7 +97,7 @@ defmodule Collects do
                 [this day] of a pure virgin: Grant that we, who have been born again and made your children by
                 adoption and grace, may daily be renewed by your Holy Spirit; through our Lord Jesus Christ, to
                 whom with you and the same Spirit be honor and glory, now and forever. Amen.",
-              ["Preface of the Incarnation"]
+              [:incarnation]
             }
           ]
         },
@@ -95,7 +107,7 @@ defmodule Collects do
           [ { "Almighty God, you have poured upon us the new light of your incarnate Word: Grant that this light,
                 enkindled in our hearts, may shine forth in our lives; through Jesus Christ our Lord, who lives and
                 reigns with you, in the unity of the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of the Incarnation"]
+              [:incarnation]
             }
           ]
         },
@@ -118,7 +130,7 @@ defmodule Collects do
                 Grant that we may share the divine life of him who humbled himself to share our humanity, your
                 Son Jesus Christ; who lives and reigns with you, in the unity of the Holy Spirit, one God, for ever
                 and ever. Amen.",
-              ["Preface of the Incarnation"]
+              [:incarnation]
             }
           ]
         },
@@ -131,7 +143,7 @@ defmodule Collects do
                 who know you now by faith, to your presence, where we may see your glory face to face; through
                 Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God, now and forever.
                 Amen.",
-              ["Preface of the Epiphany"]
+              [:epiphany]
             }
           ]
         },
@@ -142,7 +154,7 @@ defmodule Collects do
                 Holy Spirit: grant to us, who are born again by water and the Spirit, that we may be faithful to our
                 calling as your adopted children; through Jesus Christ your Son our Lord, who is alive and reigns
                 with you, in the unity of the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of the Epiphany"]
+              [:epiphany]
             }
           ]
         },
@@ -153,7 +165,7 @@ defmodule Collects do
                 illumined by your Word and Sacraments, may shine with the radiance of Christ’s glory, that he may
                 be known, worshiped, and obeyed to the ends of the earth; through Jesus Christ our Lord, who with
                 you and the Holy Spirit lives and reigns, one God, now and forever. Amen.",
-              ["Preface of the Epiphany"]
+              [:epiphany]
             }
           ]
         },
@@ -164,7 +176,7 @@ defmodule Collects do
                 the Good News of his salvation, that we and the whole world may perceive the glory of his
                 marvelous works; who lives and reigns with you and the Holy Spirit, one God, for ever and ever.
                 Amen.",
-              ["Preface of the Epiphany"]
+              [:epiphany]
             }
           ]
         },
@@ -175,7 +187,7 @@ defmodule Collects do
                 nature we cannot always stand upright: Grant us your strength and protection to support us in all
                 dangers and carry us through every temptation; through Jesus Christ our Lord, who lives and reigns
                 with you and the Holy Spirit, one God, world without end. Amen.",
-              ["Preface of the Epiphany"]
+              [:epiphany]
             }
           ]
         },
@@ -186,7 +198,7 @@ defmodule Collects do
                 in the temple in the substance of our flesh, so we may be presented to you with pure and clean hearts
                 by Jesus Christ our Lord; who lives and reigns with you and the Holy Spirit, one God, now and
                 forever. Amen.",
-              ["Preface of the Epiphany"]
+              [:epiphany]
             }
           ]
         },
@@ -197,7 +209,7 @@ defmodule Collects do
                 your true religion; so that we who trust in the hope of your heavenly grace may always be defended
                 by your mighty power; through Jesus Christ our Lord, who lives and reigns with you and the Holy
                 Spirit, both now and forever. Amen",
-              ["Preface of the Lord’s Day", "Preface of the Epiphany"]
+              [:lordsDay, :epiphany]
             }
           ]
         },
@@ -207,7 +219,7 @@ defmodule Collects do
           [ { "Almighty God, we ask you mercifully to look upon your people; that by your great goodness they
                 may be governed and preserved evermore; through Jesus Christ our Lord, who lives and reigns with
                 you and the Holy Spirit, now and forever. Amen.",
-              ["Preface of the Lord’s Day","Preface of the Epiphany"]
+              [:lordsDay,:epiphany]
             }
           ]
         },
@@ -218,7 +230,7 @@ defmodule Collects do
                 through the weakness of our mortal nature we can do no good thing without you, grant us the help
                 of your grace to keep your commandments; so that we may please you in will and deed; we ask this
                 through Jesus Christ our Lord. Amen.",
-              ["Preface of the Lord’s Day", "Preface of the Epiphany"]
+              [:lordsDay, :epiphany]
             }
           ]
         },
@@ -229,7 +241,7 @@ defmodule Collects do
                 us, by your mighty power, from all adversities which might assault and hurt our souls; we ask this
                 through Jesus Christ our Lord, who with you and the Holy Spirit, lives and reigns as one God, now
                 and forever. Amen.",
-              ["Preface of the Lord’s Day","Preface of the Epiphany"]
+              [:lordsDay,:epiphany]
             }
           ]
         },
@@ -242,7 +254,7 @@ defmodule Collects do
         the Good News of his salvation, that we and the whole world may perceive the glory of his
         marvelous works; who lives and reigns with you and the Holy Spirit, one God, for ever and ever.
         Amen.",
-        ["Preface of Epiphany"]
+        [:epiphany]
       }
     ]
   },
@@ -253,7 +265,7 @@ defmodule Collects do
                 mountain: Grant that we, beholding by faith the light of his countenance, may be strengthened to
                 bear our cross, and be changed into his likeness from glory to glory; through Jesus Christ our Lord,
                 who lives and reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of the Epiphany"]
+              [:epiphany]
             }
           ]
         },
@@ -266,7 +278,7 @@ defmodule Collects do
                 acknowledging our wretchedness, may obtain of you, the God of all mercy, perfect remission and
                 forgiveness; through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one
                 God, for ever and ever. Amen.",
-              ["Preface of Lent"]
+              [:lent]
             }
           ]
         },
@@ -277,7 +289,7 @@ defmodule Collects do
                 help us who are assaulted by many temptations; and, as you know the weaknesses of each of us, let
                 each one find you mighty to save; through Jesus Christ your Son our Lord, who lives and reigns with
                 you and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Lent"]
+              [:lent]
             }
           ]
         },
@@ -289,7 +301,7 @@ defmodule Collects do
                 which may happen to the body, and from all evil thoughts which may assault and hurt the soul;
                 through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God, for ever
                 and ever. Amen.",
-              ["Preface of Lent"]
+              [:lent]
             }
           ]
         },
@@ -300,7 +312,7 @@ defmodule Collects do
                 upon the heartfelt desires of your humble servants, and stretch forth the strong hand of your Majesty
                 to be our defense against our enemies; through Jesus Christ our Lord, who lives and reigns with you
                 and the Holy Spirit, world without end. Amen.",
-              ["Preface of Lent"]
+              [:lent]
             }
           ]
         },
@@ -310,7 +322,7 @@ defmodule Collects do
           [ { "Gracious Father, whose blessed Son Jesus Christ came down from heaven to be the true bread which
                 gives life to the world: Evermore give us this bread, that he may live in us, and we in him; who lives
                 and reigns with you and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Lent"]
+              [:lent]
             }
           ]
         },
@@ -322,7 +334,7 @@ defmodule Collects do
                 varied changes of this world, our hearts may surely there be fixed where true joys are to be found;
                 through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God, now and
                 forever. Amen.",
-              ["Preface of Lent"]
+              [:lent]
             }
           ]
         },
@@ -334,7 +346,7 @@ defmodule Collects do
                 example of his great humility: Mercifully grant that we may walk in the way of his suffering, and also
                 share in his resurrection; through Jesus Christ our Lord, who lives and reigns with you and the Holy
                 Spirit, one God, for ever and ever. Amen.",
-              ["Preface of Holy Week"]
+              [:holyWeek]
             }
           ]
         },
@@ -344,7 +356,7 @@ defmodule Collects do
           [ { "Almighty God, whose most dear Son went not up to joy but first he suffered pain, and entered not
                 into glory before he was crucified: Mercifully grant that we, walking in the way of the cross, may find
                 it none other than the way of life and peace; through Jesus Christ your Son our Lord. Amen",
-              ["Preface of Holy Week"]
+              [:holyWeek]
             }
           ]
         },
@@ -354,7 +366,7 @@ defmodule Collects do
           [ { "Lord our God, whose blessed Son our Savior gave his back to be whipped and did not hide his face
                 from shame and spitting: Give us grace to accept joyfully the sufferings of the present time,
                 confident of the glory that shall be revealed; through Jesus Christ your Son our Lord. Amen.",
-              ["Preface of Holy Week"]
+              [:holyWeek]
             }
           ]
         },
@@ -364,7 +376,7 @@ defmodule Collects do
           [ { "Assist us mercifully with your grace, Lord God of our salvation; that we may enter with joy upon the
                 meditation of those mighty acts by which you have promised us life and immortality; through Jesus
                 Christ our Lord. Amen.",
-              ["Preface of Holy Week"]
+              [:holyWeek]
             }
           ]
         },
@@ -375,7 +387,7 @@ defmodule Collects do
                 Body and Blood: Mercifully grant that we may receive it thankfully in remembrance of Jesus Christ
                 our Lord, who in these holy mysteries gives us a pledge of eternal life; and who now lives and reigns
                 with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of Maundy Thursday"]
+              [:maundyThursday]
             }
           ]
         },
@@ -407,13 +419,13 @@ defmodule Collects do
                 Christ, and our corrupt affections buried with him, we may pass through the grave and gate of death,
                 and rise with him to our joyful resurrection; who now is alive and reigns with you and the Holy Spirit
                 in everlasting glory. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             },
             { "O God, who made this most holy night to shine with the glory of the Lord’s resurrection: Stir up in
                 your Church that Spirit of adoption which is given to us in Baptism, that we, being renewed both in
                 body and mind, may worship you in sincerity and truth; through Jesus Christ our Lord, who lives and
                 reigns with you, in the unity of the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -424,13 +436,13 @@ defmodule Collects do
                 the gate of everlasting life: Grant that we, who celebrate with joy the day of the Lord’s resurrection,
                 may be raised from the death of sin by your life-giving Spirit; through Jesus Christ our Lord, who
                 lives and reigns with you and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             },
             { "O God, who for our redemption gave your only begotten Son to die upon the cross, and by his
                 glorious resurrection delivered us from the power of death and the devil: Grant us the grace to die
                 daily to sin, that we may live with him in the joy of his resurrection, through the same, Jesus Christ
                 our Lord, who lives and reigns with you and the Holy Spirit now and forever. Amen",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -440,7 +452,7 @@ defmodule Collects do
           [ { "Grant, we pray, Almighty God, that we who celebrate with awe the Paschal feast may be found
                 worthy to attain to everlasting joys; through Jesus Christ our Lord, who lives and reigns with you and
                 the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -451,7 +463,7 @@ defmodule Collects do
                 and immortality to light: Grant that we, who have been raised with him, may abide in his presence
                 and rejoice in the hope of eternal glory; through Jesus Christ our Lord, to whom, with you and the
                 Holy Spirit, be dominion and praise for ever and ever. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -461,7 +473,7 @@ defmodule Collects do
           [ { "O God, whose blessed Son made himself known to his disciples in the breaking of bread: Open the
                 eyes of our faith, that we may behold him in all his redeeming work; who lives and reigns with you, in
                 the unity of the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -472,7 +484,7 @@ defmodule Collects do
                 righteousness: Grant that all who have been reborn into the fellowship of Christ’s Body may show
                 forth in their lives what they profess by their faith; through Jesus Christ our Lord, who lives and
                 reigns with you and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -483,7 +495,7 @@ defmodule Collects do
                 grace so to put away the leaven of malice and wickedness, that we may always serve you in pureness
                 of living and truth; through Jesus Christ your Son our Lord, who lives and reigns with you and the
                 Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -494,7 +506,7 @@ defmodule Collects do
                 brought us into the kingdom of your Son; and we pray that, as by his death he has recalled us to life,
                 so by his love he may raise us to eternal joys; who lives and reigns with you, in the unity of the Holy
                 Spirit, one God, now and forever. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -505,7 +517,7 @@ defmodule Collects do
                 reconciliation: Grant that all who have been reborn into the fellowship of Christ’s Body may show 
                 forth in their lives what they profess by their faith; through Jesus Christ our Lord, who lives and
                 reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -515,7 +527,7 @@ defmodule Collects do
           [ { "Almighty God, you gave your only Son to be for us both a sacrifice for sin and an example of godly
                 living: Give us the grace thankfully to receive this his inestimable benefit, and daily to follow the
                 blessed steps of his most holy life; through Jesus Christ our Lord. Amen",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -525,7 +537,7 @@ defmodule Collects do
           [ { "O God, whose Son Jesus is the good shepherd of your people: Grant that when we hear his voice we
                 may know him who calls us each by name, and follow where he leads; who, with you and the Holy
                 Spirit, lives and reigns, one God, for ever and ever. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -536,7 +548,7 @@ defmodule Collects do
                 Christ to be the way, the truth, and the life, that we may steadfastly follow his steps in the way that
                 leads to eternal life; through Jesus Christ your Son our Lord, who lives and reigns with you, in the
                 unity of the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -547,7 +559,7 @@ defmodule Collects do
                 Pour into our hearts such love towards you, that we, loving you in all things and above all things,
                 may obtain your promises, which exceed all that we can desire; through Jesus Christ our Lord, who
                 lives and reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of Easter"]
+              [:easter]
             }
           ]
         },
@@ -557,7 +569,7 @@ defmodule Collects do
           [ { "Grant, we pray, Almighty God, that as we believe your only-begotten Son our Lord Jesus Christ to
                 have ascended into heaven, so we may also in heart and mind there ascend, and with him continually
                 dwell; who lives and reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of the Ascension"]
+              [:ascension]
             }
           ]
         },
@@ -568,7 +580,7 @@ defmodule Collects do
                 kingdom in heaven: Do not leave us comfortless, but send us your Holy Spirit to strengthen us, and
                 exalt us to that place where our Savior Christ has gone before; who lives and reigns with you and the 
                 Holy Spirit, one God, in glory everlasting. Amen.",
-              ["Preface of the Ascension"]
+              [:ascension]
             }
           ]
         },
@@ -579,13 +591,13 @@ defmodule Collects do
                 promised gift of your Holy Spirit: Shed abroad this gift throughout the world by the preaching of the
                 Gospel, that it may reach to the ends of the earth; through Jesus Christ our Lord, who lives and
                 reigns with you, in the unity of the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of Pentecost"]
+              [:pentecost]
             },
             {"O God, who on this day taught the hearts of your faithful people by sending to them the light of
                 your Holy Spirit: Grant us by the same Spirit to have a right judgment in all things, and evermore to
                 rejoice in his holy comfort; through Jesus Christ your Son our Lord, who lives and reigns with you, in
                 the unity of the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of Pentecost"]
+              [:pentecost]
             }
           ]
         },
@@ -596,12 +608,12 @@ defmodule Collects do
                 your will; comfort us in our afflictions, defend us from all error, and lead us into all truth; through
                 Jesus Christ our Lord, who with you and the same Spirit, lives and reigns, one God, world without
                 end. Amen.",
-              ["Preface of Pentecost"]
+              [:pentecost]
             },
             { "Grant, O merciful God, that your Church, being gathered together in unity by your Holy Spirit, may
                 show forth your power among all peoples, to the glory of your Name; through Jesus Christ our Lord,
                 who lives and reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of Pentecost"]
+              [:pentecost]
             }
           ]
         },
@@ -613,7 +625,7 @@ defmodule Collects do
                 worship the Unity: Keep us steadfast in this faith and worship, and bring us at last to see you in your
                 one and eternal glory, O Father; who with the Son and the Holy Spirit live and reign, one God, for
                 ever and ever. Amen.",
-              ["Preface of Trinity Sunday"]
+              [:trinitySunday]
             }
           ]
         },
@@ -624,7 +636,7 @@ defmodule Collects do
                 through the weakness of our mortal nature we can do no good thing without you, grant us the help
                 of your grace to keep your commandments, that we may please you in will and deed; through Jesus
                 Christ our Lord. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -634,7 +646,7 @@ defmodule Collects do
           [ { "O Lord, you never fail to support and govern those whom you bring up in your steadfast fear and
                 love: Keep us, we pray, under your continual protection and providence, and give us a perpetual fear
                 and love of your Name; through Jesus Christ our Lord. Amen",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -644,7 +656,7 @@ defmodule Collects do
           [ { "O Lord, we ask you mercifully to hear us, and grant that we, to whom you have given the desire to
                 pray, may by your mighty aid be defended and comforted in all our adversities; through Jesus Christ
                 our lord. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -655,7 +667,7 @@ defmodule Collects do
                 Increase and multiply in us your mercy, that, with you as our ruler and guide, we may so pass through
                 things temporal that we lose not the things eternal; grant this, heavenly Father, for the sake of your
                 Son, Jesus Christ. Amen",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -665,7 +677,7 @@ defmodule Collects do
           [ { "Grant, O Lord, that the course of this world may be so peaceably ordered in your providence, that
                 your Church may joyfully serve you in all godly quietness and peace; through Jesus Christ our Lord.
                 Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -675,7 +687,7 @@ defmodule Collects do
           [ { "O Lord, from whom comes all good things; grant us, your humble servants, the inspiration to always
                 think and do those things which are good, and by your merciful guiding we may perform the same;
                 through Jesus Christ our lord. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -686,7 +698,7 @@ defmodule Collects do
                 your Name, increase in us true religion, nourish us with all goodness, and bring forth in us the fruit
                 of good works; through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one
                 God for ever and ever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -696,7 +708,7 @@ defmodule Collects do
           [ { "O God, your never-failing providence sets in order all things both in heaven and on earth: Put away
                 from us all hurtful things, and give us those things which are profitable for us; through Jesus Christ
                 our Lord, who lives and reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -706,7 +718,7 @@ defmodule Collects do
           [ { "Grant us, Lord, we pray, the spirit to think and do always those things that are right, that we, who
                 cannot exist without you, may by you be enabled to live according to your will; through Jesus Christ
                 our Lord, who lives and reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -716,7 +728,7 @@ defmodule Collects do
           [ { "Hear us, O Lord, when we cry out to you; and that we might receive what we ask, enable us by your
                 Holy Spirit to ask only what accords with your will; through Jesus Christ our Lord, who with you and
                 the same Spirit lives and reigns for ever and ever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -727,7 +739,7 @@ defmodule Collects do
                 your grace, that we, running to obtain your promises, may become partakers of your heavenly
                 treasure; through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God,
                 for ever and ever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -739,7 +751,7 @@ defmodule Collects do
                 things of which our conscience is afraid, and giving us those good things for which we are not
                 worthy to ask, except through the merits and mediation of Jesus Christ our Savior; who lives and
                 reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -750,7 +762,7 @@ defmodule Collects do
                 laudable service: Grant that we may run without stumbling to obtain your heavenly promises;
                 through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God, now and
                 forever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -759,7 +771,7 @@ defmodule Collects do
           "Week of the Sunday closest to August 10",
           [ { "Almighty God, give us the increase of faith, hope, and love; and, so that we may obtain what you
                 have promised, make us love what you command; through Jesus Christ our Lord. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -769,7 +781,7 @@ defmodule Collects do
           [ { "Keep your Church in safety, O Lord; for without your grace the frailty of our nature cannot but
                 make us fall; but in your mercy keep us from all things hurtful, and lead us in all things profitable for
                 our salvation; through Jesus Christ our Lord. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -779,7 +791,7 @@ defmodule Collects do
           [ { "Let your continual mercy, O Lord, cleanse and defend your Church; and, because it cannot continue
                 in safety without your help, protect and govern it always by your goodness; through Jesus Christ our
                 Lord, who lives and reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -789,7 +801,7 @@ defmodule Collects do
           [ { "O Lord, we pray that your grace may always both precede and follow after us, that we may
                 continually be given to good works; through Jesus Christ our Lord, who lives and reigns with you
                 and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -800,7 +812,7 @@ defmodule Collects do
                 devil; that we may love you faithfully with all our heart and soul and mind and strength; through
                 Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God, now and forever.
                 Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -810,7 +822,7 @@ defmodule Collects do
           [ { "O God, because without you we are not able to please you, mercifully grant that your Holy Spirit
                 may in all things direct and rule our hearts; through Jesus Christ our Lord, who lives and reigns with
                 you and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -821,7 +833,7 @@ defmodule Collects do
                 we, being ready both in mind and body, may accomplish with free hearts those things which belong
                 to your purpose; through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit,
                 one God, now and forever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -831,7 +843,7 @@ defmodule Collects do
           [ { "Merciful Lord, grant to your faithful people pardon and peace; that by your grace we may be cleansed
                 from all our sins and serve you with a quiet mind; through Jesus Christ our Lord, who lives and
                 reigns with you and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -842,7 +854,7 @@ defmodule Collects do
                 may be free from all adversities, and devotedly serve you in good works, to the glory of your Name;
                 through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God, now and
                 forever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -853,7 +865,7 @@ defmodule Collects do
                 Church, and grant that those things which we ask faithfully we may obtain effectually; through Jesus
                 Christ our Lord, who sits at your right hand to intercede for us, and who with you and the Holy
                 Spirit lives and reigns in everlasting glory. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -863,7 +875,7 @@ defmodule Collects do
           [ { "Set us free, loving Father, from the bondage of our sins, and in your goodness and mercy give us the
                 liberty of that abundant life which you have made known to us in our Savior Jesus Christ; who lives
                 and reigns with you, in the unity of the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -873,7 +885,7 @@ defmodule Collects do
           [ { "Almighty and everlasting God, you govern all things both in heaven and on earth: Mercifully hear the
                 supplications of your people, and in our time grant us your peace; through Jesus Christ our Lord,
                 who lives and reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -885,7 +897,7 @@ defmodule Collects do
                 godly living, that we may come to those ineffable joys that you have prepared for those who truly
                 love you; through Jesus Christ our Lord, who with you and the Holy Spirit lives and reigns, one God,
                 in glory everlasting. Amen.",
-              ["Preface of All Saints"]
+              [:allSaints]
             }
           ]
         },
@@ -896,7 +908,7 @@ defmodule Collects do
                 while we are placed among things that are passing away, to hold fast to those that shall endure;
                 through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God, for ever
                 and ever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -908,7 +920,7 @@ defmodule Collects do
                 ourselves as he is pure; that, when he comes again with power and great glory, we may be made like
                 him in his eternal and glorious kingdom; where he lives and reigns with you and the Holy Spirit, one
                 God, for ever and ever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -918,7 +930,7 @@ defmodule Collects do
           [ { "Stir up, O Lord, the wills of your faithful people; that they may plenteously bring forth the fruit of
                 good works, as they await the coming of our Lord Jesus Christ to restore all things to their original
                 perfection; who with you and the Holy Spirit lives and reigns for ever and ever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
              }
           ]
         },
@@ -929,7 +941,7 @@ defmodule Collects do
                 of kings and Lord of lords: Mercifully grant that the peoples of the earth, divided and enslaved by
                 sin, may be freed and brought together under his most gracious rule; who lives and reigns with you
                 and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of the Lord’s Day"]
+              [:lordsDay]
             }
           ]
         },
@@ -940,7 +952,7 @@ defmodule Collects do
                 Son Jesus Christ, and brought his brother with him: Give us, who are called by your holy Word,
                 grace to follow him without delay, and to bring those near to us into his gracious presence; who lives
                 and reigns with you and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -951,7 +963,7 @@ defmodule Collects do
                 resurrection: Grant us so perfectly and without doubt to believe in Jesus Christ, our Lord and our
                 God, that our faith may never be found wanting in your sight; through him who lives and reigns with 
                 you and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -964,7 +976,7 @@ defmodule Collects do
                 Stephen, who prayed for his murderers as did his Lord and Savior, who now sits at the right hand of
                 God to intercede for all who suffer in his Name, and who lives and reigns with the Father and the
                 Holy Spirit for ever and ever. Amen.",
-              ["Preface of the Incarnation"]
+              [:incarnation]
             }
           ]
         },
@@ -975,7 +987,7 @@ defmodule Collects do
                 teaching of your apostle and evangelist John, may so walk in the light of your truth, that at length we
                 may attain to the fullness of eternal life; through Jesus Christ our Lord, who lives and reigns with you
                 and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of the Incarnation"]
+              [:incarnation]
             }
           ]
         },
@@ -987,7 +999,7 @@ defmodule Collects do
                 all that is evil within us, and so strengthen us by your grace, that we may glorify your holy Name by
                 the innocency of our lives and the constancy of our faith even unto death; through Jesus Christ our
                 Lord, who died for us and now lives with you and the Holy Spirit, world without end. Amen.",
-              ["Preface of the Incarnation"]
+              [:incarnation]
             }
           ]
         },
@@ -998,7 +1010,7 @@ defmodule Collects do
                 and Son of the living God: Keep your Church steadfast upon the rock of this faith, so that in unity
                 and peace we may proclaim the one truth and follow the one Lord, our Savior Jesus Christ; who lives
                 and reigns with you and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1009,7 +1021,7 @@ defmodule Collects do
                 throughout the world: Grant, we pray, that we, having his wonderful conversion in remembrance,
                 may show ourselves thankful to you by following his holy teaching; through Jesus Christ our Lord,
                 who lives and reigns with you, in the unity of the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1022,7 +1034,7 @@ defmodule Collects do
                 among the Twelve: Grant that your Church, being delivered from false apostles, may always be
                 guided and governed by faithful and true pastors; through Jesus Christ our Lord, who lives and
                 reigns with you, in the unity of the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1033,7 +1045,7 @@ defmodule Collects do
                 incarnate Son and the husband of his virgin mother: Give us grace to imitate his uprightness of life
                 and his obedience to your commands; through Jesus Christ our Lord, who lives and reigns with you
                 and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of the Epiphany"]
+              [:epiphany]
             }
           ]
         },
@@ -1044,7 +1056,7 @@ defmodule Collects do
                 Christ, announced by an angel to the Virgin Mary, may by his cross and passion be brought to the
                 glory of his resurrection; who lives and reigns with you, in the unity of the Holy Spirit, one God, now
                 and forever. Amen.",
-              ["Preface of the Epiphany"]
+              [:epiphany]
             }
           ]
         },
@@ -1056,7 +1068,7 @@ defmodule Collects do
                 and not be carried about by every wind of false doctrine; so that we may truly and firmly accept Jesus
                 Christ as our Lord and Savior, who lives and reigns with you and the Holy Spirit, one God, for ever
                 and ever. Amen.",
-              ["Preface of All Saints"]
+              [:allSaints]
             }
           ]
         },
@@ -1067,7 +1079,7 @@ defmodule Collects do
                 Jesus as the way, the truth, and the life: Grant that we, being mindful of their victory of faith, may
                 glorify in life and death the Name of our Lord Jesus Christ; who lives and reigns with you and the
                 Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1078,7 +1090,7 @@ defmodule Collects do
                 but still more blessed in keeping your word: Grant us who honor the exaltation of her lowliness to
                 follow the example of her devotion to your will; through Jesus Christ our Lord, who lives and reigns
                 with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of the Epiphany"]
+              [:epiphany]
             }
           ]
         },
@@ -1090,7 +1102,7 @@ defmodule Collects do
                 relief of the poor and went forth courageously in mission for the spread of the Gospel; through Jesus
                 Christ our Lord, who lives and reigns with you and the Holy Spirit, one God, for ever and ever.
                 Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1103,7 +1115,7 @@ defmodule Collects do
                 example, constantly speak the truth, boldly rebuke vice, and patiently suffer for the truth’s sake;
                 through Jesus Christ your Son our Lord, who lives and reigns with you and the Holy Spirit, one God,
                 for ever and ever. Amen.",
-              ["Preface of Advent"]
+              [:advent]
             }
           ]
         },
@@ -1114,7 +1126,7 @@ defmodule Collects do
                 your Church, instructed by their teaching and example, and knit together in unity by your Spirit, may
                 ever stand firm upon the one foundation, which is Jesus Christ our Lord; who lives and reigns with
                 you, in the unity of the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1125,7 +1137,7 @@ defmodule Collects do
                 called her to be a witness of his resurrection: Mercifully grant that by your grace we may be healed
                 from all our infirmities and know you in the power of his unending life; who with you and the Holy
                 Spirit lives and reigns, one God, now and forever. Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1137,7 +1149,7 @@ defmodule Collects do
                 the leaders of your Church that spirit of self-denying service by which alone they may have true
                 authority among your people; through Jesus Christ our Lord, who lives and reigns with you and the
                 Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1148,7 +1160,7 @@ defmodule Collects do
                 transfigured, in raiment white and glistening: Mercifully grant that we, being delivered from the 
                 disquietude of this world, may by faith behold the King in his beauty; who with you, O Father, and
                 you, O Holy Spirit, lives and reigns, one God, for ever and ever. Amen.",
-              ["Preface of the Epiphany"]
+              [:epiphany]
             }
           ]
         },
@@ -1159,7 +1171,7 @@ defmodule Collects do
                 that we, who have been redeemed by his blood, may share with her the glory of your eternal
                 kingdom; through Jesus Christ our Lord, who lives and reigns with you, in the unity of the Holy
                 Spirit, one God, now and forever. Amen.",
-              ["Preface of the Incarnation"]
+              [:incarnation]
             }
           ]
         },
@@ -1170,7 +1182,7 @@ defmodule Collects do
                 preach your Word: Grant that your Church may love what he believed and preach what he taught;
                 through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God, for ever
                 and ever. Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1181,7 +1193,7 @@ defmodule Collects do
                 the whole world to himself: Mercifully grant that we, who glory in the mystery of our redemption,
                 may have grace to take up our cross and follow him; who lives and reigns with you and the Holy
                 Spirit, one God, in glory everlasting. Amen.",
-              ["Preface of Holy Week"]
+              [:holyWeek]
             }
           ]
         },
@@ -1192,7 +1204,7 @@ defmodule Collects do
                 the grace to forsake all covetous desires and the pursuit of inordinate riches, so that we may also
                 follow you as he did and proclaim to the world around us the good news of your salvation; who live
                 and reign with the Father and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of the Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1203,7 +1215,7 @@ defmodule Collects do
                 mortals: Mercifully grant that, as your holy angels always serve and worship you in heaven, so by your
                 appointment they may help and defend us here on earth; through Jesus Christ our Lord, who lives
                 and reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of Trinity Sunday"]
+              [:trinitySunday]
             }
           ]
         },
@@ -1214,7 +1226,7 @@ defmodule Collects do
                 that we, by the wholesome medicine of the doctrine which he taught, may have all the diseases of our
                 souls be healed; through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, 
                 one God, now and forever. Amen.",
-              ["Preface of the Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1225,7 +1237,7 @@ defmodule Collects do
                 Church may give itself continually to prayer and to the reconciliation of all who are at variance and
                 enmity; through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God,
                 now and forever. Amen.",
-              ["Preface of the Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1236,7 +1248,7 @@ defmodule Collects do
                 and Jude; and we pray that, as they were faithful and zealous in their mission, so we may with ardent
                 devotion make known the love and mercy of our Lord and Savior Jesus Christ; who lives and reigns
                 with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1247,7 +1259,7 @@ defmodule Collects do
                 servant our King/Queen N., and her/his Government in this Dominion of Canada, that your people
                 may dwell in peace and safety, and your Church serve you in all godly quietness; through Jesus Christ
                 our Lord. Amen.",
-              ["Preface of Trinity Sunday"]
+              [:trinitySunday]
             }
           ]
         },
@@ -1258,7 +1270,7 @@ defmodule Collects do
                 us, and lit the torch of freedom for nations then unborn: Grant that we and all the people of this
                 land may have grace to maintain our liberties in righteousness and peace; through Jesus Christ our
                 Lord, who lives and reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of Trinity Sunday"]
+              [:trinitySunday]
             }
           ]
         },
@@ -1269,7 +1281,7 @@ defmodule Collects do
                 health and safety; for strength to work and leisure to rest; for all that is beautiful in creation and in
                 human life; but above all we thank you for our spiritual mercies in Christ Jesus our Lord; who with
                 you and the Holy Spirit lives and reigns, one God, for ever and ever. Amen.",
-              ["Preface of Trinity Sunday"]
+              [:trinitySunday]
             }
           ]
         },
@@ -1281,7 +1293,7 @@ defmodule Collects do
                 that we may not rest until all the people of this land share the benefits of true freedom and gladly
                 accept its disciplines; through Jesus Christ our Lord, who with you and the Holy Spirit, lives and
                 reigns, now and forever. Amen.",
-              ["The Common of Saints"]
+              [:ofASaint]
             }
           ]
         },
@@ -1293,7 +1305,7 @@ defmodule Collects do
                 that we may not rest until all the people of this land share the benefits of true freedom and gladly
                 accept its disciplines; through Jesus Christ our Lord, who with you and the Holy Spirit, lives and
                 reigns, now and forever. Amen.",
-              ["The Common of Saints"]
+              [:ofASaint]
             }
           ]
         },
@@ -1307,7 +1319,7 @@ defmodule Collects do
                 Grant to us, your humble servants, a like faith and power of love, that we who rejoice in his
                 companionship may profit by his example; through Jesus Christ our Lord, who lives and reigns with
                 you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of the Apostles"]
+              [:apostles]
             }
           ]
         },
@@ -1318,7 +1330,7 @@ defmodule Collects do
                 before the rulers of this world, and courage to die for this faith: Grant that we may always be ready
                 to give a reason for the hope that is in us, and to suffer gladly for the sake of our Lord Jesus Christ;
                 who lives and reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of Holy Week"]
+              [:holyWeek]
             }
           ]
         },
@@ -1330,7 +1342,7 @@ defmodule Collects do
                 evangelists and heralds of your kingdom, that your Church may proclaim the unsearchable riches of
                 our Savior Jesus Christ; who lives and reigns with you and the Holy Spirit, one God, now and
                 forever. Amen.",
-              ["Preface of Pentecost"]
+              [:pentecost]
             }
           ]
         },
@@ -1342,7 +1354,7 @@ defmodule Collects do
                 they may minister in your household as true servants of Christ and stewards of your divine mysteries;
                 through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God, for ever
                 and ever. Amen.",
-              ["Preface of a Saint "]
+              [:ofASaint]
             ]
           }
         },
@@ -1353,7 +1365,7 @@ defmodule Collects do
                 it is in Christ Jesus: Grant that by this teaching we may know you, the one true God, and Jesus Christ
                 whom you have sent; who lives and reigns with you and the Holy Spirit, one God, for ever and ever.
                 Amen.",
-              ["Preface of a Saint","Preface of Trinity Sunday"]
+              [:ofASaint,:trinitySunday]
             }
           ]
         },
@@ -1364,7 +1376,7 @@ defmodule Collects do
               an inordinate love of this world, that we, inspired by the devotion of your servant N., may serve you
               with singleness of heart, and attain to the riches of the age to come; through Jesus Christ our Lord,
               who lives and reigns with you, in the unity of the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of a Saint"]
+              [:ofASaint]
           }]
         },
       "reformerOfTheChurch" =>
@@ -1376,7 +1388,7 @@ defmodule Collects do
             that your Church on earth may more closely resemble your heavenly kingdom; through Jesus Christ
             our Lord, who lives and reigns with you, in the unity of the Holy Spirit, one God, now and forever.
             Amen.",
-            ["Preface of Pentecost"]
+            [:pentecost]
         }]
         },
       "reformerOfSociety" =>
@@ -1387,7 +1399,7 @@ defmodule Collects do
                 servants, a like faith and power of love, that we who give thanks for his righteous zeal may profit by
                 his example; through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one
                 God, for ever and ever. Amen.",
-              ["Preface of a Saint"]
+              [:ofASaint]
             }
           ]
         },
@@ -1398,7 +1410,7 @@ defmodule Collects do
                 Christ might be one: Grant that we, instructed by his teaching and example, and knit together in unity
                 by your Spirit, may ever stand firm upon the one foundation, which is Jesus Christ our Lord; who
                 lives and reigns with you, in the unity of the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Pentecost"]
+              [:pentecost]
             }
           ]
         },
@@ -1409,14 +1421,14 @@ defmodule Collects do
                 by the good example of your servant N., may persevere in running the race that is set before us, until
                 at last we may with him attain to your eternal joy; through Jesus Christ, the pioneer and perfecter of 
                 our faith, who lives and reigns with you and the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of a Saint"]
+              [:ofASaint]
             },
             { "Almighty God, by your Holy Spirit you have made us one with your saints in heaven and on earth:
                 Grant that in our earthly pilgrimage we may always be supported by this fellowship of love and
                 prayer, and know ourselves to be surrounded by their witness to your power and mercy. We ask this
                 for the sake of Jesus Christ, in whom all our intercessions are acceptable through the Spirit, and who
                 lives and reigns for ever and ever. Amen.", 
-              ["Preface of a Saint"]
+              [:ofASaint]
             }
           ]
         },
@@ -1428,7 +1440,7 @@ defmodule Collects do
                 Orders, and put into the hearts of those whom you call the desire to offer themselves for your
                 service; that thereby the whole world will be drawn into your blessed kingdom; through Jesus Christ
                 our Lord. Amen.",
-              ["Preface of the Apostles"]
+              [:apostles]
             },
             { "Almighty God, the giver of all good gifts, in your divine providence you have appointed various
                 orders in your Church: Give your grace, we humbly pray, to all who are [now] called to any office
@@ -1436,28 +1448,28 @@ defmodule Collects do
                 holiness of life, that they may faithfully serve before you, to the glory of your great Name and for the
                 benefit of your holy Church; through Jesus Christ our Lord, who lives and reigns with you, in the
                 unity of the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Apostles"]
+              [:apostles]
             },
             { "O God, you led your holy apostles to ordain ministers in every place: Grant that your Church, under
                 the guidance of the Holy Spirit, may choose suitable persons for the ministry of Word and
                 Sacrament, and may uphold them in their work for the extension of your kingdom; through him who
                 is the Shepherd and Bishop of our souls, Jesus Christ our Lord, who lives and reigns with you and
                 the Holy Spirit, one God, for ever and ever. Amen.",
-              ["Preface of the Season"]
+              [:season]
             },
             { "Almighty and everlasting God, by whose Spirit the whole body of your faithful people is governed
                 and sanctified: Receive our supplications and prayers, which we offer before you for all members of
                 your holy Church, that in their vocation and ministry they may truly and devoutly serve you; through
                 our Lord and Savior Jesus Christ, who lives and reigns with you, in the unity of the Holy Spirit, one
                 God, now and forever. Amen.",
-              ["Preface of Baptism"]
+              [:baptism]
             },
             { "O God, you have made of one blood all the peoples of the earth, and sent your blessed Son to
                 preach peace to those who are far off and to those who are near: Grant that people everywhere may
                 seek after you and find you, bring the nations into your fold, pour out your Spirit upon all flesh, and
                 hasten the coming of your kingdom; through Jesus Christ our Lord, who lives and reigns with you 
                 and the Holy Spirit, one God, now and forever. Amen.",
-              ["Preface of Pentecost"]
+              [:pentecost]
             }
           ]
       },
@@ -1467,30 +1479,146 @@ defmodule Collects do
           [ { "Almighty God, Lord of all heaven and earth; we ask that you pour forth your blessing upon this land,
                 and to give it a fruitful season; that we, receiving your bounty, may evermore give you thanks;
                 through Jesus Christ our Lord. Amen.",
-              ["Preface of the Season"]
+              [:season]
             },
             { "Almighty God, Lord of heaven and earth: We humbly pray that your gracious providence may give
                 and preserve to our use the harvests of the land and of the seas, and may prosper all who labor to
                 gather them, that we, who are constantly receiving good things from your hand, may always give you
                 thanks; through Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God,
                 for ever and ever. Amen.",
-              ["Preface of the Season"]
+              [:season]
             },
             { "Almighty God, whose Son Jesus Christ in his earthly life shared our toil and hallowed our labor: Be
                 present with your people where they work; make those who carry on the industries and commerce of
                 this land responsive to your will; and give to us all a pride in what we do, and a just return for our
                 labor; through Jesus Christ our Lord, who lives and reigns with you, in the unity of the Holy Spirit,
                 one God, now and forever. Amen.",
-              ["Preface of the Season"]
+              [:season]
             },
             { "O merciful Creator, your hand is open wide to satisfy the needs of every living creature: Make us
                 always thankful for your loving providence; and grant that we, remembering the account that we
                 must one day give, may be faithful stewards of your good gifts; through Jesus Christ our Lord, who
                 with you and the Holy Spirit lives and reigns, one God, for ever and ever. Amen.",
-              ["Preface of the Season"]
+              [:season]
             }
           ]
         }
+    }, # end of collects
+    propers: %{
+      lordsDay:
+          { "Preface for the Lord's Day",
+            "Through Jesus Christ our Lord; who on the first day of the week
+            overcame death and the grave, and by his glorious resurrection
+            opened to us the way of everlasting life."},
+      advent:
+          { "Preface of Advent",
+            "Because you sent your beloved Son to redeem us from sin and death,
+            and to make us heirs in him of everlasting life; that when he shall
+            come again in power and great glory to judge the world, we may
+            without shame or fear rejoice to behold his appearing."},
+      incarnation:
+          { "Preface of the Incarnation",
+            "Because you gave Jesus Christ, your only Son, to be born for us; who,
+            by the working of the Holy Spirit, was made truly man, taking on the
+            flesh of the Virgin Mary his mother; and yet without the stain of sin,
+            to make us clean from sin."},
+      epiphany:
+          { "Preface of the Epiphany",
+            "Through Jesus Christ our Lord, who took on our mortal flesh to
+            reveal His glory; that he might bring us out of darkness and into his
+            own glorious light."},
+      presentation:
+          { "Preface of the Presentation",
+            "Because in the mystery of the Word made flesh, you have caused a
+            new light to shine in our hearts, to give the knowledge of your glory
+            in the face of your Son Jesus Christ our Lord."},
+      lent:
+          { "Preface of Lent",
+            "Because you have given us the spirit of discipline, that we may
+            triumph over the flesh, and live no longer for ourselves but for
+            Him who died for us and rose again, your Son Jesus Christ our Lord."},
+      holyWeek:
+          { "Preface of Holy Week",
+            "Because you gave your only Son, our Savior Jesus Christ, to redeem
+            mankind from the power of darkness; who, having finished the work
+            you gave him to do, was lifted high upon the cross that he might
+            draw the whole world to himself, and, being made perfect through
+            suffering, might become the author of eternal salvation to all who
+            obey him."},
+      maundyThursday:
+          { "Preface of Maundy Thursday",
+            "Through Jesus Christ our Lord; who having loved his own who were
+            in the world, loved them to the end, and on the night before he
+            suffered, instituted these holy mysteries; that we, receiving the
+            benefits of his passion and resurrection, might be made partakers of
+            his divine nature."},
+      easter:
+          { "Preface of Easter",
+            "But chiefly are we bound to praise you for the glorious resurrection
+            of your Son Jesus Christ our Lord: for he is the true Paschal Lamb,
+            which was offered for us, and has taken away the sin of the world;
+            who by his death has destroyed death, and by his rising to life again
+            has restored us to everlasting life."},
+      ascension:
+          { "Preface of the Ascension",
+            "Through your most dearly beloved Son Jesus Christ our Lord; who
+            after his most glorious resurrection, appeared to his Apostles, and in
+            their sight ascended up into heaven, to prepare a place for us; that
+            where he is, there we might also ascend, and reign with him in glory."},
+      pentecost:
+          { "Preface of Pentecost",
+            "Through Jesus Christ our Lord; according to whose most true
+            promise, the Holy Spirit came down from heaven, lighting upon the
+            disciples, to teach them, and to lead them into all truth; giving them
+            boldness and fervent zeal constantly to preach the Gospel to all
+            nations; by which we have been brought out of darkness and error
+            into the clear light and true knowledge of you, and of your Son Jesus
+            Christ."},
+      trinitySunday:
+          { "Preface of Trinity Sunday",
+            "Who, with your co-eternal Son, and Holy Spirit, are one God, one
+            Lord, in Trinity of Persons and in Unity of Substance. For that which
+            we believe of your glory, O Father, we believe the same of your Son,
+            and of the Holy Spirit, without any: difference of inequality."},
+      allSaints:
+          { "Preface of All Saints",
+            "For in the multitude of your Saints, you have surrounded us with so
+            great a cloud of witnesses that we, rejoicing in their fellowship, may
+            run with patience the race that is set before us, and, together with
+            them, may receive the crown of glory that does not fade away."},
+      apostles:
+          { "Preface of Apostles and Ordinations",
+            "Through the great shepherd of your flock, Jesus Christ our Lord;
+            who after his resurrection sent forth his apostles to preach the
+            Gospel and to teach all nations; and promised to be with them
+            always, even to the end of the ages."},
+      dedicationOfChurch:
+          { "Preface for Dedicatgion of a Church",
+            "Through Jesus Christ our great High Priest; in whom we are built up
+            as living stones of a holy temple, that we might offer before you a
+            sacrifice of praise and prayer which is holy and pleasing in your sight."},
+      baptism:
+          { "Preface for Baptism",
+            "Because in Jesus Christ our Lord, you have received us as your sons
+            and daughters, made us citizens of your kingdom, and given us the
+            Holy Spirit to guide us into all truth."},
+      marriage:
+          { "Preface for Marriage",
+            "Because in the love of wife and husband, you have given us an image
+            of the heavenly Jerusalem, adorned as a bride for her bridegroom,
+            your Son Jesus Christ our Lord; who loves her and gave himself for
+            her, that he might make the whole creation new."},
+      ofASaint:
+          { "Preface of a Saint",
+            "Because thou art greatly glorified in the assembly of thy saints.
+            All thy creatures praise thee, and thy faithful servants bless
+            thee, confessing before the rulers of this world the great Name
+            of thine only Son. (BCP Rite I)"},
+      season:
+          { "Preface of the Season",
+            ""
+          }
+    } # end of propers
     } # end of map
   end # of build
 end # of module
