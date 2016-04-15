@@ -41,6 +41,10 @@ channel.on('new_text', data => {
   elmApp.ports.newText.send(data);
 })
 
+channel.on('new_email', data => {
+  elmApp.ports.newEmail.send(data);
+})
+
 // Local Storage
 function storageAvailable(of_type) {
   try {
@@ -99,9 +103,9 @@ var elmDiv = document.getElementById('elm-container')
     , show: false
   }
   , email_model = {
-        addr: ""
-      , msg: ""
-      , subj: ""
+        from: ""
+      , topic: ""
+      , text: ""
       , show: false
     }
   , sunday_model = {
@@ -153,6 +157,7 @@ var elmDiv = document.getElementById('elm-container')
       , body:     ""
       , version:  ""
       }
+    , newEmail: email_model
   }
   , elmApp = Elm.embed(Elm.Iphod, elmDiv, initialState)
 
@@ -175,6 +180,10 @@ elmApp.ports.requestNamedDay.subscribe(function(request) {
 
 elmApp.ports.requestAllText.subscribe(function(request) {
   channel.push("request_all_text", request)
+})
+
+elmApp.ports.sendEmail.subscribe(function(email) {
+  channel.push("request_send_email", email)
 })
 
 elmApp.ports.savingConfig.subscribe(function(config) {

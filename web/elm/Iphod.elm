@@ -21,6 +21,7 @@ import Iphod.MorningPrayer as MorningPrayer
 import Iphod.EveningPrayer as EveningPrayer
 import Iphod.Daily as Daily
 import Iphod.Email as Email
+import Iphod.Email exposing(sendContactMe)
 import Iphod.Config as Config
 import Iphod.Models as Models
 
@@ -30,7 +31,10 @@ app =
     { init = init
     , update = update
     , view = view
-    , inputs = [incomingActions, incomingText]
+    , inputs =  [ incomingActions
+                , incomingText
+                , incomingEmail
+                ]
     }
 
 -- MAIN
@@ -95,6 +99,10 @@ incomingText: Signal Action
 incomingText =
   Signal.map UpdateText newText
 
+incomingEmail: Signal Action
+incomingEmail =
+  Signal.map UpdateEmail newEmail
+
 moveDay: Signal.Mailbox (String, String)
 moveDay =
   Signal.mailbox ("", "")
@@ -133,8 +141,13 @@ port savingConfig: Signal Models.Config
 port savingConfig = 
   saveThisConfig.signal
 
+port sendEmail: Signal Models.Email
+port sendEmail =
+  sendContactMe.signal
+
 port nextSunday: Signal Model
 port newText: Signal NewText
+port newEmail: Signal Models.Email
 
 
 -- UPDATE
@@ -151,6 +164,7 @@ type Action
   | ToggleRedLetter
   | SetSunday Model
   | UpdateText NewText
+  | UpdateEmail Email.Model
   | ModEmail Email.Model Email.Action
   | ModMP MorningPrayer.Model MorningPrayer.Action
   | ModEP EveningPrayer.Model EveningPrayer.Action
@@ -225,6 +239,8 @@ update action model =
           _           -> model
       in
         (newModel, Effects.none)
+
+    UpdateEmail this_email -> ({model | email = this_email}, Effects.none)
 
     ModMP reading mpAction->
       let

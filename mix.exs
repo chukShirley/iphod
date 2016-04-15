@@ -21,7 +21,8 @@ defmodule Iphod.Mixfile do
     [mod: {Iphod, []},
      applications: [:phoenix, :phoenix_html, 
                     :cowboy, :logger, :gettext,
-                    :phoenix_ecto, :postgrex, :timex, :httpoison
+                    :phoenix_ecto, :postgrex, :timex, :httpoison,
+                    :mailgun
                   ]
     ]
   end
@@ -44,7 +45,8 @@ defmodule Iphod.Mixfile do
      {:timex, github: "frpaulas/timex"},
      {:exrm, "~> 1.0.3"},
      {:mock, github: "jjh42/mock", only: :dev},
-     {:httpoison, "~> 0.8.2"}
+     {:httpoison, "~> 0.8.2"},
+     {:mailgun, "~> 0.1.2"}
     ]
   end
 

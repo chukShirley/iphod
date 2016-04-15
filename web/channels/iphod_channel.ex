@@ -2,6 +2,7 @@ require IEx
 require Logger
 require Poison
 defmodule Iphod.IphodChannel do
+  import Iphod.Mailer
   use Iphod.Web, :channel
   # import SundayReading
   # import DailyReading
@@ -10,7 +11,7 @@ defmodule Iphod.IphodChannel do
   # import EsvText
   use Timex
   @tz "America/Los_Angeles"
-  @email %{ addr: "", subj: "", msg: "", show: false}
+  @email %{ from: "", topic: "", text: "", show: false}
 #  @config %{ ot: "ESV",
 #             ps: "Coverdale",
 #             nt: "ESV",
@@ -190,6 +191,12 @@ defmodule Iphod.IphodChannel do
           
     {:noreply, socket}  
     
+  end
+
+  def handle_in("request_send_email", email, socket) do
+    send_contact_me email["from"], email["topic"], email["text"]
+    push socket, "new_email", @email
+    {:noreply, socket}
   end
 
   def handle_in("shout", payload, socket) do

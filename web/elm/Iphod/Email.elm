@@ -1,4 +1,5 @@
-module Iphod.Email where
+module Iphod.Email (  Model, init, Action, update, view, 
+                      sendContactMe) where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -16,6 +17,12 @@ type alias Model = Email
 init: Model
 init = emailInit
 
+-- MAILBOX
+
+sendContactMe: Signal.Mailbox Model
+sendContactMe =
+  Signal.mailbox init
+
 
 -- UPDATE
 
@@ -25,6 +32,7 @@ type Action
   | Clear
   | Cancel
   | EmailAddress String
+  | Topic String
   | Message String
 
 update: Action -> Model -> Model
@@ -36,10 +44,11 @@ update action model =
         foo = Debug.log "EMAIL" model
       in
         model
-    Clear -> {model | msg = ""}
+    Clear -> {model | text = ""}
     Cancel -> init
-    EmailAddress s -> {model | addr = s}
-    Message s -> {model | msg = s}
+    EmailAddress s -> {model | from = s}
+    Topic s -> {model | topic = s}
+    Message s -> {model | text = s}
 
 
 -- VIEW
@@ -51,7 +60,7 @@ view address model =
   [ (inputEmailAddress address model)
   , (inputSubject address model)
   , (inputMessage address model)
-  , button [ buttonStyle, onClick address Send ] [text "Send"]
+  , button [ buttonStyle, onClick sendContactMe.address model ] [text "Send"]
   , button [ buttonStyle, onClick address Clear] [text "Clear"]
   , button [ buttonStyle, onClick address Cancel] [text "Cancel"]
   ]
@@ -60,14 +69,14 @@ inputEmailAddress: Signal.Address Action -> Model -> Html
 inputEmailAddress address model =
   p []
     [ input 
-        [ id "addr"
+        [ id "from"
         , type' "text"
         , placeholder "Your Email Address - required"
         , autofocus True
-        , name "addr"
+        , name "from"
         , on "input" targetValue (\str -> Signal.message address (EmailAddress str))
         , onClickLimited address NoOp
-        , value model.addr
+        , value model.from
         , emailAddrStyle model
         ]
         []
@@ -77,14 +86,14 @@ inputSubject: Signal.Address Action -> Model -> Html
 inputSubject address model =
   p []
     [ input 
-        [ id "subj"
+        [ id "topic"
         , type' "text"
         , placeholder "Subject - required"
         , autofocus True
-        , name "subj"
-        , on "input" targetValue (\str -> Signal.message address (EmailAddress str))
+        , name "topic"
+        , on "input" targetValue (\str -> Signal.message address (Topic str))
         , onClickLimited address NoOp
-        , value model.subj
+        , value model.topic
         , subjectStyle model
         ]
         []
@@ -94,14 +103,14 @@ inputMessage: Signal.Address Action -> Model -> Html
 inputMessage address model =
   p []
     [ textarea 
-        [ id "msg"
+        [ id "text"
         , type' "text"
         , placeholder "Enter Message - required"
         , autofocus True
-        , name "msg"
+        , name "text"
         , on "input" targetValue (\str -> Signal.message address (Message str))
         , onClickLimited address NoOp
-        , value model.msg
+        , value model.text
         , msgAddrStyle model 
         ]
         []

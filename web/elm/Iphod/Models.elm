@@ -23,17 +23,17 @@ configInit =
   }
 
 type alias Email =
-  { addr: String
-  , subj: String
-  , msg:  String
+  { from: String
+  , topic: String
+  , text:  String
   , show: Bool
   }
 
 emailInit: Email
 emailInit = 
-  { addr = ""
-  , subj = ""
-  , msg = ""
+  { from = ""
+  , topic = ""
+  , text = ""
   , show = False
   }
 

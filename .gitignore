@@ -25,6 +25,8 @@ erl_crash.dump
 # secrets file as long as you replace its contents by environment
 # variables.
 /config/prod.secret.exs
+/config/config.secret.exs
+
 web/elm/elm-stuff/build-artifacts/0.16.0/user/project/1.0.0/*.elmo
 priv/static/images/ic_mode_edit_black_24dp_1x.png
 web/elm/elm-stuff/build-artifacts/0.16.0/user/project/1.0.0/*.elmi
