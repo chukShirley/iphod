@@ -12,6 +12,7 @@
   .translationButton { display: none;}
   .readings_table { display: none; }
   .config { display: none; }
+  .collect_hide { display: none; }
   .esv_text { 
     page-break-after: always; 
     display: block;

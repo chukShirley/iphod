@@ -471,7 +471,7 @@ readingNav address model =
 
 config: Signal.Address Action -> Model -> Html
 config address model = 
-  div [class "cssmenu"]
+  div [class "cssmenu", style [("z-index", "99")]]
     [(Config.view (Signal.forwardTo address (ModConfig model.config)) model.config)]
 
     

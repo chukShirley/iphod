@@ -16421,7 +16421,10 @@ Elm.Iphod.make = function (_elm) {
    });
    var config = F2(function (address,model) {
       return A2($Html.div,
-      _U.list([$Html$Attributes.$class("cssmenu")]),
+      _U.list([$Html$Attributes.$class("cssmenu")
+              ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                               ,_0: "z-index"
+                                               ,_1: "99"}]))]),
       _U.list([A2($Iphod$Config.view,
       A2($Signal.forwardTo,address,ModConfig(model.config)),
       model.config)]));
