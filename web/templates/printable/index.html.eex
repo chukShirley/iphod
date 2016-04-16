@@ -1,0 +1,15 @@
+<h1>Printables</h1>
+
+<table class="printables">
+  <%= for doc <- @docs do %>
+    <tr>
+      <td><%= doc.description %></td>
+      <td><%= doc.form %></td>
+      <td><%= doc.format %></td>
+      <td><%= doc.name %></td>
+      <td>
+        <a href=<%="/printables/#{doc.name}"%> download>Download</a>
+      </td>
+    </tr>
+  <% end %>
+</table>
