@@ -65,7 +65,8 @@ defmodule  Lityear do
       from_easter == -8       -> {"epiphany", "8", yrABC, day}
       from_easter == 0        -> {"easterDay", "1", yrABC, day}
       from_easter in 0..6     -> {"easter", to_string(1 + from_easter), yrABC, day}
-      from_easter in 7..8     -> {"proper", to_string(from_easter - 6), yrABC, day}
+      from_easter == 7        -> {"pentecost", "1", yrABC, day}
+      from_easter == 8        -> {"trinity", "1", yrABC, day}
       till_advent in 1..27    -> {"proper", to_string(30 - till_advent), yrABC, day}
       till_advent in 0..-3    -> {"advent", to_string(1 - till_advent), yrABC, day}
       from_christmas in 0..1  -> {"christmas", to_string(from_christmas + 1), day}

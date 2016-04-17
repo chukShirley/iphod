@@ -1412,8 +1412,10 @@ defmodule DailyReading do
                             ep1: [%{style: "req", read: "Isa 61"}],
                             ep2: [%{style: "req", read: "2 Tim 1.3-14"}]
                             }
-            },
-        "2" =>
+            }
+          },
+    "trinity" =>
+      %{"1" =>
           %{ "Sunday" =>  %{title: "Trinity Sunday",
                             mp1: [%{style: "req", read: "Isa 6.1- 8"}],
                             mp2: [%{style: "req", read: "Mark 1.1-13"}],

@@ -17564,15 +17564,27 @@ Elm.Iphod.make = function (_elm) {
                                               _U.list([$Html$Attributes.href("#")]),
                                               _U.list([$Html.text("Easter Saturday")]))]))]))]))]))]))
               ,A2($Html.li,
-              _U.list([A2($Html$Events.onClick,address,ToggleAbout)]),
+              _U.list([$Html$Attributes.$class("has-sub")]),
               _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href("#")]),
-              _U.list([$Html.text("About")]))]))
-              ,A2($Html.li,
-              _U.list([A2($Html$Events.onClick,address,ToggleEmail)]),
-              _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href("#")]),
-              _U.list([$Html.text("Contact")]))]))]))]));
+                      _U.list([$Html$Attributes.href("#")]),
+                      _U.list([$Html.text("More...")]))
+                      ,A2($Html.ul,
+                      _U.list([]),
+                      _U.list([A2($Html.li,
+                              _U.list([]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("printables")]),
+                              _U.list([$Html.text("Printables")]))]))
+                              ,A2($Html.li,
+                              _U.list([A2($Html$Events.onClick,address,ToggleAbout)]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("About")]))]))
+                              ,A2($Html.li,
+                              _U.list([A2($Html$Events.onClick,address,ToggleEmail)]),
+                              _U.list([A2($Html.a,
+                              _U.list([$Html$Attributes.href("#")]),
+                              _U.list([$Html.text("Contact")]))]))]))]))]))]));
    });
    var view = F2(function (address,model) {
       return A2($Html.div,

@@ -617,7 +617,7 @@ defmodule Collects do
             }
           ]
         },
-      "pentecost2" =>
+      "trinity1" =>
         { "The readings for the early Sundays after Trinity Sunday are those not previously used for Sundays after the Feast of the Presentation in Epiphany.",
           "Trinity Sunday",
           [ { "Almighty and everlasting God, you have given to us your servants grace, by the confession of a true

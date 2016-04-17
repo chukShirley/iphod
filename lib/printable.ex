@@ -16,40 +16,65 @@ defmodule Printable do
         "8 1/2 x 11 booklet",
         "Daily Office Lectionary Booklet"
       },
-      { "ACNA_All_Saints_lf.odt",
-        "ODT",
+      { "ACNA_advent_lf.pdf",
+        "PDF",
         "8 1/2 x 11",
-        "Eucharistic Prayer for All Saints"
+        "On Altar: Eucharistic Prayer for Advent"
       },
-      { "ACNA_easter_lf.odt",
-        "ODT",
+      { "ACNA_Christmas_lf.pdf",
+        "PDF",
         "8 1/2 x 11",
-        "Eucharistic Prayer for Easter"
+        "On Altar: Eucharistic Prayer for All Saints"
       },
-      { "ACNA_Epiphany_lf.odt",
-        "ODT",
+      { "ACNA_Epiphany_lf.pdf",
+        "PDF",
         "8 1/2 x 11",
-        "Eucharistic Prayer for Epiphany"
+        "On Altar: Eucharistic Prayer for Epiphany"
       },
-      { "ACNA_advent_lf.odt",
-        "ODT",
+      { "ACNA_lent_lf.pdf",
+        "PDF",
         "8 1/2 x 11",
-        "Eucharistic Prayer for Advent"
+        "On Altar: Eucharistic Prayer for Lent"
       },
-      { "ACNA_pentecost_lf.odt",
-        "ODT",
+      { "ACNA_holyweek_lf.pdf",
+        "PDF",
         "8 1/2 x 11",
-        "Eucharistic Prayer for Pentecost"
+        "On Altar: Eucharistic Prayer for Holy Week"
       },
-      { "ACNA_holy_week_lf.odt",
-        "ODT",
+      { "ACNA_maunday_thursday_lf.pdf",
+        "PDF",
         "8 1/2 x 11",
-        "Eucharistic Prayer for Holy Week"
+        "On Altar: Eucharistic Prayer for Holy Week"
       },
-      { "ACNA_lent_lf.odt",
-        "ODT",
+      { "ACNA_easter_lf.pdf",
+        "PDF",
         "8 1/2 x 11",
-        "Eucharistic Prayer for Lent"
+        "On Altar: Eucharistic Prayer for Easter"
+      },
+      { "ACNA_witsunday_lf.pdf",
+        "PDF",
+        "8 1/2 x 11",
+        "On Altar: Eucharistic Prayer for Easter"
+      },
+      { "ACNA_trinity_lf.pdf",
+        "PDF",
+        "8 1/2 x 11",
+        "On Altar: Eucharistic Prayer for Easter"
+      },
+      { "ACNA_pentecost_lf.pdf",
+        "PDF",
+        "8 1/2 x 11",
+        "On Altar: Eucharistic Prayer for Pentecost"
+      },
+      { "ACNA_All_Saints_lf.pdf",
+        "PDF",
+        "8 1/2 x 11",
+        "On Altar: Eucharistic Prayer for All Saints"
+      },
+      { "easter.pdf",
+        "PDF",
+        "8 1/2 x 14 booklet",
+        "LARGE PRINT Holy Eucharistic, long form"
       },
     ]
   end

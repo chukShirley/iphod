@@ -237,34 +237,71 @@ button {
   padding-left: 1em;
 }
 input[type=radio].radio_button {
-              position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
-            }
+  position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+}
 
-            input[type=radio].radio_button + label.radio_label {
-              padding-left: 25px;
-              height: 20px; 
-              display:i nline-block;
-              line-height: 20px;
-              background-repeat: no-repeat;
-              background-position: 0 0;
-              font-size: 0.8em;
-              vertical-align: middle;
-              cursor: pointer;
-              padding-bottom: 8px;
-            }
+input[type=radio].radio_button + label.radio_label {
+  padding-left: 25px;
+  height: 20px; 
+  display:i nline-block;
+  line-height: 20px;
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  font-size: 0.8em;
+  vertical-align: middle;
+  cursor: pointer;
+  padding-bottom: 8px;
+}
 
-            input[type=radio].radio_button:checked + label.radio_label {
-              background-position: 0 -20px;
-            }
-            label.radio_label {
-        background-image: url("/images/checkbox.png");
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-      }
+input[type=radio].radio_button:checked + label.radio_label {
+  background-position: 0 -20px;
+}
+label.radio_label {
+  background-image: url("/images/checkbox.png");
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.pdescription {
+  width: 40%;
+  padding: 0 0.5em;
+  font-size: 0.9em;
+}
+.pform {
+  width: 20%;
+  padding: 0 0.5em;
+  font-size: 0.9em;
+}
+.pformat {
+  width: 5%;
+  padding: 0 0.5em;
+  font-size: 0.9em;
+}
+.pname {
+  width: 25%;
+  padding: 0 0.5em;
+  font-size: 0.9em;
+}
+.pdownload {
+  width: 5%;
+  padding: 0 0.5em;
+  font-size: 0.9em;
+  color: #333333;
+  background-color: #EEEEEE;
+  padding: 2px 6px 2px 6px;
+  border-radius: 4px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+.pdownload a {
+  text-decoration: none;
+}
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 .cssmenu,
 .cssmenu ul,

@@ -1,13 +1,18 @@
 <h1>Printables</h1>
+<p> <span style="color: darkred;">Word of Caution:</span> 
+    these printable forms were created for specific uses. 
+    It is best to check the printable form meets your specific needs 
+    rather than have a WT...? moment Sunday morning.
+</p>
 
 <table class="printables">
   <%= for doc <- @docs do %>
     <tr>
-      <td><%= doc.description %></td>
-      <td><%= doc.form %></td>
-      <td><%= doc.format %></td>
-      <td><%= doc.name %></td>
-      <td>
+      <td class="pdescription"><%= doc.description %></td>
+      <td class="pform"><%= doc.form %></td>
+      <td class="pformat"><%= doc.format %></td>
+      <td class="pname"><%= doc.name %></td>
+      <td class="pdownload">
         <a href=<%="/printables/#{doc.name}"%> download>Download</a>
       </td>
     </tr>

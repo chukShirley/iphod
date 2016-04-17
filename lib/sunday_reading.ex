@@ -1122,8 +1122,10 @@ defmodule SundayReading do
                           nt: [%{style: "req", read: "1 Cor 12.4-13"}],
                           gs: [%{style: "req", read: "Jn 20.19-23"},%{style: "alt", read: "Jn 14.8-17"}]
                         }
-            },
-          "2" =>
+            }
+      },
+    "trinity" =>
+      %{  "1" =>
             %{"title" => "Trinity Sunday",
                 "a" => %{ ot: [%{style: "req", read: "Gen 1.1-end 2.1-3"}],
                           ps: [%{style: "req", read: "Psalm 150"}],
