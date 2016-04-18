@@ -87,6 +87,24 @@ form.link, form.button {
   padding: 0px 10px 0px 10px;
 }
 
+#header {
+  background-image: url("/images/bcp_old.jpg");
+  background-repeat: no-repeat;
+  margin-bottom: 0.1em;
+  line-height: 50px;
+}
+.home_link {
+  background-image: url("/images/legereme.jpg");
+  background-repeat: no-repeat;
+  margin-left: 27em;
+  display:block;
+  height:50;
+  text-indent: 100%;
+  overflow:hidden;
+  white-space:nowrap;
+  width: 10em;
+}
+}
 #datepicker {position: relative; z-index:200;}
 #dateNav p {
   text-align: center;
