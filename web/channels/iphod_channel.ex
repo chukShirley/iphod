@@ -133,6 +133,12 @@ defmodule Iphod.IphodChannel do
     
   end
 
+  def handle_in("request_move_date", this_date, socket) do
+    Timex.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")
+    |> Timex.to_date
+    |> request_date(socket, {true, true})
+  end
+
   def handle_in("request_all_text", ["morningPrayer", this_date, config], socket) do
     readings = 
       Timex.parse!(this_date, "{WDfull} {Mfull} {D}, {YYYY}")

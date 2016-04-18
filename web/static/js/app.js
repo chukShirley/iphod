@@ -162,6 +162,11 @@ var elmDiv = document.getElementById('elm-container')
   , elmApp = Elm.embed(Elm.Iphod, elmDiv, initialState)
 
 
+elmApp.ports.requestMoveDate.subscribe(function(request) {
+  console.log("MOVE DATE: ", request);
+  channel.push("request_move_date", request)
+});
+
 elmApp.ports.requestMoveDay.subscribe(function(request) {
   channel.push("request_move_day", request)
 });

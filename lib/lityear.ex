@@ -44,7 +44,7 @@ defmodule  Lityear do
     # read as `does sunday come before advent(1, sunday.year)?`
     # this keeps tripping me up
     till_advent = Timex.diff(sunday, advent(1, sunday.year), :weeks)
-    till_advent = if sunday > advent(1, sunday.year), do: till_advent, else: -till_advent
+    till_advent = if sunday > advent(1, sunday.year), do: -till_advent, else: till_advent
     from_christmas = Timex.diff(sunday, christmas(1, y), :weeks)
 #    from_easter = Timex.diff(easter_day(y), sunday, :days) |> div(7) |> abs
     from_easter = Timex.diff(easter_day(y), sunday, :weeks) |> abs

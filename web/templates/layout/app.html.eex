@@ -7,8 +7,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Hello Iphod!</title>
+    <title>Lectionary</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
   </head>
 
   <body>
@@ -19,5 +23,14 @@
 
     </div> <!-- /container -->
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script>
+      $(function() {
+        $("#datepicker").datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "DD MM d, yy"
+        });
+      });
+    </script>
   </body>
 </html>

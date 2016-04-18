@@ -16548,6 +16548,9 @@ Elm.Iphod.make = function (_elm) {
    var ChangeDay = function (a) {
       return {ctor: "ChangeDay",_0: a};
    };
+   var ChangeDate = function (a) {
+      return {ctor: "ChangeDate",_0: a};
+   };
    var dateNav = F2(function (address,model) {
       return A2($Html.div,
       _U.list([$Html$Attributes.id("date_nav")]),
@@ -16556,7 +16559,23 @@ Elm.Iphod.make = function (_elm) {
                                                        ,_0: "text-align"
                                                        ,_1: "center"}
                                                       ,{ctor: "_Tuple2",_0: "margin-bottom",_1: "0.1em"}]))]),
-              _U.list([$Html.text(model.today)]))
+              _U.list([A2($Html.p,
+              _U.list([]),
+              _U.list([A2($Html.input,
+              _U.list([$Html$Attributes.type$("text")
+                      ,$Html$Attributes.$class("current_date")
+                      ,$Html$Attributes.id("datepicker")
+                      ,$Html$Attributes.value(model.today)
+                      ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                       ,_0: "z-index"
+                                                       ,_1: "200"}]))
+                      ,A3($Html$Events.on,
+                      "change",
+                      $Html$Events.targetValue,
+                      function (str) {
+                         return A2($Signal.message,address,ChangeDate(str));
+                      })]),
+              _U.list([]))]))]))
               ,A2($Html.div,
               _U.list([$Html$Attributes.id("menu2")
                       ,$Html$Attributes.$class("cssmenu")
@@ -17614,12 +17633,26 @@ Elm.Iphod.make = function (_elm) {
       moveDay.address,
       {ctor: "_Tuple2",_0: day,_1: model.today}))));
    });
+   var moveDate = $Signal.mailbox("");
+   var requestMoveDate = Elm.Native.Port.make(_elm).outboundSignal("requestMoveDate",
+   function (v) {
+      return v;
+   },
+   moveDate.signal);
+   var changeDate = function (date) {
+      return $Effects.task(A2($Task.map,
+      $Basics.always(NoOp),
+      $Task.toMaybe(A2($Signal.send,moveDate.address,date))));
+   };
    var update = F2(function (action,model) {
       var _p4 = action;
       switch (_p4.ctor)
       {case "NoOp": return {ctor: "_Tuple2"
                            ,_0: model
                            ,_1: $Effects.none};
+         case "ChangeDate": return {ctor: "_Tuple2"
+                                   ,_0: model
+                                   ,_1: changeDate(_p4._0)};
          case "ChangeDay": return {ctor: "_Tuple2"
                                   ,_0: model
                                   ,_1: A2(changeDay,_p4._0,model)};
@@ -17768,11 +17801,13 @@ Elm.Iphod.make = function (_elm) {
                               ,incomingActions: incomingActions
                               ,incomingText: incomingText
                               ,incomingEmail: incomingEmail
+                              ,moveDate: moveDate
                               ,moveDay: moveDay
                               ,namedDay: namedDay
                               ,gatherAllText: gatherAllText
                               ,saveThisConfig: saveThisConfig
                               ,NoOp: NoOp
+                              ,ChangeDate: ChangeDate
                               ,ChangeDay: ChangeDay
                               ,ToggleAbout: ToggleAbout
                               ,ToggleEmail: ToggleEmail
@@ -17792,6 +17827,7 @@ Elm.Iphod.make = function (_elm) {
                               ,ModConfig: ModConfig
                               ,update: update
                               ,gatherText: gatherText
+                              ,changeDate: changeDate
                               ,changeDay: changeDay
                               ,saveConfig: saveConfig
                               ,updateSundayText: updateSundayText

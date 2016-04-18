@@ -103,6 +103,10 @@ incomingEmail: Signal Action
 incomingEmail =
   Signal.map UpdateEmail newEmail
 
+moveDate: Signal.Mailbox String
+moveDate =
+  Signal.mailbox ""
+
 moveDay: Signal.Mailbox (String, String)
 moveDay =
   Signal.mailbox ("", "")
@@ -120,6 +124,10 @@ saveThisConfig =
   Signal.mailbox Models.configInit
 
 -- PORTS
+
+port requestMoveDate: Signal String
+port requestMoveDate =
+  moveDate.signal
 
 port requestMoveDay: Signal (String, String)
 port requestMoveDay =
@@ -154,6 +162,7 @@ port newEmail: Signal Models.Email
 
 type Action
   = NoOp
+  | ChangeDate String
   | ChangeDay String
   | ToggleAbout
   | ToggleEmail
@@ -176,6 +185,7 @@ update: Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     NoOp -> (model, Effects.none)
+    ChangeDate date -> (model, changeDate date)
     ChangeDay day -> (model, changeDay day model)
     ToggleAbout -> ({model | about = not model.about}, Effects.none)
     ToggleEmail -> 
@@ -297,6 +307,13 @@ update action model =
 gatherText: Model -> String -> Effects Action
 gatherText model prayer =
   Signal.send gatherAllText.address (prayer, model.today, model.config)
+  |> Task.toMaybe
+  |> Task.map (always NoOp)
+  |> Effects.task
+
+changeDate: String -> Effects Action
+changeDate date =
+  Signal.send moveDate.address date
   |> Task.toMaybe
   |> Task.map (always NoOp)
   |> Effects.task
@@ -469,7 +486,19 @@ fancyNav address model =
 dateNav: Signal.Address Action -> Model -> Html
 dateNav address model =
   div [id "date_nav"]
-    [ p [style [("text-align", "center"), ("margin-bottom", "0.1em")]] [ text model.today ]
+    [ p 
+        [style [("text-align", "center"), ("margin-bottom", "0.1em")] ] 
+        [ p [] 
+            [ input 
+                [ type' "text"
+                , class "current_date"
+                , id "datepicker"
+                , value model.today
+                , style [("z-index", "200")]
+                , on "change" targetValue (\str -> Signal.message address (ChangeDate str))
+                ] []
+            ]
+        ]
     , div [id "menu2", class "cssmenu", style [("z-index", "99")] ] 
         [ ul []
           [ li [style [("width", "25%")], onClick address (ChangeDay "lastSunday")] [ a [href "#"] [ text "Last Sunday"] ]

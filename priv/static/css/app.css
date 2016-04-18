@@ -87,6 +87,22 @@ form.link, form.button {
   padding: 0px 10px 0px 10px;
 }
 
+#datepicker {position: relative; z-index:200;}
+#dateNav p {
+  text-align: center;
+}
+.current_date {
+  color: darkblue;
+  font-weight: bold;
+  font-size: 0.9em;
+  text-align: center;
+  width: 17em;
+}
+
+#menu2 {
+  margin-top: -0.9em;
+}
+
 button.delete {
   margin: 0;
   padding: 0;
