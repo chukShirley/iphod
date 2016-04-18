@@ -931,7 +931,7 @@ view address model =
 
   ++ (vs "Our Father, who art in heaven, hallowed be thy Name.")
   ++ (vs "Thy kingdom come, thy will be done, on earth as it is in heaven.")
-  ++ (vs "Give us this day our readings bread.")
+  ++ (vs "Give us this day our daily bread.")
   ++ (vs "And forgive us our trespasses, as we forgive those who trespass")
   ++ (vsIndent "against us.")
   ++ (vs "And lead us not into temptation, but deliver us from evil.")
@@ -943,7 +943,7 @@ view address model =
 
   ++ (vs "Our Father in heaven, hallowed be your Name.")
   ++ (vs "Your kingdom come, your will be done, on earth as it is in heaven.")
-  ++ (vs "Give us today our readings bread.")
+  ++ (vs "Give us today our daily bread.")
   ++ (vs "And forgive us our sins as we forgive those who sin against us.")
   ++ (vs "Save us from the time of trial, and deliver us from evil.")
   ++ (vs "For the kingdom, the power, and the glory are yours,")
@@ -952,7 +952,7 @@ view address model =
   ++ (thePrayers2)
   ++ (blankline)
 
-  ++ (rubric "The Officiant then prays one or more of the following collects. It is traditional to pray the Collects for Peace and Grace readings. Alternatively, one may pray the collects on a weekly rotation, using the suggestions in parentheses.")
+  ++ (rubric "The Officiant then prays one or more of the following collects. It is traditional to pray the Collects for Peace and Grace daily. Alternatively, one may pray the collects on a weekly rotation, using the suggestions in parentheses.")
   ++ (section "The Collect of the Day")
 
   ++ (collectOfDay model)
