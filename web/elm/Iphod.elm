@@ -476,6 +476,7 @@ fancyNav address model =
           [ a [href "#"] [text "More..."]
           , ul []
               [ li [] [ a [href "printables"] [text "Printables"] ]
+              , li [] [ a [href "versions"] [text "Bible Versions"] ]
               , li [onClick address ToggleAbout] [ a [href "#"] [ text "About"] ]
               , li [onClick address ToggleEmail] [ a [href "#"] [ text "Contact"] ]
               ]

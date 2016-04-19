@@ -18,6 +18,7 @@ defmodule Iphod.Router do
 
     get "/", PageController, :index
     get "/printables", PrintableController, :index
+    get "/versions", BibleVersionsController, :index
   end
 
   # Other scopes may use custom stacks.

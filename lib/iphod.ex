@@ -17,7 +17,8 @@ defmodule Iphod do
       worker(DailyReading, []),
       worker(Psalms, []),
       worker(Collects, []),
-      worker(Printable, [])
+      worker(Printable, []),
+      worker(BibleVersions, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

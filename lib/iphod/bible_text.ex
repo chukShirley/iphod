@@ -20,14 +20,24 @@ defmodule BibleText do
     IO.puts "URL: #{url}"
     case  HTTPoison.get(url, [{"Accept", "application/jsonrequest"}], [hackney: auth, follow_redirect: true]) do
       {:ok, resp} ->
-        IEx.pry
         map = resp.body 
         |> Poison.decode!
-        # map["response"]["search"]["result"]["passages"] # always a list
-        # |> Enum.reduce "", fn(passage, acc) -> end) 
+        
+        {text, fnotes} = map["response"]["search"]["result"]["passages"] # always a list
+        |> Enum.reduce( {"",""}, fn(passage, {text, fnotes}) -> 
+            text = text <> passage["text"]
+            fnotes = fnotes <> footnotes_to_string(passage["footnotes"])
+            {text, fnotes}
+          end) 
         # and the above fn() should do what?
+        text <> "</br>" <> fnotes
       {:error, _reason} ->
         "ESV text Failed badly"
     end
+  end
+
+  def footnotes_to_string(footnotes) do
+    footnotes
+    |> Enum.reduce( "", &(&1 = &1 <> &2))
   end
 end

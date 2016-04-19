@@ -1,0 +1,16 @@
+<h1>Bible Versions</h1>
+
+<table class="versions">
+  <th>Version</th>
+  <th>Version Name</th>
+  <th>Language</th>
+  <th></th>
+  <%= for doc <- @docs do %>
+    <tr>
+      <td class="ver_abbr"><%= doc.abbr %></td>
+      <td class="ver_name"><%= doc.name %></td>
+      <td class="ver_lang"><%= doc.language %></td>
+      <td class="ver_use">Use</td>
+    </tr>
+  <% end %>
+</table>
