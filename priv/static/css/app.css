@@ -340,7 +340,7 @@ label.radio_label {
   font-size: 0.8em;
   text-align: left;
 }
-.ver_abbr { width: 10%; }
+.ver_abbr { width: 5%; }
 .ver_name { width: 65%; }
 .ver_lang { width: 20%; }
 .ver_use { width: 5%; }

@@ -24,9 +24,9 @@ defmodule Iphod.IphodChannel do
 
 
 
-  def join("iphod", payload, socket) do
+  def join("iphod:readings", payload, socket) do
     if authorized?(payload) do
-      send self(), :after_join
+      # send self(), :after_join
       {:ok, socket}
     else
       {:error, %{reason: "unauthorized"}}
@@ -131,6 +131,10 @@ defmodule Iphod.IphodChannel do
           
     {:noreply, socket}  
     
+  end
+
+  def handle_in("request_today", _, socket) do
+    handle_info :after_join, socket
   end
 
   def handle_in("request_move_date", this_date, socket) do

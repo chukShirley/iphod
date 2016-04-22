@@ -43,7 +43,8 @@ exports.config = {
       "deps/phoenix_html/web/static",
       "web/static",
       "test/static",
-      "web/elm/Iphod.elm"
+      "web/elm/Iphod.elm",
+      "web/elm/Translations.elm"
     ],
 
     // Where to compile files to
@@ -54,7 +55,7 @@ exports.config = {
   plugins: {
     elmBrunch: {
       elmFolder: 'web/elm',
-      mainModules: ['Iphod.elm'],
+      mainModules: ['Iphod.elm', 'Translations.elm'],
       outputFolder: '../static/vendor'
     },
     babel: {

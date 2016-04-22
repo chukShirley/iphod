@@ -2,7 +2,8 @@ defmodule Iphod.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "iphod", Iphod.IphodChannel
+  channel "iphod:*", Iphod.IphodChannel
+  channel "versions", Iphod.VersionsChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
