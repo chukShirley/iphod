@@ -11977,11 +11977,13 @@ Elm.StartApp.make = function (_elm) {
                                  ,Config: Config
                                  ,App: App};
 };
-Elm.Helper = Elm.Helper || {};
-Elm.Helper.make = function (_elm) {
+Elm.Iphod = Elm.Iphod || {};
+Elm.Iphod.Helper = Elm.Iphod.Helper || {};
+Elm.Iphod.Helper.make = function (_elm) {
    "use strict";
-   _elm.Helper = _elm.Helper || {};
-   if (_elm.Helper.values) return _elm.Helper.values;
+   _elm.Iphod = _elm.Iphod || {};
+   _elm.Iphod.Helper = _elm.Iphod.Helper || {};
+   if (_elm.Iphod.Helper.values) return _elm.Iphod.Helper.values;
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
@@ -12009,10 +12011,10 @@ Elm.Helper.make = function (_elm) {
          return A2($Signal.message,address,msg);
       });
    });
-   return _elm.Helper.values = {_op: _op
-                               ,onClickLimited: onClickLimited
-                               ,hideable: hideable
-                               ,getText: getText};
+   return _elm.Iphod.Helper.values = {_op: _op
+                                     ,onClickLimited: onClickLimited
+                                     ,hideable: hideable
+                                     ,getText: getText};
 };
 Elm.Translations = Elm.Translations || {};
 Elm.Translations.make = function (_elm) {
@@ -12023,10 +12025,10 @@ Elm.Translations.make = function (_elm) {
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $Effects = Elm.Effects.make(_elm),
-   $Helper = Elm.Helper.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
    $Html$Events = Elm.Html.Events.make(_elm),
+   $Iphod$Helper = Elm.Iphod.Helper.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Regex = Elm.Regex.make(_elm),
@@ -12040,45 +12042,12 @@ Elm.Translations.make = function (_elm) {
                                                  ,_0: "background-color"
                                                  ,_1: "lightgreen"} : {ctor: "_Tuple2"
                                                                       ,_0: "background-color"
-                                                                      ,_1: "none"}]);
-      return A2($Helper.hideable,model.show,this_style);
+                                                                      ,_1: "white"}]);
+      return A2($Iphod$Helper.hideable,model.show,this_style);
    };
-   var selectedStyle = function (model) {
-      return model.selected ? $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                              ,_0: "background-color"
-                                                              ,_1: "lightgreen"}])) : $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                                                                                      ,_0: "background-color"
-                                                                                                                      ,_1: "none"}]));
+   var UseVersion = function (a) {
+      return {ctor: "UseVersion",_0: a};
    };
-   var update = F2(function (action,model) {
-      var _p0 = action;
-      switch (_p0.ctor)
-      {case "NoOp": return {ctor: "_Tuple2"
-                           ,_0: model
-                           ,_1: $Effects.none};
-         case "AddModel": return {ctor: "_Tuple2"
-                                 ,_0: _p0._0
-                                 ,_1: $Effects.none};
-         default: var _p2 = _p0._1;
-           var findThis = function (ver) {
-              var _p1 = _p0._0;
-              switch (_p1)
-              {case "abbr": return A2($Regex.contains,
-                   $Regex.caseInsensitive($Regex.regex(_p2)),
-                   ver.abbr) ? _U.update(ver,{show: true}) : _U.update(ver,
-                   {show: false});
-                 case "name": return A2($Regex.contains,
-                   $Regex.caseInsensitive($Regex.regex(_p2)),
-                   ver.name) ? _U.update(ver,{show: true}) : _U.update(ver,
-                   {show: false});
-                 default: return A2($Regex.contains,
-                   $Regex.caseInsensitive($Regex.regex(_p2)),
-                   ver.lang) ? _U.update(ver,{show: true}) : _U.update(ver,
-                   {show: false});}
-           };
-           var newModel = A2($List.map,findThis,model);
-           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};}
-   });
    var Find = F2(function (a,b) {
       return {ctor: "Find",_0: a,_1: b};
    });
@@ -12101,7 +12070,7 @@ Elm.Translations.make = function (_elm) {
               function (str) {
                  return A2($Signal.message,address,A2(Find,"abbr",str));
               })
-              ,A2($Helper.onClickLimited,address,NoOp)
+              ,A2($Iphod$Helper.onClickLimited,address,NoOp)
               ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                                ,_0: "width"
                                                ,_1: "90%"}]))]),
@@ -12122,7 +12091,7 @@ Elm.Translations.make = function (_elm) {
               function (str) {
                  return A2($Signal.message,address,A2(Find,"name",str));
               })
-              ,A2($Helper.onClickLimited,address,NoOp)
+              ,A2($Iphod$Helper.onClickLimited,address,NoOp)
               ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                                ,_0: "width"
                                                ,_1: "90%"}]))]),
@@ -12143,7 +12112,7 @@ Elm.Translations.make = function (_elm) {
               function (str) {
                  return A2($Signal.message,address,A2(Find,"lang",str));
               })
-              ,A2($Helper.onClickLimited,address,NoOp)
+              ,A2($Iphod$Helper.onClickLimited,address,NoOp)
               ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                                ,_0: "width"
                                                ,_1: "90%"}]))]),
@@ -12164,7 +12133,8 @@ Elm.Translations.make = function (_elm) {
                  _U.list([$Html$Attributes.$class("ver_language")]),
                  _U.list([$Html.text(ver.lang)]))
                  ,A2($Html.td,
-                 _U.list([$Html$Attributes.$class("ver_use")]),
+                 _U.list([$Html$Attributes.$class("ver_use")
+                         ,A2($Html$Events.onClick,address,UseVersion(ver))]),
                  _U.list([A2($Html.button,
                  _U.list([]),
                  _U.list([$Html.text(using)]))]))]));
@@ -12232,6 +12202,66 @@ Elm.Translations.make = function (_elm) {
                      ,lang: ""
                      ,show: false
                      ,selected: false};
+   var dbSaveVersion = $Signal.mailbox({ctor: "_Tuple2"
+                                       ,_0: ""
+                                       ,_1: initVersion});
+   var requestSaveVersion = Elm.Native.Port.make(_elm).outboundSignal("requestSaveVersion",
+   function (v) {
+      return [v._0
+             ,{id: v._1.id
+              ,abbr: v._1.abbr
+              ,name: v._1.name
+              ,lang: v._1.lang
+              ,show: v._1.show
+              ,selected: v._1.selected}];
+   },
+   dbSaveVersion.signal);
+   var saveVersion = function (ver) {
+      var saving = ver.selected ? "save" : "unsave";
+      return $Effects.task(A2($Task.map,
+      $Basics.always(NoOp),
+      $Task.toMaybe(A2($Signal.send,
+      dbSaveVersion.address,
+      {ctor: "_Tuple2",_0: saving,_1: ver}))));
+   };
+   var update = F2(function (action,model) {
+      var _p0 = action;
+      switch (_p0.ctor)
+      {case "NoOp": return {ctor: "_Tuple2"
+                           ,_0: model
+                           ,_1: $Effects.none};
+         case "AddModel": return {ctor: "_Tuple2"
+                                 ,_0: _p0._0
+                                 ,_1: $Effects.none};
+         case "Find": var _p2 = _p0._1;
+           var findThis = function (ver) {
+              var _p1 = _p0._0;
+              switch (_p1)
+              {case "abbr": return A2($Regex.contains,
+                   $Regex.caseInsensitive($Regex.regex(_p2)),
+                   ver.abbr) ? _U.update(ver,{show: true}) : _U.update(ver,
+                   {show: false});
+                 case "name": return A2($Regex.contains,
+                   $Regex.caseInsensitive($Regex.regex(_p2)),
+                   ver.name) ? _U.update(ver,{show: true}) : _U.update(ver,
+                   {show: false});
+                 default: return A2($Regex.contains,
+                   $Regex.caseInsensitive($Regex.regex(_p2)),
+                   ver.lang) ? _U.update(ver,{show: true}) : _U.update(ver,
+                   {show: false});}
+           };
+           var newModel = A2($List.map,findThis,model);
+           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+         default: var _p3 = _p0._0;
+           var newVer = _U.update(_p3,
+           {selected: $Basics.not(_p3.selected)});
+           var selectModel = function (this_model) {
+              return _U.eq(this_model.id,_p3.id) ? _U.update(this_model,
+              {selected: newVer.selected}) : this_model;
+           };
+           var newModel = A2($List.map,selectModel,model);
+           return {ctor: "_Tuple2",_0: newModel,_1: saveVersion(newVer)};}
+   });
    var Version = F6(function (a,b,c,d,e,f) {
       return {id: a,abbr: b,name: c,lang: d,show: e,selected: f};
    });
@@ -12249,14 +12279,16 @@ Elm.Translations.make = function (_elm) {
                                      ,initVersion: initVersion
                                      ,init: init
                                      ,incomingVersion: incomingVersion
+                                     ,dbSaveVersion: dbSaveVersion
                                      ,NoOp: NoOp
                                      ,AddModel: AddModel
                                      ,Find: Find
+                                     ,UseVersion: UseVersion
                                      ,update: update
+                                     ,saveVersion: saveVersion
                                      ,view: view
                                      ,findVersion: findVersion
                                      ,findName: findName
                                      ,findLanguage: findLanguage
-                                     ,selectedStyle: selectedStyle
                                      ,versionRow: versionRow};
 };

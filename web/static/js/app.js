@@ -18,7 +18,8 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// Local Storage
+// LOCAL STORAGE ------------------------
+
 function storageAvailable(of_type) {
   try {
     var storage = window[of_type],
@@ -39,6 +40,64 @@ function get_init(arg, arg2) {
       }
   return t;
 }
+function init_config_model() {
+  var m = { ot: "ESV"
+    , ps: "Coverdale"
+    , nt: "ESV"
+    , gs: "ESV"
+    , fnotes: "fnotes"
+    , vers: ["ESV"]
+    , current: "ESV"
+    }
+  if ( storageAvailable('localStorage') ) {
+    m = { ot: get_init("iphod_ot", "ESV")
+        , ps: get_init("iphod_ps", "Coverdale")
+        , nt: get_init("iphod_nt", "ESV")
+        , gs: get_init("iphod_gs", "ESV")
+        , fnotes: get_init("iphod_fnotes", "fnotes")
+        , vers: get_versions("iphod_vers", "ESV")
+        , current: "ESV"
+        }
+  }
+  return m;
+}
+
+function get_versions(arg1, arg2) {
+  let versions = get_init(arg1, arg2);
+  return versions.split(",");
+}
+
+function save_version(abbr) {
+  var s = window.localStorage
+    , t = s.getItem("iphod_vers");
+  if (t == null) { 
+    t = [];
+  }
+  else {
+    t = t.split(",");
+  };
+  if (t.indexOf(abbr) >= 0) {return true;};
+  t.push(abbr);
+  t = t.toString();
+  s.setItem("iphod_vers", t);
+  return true
+}
+
+function unsave_version(abbr) {
+  var s = window.localStorage
+    , t = s.getItem("iphod_vers");
+  if (t == null) return true;
+  t = t.split(",");
+  t = t.filter(remove_abbr, abbr);
+  t = t.toString();
+  s.setItem("iphod_vers", t);
+  return true;
+}
+function remove_abbr(v, i, ary){
+  return v != this;
+}
+  
+// SOCKETS ------------------------
 
 import "./menu"
 import socket from "./socket"
@@ -60,10 +119,27 @@ if (window.location.pathname == "/versions") {
 //  })
 
   channel_v.on("all_versions", data => {
-    elmApp.ports.allVersions.send(data.list);
+    let list = data.list
+      , in_use = get_versions("iphod_vers", "ESV");
+    list.forEach(function(ver) {
+      if (in_use.indexOf(ver.abbr) > -1) { ver.selected = true }
+    });
+    elmApp.ports.allVersions.send(list);
   })
   
   channel_v.push("request_list", "");
+
+  elmApp.ports.requestSaveVersion.subscribe(function(request) {
+    let   cmnd = request[0]
+        , ver  = request[1];
+    if (cmnd == "save") {
+      save_version(ver.abbr);
+    } 
+    else {
+      unsave_version(ver.abbr);
+    }
+  });
+
 }
 
 
@@ -97,24 +173,6 @@ if (window.location.pathname == "/") {
   })
 
 
-  function init_config_model() {
-    var m = { ot: "ESV"
-      , ps: "Coverdale"
-      , nt: "ESV"
-      , gs: "ESV"
-      , fnotes: "fnotes"
-      }
-    if ( storageAvailable('localStorage') ) {
-      m = { ot: get_init("iphod_ot", "ESV")
-          , ps: get_init("iphod_ps", "Coverdale")
-          , nt: get_init("iphod_nt", "ESV")
-          , gs: get_init("iphod_gs", "ESV")
-          , fnotes: get_init("iphod_fnotes", "fnotes")
-          }
-    }
-    return m;
-  }
-  
   // Hook up Elm
   
   
@@ -125,6 +183,8 @@ if (window.location.pathname == "/") {
       , nt: ""
       , gs: ""
       , fnotes: ""
+      , vers: []
+      , current: "ESV"
     }
     , sunday_collect_model = {
         instruction: "String"
@@ -194,7 +254,6 @@ if (window.location.pathname == "/") {
   
   
   elmApp.ports.requestMoveDate.subscribe(function(request) {
-    console.log("MOVE DATE: ", request);
     channel.push("request_move_date", request)
   });
   

@@ -44,7 +44,7 @@ defmodule Iphod.Mixfile do
      {:cowboy, "~> 1.0"},
      {:timex, github: "frpaulas/timex"},
      {:exrm, "~> 1.0.3"},
-     {:mock, github: "jjh42/mock", only: :dev},
+     # {:mock, github: "jjh42/mock", only: :dev},
      {:httpoison, "~> 0.8.2"},
      {:mailgun, "~> 0.1.2"}
     ]

@@ -8,6 +8,7 @@ defmodule BibleVersions do
   end
 
   def identity(), do: Agent.get(__MODULE__, &(&1))
+  def id(abbreviation), do: identity[abbreviation]["id"]
   def list_all() do
     identity 
       |> Map.to_list
@@ -22,7 +23,7 @@ defmodule BibleVersions do
           resp.body
           |> Poison.decode!
         body["response"]["versions"]
-          |> Enum.reduce(%{}, fn(ver, acc)-> acc = acc |> Map.put_new(ver["id"], ver) end)
+          |> Enum.reduce(%{}, fn(ver, acc)-> acc = acc |> Map.put_new(ver["abbreviation"], ver) end)
       {:error, _reason} ->
         "ESV List of Versions failed badly"
     end

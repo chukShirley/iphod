@@ -6,7 +6,8 @@ import Html.Events exposing (..)
 import Effects exposing (Effects, Never)
 import String exposing (join)
 import Json.Decode as Json
-import Helper exposing (onClickLimited, hideable, getText)
+
+import Iphod.Helper exposing (onClickLimited, hideable, getText)
 import Iphod.Models exposing (Config, configInit)
 
 -- MODEL
@@ -28,12 +29,14 @@ type Key
 type Action
   = NoOp
   | Change Key String
+  | ChangeVersion String
   | ChangeFootnote Bool
 
 update: Action -> Model -> Model
 update action model =
   case action of
     NoOp -> model
+
     Change key val -> 
       let
         newModel = case key of
@@ -43,6 +46,18 @@ update action model =
           GS -> {model | gs = val}
       in 
         newModel
+
+    ChangeVersion ver ->
+      let
+        newModel = 
+          { model | ot = ver
+                  , ps = ver
+                  , nt = ver
+                  , gs = ver
+          }
+      in
+        newModel
+
     ChangeFootnote torf ->
       let
         newModel = if torf 
@@ -70,10 +85,25 @@ view address model =
         [ text "FootNotes: "
         , ftnoteCheck address model "fnotes"
         ]
+--    , span
+--        [style [("margin-left", "2em")]]
+--        [ text "Version: "
+--        , versionSelect address model
+--        ]
     ]
 
 
 -- HELPERS
+
+versionSelect: Signal.Address Action -> Model -> Html
+versionSelect address model =
+  let
+    thisVersion ver =
+      option [value ver, selected (ver == model.current)] [text ver]
+  in
+    select 
+      [ on "change" targetValue (\resp -> Signal.message address (ChangeVersion resp))] 
+      (List.map thisVersion model.vers)
 
 psRadio: Signal.Address Action -> Model -> Key -> String -> Html
 psRadio address model key val =

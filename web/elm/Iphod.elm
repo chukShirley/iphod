@@ -10,12 +10,12 @@ import Http
 import Regex
 import Json.Decode as Json exposing ((:=))
 import Effects exposing (Effects, Never)
-import Task exposing (Task)
+import Task exposing (Task, andThen)
 import String exposing (join)
-import Helper exposing (onClickLimited, hideable, getText)
 import Markdown
 import Graphics.Element as Graphics
 
+import Iphod.Helper exposing (onClickLimited, hideable, getText)
 import Iphod.Sunday as Sunday
 import Iphod.MorningPrayer as MorningPrayer
 import Iphod.EveningPrayer as EveningPrayer
@@ -123,6 +123,8 @@ saveThisConfig: Signal.Mailbox Models.Config
 saveThisConfig =
   Signal.mailbox Models.configInit
 
+
+
 -- PORTS
 
 port requestMoveDate: Signal String
@@ -132,10 +134,6 @@ port requestMoveDate =
 port requestMoveDay: Signal (String, String)
 port requestMoveDay =
   moveDay.signal
-
-port requestText: Signal (List (String, String))
-port requestText =
-  getText.signal
 
 port requestNamedDay: Signal (String, String)
 port requestNamedDay =
@@ -153,6 +151,10 @@ port sendEmail: Signal Models.Email
 port sendEmail =
   sendContactMe.signal
 
+port requestText: Signal (List (String, String))
+port requestText =
+  getText.signal
+
 port nextSunday: Signal Model
 port newText: Signal NewText
 port newEmail: Signal Models.Email
@@ -162,6 +164,7 @@ port newEmail: Signal Models.Email
 
 type Action
   = NoOp
+  | ReadMe String
   | ChangeDate String
   | ChangeDay String
   | ToggleAbout
@@ -185,9 +188,19 @@ update: Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     NoOp -> (model, Effects.none)
+
+    ReadMe s ->
+      let
+        foo = Debug.log "README" s
+      in
+        (model, Effects.none)
+
     ChangeDate date -> (model, changeDate date)
+
     ChangeDay day -> (model, changeDay day model)
+
     ToggleAbout -> ({model | about = not model.about}, Effects.none)
+
     ToggleEmail -> 
       let 
         email = model.email
@@ -195,6 +208,7 @@ update action model =
         newModel = {model | email = newEmail}
       in
         (newModel, Effects.none)
+
     ToggleMp ->
       let
         mp = model.morningPrayer
@@ -205,6 +219,7 @@ update action model =
                   else Effects.none
       in 
         (newModel, effect)
+
     ToggleEp ->
       let
         ep = model.eveningPrayer
@@ -215,6 +230,7 @@ update action model =
                   else Effects.none
       in 
         (newModel, effect)
+
     ToggleDaily ->
       let
         daily = model.daily
@@ -222,6 +238,7 @@ update action model =
         newModel = {model | daily = newdaily}
       in 
         (newModel, Effects.none)
+
     ToggleSunday ->
       let
         sunday = model.sunday
@@ -229,6 +246,7 @@ update action model =
         newModel = {model | sunday = newSunday}
       in 
         (newModel, Effects.none)
+
     ToggleRedLetter ->
       let
         rl = model.redLetter
@@ -238,6 +256,7 @@ update action model =
         (newModel, Effects.none)
 
     SetSunday readings -> (readings, Effects.none)
+
     UpdateText text ->
       let 
         newModel = case text.model of
@@ -287,6 +306,7 @@ update action model =
 
     ModConfig cmodel caction ->
       let
+        foo = Debug.log "CONFIG" model.config
         newConfig = Config.update caction cmodel
         sunday = model.sunday 
         newSunday = {sunday | config = newConfig}
@@ -343,9 +363,9 @@ updateSundayText sunday text =
       "nt" -> sunday.nt
       _    -> sunday.gs
     update_text this_lesson =
-      if this_lesson.id == text.id 
+      if this_lesson.id == text.id
         then 
-          {this_lesson | body = text.body, show = True}
+          {this_lesson | body = text.body, show = True, version = text.version}
         else 
           this_lesson
     newSection = List.map update_text this_section
@@ -372,7 +392,7 @@ updateDailyText daily text =
     update_text this_lesson =
       if this_lesson.id == text.id 
         then 
-          {this_lesson | body = text.body, show = True}
+          {this_lesson | body = text.body, show = True, version = text.version}
         else 
           this_lesson
 

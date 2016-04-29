@@ -9,15 +9,10 @@
   var aliases = {};
   var has = ({}).hasOwnProperty;
 
-  var unalias = function(alias, loaderPath) {
-    var result = aliases[alias] || aliases[alias + '/index.js'];
-    return result || alias;
-  };
-
-  var _reg = /^\.\.?(\/|$)/;
+  var expRe = /^\.\.?(\/|$)/;
   var expand = function(root, name) {
     var results = [], part;
-    var parts = (_reg.test(name) ? root + '/' + name : name).split('/');
+    var parts = (expRe.test(name) ? root + '/' + name : name).split('/');
     for (var i = 0, length = parts.length; i < length; i++) {
       part = parts[i];
       if (part === '..') {
@@ -41,28 +36,52 @@
   };
 
   var initModule = function(name, definition) {
-    var module = {id: name, exports: {}};
+    var hot = null;
+    hot = hmr && hmr.createHot(name);
+    var module = {id: name, exports: {}, hot: hot};
     cache[name] = module;
     definition(module.exports, localRequire(name), module);
     return module.exports;
   };
 
+  var expandAlias = function(name) {
+    return aliases[name] ? expandAlias(aliases[name]) : name;
+  };
+
+  var _resolve = function(name, dep) {
+    return expandAlias(expand(dirname(name), dep));
+  };
+
   var require = function(name, loaderPath) {
     if (loaderPath == null) loaderPath = '/';
-    var path = unalias(name, loaderPath);
+    var path = expandAlias(name);
 
     if (has.call(cache, path)) return cache[path].exports;
     if (has.call(modules, path)) return initModule(path, modules[path]);
 
-    var dirIndex = expand(path, './index');
-    if (has.call(cache, dirIndex)) return cache[dirIndex].exports;
-    if (has.call(modules, dirIndex)) return initModule(dirIndex, modules[dirIndex]);
-
-    throw new Error('Cannot find module "' + name + '" from ' + '"' + loaderPath + '"');
+    throw new Error("Cannot find module '" + name + "' from '" + loaderPath + "'");
   };
 
   require.alias = function(from, to) {
     aliases[to] = from;
+  };
+
+  var extRe = /\.[^.\/]+$/;
+  var indexRe = /\/index(\.[^\/]+)?$/;
+  var addExtensions = function(bundle) {
+    if (extRe.test(bundle)) {
+      var alias = bundle.replace(extRe, '');
+      if (!has.call(aliases, alias) || aliases[alias].replace(extRe, '') === alias + '/index') {
+        aliases[alias] = bundle;
+      }
+    }
+
+    if (indexRe.test(bundle)) {
+      var iAlias = bundle.replace(indexRe, '');
+      if (!has.call(aliases, iAlias)) {
+        aliases[iAlias] = bundle;
+      }
+    }
   };
 
   require.register = require.define = function(bundle, fn) {
@@ -74,23 +93,1526 @@
       }
     } else {
       modules[bundle] = fn;
+      delete cache[bundle];
+      addExtensions(bundle);
     }
   };
 
   require.list = function() {
-    var result = [];
+    var list = [];
     for (var item in modules) {
       if (has.call(modules, item)) {
-        result.push(item);
+        list.push(item);
       }
     }
-    return result;
+    return list;
   };
 
-  require.brunch = true;
+  var hmr = globals._hmr && new globals._hmr(_resolve, require, modules, cache);
   require._cache = cache;
+  require.hmr = hmr && hmr.wrap;
+  require.brunch = true;
   globals.require = require;
 })();
+
+(function() {
+var global = window;
+var __makeRelativeRequire = function(require, mappings, pref) {
+  var none = {};
+  var tryReq = function(name, pref) {
+    var val;
+    try {
+      val = require(pref + '/node_modules/' + name);
+      return val;
+    } catch (e) {
+      if (e.toString().indexOf('Cannot find module') === -1) {
+        throw e;
+      }
+
+      if (pref.indexOf('node_modules') !== -1) {
+        var s = pref.split('/');
+        var i = s.lastIndexOf('node_modules');
+        var newPref = s.slice(0, i).join('/');
+        return tryReq(name, newPref);
+      }
+    }
+    return none;
+  };
+  return function(name) {
+    if (name in mappings) name = mappings[name];
+    if (!name) return;
+    if (name[0] !== '.' && pref) {
+      var val = tryReq(name, pref);
+      if (val !== none) return val;
+    }
+    return require(name);
+  }
+};
+require.register("deps/phoenix/web/static/js/phoenix.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+// Phoenix Channels JavaScript client
+//
+// ## Socket Connection
+//
+// A single connection is established to the server and
+// channels are mulitplexed over the connection.
+// Connect to the server using the `Socket` class:
+//
+//     let socket = new Socket("/ws", {params: {userToken: "123"}})
+//     socket.connect()
+//
+// The `Socket` constructor takes the mount point of the socket,
+// the authentication params, as well as options that can be found in
+// the Socket docs, such as configuring the `LongPoll` transport, and
+// heartbeat.
+//
+// ## Channels
+//
+// Channels are isolated, concurrent processes on the server that
+// subscribe to topics and broker events between the client and server.
+// To join a channel, you must provide the topic, and channel params for
+// authorization. Here's an example chat room example where `"new_msg"`
+// events are listened for, messages are pushed to the server, and
+// the channel is joined with ok/error/timeout matches:
+//
+//     let channel = socket.channel("rooms:123", {token: roomToken})
+//     channel.on("new_msg", msg => console.log("Got message", msg) )
+//     $input.onEnter( e => {
+//       channel.push("new_msg", {body: e.target.val}, 10000)
+//        .receive("ok", (msg) => console.log("created message", msg) )
+//        .receive("error", (reasons) => console.log("create failed", reasons) )
+//        .receive("timeout", () => console.log("Networking issue...") )
+//     })
+//     channel.join()
+//       .receive("ok", ({messages}) => console.log("catching up", messages) )
+//       .receive("error", ({reason}) => console.log("failed join", reason) )
+//       .receive("timeout", () => console.log("Networking issue. Still waiting...") )
+//
+//
+// ## Joining
+//
+// Creating a channel with `socket.channel(topic, params)`, binds the params to
+// `channel.params`, which are sent up on `channel.join()`.
+// Subsequent rejoins will send up the modified params for
+// updating authorization params, or passing up last_message_id information.
+// Successful joins receive an "ok" status, while unsuccessful joins
+// receive "error".
+//
+//
+// ## Pushing Messages
+//
+// From the previous example, we can see that pushing messages to the server
+// can be done with `channel.push(eventName, payload)` and we can optionally
+// receive responses from the push. Additionally, we can use
+// `receive("timeout", callback)` to abort waiting for our other `receive` hooks
+//  and take action after some period of waiting. The default timeout is 5000ms.
+//
+//
+// ## Socket Hooks
+//
+// Lifecycle events of the multiplexed connection can be hooked into via
+// `socket.onError()` and `socket.onClose()` events, ie:
+//
+//     socket.onError( () => console.log("there was an error with the connection!") )
+//     socket.onClose( () => console.log("the connection dropped") )
+//
+//
+// ## Channel Hooks
+//
+// For each joined channel, you can bind to `onError` and `onClose` events
+// to monitor the channel lifecycle, ie:
+//
+//     channel.onError( () => console.log("there was an error!") )
+//     channel.onClose( () => console.log("the channel has gone away gracefully") )
+//
+// ### onError hooks
+//
+// `onError` hooks are invoked if the socket connection drops, or the channel
+// crashes on the server. In either case, a channel rejoin is attemtped
+// automatically in an exponential backoff manner.
+//
+// ### onClose hooks
+//
+// `onClose` hooks are invoked only in two cases. 1) the channel explicitly
+// closed on the server, or 2). The client explicitly closed, by calling
+// `channel.leave()`
+//
+
+var VSN = "1.0.0";
+var SOCKET_STATES = { connecting: 0, open: 1, closing: 2, closed: 3 };
+var DEFAULT_TIMEOUT = 10000;
+var CHANNEL_STATES = {
+  closed: "closed",
+  errored: "errored",
+  joined: "joined",
+  joining: "joining"
+};
+var CHANNEL_EVENTS = {
+  close: "phx_close",
+  error: "phx_error",
+  join: "phx_join",
+  reply: "phx_reply",
+  leave: "phx_leave"
+};
+var TRANSPORTS = {
+  longpoll: "longpoll",
+  websocket: "websocket"
+};
+
+var Push = function () {
+
+  // Initializes the Push
+  //
+  // channel - The Channel
+  // event - The event, for example `"phx_join"`
+  // payload - The payload, for example `{user_id: 123}`
+  // timeout - The push timeout in milliseconds
+  //
+
+  function Push(channel, event, payload, timeout) {
+    _classCallCheck(this, Push);
+
+    this.channel = channel;
+    this.event = event;
+    this.payload = payload || {};
+    this.receivedResp = null;
+    this.timeout = timeout;
+    this.timeoutTimer = null;
+    this.recHooks = [];
+    this.sent = false;
+  }
+
+  _createClass(Push, [{
+    key: "resend",
+    value: function resend(timeout) {
+      this.timeout = timeout;
+      this.cancelRefEvent();
+      this.ref = null;
+      this.refEvent = null;
+      this.receivedResp = null;
+      this.sent = false;
+      this.send();
+    }
+  }, {
+    key: "send",
+    value: function send() {
+      if (this.hasReceived("timeout")) {
+        return;
+      }
+      this.startTimeout();
+      this.sent = true;
+      this.channel.socket.push({
+        topic: this.channel.topic,
+        event: this.event,
+        payload: this.payload,
+        ref: this.ref
+      });
+    }
+  }, {
+    key: "receive",
+    value: function receive(status, callback) {
+      if (this.hasReceived(status)) {
+        callback(this.receivedResp.response);
+      }
+
+      this.recHooks.push({ status: status, callback: callback });
+      return this;
+    }
+
+    // private
+
+  }, {
+    key: "matchReceive",
+    value: function matchReceive(_ref) {
+      var status = _ref.status;
+      var response = _ref.response;
+      var ref = _ref.ref;
+
+      this.recHooks.filter(function (h) {
+        return h.status === status;
+      }).forEach(function (h) {
+        return h.callback(response);
+      });
+    }
+  }, {
+    key: "cancelRefEvent",
+    value: function cancelRefEvent() {
+      if (!this.refEvent) {
+        return;
+      }
+      this.channel.off(this.refEvent);
+    }
+  }, {
+    key: "cancelTimeout",
+    value: function cancelTimeout() {
+      clearTimeout(this.timeoutTimer);
+      this.timeoutTimer = null;
+    }
+  }, {
+    key: "startTimeout",
+    value: function startTimeout() {
+      var _this = this;
+
+      if (this.timeoutTimer) {
+        return;
+      }
+      this.ref = this.channel.socket.makeRef();
+      this.refEvent = this.channel.replyEventName(this.ref);
+
+      this.channel.on(this.refEvent, function (payload) {
+        _this.cancelRefEvent();
+        _this.cancelTimeout();
+        _this.receivedResp = payload;
+        _this.matchReceive(payload);
+      });
+
+      this.timeoutTimer = setTimeout(function () {
+        _this.trigger("timeout", {});
+      }, this.timeout);
+    }
+  }, {
+    key: "hasReceived",
+    value: function hasReceived(status) {
+      return this.receivedResp && this.receivedResp.status === status;
+    }
+  }, {
+    key: "trigger",
+    value: function trigger(status, response) {
+      this.channel.trigger(this.refEvent, { status: status, response: response });
+    }
+  }]);
+
+  return Push;
+}();
+
+var Channel = exports.Channel = function () {
+  function Channel(topic, params, socket) {
+    var _this2 = this;
+
+    _classCallCheck(this, Channel);
+
+    this.state = CHANNEL_STATES.closed;
+    this.topic = topic;
+    this.params = params || {};
+    this.socket = socket;
+    this.bindings = [];
+    this.timeout = this.socket.timeout;
+    this.joinedOnce = false;
+    this.joinPush = new Push(this, CHANNEL_EVENTS.join, this.params, this.timeout);
+    this.pushBuffer = [];
+    this.rejoinTimer = new Timer(function () {
+      return _this2.rejoinUntilConnected();
+    }, this.socket.reconnectAfterMs);
+    this.joinPush.receive("ok", function () {
+      _this2.state = CHANNEL_STATES.joined;
+      _this2.rejoinTimer.reset();
+      _this2.pushBuffer.forEach(function (pushEvent) {
+        return pushEvent.send();
+      });
+      _this2.pushBuffer = [];
+    });
+    this.onClose(function () {
+      _this2.socket.log("channel", "close " + _this2.topic);
+      _this2.state = CHANNEL_STATES.closed;
+      _this2.socket.remove(_this2);
+    });
+    this.onError(function (reason) {
+      _this2.socket.log("channel", "error " + _this2.topic, reason);
+      _this2.state = CHANNEL_STATES.errored;
+      _this2.rejoinTimer.scheduleTimeout();
+    });
+    this.joinPush.receive("timeout", function () {
+      if (_this2.state !== CHANNEL_STATES.joining) {
+        return;
+      }
+
+      _this2.socket.log("channel", "timeout " + _this2.topic, _this2.joinPush.timeout);
+      _this2.state = CHANNEL_STATES.errored;
+      _this2.rejoinTimer.scheduleTimeout();
+    });
+    this.on(CHANNEL_EVENTS.reply, function (payload, ref) {
+      _this2.trigger(_this2.replyEventName(ref), payload);
+    });
+  }
+
+  _createClass(Channel, [{
+    key: "rejoinUntilConnected",
+    value: function rejoinUntilConnected() {
+      this.rejoinTimer.scheduleTimeout();
+      if (this.socket.isConnected()) {
+        this.rejoin();
+      }
+    }
+  }, {
+    key: "join",
+    value: function join() {
+      var timeout = arguments.length <= 0 || arguments[0] === undefined ? this.timeout : arguments[0];
+
+      if (this.joinedOnce) {
+        throw "tried to join multiple times. 'join' can only be called a single time per channel instance";
+      } else {
+        this.joinedOnce = true;
+      }
+      this.rejoin(timeout);
+      return this.joinPush;
+    }
+  }, {
+    key: "onClose",
+    value: function onClose(callback) {
+      this.on(CHANNEL_EVENTS.close, callback);
+    }
+  }, {
+    key: "onError",
+    value: function onError(callback) {
+      this.on(CHANNEL_EVENTS.error, function (reason) {
+        return callback(reason);
+      });
+    }
+  }, {
+    key: "on",
+    value: function on(event, callback) {
+      this.bindings.push({ event: event, callback: callback });
+    }
+  }, {
+    key: "off",
+    value: function off(event) {
+      this.bindings = this.bindings.filter(function (bind) {
+        return bind.event !== event;
+      });
+    }
+  }, {
+    key: "canPush",
+    value: function canPush() {
+      return this.socket.isConnected() && this.state === CHANNEL_STATES.joined;
+    }
+  }, {
+    key: "push",
+    value: function push(event, payload) {
+      var timeout = arguments.length <= 2 || arguments[2] === undefined ? this.timeout : arguments[2];
+
+      if (!this.joinedOnce) {
+        throw "tried to push '" + event + "' to '" + this.topic + "' before joining. Use channel.join() before pushing events";
+      }
+      var pushEvent = new Push(this, event, payload, timeout);
+      if (this.canPush()) {
+        pushEvent.send();
+      } else {
+        pushEvent.startTimeout();
+        this.pushBuffer.push(pushEvent);
+      }
+
+      return pushEvent;
+    }
+
+    // Leaves the channel
+    //
+    // Unsubscribes from server events, and
+    // instructs channel to terminate on server
+    //
+    // Triggers onClose() hooks
+    //
+    // To receive leave acknowledgements, use the a `receive`
+    // hook to bind to the server ack, ie:
+    //
+    //     channel.leave().receive("ok", () => alert("left!") )
+    //
+
+  }, {
+    key: "leave",
+    value: function leave() {
+      var _this3 = this;
+
+      var timeout = arguments.length <= 0 || arguments[0] === undefined ? this.timeout : arguments[0];
+
+      var onClose = function onClose() {
+        _this3.socket.log("channel", "leave " + _this3.topic);
+        _this3.trigger(CHANNEL_EVENTS.close, "leave");
+      };
+      var leavePush = new Push(this, CHANNEL_EVENTS.leave, {}, timeout);
+      leavePush.receive("ok", function () {
+        return onClose();
+      }).receive("timeout", function () {
+        return onClose();
+      });
+      leavePush.send();
+      if (!this.canPush()) {
+        leavePush.trigger("ok", {});
+      }
+
+      return leavePush;
+    }
+
+    // Overridable message hook
+    //
+    // Receives all events for specialized message handling
+
+  }, {
+    key: "onMessage",
+    value: function onMessage(event, payload, ref) {}
+
+    // private
+
+  }, {
+    key: "isMember",
+    value: function isMember(topic) {
+      return this.topic === topic;
+    }
+  }, {
+    key: "sendJoin",
+    value: function sendJoin(timeout) {
+      this.state = CHANNEL_STATES.joining;
+      this.joinPush.resend(timeout);
+    }
+  }, {
+    key: "rejoin",
+    value: function rejoin() {
+      var timeout = arguments.length <= 0 || arguments[0] === undefined ? this.timeout : arguments[0];
+      this.sendJoin(timeout);
+    }
+  }, {
+    key: "trigger",
+    value: function trigger(triggerEvent, payload, ref) {
+      this.onMessage(triggerEvent, payload, ref);
+      this.bindings.filter(function (bind) {
+        return bind.event === triggerEvent;
+      }).map(function (bind) {
+        return bind.callback(payload, ref);
+      });
+    }
+  }, {
+    key: "replyEventName",
+    value: function replyEventName(ref) {
+      return "chan_reply_" + ref;
+    }
+  }]);
+
+  return Channel;
+}();
+
+var Socket = exports.Socket = function () {
+
+  // Initializes the Socket
+  //
+  // endPoint - The string WebSocket endpoint, ie, "ws://example.com/ws",
+  //                                               "wss://example.com"
+  //                                               "/ws" (inherited host & protocol)
+  // opts - Optional configuration
+  //   transport - The Websocket Transport, for example WebSocket or Phoenix.LongPoll.
+  //               Defaults to WebSocket with automatic LongPoll fallback.
+  //   timeout - The default timeout in milliseconds to trigger push timeouts.
+  //             Defaults `DEFAULT_TIMEOUT`
+  //   heartbeatIntervalMs - The millisec interval to send a heartbeat message
+  //   reconnectAfterMs - The optional function that returns the millsec
+  //                      reconnect interval. Defaults to stepped backoff of:
+  //
+  //     function(tries){
+  //       return [1000, 5000, 10000][tries - 1] || 10000
+  //     }
+  //
+  //   logger - The optional function for specialized logging, ie:
+  //     `logger: (kind, msg, data) => { console.log(`${kind}: ${msg}`, data) }
+  //
+  //   longpollerTimeout - The maximum timeout of a long poll AJAX request.
+  //                        Defaults to 20s (double the server long poll timer).
+  //
+  //   params - The optional params to pass when connecting
+  //
+  // For IE8 support use an ES5-shim (https://github.com/es-shims/es5-shim)
+  //
+
+  function Socket(endPoint) {
+    var _this4 = this;
+
+    var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+    _classCallCheck(this, Socket);
+
+    this.stateChangeCallbacks = { open: [], close: [], error: [], message: [] };
+    this.channels = [];
+    this.sendBuffer = [];
+    this.ref = 0;
+    this.timeout = opts.timeout || DEFAULT_TIMEOUT;
+    this.transport = opts.transport || window.WebSocket || LongPoll;
+    this.heartbeatIntervalMs = opts.heartbeatIntervalMs || 30000;
+    this.reconnectAfterMs = opts.reconnectAfterMs || function (tries) {
+      return [1000, 2000, 5000, 10000][tries - 1] || 10000;
+    };
+    this.logger = opts.logger || function () {}; // noop
+    this.longpollerTimeout = opts.longpollerTimeout || 20000;
+    this.params = opts.params || {};
+    this.endPoint = endPoint + "/" + TRANSPORTS.websocket;
+    this.reconnectTimer = new Timer(function () {
+      _this4.disconnect(function () {
+        return _this4.connect();
+      });
+    }, this.reconnectAfterMs);
+  }
+
+  _createClass(Socket, [{
+    key: "protocol",
+    value: function protocol() {
+      return location.protocol.match(/^https/) ? "wss" : "ws";
+    }
+  }, {
+    key: "endPointURL",
+    value: function endPointURL() {
+      var uri = Ajax.appendParams(Ajax.appendParams(this.endPoint, this.params), { vsn: VSN });
+      if (uri.charAt(0) !== "/") {
+        return uri;
+      }
+      if (uri.charAt(1) === "/") {
+        return this.protocol() + ":" + uri;
+      }
+
+      return this.protocol() + "://" + location.host + uri;
+    }
+  }, {
+    key: "disconnect",
+    value: function disconnect(callback, code, reason) {
+      if (this.conn) {
+        this.conn.onclose = function () {}; // noop
+        if (code) {
+          this.conn.close(code, reason || "");
+        } else {
+          this.conn.close();
+        }
+        this.conn = null;
+      }
+      callback && callback();
+    }
+
+    // params - The params to send when connecting, for example `{user_id: userToken}`
+
+  }, {
+    key: "connect",
+    value: function connect(params) {
+      var _this5 = this;
+
+      if (params) {
+        console && console.log("passing params to connect is deprecated. Instead pass :params to the Socket constructor");
+        this.params = params;
+      }
+      if (this.conn) {
+        return;
+      }
+
+      this.conn = new this.transport(this.endPointURL());
+      this.conn.timeout = this.longpollerTimeout;
+      this.conn.onopen = function () {
+        return _this5.onConnOpen();
+      };
+      this.conn.onerror = function (error) {
+        return _this5.onConnError(error);
+      };
+      this.conn.onmessage = function (event) {
+        return _this5.onConnMessage(event);
+      };
+      this.conn.onclose = function (event) {
+        return _this5.onConnClose(event);
+      };
+    }
+
+    // Logs the message. Override `this.logger` for specialized logging. noops by default
+
+  }, {
+    key: "log",
+    value: function log(kind, msg, data) {
+      this.logger(kind, msg, data);
+    }
+
+    // Registers callbacks for connection state change events
+    //
+    // Examples
+    //
+    //    socket.onError(function(error){ alert("An error occurred") })
+    //
+
+  }, {
+    key: "onOpen",
+    value: function onOpen(callback) {
+      this.stateChangeCallbacks.open.push(callback);
+    }
+  }, {
+    key: "onClose",
+    value: function onClose(callback) {
+      this.stateChangeCallbacks.close.push(callback);
+    }
+  }, {
+    key: "onError",
+    value: function onError(callback) {
+      this.stateChangeCallbacks.error.push(callback);
+    }
+  }, {
+    key: "onMessage",
+    value: function onMessage(callback) {
+      this.stateChangeCallbacks.message.push(callback);
+    }
+  }, {
+    key: "onConnOpen",
+    value: function onConnOpen() {
+      var _this6 = this;
+
+      this.log("transport", "connected to " + this.endPointURL(), this.transport.prototype);
+      this.flushSendBuffer();
+      this.reconnectTimer.reset();
+      if (!this.conn.skipHeartbeat) {
+        clearInterval(this.heartbeatTimer);
+        this.heartbeatTimer = setInterval(function () {
+          return _this6.sendHeartbeat();
+        }, this.heartbeatIntervalMs);
+      }
+      this.stateChangeCallbacks.open.forEach(function (callback) {
+        return callback();
+      });
+    }
+  }, {
+    key: "onConnClose",
+    value: function onConnClose(event) {
+      this.log("transport", "close", event);
+      this.triggerChanError();
+      clearInterval(this.heartbeatTimer);
+      this.reconnectTimer.scheduleTimeout();
+      this.stateChangeCallbacks.close.forEach(function (callback) {
+        return callback(event);
+      });
+    }
+  }, {
+    key: "onConnError",
+    value: function onConnError(error) {
+      this.log("transport", error);
+      this.triggerChanError();
+      this.stateChangeCallbacks.error.forEach(function (callback) {
+        return callback(error);
+      });
+    }
+  }, {
+    key: "triggerChanError",
+    value: function triggerChanError() {
+      this.channels.forEach(function (channel) {
+        return channel.trigger(CHANNEL_EVENTS.error);
+      });
+    }
+  }, {
+    key: "connectionState",
+    value: function connectionState() {
+      switch (this.conn && this.conn.readyState) {
+        case SOCKET_STATES.connecting:
+          return "connecting";
+        case SOCKET_STATES.open:
+          return "open";
+        case SOCKET_STATES.closing:
+          return "closing";
+        default:
+          return "closed";
+      }
+    }
+  }, {
+    key: "isConnected",
+    value: function isConnected() {
+      return this.connectionState() === "open";
+    }
+  }, {
+    key: "remove",
+    value: function remove(channel) {
+      this.channels = this.channels.filter(function (c) {
+        return !c.isMember(channel.topic);
+      });
+    }
+  }, {
+    key: "channel",
+    value: function channel(topic) {
+      var chanParams = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
+
+      var chan = new Channel(topic, chanParams, this);
+      this.channels.push(chan);
+      return chan;
+    }
+  }, {
+    key: "push",
+    value: function push(data) {
+      var _this7 = this;
+
+      var topic = data.topic;
+      var event = data.event;
+      var payload = data.payload;
+      var ref = data.ref;
+
+      var callback = function callback() {
+        return _this7.conn.send(JSON.stringify(data));
+      };
+      this.log("push", topic + " " + event + " (" + ref + ")", payload);
+      if (this.isConnected()) {
+        callback();
+      } else {
+        this.sendBuffer.push(callback);
+      }
+    }
+
+    // Return the next message ref, accounting for overflows
+
+  }, {
+    key: "makeRef",
+    value: function makeRef() {
+      var newRef = this.ref + 1;
+      if (newRef === this.ref) {
+        this.ref = 0;
+      } else {
+        this.ref = newRef;
+      }
+
+      return this.ref.toString();
+    }
+  }, {
+    key: "sendHeartbeat",
+    value: function sendHeartbeat() {
+      if (!this.isConnected()) {
+        return;
+      }
+      this.push({ topic: "phoenix", event: "heartbeat", payload: {}, ref: this.makeRef() });
+    }
+  }, {
+    key: "flushSendBuffer",
+    value: function flushSendBuffer() {
+      if (this.isConnected() && this.sendBuffer.length > 0) {
+        this.sendBuffer.forEach(function (callback) {
+          return callback();
+        });
+        this.sendBuffer = [];
+      }
+    }
+  }, {
+    key: "onConnMessage",
+    value: function onConnMessage(rawMessage) {
+      var msg = JSON.parse(rawMessage.data);
+      var topic = msg.topic;
+      var event = msg.event;
+      var payload = msg.payload;
+      var ref = msg.ref;
+
+      this.log("receive", (payload.status || "") + " " + topic + " " + event + " " + (ref && "(" + ref + ")" || ""), payload);
+      this.channels.filter(function (channel) {
+        return channel.isMember(topic);
+      }).forEach(function (channel) {
+        return channel.trigger(event, payload, ref);
+      });
+      this.stateChangeCallbacks.message.forEach(function (callback) {
+        return callback(msg);
+      });
+    }
+  }]);
+
+  return Socket;
+}();
+
+var LongPoll = exports.LongPoll = function () {
+  function LongPoll(endPoint) {
+    _classCallCheck(this, LongPoll);
+
+    this.endPoint = null;
+    this.token = null;
+    this.skipHeartbeat = true;
+    this.onopen = function () {}; // noop
+    this.onerror = function () {}; // noop
+    this.onmessage = function () {}; // noop
+    this.onclose = function () {}; // noop
+    this.pollEndpoint = this.normalizeEndpoint(endPoint);
+    this.readyState = SOCKET_STATES.connecting;
+
+    this.poll();
+  }
+
+  _createClass(LongPoll, [{
+    key: "normalizeEndpoint",
+    value: function normalizeEndpoint(endPoint) {
+      return endPoint.replace("ws://", "http://").replace("wss://", "https://").replace(new RegExp("(.*)\/" + TRANSPORTS.websocket), "$1/" + TRANSPORTS.longpoll);
+    }
+  }, {
+    key: "endpointURL",
+    value: function endpointURL() {
+      return Ajax.appendParams(this.pollEndpoint, { token: this.token });
+    }
+  }, {
+    key: "closeAndRetry",
+    value: function closeAndRetry() {
+      this.close();
+      this.readyState = SOCKET_STATES.connecting;
+    }
+  }, {
+    key: "ontimeout",
+    value: function ontimeout() {
+      this.onerror("timeout");
+      this.closeAndRetry();
+    }
+  }, {
+    key: "poll",
+    value: function poll() {
+      var _this8 = this;
+
+      if (!(this.readyState === SOCKET_STATES.open || this.readyState === SOCKET_STATES.connecting)) {
+        return;
+      }
+
+      Ajax.request("GET", this.endpointURL(), "application/json", null, this.timeout, this.ontimeout.bind(this), function (resp) {
+        if (resp) {
+          var status = resp.status;
+          var token = resp.token;
+          var messages = resp.messages;
+
+          _this8.token = token;
+        } else {
+          var status = 0;
+        }
+
+        switch (status) {
+          case 200:
+            messages.forEach(function (msg) {
+              return _this8.onmessage({ data: JSON.stringify(msg) });
+            });
+            _this8.poll();
+            break;
+          case 204:
+            _this8.poll();
+            break;
+          case 410:
+            _this8.readyState = SOCKET_STATES.open;
+            _this8.onopen();
+            _this8.poll();
+            break;
+          case 0:
+          case 500:
+            _this8.onerror();
+            _this8.closeAndRetry();
+            break;
+          default:
+            throw "unhandled poll status " + status;
+        }
+      });
+    }
+  }, {
+    key: "send",
+    value: function send(body) {
+      var _this9 = this;
+
+      Ajax.request("POST", this.endpointURL(), "application/json", body, this.timeout, this.onerror.bind(this, "timeout"), function (resp) {
+        if (!resp || resp.status !== 200) {
+          _this9.onerror(status);
+          _this9.closeAndRetry();
+        }
+      });
+    }
+  }, {
+    key: "close",
+    value: function close(code, reason) {
+      this.readyState = SOCKET_STATES.closed;
+      this.onclose();
+    }
+  }]);
+
+  return LongPoll;
+}();
+
+var Ajax = exports.Ajax = function () {
+  function Ajax() {
+    _classCallCheck(this, Ajax);
+  }
+
+  _createClass(Ajax, null, [{
+    key: "request",
+    value: function request(method, endPoint, accept, body, timeout, ontimeout, callback) {
+      if (window.XDomainRequest) {
+        var req = new XDomainRequest(); // IE8, IE9
+        this.xdomainRequest(req, method, endPoint, body, timeout, ontimeout, callback);
+      } else {
+        var _req = window.XMLHttpRequest ? new XMLHttpRequest() : // IE7+, Firefox, Chrome, Opera, Safari
+        new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
+        this.xhrRequest(_req, method, endPoint, accept, body, timeout, ontimeout, callback);
+      }
+    }
+  }, {
+    key: "xdomainRequest",
+    value: function xdomainRequest(req, method, endPoint, body, timeout, ontimeout, callback) {
+      var _this10 = this;
+
+      req.timeout = timeout;
+      req.open(method, endPoint);
+      req.onload = function () {
+        var response = _this10.parseJSON(req.responseText);
+        callback && callback(response);
+      };
+      if (ontimeout) {
+        req.ontimeout = ontimeout;
+      }
+
+      // Work around bug in IE9 that requires an attached onprogress handler
+      req.onprogress = function () {};
+
+      req.send(body);
+    }
+  }, {
+    key: "xhrRequest",
+    value: function xhrRequest(req, method, endPoint, accept, body, timeout, ontimeout, callback) {
+      var _this11 = this;
+
+      req.timeout = timeout;
+      req.open(method, endPoint, true);
+      req.setRequestHeader("Content-Type", accept);
+      req.onerror = function () {
+        callback && callback(null);
+      };
+      req.onreadystatechange = function () {
+        if (req.readyState === _this11.states.complete && callback) {
+          var response = _this11.parseJSON(req.responseText);
+          callback(response);
+        }
+      };
+      if (ontimeout) {
+        req.ontimeout = ontimeout;
+      }
+
+      req.send(body);
+    }
+  }, {
+    key: "parseJSON",
+    value: function parseJSON(resp) {
+      return resp && resp !== "" ? JSON.parse(resp) : null;
+    }
+  }, {
+    key: "serialize",
+    value: function serialize(obj, parentKey) {
+      var queryStr = [];
+      for (var key in obj) {
+        if (!obj.hasOwnProperty(key)) {
+          continue;
+        }
+        var paramKey = parentKey ? parentKey + "[" + key + "]" : key;
+        var paramVal = obj[key];
+        if ((typeof paramVal === "undefined" ? "undefined" : _typeof(paramVal)) === "object") {
+          queryStr.push(this.serialize(paramVal, paramKey));
+        } else {
+          queryStr.push(encodeURIComponent(paramKey) + "=" + encodeURIComponent(paramVal));
+        }
+      }
+      return queryStr.join("&");
+    }
+  }, {
+    key: "appendParams",
+    value: function appendParams(url, params) {
+      if (Object.keys(params).length === 0) {
+        return url;
+      }
+
+      var prefix = url.match(/\?/) ? "&" : "?";
+      return "" + url + prefix + this.serialize(params);
+    }
+  }]);
+
+  return Ajax;
+}();
+
+Ajax.states = { complete: 4 };
+
+// Creates a timer that accepts a `timerCalc` function to perform
+// calculated timeout retries, such as exponential backoff.
+//
+// ## Examples
+//
+//    let reconnectTimer = new Timer(() => this.connect(), function(tries){
+//      return [1000, 5000, 10000][tries - 1] || 10000
+//    })
+//    reconnectTimer.scheduleTimeout() // fires after 1000
+//    reconnectTimer.scheduleTimeout() // fires after 5000
+//    reconnectTimer.reset()
+//    reconnectTimer.scheduleTimeout() // fires after 1000
+//
+
+var Timer = function () {
+  function Timer(callback, timerCalc) {
+    _classCallCheck(this, Timer);
+
+    this.callback = callback;
+    this.timerCalc = timerCalc;
+    this.timer = null;
+    this.tries = 0;
+  }
+
+  _createClass(Timer, [{
+    key: "reset",
+    value: function reset() {
+      this.tries = 0;
+      clearTimeout(this.timer);
+    }
+
+    // Cancels any previous scheduleTimeout and schedules callback
+
+  }, {
+    key: "scheduleTimeout",
+    value: function scheduleTimeout() {
+      var _this12 = this;
+
+      clearTimeout(this.timer);
+
+      this.timer = setTimeout(function () {
+        _this12.tries = _this12.tries + 1;
+        _this12.callback();
+      }, this.timerCalc(this.tries + 1));
+    }
+  }]);
+
+  return Timer;
+}();
+});
+
+;require.register("deps/phoenix_html/web/static/js/phoenix_html.js", function(exports, require, module) {
+'use strict';
+
+// Although ^=parent is not technically correct,
+// we need to use it in order to get IE8 support.
+var elements = document.querySelectorAll('[data-submit^=parent]');
+var len = elements.length;
+
+for (var i = 0; i < len; ++i) {
+  elements[i].addEventListener('click', function (event) {
+    var message = this.getAttribute("data-confirm");
+    if (message === null || confirm(message)) {
+      this.parentNode.submit();
+    };
+    event.preventDefault();
+    return false;
+  }, false);
+}
+});
+
+;require.register("web/elm/Iphod.elm", function(exports, require, module) {
+
+});
+
+;require.register("web/elm/Translations.elm", function(exports, require, module) {
+
+});
+
+;require.register("web/static/js/app.js", function(exports, require, module) {
+"use strict";
+
+require("deps/phoenix_html/web/static/js/phoenix_html");
+
+require("./menu");
+
+var _socket = require("./socket");
+
+var _socket2 = _interopRequireDefault(_socket);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Brunch automatically concatenates all files in your
+// watched paths. Those paths can be configured at
+// config.paths.watched in "brunch-config.js".
+//
+// However, those files will only be executed if
+// explicitly imported. The only exception are files
+// in vendor, which are never wrapped in imports and
+// therefore are always executed.
+
+// Import dependencies
+//
+// If you no longer want to use a dependency, remember
+// to also remove its path from "config.paths.watched".
+
+
+// Import local files
+//
+// Local files can be imported directly using relative
+// paths "./socket" or full ones "web/static/js/socket".
+
+// LOCAL STORAGE ------------------------
+
+function storageAvailable(of_type) {
+  try {
+    var storage = window[of_type],
+        x = '__storage_test__';
+    storage.setItem(x, x);
+    storage.removeItem(x);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function get_init(arg, arg2) {
+  var s = window.localStorage,
+      t = s.getItem(arg);
+  if (t == null) {
+    s.setItem(arg, arg2);
+    t = arg2;
+  }
+  return t;
+}
+function init_config_model() {
+  var m = { ot: "ESV",
+    ps: "Coverdale",
+    nt: "ESV",
+    gs: "ESV",
+    fnotes: "fnotes",
+    vers: ["ESV"],
+    current: "ESV"
+  };
+  if (storageAvailable('localStorage')) {
+    m = { ot: get_init("iphod_ot", "ESV"),
+      ps: get_init("iphod_ps", "Coverdale"),
+      nt: get_init("iphod_nt", "ESV"),
+      gs: get_init("iphod_gs", "ESV"),
+      fnotes: get_init("iphod_fnotes", "fnotes"),
+      vers: get_versions("iphod_vers", "ESV"),
+      current: "ESV"
+    };
+  }
+  return m;
+}
+
+function get_versions(arg1, arg2) {
+  var versions = get_init(arg1, arg2);
+  return versions.split(",");
+}
+
+function save_version(abbr) {
+  var s = window.localStorage,
+      t = s.getItem("iphod_vers");
+  if (t == null) {
+    t = [];
+  } else {
+    t = t.split(",");
+  };
+  if (t.indexOf(abbr) >= 0) {
+    return true;
+  };
+  t.push(abbr);
+  t = t.toString();
+  s.setItem("iphod_vers", t);
+  return true;
+}
+
+function unsave_version(abbr) {
+  var s = window.localStorage,
+      t = s.getItem("iphod_vers");
+  if (t == null) return true;
+  t = t.split(",");
+  t = t.filter(remove_abbr, abbr);
+  t = t.toString();
+  s.setItem("iphod_vers", t);
+  return true;
+}
+function remove_abbr(v, i, ary) {
+  return v != this;
+}
+
+// SOCKETS ------------------------
+
+if (window.location.pathname == "/versions") {
+  var channel_v = _socket2.default.channel("versions");
+  channel_v.join().receive("ok", function (resp) {
+    console.log("Joined Versions successfully", resp);
+  }).receive("error", function (resp) {
+    console.log("Unable to join Versions", resp);
+  });
+
+  var elmDiv = document.getElementById('elm-container'),
+      initialState = {
+    allVersions: []
+  },
+      elmApp = Elm.embed(Elm.Translations, elmDiv, initialState);
+
+  //  channel_v.on("version", data => {
+  //    elmApp.ports.thisVersion.send(data);
+  //  })
+
+  channel_v.on("all_versions", function (data) {
+    var list = data.list,
+        in_use = get_versions("iphod_vers", "ESV");
+    list.forEach(function (ver) {
+      if (in_use.indexOf(ver.abbr) > -1) {
+        ver.selected = true;
+      }
+    });
+    elmApp.ports.allVersions.send(list);
+  });
+
+  channel_v.push("request_list", "");
+
+  elmApp.ports.requestSaveVersion.subscribe(function (request) {
+    var cmnd = request[0],
+        ver = request[1];
+    if (cmnd == "save") {
+      save_version(ver.abbr);
+    } else {
+      unsave_version(ver.abbr);
+    }
+  });
+}
+
+if (window.location.pathname == "/") {
+  var elmDiv, config_model, sunday_collect_model, email_model, sunday_model, daily_reading, initialState, elmApp;
+
+  (function () {
+
+    var channel = _socket2.default.channel("iphod:readings");
+    channel.join().receive("ok", function (resp) {
+      console.log("Joined Iphod successfully", resp);
+    }).receive("error", function (resp) {
+      console.log("Unable to join Iphod", resp);
+    });
+
+    channel.push("request_today", "");
+    channel.on("next_sunday", function (data) {
+      var z = data,
+          icm = init_config_model();
+      z.config = icm;
+      z.daily.config = icm;
+      z.sunday.config = icm;
+      z.redLetter.config = icm;
+      z.eveningPrayer.config = icm;
+      z.morningPrayer.config = icm;
+
+      elmApp.ports.nextSunday.send(z);
+    });
+
+    channel.on('new_text', function (data) {
+      elmApp.ports.newText.send(data);
+    });
+
+    channel.on('new_email', function (data) {
+      elmApp.ports.newEmail.send(data);
+    });
+
+    // Hook up Elm
+
+    elmDiv = document.getElementById('elm-container');
+    config_model = {
+      ot: "",
+      ps: "",
+      nt: "",
+      gs: "",
+      fnotes: "",
+      vers: [],
+      current: "ESV"
+    };
+    sunday_collect_model = {
+      instruction: "String",
+      title: "",
+      collects: [],
+      show: false
+    };
+    email_model = {
+      from: "",
+      topic: "",
+      text: "",
+      show: false
+    };
+    sunday_model = {
+      ofType: "",
+      date: "",
+      season: "",
+      week: "",
+      title: "",
+      collect: sunday_collect_model,
+      ot: [],
+      ps: [],
+      nt: [],
+      gs: [],
+      show: false,
+      config: config_model
+    };
+    daily_reading = {
+      date: "",
+      season: "",
+      week: "",
+      day: "",
+      title: "",
+      mp1: [],
+      mp2: [],
+      mpp: [],
+      ep1: [],
+      ep2: [],
+      epp: [],
+      show: false,
+      justToday: false,
+      config: config_model
+    };
+    initialState = {
+      nextSunday: {
+        today: "",
+        sunday: sunday_model,
+        redLetter: sunday_model,
+        daily: daily_reading,
+        morningPrayer: daily_reading,
+        eveningPrayer: daily_reading,
+        email: email_model,
+        config: config_model,
+        about: false
+      },
+      newText: {
+        model: "",
+        section: "",
+        id: "",
+        body: "",
+        version: ""
+      },
+      newEmail: email_model
+    };
+    elmApp = Elm.embed(Elm.Iphod, elmDiv, initialState);
+
+
+    elmApp.ports.requestMoveDate.subscribe(function (request) {
+      channel.push("request_move_date", request);
+    });
+
+    elmApp.ports.requestMoveDay.subscribe(function (request) {
+      channel.push("request_move_day", request);
+    });
+
+    elmApp.ports.requestText.subscribe(function (request) {
+      var model = {};
+      request.forEach(function (tuple) {
+        model[tuple[0]] = tuple[1];
+      });
+      if ($("#" + request[0]).text().length == 0) {
+        channel.push("request_text", model);
+      }
+    });
+
+    elmApp.ports.requestNamedDay.subscribe(function (request) {
+      channel.push("request_named_day", request);
+    });
+
+    elmApp.ports.requestAllText.subscribe(function (request) {
+      channel.push("request_all_text", request);
+    });
+
+    elmApp.ports.sendEmail.subscribe(function (email) {
+      channel.push("request_send_email", email);
+    });
+
+    elmApp.ports.savingConfig.subscribe(function (config) {
+      // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
+      if (storageAvailable('localStorage')) {
+        var s = window.localStorage;
+        s.setItem("iphod_ot", config.ot);
+        s.setItem("iphod_ps", config.ps);
+        s.setItem("iphod_nt", config.nt);
+        s.setItem("iphod_gs", config.ot);
+        s.setItem("iphod_fnotes", config.fnotes);
+      }
+    });
+  })();
+}
+});
+
+;require.register("web/static/js/menu.js", function(exports, require, module) {
+'use strict';
+
+(function ($) {
+  $(document).ready(function () {
+
+    $('#menu1').prepend('<div class="menu-button">MP etc.</div>');
+    $('#menu2').prepend('<div class="menu-button">Days</div>');
+    $('#menu3').prepend('<div class="menu-button">Service</div>');
+    $('.cssmenu .menu-button').on('click', function () {
+      var menu = $(this).next('ul');
+      if (menu.hasClass('open')) {
+        menu.removeClass('open');
+      } else {
+        menu.addClass('open');
+      }
+    });
+  });
+})(jQuery);
+});
+
+require.register("web/static/js/socket.js", function(exports, require, module) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _phoenix = require("deps/phoenix/web/static/js/phoenix");
+
+var socket = new _phoenix.Socket("/socket", { params: { token: window.userToken } });
+
+// When you connect, you'll often need to authenticate the client.
+// For example, imagine you have an authentication plug, `MyAuth`,
+// which authenticates the session and assigns a `:current_user`.
+// If the current user exists you can assign the user's token in
+// the connection for use in the layout.
+//
+// In your "web/router.ex":
+//
+//     pipeline :browser do
+//       ...
+//       plug MyAuth
+//       plug :put_user_token
+//     end
+//
+//     defp put_user_token(conn, _) do
+//       if current_user = conn.assigns[:current_user] do
+//         token = Phoenix.Token.sign(conn, "user socket", current_user.id)
+//         assign(conn, :user_token, token)
+//       else
+//         conn
+//       end
+//     end
+//
+// Now you need to pass this token to JavaScript. You can do so
+// inside a script tag in "web/templates/layout/app.html.eex":
+//
+//     <script>window.userToken = "<%= assigns[:user_token] %>";</script>
+//
+// You will need to verify the user token in the "connect/2" function
+// in "web/channels/user_socket.ex":
+//
+//     def connect(%{"token" => token}, socket) do
+//       # max_age: 1209600 is equivalent to two weeks in seconds
+//       case Phoenix.Token.verify(socket, "user socket", token, max_age: 1209600) do
+//         {:ok, user_id} ->
+//           {:ok, assign(socket, :user, user_id)}
+//         {:error, reason} ->
+//           :error
+//       end
+//     end
+//
+// Finally, pass the token on connect as below. Or remove it
+// from connect if you don't care about authentication.
+
+// NOTE: The contents of this file will only be executed if
+// you uncomment its entry in "web/static/js/app.js".
+
+// To use Phoenix channels, the first step is to import Socket
+// and connect at the socket path in "lib/my_app/endpoint.ex":
+socket.connect();
+// I'm defining channels in app.js
+
+// Now that you are connected, you can join channels with a topic:
+// let channel = socket.channel("topic:subtopic", {})
+// channel.join()
+//   .receive("ok", resp => { console.log("Joined successfully", resp) })
+//   .receive("error", resp => { console.log("Unable to join", resp) })
+
+exports.default = socket;
+});
+
+;require.register("___globals___", function(exports, require, module) {
+  
+});})();require('___globals___');
+
 var Elm = Elm || { Native: {} };
 Elm.Native.Array = {};
 Elm.Native.Array.make = function(localRuntime) {
@@ -12690,11 +14212,13 @@ Elm.DynamicStyle.make = function (_elm) {
                                      ,focus$: focus$
                                      ,cssStateEffect: cssStateEffect};
 };
-Elm.Helper = Elm.Helper || {};
-Elm.Helper.make = function (_elm) {
+Elm.Iphod = Elm.Iphod || {};
+Elm.Iphod.Helper = Elm.Iphod.Helper || {};
+Elm.Iphod.Helper.make = function (_elm) {
    "use strict";
-   _elm.Helper = _elm.Helper || {};
-   if (_elm.Helper.values) return _elm.Helper.values;
+   _elm.Iphod = _elm.Iphod || {};
+   _elm.Iphod.Helper = _elm.Iphod.Helper || {};
+   if (_elm.Iphod.Helper.values) return _elm.Iphod.Helper.values;
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
@@ -12722,10 +14246,10 @@ Elm.Helper.make = function (_elm) {
          return A2($Signal.message,address,msg);
       });
    });
-   return _elm.Helper.values = {_op: _op
-                               ,onClickLimited: onClickLimited
-                               ,hideable: hideable
-                               ,getText: getText};
+   return _elm.Iphod.Helper.values = {_op: _op
+                                     ,onClickLimited: onClickLimited
+                                     ,hideable: hideable
+                                     ,getText: getText};
 };
 Elm.Iphod = Elm.Iphod || {};
 Elm.Iphod.Models = Elm.Iphod.Models || {};
@@ -12742,6 +14266,18 @@ Elm.Iphod.Models.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
+   var initBiblesOrg = {url: "https://bibles.org/v2/passages.js?q[]="
+                       ,key: "P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT"
+                       ,foot_notes: true};
+   var BiblesOrg = F3(function (a,b,c) {
+      return {url: a,key: b,foot_notes: c};
+   });
+   var initESV = {url: "www.esvapi.org/v2/rest/passageQuery?"
+                 ,key: "10b28dac7c57fd96"
+                 ,foot_notes: true};
+   var ESV = F3(function (a,b,c) {
+      return {url: a,key: b,foot_notes: c};
+   });
    var Daily = function (a) {
       return function (b) {
          return function (c) {
@@ -12852,7 +14388,9 @@ Elm.Iphod.Models.make = function (_elm) {
                     ,ps: "Coverdale"
                     ,nt: "ESV"
                     ,gs: "ESV"
-                    ,fnotes: "fnotes"};
+                    ,fnotes: "fnotes"
+                    ,vers: _U.list([])
+                    ,current: "ESV"};
    var sundayInit = {ofType: ""
                     ,date: ""
                     ,season: ""
@@ -12879,8 +14417,14 @@ Elm.Iphod.Models.make = function (_elm) {
                    ,show: false
                    ,justToday: false
                    ,config: configInit};
-   var Config = F5(function (a,b,c,d,e) {
-      return {ot: a,ps: b,nt: c,gs: d,fnotes: e};
+   var Config = F7(function (a,b,c,d,e,f,g) {
+      return {ot: a
+             ,ps: b
+             ,nt: c
+             ,gs: d
+             ,fnotes: e
+             ,vers: f
+             ,current: g};
    });
    return _elm.Iphod.Models.values = {_op: _op
                                      ,configInit: configInit
@@ -12910,10 +14454,10 @@ Elm.Iphod.Sunday.make = function (_elm) {
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $DynamicStyle = Elm.DynamicStyle.make(_elm),
-   $Helper = Elm.Helper.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
    $Html$Events = Elm.Html.Events.make(_elm),
+   $Iphod$Helper = Elm.Iphod.Helper.make(_elm),
    $Iphod$Models = Elm.Iphod.Models.make(_elm),
    $List = Elm.List.make(_elm),
    $Markdown = Elm.Markdown.make(_elm),
@@ -12923,7 +14467,7 @@ Elm.Iphod.Sunday.make = function (_elm) {
    $String = Elm.String.make(_elm);
    var _op = {};
    var collectStyle = function (model) {
-      return A2($Helper.hideable,
+      return A2($Iphod$Helper.hideable,
       model.show,
       _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1em"}
               ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
@@ -12933,7 +14477,7 @@ Elm.Iphod.Sunday.make = function (_elm) {
               ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}]));
    };
    var textStyle = function (model) {
-      return A2($Helper.hideable,
+      return A2($Iphod$Helper.hideable,
       model.show,
       _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1em"}
               ,{ctor: "_Tuple2",_0: "background-color",_1: "white"}
@@ -12943,24 +14487,47 @@ Elm.Iphod.Sunday.make = function (_elm) {
               ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}]));
    };
    var titleStyle = function (model) {
-      return A2($Helper.hideable,
+      return A2($Iphod$Helper.hideable,
       model.show,
       _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.9em"}
               ,{ctor: "_Tuple2",_0: "color",_1: "blue"}
               ,{ctor: "_Tuple2",_0: "height",_1: "2.3em"}]));
    };
    var bodyStyle = function (lesson) {
-      return A2($Helper.hideable,
+      return A2($Iphod$Helper.hideable,
       lesson.show,
       _U.list([{ctor: "_Tuple2"
                ,_0: "background-color"
                ,_1: "white"}]));
    };
    var tableStyle = function (model) {
-      return A2($Helper.hideable,
+      return A2($Iphod$Helper.hideable,
       model.show,
       _U.list([{ctor: "_Tuple2",_0: "width",_1: "100%"}]));
    };
+   var versionSelect = F3(function (address,model,lesson) {
+      var thisVersion = function (ver) {
+         return A2($Html.option,
+         _U.list([$Html$Attributes.value(ver)
+                 ,$Html$Attributes.selected(_U.eq(ver,lesson.version))]),
+         _U.list([$Html.text(ver)]));
+      };
+      return A2($Html.select,
+      _U.list([A3($Html$Events.on,
+      "change",
+      $Html$Events.targetValue,
+      function (resp) {
+         return A2($Signal.message,
+         $Iphod$Helper.getText.address,
+         _U.list([{ctor: "_Tuple2",_0: "ofType",_1: model.ofType}
+                 ,{ctor: "_Tuple2",_0: "section",_1: lesson.section}
+                 ,{ctor: "_Tuple2",_0: "id",_1: lesson.id}
+                 ,{ctor: "_Tuple2",_0: "read",_1: lesson.read}
+                 ,{ctor: "_Tuple2",_0: "ver",_1: resp}
+                 ,{ctor: "_Tuple2",_0: "fnotes",_1: "fnotes"}]));
+      })]),
+      A2($List.map,thisVersion,model.config.vers));
+   });
    var hoverable = function (attrs) {
       return A2($Basics._op["++"],
       $DynamicStyle.hover(_U.list([{ctor: "_Tuple3"
@@ -13054,12 +14621,12 @@ Elm.Iphod.Sunday.make = function (_elm) {
    var ToggleShow = function (a) {
       return {ctor: "ToggleShow",_0: a};
    };
-   var thisText = F3(function (address,ofType,lessons) {
+   var thisText = F3(function (address,model,lessons) {
       var this_text = function (l) {
          var getTranslation = function (s) {
             return A2($Html$Events.onClick,
-            $Helper.getText.address,
-            _U.list([{ctor: "_Tuple2",_0: "ofType",_1: ofType}
+            $Iphod$Helper.getText.address,
+            _U.list([{ctor: "_Tuple2",_0: "ofType",_1: model.ofType}
                     ,{ctor: "_Tuple2",_0: "section",_1: l.section}
                     ,{ctor: "_Tuple2",_0: "id",_1: l.id}
                     ,{ctor: "_Tuple2",_0: "read",_1: l.read}
@@ -13070,30 +14637,38 @@ Elm.Iphod.Sunday.make = function (_elm) {
          _U.list([$Html$Attributes.id(l.id)
                  ,bodyStyle(l)
                  ,$Html$Attributes.$class("esv_text")]),
-         _U.list([A2($Html.button,
-                 _U.list([$Html$Attributes.$class("translationButton")
-                         ,getTranslation("Coverdale")]),
-                 _U.list([$Html.text("Coverdale")]))
-                 ,A2($Html.button,
-                 _U.list([$Html$Attributes.$class("translationButton")
-                         ,getTranslation("ESV")]),
-                 _U.list([$Html.text("ESV")]))
-                 ,A2($Html.button,
-                 _U.list([$Html$Attributes.$class("translationButton")
-                         ,getTranslation("BCP")]),
-                 _U.list([$Html.text("BCP")]))
-                 ,A2($Html.button,
-                 _U.list([$Html$Attributes.$class("translationButton")
-                         ,A2($Html$Events.onClick,address,ToggleShow(l))]),
-                 _U.list([$Html.text("Hide")]))
+         _U.list([A2($Html.span,
+                 _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                          ,_0: "position"
+                                                          ,_1: "relative"}
+                                                         ,{ctor: "_Tuple2",_0: "top",_1: "1em"}]))]),
+                 _U.list([A2($Html.button,
+                         _U.list([$Html$Attributes.$class("translationButton")
+                                 ,A2($Html$Events.onClick,address,ToggleShow(l))]),
+                         _U.list([$Html.text("Hide")]))
+                         ,A2($Html.button,
+                         _U.list([$Html$Attributes.$class("translationButton")
+                                 ,getTranslation("Coverdale")]),
+                         _U.list([$Html.text("Coverdale")]))
+                         ,A2($Html.button,
+                         _U.list([$Html$Attributes.$class("translationButton")
+                                 ,getTranslation("BCP")]),
+                         _U.list([$Html.text("BCP")]))
+                         ,A3(versionSelect,address,model,l)]))
                  ,$Markdown.toHtml(l.body)])) : A2($Html.div,
          _U.list([$Html$Attributes.id(l.id)
                  ,bodyStyle(l)
                  ,$Html$Attributes.$class("esv_text")]),
-         _U.list([A2($Html.button,
-                 _U.list([$Html$Attributes.$class("translationButton")
-                         ,A2($Html$Events.onClick,address,ToggleShow(l))]),
-                 _U.list([$Html.text("Hide")]))
+         _U.list([A2($Html.span,
+                 _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                          ,_0: "position"
+                                                          ,_1: "relative"}
+                                                         ,{ctor: "_Tuple2",_0: "top",_1: "1em"}]))]),
+                 _U.list([A2($Html.button,
+                         _U.list([$Html$Attributes.$class("translationButton")
+                                 ,A2($Html$Events.onClick,address,ToggleShow(l))]),
+                         _U.list([$Html.text("Hide")]))
+                         ,A3(versionSelect,address,model,l)]))
                  ,$Markdown.toHtml(l.body)]));
       };
       return A2($List.map,this_text,lessons);
@@ -13138,7 +14713,9 @@ Elm.Iphod.Sunday.make = function (_elm) {
       var this_lesson = function (l) {
          return _U.eq($String.length(l.body),0) ? A2($Html.li,
          hoverable(_U.list([this_style(l)
-                           ,A2($Html$Events.onClick,$Helper.getText.address,req(l))])),
+                           ,A2($Html$Events.onClick,
+                           $Iphod$Helper.getText.address,
+                           req(l))])),
          _U.list([$Html.text(l.read)])) : A2($Html.li,
          hoverable(_U.list([this_style(l)
                            ,A2($Html$Events.onClick,address,ToggleShow(l))])),
@@ -13220,18 +14797,10 @@ Elm.Iphod.Sunday.make = function (_elm) {
                               _U.list([A2($Html.ul,
                               _U.list([textStyle(model)]),
                               A3(thisReading,address,model,GS))]))]))]))
-              ,A2($Html.div,
-              _U.list([]),
-              A3(thisText,address,model.ofType,model.ot))
-              ,A2($Html.div,
-              _U.list([]),
-              A3(thisText,address,model.ofType,model.ps))
-              ,A2($Html.div,
-              _U.list([]),
-              A3(thisText,address,model.ofType,model.nt))
-              ,A2($Html.div,
-              _U.list([]),
-              A3(thisText,address,model.ofType,model.gs))
+              ,A2($Html.div,_U.list([]),A3(thisText,address,model,model.ot))
+              ,A2($Html.div,_U.list([]),A3(thisText,address,model,model.ps))
+              ,A2($Html.div,_U.list([]),A3(thisText,address,model,model.nt))
+              ,A2($Html.div,_U.list([]),A3(thisText,address,model,model.gs))
               ,A2($Html.div,
               _U.list([collectStyle(model.collect)]),
               A2(thisCollect,address,model.collect))]));
@@ -13254,9 +14823,9 @@ Elm.Iphod.MorningPrayer.make = function (_elm) {
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
-   $Helper = Elm.Helper.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Iphod$Helper = Elm.Iphod.Helper.make(_elm),
    $Iphod$Models = Elm.Iphod.Models.make(_elm),
    $List = Elm.List.make(_elm),
    $Markdown = Elm.Markdown.make(_elm),
@@ -13267,7 +14836,7 @@ Elm.Iphod.MorningPrayer.make = function (_elm) {
    $String = Elm.String.make(_elm);
    var _op = {};
    var mpStyle = function (model) {
-      return A2($Helper.hideable,
+      return A2($Iphod$Helper.hideable,
       model.show,
       _U.list([{ctor: "_Tuple2"
                ,_0: "font-family"
@@ -14638,9 +16207,9 @@ Elm.Iphod.EveningPrayer.make = function (_elm) {
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
-   $Helper = Elm.Helper.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
+   $Iphod$Helper = Elm.Iphod.Helper.make(_elm),
    $Iphod$Models = Elm.Iphod.Models.make(_elm),
    $List = Elm.List.make(_elm),
    $Markdown = Elm.Markdown.make(_elm),
@@ -14651,7 +16220,7 @@ Elm.Iphod.EveningPrayer.make = function (_elm) {
    $String = Elm.String.make(_elm);
    var _op = {};
    var epStyle = function (model) {
-      return A2($Helper.hideable,
+      return A2($Iphod$Helper.hideable,
       model.show,
       _U.list([{ctor: "_Tuple2"
                ,_0: "font-family"
@@ -15806,6 +17375,10 @@ Elm.Iphod.Config.make = function (_elm) {
                  default: return _U.update(model,{gs: _p2});}
            }();
            return newModel;
+         case "ChangeVersion": var _p3 = _p0._0;
+           var newModel = _U.update(model,
+           {ot: _p3,ps: _p3,nt: _p3,gs: _p3});
+           return newModel;
          default: var newModel = _p0._0 ? _U.update(model,
            {fnotes: "fnotes"}) : _U.update(model,{fnotes: ""});
            return newModel;}
@@ -15834,6 +17407,25 @@ Elm.Iphod.Config.make = function (_elm) {
                       ,$Html$Attributes.$for(val)]),
               _U.list([$Html.text("Show")]))]));
    });
+   var ChangeVersion = function (a) {
+      return {ctor: "ChangeVersion",_0: a};
+   };
+   var versionSelect = F2(function (address,model) {
+      var thisVersion = function (ver) {
+         return A2($Html.option,
+         _U.list([$Html$Attributes.value(ver)
+                 ,$Html$Attributes.selected(_U.eq(ver,model.current))]),
+         _U.list([$Html.text(ver)]));
+      };
+      return A2($Html.select,
+      _U.list([A3($Html$Events.on,
+      "change",
+      $Html$Events.targetValue,
+      function (resp) {
+         return A2($Signal.message,address,ChangeVersion(resp));
+      })]),
+      A2($List.map,thisVersion,model.vers));
+   });
    var Change = F2(function (a,b) {
       return {ctor: "Change",_0: a,_1: b};
    });
@@ -15847,7 +17439,7 @@ Elm.Iphod.Config.make = function (_elm) {
                       ,A3($Html$Events.on,
                       "change",
                       $Html$Events.targetChecked,
-                      function (_p3) {
+                      function (_p4) {
                          return A2($Signal.message,address,A2(Change,key,val));
                       })
                       ,$Html$Attributes.name("psalm")
@@ -15888,9 +17480,11 @@ Elm.Iphod.Config.make = function (_elm) {
                                      ,GS: GS
                                      ,NoOp: NoOp
                                      ,Change: Change
+                                     ,ChangeVersion: ChangeVersion
                                      ,ChangeFootnote: ChangeFootnote
                                      ,update: update
                                      ,view: view
+                                     ,versionSelect: versionSelect
                                      ,psRadio: psRadio
                                      ,ftnoteCheck: ftnoteCheck};
 };
@@ -15905,10 +17499,10 @@ Elm.Iphod.Daily.make = function (_elm) {
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $DynamicStyle = Elm.DynamicStyle.make(_elm),
-   $Helper = Elm.Helper.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
    $Html$Events = Elm.Html.Events.make(_elm),
+   $Iphod$Helper = Elm.Iphod.Helper.make(_elm),
    $Iphod$Models = Elm.Iphod.Models.make(_elm),
    $List = Elm.List.make(_elm),
    $Markdown = Elm.Markdown.make(_elm),
@@ -15918,7 +17512,7 @@ Elm.Iphod.Daily.make = function (_elm) {
    $String = Elm.String.make(_elm);
    var _op = {};
    var textStyle = function (model) {
-      return A2($Helper.hideable,
+      return A2($Iphod$Helper.hideable,
       model.show,
       _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "1em"}
               ,{ctor: "_Tuple2",_0: "margin",_1: "0"}
@@ -15927,17 +17521,17 @@ Elm.Iphod.Daily.make = function (_elm) {
               ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}]));
    };
    var titleStyle = function (model) {
-      return A2($Helper.hideable,
+      return A2($Iphod$Helper.hideable,
       model.show,
       _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.9em"}
               ,{ctor: "_Tuple2",_0: "color",_1: "blue"}
               ,{ctor: "_Tuple2",_0: "height",_1: "2em"}]));
    };
    var bodyStyle = function (lesson) {
-      return A2($Helper.hideable,lesson.show,_U.list([]));
+      return A2($Iphod$Helper.hideable,lesson.show,_U.list([]));
    };
    var tableStyle = function (model) {
-      return A2($Helper.hideable,
+      return A2($Iphod$Helper.hideable,
       model.show,
       _U.list([{ctor: "_Tuple2",_0: "width",_1: "100%"}]));
    };
@@ -15959,6 +17553,29 @@ Elm.Iphod.Daily.make = function (_elm) {
          case "alt-opt": return $Html$Attributes.$class("altOpt_style");
          default: return $Html$Attributes.$class("bogis_style");}
    };
+   var versionSelect = F3(function (address,model,lesson) {
+      var thisVersion = function (ver) {
+         return A2($Html.option,
+         _U.list([$Html$Attributes.value(ver)
+                 ,$Html$Attributes.selected(_U.eq(ver,lesson.version))]),
+         _U.list([$Html.text(ver)]));
+      };
+      return A2($Html.select,
+      _U.list([A3($Html$Events.on,
+      "change",
+      $Html$Events.targetValue,
+      function (resp) {
+         return A2($Signal.message,
+         $Iphod$Helper.getText.address,
+         _U.list([{ctor: "_Tuple2",_0: "ofType",_1: "daily"}
+                 ,{ctor: "_Tuple2",_0: "section",_1: lesson.section}
+                 ,{ctor: "_Tuple2",_0: "id",_1: lesson.id}
+                 ,{ctor: "_Tuple2",_0: "read",_1: lesson.read}
+                 ,{ctor: "_Tuple2",_0: "ver",_1: resp}
+                 ,{ctor: "_Tuple2",_0: "fnotes",_1: "fnotes"}]));
+      })]),
+      A2($List.map,thisVersion,model.config.vers));
+   });
    var update = F2(function (action,model) {
       var _p1 = action;
       switch (_p1.ctor)
@@ -16000,11 +17617,11 @@ Elm.Iphod.Daily.make = function (_elm) {
    var ToggleShow = function (a) {
       return {ctor: "ToggleShow",_0: a};
    };
-   var thisText = F2(function (address,lessons) {
+   var thisText = F3(function (address,model,lessons) {
       var this_text = function (l) {
          var getTranslation = function (s) {
             return A2($Html$Events.onClick,
-            $Helper.getText.address,
+            $Iphod$Helper.getText.address,
             _U.list([{ctor: "_Tuple2",_0: "ofType",_1: "daily"}
                     ,{ctor: "_Tuple2",_0: "section",_1: l.section}
                     ,{ctor: "_Tuple2",_0: "id",_1: l.id}
@@ -16017,30 +17634,38 @@ Elm.Iphod.Daily.make = function (_elm) {
          _U.list([$Html$Attributes.id(l.id)
                  ,bodyStyle(l)
                  ,$Html$Attributes.$class("esv_text")]),
-         _U.list([A2($Html.button,
-                 _U.list([$Html$Attributes.$class("translationButton")
-                         ,getTranslation("Coverdale")]),
-                 _U.list([$Html.text("Coverdale")]))
-                 ,A2($Html.button,
-                 _U.list([$Html$Attributes.$class("translationButton")
-                         ,getTranslation("ESV")]),
-                 _U.list([$Html.text("ESV")]))
-                 ,A2($Html.button,
-                 _U.list([$Html$Attributes.$class("translationButton")
-                         ,getTranslation("BCP")]),
-                 _U.list([$Html.text("BCP")]))
-                 ,A2($Html.button,
-                 _U.list([$Html$Attributes.$class("translationButton")
-                         ,A2($Html$Events.onClick,address,ToggleShow(l))]),
-                 _U.list([$Html.text("Hide")]))
+         _U.list([A2($Html.span,
+                 _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                          ,_0: "position"
+                                                          ,_1: "relative"}
+                                                         ,{ctor: "_Tuple2",_0: "top",_1: "1em"}]))]),
+                 _U.list([A2($Html.button,
+                         _U.list([$Html$Attributes.$class("translationButton")
+                                 ,A2($Html$Events.onClick,address,ToggleShow(l))]),
+                         _U.list([$Html.text("Hide")]))
+                         ,A2($Html.button,
+                         _U.list([$Html$Attributes.$class("translationButton")
+                                 ,getTranslation("Coverdale")]),
+                         _U.list([$Html.text("Coverdale")]))
+                         ,A2($Html.button,
+                         _U.list([$Html$Attributes.$class("translationButton")
+                                 ,getTranslation("BCP")]),
+                         _U.list([$Html.text("BCP")]))
+                         ,A3(versionSelect,address,model,l)]))
                  ,$Markdown.toHtml(l.body)])) : A2($Html.div,
          _U.list([$Html$Attributes.id(l.id)
                  ,bodyStyle(l)
                  ,$Html$Attributes.$class("esv_text")]),
-         _U.list([A2($Html.button,
-                 _U.list([$Html$Attributes.$class("translationButton")
-                         ,A2($Html$Events.onClick,address,ToggleShow(l))]),
-                 _U.list([$Html.text("Hide")]))
+         _U.list([A2($Html.span,
+                 _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                                          ,_0: "position"
+                                                          ,_1: "relative"}
+                                                         ,{ctor: "_Tuple2",_0: "top",_1: "1em"}]))]),
+                 _U.list([A2($Html.button,
+                         _U.list([$Html$Attributes.$class("translationButton")
+                                 ,A2($Html$Events.onClick,address,ToggleShow(l))]),
+                         _U.list([$Html.text("Hide")]))
+                         ,A3(versionSelect,address,model,l)]))
                  ,$Markdown.toHtml(l.body)]));
       };
       return A2($List.map,this_text,lessons);
@@ -16101,7 +17726,9 @@ Elm.Iphod.Daily.make = function (_elm) {
       var this_lesson = function (l) {
          return _U.eq($String.length(l.body),0) ? A2($Html.li,
          hoverable(_U.list([this_style(l)
-                           ,A2($Html$Events.onClick,$Helper.getText.address,req(l))])),
+                           ,A2($Html$Events.onClick,
+                           $Iphod$Helper.getText.address,
+                           req(l))])),
          _U.list([$Html.text(l.read)])) : A2($Html.li,
          hoverable(_U.list([this_style(l)
                            ,A2($Html$Events.onClick,address,ToggleShow(l))])),
@@ -16199,12 +17826,14 @@ Elm.Iphod.Daily.make = function (_elm) {
                               _U.list([A2($Html.ul,
                               _U.list([textStyle(model)]),
                               A3(thisReading,address,model,EPP))]))]))]))
-              ,A2($Html.div,_U.list([]),A2(thisText,address,model.mp1))
-              ,A2($Html.div,_U.list([]),A2(thisText,address,model.mp2))
-              ,A2($Html.div,_U.list([]),A2(thisText,address,model.mpp))
-              ,A2($Html.div,_U.list([]),A2(thisText,address,model.ep1))
-              ,A2($Html.div,_U.list([]),A2(thisText,address,model.ep2))
-              ,A2($Html.div,_U.list([]),A2(thisText,address,model.epp))]));
+              ,A2($Html.div,_U.list([]),A3(thisText,address,model,model.mp1))
+              ,A2($Html.div,_U.list([]),A3(thisText,address,model,model.mp2))
+              ,A2($Html.div,_U.list([]),A3(thisText,address,model,model.mpp))
+              ,A2($Html.div,_U.list([]),A3(thisText,address,model,model.ep1))
+              ,A2($Html.div,_U.list([]),A3(thisText,address,model,model.ep2))
+              ,A2($Html.div,
+              _U.list([]),
+              A3(thisText,address,model,model.epp))]));
    });
    var init = $Iphod$Models.dailyInit;
    return _elm.Iphod.Daily.values = {_op: _op
@@ -16223,10 +17852,10 @@ Elm.Iphod.Email.make = function (_elm) {
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
-   $Helper = Elm.Helper.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
    $Html$Events = Elm.Html.Events.make(_elm),
+   $Iphod$Helper = Elm.Iphod.Helper.make(_elm),
    $Iphod$Models = Elm.Iphod.Models.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
@@ -16264,7 +17893,7 @@ Elm.Iphod.Email.make = function (_elm) {
                                             ,{ctor: "_Tuple2",_0: "padding-left",_1: "1em"}]));
    };
    var contactStyle = function (model) {
-      return A2($Helper.hideable,
+      return A2($Iphod$Helper.hideable,
       model.show,
       _U.list([{ctor: "_Tuple2",_0: "position",_1: "absolute"}
               ,{ctor: "_Tuple2",_0: "z-index",_1: "999"}
@@ -16301,7 +17930,7 @@ Elm.Iphod.Email.make = function (_elm) {
               function (str) {
                  return A2($Signal.message,address,EmailAddress(str));
               })
-              ,A2($Helper.onClickLimited,address,NoOp)
+              ,A2($Iphod$Helper.onClickLimited,address,NoOp)
               ,$Html$Attributes.value(model.from)
               ,emailAddrStyle(model)]),
       _U.list([]))]));
@@ -16321,7 +17950,7 @@ Elm.Iphod.Email.make = function (_elm) {
               function (str) {
                  return A2($Signal.message,address,Topic(str));
               })
-              ,A2($Helper.onClickLimited,address,NoOp)
+              ,A2($Iphod$Helper.onClickLimited,address,NoOp)
               ,$Html$Attributes.value(model.topic)
               ,subjectStyle(model)]),
       _U.list([]))]));
@@ -16341,7 +17970,7 @@ Elm.Iphod.Email.make = function (_elm) {
               function (str) {
                  return A2($Signal.message,address,Message(str));
               })
-              ,A2($Helper.onClickLimited,address,NoOp)
+              ,A2($Iphod$Helper.onClickLimited,address,NoOp)
               ,$Html$Attributes.value(model.text)
               ,msgAddrStyle(model)]),
       _U.list([]))]));
@@ -16392,7 +18021,6 @@ Elm.Iphod.make = function (_elm) {
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $Effects = Elm.Effects.make(_elm),
-   $Helper = Elm.Helper.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
    $Html$Events = Elm.Html.Events.make(_elm),
@@ -16400,6 +18028,7 @@ Elm.Iphod.make = function (_elm) {
    $Iphod$Daily = Elm.Iphod.Daily.make(_elm),
    $Iphod$Email = Elm.Iphod.Email.make(_elm),
    $Iphod$EveningPrayer = Elm.Iphod.EveningPrayer.make(_elm),
+   $Iphod$Helper = Elm.Iphod.Helper.make(_elm),
    $Iphod$Models = Elm.Iphod.Models.make(_elm),
    $Iphod$MorningPrayer = Elm.Iphod.MorningPrayer.make(_elm),
    $Iphod$Sunday = Elm.Iphod.Sunday.make(_elm),
@@ -16434,7 +18063,7 @@ Elm.Iphod.make = function (_elm) {
                                                     ,{ctor: "_Tuple2",_0: "font-size",_1: "0.8em"}
                                                     ,{ctor: "_Tuple2",_0: "display",_1: "inline-block"}]));
    var aboutStyle = function (model) {
-      return A2($Helper.hideable,
+      return A2($Iphod$Helper.hideable,
       model.about,
       _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.7em"}]));
    };
@@ -16462,7 +18091,9 @@ Elm.Iphod.make = function (_elm) {
    var updateDailyText = F2(function (daily,text) {
       var update_text = function (this_lesson) {
          return _U.eq(this_lesson.id,text.id) ? _U.update(this_lesson,
-         {body: text.body,show: true}) : this_lesson;
+         {body: text.body
+         ,show: true
+         ,version: text.version}) : this_lesson;
       };
       var this_section = function () {
          var _p0 = text.section;
@@ -16492,7 +18123,9 @@ Elm.Iphod.make = function (_elm) {
    var updateSundayText = F2(function (sunday,text) {
       var update_text = function (this_lesson) {
          return _U.eq(this_lesson.id,text.id) ? _U.update(this_lesson,
-         {body: text.body,show: true}) : this_lesson;
+         {body: text.body
+         ,show: true
+         ,version: text.version}) : this_lesson;
       };
       var this_section = function () {
          var _p2 = text.section;
@@ -16710,6 +18343,7 @@ Elm.Iphod.make = function (_elm) {
                       _U.list([$Html$Attributes.href("#")]),
                       _U.list([$Html.text("Next Sunday")]))]))]))]))]));
    });
+   var ReadMe = function (a) {    return {ctor: "ReadMe",_0: a};};
    var NoOp = {ctor: "NoOp"};
    var newEmail = Elm.Native.Port.make(_elm).inboundSignal("newEmail",
    "Iphod.Models.Email",
@@ -16860,17 +18494,24 @@ Elm.Iphod.make = function (_elm) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.sunday.gs)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,show: typeof v.sunday.show === "boolean" ? v.sunday.show : _U.badPort("a boolean (true or false)",
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.sunday.show)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ,config: typeof v.sunday.config === "object" && "ot" in v.sunday.config && "ps" in v.sunday.config && "nt" in v.sunday.config && "gs" in v.sunday.config && "fnotes" in v.sunday.config ? {_: {}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ,ot: typeof v.sunday.config.ot === "string" || typeof v.sunday.config.ot === "object" && v.sunday.config.ot instanceof String ? v.sunday.config.ot : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       v.sunday.config.ot)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ,ps: typeof v.sunday.config.ps === "string" || typeof v.sunday.config.ps === "object" && v.sunday.config.ps instanceof String ? v.sunday.config.ps : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       v.sunday.config.ps)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ,nt: typeof v.sunday.config.nt === "string" || typeof v.sunday.config.nt === "object" && v.sunday.config.nt instanceof String ? v.sunday.config.nt : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       v.sunday.config.nt)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ,gs: typeof v.sunday.config.gs === "string" || typeof v.sunday.config.gs === "object" && v.sunday.config.gs instanceof String ? v.sunday.config.gs : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       v.sunday.config.gs)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ,fnotes: typeof v.sunday.config.fnotes === "string" || typeof v.sunday.config.fnotes === "object" && v.sunday.config.fnotes instanceof String ? v.sunday.config.fnotes : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       v.sunday.config.fnotes)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             ,config: typeof v.sunday.config === "object" && "ot" in v.sunday.config && "ps" in v.sunday.config && "nt" in v.sunday.config && "gs" in v.sunday.config && "fnotes" in v.sunday.config && "vers" in v.sunday.config && "current" in v.sunday.config ? {_: {}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ,ot: typeof v.sunday.config.ot === "string" || typeof v.sunday.config.ot === "object" && v.sunday.config.ot instanceof String ? v.sunday.config.ot : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    v.sunday.config.ot)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ,ps: typeof v.sunday.config.ps === "string" || typeof v.sunday.config.ps === "object" && v.sunday.config.ps instanceof String ? v.sunday.config.ps : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    v.sunday.config.ps)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ,nt: typeof v.sunday.config.nt === "string" || typeof v.sunday.config.nt === "object" && v.sunday.config.nt instanceof String ? v.sunday.config.nt : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    v.sunday.config.nt)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ,gs: typeof v.sunday.config.gs === "string" || typeof v.sunday.config.gs === "object" && v.sunday.config.gs instanceof String ? v.sunday.config.gs : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    v.sunday.config.gs)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ,fnotes: typeof v.sunday.config.fnotes === "string" || typeof v.sunday.config.fnotes === "object" && v.sunday.config.fnotes instanceof String ? v.sunday.config.fnotes : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    v.sunday.config.fnotes)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ,vers: typeof v.sunday.config.vers === "object" && v.sunday.config.vers instanceof Array ? Elm.Native.List.make(_elm).fromArray(v.sunday.config.vers.map(function (v) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       return typeof v === "string" || typeof v === "object" && v instanceof String ? v : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       v);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    })) : _U.badPort("an array",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    v.sunday.config.vers)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ,current: typeof v.sunday.config.current === "string" || typeof v.sunday.config.current === "object" && v.sunday.config.current instanceof String ? v.sunday.config.current : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    v.sunday.config.current)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`, `vers`, `current`",
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.sunday.config)} : _U.badPort("an object with fields `ofType`, `date`, `season`, `week`, `title`, `collect`, `ot`, `ps`, `nt`, `gs`, `show`, `config`",
                                                                                                                                                                                                            v.sunday)
                                                                                                                                                                                                            ,redLetter: typeof v.redLetter === "object" && "ofType" in v.redLetter && "date" in v.redLetter && "season" in v.redLetter && "week" in v.redLetter && "title" in v.redLetter && "collect" in v.redLetter && "ot" in v.redLetter && "ps" in v.redLetter && "nt" in v.redLetter && "gs" in v.redLetter && "show" in v.redLetter && "config" in v.redLetter ? {_: {}
@@ -16986,17 +18627,24 @@ Elm.Iphod.make = function (_elm) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        v.redLetter.gs)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ,show: typeof v.redLetter.show === "boolean" ? v.redLetter.show : _U.badPort("a boolean (true or false)",
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        v.redLetter.show)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ,config: typeof v.redLetter.config === "object" && "ot" in v.redLetter.config && "ps" in v.redLetter.config && "nt" in v.redLetter.config && "gs" in v.redLetter.config && "fnotes" in v.redLetter.config ? {_: {}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ,ot: typeof v.redLetter.config.ot === "string" || typeof v.redLetter.config.ot === "object" && v.redLetter.config.ot instanceof String ? v.redLetter.config.ot : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   v.redLetter.config.ot)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ,ps: typeof v.redLetter.config.ps === "string" || typeof v.redLetter.config.ps === "object" && v.redLetter.config.ps instanceof String ? v.redLetter.config.ps : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   v.redLetter.config.ps)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ,nt: typeof v.redLetter.config.nt === "string" || typeof v.redLetter.config.nt === "object" && v.redLetter.config.nt instanceof String ? v.redLetter.config.nt : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   v.redLetter.config.nt)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ,gs: typeof v.redLetter.config.gs === "string" || typeof v.redLetter.config.gs === "object" && v.redLetter.config.gs instanceof String ? v.redLetter.config.gs : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   v.redLetter.config.gs)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ,fnotes: typeof v.redLetter.config.fnotes === "string" || typeof v.redLetter.config.fnotes === "object" && v.redLetter.config.fnotes instanceof String ? v.redLetter.config.fnotes : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   v.redLetter.config.fnotes)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ,config: typeof v.redLetter.config === "object" && "ot" in v.redLetter.config && "ps" in v.redLetter.config && "nt" in v.redLetter.config && "gs" in v.redLetter.config && "fnotes" in v.redLetter.config && "vers" in v.redLetter.config && "current" in v.redLetter.config ? {_: {}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ,ot: typeof v.redLetter.config.ot === "string" || typeof v.redLetter.config.ot === "object" && v.redLetter.config.ot instanceof String ? v.redLetter.config.ot : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      v.redLetter.config.ot)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ,ps: typeof v.redLetter.config.ps === "string" || typeof v.redLetter.config.ps === "object" && v.redLetter.config.ps instanceof String ? v.redLetter.config.ps : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      v.redLetter.config.ps)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ,nt: typeof v.redLetter.config.nt === "string" || typeof v.redLetter.config.nt === "object" && v.redLetter.config.nt instanceof String ? v.redLetter.config.nt : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      v.redLetter.config.nt)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ,gs: typeof v.redLetter.config.gs === "string" || typeof v.redLetter.config.gs === "object" && v.redLetter.config.gs instanceof String ? v.redLetter.config.gs : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      v.redLetter.config.gs)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ,fnotes: typeof v.redLetter.config.fnotes === "string" || typeof v.redLetter.config.fnotes === "object" && v.redLetter.config.fnotes instanceof String ? v.redLetter.config.fnotes : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      v.redLetter.config.fnotes)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ,vers: typeof v.redLetter.config.vers === "object" && v.redLetter.config.vers instanceof Array ? Elm.Native.List.make(_elm).fromArray(v.redLetter.config.vers.map(function (v) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         return typeof v === "string" || typeof v === "object" && v instanceof String ? v : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      })) : _U.badPort("an array",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      v.redLetter.config.vers)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ,current: typeof v.redLetter.config.current === "string" || typeof v.redLetter.config.current === "object" && v.redLetter.config.current instanceof String ? v.redLetter.config.current : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      v.redLetter.config.current)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`, `vers`, `current`",
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        v.redLetter.config)} : _U.badPort("an object with fields `ofType`, `date`, `season`, `week`, `title`, `collect`, `ot`, `ps`, `nt`, `gs`, `show`, `config`",
                                                                                                                                                                                                            v.redLetter)
                                                                                                                                                                                                            ,daily: typeof v.daily === "object" && "date" in v.daily && "season" in v.daily && "week" in v.daily && "day" in v.daily && "title" in v.daily && "mp1" in v.daily && "mp2" in v.daily && "mpp" in v.daily && "ep1" in v.daily && "ep2" in v.daily && "epp" in v.daily && "show" in v.daily && "justToday" in v.daily && "config" in v.daily ? {_: {}
@@ -17128,17 +18776,24 @@ Elm.Iphod.make = function (_elm) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           v.daily.show)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ,justToday: typeof v.daily.justToday === "boolean" ? v.daily.justToday : _U.badPort("a boolean (true or false)",
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           v.daily.justToday)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ,config: typeof v.daily.config === "object" && "ot" in v.daily.config && "ps" in v.daily.config && "nt" in v.daily.config && "gs" in v.daily.config && "fnotes" in v.daily.config ? {_: {}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,ot: typeof v.daily.config.ot === "string" || typeof v.daily.config.ot === "object" && v.daily.config.ot instanceof String ? v.daily.config.ot : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.daily.config.ot)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,ps: typeof v.daily.config.ps === "string" || typeof v.daily.config.ps === "object" && v.daily.config.ps instanceof String ? v.daily.config.ps : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.daily.config.ps)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,nt: typeof v.daily.config.nt === "string" || typeof v.daily.config.nt === "object" && v.daily.config.nt instanceof String ? v.daily.config.nt : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.daily.config.nt)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,gs: typeof v.daily.config.gs === "string" || typeof v.daily.config.gs === "object" && v.daily.config.gs instanceof String ? v.daily.config.gs : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.daily.config.gs)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,fnotes: typeof v.daily.config.fnotes === "string" || typeof v.daily.config.fnotes === "object" && v.daily.config.fnotes instanceof String ? v.daily.config.fnotes : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.daily.config.fnotes)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ,config: typeof v.daily.config === "object" && "ot" in v.daily.config && "ps" in v.daily.config && "nt" in v.daily.config && "gs" in v.daily.config && "fnotes" in v.daily.config && "vers" in v.daily.config && "current" in v.daily.config ? {_: {}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,ot: typeof v.daily.config.ot === "string" || typeof v.daily.config.ot === "object" && v.daily.config.ot instanceof String ? v.daily.config.ot : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.daily.config.ot)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,ps: typeof v.daily.config.ps === "string" || typeof v.daily.config.ps === "object" && v.daily.config.ps instanceof String ? v.daily.config.ps : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.daily.config.ps)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,nt: typeof v.daily.config.nt === "string" || typeof v.daily.config.nt === "object" && v.daily.config.nt instanceof String ? v.daily.config.nt : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.daily.config.nt)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,gs: typeof v.daily.config.gs === "string" || typeof v.daily.config.gs === "object" && v.daily.config.gs instanceof String ? v.daily.config.gs : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.daily.config.gs)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,fnotes: typeof v.daily.config.fnotes === "string" || typeof v.daily.config.fnotes === "object" && v.daily.config.fnotes instanceof String ? v.daily.config.fnotes : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.daily.config.fnotes)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,vers: typeof v.daily.config.vers === "object" && v.daily.config.vers instanceof Array ? Elm.Native.List.make(_elm).fromArray(v.daily.config.vers.map(function (v) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            return typeof v === "string" || typeof v === "object" && v instanceof String ? v : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            v);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         })) : _U.badPort("an array",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.daily.config.vers)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,current: typeof v.daily.config.current === "string" || typeof v.daily.config.current === "object" && v.daily.config.current instanceof String ? v.daily.config.current : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.daily.config.current)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`, `vers`, `current`",
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           v.daily.config)} : _U.badPort("an object with fields `date`, `season`, `week`, `day`, `title`, `mp1`, `mp2`, `mpp`, `ep1`, `ep2`, `epp`, `show`, `justToday`, `config`",
                                                                                                                                                                                                            v.daily)
                                                                                                                                                                                                            ,morningPrayer: typeof v.morningPrayer === "object" && "date" in v.morningPrayer && "season" in v.morningPrayer && "week" in v.morningPrayer && "day" in v.morningPrayer && "title" in v.morningPrayer && "mp1" in v.morningPrayer && "mp2" in v.morningPrayer && "mpp" in v.morningPrayer && "ep1" in v.morningPrayer && "ep2" in v.morningPrayer && "epp" in v.morningPrayer && "show" in v.morningPrayer && "justToday" in v.morningPrayer && "config" in v.morningPrayer ? {_: {}
@@ -17270,17 +18925,24 @@ Elm.Iphod.make = function (_elm) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           v.morningPrayer.show)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ,justToday: typeof v.morningPrayer.justToday === "boolean" ? v.morningPrayer.justToday : _U.badPort("a boolean (true or false)",
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           v.morningPrayer.justToday)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ,config: typeof v.morningPrayer.config === "object" && "ot" in v.morningPrayer.config && "ps" in v.morningPrayer.config && "nt" in v.morningPrayer.config && "gs" in v.morningPrayer.config && "fnotes" in v.morningPrayer.config ? {_: {}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,ot: typeof v.morningPrayer.config.ot === "string" || typeof v.morningPrayer.config.ot === "object" && v.morningPrayer.config.ot instanceof String ? v.morningPrayer.config.ot : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.morningPrayer.config.ot)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,ps: typeof v.morningPrayer.config.ps === "string" || typeof v.morningPrayer.config.ps === "object" && v.morningPrayer.config.ps instanceof String ? v.morningPrayer.config.ps : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.morningPrayer.config.ps)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,nt: typeof v.morningPrayer.config.nt === "string" || typeof v.morningPrayer.config.nt === "object" && v.morningPrayer.config.nt instanceof String ? v.morningPrayer.config.nt : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.morningPrayer.config.nt)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,gs: typeof v.morningPrayer.config.gs === "string" || typeof v.morningPrayer.config.gs === "object" && v.morningPrayer.config.gs instanceof String ? v.morningPrayer.config.gs : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.morningPrayer.config.gs)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,fnotes: typeof v.morningPrayer.config.fnotes === "string" || typeof v.morningPrayer.config.fnotes === "object" && v.morningPrayer.config.fnotes instanceof String ? v.morningPrayer.config.fnotes : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.morningPrayer.config.fnotes)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ,config: typeof v.morningPrayer.config === "object" && "ot" in v.morningPrayer.config && "ps" in v.morningPrayer.config && "nt" in v.morningPrayer.config && "gs" in v.morningPrayer.config && "fnotes" in v.morningPrayer.config && "vers" in v.morningPrayer.config && "current" in v.morningPrayer.config ? {_: {}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,ot: typeof v.morningPrayer.config.ot === "string" || typeof v.morningPrayer.config.ot === "object" && v.morningPrayer.config.ot instanceof String ? v.morningPrayer.config.ot : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.morningPrayer.config.ot)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,ps: typeof v.morningPrayer.config.ps === "string" || typeof v.morningPrayer.config.ps === "object" && v.morningPrayer.config.ps instanceof String ? v.morningPrayer.config.ps : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.morningPrayer.config.ps)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,nt: typeof v.morningPrayer.config.nt === "string" || typeof v.morningPrayer.config.nt === "object" && v.morningPrayer.config.nt instanceof String ? v.morningPrayer.config.nt : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.morningPrayer.config.nt)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,gs: typeof v.morningPrayer.config.gs === "string" || typeof v.morningPrayer.config.gs === "object" && v.morningPrayer.config.gs instanceof String ? v.morningPrayer.config.gs : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.morningPrayer.config.gs)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,fnotes: typeof v.morningPrayer.config.fnotes === "string" || typeof v.morningPrayer.config.fnotes === "object" && v.morningPrayer.config.fnotes instanceof String ? v.morningPrayer.config.fnotes : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.morningPrayer.config.fnotes)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,vers: typeof v.morningPrayer.config.vers === "object" && v.morningPrayer.config.vers instanceof Array ? Elm.Native.List.make(_elm).fromArray(v.morningPrayer.config.vers.map(function (v) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            return typeof v === "string" || typeof v === "object" && v instanceof String ? v : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            v);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         })) : _U.badPort("an array",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.morningPrayer.config.vers)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,current: typeof v.morningPrayer.config.current === "string" || typeof v.morningPrayer.config.current === "object" && v.morningPrayer.config.current instanceof String ? v.morningPrayer.config.current : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.morningPrayer.config.current)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`, `vers`, `current`",
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           v.morningPrayer.config)} : _U.badPort("an object with fields `date`, `season`, `week`, `day`, `title`, `mp1`, `mp2`, `mpp`, `ep1`, `ep2`, `epp`, `show`, `justToday`, `config`",
                                                                                                                                                                                                            v.morningPrayer)
                                                                                                                                                                                                            ,eveningPrayer: typeof v.eveningPrayer === "object" && "date" in v.eveningPrayer && "season" in v.eveningPrayer && "week" in v.eveningPrayer && "day" in v.eveningPrayer && "title" in v.eveningPrayer && "mp1" in v.eveningPrayer && "mp2" in v.eveningPrayer && "mpp" in v.eveningPrayer && "ep1" in v.eveningPrayer && "ep2" in v.eveningPrayer && "epp" in v.eveningPrayer && "show" in v.eveningPrayer && "justToday" in v.eveningPrayer && "config" in v.eveningPrayer ? {_: {}
@@ -17412,17 +19074,24 @@ Elm.Iphod.make = function (_elm) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           v.eveningPrayer.show)
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           ,justToday: typeof v.eveningPrayer.justToday === "boolean" ? v.eveningPrayer.justToday : _U.badPort("a boolean (true or false)",
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           v.eveningPrayer.justToday)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ,config: typeof v.eveningPrayer.config === "object" && "ot" in v.eveningPrayer.config && "ps" in v.eveningPrayer.config && "nt" in v.eveningPrayer.config && "gs" in v.eveningPrayer.config && "fnotes" in v.eveningPrayer.config ? {_: {}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,ot: typeof v.eveningPrayer.config.ot === "string" || typeof v.eveningPrayer.config.ot === "object" && v.eveningPrayer.config.ot instanceof String ? v.eveningPrayer.config.ot : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.eveningPrayer.config.ot)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,ps: typeof v.eveningPrayer.config.ps === "string" || typeof v.eveningPrayer.config.ps === "object" && v.eveningPrayer.config.ps instanceof String ? v.eveningPrayer.config.ps : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.eveningPrayer.config.ps)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,nt: typeof v.eveningPrayer.config.nt === "string" || typeof v.eveningPrayer.config.nt === "object" && v.eveningPrayer.config.nt instanceof String ? v.eveningPrayer.config.nt : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.eveningPrayer.config.nt)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,gs: typeof v.eveningPrayer.config.gs === "string" || typeof v.eveningPrayer.config.gs === "object" && v.eveningPrayer.config.gs instanceof String ? v.eveningPrayer.config.gs : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.eveningPrayer.config.gs)
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              ,fnotes: typeof v.eveningPrayer.config.fnotes === "string" || typeof v.eveningPrayer.config.fnotes === "object" && v.eveningPrayer.config.fnotes instanceof String ? v.eveningPrayer.config.fnotes : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              v.eveningPrayer.config.fnotes)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          ,config: typeof v.eveningPrayer.config === "object" && "ot" in v.eveningPrayer.config && "ps" in v.eveningPrayer.config && "nt" in v.eveningPrayer.config && "gs" in v.eveningPrayer.config && "fnotes" in v.eveningPrayer.config && "vers" in v.eveningPrayer.config && "current" in v.eveningPrayer.config ? {_: {}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,ot: typeof v.eveningPrayer.config.ot === "string" || typeof v.eveningPrayer.config.ot === "object" && v.eveningPrayer.config.ot instanceof String ? v.eveningPrayer.config.ot : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.eveningPrayer.config.ot)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,ps: typeof v.eveningPrayer.config.ps === "string" || typeof v.eveningPrayer.config.ps === "object" && v.eveningPrayer.config.ps instanceof String ? v.eveningPrayer.config.ps : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.eveningPrayer.config.ps)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,nt: typeof v.eveningPrayer.config.nt === "string" || typeof v.eveningPrayer.config.nt === "object" && v.eveningPrayer.config.nt instanceof String ? v.eveningPrayer.config.nt : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.eveningPrayer.config.nt)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,gs: typeof v.eveningPrayer.config.gs === "string" || typeof v.eveningPrayer.config.gs === "object" && v.eveningPrayer.config.gs instanceof String ? v.eveningPrayer.config.gs : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.eveningPrayer.config.gs)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,fnotes: typeof v.eveningPrayer.config.fnotes === "string" || typeof v.eveningPrayer.config.fnotes === "object" && v.eveningPrayer.config.fnotes instanceof String ? v.eveningPrayer.config.fnotes : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.eveningPrayer.config.fnotes)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,vers: typeof v.eveningPrayer.config.vers === "object" && v.eveningPrayer.config.vers instanceof Array ? Elm.Native.List.make(_elm).fromArray(v.eveningPrayer.config.vers.map(function (v) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            return typeof v === "string" || typeof v === "object" && v instanceof String ? v : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            v);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         })) : _U.badPort("an array",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.eveningPrayer.config.vers)
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         ,current: typeof v.eveningPrayer.config.current === "string" || typeof v.eveningPrayer.config.current === "object" && v.eveningPrayer.config.current instanceof String ? v.eveningPrayer.config.current : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         v.eveningPrayer.config.current)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`, `vers`, `current`",
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           v.eveningPrayer.config)} : _U.badPort("an object with fields `date`, `season`, `week`, `day`, `title`, `mp1`, `mp2`, `mpp`, `ep1`, `ep2`, `epp`, `show`, `justToday`, `config`",
                                                                                                                                                                                                            v.eveningPrayer)
                                                                                                                                                                                                            ,email: typeof v.email === "object" && "from" in v.email && "topic" in v.email && "text" in v.email && "show" in v.email ? {_: {}
@@ -17435,22 +19104,36 @@ Elm.Iphod.make = function (_elm) {
                                                                                                                                                                                                                                                                                                                                       ,show: typeof v.email.show === "boolean" ? v.email.show : _U.badPort("a boolean (true or false)",
                                                                                                                                                                                                                                                                                                                                       v.email.show)} : _U.badPort("an object with fields `from`, `topic`, `text`, `show`",
                                                                                                                                                                                                            v.email)
-                                                                                                                                                                                                           ,config: typeof v.config === "object" && "ot" in v.config && "ps" in v.config && "nt" in v.config && "gs" in v.config && "fnotes" in v.config ? {_: {}
-                                                                                                                                                                                                                                                                                                                                                           ,ot: typeof v.config.ot === "string" || typeof v.config.ot === "object" && v.config.ot instanceof String ? v.config.ot : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                           v.config.ot)
-                                                                                                                                                                                                                                                                                                                                                           ,ps: typeof v.config.ps === "string" || typeof v.config.ps === "object" && v.config.ps instanceof String ? v.config.ps : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                           v.config.ps)
-                                                                                                                                                                                                                                                                                                                                                           ,nt: typeof v.config.nt === "string" || typeof v.config.nt === "object" && v.config.nt instanceof String ? v.config.nt : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                           v.config.nt)
-                                                                                                                                                                                                                                                                                                                                                           ,gs: typeof v.config.gs === "string" || typeof v.config.gs === "object" && v.config.gs instanceof String ? v.config.gs : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                           v.config.gs)
-                                                                                                                                                                                                                                                                                                                                                           ,fnotes: typeof v.config.fnotes === "string" || typeof v.config.fnotes === "object" && v.config.fnotes instanceof String ? v.config.fnotes : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                                           v.config.fnotes)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`",
+                                                                                                                                                                                                           ,config: typeof v.config === "object" && "ot" in v.config && "ps" in v.config && "nt" in v.config && "gs" in v.config && "fnotes" in v.config && "vers" in v.config && "current" in v.config ? {_: {}
+                                                                                                                                                                                                                                                                                                                                                                                                          ,ot: typeof v.config.ot === "string" || typeof v.config.ot === "object" && v.config.ot instanceof String ? v.config.ot : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                          v.config.ot)
+                                                                                                                                                                                                                                                                                                                                                                                                          ,ps: typeof v.config.ps === "string" || typeof v.config.ps === "object" && v.config.ps instanceof String ? v.config.ps : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                          v.config.ps)
+                                                                                                                                                                                                                                                                                                                                                                                                          ,nt: typeof v.config.nt === "string" || typeof v.config.nt === "object" && v.config.nt instanceof String ? v.config.nt : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                          v.config.nt)
+                                                                                                                                                                                                                                                                                                                                                                                                          ,gs: typeof v.config.gs === "string" || typeof v.config.gs === "object" && v.config.gs instanceof String ? v.config.gs : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                          v.config.gs)
+                                                                                                                                                                                                                                                                                                                                                                                                          ,fnotes: typeof v.config.fnotes === "string" || typeof v.config.fnotes === "object" && v.config.fnotes instanceof String ? v.config.fnotes : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                          v.config.fnotes)
+                                                                                                                                                                                                                                                                                                                                                                                                          ,vers: typeof v.config.vers === "object" && v.config.vers instanceof Array ? Elm.Native.List.make(_elm).fromArray(v.config.vers.map(function (v) {
+                                                                                                                                                                                                                                                                                                                                                                                                             return typeof v === "string" || typeof v === "object" && v instanceof String ? v : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                             v);
+                                                                                                                                                                                                                                                                                                                                                                                                          })) : _U.badPort("an array",
+                                                                                                                                                                                                                                                                                                                                                                                                          v.config.vers)
+                                                                                                                                                                                                                                                                                                                                                                                                          ,current: typeof v.config.current === "string" || typeof v.config.current === "object" && v.config.current instanceof String ? v.config.current : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                                                                                                          v.config.current)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`, `vers`, `current`",
                                                                                                                                                                                                            v.config)
                                                                                                                                                                                                            ,about: typeof v.about === "boolean" ? v.about : _U.badPort("a boolean (true or false)",
                                                                                                                                                                                                            v.about)} : _U.badPort("an object with fields `today`, `sunday`, `redLetter`, `daily`, `morningPrayer`, `eveningPrayer`, `email`, `config`, `about`",
       v);
    });
+   var requestText = Elm.Native.Port.make(_elm).outboundSignal("requestText",
+   function (v) {
+      return Elm.Native.List.make(_elm).toArray(v).map(function (v) {
+         return [v._0,v._1];
+      });
+   },
+   $Iphod$Helper.getText.signal);
    var sendEmail = Elm.Native.Port.make(_elm).outboundSignal("sendEmail",
    function (v) {
       return {from: v.from
@@ -17459,13 +19142,6 @@ Elm.Iphod.make = function (_elm) {
              ,show: v.show};
    },
    $Iphod$Email.sendContactMe.signal);
-   var requestText = Elm.Native.Port.make(_elm).outboundSignal("requestText",
-   function (v) {
-      return Elm.Native.List.make(_elm).toArray(v).map(function (v) {
-         return [v._0,v._1];
-      });
-   },
-   $Helper.getText.signal);
    var saveThisConfig = $Signal.mailbox($Iphod$Models.configInit);
    var savingConfig = Elm.Native.Port.make(_elm).outboundSignal("savingConfig",
    function (v) {
@@ -17473,7 +19149,11 @@ Elm.Iphod.make = function (_elm) {
              ,ps: v.ps
              ,nt: v.nt
              ,gs: v.gs
-             ,fnotes: v.fnotes};
+             ,fnotes: v.fnotes
+             ,vers: Elm.Native.List.make(_elm).toArray(v.vers).map(function (v) {
+                return v;
+             })
+             ,current: v.current};
    },
    saveThisConfig.signal);
    var saveConfig = function (config) {
@@ -17493,7 +19173,11 @@ Elm.Iphod.make = function (_elm) {
               ,ps: v._2.ps
               ,nt: v._2.nt
               ,gs: v._2.gs
-              ,fnotes: v._2.fnotes}];
+              ,fnotes: v._2.fnotes
+              ,vers: Elm.Native.List.make(_elm).toArray(v._2.vers).map(function (v) {
+                 return v;
+              })
+              ,current: v._2.current}];
    },
    gatherAllText.signal);
    var gatherText = F2(function (model,prayer) {
@@ -17748,6 +19432,8 @@ Elm.Iphod.make = function (_elm) {
       {case "NoOp": return {ctor: "_Tuple2"
                            ,_0: model
                            ,_1: $Effects.none};
+         case "ReadMe": var foo = A2($Debug.log,"README",_p4._0);
+           return {ctor: "_Tuple2",_0: model,_1: $Effects.none};
          case "ChangeDate": return {ctor: "_Tuple2"
                                    ,_0: model
                                    ,_1: changeDate(_p4._0)};
@@ -17849,6 +19535,7 @@ Elm.Iphod.make = function (_elm) {
            ,sunday: newSunday
            ,redLetter: newRed
            ,daily: newDaily});
+           var foo = A2($Debug.log,"CONFIG",model.config);
            return {ctor: "_Tuple2"
                   ,_0: newModel
                   ,_1: saveConfig(newModel.config)};}
@@ -17905,6 +19592,7 @@ Elm.Iphod.make = function (_elm) {
                               ,gatherAllText: gatherAllText
                               ,saveThisConfig: saveThisConfig
                               ,NoOp: NoOp
+                              ,ReadMe: ReadMe
                               ,ChangeDate: ChangeDate
                               ,ChangeDay: ChangeDay
                               ,ToggleAbout: ToggleAbout
@@ -29927,11 +31615,13 @@ Elm.StartApp.make = function (_elm) {
                                  ,Config: Config
                                  ,App: App};
 };
-Elm.Helper = Elm.Helper || {};
-Elm.Helper.make = function (_elm) {
+Elm.Iphod = Elm.Iphod || {};
+Elm.Iphod.Helper = Elm.Iphod.Helper || {};
+Elm.Iphod.Helper.make = function (_elm) {
    "use strict";
-   _elm.Helper = _elm.Helper || {};
-   if (_elm.Helper.values) return _elm.Helper.values;
+   _elm.Iphod = _elm.Iphod || {};
+   _elm.Iphod.Helper = _elm.Iphod.Helper || {};
+   if (_elm.Iphod.Helper.values) return _elm.Iphod.Helper.values;
    var _U = Elm.Native.Utils.make(_elm),
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
@@ -29959,10 +31649,10 @@ Elm.Helper.make = function (_elm) {
          return A2($Signal.message,address,msg);
       });
    });
-   return _elm.Helper.values = {_op: _op
-                               ,onClickLimited: onClickLimited
-                               ,hideable: hideable
-                               ,getText: getText};
+   return _elm.Iphod.Helper.values = {_op: _op
+                                     ,onClickLimited: onClickLimited
+                                     ,hideable: hideable
+                                     ,getText: getText};
 };
 Elm.Translations = Elm.Translations || {};
 Elm.Translations.make = function (_elm) {
@@ -29973,10 +31663,10 @@ Elm.Translations.make = function (_elm) {
    $Basics = Elm.Basics.make(_elm),
    $Debug = Elm.Debug.make(_elm),
    $Effects = Elm.Effects.make(_elm),
-   $Helper = Elm.Helper.make(_elm),
    $Html = Elm.Html.make(_elm),
    $Html$Attributes = Elm.Html.Attributes.make(_elm),
    $Html$Events = Elm.Html.Events.make(_elm),
+   $Iphod$Helper = Elm.Iphod.Helper.make(_elm),
    $List = Elm.List.make(_elm),
    $Maybe = Elm.Maybe.make(_elm),
    $Regex = Elm.Regex.make(_elm),
@@ -29990,45 +31680,12 @@ Elm.Translations.make = function (_elm) {
                                                  ,_0: "background-color"
                                                  ,_1: "lightgreen"} : {ctor: "_Tuple2"
                                                                       ,_0: "background-color"
-                                                                      ,_1: "none"}]);
-      return A2($Helper.hideable,model.show,this_style);
+                                                                      ,_1: "white"}]);
+      return A2($Iphod$Helper.hideable,model.show,this_style);
    };
-   var selectedStyle = function (model) {
-      return model.selected ? $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                              ,_0: "background-color"
-                                                              ,_1: "lightgreen"}])) : $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                                                                                      ,_0: "background-color"
-                                                                                                                      ,_1: "none"}]));
+   var UseVersion = function (a) {
+      return {ctor: "UseVersion",_0: a};
    };
-   var update = F2(function (action,model) {
-      var _p0 = action;
-      switch (_p0.ctor)
-      {case "NoOp": return {ctor: "_Tuple2"
-                           ,_0: model
-                           ,_1: $Effects.none};
-         case "AddModel": return {ctor: "_Tuple2"
-                                 ,_0: _p0._0
-                                 ,_1: $Effects.none};
-         default: var _p2 = _p0._1;
-           var findThis = function (ver) {
-              var _p1 = _p0._0;
-              switch (_p1)
-              {case "abbr": return A2($Regex.contains,
-                   $Regex.caseInsensitive($Regex.regex(_p2)),
-                   ver.abbr) ? _U.update(ver,{show: true}) : _U.update(ver,
-                   {show: false});
-                 case "name": return A2($Regex.contains,
-                   $Regex.caseInsensitive($Regex.regex(_p2)),
-                   ver.name) ? _U.update(ver,{show: true}) : _U.update(ver,
-                   {show: false});
-                 default: return A2($Regex.contains,
-                   $Regex.caseInsensitive($Regex.regex(_p2)),
-                   ver.lang) ? _U.update(ver,{show: true}) : _U.update(ver,
-                   {show: false});}
-           };
-           var newModel = A2($List.map,findThis,model);
-           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};}
-   });
    var Find = F2(function (a,b) {
       return {ctor: "Find",_0: a,_1: b};
    });
@@ -30051,7 +31708,7 @@ Elm.Translations.make = function (_elm) {
               function (str) {
                  return A2($Signal.message,address,A2(Find,"abbr",str));
               })
-              ,A2($Helper.onClickLimited,address,NoOp)
+              ,A2($Iphod$Helper.onClickLimited,address,NoOp)
               ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                                ,_0: "width"
                                                ,_1: "90%"}]))]),
@@ -30072,7 +31729,7 @@ Elm.Translations.make = function (_elm) {
               function (str) {
                  return A2($Signal.message,address,A2(Find,"name",str));
               })
-              ,A2($Helper.onClickLimited,address,NoOp)
+              ,A2($Iphod$Helper.onClickLimited,address,NoOp)
               ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                                ,_0: "width"
                                                ,_1: "90%"}]))]),
@@ -30093,7 +31750,7 @@ Elm.Translations.make = function (_elm) {
               function (str) {
                  return A2($Signal.message,address,A2(Find,"lang",str));
               })
-              ,A2($Helper.onClickLimited,address,NoOp)
+              ,A2($Iphod$Helper.onClickLimited,address,NoOp)
               ,$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
                                                ,_0: "width"
                                                ,_1: "90%"}]))]),
@@ -30114,7 +31771,8 @@ Elm.Translations.make = function (_elm) {
                  _U.list([$Html$Attributes.$class("ver_language")]),
                  _U.list([$Html.text(ver.lang)]))
                  ,A2($Html.td,
-                 _U.list([$Html$Attributes.$class("ver_use")]),
+                 _U.list([$Html$Attributes.$class("ver_use")
+                         ,A2($Html$Events.onClick,address,UseVersion(ver))]),
                  _U.list([A2($Html.button,
                  _U.list([]),
                  _U.list([$Html.text(using)]))]))]));
@@ -30182,6 +31840,66 @@ Elm.Translations.make = function (_elm) {
                      ,lang: ""
                      ,show: false
                      ,selected: false};
+   var dbSaveVersion = $Signal.mailbox({ctor: "_Tuple2"
+                                       ,_0: ""
+                                       ,_1: initVersion});
+   var requestSaveVersion = Elm.Native.Port.make(_elm).outboundSignal("requestSaveVersion",
+   function (v) {
+      return [v._0
+             ,{id: v._1.id
+              ,abbr: v._1.abbr
+              ,name: v._1.name
+              ,lang: v._1.lang
+              ,show: v._1.show
+              ,selected: v._1.selected}];
+   },
+   dbSaveVersion.signal);
+   var saveVersion = function (ver) {
+      var saving = ver.selected ? "save" : "unsave";
+      return $Effects.task(A2($Task.map,
+      $Basics.always(NoOp),
+      $Task.toMaybe(A2($Signal.send,
+      dbSaveVersion.address,
+      {ctor: "_Tuple2",_0: saving,_1: ver}))));
+   };
+   var update = F2(function (action,model) {
+      var _p0 = action;
+      switch (_p0.ctor)
+      {case "NoOp": return {ctor: "_Tuple2"
+                           ,_0: model
+                           ,_1: $Effects.none};
+         case "AddModel": return {ctor: "_Tuple2"
+                                 ,_0: _p0._0
+                                 ,_1: $Effects.none};
+         case "Find": var _p2 = _p0._1;
+           var findThis = function (ver) {
+              var _p1 = _p0._0;
+              switch (_p1)
+              {case "abbr": return A2($Regex.contains,
+                   $Regex.caseInsensitive($Regex.regex(_p2)),
+                   ver.abbr) ? _U.update(ver,{show: true}) : _U.update(ver,
+                   {show: false});
+                 case "name": return A2($Regex.contains,
+                   $Regex.caseInsensitive($Regex.regex(_p2)),
+                   ver.name) ? _U.update(ver,{show: true}) : _U.update(ver,
+                   {show: false});
+                 default: return A2($Regex.contains,
+                   $Regex.caseInsensitive($Regex.regex(_p2)),
+                   ver.lang) ? _U.update(ver,{show: true}) : _U.update(ver,
+                   {show: false});}
+           };
+           var newModel = A2($List.map,findThis,model);
+           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+         default: var _p3 = _p0._0;
+           var newVer = _U.update(_p3,
+           {selected: $Basics.not(_p3.selected)});
+           var selectModel = function (this_model) {
+              return _U.eq(this_model.id,_p3.id) ? _U.update(this_model,
+              {selected: newVer.selected}) : this_model;
+           };
+           var newModel = A2($List.map,selectModel,model);
+           return {ctor: "_Tuple2",_0: newModel,_1: saveVersion(newVer)};}
+   });
    var Version = F6(function (a,b,c,d,e,f) {
       return {id: a,abbr: b,name: c,lang: d,show: e,selected: f};
    });
@@ -30199,1417 +31917,19 @@ Elm.Translations.make = function (_elm) {
                                      ,initVersion: initVersion
                                      ,init: init
                                      ,incomingVersion: incomingVersion
+                                     ,dbSaveVersion: dbSaveVersion
                                      ,NoOp: NoOp
                                      ,AddModel: AddModel
                                      ,Find: Find
+                                     ,UseVersion: UseVersion
                                      ,update: update
+                                     ,saveVersion: saveVersion
                                      ,view: view
                                      ,findVersion: findVersion
                                      ,findName: findName
                                      ,findLanguage: findLanguage
-                                     ,selectedStyle: selectedStyle
                                      ,versionRow: versionRow};
 };
 
-require.register("deps/phoenix/web/static/js/phoenix", function(exports, require, module) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-// Phoenix Channels JavaScript client
-//
-// ## Socket Connection
-//
-// A single connection is established to the server and
-// channels are mulitplexed over the connection.
-// Connect to the server using the `Socket` class:
-//
-//     let socket = new Socket("/ws", {params: {userToken: "123"}})
-//     socket.connect()
-//
-// The `Socket` constructor takes the mount point of the socket,
-// the authentication params, as well as options that can be found in
-// the Socket docs, such as configuring the `LongPoll` transport, and
-// heartbeat.
-//
-// ## Channels
-//
-// Channels are isolated, concurrent processes on the server that
-// subscribe to topics and broker events between the client and server.
-// To join a channel, you must provide the topic, and channel params for
-// authorization. Here's an example chat room example where `"new_msg"`
-// events are listened for, messages are pushed to the server, and
-// the channel is joined with ok/error/timeout matches:
-//
-//     let channel = socket.channel("rooms:123", {token: roomToken})
-//     channel.on("new_msg", msg => console.log("Got message", msg) )
-//     $input.onEnter( e => {
-//       channel.push("new_msg", {body: e.target.val}, 10000)
-//        .receive("ok", (msg) => console.log("created message", msg) )
-//        .receive("error", (reasons) => console.log("create failed", reasons) )
-//        .receive("timeout", () => console.log("Networking issue...") )
-//     })
-//     channel.join()
-//       .receive("ok", ({messages}) => console.log("catching up", messages) )
-//       .receive("error", ({reason}) => console.log("failed join", reason) )
-//       .receive("timeout", () => console.log("Networking issue. Still waiting...") )
-//
-//
-// ## Joining
-//
-// Creating a channel with `socket.channel(topic, params)`, binds the params to
-// `channel.params`, which are sent up on `channel.join()`.
-// Subsequent rejoins will send up the modified params for
-// updating authorization params, or passing up last_message_id information.
-// Successful joins receive an "ok" status, while unsuccessful joins
-// receive "error".
-//
-//
-// ## Pushing Messages
-//
-// From the previous example, we can see that pushing messages to the server
-// can be done with `channel.push(eventName, payload)` and we can optionally
-// receive responses from the push. Additionally, we can use
-// `receive("timeout", callback)` to abort waiting for our other `receive` hooks
-//  and take action after some period of waiting. The default timeout is 5000ms.
-//
-//
-// ## Socket Hooks
-//
-// Lifecycle events of the multiplexed connection can be hooked into via
-// `socket.onError()` and `socket.onClose()` events, ie:
-//
-//     socket.onError( () => console.log("there was an error with the connection!") )
-//     socket.onClose( () => console.log("the connection dropped") )
-//
-//
-// ## Channel Hooks
-//
-// For each joined channel, you can bind to `onError` and `onClose` events
-// to monitor the channel lifecycle, ie:
-//
-//     channel.onError( () => console.log("there was an error!") )
-//     channel.onClose( () => console.log("the channel has gone away gracefully") )
-//
-// ### onError hooks
-//
-// `onError` hooks are invoked if the socket connection drops, or the channel
-// crashes on the server. In either case, a channel rejoin is attemtped
-// automatically in an exponential backoff manner.
-//
-// ### onClose hooks
-//
-// `onClose` hooks are invoked only in two cases. 1) the channel explicitly
-// closed on the server, or 2). The client explicitly closed, by calling
-// `channel.leave()`
-//
-
-var VSN = "1.0.0";
-var SOCKET_STATES = { connecting: 0, open: 1, closing: 2, closed: 3 };
-var DEFAULT_TIMEOUT = 10000;
-var CHANNEL_STATES = {
-  closed: "closed",
-  errored: "errored",
-  joined: "joined",
-  joining: "joining"
-};
-var CHANNEL_EVENTS = {
-  close: "phx_close",
-  error: "phx_error",
-  join: "phx_join",
-  reply: "phx_reply",
-  leave: "phx_leave"
-};
-var TRANSPORTS = {
-  longpoll: "longpoll",
-  websocket: "websocket"
-};
-
-var Push = function () {
-
-  // Initializes the Push
-  //
-  // channel - The Channel
-  // event - The event, for example `"phx_join"`
-  // payload - The payload, for example `{user_id: 123}`
-  // timeout - The push timeout in milliseconds
-  //
-
-  function Push(channel, event, payload, timeout) {
-    _classCallCheck(this, Push);
-
-    this.channel = channel;
-    this.event = event;
-    this.payload = payload || {};
-    this.receivedResp = null;
-    this.timeout = timeout;
-    this.timeoutTimer = null;
-    this.recHooks = [];
-    this.sent = false;
-  }
-
-  _createClass(Push, [{
-    key: "resend",
-    value: function resend(timeout) {
-      this.timeout = timeout;
-      this.cancelRefEvent();
-      this.ref = null;
-      this.refEvent = null;
-      this.receivedResp = null;
-      this.sent = false;
-      this.send();
-    }
-  }, {
-    key: "send",
-    value: function send() {
-      if (this.hasReceived("timeout")) {
-        return;
-      }
-      this.startTimeout();
-      this.sent = true;
-      this.channel.socket.push({
-        topic: this.channel.topic,
-        event: this.event,
-        payload: this.payload,
-        ref: this.ref
-      });
-    }
-  }, {
-    key: "receive",
-    value: function receive(status, callback) {
-      if (this.hasReceived(status)) {
-        callback(this.receivedResp.response);
-      }
-
-      this.recHooks.push({ status: status, callback: callback });
-      return this;
-    }
-
-    // private
-
-  }, {
-    key: "matchReceive",
-    value: function matchReceive(_ref) {
-      var status = _ref.status;
-      var response = _ref.response;
-      var ref = _ref.ref;
-
-      this.recHooks.filter(function (h) {
-        return h.status === status;
-      }).forEach(function (h) {
-        return h.callback(response);
-      });
-    }
-  }, {
-    key: "cancelRefEvent",
-    value: function cancelRefEvent() {
-      if (!this.refEvent) {
-        return;
-      }
-      this.channel.off(this.refEvent);
-    }
-  }, {
-    key: "cancelTimeout",
-    value: function cancelTimeout() {
-      clearTimeout(this.timeoutTimer);
-      this.timeoutTimer = null;
-    }
-  }, {
-    key: "startTimeout",
-    value: function startTimeout() {
-      var _this = this;
-
-      if (this.timeoutTimer) {
-        return;
-      }
-      this.ref = this.channel.socket.makeRef();
-      this.refEvent = this.channel.replyEventName(this.ref);
-
-      this.channel.on(this.refEvent, function (payload) {
-        _this.cancelRefEvent();
-        _this.cancelTimeout();
-        _this.receivedResp = payload;
-        _this.matchReceive(payload);
-      });
-
-      this.timeoutTimer = setTimeout(function () {
-        _this.trigger("timeout", {});
-      }, this.timeout);
-    }
-  }, {
-    key: "hasReceived",
-    value: function hasReceived(status) {
-      return this.receivedResp && this.receivedResp.status === status;
-    }
-  }, {
-    key: "trigger",
-    value: function trigger(status, response) {
-      this.channel.trigger(this.refEvent, { status: status, response: response });
-    }
-  }]);
-
-  return Push;
-}();
-
-var Channel = exports.Channel = function () {
-  function Channel(topic, params, socket) {
-    var _this2 = this;
-
-    _classCallCheck(this, Channel);
-
-    this.state = CHANNEL_STATES.closed;
-    this.topic = topic;
-    this.params = params || {};
-    this.socket = socket;
-    this.bindings = [];
-    this.timeout = this.socket.timeout;
-    this.joinedOnce = false;
-    this.joinPush = new Push(this, CHANNEL_EVENTS.join, this.params, this.timeout);
-    this.pushBuffer = [];
-    this.rejoinTimer = new Timer(function () {
-      return _this2.rejoinUntilConnected();
-    }, this.socket.reconnectAfterMs);
-    this.joinPush.receive("ok", function () {
-      _this2.state = CHANNEL_STATES.joined;
-      _this2.rejoinTimer.reset();
-      _this2.pushBuffer.forEach(function (pushEvent) {
-        return pushEvent.send();
-      });
-      _this2.pushBuffer = [];
-    });
-    this.onClose(function () {
-      _this2.socket.log("channel", "close " + _this2.topic);
-      _this2.state = CHANNEL_STATES.closed;
-      _this2.socket.remove(_this2);
-    });
-    this.onError(function (reason) {
-      _this2.socket.log("channel", "error " + _this2.topic, reason);
-      _this2.state = CHANNEL_STATES.errored;
-      _this2.rejoinTimer.scheduleTimeout();
-    });
-    this.joinPush.receive("timeout", function () {
-      if (_this2.state !== CHANNEL_STATES.joining) {
-        return;
-      }
-
-      _this2.socket.log("channel", "timeout " + _this2.topic, _this2.joinPush.timeout);
-      _this2.state = CHANNEL_STATES.errored;
-      _this2.rejoinTimer.scheduleTimeout();
-    });
-    this.on(CHANNEL_EVENTS.reply, function (payload, ref) {
-      _this2.trigger(_this2.replyEventName(ref), payload);
-    });
-  }
-
-  _createClass(Channel, [{
-    key: "rejoinUntilConnected",
-    value: function rejoinUntilConnected() {
-      this.rejoinTimer.scheduleTimeout();
-      if (this.socket.isConnected()) {
-        this.rejoin();
-      }
-    }
-  }, {
-    key: "join",
-    value: function join() {
-      var timeout = arguments.length <= 0 || arguments[0] === undefined ? this.timeout : arguments[0];
-
-      if (this.joinedOnce) {
-        throw "tried to join multiple times. 'join' can only be called a single time per channel instance";
-      } else {
-        this.joinedOnce = true;
-      }
-      this.rejoin(timeout);
-      return this.joinPush;
-    }
-  }, {
-    key: "onClose",
-    value: function onClose(callback) {
-      this.on(CHANNEL_EVENTS.close, callback);
-    }
-  }, {
-    key: "onError",
-    value: function onError(callback) {
-      this.on(CHANNEL_EVENTS.error, function (reason) {
-        return callback(reason);
-      });
-    }
-  }, {
-    key: "on",
-    value: function on(event, callback) {
-      this.bindings.push({ event: event, callback: callback });
-    }
-  }, {
-    key: "off",
-    value: function off(event) {
-      this.bindings = this.bindings.filter(function (bind) {
-        return bind.event !== event;
-      });
-    }
-  }, {
-    key: "canPush",
-    value: function canPush() {
-      return this.socket.isConnected() && this.state === CHANNEL_STATES.joined;
-    }
-  }, {
-    key: "push",
-    value: function push(event, payload) {
-      var timeout = arguments.length <= 2 || arguments[2] === undefined ? this.timeout : arguments[2];
-
-      if (!this.joinedOnce) {
-        throw "tried to push '" + event + "' to '" + this.topic + "' before joining. Use channel.join() before pushing events";
-      }
-      var pushEvent = new Push(this, event, payload, timeout);
-      if (this.canPush()) {
-        pushEvent.send();
-      } else {
-        pushEvent.startTimeout();
-        this.pushBuffer.push(pushEvent);
-      }
-
-      return pushEvent;
-    }
-
-    // Leaves the channel
-    //
-    // Unsubscribes from server events, and
-    // instructs channel to terminate on server
-    //
-    // Triggers onClose() hooks
-    //
-    // To receive leave acknowledgements, use the a `receive`
-    // hook to bind to the server ack, ie:
-    //
-    //     channel.leave().receive("ok", () => alert("left!") )
-    //
-
-  }, {
-    key: "leave",
-    value: function leave() {
-      var _this3 = this;
-
-      var timeout = arguments.length <= 0 || arguments[0] === undefined ? this.timeout : arguments[0];
-
-      var onClose = function onClose() {
-        _this3.socket.log("channel", "leave " + _this3.topic);
-        _this3.trigger(CHANNEL_EVENTS.close, "leave");
-      };
-      var leavePush = new Push(this, CHANNEL_EVENTS.leave, {}, timeout);
-      leavePush.receive("ok", function () {
-        return onClose();
-      }).receive("timeout", function () {
-        return onClose();
-      });
-      leavePush.send();
-      if (!this.canPush()) {
-        leavePush.trigger("ok", {});
-      }
-
-      return leavePush;
-    }
-
-    // Overridable message hook
-    //
-    // Receives all events for specialized message handling
-
-  }, {
-    key: "onMessage",
-    value: function onMessage(event, payload, ref) {}
-
-    // private
-
-  }, {
-    key: "isMember",
-    value: function isMember(topic) {
-      return this.topic === topic;
-    }
-  }, {
-    key: "sendJoin",
-    value: function sendJoin(timeout) {
-      this.state = CHANNEL_STATES.joining;
-      this.joinPush.resend(timeout);
-    }
-  }, {
-    key: "rejoin",
-    value: function rejoin() {
-      var timeout = arguments.length <= 0 || arguments[0] === undefined ? this.timeout : arguments[0];
-      this.sendJoin(timeout);
-    }
-  }, {
-    key: "trigger",
-    value: function trigger(triggerEvent, payload, ref) {
-      this.onMessage(triggerEvent, payload, ref);
-      this.bindings.filter(function (bind) {
-        return bind.event === triggerEvent;
-      }).map(function (bind) {
-        return bind.callback(payload, ref);
-      });
-    }
-  }, {
-    key: "replyEventName",
-    value: function replyEventName(ref) {
-      return "chan_reply_" + ref;
-    }
-  }]);
-
-  return Channel;
-}();
-
-var Socket = exports.Socket = function () {
-
-  // Initializes the Socket
-  //
-  // endPoint - The string WebSocket endpoint, ie, "ws://example.com/ws",
-  //                                               "wss://example.com"
-  //                                               "/ws" (inherited host & protocol)
-  // opts - Optional configuration
-  //   transport - The Websocket Transport, for example WebSocket or Phoenix.LongPoll.
-  //               Defaults to WebSocket with automatic LongPoll fallback.
-  //   timeout - The default timeout in milliseconds to trigger push timeouts.
-  //             Defaults `DEFAULT_TIMEOUT`
-  //   heartbeatIntervalMs - The millisec interval to send a heartbeat message
-  //   reconnectAfterMs - The optional function that returns the millsec
-  //                      reconnect interval. Defaults to stepped backoff of:
-  //
-  //     function(tries){
-  //       return [1000, 5000, 10000][tries - 1] || 10000
-  //     }
-  //
-  //   logger - The optional function for specialized logging, ie:
-  //     `logger: (kind, msg, data) => { console.log(`${kind}: ${msg}`, data) }
-  //
-  //   longpollerTimeout - The maximum timeout of a long poll AJAX request.
-  //                        Defaults to 20s (double the server long poll timer).
-  //
-  //   params - The optional params to pass when connecting
-  //
-  // For IE8 support use an ES5-shim (https://github.com/es-shims/es5-shim)
-  //
-
-  function Socket(endPoint) {
-    var _this4 = this;
-
-    var opts = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-
-    _classCallCheck(this, Socket);
-
-    this.stateChangeCallbacks = { open: [], close: [], error: [], message: [] };
-    this.channels = [];
-    this.sendBuffer = [];
-    this.ref = 0;
-    this.timeout = opts.timeout || DEFAULT_TIMEOUT;
-    this.transport = opts.transport || window.WebSocket || LongPoll;
-    this.heartbeatIntervalMs = opts.heartbeatIntervalMs || 30000;
-    this.reconnectAfterMs = opts.reconnectAfterMs || function (tries) {
-      return [1000, 2000, 5000, 10000][tries - 1] || 10000;
-    };
-    this.logger = opts.logger || function () {}; // noop
-    this.longpollerTimeout = opts.longpollerTimeout || 20000;
-    this.params = opts.params || {};
-    this.endPoint = endPoint + "/" + TRANSPORTS.websocket;
-    this.reconnectTimer = new Timer(function () {
-      _this4.disconnect(function () {
-        return _this4.connect();
-      });
-    }, this.reconnectAfterMs);
-  }
-
-  _createClass(Socket, [{
-    key: "protocol",
-    value: function protocol() {
-      return location.protocol.match(/^https/) ? "wss" : "ws";
-    }
-  }, {
-    key: "endPointURL",
-    value: function endPointURL() {
-      var uri = Ajax.appendParams(Ajax.appendParams(this.endPoint, this.params), { vsn: VSN });
-      if (uri.charAt(0) !== "/") {
-        return uri;
-      }
-      if (uri.charAt(1) === "/") {
-        return this.protocol() + ":" + uri;
-      }
-
-      return this.protocol() + "://" + location.host + uri;
-    }
-  }, {
-    key: "disconnect",
-    value: function disconnect(callback, code, reason) {
-      if (this.conn) {
-        this.conn.onclose = function () {}; // noop
-        if (code) {
-          this.conn.close(code, reason || "");
-        } else {
-          this.conn.close();
-        }
-        this.conn = null;
-      }
-      callback && callback();
-    }
-
-    // params - The params to send when connecting, for example `{user_id: userToken}`
-
-  }, {
-    key: "connect",
-    value: function connect(params) {
-      var _this5 = this;
-
-      if (params) {
-        console && console.log("passing params to connect is deprecated. Instead pass :params to the Socket constructor");
-        this.params = params;
-      }
-      if (this.conn) {
-        return;
-      }
-
-      this.conn = new this.transport(this.endPointURL());
-      this.conn.timeout = this.longpollerTimeout;
-      this.conn.onopen = function () {
-        return _this5.onConnOpen();
-      };
-      this.conn.onerror = function (error) {
-        return _this5.onConnError(error);
-      };
-      this.conn.onmessage = function (event) {
-        return _this5.onConnMessage(event);
-      };
-      this.conn.onclose = function (event) {
-        return _this5.onConnClose(event);
-      };
-    }
-
-    // Logs the message. Override `this.logger` for specialized logging. noops by default
-
-  }, {
-    key: "log",
-    value: function log(kind, msg, data) {
-      this.logger(kind, msg, data);
-    }
-
-    // Registers callbacks for connection state change events
-    //
-    // Examples
-    //
-    //    socket.onError(function(error){ alert("An error occurred") })
-    //
-
-  }, {
-    key: "onOpen",
-    value: function onOpen(callback) {
-      this.stateChangeCallbacks.open.push(callback);
-    }
-  }, {
-    key: "onClose",
-    value: function onClose(callback) {
-      this.stateChangeCallbacks.close.push(callback);
-    }
-  }, {
-    key: "onError",
-    value: function onError(callback) {
-      this.stateChangeCallbacks.error.push(callback);
-    }
-  }, {
-    key: "onMessage",
-    value: function onMessage(callback) {
-      this.stateChangeCallbacks.message.push(callback);
-    }
-  }, {
-    key: "onConnOpen",
-    value: function onConnOpen() {
-      var _this6 = this;
-
-      this.log("transport", "connected to " + this.endPointURL(), this.transport.prototype);
-      this.flushSendBuffer();
-      this.reconnectTimer.reset();
-      if (!this.conn.skipHeartbeat) {
-        clearInterval(this.heartbeatTimer);
-        this.heartbeatTimer = setInterval(function () {
-          return _this6.sendHeartbeat();
-        }, this.heartbeatIntervalMs);
-      }
-      this.stateChangeCallbacks.open.forEach(function (callback) {
-        return callback();
-      });
-    }
-  }, {
-    key: "onConnClose",
-    value: function onConnClose(event) {
-      this.log("transport", "close", event);
-      this.triggerChanError();
-      clearInterval(this.heartbeatTimer);
-      this.reconnectTimer.scheduleTimeout();
-      this.stateChangeCallbacks.close.forEach(function (callback) {
-        return callback(event);
-      });
-    }
-  }, {
-    key: "onConnError",
-    value: function onConnError(error) {
-      this.log("transport", error);
-      this.triggerChanError();
-      this.stateChangeCallbacks.error.forEach(function (callback) {
-        return callback(error);
-      });
-    }
-  }, {
-    key: "triggerChanError",
-    value: function triggerChanError() {
-      this.channels.forEach(function (channel) {
-        return channel.trigger(CHANNEL_EVENTS.error);
-      });
-    }
-  }, {
-    key: "connectionState",
-    value: function connectionState() {
-      switch (this.conn && this.conn.readyState) {
-        case SOCKET_STATES.connecting:
-          return "connecting";
-        case SOCKET_STATES.open:
-          return "open";
-        case SOCKET_STATES.closing:
-          return "closing";
-        default:
-          return "closed";
-      }
-    }
-  }, {
-    key: "isConnected",
-    value: function isConnected() {
-      return this.connectionState() === "open";
-    }
-  }, {
-    key: "remove",
-    value: function remove(channel) {
-      this.channels = this.channels.filter(function (c) {
-        return !c.isMember(channel.topic);
-      });
-    }
-  }, {
-    key: "channel",
-    value: function channel(topic) {
-      var chanParams = arguments.length <= 1 || arguments[1] === undefined ? {} : arguments[1];
-
-      var chan = new Channel(topic, chanParams, this);
-      this.channels.push(chan);
-      return chan;
-    }
-  }, {
-    key: "push",
-    value: function push(data) {
-      var _this7 = this;
-
-      var topic = data.topic;
-      var event = data.event;
-      var payload = data.payload;
-      var ref = data.ref;
-
-      var callback = function callback() {
-        return _this7.conn.send(JSON.stringify(data));
-      };
-      this.log("push", topic + " " + event + " (" + ref + ")", payload);
-      if (this.isConnected()) {
-        callback();
-      } else {
-        this.sendBuffer.push(callback);
-      }
-    }
-
-    // Return the next message ref, accounting for overflows
-
-  }, {
-    key: "makeRef",
-    value: function makeRef() {
-      var newRef = this.ref + 1;
-      if (newRef === this.ref) {
-        this.ref = 0;
-      } else {
-        this.ref = newRef;
-      }
-
-      return this.ref.toString();
-    }
-  }, {
-    key: "sendHeartbeat",
-    value: function sendHeartbeat() {
-      if (!this.isConnected()) {
-        return;
-      }
-      this.push({ topic: "phoenix", event: "heartbeat", payload: {}, ref: this.makeRef() });
-    }
-  }, {
-    key: "flushSendBuffer",
-    value: function flushSendBuffer() {
-      if (this.isConnected() && this.sendBuffer.length > 0) {
-        this.sendBuffer.forEach(function (callback) {
-          return callback();
-        });
-        this.sendBuffer = [];
-      }
-    }
-  }, {
-    key: "onConnMessage",
-    value: function onConnMessage(rawMessage) {
-      var msg = JSON.parse(rawMessage.data);
-      var topic = msg.topic;
-      var event = msg.event;
-      var payload = msg.payload;
-      var ref = msg.ref;
-
-      this.log("receive", (payload.status || "") + " " + topic + " " + event + " " + (ref && "(" + ref + ")" || ""), payload);
-      this.channels.filter(function (channel) {
-        return channel.isMember(topic);
-      }).forEach(function (channel) {
-        return channel.trigger(event, payload, ref);
-      });
-      this.stateChangeCallbacks.message.forEach(function (callback) {
-        return callback(msg);
-      });
-    }
-  }]);
-
-  return Socket;
-}();
-
-var LongPoll = exports.LongPoll = function () {
-  function LongPoll(endPoint) {
-    _classCallCheck(this, LongPoll);
-
-    this.endPoint = null;
-    this.token = null;
-    this.skipHeartbeat = true;
-    this.onopen = function () {}; // noop
-    this.onerror = function () {}; // noop
-    this.onmessage = function () {}; // noop
-    this.onclose = function () {}; // noop
-    this.pollEndpoint = this.normalizeEndpoint(endPoint);
-    this.readyState = SOCKET_STATES.connecting;
-
-    this.poll();
-  }
-
-  _createClass(LongPoll, [{
-    key: "normalizeEndpoint",
-    value: function normalizeEndpoint(endPoint) {
-      return endPoint.replace("ws://", "http://").replace("wss://", "https://").replace(new RegExp("(.*)\/" + TRANSPORTS.websocket), "$1/" + TRANSPORTS.longpoll);
-    }
-  }, {
-    key: "endpointURL",
-    value: function endpointURL() {
-      return Ajax.appendParams(this.pollEndpoint, { token: this.token });
-    }
-  }, {
-    key: "closeAndRetry",
-    value: function closeAndRetry() {
-      this.close();
-      this.readyState = SOCKET_STATES.connecting;
-    }
-  }, {
-    key: "ontimeout",
-    value: function ontimeout() {
-      this.onerror("timeout");
-      this.closeAndRetry();
-    }
-  }, {
-    key: "poll",
-    value: function poll() {
-      var _this8 = this;
-
-      if (!(this.readyState === SOCKET_STATES.open || this.readyState === SOCKET_STATES.connecting)) {
-        return;
-      }
-
-      Ajax.request("GET", this.endpointURL(), "application/json", null, this.timeout, this.ontimeout.bind(this), function (resp) {
-        if (resp) {
-          var status = resp.status;
-          var token = resp.token;
-          var messages = resp.messages;
-
-          _this8.token = token;
-        } else {
-          var status = 0;
-        }
-
-        switch (status) {
-          case 200:
-            messages.forEach(function (msg) {
-              return _this8.onmessage({ data: JSON.stringify(msg) });
-            });
-            _this8.poll();
-            break;
-          case 204:
-            _this8.poll();
-            break;
-          case 410:
-            _this8.readyState = SOCKET_STATES.open;
-            _this8.onopen();
-            _this8.poll();
-            break;
-          case 0:
-          case 500:
-            _this8.onerror();
-            _this8.closeAndRetry();
-            break;
-          default:
-            throw "unhandled poll status " + status;
-        }
-      });
-    }
-  }, {
-    key: "send",
-    value: function send(body) {
-      var _this9 = this;
-
-      Ajax.request("POST", this.endpointURL(), "application/json", body, this.timeout, this.onerror.bind(this, "timeout"), function (resp) {
-        if (!resp || resp.status !== 200) {
-          _this9.onerror(status);
-          _this9.closeAndRetry();
-        }
-      });
-    }
-  }, {
-    key: "close",
-    value: function close(code, reason) {
-      this.readyState = SOCKET_STATES.closed;
-      this.onclose();
-    }
-  }]);
-
-  return LongPoll;
-}();
-
-var Ajax = exports.Ajax = function () {
-  function Ajax() {
-    _classCallCheck(this, Ajax);
-  }
-
-  _createClass(Ajax, null, [{
-    key: "request",
-    value: function request(method, endPoint, accept, body, timeout, ontimeout, callback) {
-      if (window.XDomainRequest) {
-        var req = new XDomainRequest(); // IE8, IE9
-        this.xdomainRequest(req, method, endPoint, body, timeout, ontimeout, callback);
-      } else {
-        var _req = window.XMLHttpRequest ? new XMLHttpRequest() : // IE7+, Firefox, Chrome, Opera, Safari
-        new ActiveXObject("Microsoft.XMLHTTP"); // IE6, IE5
-        this.xhrRequest(_req, method, endPoint, accept, body, timeout, ontimeout, callback);
-      }
-    }
-  }, {
-    key: "xdomainRequest",
-    value: function xdomainRequest(req, method, endPoint, body, timeout, ontimeout, callback) {
-      var _this10 = this;
-
-      req.timeout = timeout;
-      req.open(method, endPoint);
-      req.onload = function () {
-        var response = _this10.parseJSON(req.responseText);
-        callback && callback(response);
-      };
-      if (ontimeout) {
-        req.ontimeout = ontimeout;
-      }
-
-      // Work around bug in IE9 that requires an attached onprogress handler
-      req.onprogress = function () {};
-
-      req.send(body);
-    }
-  }, {
-    key: "xhrRequest",
-    value: function xhrRequest(req, method, endPoint, accept, body, timeout, ontimeout, callback) {
-      var _this11 = this;
-
-      req.timeout = timeout;
-      req.open(method, endPoint, true);
-      req.setRequestHeader("Content-Type", accept);
-      req.onerror = function () {
-        callback && callback(null);
-      };
-      req.onreadystatechange = function () {
-        if (req.readyState === _this11.states.complete && callback) {
-          var response = _this11.parseJSON(req.responseText);
-          callback(response);
-        }
-      };
-      if (ontimeout) {
-        req.ontimeout = ontimeout;
-      }
-
-      req.send(body);
-    }
-  }, {
-    key: "parseJSON",
-    value: function parseJSON(resp) {
-      return resp && resp !== "" ? JSON.parse(resp) : null;
-    }
-  }, {
-    key: "serialize",
-    value: function serialize(obj, parentKey) {
-      var queryStr = [];
-      for (var key in obj) {
-        if (!obj.hasOwnProperty(key)) {
-          continue;
-        }
-        var paramKey = parentKey ? parentKey + "[" + key + "]" : key;
-        var paramVal = obj[key];
-        if ((typeof paramVal === "undefined" ? "undefined" : _typeof(paramVal)) === "object") {
-          queryStr.push(this.serialize(paramVal, paramKey));
-        } else {
-          queryStr.push(encodeURIComponent(paramKey) + "=" + encodeURIComponent(paramVal));
-        }
-      }
-      return queryStr.join("&");
-    }
-  }, {
-    key: "appendParams",
-    value: function appendParams(url, params) {
-      if (Object.keys(params).length === 0) {
-        return url;
-      }
-
-      var prefix = url.match(/\?/) ? "&" : "?";
-      return "" + url + prefix + this.serialize(params);
-    }
-  }]);
-
-  return Ajax;
-}();
-
-Ajax.states = { complete: 4 };
-
-// Creates a timer that accepts a `timerCalc` function to perform
-// calculated timeout retries, such as exponential backoff.
-//
-// ## Examples
-//
-//    let reconnectTimer = new Timer(() => this.connect(), function(tries){
-//      return [1000, 5000, 10000][tries - 1] || 10000
-//    })
-//    reconnectTimer.scheduleTimeout() // fires after 1000
-//    reconnectTimer.scheduleTimeout() // fires after 5000
-//    reconnectTimer.reset()
-//    reconnectTimer.scheduleTimeout() // fires after 1000
-//
-
-var Timer = function () {
-  function Timer(callback, timerCalc) {
-    _classCallCheck(this, Timer);
-
-    this.callback = callback;
-    this.timerCalc = timerCalc;
-    this.timer = null;
-    this.tries = 0;
-  }
-
-  _createClass(Timer, [{
-    key: "reset",
-    value: function reset() {
-      this.tries = 0;
-      clearTimeout(this.timer);
-    }
-
-    // Cancels any previous scheduleTimeout and schedules callback
-
-  }, {
-    key: "scheduleTimeout",
-    value: function scheduleTimeout() {
-      var _this12 = this;
-
-      clearTimeout(this.timer);
-
-      this.timer = setTimeout(function () {
-        _this12.tries = _this12.tries + 1;
-        _this12.callback();
-      }, this.timerCalc(this.tries + 1));
-    }
-  }]);
-
-  return Timer;
-}();
-});
-
-;require.register("deps/phoenix_html/web/static/js/phoenix_html", function(exports, require, module) {
-'use strict';
-
-// Although ^=parent is not technically correct,
-// we need to use it in order to get IE8 support.
-var elements = document.querySelectorAll('[data-submit^=parent]');
-var len = elements.length;
-
-for (var i = 0; i < len; ++i) {
-  elements[i].addEventListener('click', function (event) {
-    var message = this.getAttribute("data-confirm");
-    if (message === null || confirm(message)) {
-      this.parentNode.submit();
-    };
-    event.preventDefault();
-    return false;
-  }, false);
-}
-});
-
-;require.register("web/elm/Iphod", function(exports, require, module) {
-
-});
-
-;require.register("web/elm/Translations", function(exports, require, module) {
-
-});
-
-;require.register("web/static/js/app", function(exports, require, module) {
-"use strict";
-
-require("deps/phoenix_html/web/static/js/phoenix_html");
-
-require("./menu");
-
-var _socket = require("./socket");
-
-var _socket2 = _interopRequireDefault(_socket);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-// Brunch automatically concatenates all files in your
-// watched paths. Those paths can be configured at
-// config.paths.watched in "brunch-config.js".
-//
-// However, those files will only be executed if
-// explicitly imported. The only exception are files
-// in vendor, which are never wrapped in imports and
-// therefore are always executed.
-
-// Import dependencies
-//
-// If you no longer want to use a dependency, remember
-// to also remove its path from "config.paths.watched".
-
-
-// Import local files
-//
-// Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
-
-// Local Storage
-function storageAvailable(of_type) {
-  try {
-    var storage = window[of_type],
-        x = '__storage_test__';
-    storage.setItem(x, x);
-    storage.removeItem(x);
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-function get_init(arg, arg2) {
-  var s = window.localStorage,
-      t = s.getItem(arg);
-  if (t == null) {
-    s.setItem(arg, arg2);
-    t = arg2;
-  }
-  return t;
-}
-
-if (window.location.pathname == "/versions") {
-  var channel_v = _socket2.default.channel("versions");
-  channel_v.join().receive("ok", function (resp) {
-    console.log("Joined Versions successfully", resp);
-  }).receive("error", function (resp) {
-    console.log("Unable to join Versions", resp);
-  });
-
-  var elmDiv = document.getElementById('elm-container'),
-      initialState = {
-    allVersions: []
-  },
-      elmApp = Elm.embed(Elm.Translations, elmDiv, initialState);
-
-  //  channel_v.on("version", data => {
-  //    elmApp.ports.thisVersion.send(data);
-  //  })
-
-  channel_v.on("all_versions", function (data) {
-    elmApp.ports.allVersions.send(data.list);
-  });
-
-  channel_v.push("request_list", "");
-}
-
-if (window.location.pathname == "/") {
-  var elmDiv, config_model, sunday_collect_model, email_model, sunday_model, daily_reading, initialState, elmApp;
-
-  (function () {
-    var init_config_model = function init_config_model() {
-      var m = { ot: "ESV",
-        ps: "Coverdale",
-        nt: "ESV",
-        gs: "ESV",
-        fnotes: "fnotes"
-      };
-      if (storageAvailable('localStorage')) {
-        m = { ot: get_init("iphod_ot", "ESV"),
-          ps: get_init("iphod_ps", "Coverdale"),
-          nt: get_init("iphod_nt", "ESV"),
-          gs: get_init("iphod_gs", "ESV"),
-          fnotes: get_init("iphod_fnotes", "fnotes")
-        };
-      }
-      return m;
-    };
-
-    // Hook up Elm
-
-    var channel = _socket2.default.channel("iphod:readings");
-    channel.join().receive("ok", function (resp) {
-      console.log("Joined Iphod successfully", resp);
-    }).receive("error", function (resp) {
-      console.log("Unable to join Iphod", resp);
-    });
-
-    channel.push("request_today", "");
-    channel.on("next_sunday", function (data) {
-      var z = data,
-          icm = init_config_model();
-      z.config = icm;
-      z.daily.config = icm;
-      z.sunday.config = icm;
-      z.redLetter.config = icm;
-      z.eveningPrayer.config = icm;
-      z.morningPrayer.config = icm;
-
-      elmApp.ports.nextSunday.send(z);
-    });
-
-    channel.on('new_text', function (data) {
-      elmApp.ports.newText.send(data);
-    });
-
-    channel.on('new_email', function (data) {
-      elmApp.ports.newEmail.send(data);
-    });
-
-    elmDiv = document.getElementById('elm-container');
-    config_model = {
-      ot: "",
-      ps: "",
-      nt: "",
-      gs: "",
-      fnotes: ""
-    };
-    sunday_collect_model = {
-      instruction: "String",
-      title: "",
-      collects: [],
-      show: false
-    };
-    email_model = {
-      from: "",
-      topic: "",
-      text: "",
-      show: false
-    };
-    sunday_model = {
-      ofType: "",
-      date: "",
-      season: "",
-      week: "",
-      title: "",
-      collect: sunday_collect_model,
-      ot: [],
-      ps: [],
-      nt: [],
-      gs: [],
-      show: false,
-      config: config_model
-    };
-    daily_reading = {
-      date: "",
-      season: "",
-      week: "",
-      day: "",
-      title: "",
-      mp1: [],
-      mp2: [],
-      mpp: [],
-      ep1: [],
-      ep2: [],
-      epp: [],
-      show: false,
-      justToday: false,
-      config: config_model
-    };
-    initialState = {
-      nextSunday: {
-        today: "",
-        sunday: sunday_model,
-        redLetter: sunday_model,
-        daily: daily_reading,
-        morningPrayer: daily_reading,
-        eveningPrayer: daily_reading,
-        email: email_model,
-        config: config_model,
-        about: false
-      },
-      newText: {
-        model: "",
-        section: "",
-        id: "",
-        body: "",
-        version: ""
-      },
-      newEmail: email_model
-    };
-    elmApp = Elm.embed(Elm.Iphod, elmDiv, initialState);
-
-
-    elmApp.ports.requestMoveDate.subscribe(function (request) {
-      console.log("MOVE DATE: ", request);
-      channel.push("request_move_date", request);
-    });
-
-    elmApp.ports.requestMoveDay.subscribe(function (request) {
-      channel.push("request_move_day", request);
-    });
-
-    elmApp.ports.requestText.subscribe(function (request) {
-      var model = {};
-      request.forEach(function (tuple) {
-        model[tuple[0]] = tuple[1];
-      });
-      if ($("#" + request[0]).text().length == 0) {
-        channel.push("request_text", model);
-      }
-    });
-
-    elmApp.ports.requestNamedDay.subscribe(function (request) {
-      channel.push("request_named_day", request);
-    });
-
-    elmApp.ports.requestAllText.subscribe(function (request) {
-      channel.push("request_all_text", request);
-    });
-
-    elmApp.ports.sendEmail.subscribe(function (email) {
-      channel.push("request_send_email", email);
-    });
-
-    elmApp.ports.savingConfig.subscribe(function (config) {
-      // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
-      if (storageAvailable('localStorage')) {
-        var s = window.localStorage;
-        s.setItem("iphod_ot", config.ot);
-        s.setItem("iphod_ps", config.ps);
-        s.setItem("iphod_nt", config.nt);
-        s.setItem("iphod_gs", config.ot);
-        s.setItem("iphod_fnotes", config.fnotes);
-      }
-    });
-  })();
-}
-});
-
-;require.register("web/static/js/menu", function(exports, require, module) {
-'use strict';
-
-(function ($) {
-  $(document).ready(function () {
-
-    $('#menu1').prepend('<div class="menu-button">MP etc.</div>');
-    $('#menu2').prepend('<div class="menu-button">Days</div>');
-    $('#menu3').prepend('<div class="menu-button">Service</div>');
-    $('.cssmenu .menu-button').on('click', function () {
-      var menu = $(this).next('ul');
-      if (menu.hasClass('open')) {
-        menu.removeClass('open');
-      } else {
-        menu.addClass('open');
-      }
-    });
-  });
-})(jQuery);
-});
-
-require.register("web/static/js/socket", function(exports, require, module) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _phoenix = require("deps/phoenix/web/static/js/phoenix");
-
-var socket = new _phoenix.Socket("/socket", { params: { token: window.userToken } });
-
-// When you connect, you'll often need to authenticate the client.
-// For example, imagine you have an authentication plug, `MyAuth`,
-// which authenticates the session and assigns a `:current_user`.
-// If the current user exists you can assign the user's token in
-// the connection for use in the layout.
-//
-// In your "web/router.ex":
-//
-//     pipeline :browser do
-//       ...
-//       plug MyAuth
-//       plug :put_user_token
-//     end
-//
-//     defp put_user_token(conn, _) do
-//       if current_user = conn.assigns[:current_user] do
-//         token = Phoenix.Token.sign(conn, "user socket", current_user.id)
-//         assign(conn, :user_token, token)
-//       else
-//         conn
-//       end
-//     end
-//
-// Now you need to pass this token to JavaScript. You can do so
-// inside a script tag in "web/templates/layout/app.html.eex":
-//
-//     <script>window.userToken = "<%= assigns[:user_token] %>";</script>
-//
-// You will need to verify the user token in the "connect/2" function
-// in "web/channels/user_socket.ex":
-//
-//     def connect(%{"token" => token}, socket) do
-//       # max_age: 1209600 is equivalent to two weeks in seconds
-//       case Phoenix.Token.verify(socket, "user socket", token, max_age: 1209600) do
-//         {:ok, user_id} ->
-//           {:ok, assign(socket, :user, user_id)}
-//         {:error, reason} ->
-//           :error
-//       end
-//     end
-//
-// Finally, pass the token on connect as below. Or remove it
-// from connect if you don't care about authentication.
-
-// NOTE: The contents of this file will only be executed if
-// you uncomment its entry in "web/static/js/app.js".
-
-// To use Phoenix channels, the first step is to import Socket
-// and connect at the socket path in "lib/my_app/endpoint.ex":
-socket.connect();
-// I'm defining channels in app.js
-
-// Now that you are connected, you can join channels with a topic:
-// let channel = socket.channel("topic:subtopic", {})
-// channel.join()
-//   .receive("ok", resp => { console.log("Joined successfully", resp) })
-//   .receive("error", resp => { console.log("Unable to join", resp) })
-
-exports.default = socket;
-});
-
-;require('web/static/js/app');
+require('web/static/js/app');
 //# sourceMappingURL=app.js.map

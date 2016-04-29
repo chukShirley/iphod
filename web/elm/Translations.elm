@@ -8,8 +8,9 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Effects exposing (Effects, Never)
 import Task exposing (Task)
-import Helper exposing (onClickLimited, hideable, getText)
 import Regex exposing (regex, contains, caseInsensitive)
+
+import Iphod.Helper exposing (onClickLimited, hideable, getText)
 
 
 app = 
@@ -61,10 +62,17 @@ incomingVersion: Signal Action
 incomingVersion =
   Signal.map AddModel allVersions
 
+dbSaveVersion: Signal.Mailbox (String, Version)
+dbSaveVersion = 
+  Signal.mailbox ("", initVersion)
+
 
 -- PORTS
 
 port allVersions: Signal Model
+port requestSaveVersion: Signal (String, Version)
+port requestSaveVersion =
+  dbSaveVersion.signal
 
 
 -- UPDATE
@@ -73,6 +81,7 @@ type Action
   = NoOp
   | AddModel Model
   | Find String String
+  | UseVersion Version
 
 update: Action -> Model -> (Model, Effects Action)
 update action model =
@@ -92,7 +101,6 @@ update action model =
                 then {ver | show = True}
                 else {ver | show = False}
             _         -> -- language
-              -- (findVer ver ver.lang name)
               if contains( caseInsensitive(regex name) ) ver.lang
                 then {ver | show = True}
                 else {ver | show = False}
@@ -101,11 +109,28 @@ update action model =
       in
         (newModel, Effects.none)
 
--- findVer: Version -> String -> String -> Version
--- findVer ver col reg =
---   if contains( caseInsensitive(regex reg) ) col
---     then {ver | show = True}
---     else {ver | show = False}
+    UseVersion ver ->
+      let
+        newVer = {ver | selected = not ver.selected}
+        selectModel this_model =
+          if this_model.id == ver.id
+            then {this_model | selected = newVer.selected}
+            else this_model          
+        newModel = List.map selectModel model
+      in
+        (newModel, saveVersion newVer)
+
+
+saveVersion: Version -> Effects Action
+saveVersion ver =
+  let 
+    saving = if ver.selected then "save" else "unsave"
+  in
+    Signal.send dbSaveVersion.address (saving, ver)
+    |> Task.toMaybe
+    |> Task.map (always NoOp)
+    |> Effects.task
+
 
 -- VIEW
 
@@ -120,7 +145,9 @@ view address model =
           [ td [class "ver_abbr"] [text ver.abbr]
           , td [class "ver_name"] [text ver.name]
           , td [class "ver_language"] [text ver.lang]
-          , td [class "ver_use"] [ button [] [text using] ]
+          , td  [ class "ver_use"
+                , onClick address (UseVersion ver)
+                ] [ button [] [text using] ]
           ]
   in
     div []
@@ -200,19 +227,13 @@ findLanguage address =
 
 -- STYLE
 
-selectedStyle: Version -> Attribute
-selectedStyle model =
-  if model.selected
-    then style [("background-color", "lightgreen")]
-    else style [("background-color", "none")]
-
 versionRow: Version -> Attribute
 versionRow model =
   let
     this_style = 
       [ if model.selected
           then ("background-color", "lightgreen")
-          else ("background-color", "none")
+          else ("background-color", "white")
       ]
   in
     hideable model.show this_style

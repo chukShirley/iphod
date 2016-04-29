@@ -5,11 +5,12 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Effects exposing (Effects, Never)
 import Task exposing (Task)
-import Iphod.Models as Models
-import Helper exposing (onClickLimited, hideable, getText)
 import String
 import Markdown
 import Regex exposing (split, regex)
+
+import Iphod.Models as Models
+import Iphod.Helper exposing (onClickLimited, hideable, getText)
 
 -- MODEL
 

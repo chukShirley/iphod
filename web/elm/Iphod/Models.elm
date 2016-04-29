@@ -11,6 +11,8 @@ type alias Config =
   , nt: String
   , gs: String
   , fnotes: String
+  , vers: List String
+  , current: String
   }
 
 configInit: Config
@@ -20,6 +22,8 @@ configInit =
   , nt = "ESV"
   , gs = "ESV"
   , fnotes = "fnotes"
+  , vers = []
+  , current = "ESV"
   }
 
 type alias Email =
@@ -148,4 +152,31 @@ dailyInit =
   , show      = False
   , justToday = False
   , config    = configInit
+  }
+
+type alias ESV =
+  { url: String
+  , key: String
+  , foot_notes: Bool
+  }
+
+initESV: ESV
+initESV =
+  { url = "www.esvapi.org/v2/rest/passageQuery?"
+  , key = "10b28dac7c57fd96"
+  , foot_notes = True
+  }
+
+
+type alias BiblesOrg =
+  { url: String
+  , key: String
+  , foot_notes: Bool
+  }
+
+initBiblesOrg: BiblesOrg
+initBiblesOrg =
+  { url = "https://bibles.org/v2/passages.js?q[]="
+  , key = "P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT"
+  , foot_notes = True
   }

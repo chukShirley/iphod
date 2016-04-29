@@ -4,11 +4,12 @@ module Iphod.Sunday ( Model, init, Action, update, view,
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Helper exposing (onClickLimited, hideable, getText)
 import String exposing (join)
 import Regex exposing (..)
 import Markdown
 import DynamicStyle exposing (hover, hover')
+
+import Iphod.Helper exposing (onClickLimited, hideable, getText)
 import Iphod.Models as Models
 
 -- MODEL
@@ -38,8 +39,11 @@ update: Action -> Model -> Model
 update action model =
   case action of
     NoOp -> model
+
     ToggleModelShow -> {model | show = not model.show}
+
     SetReading newModel -> newModel
+
     ToggleShow lesson ->
       let 
         this_section = case lesson.section of
@@ -61,6 +65,7 @@ update action model =
           _    -> {model | gs = newSection}
       in
         newModel
+
     ToggleCollect ->
       let
         collect = model.collect
@@ -68,6 +73,7 @@ update action model =
         newModel = {model | collect = newCollect}
       in
         newModel
+
 
 -- VIEW
 
@@ -112,10 +118,10 @@ view address model =
               [ ul [textStyle model] ( thisReading address model GS)]
           ] -- end of row
       ] -- end of table
-    , div [] (thisText address model.ofType model.ot )
-    , div [] (thisText address model.ofType model.ps )
-    , div [] (thisText address model.ofType model.nt )
-    , div [] (thisText address model.ofType model.gs )
+    , div [] (thisText address model model.ot )
+    , div [] (thisText address model model.ps )
+    , div [] (thisText address model model.nt )
+    , div [] (thisText address model model.gs )
     , div [ collectStyle model.collect ] (thisCollect address model.collect)
 
 --    [ li [titleStyle model, onClick address ToggleModelShow] [text model.title]
@@ -156,32 +162,36 @@ thisProper proper =
       , p [class "proper_text"] [text proper.text]
       ]
 
-thisText: Signal.Address Action -> String -> List Models.Lesson -> List Html
-thisText address ofType lessons =
+thisText: Signal.Address Action -> Model -> List Models.Lesson -> List Html
+thisText address model lessons =
   let
     this_text l =
       let
         getTranslation s = 
-          onClick getText.address [("ofType", ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", "fnotes")]
+          onClick getText.address [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", "fnotes")]
       in
         if l.section == "ps"
           then
             div [id l.id, bodyStyle l, class "esv_text"] 
-               [ button 
-                [ class "translationButton", getTranslation "Coverdale"]
-                [text "Coverdale"]
-               , button 
-                [ class "translationButton", getTranslation "ESV"]
-                [text "ESV"]
-               , button 
-                [ class "translationButton", getTranslation "BCP"]
-                [text "BCP"]
-               , button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
+               [ span 
+                  [ style [("position", "relative"), ("top", "1em")]]
+                  [ button [ class "translationButton", onClick address (ToggleShow l) ] [ text "Hide" ]
+                  , button 
+                     [ class "translationButton", getTranslation "Coverdale"]
+                     [ text "Coverdale"]
+                  , button 
+                     [ class "translationButton", getTranslation "BCP"]
+                     [ text "BCP"]
+                  , versionSelect address model l
+                  ]
                , Markdown.toHtml l.body
                ]
           else
             div [id l.id, bodyStyle l, class "esv_text"] 
-            [ button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
+            [ span [style [("position", "relative"), ("top", "1em")]]
+                [ button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
+                , versionSelect address model l
+                ]
             , Markdown.toHtml l.body
             ]
   in
@@ -215,28 +225,6 @@ thisReading address model section =
   in
     List.map this_lesson lessons
 
--- thisReading: Signal.Address Action -> String -> List Models.Lesson -> String -> String -> List Html
--- thisReading address ofType lessons ver fnotes=
---   let
---     this_lesson l =
---       let
---         -- ver = if l.section == "mpp" || l.section == "epp" then "Coverdale" else "ESV"
---         req = [ofType, l.section, l.id, l.read, ver, fnotes]
--- 
---         -- ver = if l.section == "ps" then "Coverdale" else "ESV"
---       in
---         if String.length l.body == 0
---           then
---             li 
---               (hoverable [this_style l, onClick getText.address req] )
---               [text l.read]
---           else
---             li 
---               (hoverable [this_style l, onClick address (ToggleShow l)] )
---               [text l.read]
---   in
---     List.map this_lesson lessons
-  
 this_style: Models.Lesson -> Attribute
 this_style l =
   case l.style of
@@ -251,6 +239,21 @@ hoverable: List Attribute -> List Attribute
 hoverable attrs =
   hover [("background-color", "white", "skyblue")] ++ attrs
   
+versionSelect: Signal.Address Action -> Model -> Models.Lesson -> Html
+versionSelect address model lesson =
+  let
+    thisVersion ver =
+      option [value ver, selected (ver == lesson.version)] [text ver]
+  in
+    select
+      [ on "change" targetValue 
+        (\resp -> Signal.message 
+                  getText.address 
+                  [("ofType", model.ofType), ("section", lesson.section), ("id", lesson.id), ("read", lesson.read), ("ver", resp), ("fnotes", "fnotes")]
+        )
+      ]
+      (List.map thisVersion model.config.vers)
+
 
 
 -- STYLE
@@ -265,8 +268,7 @@ bodyStyle: Models.Lesson -> Attribute
 bodyStyle lesson =
   hideable
     lesson.show
-    [ ("background-color", "white")
-    ]
+    [ ("background-color", "white") ]
 
 titleStyle: Model -> Attribute
 titleStyle model =

@@ -222,19 +222,31 @@ defmodule Iphod.IphodChannel do
   end
 
   def request_text("ESV", m, socket) do
-    body = EsvText.request(m["read"], m["fnotes"])
+    EsvText.request(m["read"], m["fnotes"])
+    |> push_text(m, socket)
     # {ofType: "sunday", section: "ot", id: "Acts_9_1-19a", read: "Acts 9.1-19a", ver: "ESV"…}
-    push socket, "new_text", %{model: m["ofType"], section: m["section"], id: m["id"], body: body, version: "ESV"}
-    {:noreply, socket}
   end 
 
+  def request_text("Coverdale", m, socket) do
+    Psalms.to_html( m["read"], "Coverdale")
+    |> push_text(m, socket)
+  end
+
+  def request_text("BCP", m, socket) do
+    Psalms.to_html( m["read"], "BCP")
+    |> push_text(m, socket)
+  end
+
   def request_text(ver, m, socket) do
-    # this should only happen on psalms
-    # {ofType: "sunday", section: "ot", id: "Acts_9_1-19a", read: "Acts 9.1-19a", ver: "ESV"…}
-    body = Psalms.to_html m["read"], m["ver"]
+    body = BibleComText.request(ver, m["read"], m["fnotes"])
     push socket, "new_text", %{model: m["ofType"], section: m["section"], id: m["id"], body: body, version: m["ver"]}
     {:noreply, socket}
-  end  
+  end
+
+  def push_text(body, m, socket) do
+    push socket, "new_text", %{model: m["ofType"], section: m["section"], id: m["id"], body: body, version: m["ver"]}
+    {:noreply, socket}
+  end
 
   # Add authorization logic here as required.
   defp authorized?(_payload) do
