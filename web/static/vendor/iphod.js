@@ -12651,6 +12651,14 @@ Elm.Iphod.Models.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
+   var Day = F6(function (a,b,c,d,e,f) {
+      return {name: a
+             ,color: b
+             ,dayOfMonth: c
+             ,date: d
+             ,daily: e
+             ,sunday: f};
+   });
    var initBiblesOrg = {url: "https://bibles.org/v2/passages.js?q[]="
                        ,key: "P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT"
                        ,foot_notes: true};
@@ -12802,6 +12810,12 @@ Elm.Iphod.Models.make = function (_elm) {
                    ,show: false
                    ,justToday: false
                    ,config: configInit};
+   var initDay = {name: ""
+                 ,color: ""
+                 ,dayOfMonth: ""
+                 ,date: ""
+                 ,daily: dailyInit
+                 ,sunday: sundayInit};
    var Config = F7(function (a,b,c,d,e,f,g) {
       return {ot: a
              ,ps: b
@@ -12819,10 +12833,12 @@ Elm.Iphod.Models.make = function (_elm) {
                                      ,initCollect: initCollect
                                      ,initSundayCollect: initSundayCollect
                                      ,initProper: initProper
+                                     ,initDay: initDay
                                      ,Config: Config
                                      ,Lesson: Lesson
                                      ,Sunday: Sunday
                                      ,Daily: Daily
+                                     ,Day: Day
                                      ,Email: Email
                                      ,Collect: Collect
                                      ,SundayCollect: SundayCollect
@@ -16452,6 +16468,29 @@ Elm.Iphod.make = function (_elm) {
       model.about,
       _U.list([{ctor: "_Tuple2",_0: "font-size",_1: "0.7em"}]));
    };
+   var datepickerStyle = function (model) {
+      return $Html$Attributes.style(_U.list([{ctor: "_Tuple2"
+                                             ,_0: "background-color"
+                                             ,_1: "gold"}
+                                            ,{ctor: "_Tuple2"
+                                             ,_0: "background"
+                                             ,_1: "-moz-linear-gradient(top, #ffec80 0%, #e6c300 100%)"}
+                                            ,{ctor: "_Tuple2"
+                                             ,_0: "background"
+                                             ,_1: "-webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffec80), color-stop(100%, #e6c300))"}
+                                            ,{ctor: "_Tuple2"
+                                             ,_0: "background"
+                                             ,_1: "-webkit-linear-gradient(top, #ffec80 0%, #e6c300 100%)"}
+                                            ,{ctor: "_Tuple2"
+                                             ,_0: "background"
+                                             ,_1: "-o-linear-gradient(top, #ffec80 0%, #e6c300 100%)"}
+                                            ,{ctor: "_Tuple2"
+                                             ,_0: "background"
+                                             ,_1: "-ms-linear-gradient(top, #ffec80 0%, #e6c300 100%)"}
+                                            ,{ctor: "_Tuple2"
+                                             ,_0: "background"
+                                             ,_1: "linear-gradient(to bottom, #ffec80 0%, #e6c300 100%)"}]));
+   };
    var about = "\n\n#### How to use\n* click on stuff\n  * click on the reading \"title\" and the text appears below\n  * click on the title again and the text is hidden\n* colors\n  * Black is a required reading\n  * Grey is optional\n  * Dark Blue is alternative\n\n#### About Iphod\n* It is a work in progress\n* Inerrancy is not gauranteed, so don\'t expect it\n* Facebook group at https://www.facebook.com/groups/471879323003692/\n  * report errors\n  * make suggestions\n  * ask questions\n* shows assigned readings and ESV text for the ACNA Red Letter, Sunday Lectionary, and Daily Prayer. Current fails include...\n  * partial verses mean nothing to the ESV API, so in this app only complete verses are shown\n* Path forward\n  * Daily Office\n  * Daily Office with redings inserted\n  * Canticals\n  * Printable readings\n    * so you don\'t have to cut and paste\n\n#### Contact\n* questions or comments email frpaulas at gmail dot com\n* at this point in time I am looking for\n  * error reports\n  * useability suggestions\n  * suggestions for features\n\n#### Want to help?\n* this is an open source project\n* you can fork the project at https://github.com/frpaulas/iphod\n\n";
    var listDates = F2(function (address,model) {
       return A2($Html.div,
@@ -16665,13 +16704,9 @@ Elm.Iphod.make = function (_elm) {
    var dateNav = F2(function (address,model) {
       return A2($Html.div,
       _U.list([$Html$Attributes.id("date_nav")]),
-      _U.list([A2($Html.p,
-              _U.list([$Html$Attributes.style(_U.list([{ctor: "_Tuple2"
-                                                       ,_0: "text-align"
-                                                       ,_1: "center"}
-                                                      ,{ctor: "_Tuple2",_0: "margin-bottom",_1: "0.1em"}]))]),
-              _U.list([A2($Html.p,
-              _U.list([]),
+      _U.list([A2($Html.div,
+              _U.list([$Html$Attributes.id("datepicker_div")
+                      ,datepickerStyle(model)]),
               _U.list([A2($Html.input,
               _U.list([$Html$Attributes.type$("text")
                       ,$Html$Attributes.$class("current_date")
@@ -16686,7 +16721,7 @@ Elm.Iphod.make = function (_elm) {
                       function (str) {
                          return A2($Signal.message,address,ChangeDate(str));
                       })]),
-              _U.list([]))]))]))
+              _U.list([]))]))
               ,A2($Html.div,
               _U.list([$Html$Attributes.id("menu2")
                       ,$Html$Attributes.$class("cssmenu")
@@ -18015,6 +18050,7 @@ Elm.Iphod.make = function (_elm) {
                               ,morningPrayerDiv: morningPrayerDiv
                               ,eveningPrayerDiv: eveningPrayerDiv
                               ,about: about
+                              ,datepickerStyle: datepickerStyle
                               ,aboutStyle: aboutStyle
                               ,buttonStyle: buttonStyle
                               ,aboutButtonStyle: aboutButtonStyle

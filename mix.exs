@@ -46,7 +46,10 @@ defmodule Iphod.Mixfile do
      {:exrm, "~> 1.0.3"},
      # {:mock, github: "jjh42/mock", only: :dev},
      {:httpoison, "~> 0.8.2"},
-     {:mailgun, "~> 0.1.2"}
+     {:mailgun, "~> 0.1.2"},
+     {:exometer_core, github: "PSPDFKit-labs/exometer_core", override: true},
+     {:exometer, github: "PSPDFKit-labs/exometer"},
+     {:edown, github: "uwiger/edown", tag: "0.7", override: true}
     ]
   end
 

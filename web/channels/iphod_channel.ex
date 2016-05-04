@@ -23,7 +23,6 @@ defmodule Iphod.IphodChannel do
 #  alias Saints.Donor
 
 
-
   def join("iphod:readings", payload, socket) do
     if authorized?(payload) do
       # send self(), :after_join

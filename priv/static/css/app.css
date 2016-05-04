@@ -105,8 +105,17 @@ form.link, form.button {
   width: 10em;
 }
 }
-#datepicker {position: relative; z-index:200;}
-#dateNav p {
+#datepicker {}
+#datepicker_div {
+  position: relative; 
+  z-index:200;
+  margin-bottom: 15px;
+  padding: 3px 0;
+  z-index: 200;
+  position: relative;
+  text-align: center;
+}
+#dateNav div {
   text-align: center;
 }
 .current_date {
@@ -344,6 +353,111 @@ label.radio_label {
 .ver_name { width: 65%; }
 .ver_lang { width: 20%; }
 .ver_use { width: 5%; }
+
+
+.day_of_month{
+  position: relative;
+  margin-bottom: 0;
+  margin-top: 0;
+}
+#calendar {
+  border-collapse: collapse;
+  border: 4px solid darkblue;
+  border-radius: 8px;
+  font-size: 0.8em;
+  width: 100%;
+}
+
+#calendar th {
+  border: 1px solid black;
+  vertical-align: top;
+  width: 14%;
+}
+#calendar td {
+  border: 1px solid black;
+  text-align: left;
+  vertical-align: top;
+}
+#calendar td ul {
+  margin-top: 0;
+  padding-left: 2px;
+  padding-top: 0px;
+}
+
+.reading-group{
+  position: relative;
+  float: left;
+}
+
+#calendar td ul{
+  list-style-type: none;
+}
+#li.reading_item {
+  margin-left: 0;
+}
+
+.reading_list {
+  font-size: 1.5em;
+}
+
+.modal_header {
+  text-align: center;
+}
+
+.modalDialog {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 99999;
+  opacity: 0;
+  -webkit-transition: opacity 200ms ease-in;
+  -moz-transition: opacity 200ms ease-in;
+  transition: opacity 200ms ease-in;
+  pointer-events: none;
+}
+
+.modalDialog:target {
+  opacity:1;
+  pointer-events: auto;
+}
+
+.modalDialog div {
+  width: 400px;
+  height: auto;
+  position: relative;
+  margin: 10% auto;
+  padding: 5px 20px 13px 20px;
+  border-radius: 10px;
+  background: #fff;
+  background: -moz-linear-gradiant(#fff, #999);
+  background: -webkit-linear-gradiant(#fff, #999);
+  background: -o-linear-gradiant(#fff, #999);  
+}
+
+.close {
+  background: #606061;
+  color: #ffffff;
+  line-height: 25px;
+  position: absolute;
+  right: -12px;
+  top: -10px;
+  width: 24px;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  -webkit-border-radius: 12px;
+  -moz-border-radius: 12px;
+  border-radius: 12px;
+  webkit-box-shadow: 1px 1px 3px #000;
+  moz-box-shadow: 1px 1px 3px #000;
+  box-shadow: 1px 1px 3px #000;
+}
+
+.close:hover { background: #00d9ff; }
+
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 .cssmenu,

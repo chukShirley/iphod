@@ -4,6 +4,7 @@ defmodule Iphod.UserSocket do
   ## Channels
   channel "iphod:*", Iphod.IphodChannel
   channel "versions", Iphod.VersionsChannel
+  channel "calendar", Iphod.CalendarChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

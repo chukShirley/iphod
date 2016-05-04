@@ -142,6 +142,40 @@ if (window.location.pathname == "/versions") {
 
 }
 
+if (window.location.pathname == "/calendar") {
+  let channel_c = socket.channel("calendar");
+  channel_c.join()
+    .receive("ok",    resp => {console.log("Joined Calendar successfully", resp)})
+    .receive("error", resp => {console.log("Unable to join Calendar", resp)})
+
+  var elmDiv = document.getElementById('elm-container')
+    , initialState = {
+        thisMonth: {
+          calendar: []
+        }
+    }
+    , elmApp = Elm.embed(Elm.Calendar, elmDiv, initialState)
+
+  channel_c.on("this_month", data => {
+    var z = data.calendar,
+        icm = init_config_model();
+    z.forEach( function(week){
+      week.days.forEach( function(day){
+        day.daily.config = icm;
+        day.daily.show = false;
+        day.daily.justToday = false;
+        day.sunday.config = icm;
+        day.sunday.show = false;
+        day.sunday.ofType = "sunday"
+      })
+    })
+    console.log("THIS MONTH DATA: ", z)
+    elmApp.ports.thisMonth.send( {calendar: z} )
+  })
+
+  channel_c.push("request_calendar", "")
+}
+
 
 if (window.location.pathname == "/") {
 

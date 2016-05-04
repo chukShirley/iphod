@@ -4,11 +4,17 @@ defmodule DailyReading do
   use Timex
   def start_link, do: Agent.start_link fn -> build end, name: __MODULE__
   def identity(), do: Agent.get(__MODULE__, &(&1))
-  def readings(season, wk, day), do: identity[season][wk][day]
+  def readings("christmas", wk, "Sunday", _date) do
+    identity["christmas"][wk]["Sunday"]
+  end
+  def readings("christmas", wk, day, date) do
+    identity["christmas"][wk][date |> Timex.format!("{Mshort}{0D}")]
+  end
+  def readings(season, wk, day, _date), do: identity[season][wk][day]
   def readings({season, wk, _litYr, date}) do
     dow = date |> Timex.format!("{WDfull}")
-    if readings(season, wk, dow) |> is_nil, do: IEx.pry
-    readings(season, wk, dow)
+    if readings(season, wk, dow, date) |> is_nil, do: IEx.pry
+    readings(season, wk, dow, date)
       |> add_psalms(date.day)
       |> to_lessons
       |> Map.merge( %{  
@@ -288,19 +294,19 @@ defmodule DailyReading do
                                 ep1: [%{style: "req", read: "Isa 55"}],
                                 ep2: [%{style: "req", read: "Luke 2.22-40"}]
                                 },
-            "dec29" =>        %{  title: "December 29",
+            "Dec29" =>        %{  title: "December 29",
                                 mp1: [%{style: "req", read: "Ruth 1.1-18"}],
                                 mp2: [%{style: "req", read: "John 1.14-18"}],
                                 ep1: [%{style: "req", read: "Ruth 1.19-2.13"}],
                                 ep2: [%{style: "req", read: "Matt 11.2-6"}]
                                 },
-            "dec30" =>        %{  title: "December 30",
+            "Dec30" =>        %{  title: "December 30",
                                 mp1: [%{style: "req", read: "Ruth 2.14-end"}],
                                 mp2: [%{style: "req", read: "John 3.16-21"}],
                                 ep1: [%{style: "req", read: "Ruth 3"}],
                                 ep2: [%{style: "req", read: "Matt 16.13-20"}]
                                 },
-            "dec31" =>        %{  title: "December 31",
+            "Dec31" =>        %{  title: "December 31",
                                 mp1: [%{style: "req", read: "Ruth 4.1-17"},%{style: "opt", read: "Ruth 4.18-21"}],
                                 mp2: [%{style: "req", read: "John 6.41-58"}],
                                 ep1: [%{style: "req", read: "Mic 4.8-5.4"}],
@@ -320,25 +326,25 @@ defmodule DailyReading do
                             ep1: [%{style: "req", read: "Isa 55"}],
                             ep2: [%{style: "req", read: "Luke 2.22-40"}]
                             },
-            "jan02" =>  %{  title: "January 2",
+            "Jan02" =>  %{  title: "January 2",
                             mp1: [%{style: "req", read: "Isa 63.1-6"}],
                             mp2: [%{style: "req", read: "Matt 1.18-end"}],
                             ep1: [%{style: "req", read: "Isa 63.7-end"}],
                             ep2: [%{style: "req", read: "1 Thess 1"}]
                             },
-            "jan03" =>  %{  title: "January 3",
+            "Jan03" =>  %{  title: "January 3",
                             mp1: [%{style: "req", read: "Isa 64"}],
                             mp2: [%{style: "req", read: "Matt 2.19-end"}],
                             ep1: [%{style: "req", read: "Isa 65.1-16"}],
                             ep2: [%{style: "req", read: "1 Thess 2.1-16"}]
                             },
-            "jan04" =>  %{  title: "January 4",
+            "Jan04" =>  %{  title: "January 4",
                             mp1: [%{style: "req", read: "Isa 65.17-end"}],
                             mp2: [%{style: "req", read: "Matt 3.1-4.11"}],
                             ep1: [%{style: "req", read: "Isa 66.1-9"}],
                             ep2: [%{style: "req", read: "1 Thess 2.17-3 end"}]
                             },
-            "jan05" =>  %{  title: "January 5",
+            "Jan05" =>  %{  title: "January 5",
                             mp1: [%{style: "req", read: "Isa 66.10-end"}],
                             mp2: [%{style: "req", read: "Matt 4.12-5.16"}],
                             ep1: [%{style: "req", read: "Isa 60.1-7"}],

@@ -1,8 +1,8 @@
-module Iphod.Models ( Config, Lesson, Sunday, Daily, 
+module Iphod.Models ( Config, Lesson, Sunday, Daily, Day,
                       Email, Collect, SundayCollect, Proper,
                       configInit, sundayInit, dailyInit,
                       emailInit, initCollect, initSundayCollect,
-                      initProper
+                      initProper, initDay
                     ) where
 
 type alias Config =
@@ -179,4 +179,23 @@ initBiblesOrg =
   { url = "https://bibles.org/v2/passages.js?q[]="
   , key = "P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT"
   , foot_notes = True
+  }
+
+type alias Day =
+  { name:       String
+  , color:      String
+  , dayOfMonth: String
+  , date:       String
+  , daily:      Daily
+  , sunday:     Sunday
+  }
+
+initDay: Day
+initDay =
+  { name  =       ""
+  , color =       ""
+  , dayOfMonth =  ""
+  , date  =       ""
+  , daily =       dailyInit
+  , sunday =      sundayInit
   }

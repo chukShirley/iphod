@@ -2,6 +2,7 @@ require IEx
 defmodule  Lityear do
   use Timex
 
+  @leap_day 60
   @sunday 7
   @thursday 4
   @tz "America/Los_Angeles"
@@ -39,18 +40,27 @@ defmodule  Lityear do
     sunday = if day |> is_sunday?, do: day, else: day |> date_next_sunday
     y = lityear sunday
     yrABC = abc sunday
-    # to the next guy...
-    # when comparing dates as `sunday > advent(1, sunday.year)`
-    # read as `does sunday come before advent(1, sunday.year)?`
-    # this keeps tripping me up
+
+    # Timex.diff is a scaler not a vector
+    # that's why the second step
+    # see also from_easter
     till_advent = Timex.diff(sunday, advent(1, sunday.year), :weeks)
-    till_advent = if sunday > advent(1, sunday.year), do: -till_advent, else: till_advent
+    till_advent = if sunday |> Timex.before?( advent(1, sunday.year)), do: till_advent, else: -till_advent
+
     from_christmas = Timex.diff(sunday, christmas(1, y), :weeks)
-#    from_easter = Timex.diff(easter_day(y), sunday, :days) |> div(7) |> abs
+
     from_easter = Timex.diff(easter_day(y), sunday, :weeks) |> abs
-    from_easter = if easter_day(y) > sunday, do: from_easter, else: -from_easter
+    from_easter = if easter_day(y) |> Timex.before?(sunday), do: from_easter, else: -from_easter
+
     till_epiphany = Timex.diff(sunday, epiphany(y), :days)
+    till_epiphany = if sunday |> Timex.before?(epiphany(y)), do: till_epiphany, else: -till_epiphany
+    
     from_epiphany = Timex.diff(epiphany(1, y), sunday, :weeks)
+
+    # IO.puts "TILL EPIPHANY: #{till_epiphany}"
+    # IO.puts "FROM EPIPHANY: #{from_epiphany}"
+    # IO.puts "FROM EASTER: #{from_easter}"
+
     cond do
       # to whom it may concern...
       # changes the order of these conditions at your paril
@@ -74,6 +84,7 @@ defmodule  Lityear do
       true -> {"unknown", "unknown", :unknown, day}
     end
    end
+
 
   def advent(),         do: advent(1)
   def advent(n),        do: christmas    |> date_last_sunday |> date_shift( weeks: n-4)
@@ -205,18 +216,22 @@ defmodule  Lityear do
         356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,362,362,362,362,362,363,383,383,383,383  # dec
       ]
       |> Enum.at( date |> Timex.day)
-      n = cond do
-            date |> Timex.compare(Timex.date {date.year, 2, 28}) < 0 -> 1
-            date |> Timex.day <= 362 && not( date |> Timex.is_leap?) -> 2
-            date |> Timex.day > 362 && not( date |> Timex.is_leap?) -> 1
-            date |> Timex.day <= 362 -> 1
-            date |> Timex.is_leap? -> 0
-            true -> 1
-      end
+      this_day = date |> Timex.day
+      n = lit_day_of_year(date)
+      
       date = Timex.date({date.year, 1, 1}) |> date_shift(days: day - n)
       {date, holy_days[day]}
   end
 
+  def lit_day_of_year(date) do
+    date |> Timex.day |> _lit_day_of_year(Timex.is_leap?(date))
+  end
+
+  def _lit_day_of_year(n, false), do: n-1
+    # if it's a leap year and past leap day
+    # you have to subtract 1 to get the right saint day
+  def _lit_day_of_year(n, true), do: if n > @leap_day, do: n, else: n-1
+    
   def namedDayDate("palmSundayPalms", _wk), do: palm_sunday
   def namedDayDate("palmSunday", _wk), do: palm_sunday
   def namedDayDate("holyWeek", wk) when wk |> is_bitstring, do: namedDayDate("holyWeek", wk |> String.to_integer)

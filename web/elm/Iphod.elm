@@ -507,19 +507,16 @@ fancyNav address model =
 dateNav: Signal.Address Action -> Model -> Html
 dateNav address model =
   div [id "date_nav"]
-    [ p 
-        [style [("text-align", "center"), ("margin-bottom", "0.1em")] ] 
-        [ p [] 
-            [ input 
-                [ type' "text"
-                , class "current_date"
-                , id "datepicker"
-                , value model.today
-                , style [("z-index", "200")]
-                , on "change" targetValue (\str -> Signal.message address (ChangeDate str))
-                ] []
-            ]
-        ]
+    [ div [ id "datepicker_div", datepickerStyle model ] 
+          [ input 
+              [ type' "text"
+              , class "current_date"
+              , id "datepicker"
+              , value model.today
+              , style [("z-index", "200")]
+              , on "change" targetValue (\str -> Signal.message address (ChangeDate str))
+              ] []
+          ]
     , div [id "menu2", class "cssmenu", style [("z-index", "99")] ] 
         [ ul []
           [ li [style [("width", "25%")], onClick address (ChangeDay "lastSunday")] [ a [href "#"] [ text "Last Sunday"] ]
@@ -609,6 +606,18 @@ about =  """
 """
 
 -- STYLE
+
+datepickerStyle: Model -> Attribute
+datepickerStyle model =
+  style
+    [ ("background-color", "gold")
+    , ("background", "-moz-linear-gradient(top, #ffec80 0%, #e6c300 100%)")
+    , ("background", "-webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffec80), color-stop(100%, #e6c300))")
+    , ("background", "-webkit-linear-gradient(top, #ffec80 0%, #e6c300 100%)")
+    , ("background", "-o-linear-gradient(top, #ffec80 0%, #e6c300 100%)")
+    , ("background", "-ms-linear-gradient(top, #ffec80 0%, #e6c300 100%)")
+    , ("background", "linear-gradient(to bottom, #ffec80 0%, #e6c300 100%)")
+    ]
 
 aboutStyle: Model -> Attribute
 aboutStyle model =
