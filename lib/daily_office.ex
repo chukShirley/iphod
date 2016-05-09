@@ -4,6 +4,17 @@ defmodule DailyReading do
   use Timex
   def start_link, do: Agent.start_link fn -> build end, name: __MODULE__
   def identity(), do: Agent.get(__MODULE__, &(&1))
+  def opening_sentence(mpep, date) do
+    {season, _wk, _lityr, _date} = select_season(date)
+    identity["#{mpep}_opening"][season]
+    |> Enum.random
+  end
+    def antiphon(date) do
+    {season, _wk, _lityr, _date} = select_season(date)
+    identity["antiphon"][season]
+    |> Enum.random
+  end
+
   def readings("christmas", wk, "Sunday", _date) do
     identity["christmas"][wk]["Sunday"]
   end
@@ -28,14 +39,19 @@ defmodule DailyReading do
   # readings(d) is last otherwise there will be confusion between
   # Timex.Date tuple of {season, wk, _litYr, date}
   def readings(date) do
+    readings select_season(date)
+  end
+
+  def select_season(date) do
     {season, wk, lityr, _sundayDate} = if date |> Lityear.is_sunday? do
       date |> Lityear.to_season
     else
       date |> Lityear.last_sunday
     end
     # IMPORTANT - send the real date, not the sundayDate
-    readings {season, wk, lityr, date}
+    {season, wk, lityr, date}
   end
+
   def add_psalms(map, day) do
     map
       |> Map.put(:mpp, Psalms.morning(day) |> psalm_map )
@@ -77,7 +93,197 @@ defmodule DailyReading do
     |> Map.put_new(:version, "")
   end
   def build do
-    %{ 
+    %{"antiphon" =>
+      %{  "advent" => 
+            ["Our King and Savior now draws near: O come, let us adore him."],
+          "christmas" =>
+            ["Alleluia, to us a child is born: O come, let us adore him. Alleluia."],
+          "epiphany" => 
+            ["The Lord has shown forth his glory: O come, let us adore him."],
+          "lent" =>
+            ["The Lord is full of compassion and mercy: O come, let us adore him."],
+          "palmSunday" =>
+            ["The Lord is full of compassion and mercy: O come, let us adore him."],
+          "easterDay" =>
+            ["Alleluia. The Lord is risen indeed: O come, let us adore him. Alleluia."],
+          "easter" =>
+            ["Alleluia. The Lord is risen indeed: O come, let us adore him. Alleluia."],
+          "proper" =>
+            ["The earth is the Lord's for he made it: O Come let us adore him.",
+             "Worship the Lord in the beauty of holiness: O Come let us adore him.",
+             "The mercy of the Lord is everlasting: O Come let us adore him.",
+             "Worship the Lord in the beauty of holiness: O Come let us adore him."
+            ],
+          "ascension" =>
+            ["Alleluia. Christ the Lord has ascended into heaven: O come, let us adore him. Alleluia."],
+          "pentecost" =>
+            ["Alleluia. The Spirit of the Lord renews the face of the earth: O come, let us adore him. Alleluia."],
+          "trinity" => 
+            ["Father, Son and Holy Spirit, one God: O come, let us adore him."], 
+          "incarnation" =>
+            ["The Word was made flesh and dwelt among us: O come, let us adore him."],
+          "saints" =>
+            ["The Lord is glorious in his saints: O come, let us adore him."]
+      },  
+      "mp_opening" =>
+      %{ "advent" => [{
+                  "In the wilderness prepare the way of the Lord; make straight in the desert a highway for our God.",
+                  "Isaiah 40:3"
+                  }],
+        "christmas" => [{
+                    "Fear not, for behold, I bring you good news of a great joy that will be for all people. For unto you is born this day in the city of David a Savior, who is Christ the Lord.",
+                    "Luke 2:10-11"
+                    }],
+        "epiphany" => [{
+                    "For from the rising of the sun to its setting my name will be great among the nations, and in every place incense will be offered to my name, and a pure offering. For my name will be great among the nations, says the Lord of hosts.",
+                    "Malachi 1:11"
+                    }],
+        "lent" => [{
+                    "Repent, for the kingdom of heaven is at hand.",
+                    "Matthew 3:2"
+                    }],
+        "goodFriday" => [{
+                    "Is it nothing to you, all you who pass by? Look and see if there is any sorrow like my sorrow, which was brought upon me, which the Lord inflicted on the day of his fierce anger.",
+                    "Lamentations 1:12",
+                    }],
+        "easter" => [{
+                    "Christ is risen! The Lord is risen indeed!",
+                    "Mark 16:6 and Luke 24:34"
+                    }],
+        "ascension" => [{
+                    "Since then we have a great high priest who has passed through the heavens, Jesus, the Son of God, let us hold fast our confession. Let us then with confidence draw near to the throne of grace, that we may receive mercy and find grace to help in time of need.",
+                    "Hebrews 4:14, 16"
+                    }],
+        "pentecost" => [{
+                    "You will receive power when the Holy Spirit has come upon you, and you will be my witnesses in Jerusalem and in all Judea and Samaria, and to the end of the earth.",
+                    "Acts 1:8"
+                    }],
+        "trinity" => [{
+                    "Holy, holy, holy, is the Lord God Almighty, who was and is and is to come!",
+                    "Revelation 4:8"
+                    }],
+        "thanksgiving" => [{
+                    "Honor the Lord with your wealth and with the firstfruits of all your produce; then your barns will be filled with plenty, and your vats will be bursting with wine.",
+                    "Proverbs 3:9-10"
+                    }],
+        "proper" => 
+          [ { "The Lord is in his holy temple; let all the earth keep silence before him.",
+              "Habakkuk 2:20"
+            },
+            { "I was glad when they said to me, “Let us go to the house of the Lord!”",
+              "Psalm 122:1"
+            },
+            { "Let the words of my mouth and the meditation of my heart be acceptable in your sight, O Lord, my rock and my redeemer.",
+              "Psalm 19:14"
+            },
+            { "Send out your light and your truth; let them lead me; let them bring me to your holy hill and to your dwelling!",
+              "Psalm 43:3"
+            },
+            { "For thus says the One who is high and lifted up, who inhabits eternity, whose name is Holy: “I dwell in the high and holy place, and also with him who is of a contrite and lowly spirit, to revive the spirit of the lowly, and to revive the heart of the contrite.”",
+              "Isaiah 57:15"
+            },
+            { "The hour is coming, and is now here, when the true worshipers will worship the Father in spirit and truth, for the Father is seeking such people to worship him.",
+              "John 4:23"
+            },
+            { "Grace to you and peace from God our Father and the Lord Jesus Christ.",
+              "Philippians 1:2"
+            }
+          ]
+      },
+      "ep_opening" =>
+        %{  "advent" => [{
+              "Therefore stay awake – for you do not know when the master of the
+              house will come, in the evening, or at midnight, or when the cock
+              crows, or in the morning – lest he come suddenly and find you asleep.",
+              "Mark 13:35-36"
+            }],
+
+            "christmas" => [{
+              "Behold, the dwelling place of God is with man. He will dwell with
+              them, and they will be his people, and God himself will be with them
+              as their God.",
+              "Revelation 21:3"
+            }],
+            "epiphany" => [{
+              "Nations shall come to your light, and kings to the brightness of your rising.",
+              "Isaiah 60:3"
+            }],
+            "lent" => [{
+              "If we say we have no sin, we deceive ourselves, and the truth is not in
+                 us. If we confess our sins, he is faithful and just to forgive us our sins
+                 and to cleanse us from all unrighteousness.",
+              "1 John 1:8-9"
+              },
+              { "For I know my transgressions, and my sin is ever before me.",
+                "Psalm 51:3"
+              },
+              { "To the Lord our God belong mercy and forgiveness, for we have against him.",
+                "Daniel 9:9"
+              }],
+            "goodFriday" => [{
+                "All we like sheep have gone astray; we have turned every one to his
+                own way; and the Lord has laid on him the iniquity of us all.",
+                "Isaiah 53:6"
+              }],
+            "easter" => [{
+                "Thanks be to God, who gives us the victory through our Lord Jesus Christ.",
+                "1 Corinthians 15:57"
+                },
+                {
+                  "If then you have been raised with Christ, seek the things that are
+                  above, where Christ is, seated at the right hand of God.",
+                  "Colossians 3:1"
+                }],
+            "ascension" => [{
+                  "For Christ has entered, not into holy places made with hands, which
+                  are copies of the true things, but into heaven itself, now to appear in
+                  the presence of God on our behalf.",
+                  "Hebrews 9:24"
+                }],
+            "pentecost" => [{
+                  "The Spirit and the Bride say, “Come.” And let the one who hears say,
+                  “Come.” And let the one who is thirsty come; let the one who desires
+                  take the water of life without price.",
+                  "Revelation 22:17"
+                },
+                {
+                  "There is a river whose streams make glad the city of God, the holy
+                  habitation of the Most High.",
+                  "Psalm 46:4"
+                }],
+            "trinity" => [{
+                "Holy, holy, holy, is the Lord God of Hosts; the whole earth is full of his glory!",
+                "Isaiah 6:3"
+                }],
+            "thanksgiving" => [{
+                "The Lord by wisdom founded the earth; by understanding he
+                  established the heavens; by his knowledge the deeps broke open, and
+                  the clouds drop down the dew.",
+                 "Proverbs 3:19-20"
+                }],
+            "proper" => [{
+                "The Lord is in his holy temple; let all the earth keep silence before him.",
+                "Habakkuk 2:20"
+              },
+              {
+                "O Lord, I love the habitation of your house and the place where your glory dwells.",
+                "Psalm 46:8"
+              },
+              {
+                "Let my prayer be counted as incense before you, and the lifting up of
+                my hands as the evening sacrifice!",
+                "Psalm 141:2"
+              },
+              {
+                "Worship the Lord in the splendor of holiness; tremble before him, all the earth!",
+                "Psalm 96:9"
+              },
+              {
+                "Let the words of my mouth and the meditation of my heart be
+                acceptable in your sight, O Lord, my rock and my redeemer.",
+                "Psalm 19:14"
+              }]
+        },
       "advent" =>
         %{"1" =>
           %{  "Sunday" =>     %{  title: "First Sunday in Advent",

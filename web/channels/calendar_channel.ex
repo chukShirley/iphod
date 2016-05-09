@@ -14,13 +14,38 @@ defmodule Iphod.CalendarChannel do
   end
 
   def handle_info(:after_join, socket) do
-    today = Date.now()
-    msg = list_of_weeks_from begin_month(today), end_month(today)
-    push socket, "this_month", %{calendar: msg}
+    push socket, "this_month", get_month(Date.now)
     {:noreply, socket}
   end
 
   def handle_in("request_calendar", _, socket), do: handle_info :after_join, socket
+
+  def handle_in("request_move_month", [month, year, "next"], socket) do
+    push socket, "this_month", shift_get_month(month, year, 1)
+    {:noreply, socket}
+  end
+
+  def handle_in("request_move_month", [month, year, "last"], socket) do
+    push socket, "this_month", shift_get_month(month, year, -1)   
+    {:noreply, socket}
+  end
+
+  def shift_get_month(month, year, n) do
+    imonth = Timex.month_to_num(month)
+    iyr = String.to_integer(year)
+    IO.puts "IMONTH: #{imonth}, IYEAR: #{iyr}"
+    Timex.date({iyr, imonth, 1}) 
+    |> Timex.shift(months: n)
+    |> get_month    
+  end
+
+  def get_month(date) do
+    days = list_of_weeks_from begin_month(date), end_month(date)
+    %{  calendar: days,
+        month:    date |> Timex.format!("{Mfull}"),
+        year:     date |> Timex.format!("{YYYY}")
+    }
+  end
 
   def begin_month(date) do
     bom = date |> Timex.beginning_of_month

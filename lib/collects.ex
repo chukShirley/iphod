@@ -338,7 +338,7 @@ defmodule Collects do
             }
           ]
         },
-      "palmSunday" =>
+      "palmSunday1" =>
         { "",
           "Palm Sunday",
           [ { "Almighty and everliving God, in your tender love for the human race you sent your Son our Savior

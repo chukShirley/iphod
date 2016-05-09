@@ -1,0 +1,137 @@
+/*!
+ * styles for morning and evening prayer
+*/
+
+.mpep {
+  font-family: "Georgia, Times New Roman, Times, serif";
+  font-size: 1em;
+  margin-left: 2em;
+  width: 32em;
+}
+
+.mpep p{
+  position: relative;
+  margin: 0;
+}
+
+.title1 {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.title2 {
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.italic { 
+  font-style: italic;
+  font-size: 1em; 
+}
+
+.rubric {
+  padding: 0.5em 0;
+  font-size: 0.8em;
+  font-style: italic;
+  color: red;
+}
+
+.rubric_black {
+  font-siz: 0.8em;
+  font-style: italic;
+  color: black;
+}
+
+.bible_ref {
+  font-size: 0.8em;
+  font-style: italic;
+  margin: -1em 0 1em 0;
+  padding: 0;
+}
+
+.section {
+  font-size: 1.0em;
+  font-weight: bold;
+}
+
+.default {
+  font-size: 1.0em;
+}
+
+.reading { font-size: 1.0em }
+
+.indent_italic {
+  font-size: 1.0em;
+  font-style: italic;
+  margin: 0 0 0 2em;
+  padding: 0;
+}
+
+.vspeaker {
+  font-style: italic;
+  padding: 0 2em 0 0;
+}
+.vspeaker_says {
+  position: absolute;
+  left: 10em;
+}
+
+.vs {
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+.vs_indent {
+  font-size: 1em;
+  margin: 0;
+  padding: 0 0 0 2em;
+}
+
+.canticle_title {
+  font-size: 1em;
+  margin: 0;
+  font-weight: bold;
+  padding: 0 2em 0 0;
+}
+
+.canticle_name {
+  font-size: 1em;
+  margin: 0;
+  font-style: italic;
+  padding: 0 2em 0 0;
+}
+
+.mercy {
+  margin: 0;
+  padding: 0;
+}
+
+.mercy_italic {
+  margin: 0;
+  padding: 0;
+  font-style: italic;
+}
+
+.invitatory tr td {
+  vertical-align: top;
+}
+
+.prayer_table td {
+  padding: 0;
+}
+
+.ps_first {
+    position: relative;
+    top: -0.7em;
+    padding-left: 2.5em;
+    text-indent: -1.5em;
+}
+
+.ps_second {
+    position: relative;
+    top: -0.7em;
+    padding-left: 3.5em;
+    text-indent: -1.5em;
+    margin-bottom: -2.8em;
+}

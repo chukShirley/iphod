@@ -94,6 +94,7 @@ type alias Sunday =
   , season:   String
   , week:     String
   , title:    String
+  , colors:   List String
   , collect:  SundayCollect
   , ot:       List Lesson
   , ps:       List Lesson
@@ -110,6 +111,7 @@ sundayInit =
   , season  = ""
   , week    = ""
   , title   = ""
+  , colors  = []
   , collect = initSundayCollect
   , ot      = []
   , ps      = []

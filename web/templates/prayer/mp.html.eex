@@ -1,0 +1,141 @@
+<div class= "mpep">
+  <p class= "title1">Daily Morning Prayer</p>
+  <p class= "title1"><%=@model.date%></p>
+  <p class= "title2 italic">Approved for Provincial Use</p>
+  <p class= "title2">The Anglican Church in North America</p>
+  <p class= "title2 italic">Petertide, A.D. 2013</p>
+  </br>
+  <p class= "rubric"> 
+    The Officiant may begin Morning Prayer by reading an opening sentence 
+    of Scripture found on pages 17-19 or another appropriate Scripture. 
+    The Confession of Sin may be said, or the Office may continue with 
+    “O Lord, open our lips.”
+  </p>
+  <p class= "section">Opening Sentences of Scripture</p>
+  </br>
+  <p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
+  <p class= "default">
+    <%=@model.opening_sentence%>
+    </br>
+    <span class= "bible_ref"><%=@model.opening_sentence_ref%></span>
+  </p>
+  </br>
+  <p class= "section">Confession of Sin</p>
+  </br>
+  <p class ="rubric">The Officiant says to the People</p>
+
+  <p class= "default">Dearly beloved, the Scriptures teach us to acknowledge our many sins and offenses, not concealing them from our heavenly Father, but confessing them with humble and obedient hearts that we may obtain forgiveness by his infinite goodness and mercy. We ought at all times humbly to acknowledge our sins before Almighty God, but especially when we come together in his presence to give thanks for the great benefits we have received at his hands, to declare his most worthy praise, to hear his holy Word, and to ask, for ourselves and others, those things necessary for our life and our salvation. Therefore, come with me to the throne of heavenly grace.</p>
+  <p class= "rubric">or this</p>
+  <p class= "default"> Let us humbly confess our sins to Almighty God.</p>
+  <p class= "rubric"> Silence is kept. All kneeling the Officiant and People say</p>
+  <p class= "vs"> Almighty and most merciful Father,</p>
+  <p class= "vs"> we have erred and strayed from your ways like lost sheep.</p>
+  <p class= "vs"> we have followed too much the deceits and desires of our</p>
+  <p class= "vs_indent">own hearts.</p>
+  <p class= "vs">we have offended against your holy laws.</p>
+  <p class= "vs">we have left undone those things which we ought to have done</p>
+  <p class= "vs">and we have done those things which we ought not to have done;</p>
+  <p class= "vs">and apart from your grace, there is no health in us.</p>
+  <p class= "vs">O Lord, have mercy upon us.</p>
+  <p class= "vs">Spare those who confess their faults.</p>
+  <p class= "vs">Restore those who are penitent, according to your promises declared</p>
+  <p class= "vsIndent">to all people in Christ Jesus our Lord;</p>
+  <p class= "vs">And grant, O most merciful Father, for his sake,</p>
+  <p class= "vs_indent">that we may now live a godly, righteous, and soberlife,</p>
+  <p class= "vs_indent">to the glory of your holy Name. Amen.</p>
+  </br>
+  <p class= "rubric">The Priest alone stands and says</p>
+
+  <p class= "default">Almighty God, the Father of our Lord Jesus Christ,desires not the death of sinners, but that they may turn from their wickedness and live. He has empowered and commanded his ministers to pronounce to his people, being penitent, the absolution and remission of their sins. He pardons all who truly repent and genuinely believe his holy Gospel. For this reason, we beseech him to grant us true repentance and his Holy Spirit, that our present deeds may please him, the rest of our lives may be pure and holy, and that at the last we may come to his eternal joy; through Jesus Christ our Lord. Amen.</p>
+
+  <p class= "rubric">or this</p>
+
+  <p class= "default">The Almighty and merciful Lord grant you absolution and remission of all your sins, true repentance, amendment of life, and the grace and consolation of his Holy Spirit. Amen.</p>
+
+  <p class= "rubric"> A deacon or layperson remains kneeling and prays</p>
+
+  <p class= "default"> "Grant your faithful people, merciful Lord, pardon and peace; that we may be cleansed from all our sins, and serve you with a quiet mind; through Jesus Christ our Lord. Amen.</p>
+  </br>
+  <p class= "section"> The Invitatory</p>
+
+  <p class= "rubric">All stand</p>
+  <%= render "_invitatory.html" %>
+  </br>
+  <p class= "rubric">Then follows the Venite. Alternatively, the Jubilate may be used.</p>
+  <p class= "rubric">These seasonal antiphons may be sung or said before and after the Invitatory Psalm.</p>
+  <p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
+  <p class= "default"><%=@model.antiphon%></p>
+  </br>
+  <%= render "_#{@model.invitatory_canticle}.html" %>
+  </br>
+  <p class= "rubric">Then follow</p>
+  <p class= "section">The Psalm or Psalms Appointed</p>
+  <p class= "reading"><%= 
+      raw( @model.mpp |> Enum.reduce("", fn(ps, acc)-> acc = acc <> ps.body end) ) %>
+  </p> 
+  <p class= "rubric">At the end of the Psalms is sung or said</p>
+
+  <p class= "vs">Glory to the Father, and to the Son, and to the Holy Spirit;</p>
+  <p class= "vs_indent">as it was in the beginning, is now, and ever shall be,</p>
+  <p class= "vs_indent">world without end. Amen.</p>
+
+  </br>
+  <p class= "section">The Lessons</p>
+  <p class= "rubric">One or more Lessons, as appointed, are read, the Readerfirst saying</p>
+  <p style= "margin-bottom: -1.0em;">The First Lesson from</p>
+  <p class= "reading"> <%= 
+      raw( @model.mp1 |> Enum.reduce("", fn(ls, acc)-> acc = acc <> ls.body end) )
+  %></p>
+
+  <p class= "rubric">A citation giving chapter and verse may be added.</p>
+  <p class= "rubric">After each Lesson the Reader may say</p>
+  <%= render "_the_word_of_the_lord.html" %>
+  </br>
+
+  <p class= "rubric">Or the Reader may say</p>
+  <p class= "versical">Here ends the Reading.</p>
+  </br>
+
+  <p class= "rubric">The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise.</p>
+  <%= render "_#{@model.canticle1}.html" %>
+  </br>
+
+  <p style= "margin-bottom: -1.0em;">The Second Lesson from</p>
+  <p class= "reading"> <%= 
+      raw( @model.mp2 |> Enum.reduce("", fn(ls, acc)-> acc = acc <> ls.body end) )
+  %></p>
+
+  <%= render "_apostles_creed.html" %>
+  </br>
+  <p class= "section">The Prayers</p>
+  <p class= "rubric">The People kneel or stand.</p>
+  <%= render "_prayer_intro.html" %>
+  </br>
+
+  <%= render "_mercy3.html" %>
+  </br>
+
+  <p class= "rubric">Officiant and People</p>
+
+  <%= render "_lords_prayer_trad.html" %>
+  
+  <p class= "rubric">or this</p>
+
+  <%= render "_lords_prayer_modern.html" %>
+  </br>
+  <%= render "_prayers.html" %>
+  <%= render "_prayers.html" %>
+  </br>
+
+  <p class= "rubric">The Officiant then prays one or more of the following collects. It is traditional to pray the Collects for Peace and Grace daily. Alternatively, one may pray the collects on a weekly rotation, using the suggestions in parentheses.</p>
+  <p class= "section">The Collect of the Day</p>
+
+  <p><%= @model.collect_of_week %></p>
+  <%= render "_#{@model.day}.html" %> <%# collect for this day %>
+  <%= render "_for_mission.html" %>
+  <%= render "_general_thanksgiving.html" %>
+  <%= render "_chrysostom.html" %>
+  </br>
+  <%= render "_eo_prayer.html" %>
+  <%= render "_graces.html" %>
+</div>

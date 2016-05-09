@@ -151,7 +151,9 @@ if (window.location.pathname == "/calendar") {
   var elmDiv = document.getElementById('elm-container')
     , initialState = {
         thisMonth: {
-          calendar: []
+          calendar: [],
+          month:    "",
+          year:     ""
         }
     }
     , elmApp = Elm.embed(Elm.Calendar, elmDiv, initialState)
@@ -169,11 +171,15 @@ if (window.location.pathname == "/calendar") {
         day.sunday.ofType = "sunday"
       })
     })
-    console.log("THIS MONTH DATA: ", z)
-    elmApp.ports.thisMonth.send( {calendar: z} )
+    elmApp.ports.thisMonth.send( data )
   })
 
   channel_c.push("request_calendar", "")
+
+  elmApp.ports.requestMoveMonth.subscribe(function(request) {
+    console.log("MOVE MONTH: ", request)
+    channel_c.push("request_move_month", request)
+  })
 }
 
 
@@ -238,6 +244,7 @@ if (window.location.pathname == "/") {
         , season: ""
         , week: ""
         , title: ""
+        , colors: []
         , collect: sunday_collect_model
         , ot: []
         , ps: []

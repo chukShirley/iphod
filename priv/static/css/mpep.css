@@ -5,7 +5,6 @@
  */
 @import "menu_styles.css"
 @import "print.css"
-@import "mpep.css"
 
 /* Space out content a bit */
 body, form, ul, table {
@@ -864,13 +863,6 @@ label.radio_label {
 .mpep {
   font-family: "Georgia, Times New Roman, Times, serif";
   font-size: 1em;
-  margin-left: 2em;
-  width: 32em;
-}
-
-.mpep p{
-  position: relative;
-  margin: 0;
 }
 
 .title1 {
@@ -889,8 +881,7 @@ label.radio_label {
 }
 
 .rubric {
-  padding: 0.5em 0;
-  font-size: 0.8em;
+  font-siz: 0.8em;
   font-style: italic;
   color: red;
 }
@@ -972,28 +963,7 @@ label.radio_label {
   font-style: italic;
 }
 
-.invitatory tr td {
-  vertical-align: top;
-}
 
-.prayer_table td {
-  padding: 0;
-}
-
-.ps_first {
-    position: relative;
-    top: -0.7em;
-    padding-left: 2.5em;
-    text-indent: -1.5em;
-}
-
-.ps_second {
-    position: relative;
-    top: -0.7em;
-    padding-left: 3.5em;
-    text-indent: -1.5em;
-    margin-bottom: -2.8em;
-}
 /*!
 * print.css
 * for printing stuff from iphod
@@ -1017,4 +987,4 @@ label.radio_label {
 }
 
 
-/*# sourceMappingURL=app.css.map*/
+/*# sourceMappingURL=mpep.css.map*/

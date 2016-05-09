@@ -1,0 +1,17 @@
+</br>
+<p class= "rubric">The Officiant may invite the People to join in one of the Graces.</p>
+<p class= "rubric">Officiant</p>
+
+<%= raw( [
+      "<p>The grace of our Lord Jesus Christ, and the love of God, and the
+      fellowship of the Holy Spirit, be with us all evermore. Amen.</p>
+      <p class= 'bible_ref'>2 Corinthians 13:14</p>",
+      "<p>May the God of hope fill us with all joy and peace in believing
+      through the power of the Holy Spirit. Amen.</p>
+      <p class= 'bible_ref'>Romans 15:13</p>",
+      "<p>Glory to God whose power, working in us, can do infinitely more
+      than we can ask or imagine: Glory to him from generation to
+      generation in the Church, and in Christ Jesus forever and ever. Amen.</p>
+      <p class= 'bible_ref'>Ephesians 3:20-21</p>"
+      ] |> Enum.random )
+%>

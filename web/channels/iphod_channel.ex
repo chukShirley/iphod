@@ -54,6 +54,7 @@ defmodule Iphod.IphodChannel do
         season:   r.season,
         week:     r.week,
         title:    r.title,
+        colors:   r.colors,
         collect:  r.collect,
         ot:       r.ot,
         ps:       r.ps,

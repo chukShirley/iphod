@@ -49,16 +49,28 @@ type alias Week = { days: List Models.Day }
 initWeek: Week
 initWeek = { days = [] }
 
-type alias Model = { calendar: List Week } -- Month
+type alias Model = 
+  { calendar: List Week 
+  , month:    String
+  , year:     String
+  } -- Month
 
 initModel: Model
-initModel = {calendar = []}
+initModel = 
+  { calendar  = []
+  , month     = ""
+  , year      = ""
+  }
 
 init: (Model, Effects Action)
 init = ( initModel, Effects.none )
 
 
 -- SIGNALS
+
+changeMonth: Signal.Mailbox (String, String, String)
+changeMonth =
+  Signal.mailbox ("", "", "")
 
 incomingMonth: Signal Action
 incomingMonth =
@@ -69,12 +81,17 @@ incomingMonth =
 
 port thisMonth: Signal Model
 
+port requestMoveMonth: Signal (String, String, String)
+port requestMoveMonth =
+  changeMonth.signal
 
 -- UPDATE
 
 type Action
   = NoOp
   | AddMonth Model
+  | LastMonth
+  | NextMonth
 
 update: Action -> Model -> (Model, Effects Action)
 update action model =
@@ -83,6 +100,19 @@ update action model =
 
     AddMonth newMonth -> (newMonth, Effects.none)
 
+    LastMonth -> (model, getMonth model "last")
+
+    NextMonth -> (model, getMonth model "next")
+
+
+-- HELPERS
+
+getMonth: Model -> String -> Effects Action
+getMonth model movement =
+  Signal.send changeMonth.address (model.month, model.year, movement)
+  |> Task.toMaybe
+  |> Task.map (always NoOp)
+  |> Effects.task
 
 -- VIEW
 
@@ -90,7 +120,8 @@ view: Signal.Address Action -> Model -> Html
 view address model =
   div []
     [ table [id "calendar"]
-        ( (calendarNavHeader address model)
+        (  (mpEp address model)
+        ++ (calendarNavHeader address model)
         ++ (calendarDayHeader)
         ++ (calendarWeeks address model)
         )
@@ -99,16 +130,23 @@ view address model =
 calendarNavHeader: Signal.Address Action -> Model -> List Html
 calendarNavHeader address model =
   [ tr [id "calendar"]
-      [ th [] [ text "<" ]
+      [ th [onClick address LastMonth] [ text "<" ]
       , dateNav address model
-      , th [] [ text ">"]
+      , th [onClick address NextMonth] [ text ">"]
       ]
   ]
 
 dateNav: Signal.Address Action -> Model -> Html
 dateNav address model =
   th [ colspan 5]
-    [ text "MONTH PICKER GOES HERE" ]
+    [ text (String.join ", " [model.month, model.year]) ]
+
+mpEp: Signal.Address Action -> Model -> List Html
+mpEp action model =
+  [ th [class "mpep_link", colspan 3] [ a [href "morningPrayer"] [button [] [text "Morning Prayer"]]]
+  , th [class "mpep_link" ] [text "Today"]
+  , th [class "mpep_link", colspan 3] [ a [href "morningPrayer"] [button [] [text "Morning Prayer"]]]
+  ]
 
 calendarDayHeader: List Html
 calendarDayHeader =
@@ -132,8 +170,10 @@ oneWeek address week =
   let
     this_day address d =
       td [] 
-        [ p [class "day_of_month"] [text d.dayOfMonth] 
-        , ul [] 
+        [ p 
+            [day_classes d] 
+            (colorOptions d)
+        , ul [ class "day_options"] 
             [ li [class "reading_group"] 
                 (readingsMP d.daily)
             , li [class "reading_group"] 
@@ -141,24 +181,41 @@ oneWeek address week =
             , li [class "reading_group"] 
                 (readingsEU d.sunday)
             ]
---          [ li [class "reading_group"] (reading d.daily.mp1)
---          , li [class "reading_group"] (reading d.daily.mp2)
---          , li [class "reading_group"] (reading d.daily.mpp)
---          , li [class "reading_group"] (reading d.daily.ep1)
---          , li [class "reading_group"] (reading d.daily.ep2)
---          , li [class "reading_group"] (reading d.daily.epp)
---          ]
         ]
   in
     tr []
       (List.map (this_day address) week.days)
+
+colorOptions: Models.Day -> List Html
+colorOptions day =
+  let
+    (thisID, thisRef, thisClose) = httpReferences "colors" day.sunday.date
+    thisColor c =  li [class "reading_item"] [text c]
+
+  in
+    [ a [ href thisRef ] 
+        [ button [] [text day.dayOfMonth] ]
+    , div
+        [ id thisID, class "modalDialog" ]
+        [ div []
+            [ a [href thisClose, title "Close", class "close"] [ text "X" ]
+            , h2 [class "modal_header"] 
+                [ text "Color Options For"
+                , br [] []
+                , text day.sunday.title
+                ]
+            , ul [class "reading_list"] (List.map thisColor day.sunday.colors)
+            ]    
+        ]
+    ]
 
 readingsMP: Models.Daily -> List Html
 readingsMP daily =
   let
     (thisId, thisRef, thisClose) = httpReferences "mp" daily.date
   in
-    [ a [ href thisRef ] [ text "MP" ]
+    [ a [ href thisRef ] 
+        [ button [] [text "MP"] ]
     , div 
         [ id thisId, class "modalDialog" ]
         [ div []
@@ -180,7 +237,8 @@ readingsEP daily =
   let
     (thisId, thisRef, thisClose) = httpReferences "ep" daily.date
   in
-    [ a [ href thisRef ] [ text "EP" ]
+    [ a [ href thisRef ] 
+        [ button [] [text "EP"] ]
     , div 
         [ id thisId, class "modalDialog" ]
         [ div []
@@ -200,9 +258,10 @@ readingsEP daily =
 readingsEU: Models.Sunday -> List Html
 readingsEU sunday =
   let
-    (thisId, thisRef, thisClose) = httpReferences "eu" sunday.date
+    (thisId, thisRef, thisClose) = httpReferences "he" sunday.date
   in
-    [ a [ href thisRef ] [ text "Eucharistic" ]
+    [ a [ href thisRef ] 
+        [ button [] [text "HE"] ]
     , div 
         [ id thisId, class "modalDialog" ]
         [ div []
@@ -236,5 +295,17 @@ reading lessons =
       li [class "reading_item"] [ text l.read ]
   in
     ul [class "reading_list"] (List.map this_reading lessons)
+
+
+-- STYLE
+
+day_classes: Models.Day -> Attribute
+day_classes day =
+  let
+    firstColor = day.sunday.colors |> List.head |> Maybe.withDefault "green"
+    color_class = "day_" ++ firstColor
+  in
+    class ("day_of_month " ++ color_class)
+
 
 
