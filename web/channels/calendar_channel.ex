@@ -78,7 +78,8 @@ defmodule Iphod.CalendarChannel do
               dayOfMonth: start_date |> Timex.format!("{D}"),
               color: "green",
               daily: DailyReading.readings(start_date),
-              sunday: SundayReading.readings(start_date)
+              sunday: SundayReading.readings(start_date),
+              today: start_date == Date.now
           }
     new_head = [day | head]
     new_date = start_date |> Timex.shift(days: 1)

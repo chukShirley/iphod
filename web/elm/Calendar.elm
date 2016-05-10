@@ -169,19 +169,27 @@ oneWeek: Signal.Address Action -> Week -> Html
 oneWeek address week =
   let
     this_day address d =
-      td [] 
-        [ p 
-            [day_classes d] 
-            (colorOptions d)
-        , ul [ class "day_options"] 
-            [ li [class "reading_group"] 
-                (readingsMP d.daily)
-            , li [class "reading_group"] 
-                (readingsEP d.daily)
-            , li [class "reading_group"] 
-                (readingsEU d.sunday)
-            ]
-        ]
+      let
+        title = 
+          if List.member d.daily.title 
+            ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+          then ""
+          else d.daily.title
+      in
+        td [styleBorder d.today] 
+          [ p 
+              [day_classes d] 
+              (colorOptions d)
+          , p [class "cal_day_title"] [text title]
+          , ul [ class "day_options"] 
+              [ li [class "reading_group"] 
+                  (readingsMP d.daily)
+              , li [class "reading_group"] 
+                  (readingsEP d.daily)
+              , li [class "reading_group"] 
+                  (readingsEU d.sunday)
+              ]
+          ]
   in
     tr []
       (List.map (this_day address) week.days)
@@ -306,6 +314,12 @@ day_classes day =
     color_class = "day_" ++ firstColor
   in
     class ("day_of_month " ++ color_class)
+
+styleBorder: Bool -> Attribute
+styleBorder today =
+  if today 
+    then style [("border", "3px solid #555")]
+    else style []
 
 
 

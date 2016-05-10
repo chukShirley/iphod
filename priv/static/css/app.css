@@ -368,7 +368,6 @@ label.radio_label {
 
 .day_options {
   position: relative;
-  float: right;
   margin-bottom: 0;
 }
 
@@ -377,6 +376,7 @@ label.radio_label {
 }
 
 .reading_group {
+  display: inline;
 }
 
 #calendar {
@@ -392,15 +392,24 @@ label.radio_label {
   vertical-align: top;
   width: 14%;
 }
+#calendar tr{
+}
 #calendar td {
   border: 1px solid black;
   text-align: left;
-  vertical-align: top;
+  vertical-align: bottom;
 }
 #calendar td ul {
-  margin-top: 0;
-  padding-left: 2px;
-  padding-top: 0px;
+  margin-top: 3.5em;
+  padding-left: 0;
+  text-align: center;
+}
+
+.cal_day_title {
+  width: 99%;
+  position: relative;
+  float: left;
+  margin: 0;
 }
 
 .day_white {

@@ -12651,13 +12651,14 @@ Elm.Iphod.Models.make = function (_elm) {
    $Result = Elm.Result.make(_elm),
    $Signal = Elm.Signal.make(_elm);
    var _op = {};
-   var Day = F6(function (a,b,c,d,e,f) {
+   var Day = F7(function (a,b,c,d,e,f,g) {
       return {name: a
              ,color: b
              ,dayOfMonth: c
              ,date: d
              ,daily: e
-             ,sunday: f};
+             ,sunday: f
+             ,today: g};
    });
    var initBiblesOrg = {url: "https://bibles.org/v2/passages.js?q[]="
                        ,key: "P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT"
@@ -12819,7 +12820,8 @@ Elm.Iphod.Models.make = function (_elm) {
                  ,dayOfMonth: ""
                  ,date: ""
                  ,daily: dailyInit
-                 ,sunday: sundayInit};
+                 ,sunday: sundayInit
+                 ,today: false};
    var Config = F7(function (a,b,c,d,e,f,g) {
       return {ot: a
              ,ps: b

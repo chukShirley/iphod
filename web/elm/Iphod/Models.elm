@@ -190,6 +190,7 @@ type alias Day =
   , date:       String
   , daily:      Daily
   , sunday:     Sunday
+  , today:      Bool
   }
 
 initDay: Day
@@ -200,4 +201,5 @@ initDay =
   , date  =       ""
   , daily =       dailyInit
   , sunday =      sundayInit
+  , today =       False
   }
