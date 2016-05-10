@@ -25,7 +25,7 @@ defmodule SundayReading do
 
   defp _sunday({season, wk, yr, sunday}) do
     if identity[season][wk][yr] |> is_nil, do: IEx.pry
-    IO.puts "SUNDAY: #{season}, #{wk}"
+    # IO.puts "SUNDAY: #{season}, #{wk}"
     identity[season][wk][yr]
       |> add_ids
       |> Map.merge( %{

@@ -457,8 +457,8 @@ fancyNav: Signal.Address Action -> Model -> Html
 fancyNav address model =
   div [id "menu1", class "cssmenu"] [
     ul []
-      [ li [onClick address ToggleMp] [ a [href "#"] [ text "Morning Prayer"] ]
-      , li [onClick address ToggleEp] [ a [href "#"] [ text "Evening Prayer"] ]
+      [ li [onClick address ToggleMp] [ a [href "/morningPrayer"] [ text "Morning Prayer"] ]
+      , li [onClick address ToggleEp] [ a [href "/eveningPrayer"] [ text "Evening Prayer"] ]
       , li [class "has-sub"] 
           [ a [href "#"] [ text "Easter"]
           , ul [] 

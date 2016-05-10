@@ -40,8 +40,8 @@ defmodule Iphod.PrayerController do
       |> Map.put(:epp, put_psalm(dreading, :epp))
       |> Map.put(:ep1, put_lesson(dreading, :ep1))
       |> Map.put(:ep2, put_lesson(dreading, :ep2))
-      |> Map.put(:ot_canticle, put_canticle("mp", "ot", dreading.season, dreading.day))
-      |> Map.put(:nt_canticle, put_canticle("mp", "nt", dreading.season, dreading.day))
+      |> Map.put(:ot_canticle, put_canticle("ep", "ot", dreading.season, dreading.day))
+      |> Map.put(:nt_canticle, put_canticle("ep", "nt", dreading.season, dreading.day))
       |> Map.put(:collect_of_week, put_collect_of_week(dreading))
   end
 
