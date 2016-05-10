@@ -17104,7 +17104,7 @@ Elm.Iphod.EveningPrayer.make = function (_elm) {
       A2($Basics._op["++"],
       title2Italic("Petertide, A.D. 2013"),
       A2($Basics._op["++"],
-      rubric("The Officiant may begin Morning Prayer by reading an opening sentence of Scripture found on pages 17-19 or another appropriate Scripture. The Confession of Sin may be said, or the Office may continue with “O Lord, open our lips.”"),
+      rubric("The Officiant may begin Evening Prayer by reading an opening sentence of Scripture found on pages 17-19 or another appropriate Scripture. The Confession of Sin may be said, or the Office may continue with “O Lord, open our lips.”"),
       A2($Basics._op["++"],
       section("Opening Sentences of Scripture"),
       A2($Basics._op["++"],
@@ -18310,10 +18310,10 @@ Elm.Calendar.make = function (_elm) {
                      _U.list([$Html$Attributes.$class("mpep_link")
                              ,$Html$Attributes.colspan(3)]),
                      _U.list([A2($Html.a,
-                     _U.list([$Html$Attributes.href("morningPrayer")]),
+                     _U.list([$Html$Attributes.href("eveningPrayer")]),
                      _U.list([A2($Html.button,
                      _U.list([]),
-                     _U.list([$Html.text("Morning Prayer")]))]))]))]);
+                     _U.list([$Html.text("Evening Prayer")]))]))]))]);
    });
    var dateNav = F2(function (address,model) {
       return A2($Html.th,

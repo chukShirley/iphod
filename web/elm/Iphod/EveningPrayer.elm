@@ -666,7 +666,7 @@ view address model =
   ++ (title2 "The Anglican Church in North America")
   ++ (title2Italic "Petertide, A.D. 2013")
 
-  ++ (rubric "The Officiant may begin Morning Prayer by reading an opening sentence of Scripture found on pages 17-19 or another appropriate Scripture. The Confession of Sin may be said, or the Office may continue with “O Lord, open our lips.”")
+  ++ (rubric "The Officiant may begin Evening Prayer by reading an opening sentence of Scripture found on pages 17-19 or another appropriate Scripture. The Confession of Sin may be said, or the Office may continue with “O Lord, open our lips.”")
   ++ (section "Opening Sentences of Scripture")
   ++ (openingSentences model)
   ++ (blankline)
@@ -751,7 +751,7 @@ view address model =
 
   ++ (nuncDimittis)
   ++ (blankline)
-  ++ (rubric "If desired, a sermon on the Morning Lessons may be preached.")
+  ++ (rubric "If desired, a sermon on the Evening Lessons may be preached.")
   ++ (apostlesCreed)
   ++ (blankline)
 
