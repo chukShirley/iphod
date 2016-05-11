@@ -4,6 +4,7 @@ defmodule  Lityear do
 
   @leap_day 60
   @sunday 7
+  @monday 1
   @thursday 4
   @tz "America/Los_Angeles"
 
@@ -23,6 +24,8 @@ defmodule  Lityear do
   def abc_atom(d), do: {:c, :a, :b} |> elem(d|>lityear|>rem(3))
   def is_sunday?(), do: Date.now(@tz) |> Timex.weekday == @sunday
   def is_sunday?(d), do: Timex.weekday(d) == @sunday
+  def is_monday?(), do: Date.now(@tz) |> Timex.weekday == @monday
+  def is_monday?(d), do: Timex.weekday(d) == @monday
   def days_till_sunday(date) do
     days_till_sunday = %{1 => 6, 2 => 5, 3 => 4, 4 => 3, 5 => 2, 6 => 1, 7 => 7}
     days_till_sunday[Timex.weekday(date)]
@@ -147,6 +150,8 @@ defmodule  Lityear do
     day = rem(h + l - 7*m + 114, 31) + 1
     Timex.date({year, month, day})
   end
+  def second_monday_after_easter(), do: second_monday_after_easter(lityear)
+  def second_monday_after_easter(n), do: _easter(n) |> Timex.shift(days: 8)
   def pentecost(),    do: pentecost(1, lityear)
   def pentecost(n),   do: pentecost(n, lityear)
   def pentecost(n,y), do: easter(n+7, y)
@@ -167,71 +172,89 @@ defmodule  Lityear do
   def sunday_to_date('epiphany', week, year),   do: epiphany(week, year)
   def sunday_to_date('lent', week, year),       do: epiphany(week, year)
 
-  def next_holy_day(date) do
-    holy_days =
-      %{  18  => "confessionOfStPeter",
-          383 => "confessionOfStPeter", # for dates at end of dec
-          25  => "conversionOfStPaul",
-          55  => "stMatthias",
-          79  => "stJoseph",
-          85  => "annunciation",
-          116 => "stMark",
-          122 => "stsPhilipAndJames",
-          152 => "visitation",
-          163 => "stBarnabas",
-          176 => "nativityOfJohnTheBaptist",
-          181 => "stPeterAndPaul",
-          183 => "dominion",
-          186 => "independence",
-          204 => "stMaryMagdalene",
-          207 => "stJames",
-          219 => "transfiguration",
-          228 => "bvm",
-          237 => "stBartholomew",
-          258 => "holyCross",
-          265 => "stMatthew",
-          273 => "michaelAllAngels",
-          292 => "stLuke",
-          297 => "stJames",
-          302 => "stsSimonAndJude",
-          316 => "remembrance",
-          334 => "stAndrew",
-          356 => "stThomas",
-          361 => "stStephen",
-          362 => "stJohn",
-          363 => "holyInnocents"
-      }
-      day = [ 0, # zero indexed
-        18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,25,25,25,25,25,25,25,55,55,55,55,55,55,  # jan
-        55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,79,79,79,79,           # feb
-        79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,79,85,85,85,85,85,85,116,116,116,116,116,116,  # mar
-        116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,116,122,122,122,122,122,     # apr
-        122,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152,152, # may
-        163,163,163,163,163,163,163,163,163,163,163,176,176,176,176,176,176,176,176,176,176,176,176,176,181,181,181,181,181,183,     # jun
-        183,186,186,186,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,204,207,207,207,219,219,219,219,219,219, # jul
-        219,219,219,219,219,219,228,228,228,228,228,228,228,228,228,237,237,237,237,237,237,237,237,237,258,258,258,258,258,258,258, # aug
-        258,258,258,258,258,258,258,258,258,258,258,258,258,258,265,265,265,265,265,265,265,273,273,273,273,273,273,273,273,292,     # sep
-        292,292,292,292,292,292,292,292,292,292,292,292,292,292,292,292,292,292,297,297,297,297,297,302,302,302,302,302,316,316,316, # oct
-        316,316,316,316,316,316,316,316,316,316,316,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,334,     # nov
-        356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,356,362,362,362,362,362,363,383,383,383,383  # dec
-      ]
-      |> Enum.at( date |> Timex.day)
-      this_day = date |> Timex.day
-      n = lit_day_of_year(date)
-      
-      date = Timex.date({date.year, 1, 1}) |> date_shift(days: day - n)
-      {date, holy_days[day]}
+  defp hd_index() do
+    %{  18  => "confessionOfStPeter",
+        382 => "confessionOfStPeter", # for dates at end of dec
+        25  => "conversionOfStPaul",
+        55  => "stMatthias",
+        78  => "stJoseph",
+        84  => "annunciation",
+        115 => "stMark",
+        121 => "stsPhilipAndJames",
+        151 => "visitation",
+        162 => "stBarnabas",
+        175 => "nativityOfJohnTheBaptist",
+        180 => "stPeterAndPaul",
+        182 => "dominion",
+        185 => "independence",
+        203 => "stMaryMagdalene",
+        206 => "stJames",
+        218 => "transfiguration",
+        227 => "bvm",
+        236 => "stBartholomew",
+        257 => "holyCross",
+        264 => "stMatthew",
+        272 => "michaelAllAngels",
+        291 => "stLuke",
+        296 => "stJames",
+        301 => "stsSimonAndJude",
+        315 => "remembrance",
+        333 => "stAndrew",
+        355 => "stThomas",
+        361 => "stStephen",
+        361 => "stJohn",
+        362 => "holyInnocents"
+    }
+  end
+  defp hd_doy() do
+    [ 0, # zero indexed
+      18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,25,25,25,25,25,25,25,55,55,55,55,55,55,  # jan
+      55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,78,78,78,78,           # feb
+      78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,84,84,84,84,84,84,115,115,115,115,115,115,  # mar
+      115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,121,121,121,121,121,     # apr
+      121,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151, # may
+      162,162,162,162,162,162,162,162,162,162,162,175,175,175,175,175,175,175,175,175,175,175,175,175,180,180,180,180,180,182,     # jun
+      182,185,185,185,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,203,206,206,206,218,218,218,218,218,218, # jul
+      218,218,218,218,218,218,227,227,227,227,227,227,227,227,227,236,236,236,236,236,236,236,236,236,257,257,257,257,257,257,257, # aug
+      257,257,257,257,257,257,257,257,257,257,257,257,257,257,264,264,264,264,264,264,264,272,272,272,272,272,272,272,272,291,     # sep
+      291,291,291,291,291,291,291,291,291,291,291,291,291,291,291,291,291,291,296,296,296,296,296,301,301,301,301,301,315,315,315, # oct
+      315,315,315,315,315,315,315,315,315,315,315,333,333,333,333,333,333,333,333,333,333,333,333,333,333,333,333,333,333,333,     # nov
+      355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,361,361,361,361,361,362,382,382,382,382  # dec
+    ]
   end
 
-  def lit_day_of_year(date) do
-    date |> Timex.day |> _lit_day_of_year(Timex.is_leap?(date))
+  def next_holy_day(date) do # {date_of_holy_day, name_of_holy_day}
+    _next_holy_day(date, Timex.weekday(date))
   end
 
-  def _lit_day_of_year(n, false), do: n-1
-    # if it's a leap year and past leap day
-    # you have to subtract 1 to get the right saint day
-  def _lit_day_of_year(n, true), do: if n > @leap_day, do: n, else: n-1
-    
+  def _next_holy_day(date, @sunday) do
+    _next_holy_day(date, @sunday, 1)
+  end
+
+  def _next_holy_day(date, @monday) do
+    date |> date_shift(days: -1) |> next_holy_day
+  end
+
+  def _next_holy_day(date, weekday) do
+    _next_holy_day(date, weekday, 0)
+  end
+
+  def _next_holy_day(date, _, n) do
+    this_day = leap_year_correction(date)
+    day = hd_doy |> Enum.at(this_day)
+    hd_date = Timex.date({date.year, 1, 1}) |> date_shift(days: day + n)
+    {hd_date, hd_index[day]}
+  end
+
+  def leap_year_correction(date) do
+    _leap_year_correction(date, Timex.is_leap?(date))
+  end
+  def _leap_year_correction(date, false), do: date |> Timex.day
+  def _leap_year_correction(date, true) do
+    n = date |> Timex.day
+    if n > @leap_day, do: n - 1, else: n
+  end
+
   def namedDayDate("palmSundayPalms", _wk), do: palm_sunday
   def namedDayDate("palmSunday", _wk), do: palm_sunday
   def namedDayDate("holyWeek", wk) when wk |> is_bitstring, do: namedDayDate("holyWeek", wk |> String.to_integer)

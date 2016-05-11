@@ -32,7 +32,7 @@ defmodule DailyReading do
                 season: season, 
                 week:   wk, 
                 day:    dow,
-                title:  identity[season][wk][dow].title, 
+                title:  update_title(date, identity[season][wk][dow].title), 
                 date:   date |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
             })
   end
@@ -101,6 +101,11 @@ defmodule DailyReading do
       readings(date).colors
     end
   end
+  def update_title(date, title) do
+    {red_letter_date, holy_day} = Lityear.next_holy_day(date)
+    if date == red_letter_date, do: SundayReading.holy_day(holy_day)["title"], else: title
+  end
+
   def build do
     %{"antiphon" =>
       %{  "advent" => 

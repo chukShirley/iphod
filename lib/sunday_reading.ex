@@ -82,6 +82,10 @@ defmodule SundayReading do
     #   %{date: st_date, season: "", week: "", title: identity["redLetter"][festival]["title"]}
   end
 
+  def holy_day(festival) do
+    identity["redLetter"][festival]
+  end
+
   def formatted_date(d), do: d |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
 
   def build do
@@ -485,7 +489,7 @@ defmodule SundayReading do
   "presentation" =>
     %{  "1" =>
         %{  "title" => "The Presentation of Christ in the Temple (February 2)",
-            "colors" => ["green"],
+            "colors" => ["white"],
             "a" => %{ ot: [%{style: "req", read: "Mal 3.1-4"}],
                       ps: [%{style: "req", read: "Psalm 84"}],
                       nt: [%{style: "req", read: "Heb 2.14-18"}],
@@ -1879,7 +1883,7 @@ defmodule SundayReading do
             },
           "stJohn" =>
             %{  "title" => "St. John (December 27)",
-                "colors" => ["red"],
+                "colors" => ["white"],
                 "a" => %{ ot: [%{style: "req", read: "Ex 33.18-23"}],
                           ps: [%{style: "req", read: "Psalm 92.1-("},%{style: "opt", read: "Psalm 92.5-10"},%{style: "req", read: "Psalm 92.1-14"}],
                           nt: [%{style: "req", read: "1 Jn 1"}],
@@ -1917,7 +1921,7 @@ defmodule SundayReading do
             },
           "confessionOfStPeter" =>
             %{  "title" => "Confession of St. Peter (January 18)",
-                "colors" => ["red", "white"],
+                "colors" => ["white"],
                 "a" => %{ ot: [%{style: "req", read: "Acts 4.8-13"}],
                           ps: [%{style: "req", read: "Psalm 23"}],
                           nt: [%{style: "req", read: "1 Pet 5.1-11"}],
@@ -1936,7 +1940,7 @@ defmodule SundayReading do
             },
           "conversionOfStPaul" =>
             %{  "title" => "Conversion of St. Paul (January 25)",
-                "colors" => ["red", "white"],
+                "colors" => ["white"],
                 "a" => %{ ot: [%{style: "req", read: "Acts 26.9-21"}],
                           ps: [%{style: "req", read: "Psalm 67"}],
                           nt: [%{style: "req", read: "Gal 1.11-24"}],
@@ -1974,7 +1978,7 @@ defmodule SundayReading do
             },
           "stJoseph" =>
             %{  "title" => "St. Joseph (March 19)",
-                "colors" => ["blue", "white"],
+                "colors" => ["white", "blue"],
                 "a" => %{ ot: [%{style: "req", read: "2 Sam 7.4 7.8-16"}],
                           ps: [%{style: "req", read: "Psalm 89.1-4"},%{style: "opt", read: "Psalm 89.5-18"},%{style: "req", read: "Psalm 89.19-29"}],
                           nt: [%{style: "req", read: "Rom 4.13-18"}],
@@ -1993,7 +1997,7 @@ defmodule SundayReading do
             },
           "annunciation" =>
             %{  "title" => "The Annunciation (March 25)",
-                "colors" => ["blue", "white"],
+                "colors" => ["white", "blue"],
                 "a" => %{ ot: [%{style: "req", read: "Isaiah 7.10-14"}],
                           ps: [%{style: "req", read: "Psalm 40.1-11"},%{style: "opt", read: "Canticle 3"},%{style: "opt", read: "Canticle 15"}],
                           nt: [%{style: "req", read: "Heb 10.5-10"}],
@@ -2126,7 +2130,7 @@ defmodule SundayReading do
             },
           "dominion" =>
             %{  "title" => "Dominion Day (July 1)",
-                "colors" => ["red"],
+                "colors" => ["white"],
                 "a" => %{ ot: [%{style: "req", read: "Deut 6.1-15"}],
                           ps: [%{style: "req", read: "Psalm 145"}],
                           nt: [%{style: "req", read: "1 Peter 2.1-6"}],
@@ -2145,7 +2149,7 @@ defmodule SundayReading do
             },
           "independence" =>
             %{  "title" => "Independence Day (July 4)",
-                "colors" => ["red"],
+                "colors" => ["white"],
                 "a" => %{ ot: [%{style: "req", read: "Deut 10.17-21"}],
                           ps: [%{style: "req", read: "Psalm 145"}],
                           nt: [%{style: "req", read: "Heb 11.8-16"}],
@@ -2164,7 +2168,7 @@ defmodule SundayReading do
             },
           "stMaryMagdalene" =>
             %{  "title" => "St. Mary Magdalene (July 22)",
-                "colors" => ["red"],
+                "colors" => ["white"],
                 "a" => %{ ot: [%{style: "req", read: "Judith 9.1 11-14"}],
                           ps: [%{style: "req", read: "Psalm 42.1-7"},%{style: "opt", read: "Psalm 42.8-15"}],
                           nt: [%{style: "req", read: "2 Cor 5.14-20a"}],
@@ -2297,7 +2301,7 @@ defmodule SundayReading do
             },
           "michaelAllAngels" =>
             %{  "title" => "St. Michael All Angels (September 29)",
-                "colors" => ["blue", "white"],
+                "colors" => ["white"],
               "a" => %{ ot: [%{style: "req", read: "Gen 28.10-17"}],
                         ps: [%{style: "req", read: "Psalm 103"}],
                         nt: [%{style: "req", read: "Rev 12.7-12"}],
@@ -2373,7 +2377,7 @@ defmodule SundayReading do
             },
           "thanksgiving" =>
             %{  "title" => "Thanksgiving Day (Canada and the United States)",
-                "colors" => ["blue", "white"],
+                "colors" => ["white"],
               "a" => %{ ot: [%{style: "req", read: "Deut 8"}],
                         ps: [%{style: "req", read: "Psalm 65.1-8"},%{style: "opt", read: "Psalm 65.9-14"}],
                         nt: [%{style: "req", read: "James 1.17-27"}], 

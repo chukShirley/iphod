@@ -416,7 +416,7 @@ label.radio_label {
   margin: 0;
 }
 
-.day_white {
+.day_white, .day_gold {
 /* Permalink - use to edit and share this gradient: 
   http://colorzilla.com/gradient-editor/#fefcea+0,f1da36+100;Gold+3D */
   background: #fefcea; /* Old browsers */
@@ -434,6 +434,15 @@ label.radio_label {
   background: -webkit-linear-gradient(-45deg,  #f6f9ea 0%,#8ab66b 50%,#398235 100%); /* Chrome10-25,Safari5.1-6 */
   background: linear-gradient(135deg,  #f6f9ea 0%,#8ab66b 50%,#398235 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f9ea', endColorstr='#398235',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
+.day_blue {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+1,87e0fd+1,e8f7fc+1,53cbf1+69,53cbf1+69,05abe0+100 */
+background: #87e0fd; /* Old browsers */
+background: -moz-linear-gradient(-45deg,  #87e0fd 1%, #87e0fd 1%, #e8f7fc 1%, #53cbf1 69%, #53cbf1 69%, #05abe0 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg,  #87e0fd 1%,#87e0fd 1%,#e8f7fc 1%,#53cbf1 69%,#53cbf1 69%,#05abe0 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg,  #87e0fd 1%,#87e0fd 1%,#e8f7fc 1%,#53cbf1 69%,#53cbf1 69%,#05abe0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
 .day_violet {
