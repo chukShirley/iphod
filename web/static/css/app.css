@@ -106,6 +106,9 @@ form.link, form.button {
   width: 10em;
 }
 }
+#menu1 {
+  z-index: 201;
+}
 #datepicker {}
 #datepicker_div {
   position: relative; 
@@ -114,8 +117,9 @@ form.link, form.button {
   margin-bottom: 15px;
   padding: 3px 0;
 }
-#dateNav div {
+#date_nav div {
   text-align: center;
+  z-index: 99;
 }
 .current_date {
   color: darkblue;
