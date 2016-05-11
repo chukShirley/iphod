@@ -197,7 +197,7 @@ oneWeek address week =
 colorOptions: Models.Day -> List Html
 colorOptions day =
   let
-    (thisID, thisRef, thisClose) = httpReferences "colors" day.sunday.date
+    (thisID, thisRef, thisClose) = httpReferences "colors" day.date
     thisColor c =  li [class "reading_item"] [text c]
 
   in
@@ -212,7 +212,7 @@ colorOptions day =
                 , br [] []
                 , text day.sunday.title
                 ]
-            , ul [class "reading_list"] (List.map thisColor day.sunday.colors)
+            , ul [class "reading_list"] (List.map thisColor day.colors)
             ]    
         ]
     ]
@@ -310,7 +310,7 @@ reading lessons =
 day_classes: Models.Day -> Attribute
 day_classes day =
   let
-    firstColor = day.sunday.colors |> List.head |> Maybe.withDefault "green"
+    firstColor = day.colors |> List.head |> Maybe.withDefault "green"
     color_class = "day_" ++ firstColor
   in
     class ("day_of_month " ++ color_class)

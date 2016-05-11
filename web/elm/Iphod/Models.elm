@@ -185,7 +185,7 @@ initBiblesOrg =
 
 type alias Day =
   { name:       String
-  , color:      String
+  , colors:     List String
   , dayOfMonth: String
   , date:       String
   , daily:      Daily
@@ -196,7 +196,7 @@ type alias Day =
 initDay: Day
 initDay =
   { name  =       ""
-  , color =       ""
+  , colors =      []
   , dayOfMonth =  ""
   , date  =       ""
   , daily =       dailyInit
