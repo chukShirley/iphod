@@ -77,7 +77,7 @@ defmodule Iphod.PrayerController do
   defp put_canticle("mp", "ot", _,        "Thursday"),  do: "cantemus_domino"
   defp put_canticle("mp", "ot", "lent",   "Friday"),    do: "kyrie_pantokrator"
   defp put_canticle("mp", "ot", _,        "Friday"),    do: "quaerite_dominum"
-  defp put_canticle("mp", "ot", _,        "Saturday"),  do: "benedicite_omnia_opera"
+  defp put_canticle("mp", "ot", _,        "Saturday"),  do: "benedicite_omnia_opera_domini"
 
   defp put_canticle("mp", "nt", "advent", "Sunday"),    do: "benedictus"
   defp put_canticle("mp", "nt", "lent",   "Sunday"),    do: "benedictus"
@@ -95,7 +95,7 @@ defmodule Iphod.PrayerController do
   defp put_canticle("ep", "ot", "lent",   "Monday"),    do: "kyrie_pantokrator"
   defp put_canticle("ep", "ot", _,        "Monday"),    do: "cantemus_domino"
   defp put_canticle("ep", "ot", _,        "Tuesday"),   do: "quaerite_dominum"
-  defp put_canticle("ep", "ot", _,        "Wednesday"), do: "benedicite_omnia_opera"
+  defp put_canticle("ep", "ot", _,        "Wednesday"), do: "benedicite_omnia_opera_domini"
   defp put_canticle("ep", "ot", _,        "Thursday"),  do: "surge_illuminare"
   defp put_canticle("ep", "ot", _,        "Friday"),    do: "benedictis_es_domine"
   defp put_canticle("ep", "ot", _,        "Saturday"),  do: "ecce_deus"
