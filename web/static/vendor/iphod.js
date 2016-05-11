@@ -12653,7 +12653,7 @@ Elm.Iphod.Models.make = function (_elm) {
    var _op = {};
    var Day = F7(function (a,b,c,d,e,f,g) {
       return {name: a
-             ,color: b
+             ,colors: b
              ,dayOfMonth: c
              ,date: d
              ,daily: e
@@ -12816,7 +12816,7 @@ Elm.Iphod.Models.make = function (_elm) {
                    ,justToday: false
                    ,config: configInit};
    var initDay = {name: ""
-                 ,color: ""
+                 ,colors: _U.list([])
                  ,dayOfMonth: ""
                  ,date: ""
                  ,daily: dailyInit
