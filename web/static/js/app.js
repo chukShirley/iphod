@@ -174,11 +174,12 @@ if (window.location.pathname == "/calendar") {
     elmApp.ports.thisMonth.send( data )
   })
 
+
   channel_c.push("request_calendar", "")
 
   elmApp.ports.requestMoveMonth.subscribe(function(request) {
     console.log("MOVE MONTH: ", request)
-    channel_c.push("request_move_month", request)
+    // channel_c.push("request_move_month", request)
   })
 }
 

@@ -129,7 +129,7 @@ view address model =
 
 calendarNavHeader: Signal.Address Action -> Model -> List Html
 calendarNavHeader address model =
-  [ tr [id "calendar"]
+  [ tr []
       [ th [onClick address LastMonth] [ text "<" ]
       , dateNav address model
       , th [onClick address NextMonth] [ text ">"]

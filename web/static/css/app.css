@@ -409,6 +409,11 @@ label.radio_label {
   text-align: center;
 }
 
+th.cal_move_month a {
+  width: 100%;
+  display: block;
+}
+
 .cal_day_title {
   width: 99%;
   position: relative;

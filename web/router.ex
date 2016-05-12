@@ -20,6 +20,8 @@ defmodule Iphod.Router do
     get "/printables", PrintableController, :index
     get "/versions", BibleVersionsController, :index
     get "/calendar", CalendarController, :index
+    get "/calendar/prev/:month/:year", CalendarController, :prev
+    get "/calendar/next/:month/:year", CalendarController, :next
     get "/morningPrayer", PrayerController, :mp
     get "/morningPrayer/:psalm", PrayerController, :mp
     get "/morningPrayer/:psalm/:text", PrayerController, :mp

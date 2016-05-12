@@ -16678,7 +16678,7 @@ Elm.Calendar.make = function (_elm) {
    var LastMonth = {ctor: "LastMonth"};
    var calendarNavHeader = F2(function (address,model) {
       return _U.list([A2($Html.tr,
-      _U.list([$Html$Attributes.id("calendar")]),
+      _U.list([]),
       _U.list([A2($Html.th,
               _U.list([A2($Html$Events.onClick,address,LastMonth)]),
               _U.list([$Html.text("<")]))

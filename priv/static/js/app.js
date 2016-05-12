@@ -1364,50 +1364,45 @@ if (window.location.pathname == "/versions") {
 }
 
 if (window.location.pathname == "/calendar") {
-  var elmDiv, initialState, elmApp;
+  var channel_c = _socket2.default.channel("calendar");
+  channel_c.join().receive("ok", function (resp) {
+    console.log("Joined Calendar successfully", resp);
+  }).receive("error", function (resp) {
+    console.log("Unable to join Calendar", resp);
+  });
 
-  (function () {
-    var channel_c = _socket2.default.channel("calendar");
-    channel_c.join().receive("ok", function (resp) {
-      console.log("Joined Calendar successfully", resp);
-    }).receive("error", function (resp) {
-      console.log("Unable to join Calendar", resp);
-    });
+  var elmDiv = document.getElementById('elm-container'),
+      initialState = {
+    thisMonth: {
+      calendar: [],
+      month: "",
+      year: ""
+    }
+  },
+      elmApp = Elm.embed(Elm.Calendar, elmDiv, initialState);
 
-    elmDiv = document.getElementById('elm-container');
-    initialState = {
-      thisMonth: {
-        calendar: [],
-        month: "",
-        year: ""
-      }
-    };
-    elmApp = Elm.embed(Elm.Calendar, elmDiv, initialState);
-
-
-    channel_c.on("this_month", function (data) {
-      var z = data.calendar,
-          icm = init_config_model();
-      z.forEach(function (week) {
-        week.days.forEach(function (day) {
-          day.daily.config = icm;
-          day.daily.show = false;
-          day.daily.justToday = false;
-          day.sunday.config = icm;
-          day.sunday.show = false;
-          day.sunday.ofType = "sunday";
-        });
+  channel_c.on("this_month", function (data) {
+    var z = data.calendar,
+        icm = init_config_model();
+    z.forEach(function (week) {
+      week.days.forEach(function (day) {
+        day.daily.config = icm;
+        day.daily.show = false;
+        day.daily.justToday = false;
+        day.sunday.config = icm;
+        day.sunday.show = false;
+        day.sunday.ofType = "sunday";
       });
-      elmApp.ports.thisMonth.send(data);
     });
+    elmApp.ports.thisMonth.send(data);
+  });
 
-    channel_c.push("request_calendar", "");
+  channel_c.push("request_calendar", "");
 
-    elmApp.ports.requestMoveMonth.subscribe(function (request) {
-      console.log("MOVE MONTH: ", request);
-      channel_c.push("request_move_month", request);
-    });
-  })();
+  elmApp.ports.requestMoveMonth.subscribe(function (request) {
+    console.log("MOVE MONTH: ", request);
+    // channel_c.push("request_move_month", request)
+  });
 }
 
 if (window.location.pathname == "/") {
@@ -18345,7 +18340,7 @@ Elm.Calendar.make = function (_elm) {
    var LastMonth = {ctor: "LastMonth"};
    var calendarNavHeader = F2(function (address,model) {
       return _U.list([A2($Html.tr,
-      _U.list([$Html$Attributes.id("calendar")]),
+      _U.list([]),
       _U.list([A2($Html.th,
               _U.list([A2($Html$Events.onClick,address,LastMonth)]),
               _U.list([$Html.text("<")]))
