@@ -11,6 +11,7 @@ defmodule Psalms do
   def psalm({119, v1, v2}, "Coverdale"), do: psalm(119, v1, v2, "Coverdale")
   def psalm({119, v1, v2}, "BCP"), do: psalm(119, v1, v2, "BCP")
   def psalm({119, v1, v2}, "ESV"), do: EsvText.request("Ps 119.#{v1}-#{v2}")
+  def psalm({119, v1, v2}, ver), do: BibleComText.request(ver, "Ps 119.#{v1}-#{v2}")
 
   def psalm(n, ver ) when n |> is_bitstring, do: psalm(String.to_integer(n), ver)
 
@@ -18,6 +19,7 @@ defmodule Psalms do
   def psalm(n, "COVERDALE"), do: identity.coverdale[n]
   def psalm(n, "BCP"), do: identity.bcp[n]
   def psalm(n, "ESV"), do: EsvText.request("Ps #{n}")
+  def psalm(n, ver), do: BibleComText.request(ver, "Ps #{n}")
 
   def psalm(n,v1,v2, "Coverdale") do
     identity.coverdale[n] |> Map.take(list_of_vss(v1, v2))
@@ -49,7 +51,12 @@ defmodule Psalms do
   def _to_html(n, ver) when n |> is_integer, do: _to_html(psalm(n, ver), ver)
 
   def _to_html(ps, "ESV"), do: ps # ESV comes ready to go
-  def _to_html(ps, ver) do
+  def _to_html(ps, "BCP"), do: _to_local_html(ps)
+  def _to_html(ps, "Coverdale"), do: _to_local_html(ps)
+  def _to_html(ps, "COVERDALE"), do: _to_local_html(ps)
+  def _to_html(ps, ver), do: ps # BibleComText comes ready to go
+
+  def _to_local_html(ps) do
     s = ~s(<h3>#{ps["name"]} <span class="ps_title">#{ps["title"]}</span></h3></br>)
     ps 
       |> Enum.to_list

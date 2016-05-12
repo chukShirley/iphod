@@ -17633,7 +17633,13 @@ Elm.Iphod.make = function (_elm) {
    },
    namedDay.signal);
    var fancyNav = F2(function (address,model) {
-      var trans = model.config.ps;
+      var ep = A2($Basics._op["++"],
+      "/eveningPrayer/",
+      model.config.ps);
+      var mp = A2($Basics._op["++"],
+      "/morningPrayer/",
+      model.config.ps);
+      var foo = A2($Debug.log,"MorningPrayer",mp);
       return A2($Html.div,
       _U.list([$Html$Attributes.id("menu1")
               ,$Html$Attributes.$class("cssmenu")]),
@@ -17642,16 +17648,12 @@ Elm.Iphod.make = function (_elm) {
       _U.list([A2($Html.li,
               _U.list([A2($Html$Events.onClick,address,ToggleMp)]),
               _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href(A2($Basics._op["++"],
-              "/morningPrayer/",
-              trans))]),
+              _U.list([$Html$Attributes.href(mp)]),
               _U.list([$Html.text("Morning Prayer")]))]))
               ,A2($Html.li,
               _U.list([A2($Html$Events.onClick,address,ToggleEp)]),
               _U.list([A2($Html.a,
-              _U.list([$Html$Attributes.href(A2($Basics._op["++"],
-              "/eveningPrayer/",
-              trans))]),
+              _U.list([$Html$Attributes.href(mp)]),
               _U.list([$Html.text("Evening Prayer")]))]))
               ,A2($Html.li,
               _U.list([$Html$Attributes.$class("has-sub")]),

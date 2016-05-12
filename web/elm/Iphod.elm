@@ -456,12 +456,14 @@ listDates address model =
 fancyNav: Signal.Address Action -> Model -> Html
 fancyNav address model =
   let 
-    trans = model.config.ps
+    mp = "/morningPrayer/" ++ model.config.ps
+    ep = "/eveningPrayer/" ++ model.config.ps
+    foo = Debug.log "MorningPrayer" mp
   in
     div [id "menu1", class "cssmenu"] [
       ul []
-        [ li [onClick address ToggleMp] [ a [href ("/morningPrayer/" ++ trans)] [ text "Morning Prayer"] ]
-        , li [onClick address ToggleEp] [ a [href ("/eveningPrayer/" ++ trans)] [ text "Evening Prayer"] ]
+        [ li [onClick address ToggleMp] [ a [href mp] [ text "Morning Prayer"] ]
+        , li [onClick address ToggleEp] [ a [href mp] [ text "Evening Prayer"] ]
         , li [class "has-sub"] 
             [ a [href "#"] [ text "Easter"]
             , ul [] 
