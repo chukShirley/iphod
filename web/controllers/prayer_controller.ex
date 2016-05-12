@@ -4,15 +4,25 @@ defmodule Iphod.PrayerController do
   use Timex
   @tz "America/Los_Angeles"
 
-  def mp(conn, _params) do
-    render conn, "mp.html", model: prayer_model("mp")
+  def mp(conn, params) do
+    {psalm, text} = translations(params)
+    render conn, "mp.html", model: prayer_model("mp", psalm, text)
   end
 
-  def ep(conn, _params) do
-    render conn, "ep.html", model: prayer_model("ep")
+  def ep(conn, params) do
+    {psalm, text} = translations(params)
+    render conn, "ep.html", model: prayer_model("ep", psalm, text)
   end
 
-  defp prayer_model("mp") do
+# HELPERS ------
+
+  defp translations(map) do
+    psalm = if map |> Map.has_key?("psalm"), do: map["psalm"] |> String.upcase, else: "Coverdale"
+    text  = if map |> Map.has_key?("text"), do: map["text"] |> String.upcase, else: "ESV"
+    {psalm, text}
+  end
+
+  defp prayer_model("mp", psalm_translation, text_translation) do
     day = Date.now(@tz)
     {sent, ref} = DailyReading.opening_sentence("mp", day)
     dreading = DailyReading.readings(day)
@@ -21,14 +31,14 @@ defmodule Iphod.PrayerController do
       |> Map.put(:opening_sentence_ref, ref)
       |> Map.put(:antiphon, DailyReading.antiphon(day))
       |> Map.put(:invitatory_canticle, invitatory_canticle(dreading) )
-      |> Map.put(:mpp, put_psalm(dreading, :mpp))
-      |> Map.put(:mp1, put_lesson(dreading, :mp1))
-      |> Map.put(:mp2, put_lesson(dreading, :mp2))
+      |> Map.put(:mpp, put_psalm(dreading, :mpp, psalm_translation))
+      |> Map.put(:mp1, put_lesson(dreading, :mp1, text_translation))
+      |> Map.put(:mp2, put_lesson(dreading, :mp2, text_translation))
       |> Map.put(:ot_canticle, put_canticle("mp", "ot", dreading.season, dreading.day))
       |> Map.put(:nt_canticle, put_canticle("mp", "nt", dreading.season, dreading.day))
       |> Map.put(:collect_of_week, put_collect_of_week(dreading))
   end
-  defp prayer_model("ep") do
+  defp prayer_model("ep", psalm_translation, text_translation) do
     day = Date.now(@tz)
     {sent, ref} = DailyReading.opening_sentence("ep", day)
     dreading = DailyReading.readings(day)
@@ -37,9 +47,9 @@ defmodule Iphod.PrayerController do
       |> Map.put(:opening_sentence_ref, ref)
       |> Map.put(:antiphon, DailyReading.antiphon(day))
       |> Map.put(:invitatory_canticle, invitatory_canticle(dreading) )
-      |> Map.put(:epp, put_psalm(dreading, :epp))
-      |> Map.put(:ep1, put_lesson(dreading, :ep1))
-      |> Map.put(:ep2, put_lesson(dreading, :ep2))
+      |> Map.put(:epp, put_psalm(dreading, :epp, psalm_translation))
+      |> Map.put(:ep1, put_lesson(dreading, :ep1, text_translation))
+      |> Map.put(:ep2, put_lesson(dreading, :ep2, text_translation))
       |> Map.put(:ot_canticle, put_canticle("ep", "ot", dreading.season, dreading.day))
       |> Map.put(:nt_canticle, put_canticle("ep", "nt", dreading.season, dreading.day))
       |> Map.put(:collect_of_week, put_collect_of_week(dreading))
@@ -53,13 +63,13 @@ defmodule Iphod.PrayerController do
     end
   end
 
-  defp put_psalm(dreading, psx) do
+  defp put_psalm(dreading, psx, psalm_translation) do
     dreading[psx]
     |> Enum.map(fn(ps)->
-      ps |> Map.put(:body, Psalms.to_html( ps.read, "Coverdale") )
+      ps |> Map.put(:body, Psalms.to_html( ps.read, psalm_translation) )
     end)
   end
-  defp put_lesson(dreading, lsx) do
+  defp put_lesson(dreading, lsx, _text_translation) do
     dreading[lsx] 
     |> Enum.map(fn(lsn)->
       lsn |> Map.put(:body, EsvText.request(lsn.read, false) )

@@ -15,6 +15,7 @@ defmodule Psalms do
   def psalm(n, ver ) when n |> is_bitstring, do: psalm(String.to_integer(n), ver)
 
   def psalm(n, "Coverdale"), do: identity.coverdale[n]
+  def psalm(n, "COVERDALE"), do: identity.coverdale[n]
   def psalm(n, "BCP"), do: identity.bcp[n]
   def psalm(n, "ESV"), do: EsvText.request("Ps #{n}")
 

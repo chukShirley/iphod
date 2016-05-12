@@ -21,7 +21,11 @@ defmodule Iphod.Router do
     get "/versions", BibleVersionsController, :index
     get "/calendar", CalendarController, :index
     get "/morningPrayer", PrayerController, :mp
+    get "/morningPrayer/:psalm", PrayerController, :mp
+    get "/morningPrayer/:psalm/:text", PrayerController, :mp
     get "/eveningPrayer", PrayerController, :ep
+    get "/eveningPrayer/:psalm", PrayerController, :ep
+    get "/eveningPrayer/:psalm/:text", PrayerController, :ep
   end
 
   # Other scopes may use custom stacks.
