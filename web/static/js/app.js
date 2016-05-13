@@ -97,8 +97,10 @@ function remove_abbr(v, i, ary){
   return v != this;
 }
 
-$(".mp_button").click( function() {
-  alert($(this).attr("data-date"));
+$(".reading_button").click( function() {
+  let date = $(this).attr("data-date")
+    , of_type = $(this).attr("data-type");
+  channel_c.push("get_text", [of_type, date]);
 });
  
 // SOCKETS ------------------------
@@ -147,7 +149,7 @@ if (window.location.pathname == "/versions") {
 }
 
 if (window.location.pathname == "/calendar") {
-  let channel_c = socket.channel("calendar");
+  var channel_c = socket.channel("calendar");
   channel_c.join()
     .receive("ok",    resp => {console.log("Joined Calendar successfully", resp)})
     .receive("error", resp => {console.log("Unable to join Calendar", resp)})
