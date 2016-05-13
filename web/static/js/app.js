@@ -96,7 +96,11 @@ function unsave_version(abbr) {
 function remove_abbr(v, i, ary){
   return v != this;
 }
-  
+
+$(".mp_button").click( function() {
+  alert($(this).attr("data-date"));
+});
+ 
 // SOCKETS ------------------------
 
 import "./menu"
@@ -126,7 +130,7 @@ if (window.location.pathname == "/versions") {
     });
     elmApp.ports.allVersions.send(list);
   })
-  
+
   channel_v.push("request_list", "");
 
   elmApp.ports.requestSaveVersion.subscribe(function(request) {
@@ -173,7 +177,6 @@ if (window.location.pathname == "/calendar") {
     })
     elmApp.ports.thisMonth.send( data )
   })
-
 
   channel_c.push("request_calendar", "")
 

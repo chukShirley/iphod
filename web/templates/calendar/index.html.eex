@@ -33,7 +33,7 @@
             <p class= "cal_day_title"><%=day.daily.title%></p>
             <ul class= "day_options">
               <li class= "reading_group">
-                <button onClick= "sayHi('Well, hello')">MP</button></li>
+                <button class= "mp_button" data-date= "<%=day.date%>">MP</button></li>
               <li class= "reading_group"><button>EP</button></li>
               <li class= "reading_group"><button>EU</button></li>
             </ul>

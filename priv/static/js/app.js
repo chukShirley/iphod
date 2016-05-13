@@ -1319,6 +1319,10 @@ function remove_abbr(v, i, ary) {
   return v != this;
 }
 
+$(".mp_button").click(function () {
+  alert($(this).attr("data-date"));
+});
+
 // SOCKETS ------------------------
 
 if (window.location.pathname == "/versions") {
