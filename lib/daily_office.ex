@@ -101,6 +101,13 @@ defmodule DailyReading do
       readings(date).colors
     end
   end
+
+  def title_for(date) do
+    {season, wk, _lityr, _date} = readings(date)
+    dow = date |> Timex.format!("{WDfull}")
+    update_title(date, identity[season][wk][dow].title)
+  end
+
   def update_title(date, title) do
     {red_letter_date, holy_day} = Lityear.next_holy_day(date)
     if date == red_letter_date, do: SundayReading.holy_day(holy_day)["title"], else: title
