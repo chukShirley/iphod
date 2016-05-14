@@ -463,7 +463,7 @@ fancyNav address model =
     div [id "menu1", class "cssmenu"] [
       ul []
         [ li [onClick address ToggleMp] [ a [href mp] [ text "Morning Prayer"] ]
-        , li [onClick address ToggleEp] [ a [href mp] [ text "Evening Prayer"] ]
+        , li [onClick address ToggleEp] [ a [href ep] [ text "Evening Prayer"] ]
         , li [class "has-sub"] 
             [ a [href "#"] [ text "Easter"]
             , ul [] 

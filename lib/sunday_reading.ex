@@ -86,6 +86,29 @@ defmodule SundayReading do
     identity["redLetter"][festival]
   end
 
+  def eu_today(date) do
+    # if date is redletter, use those readings
+    # but if date is sunday, use those sunday readings
+    # otherwise use last_sunday 
+    r = readings(date)
+    eu =     %{  
+      ofType:   "sunday", # but it could be redletter
+      date:     r.date,
+      season:   r.season,
+      week:     r.week,
+      title:    r.title,
+      colors:   r.colors,
+      collect:  r.collect,
+      ot:       r.ot,
+      ps:       r.ps,
+      nt:       r.nt,
+      gs:       r.gs,
+      show:     true
+      }
+    # now load up the text bodies
+
+  end
+
   def formatted_date(d), do: d |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
 
   def build do

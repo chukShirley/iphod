@@ -1,1 +1,57 @@
-<div id="elm-container"></div>
+<%# <div id="elm-container"></div> %>
+
+<div>
+  <h1>Select Versions</h1>
+  <table class= "versions">
+    <thead>
+      <tr>
+        <th class= "ver_abbr">Version</th>
+        <th class= "ver_name">Version Name</th>
+        <th class= "ver_language">Language</th>
+        <th class= "ver_use">Select</th>
+      </tr>
+      <tr>
+
+        <th>
+        <input  id= "find_version" 
+                type "text"
+                placeholder= "Version"
+                autofocus= "true"
+                name="find_version"
+                style="width: 90%" 
+                >
+
+        </th>
+        <th>
+        <input  id="find_name"
+                type="text" 
+                placeholder="Version Name"
+                autofocus="true" 
+                name="find_name"
+                style="width: 90%" 
+        >
+        </th>
+        <th>
+        <input  id="find_lang"
+                type="text" 
+                placeholder="Language"
+                autofocus="true" 
+                name="find_lang" 
+                style="width: 90%" 
+        >
+        </th>
+        <th><<< Search</th>
+      </tr>
+    </thead>
+    <thead>
+      <%= for ver <- @model do %>
+        <tr>
+          <td class="ver_abbr" ><%=ver.abbr%></td>
+          <td class="ver_name" ><%=ver.name%></td>
+          <td class="ver_language" ><%=ver.language%></td>
+          <td class="ver_use" ><button class="ver_use_button" >Use</button> </td>
+        </tr>
+      <% end %>
+    </thead>
+  </table>
+</div>

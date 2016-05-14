@@ -93,6 +93,56 @@ defmodule DailyReading do
     |> Map.put_new(:version, "")
   end
 
+#      %{  date: r.date,
+#        season: r.season,
+#        week: r.week,
+#        day: r.day,
+#        title: r.title,
+#        mp1: r.mp1,
+#        mp2: r.mp2,
+#        mpp: r.mpp,
+#        ep1: r.ep1,
+#        ep2: r.ep2,
+#        epp: r.epp,
+#        show: show,
+#        justToday: false
+#    }
+
+# [:colors, :date, :day, :ep1, :ep2, :epp, :mp1, :mp2, :mpp, :season, :title,
+#  :week]
+
+  def mp_today(date) do
+    r = readings(date)
+    mp = %{
+      colors: r.colors,
+      date:   r.date,
+      day:    r.day,
+      season: r.season,
+      title:  r.title,
+      week:   r.week,
+      mp1:    r.mp1,
+      mp2:    r.mp2,
+      mpp:    r.mpp
+    }
+    # get the ESV text, put it the body for mp1, mp2, mpp
+  end
+
+  def ep_today(date) do
+    r = readings(date)
+    mp = %{
+      colors: r.colors,
+      date:   r.date,
+      day:    r.day,
+      season: r.season,
+      title:  r.title,
+      week:   r.week,
+      ep1:    r.ep1,
+      ep2:    r.ep2,
+      epp:    r.epp
+    }
+    # get the ESV text, put it the body for ep1, ep2, epp
+  end
+
   def color_for(date) do
     {red_letter_date, holy_day} = Lityear.next_holy_day(date)
     colors = if date == red_letter_date do
@@ -103,9 +153,7 @@ defmodule DailyReading do
   end
 
   def title_for(date) do
-    {season, wk, _lityr, _date} = readings(date)
-    dow = date |> Timex.format!("{WDfull}")
-    update_title(date, identity[season][wk][dow].title)
+    update_title(date, readings(date).title)
   end
 
   def update_title(date, title) do

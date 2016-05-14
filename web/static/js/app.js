@@ -97,99 +97,93 @@ function remove_abbr(v, i, ary){
   return v != this;
 }
 
-$(".reading_button").click( function() {
-  let date = $(this).attr("data-date")
-    , of_type = $(this).attr("data-type");
-  channel_c.push("get_text", [of_type, date]);
-});
- 
 // SOCKETS ------------------------
 
 import "./menu"
 import socket from "./socket"
 
-if (window.location.pathname == "/versions") {
-  let channel_v = socket.channel("versions");
-  channel_v.join()
-    .receive("ok", resp => { console.log("Joined Versions successfully", resp) })
-    .receive("error", resp => { console.log("Unable to join Versions", resp) })
-  
-  var elmDiv = document.getElementById('elm-container')
-    , initialState = {
-        allVersions: []
-    } 
-    , elmApp = Elm.embed(Elm.Translations, elmDiv, initialState);
-  
+//if (window.location.pathname == "/versions") {
+//  let channel_v = socket.channel("versions");
+//  channel_v.join()
+//    .receive("ok", resp => { console.log("Joined Versions successfully", resp) })
+//    .receive("error", resp => { console.log("Unable to join Versions", resp) })
+//  
+//  var elmDiv = document.getElementById('elm-container')
+//    , initialState = {
+//        allVersions: []
+//    } 
+//    , elmApp = Elm.embed(Elm.Translations, elmDiv, initialState);
+//  
 //  channel_v.on("version", data => {
 //    elmApp.ports.thisVersion.send(data);
 //  })
 
-  channel_v.on("all_versions", data => {
-    let list = data.list
-      , in_use = get_versions("iphod_vers", "ESV");
-    list.forEach(function(ver) {
-      if (in_use.indexOf(ver.abbr) > -1) { ver.selected = true }
-    });
-    elmApp.ports.allVersions.send(list);
-  })
+//   channel_v.on("all_versions", data => {
+//     let list = data.list
+//       , in_use = get_versions("iphod_vers", "ESV");
+//     list.forEach(function(ver) {
+//       if (in_use.indexOf(ver.abbr) > -1) { ver.selected = true }
+//     });
+//     elmApp.ports.allVersions.send(list);
+//   })
+// 
+//   channel_v.push("request_list", "");
+// 
+//   elmApp.ports.requestSaveVersion.subscribe(function(request) {
+//     let   cmnd = request[0]
+//         , ver  = request[1];
+//     if (cmnd == "save") {
+//       save_version(ver.abbr);
+//     } 
+//     else {
+//       unsave_version(ver.abbr);
+//     }
+//   });
+// 
+// }
 
-  channel_v.push("request_list", "");
-
-  elmApp.ports.requestSaveVersion.subscribe(function(request) {
-    let   cmnd = request[0]
-        , ver  = request[1];
-    if (cmnd == "save") {
-      save_version(ver.abbr);
-    } 
-    else {
-      unsave_version(ver.abbr);
-    }
-  });
-
-}
-
-if (window.location.pathname == "/calendar") {
-  var channel_c = socket.channel("calendar");
-  channel_c.join()
-    .receive("ok",    resp => {console.log("Joined Calendar successfully", resp)})
-    .receive("error", resp => {console.log("Unable to join Calendar", resp)})
-
-  var elmDiv = document.getElementById('elm-container')
-    , initialState = {
-        thisMonth: {
-          calendar: [],
-          month:    "",
-          year:     ""
-        }
-    }
-    , elmApp = Elm.embed(Elm.Calendar, elmDiv, initialState)
-
-  channel_c.on("this_month", data => {
-    var z = data.calendar,
-        icm = init_config_model();
-    z.forEach( function(week){
-      week.days.forEach( function(day){
-        day.daily.config = icm;
-        day.daily.show = false;
-        day.daily.justToday = false;
-        day.sunday.config = icm;
-        day.sunday.show = false;
-        day.sunday.ofType = "sunday"
-      })
-    })
-    elmApp.ports.thisMonth.send( data )
-  })
-
-  channel_c.push("request_calendar", "")
-
-  elmApp.ports.requestMoveMonth.subscribe(function(request) {
-    console.log("MOVE MONTH: ", request)
-    // channel_c.push("request_move_month", request)
-  })
-}
+//if (window.location.pathname == "/calendar") {
+//  var channel_c = socket.channel("calendar");
+//  channel_c.join()
+//    .receive("ok",    resp => {console.log("Joined Calendar successfully", resp)})
+//    .receive("error", resp => {console.log("Unable to join Calendar", resp)})
+//
+//  var elmDiv = document.getElementById('elm-container')
+//    , initialState = {
+//        thisMonth: {
+//          calendar: [],
+//          month:    "",
+//          year:     ""
+//        }
+//    }
+//    , elmApp = Elm.embed(Elm.Calendar, elmDiv, initialState)
+//
+//  channel_c.on("this_month", data => {
+//    var z = data.calendar,
+//        icm = init_config_model();
+//    z.forEach( function(week){
+//      week.days.forEach( function(day){
+//        day.daily.config = icm;
+//        day.daily.show = false;
+//        day.daily.justToday = false;
+//        day.sunday.config = icm;
+//        day.sunday.show = false;
+//        day.sunday.ofType = "sunday"
+//      })
+//    })
+//    elmApp.ports.thisMonth.send( data )
+//  })
+//
+//  channel_c.push("request_calendar", "")
+//
+//  elmApp.ports.requestMoveMonth.subscribe(function(request) {
+//    console.log("MOVE MONTH: ", request)
+//    // channel_c.push("request_move_month", request)
+//  })
+//}
 
 
-if (window.location.pathname == "/") {
+// if (window.location.pathname == "/") {
 
   let channel = socket.channel("iphod:readings")
   channel.join()
@@ -218,6 +212,12 @@ if (window.location.pathname == "/") {
     elmApp.ports.newEmail.send(data);
   })
 
+$(".reading_button").click( function() {
+  let date = $(this).attr("data-date")
+    , of_type = $(this).attr("data-type");
+  channel.push("get_text", [of_type, date]);
+});
+ 
 
   // Hook up Elm
   
@@ -339,6 +339,6 @@ if (window.location.pathname == "/") {
       s.setItem("iphod_fnotes", config.fnotes)
     }
   })
-}
+// }
 
 

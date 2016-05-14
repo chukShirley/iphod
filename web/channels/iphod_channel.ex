@@ -203,6 +203,22 @@ defmodule Iphod.IphodChannel do
     
   end
 
+  def handle_in("get_text", ["EU", date], socket) do
+    # a couple things need to be done here
+    # 1) is the date a redletter day or not
+    # 2) are footnotes to be displayed or not
+    push socket, "eu_today", SundayReading.eu_today(date)
+  end
+  
+  def handle_in("get_text", ["MP", date], socket) do
+    push socket, "mp_today", DailyReading.mp_today(date)
+  end
+  
+  def handle_in("get_text", ["EP", date], socket) do
+    push socket, "ep_today", DailyReading.ep_today(date)
+  end
+  
+
   def handle_in("request_send_email", email, socket) do
     send_contact_me email["from"], email["topic"], email["text"]
     push socket, "new_email", @email
