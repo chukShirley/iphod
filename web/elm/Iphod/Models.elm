@@ -1,8 +1,10 @@
 module Iphod.Models ( Config, Lesson, Sunday, Daily, Day,
                       Email, Collect, SundayCollect, Proper,
+                      DailyEU, DailyMP, DailyEP,
                       configInit, sundayInit, dailyInit,
                       emailInit, initCollect, initSundayCollect,
-                      initProper, initDay
+                      initProper, initDay,
+                      initDailyEU, initDailyMP, initDailyEP
                     ) where
 
 type alias Config =
@@ -154,6 +156,88 @@ dailyInit =
   , show      = False
   , justToday = False
   , config    = configInit
+  }
+
+type alias DailyEU =
+  { ofType:   String
+  , date:     String
+  , season:   String
+  , week:     String
+  , title:    String
+  , colors:   List String
+  , collect:  String
+  , ot:       List Lesson
+  , ps:       List Lesson
+  , nt:       List Lesson
+  , gs:       List Lesson
+  , show:     Bool
+  }
+
+initDailyEU: DailyEU
+initDailyEU =
+  { ofType  = ""
+  , date    = ""
+  , season  = ""
+  , week    = ""
+  , title   = ""
+  , colors  = []
+  , collect = ""
+  , ot      = []
+  , ps      = []
+  , nt      = []
+  , gs      = []
+  , show    = True
+  }
+
+
+type alias DailyMP =
+  { colors: List String
+  , date:   String
+  , day:    String
+  , season: String
+  , title:  String
+  , week:   String
+  , mp1:    List Lesson
+  , mp2:    List Lesson
+  , mpp:    List Lesson
+  }
+
+initDailyMP: DailyMP
+initDailyMP =
+  { colors  = []
+  , date    = ""
+  , day     = ""
+  , season  = ""
+  , title   = ""
+  , week    = ""
+  , mp1     = []
+  , mp2     = []
+  , mpp     = []
+  }
+
+type alias DailyEP =
+  { colors: List String
+  , date:   String
+  , day:    String
+  , season: String
+  , title:  String
+  , week:   String
+  , ep1:    List Lesson
+  , ep2:    List Lesson
+  , epp:    List Lesson
+  }
+
+initDailyEP: DailyEP
+initDailyEP =
+  { colors  = []
+  , date    = ""
+  , day     = ""
+  , season  = ""
+  , title   = ""
+  , week    = ""
+  , ep1     = []
+  , ep2     = []
+  , epp     = []
   }
 
 type alias ESV =

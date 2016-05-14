@@ -207,15 +207,21 @@ defmodule Iphod.IphodChannel do
     # a couple things need to be done here
     # 1) is the date a redletter day or not
     # 2) are footnotes to be displayed or not
-    push socket, "eu_today", SundayReading.eu_today(date)
+    day = Timex.parse!(date, "{WDfull} {Mfull} {D}, {YYYY}")
+    push socket, "eu_today", SundayReading.eu_today(day)
+    {:noreply, socket}  
   end
   
   def handle_in("get_text", ["MP", date], socket) do
-    push socket, "mp_today", DailyReading.mp_today(date)
+    day = Timex.parse!(date, "{WDfull} {Mfull} {D}, {YYYY}")
+    push socket, "mp_today", DailyReading.mp_today(day)
+    {:noreply, socket}  
   end
   
   def handle_in("get_text", ["EP", date], socket) do
-    push socket, "ep_today", DailyReading.ep_today(date)
+    day = Timex.parse!(date, "{WDfull} {Mfull} {D}, {YYYY}")
+    push socket, "ep_today", DailyReading.ep_today(day)
+    {:noreply, socket}  
   end
   
 

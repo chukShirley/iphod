@@ -201,7 +201,22 @@ import socket from "./socket"
       z.eveningPrayer.config = icm;
       z.morningPrayer.config = icm;
     
-      elmApp.ports.nextSunday.send(z);
+//      elmApp.ports.nextSunday.send(z);
+  })
+
+  channel.on('eu_today', data => {
+    console.log("EU: ", data)
+    elmApp.ports.newEU.send(data)
+  })
+  
+  channel.on('mp_today', data => {
+    console.log("MP: ", data)
+    elmApp.ports.newMP.send(data)
+  })
+  
+  channel.on('ep_today', data => {
+    console.log("eP: ", data)
+    elmApp.ports.newEP.send(data)
   })
   
   channel.on('new_text', data => {
