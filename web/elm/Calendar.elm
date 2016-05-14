@@ -143,9 +143,9 @@ dateNav address model =
 
 mpEp: Signal.Address Action -> Model -> List Html
 mpEp action model =
-  [ th [class "mpep_link", colspan 3] [ a [href "morningPrayer"] [button [] [text "Morning Prayer"]]]
+  [ th [class "mpep_link", colspan 3] [ a [href "/morningPrayer"] [button [] [text "Morning Prayer"]]]
   , th [class "mpep_link" ] [text "Today"]
-  , th [class "mpep_link", colspan 3] [ a [href "eveningPrayer"] [button [] [text "Evening Prayer"]]]
+  , th [class "mpep_link", colspan 3] [ a [href "/eveningPrayer"] [button [] [text "Evening Prayer"]]]
   ]
 
 calendarDayHeader: List Html

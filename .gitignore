@@ -65,3 +65,5 @@ Helper.elmo
 exact-dependencies.json
 Helper.elmi
 deploy
+
+.DS_Store
