@@ -16651,7 +16651,7 @@ Elm.Calendar.make = function (_elm) {
                      _U.list([$Html$Attributes.$class("mpep_link")
                              ,$Html$Attributes.colspan(3)]),
                      _U.list([A2($Html.a,
-                     _U.list([$Html$Attributes.href("morningPrayer")]),
+                     _U.list([$Html$Attributes.href("/morningPrayer")]),
                      _U.list([A2($Html.button,
                      _U.list([]),
                      _U.list([$Html.text("Morning Prayer")]))]))]))
@@ -16662,7 +16662,7 @@ Elm.Calendar.make = function (_elm) {
                      _U.list([$Html$Attributes.$class("mpep_link")
                              ,$Html$Attributes.colspan(3)]),
                      _U.list([A2($Html.a,
-                     _U.list([$Html$Attributes.href("eveningPrayer")]),
+                     _U.list([$Html$Attributes.href("/eveningPrayer")]),
                      _U.list([A2($Html.button,
                      _U.list([]),
                      _U.list([$Html.text("Evening Prayer")]))]))]))]);
