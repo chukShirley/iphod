@@ -1904,7 +1904,7 @@ defmodule DailyReading do
                             },
             "Friday" =>   %{title: "Friday Ember Day",
                             colors: ["violet"],
-                            mp1: [%{style: "req", read: "Num 11.16, 17, 24-29"}],
+                            mp1: [%{style: "req", read: "Num 11.16-17 and 24-29"}],
                             mp2: [%{style: "req", read: "2 Cor 5.14-6.10"}],
                             ep1: [%{style: "req", read: "Jer 31.31-34"}],
                             ep2: [%{style: "req", read: "2 Cor 3"}]
