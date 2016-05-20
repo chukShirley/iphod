@@ -93,24 +93,6 @@ defmodule DailyReading do
     |> Map.put_new(:version, "")
   end
 
-#      %{  date: r.date,
-#        season: r.season,
-#        week: r.week,
-#        day: r.day,
-#        title: r.title,
-#        mp1: r.mp1,
-#        mp2: r.mp2,
-#        mpp: r.mpp,
-#        ep1: r.ep1,
-#        ep2: r.ep2,
-#        epp: r.epp,
-#        show: show,
-#        justToday: false
-#    }
-
-# [:colors, :date, :day, :ep1, :ep2, :epp, :mp1, :mp2, :mpp, :season, :title,
-#  :week]
-
   def mp_today(date) do
     r = readings(date)
     mp = %{
@@ -122,7 +104,8 @@ defmodule DailyReading do
       week:   r.week,
       mp1:    r.mp1,
       mp2:    r.mp2,
-      mpp:    r.mpp
+      mpp:    r.mpp,
+      show:   false
     }
     # get the ESV text, put it the body for mp1, mp2, mpp
   end
@@ -138,7 +121,8 @@ defmodule DailyReading do
       week:   r.week,
       ep1:    r.ep1,
       ep2:    r.ep2,
-      epp:    r.epp
+      epp:    r.epp,
+      show:   false
     }
     # get the ESV text, put it the body for ep1, ep2, epp
   end
@@ -160,6 +144,34 @@ defmodule DailyReading do
     {red_letter_date, holy_day} = Lityear.next_holy_day(date)
     if date == red_letter_date, do: SundayReading.holy_day(holy_day)["title"], else: title
   end
+
+  def mp_body(date) do
+    footnotes = false # will have to get real value from config
+    mp = mp_today(date)
+    [:mp1, :mp2, :mpp] 
+      |> Enum.reduce(mp, fn(r, acc)-> 
+        acc |> Map.put(r, lesson_with_body(mp[r]) )
+      end)
+    |> Map.put(:show, true)
+  end
+
+  def ep_body(date) do
+    footnotes = false # will have to get real value from config
+    ep = ep_today(date)
+    [:ep1, :ep2, :epp] 
+      |> Enum.reduce(ep, fn(r, acc)-> 
+        acc |> Map.put(r, lesson_with_body(ep[r]) )
+      end)
+    |> Map.put(:show, true)
+  end
+
+  def lesson_with_body(list) do
+    list |> Enum.map(fn(lesson)->
+      lesson |> Map.put(:body, EsvText.request(lesson.read) )
+    end)
+  end
+
+
 
   def build do
     %{"antiphon" =>

@@ -45,7 +45,8 @@ exports.config = {
       "test/static",
       "web/elm/Iphod.elm",
       "web/elm/Translations.elm",
-      "web/elm/Calendar.elm"
+      "web/elm/Calendar.elm",
+      "web/elm/Header.elm"
     ],
 
     // Where to compile files to
@@ -56,7 +57,12 @@ exports.config = {
   plugins: {
     elmBrunch: {
       elmFolder: 'web/elm',
-      mainModules: ['Iphod.elm', 'Translations.elm', "Calendar.elm"],
+      mainModules: [
+        'Iphod.elm', 
+        'Translations.elm', 
+        'Calendar.elm',
+        'Header.elm'
+      ],
       outputFolder: '../static/vendor'
     },
     babel: {

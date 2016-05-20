@@ -29,12 +29,12 @@ defmodule SundayReading do
     identity[season][wk][yr]
       |> add_ids
       |> Map.merge( %{
-                date:   sunday |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"), 
-                season: season, 
-                week:   wk, 
-                title:  identity[season][wk]["title"],
-                colors: identity[season][wk]["colors"],
-                collect: Collects.get(season, wk)
+                date:     sunday |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"), 
+                season:   season, 
+                week:     wk, 
+                title:    identity[season][wk]["title"],
+                colors:   identity[season][wk]["colors"],
+                collect:  Collects.get(season, wk)
               })
   end
 
@@ -107,6 +107,20 @@ defmodule SundayReading do
       }
     # now load up the text bodies
 
+  end
+
+  def eu_body(date) do
+    footnotes = false # will have to get real value from config
+    eu = eu_today(date)
+    [:ot, :ps, :nt, :gs] |> Enum.reduce(eu, fn(r, acc)-> 
+      acc |> Map.put(r, lesson_with_body(eu[r]) )
+    end)
+  end
+
+  def lesson_with_body(list) do
+    list |> Enum.map(fn(lesson)->
+      lesson |> Map.put(:body, EsvText.request(lesson.read) )
+    end)
   end
 
   def formatted_date(d), do: d |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")

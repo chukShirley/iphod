@@ -73,23 +73,23 @@ view: Signal.Address Action -> Model -> Html
 view address model =
   div
     [ class "config"]
-    [ span 
+    [ p 
         []
         [ text "Psalms in: "
         , psRadio address model PS "Coverdale"
         , psRadio address model PS "ESV"
         , psRadio address model PS "BCP"
         ]
-    , span 
+    , p 
         [style [("margin-left", "2em")]]
         [ text "FootNotes: "
         , ftnoteCheck address model "fnotes"
         ]
---    , span
---        [style [("margin-left", "2em")]]
---        [ text "Version: "
---        , versionSelect address model
---        ]
+    , p
+        [style [("margin-left", "2em")]]
+        [ text "Version: "
+        , versionSelect address model
+        ]
     ]
 
 

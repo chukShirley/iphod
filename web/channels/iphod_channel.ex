@@ -11,7 +11,7 @@ defmodule Iphod.IphodChannel do
   # import EsvText
   use Timex
   @tz "America/Los_Angeles"
-  @email %{ from: "", topic: "", text: "", show: false}
+  @email %{ from: "", topic: "", text: ""}
 #  @config %{ ot: "ESV",
 #             ps: "Coverdale",
 #             nt: "ESV",
@@ -203,24 +203,39 @@ defmodule Iphod.IphodChannel do
     
   end
 
+  def handle_in("init_calendar", _, socket) do
+    date = Date.now(@tz)
+    push socket, "eu_today", SundayReading.eu_today(date)
+    push socket, "mp_today", DailyReading.mp_today(date)
+    push socket, "ep_today", DailyReading.ep_today(date)
+    push socket, "init_email", @email
+    {:noreply, socket}  
+  end
+
   def handle_in("get_text", ["EU", date], socket) do
     # a couple things need to be done here
     # 1) is the date a redletter day or not
     # 2) are footnotes to be displayed or not
-    day = Timex.parse!(date, "{WDfull} {Mfull} {D}, {YYYY}")
-    push socket, "eu_today", SundayReading.eu_today(day)
+    day = 
+      Timex.parse!(date, "{WDfull} {Mfull} {D}, {YYYY}") 
+      |> Timex.to_date
+    push socket, "eu_today", SundayReading.eu_body(day)
     {:noreply, socket}  
   end
   
   def handle_in("get_text", ["MP", date], socket) do
-    day = Timex.parse!(date, "{WDfull} {Mfull} {D}, {YYYY}")
-    push socket, "mp_today", DailyReading.mp_today(day)
+    day = 
+      Timex.parse!(date, "{WDfull} {Mfull} {D}, {YYYY}") 
+      |> Timex.to_date
+    push socket, "mp_today", DailyReading.mp_body(day)
     {:noreply, socket}  
   end
   
   def handle_in("get_text", ["EP", date], socket) do
-    day = Timex.parse!(date, "{WDfull} {Mfull} {D}, {YYYY}")
-    push socket, "ep_today", DailyReading.ep_today(day)
+    day = 
+      Timex.parse!(date, "{WDfull} {Mfull} {D}, {YYYY}") 
+      |> Timex.to_date
+    push socket, "ep_today", DailyReading.ep_body(day)
     {:noreply, socket}  
   end
   

@@ -22,17 +22,6 @@ form.link, form.button {
 }
 
 /* Custom page header */
-.header {
-  border-bottom: 1px solid #e5e5e5;
-}
-.logo {
-  width: 519px;
-  height: 71px;
-  display: inline-block;
-  margin-bottom: 1em;
-  background-image: url("/images/phoenix.png");
-  background-size: 519px 71px;
-}
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
@@ -89,17 +78,34 @@ form.link, form.button {
 }
 
 #header {
-  background-image: url("/images/used79bcp.png");
+  background-image: url("/images/header.png");
+  background-size: 17%;
   background-repeat: no-repeat;
+  background-position: 0em 0em;
   margin-bottom: 0.1em;
   line-height: 50px;
 }
+
+#header-options {
+  position: relative;
+  float: right;
+  margin-top: -1em;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  list-style-type: none;
+}
+
+li.option-item {
+  display: inline;
+}
+
 .home_link {
   background-image: url("/images/legereme.jpg");
   background-repeat: no-repeat;
-  margin-left: 27em;
+  background-position: 0em 1em;
+  margin-left: 10em;
   display:block;
-  height:50;
+  height:50px;
   text-indent: 100%;
   overflow:hidden;
   white-space:nowrap;
@@ -276,7 +282,7 @@ button {
   font-family: 'Open Sans', Helvetica, sans-serif;
   font-size: 0.8em;
   font-weight: 700;
-  color: #d3eced;
+  color: black;
 }
 
 .radio_button {
@@ -409,6 +415,10 @@ label.radio_label {
   text-align: center;
 }
 
+td#table-rollup {
+  text-align: center;
+}
+
 th.cal_move_month a {
   width: 100%;
   display: block;
@@ -500,7 +510,49 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', end
   text-align: center;
 }
 
-.modalDialog {
+.email-modal {
+  width: 600px;
+}
+.email {
+    position: absolute;
+    z-index: 999;
+    height: 15em;
+    width: 35em;
+    margin-top: 0.5em;
+    border: 2px solid darkblue;
+    border-radius: 0.5em;
+    background-color: linen;
+}
+
+.email-addr {
+    width: 20em;
+    margin-left: 1em;
+    margin-top: 1em;
+    padding-left: 1em;
+}
+ 
+.email-subject {
+    width: 45em;
+    margin-left: 1em;
+    padding-left: 1em;
+} 
+
+.email-msg-addr {
+    width: 45em;
+    height: 5em;
+    margin-left: 1em;
+    padding-left: 1em;
+}
+
+.email-button {
+    float: left;
+    margin-left: 1em;
+    padding: 2px 2px;
+    font-size: 0.8em;
+    display: inline-block;
+}
+
+.modalDialog, .emailModalDialog, .configModalDialog {
   position: fixed;
   top: 0;
   right: 0;
@@ -515,17 +567,59 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', end
   pointer-events: none;
 }
 
-.modalDialog:target {
+.modalDialog:target, .emailModalDialog:target, .configModalDialog:target {
   opacity:1;
   pointer-events: auto;
 }
 
-.modalDialog div {
-  width: 400px;
+.modalDialog > div {
+  width: 600px;
+  max-height: 75%;
+  overflow: scroll;
+  position: fixed;
+  top: -10px;
+  left: 120px;
+  margin: 10% auto;
+  padding: 5px 20px 13px 20px;
+  border-radius: 10px;
+  background: #fff;
+  background: -moz-linear-gradiant(#fff, #999);
+  background: -webkit-linear-gradiant(#fff, #999);
+  background: -o-linear-gradiant(#fff, #999);  
+}
+
+.emailModalDialog > div {
+  width: 25em;
   height: auto;
   position: relative;
   margin: 10% auto;
-  padding: 5px 20px 13px 20px;
+  padding: 5px 20px 30px 20px;
+  border-radius: 10px;
+  background: #fff;
+  background: -moz-linear-gradiant(#fff, #999);
+  background: -webkit-linear-gradiant(#fff, #999);
+  background: -o-linear-gradiant(#fff, #999);  
+}
+
+.configModalDialog > div {
+  width: 33.2em;
+  height: auto;
+  position: relative;
+  margin: 10% auto;
+  padding: 5px 20px 80px 20px;
+  border-radius: 10px;
+  background: #fff;
+  background: -moz-linear-gradiant(#fff, #999);
+  background: -webkit-linear-gradiant(#fff, #999);
+  background: -o-linear-gradiant(#fff, #999);  
+}
+
+ > div {
+  width: 33.2em;
+  height: auto;
+  position: relative;
+  margin: 10% auto;
+  padding: 5px 20px 30px 20px;
   border-radius: 10px;
   background: #fff;
   background: -moz-linear-gradiant(#fff, #999);
@@ -537,9 +631,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', end
   background: #606061;
   color: #ffffff;
   line-height: 25px;
-  position: absolute;
-  right: -12px;
-  top: -10px;
+  position: fixed;
+  left: 110px;
+  top: 65px;
   width: 24px;
   text-align: center;
   text-decoration: none;

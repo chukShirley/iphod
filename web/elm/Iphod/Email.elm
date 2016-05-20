@@ -56,15 +56,30 @@ update action model =
 
 view: Signal.Address Action -> Model -> Html
 view address model =
-  div
-  [ contactStyle model]
-  [ (inputEmailAddress address model)
-  , (inputSubject address model)
-  , (inputMessage address model)
-  , button [ buttonStyle, onClick sendContactMe.address model ] [text "Send"]
-  , button [ buttonStyle, onClick address Clear] [text "Clear"]
-  , button [ buttonStyle, onClick address Cancel] [text "Cancel"]
-  ]
+  (contactModal address model)
+--  div
+--  [ class "email"]
+--  [ (inputEmailAddress address model)
+--  , (inputSubject address model)
+--  , (inputMessage address model)
+--  , button [ class "email-button", onClick sendContactMe.address model ] [text "Send"]
+--  , button [ class "email-button", onClick address Clear] [text "Clear"]
+--  , button [ class "email-button", onClick address Cancel] [text "Cancel"]
+--  ]
+
+contactModal: Signal.Address Action -> Model -> Html
+contactModal address model =
+  div [ id "email-create", class "modalDialog" ]
+    [ a [href "#closeemail-text", title "Close", class "close"] [text "X"] 
+    , h2 [class "modal_header"] [ text "Contact" ]
+    , (inputEmailAddress address model)
+    , (inputSubject address model)
+    , (inputMessage address model)
+    , button [ class "email-button", onClick sendContactMe.address model ] [text "Send"]
+    , button [ class "email-button", onClick address Clear] [text "Clear"]
+    , button [ class "email-button", onClick address Cancel] [text "Cancel"]
+    ]
+
 
 inputEmailAddress: Signal.Address Action -> Model -> Html
 inputEmailAddress address model =
@@ -78,7 +93,7 @@ inputEmailAddress address model =
         , on "input" targetValue (\str -> Signal.message address (EmailAddress str))
         , onClickLimited address NoOp
         , value model.from
-        , emailAddrStyle model
+        , class "email-addr"
         ]
         []
     ]
@@ -95,7 +110,7 @@ inputSubject address model =
         , on "input" targetValue (\str -> Signal.message address (Topic str))
         , onClickLimited address NoOp
         , value model.topic
-        , subjectStyle model
+        , class "email-subject"
         ]
         []
     ]
@@ -112,61 +127,7 @@ inputMessage address model =
         , on "input" targetValue (\str -> Signal.message address (Message str))
         , onClickLimited address NoOp
         , value model.text
-        , msgAddrStyle model 
+        , class "email-msg-addr"
         ]
         []
     ]
-
--- STYLE
-
-contactStyle: Model -> Attribute
-contactStyle model =
-  hideable
-    model.show
-    [ ("position", "absolute")
-    , ("z-index", "999")
-    , ("height", "15em")
-    , ("width", "50em")
-    , ("margin-top", "0.5em")
-    , ("border", "2px solid darkblue")
-    , ("border-radius", "0.5em")
-    , ("background-color", "linen") 
-    ]
-
-emailAddrStyle: Model -> Attribute
-emailAddrStyle model =
-  style
-    [ ("width", "20em")
-    , ("margin-left", "1em")
-    , ("margin-top", "1em")
-    , ("padding-left", "1em")
-    ]
-
-subjectStyle: Model -> Attribute
-subjectStyle model =
-  style
-    [ ("width", "45em")
-    , ("margin-left", "1em")
-    , ("padding-left", "1em")
-    ]
-
-msgAddrStyle: Model -> Attribute
-msgAddrStyle model =
-  style
-    [ ("width", "45em")
-    , ("height", "5em")
-    , ("margin-left", "1em")
-    , ("padding-left", "1em")
-    ]
-
-buttonStyle: Attribute
-buttonStyle =
-  style
-    [ ("float", "left")
-    , ("margin-left", "1em")
-    , ("padding", "2px 2px")
-    , ("font-size", "0.8em")
-    , ("display", "inline-block")
-    ]
-
-

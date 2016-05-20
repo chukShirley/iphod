@@ -1,5 +1,5 @@
 <%# <div id="elm-container"></div> %>
-
+<div id= "header-elm-container"></div>
 <div>
   <table id= "calendar">
     <tr>
@@ -16,7 +16,7 @@
         <a href= "<%="/calendar/next/#{@model.month}/#{@model.year}"%>" >></a>
       </th>
     </tr>
-    <tr>
+    <tr class= "calendar-week">
       <th>Sun</th>
       <th>Mon</th>
       <th>Tue</th>
@@ -26,7 +26,7 @@
       <th>Sat</th>
     </tr>
     <%= for week <- @model.calendar do %>
-      <tr>
+      <tr class= "calendar-week">
         <%= for day <- week.days do %>
           <td>
             <p class= "<%="day_of_month day_#{hd day.colors}"%>"><%=day.dayOfMonth%></p>
@@ -43,7 +43,12 @@
         <% end %>
       </tr>
     <% end %>
+    <tr>
+      <td id="table-rollup" colspan= "7">
+        <button id= "rollup">Roll Up</button>
+      </td>
+    </tr>
   </table>
 </div>
-<div id="elm-container"></div>
+<div id="cal-elm-container"></div>
 

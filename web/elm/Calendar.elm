@@ -19,13 +19,16 @@ import Iphod.Email as Email
 import Iphod.Email exposing(sendContactMe)
 import Iphod.Config as Config
 import Iphod.Models as Models
+import Iphod.Sunday as Sunday
+import Iphod.MPReading as MPReading
+import Iphod.EPReading as EPReading
 
 app =
   StartApp.start
     { init = init
     , update = update
     , view = view
-    , inputs =  [ initialState ]
+    , inputs =  [ incomingActions, incomingEU, incomingMP, incomingEP ]
     }
 
 -- MAIN
@@ -42,19 +45,27 @@ port tasks =
 -- MODEL
 
 type alias Model =
-  { eu: Models.DailyEU
+  { eu: Models.Sunday
   , mp: Models.DailyMP
   , ep: Models.DailyEP
   }
 
-init: Model
-  { eu = Models.initDailyEU
+initModel: Model
+initModel =
+  { eu = Models.sundayInit
   , mp = Models.initDailyMP
   , ep = Models.initDailyEP
   }
 
+init:   (Model, Effects Action)
+init =  (initModel, Effects.none)
+
 
 -- SIGNALS
+
+incomingActions: Signal Action
+incomingActions =
+  Signal.map InitCalendar newCalendar
 
 incomingEU: Signal Action
 incomingEU =
@@ -70,7 +81,8 @@ incomingEP =
 
 -- PORTS
 
-port newEU: Signal Models.DailyEU
+port newCalendar: Signal Model
+port newEU: Signal Models.Sunday
 port newMP: Signal Models.DailyMP
 port newEP: Signal Models.DailyEP
 
@@ -78,32 +90,58 @@ port newEP: Signal Models.DailyEP
 
 type Action
   = NoOp
-  | UpdateEU Models.DailyEU
+  | InitCalendar Model
+  | UpdateEU Models.Sunday
   | UpdateMP Models.DailyMP
   | UpdateEP Models.DailyEP
+  | ModEU Sunday.Model Sunday.Action
+  | ModMP MPReading.Model MPReading.Action
+  | ModEP EPReading.Model EPReading.Action
 
 update: Action -> Model -> (Model, Effects Action)
 update action model =
   case action of
     NoOp -> (model, Effects.none)
 
+    InitCalendar newCalendar -> (newCalendar, Effects.none)
+
     UpdateEU eu -> 
       let
-        foo = Debug.log "EU" eu
+        newModel = {model | eu = eu}
       in
-        (model, Effects.none)
+        (newModel, Effects.none)
 
-    UpdateMP eu -> 
+    UpdateMP mp -> 
       let
-        foo = Debug.log "MP" eu
+        newModel = {model | mp = mp}
       in
-        (model, Effects.none)
+        (newModel, Effects.none)
 
-    UpdateEP eu -> 
+    UpdateEP ep -> 
       let
-        foo = Debug.log "EP" eu
+        newModel = {model | ep = ep}
       in
-        (model, Effects.none)
+        (newModel, Effects.none)
+
+    ModEU reading readingAction ->
+      let
+        foo = Debug.log "MODEU" (readingAction, reading)
+        newModel = {model | eu = Sunday.update readingAction reading}
+      in 
+        (newModel, Effects.none)
+
+    ModMP reading readingAction ->
+      let
+        newModel = {model | mp = MPReading.update readingAction reading}
+      in 
+        (newModel, Effects.none)
+
+    ModEP reading readingAction ->
+      let
+        newModel = {model | ep = EPReading.update readingAction reading}
+      in 
+        (newModel, Effects.none)
+
 
 -- HELPERS
 
@@ -112,7 +150,31 @@ update action model =
 
 view: Signal.Address Action -> Model -> Html
 view address model =
-  div [] [text "Where the readings go"]
+  div [] 
+  [ euDiv address model
+  , mpDiv address model
+  , epDiv address model
+  ]
+
+
+-- HELPERS
+
+euDiv: Signal.Address Action -> Model -> Html
+euDiv address model =
+  div [] [ (Sunday.view (Signal.forwardTo address (ModEU model.eu)) model.eu) ]
+
+mpDiv: Signal.Address Action -> Model -> Html
+mpDiv address model =
+  div []
+  [ (MPReading.view (Signal.forwardTo address (ModMP model.mp)) model.mp)
+  ]
+
+epDiv: Signal.Address Action -> Model -> Html
+epDiv address model =
+  div []
+  [ (EPReading.view (Signal.forwardTo address (ModEP model.ep)) model.ep)
+  ]
+
 
 -- readingsMP: Models.Daily -> List Html
 -- readingsMP daily =
@@ -217,6 +279,33 @@ view address model =
 --   if today 
 --     then style [("border", "3px solid #555")]
 --     else style []
+
+euReadingStyle: Model -> Attribute
+euReadingStyle model =
+  let
+    foo = Debug.log "STYLE EU" model.eu
+  in
+    hideable
+      model.eu.show
+      []
+
+mpReadingStyle: Model -> Attribute
+mpReadingStyle model =
+  let
+    foo = Debug.log "STYLE MP" model.mp
+  in
+    hideable
+      model.mp.show
+      []
+
+epReadingStyle: Model -> Attribute
+epReadingStyle model =
+  let
+    foo = Debug.log "STYLE EP" model.ep
+  in
+    hideable
+      model.ep.show
+      []
 
 
 
