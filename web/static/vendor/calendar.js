@@ -13114,12 +13114,15 @@ Elm.Iphod.Config.make = function (_elm) {
               {case "OT": return _U.update(model,{ot: _p2});
                  case "PS": return _U.update(model,{ps: _p2});
                  case "NT": return _U.update(model,{nt: _p2});
-                 default: return _U.update(model,{gs: _p2});}
+                 case "GS": return _U.update(model,{gs: _p2});
+                 default: return _U.update(model,{current: _p2});}
            }();
            return newModel;
          case "ChangeVersion": var _p3 = _p0._0;
            var newModel = _U.update(model,
-           {ot: _p3,ps: _p3,nt: _p3,gs: _p3});
+           {ot: _p3,ps: _p3,nt: _p3,gs: _p3,current: _p3});
+           var foo = A2($Debug.log,"CHANGE VERSION",newModel);
+           var bar = A2($Debug.log,"CHANGE VERSION ARGS",_p3);
            return newModel;
          default: var newModel = _p0._0 ? _U.update(model,
            {fnotes: "fnotes"}) : _U.update(model,{fnotes: ""});
@@ -13193,6 +13196,7 @@ Elm.Iphod.Config.make = function (_elm) {
               _U.list([$Html.text(val)]))]));
    });
    var NoOp = {ctor: "NoOp"};
+   var Current = {ctor: "Current"};
    var GS = {ctor: "GS"};
    var NT = {ctor: "NT"};
    var PS = {ctor: "PS"};
@@ -13226,6 +13230,7 @@ Elm.Iphod.Config.make = function (_elm) {
                                      ,PS: PS
                                      ,NT: NT
                                      ,GS: GS
+                                     ,Current: Current
                                      ,NoOp: NoOp
                                      ,Change: Change
                                      ,ChangeVersion: ChangeVersion
@@ -14206,15 +14211,12 @@ Elm.Calendar.make = function (_elm) {
    $Task = Elm.Task.make(_elm);
    var _op = {};
    var epReadingStyle = function (model) {
-      var foo = A2($Debug.log,"STYLE EP",model.ep);
       return A2($Iphod$Helper.hideable,model.ep.show,_U.list([]));
    };
    var mpReadingStyle = function (model) {
-      var foo = A2($Debug.log,"STYLE MP",model.mp);
       return A2($Iphod$Helper.hideable,model.mp.show,_U.list([]));
    };
    var euReadingStyle = function (model) {
-      var foo = A2($Debug.log,"STYLE EU",model.eu);
       return A2($Iphod$Helper.hideable,model.eu.show,_U.list([]));
    };
    var update = F2(function (action,model) {

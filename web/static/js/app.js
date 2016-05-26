@@ -18,19 +18,6 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// CALENDAR BUTTONS
-
-$("#rollup").click( function() {
-  if ( $(".calendar-week").is(":visible") ) {
-    $(".calendar-week").hide();
-    $("#rollup").text("Roll Down");
-  }
-  else {
-    $(".calendar-week").show();
-    $("#rollup").text("Roll Up");   
-  }
-});
-
 
 // LOCAL STORAGE ------------------------
 
@@ -111,6 +98,7 @@ function remove_abbr(v, i, ary){
   return v != this;
 }
 
+
 // SOCKETS ------------------------
 
 import "./menu"
@@ -119,13 +107,13 @@ import socket from "./socket"
 
 // if (window.location.pathname == "/") {
 
-  let channel = socket.channel("iphod:readings")
-  channel.join()
-    .receive("ok", resp => { console.log("Joined Iphod successfully", resp) })
-    .receive("error", resp => { console.log("Unable to join Iphod", resp) })
+let channel = socket.channel("iphod:readings")
+channel.join()
+  .receive("ok", resp => { console.log("Joined Iphod successfully", resp) })
+  .receive("error", resp => { console.log("Unable to join Iphod", resp) })
   
-  channel.push("request_today", "");
-  channel.push("init_calendar", "");
+channel.push("init_calendar", "");
+//  channel.push("request_today", "");
 //  channel.on("next_sunday", data => {
 //      var z = data,
 //          icm = init_config_model();
@@ -139,74 +127,100 @@ import socket from "./socket"
 //      elmApp.ports.nextSunday.send(z);
 //  })
 
-// $(".reading_button").click( function() {
-//   let date = $(this).attr("data-date")
-//     , of_type = $(this).attr("data-type");
-//   channel.push("get_text", [of_type, date]);
-// });
- 
 
 // Hook up Elm
 
 // header
 
-channel.on("init_email", data => {
-  data.about = false;
-  console.log("INIT_EMAIL: ", data)
-  elmHeaderApp.ports.newEmail.send(data)
-})
+//channel.on("init_email", data => {
+//  let config = init_config_model();
+//  config.current = config.gs;
+//  elmHeaderApp.ports.newConfig.send(config);
+//  elmHeaderApp.ports.newEmail.send(data)
+//})
 
-var elmHeaderDiv = document.getElementById('header-elm-container')
-  , email_model = {
-      from: ""
-    , topic: ""
-    , text: ""
-  }
-  , config_model = {
-      ot: ""
-    , ps: ""
-    , nt: ""
-    , gs: ""
-    , fnotes: ""
-    , vers: []
-    , current: "ESV"
-  }
-  , initialHeaderState = {
-    newHeader: {
-      email: email_model
-    , config: config_model
-    }
-    , newEmail: email_model
-  }
-  , elmHeaderApp = Elm.embed(Elm.Header, elmHeaderDiv, initialHeaderState)
 
-elmHeaderApp.ports.sendEmail.subscribe(function(email) {
-  console.log("SEND EMAIL: ", email)
-  channel.push("request_send_email", email)
-})
+// var elmHeaderDiv = document.getElementById('header-elm-container')
+//   , email_model = {
+//       from: ""
+//     , topic: ""
+//     , text: ""
+//   }
+//   , config_model = {
+//       ot: ""
+//     , ps: ""
+//     , nt: ""
+//     , gs: ""
+//     , fnotes: ""
+//     , vers: []
+//     , current: "ESV"
+//   }
+//   , initialHeaderState = {
+//     newHeader: {
+//       email: email_model
+//     , config: init_config_model()
+//     }
+//     , newConfig: init_config_model()
+//     , newEmail: email_model
+//   }
+//   , elmHeaderApp = Elm.embed(Elm.Header, elmHeaderDiv, initialHeaderState)
+// 
+// elmHeaderApp.ports.sendEmail.subscribe(function(email) {
+//   channel.push("request_send_email", email)
+// })
+// 
+// elmHeaderApp.ports.savingConfig.subscribe(function(config) {
+//   // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
+//   if ( storageAvailable('localStorage') ) {
+//     let s = window.localStorage
+//     s.setItem("iphod_ot", config.ot)
+//     s.setItem("iphod_ps", config.ps)
+//     s.setItem("iphod_nt", config.nt)
+//     s.setItem("iphod_gs", config.ot)
+//     s.setItem("iphod_fnotes", config.fnotes)
+//   }
+// })
+// 
+// elmHeaderApp.ports.newConfig.subscribe( function(data) {
+//   console.log("CONFIG: ", data)
+// })
+//   
 
 
 // calendar 
 
-  channel.on('eu_today', data => {
-    data.config = init_config_model();
-    elmCalApp.ports.newEU.send(data)
-  })
-  
-  channel.on('mp_today', data => {
-    data.config = init_config_model();
-    elmCalApp.ports.newMP.send(data)
-  })
-  
-  channel.on('ep_today', data => {
-    data.config = init_config_model();
-    elmCalApp.ports.newEP.send(data)
-  })
+$("#rollup").click( function() {
+  if ( $(".calendar-week").is(":visible") ) {
+    $(".calendar-week").hide();
+    $("#rollup").text("Roll Down");
+  }
+  else {
+    $(".calendar-week").show();
+    $("#rollup").text("Roll Up");   
+  }
+});
 
-  elmCalApp.ports.newEU.subscribe( function(data) {
-    console.log("NEW EU", data)
-  })
+channel.on('eu_today', data => {
+  data.config = init_config_model();
+  elmCalApp.ports.newEU.send(data)
+})
   
+channel.on('mp_today', data => {
+  data.config = init_config_model();
+  elmCalApp.ports.newMP.send(data)
+})
+  
+channel.on('ep_today', data => {
+  data.config = init_config_model();
+  elmCalApp.ports.newEP.send(data)
+})
+
+$(".reading_button").click( function() {
+  let date = $(this).attr("data-date")
+    , of_type = $(this).attr("data-type");
+  channel.push("get_text", [of_type, date]);
+});
+ 
 
   var elmCalDiv = document.getElementById('cal-elm-container')
     , config_model = {

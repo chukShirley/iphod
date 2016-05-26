@@ -109,6 +109,16 @@ defmodule SundayReading do
 
   end
 
+  def reading_map(date) do
+    r = readings(date)
+    %{  title:  r.title,
+        ot:     r.ot |> Enum.map(&(&1.read)),
+        ps:     r.ps |> Enum.map(&(&1.read)),
+        nt:     r.nt |> Enum.map(&(&1.read)),
+        gs:     r.gs |> Enum.map(&(&1.read))
+    }
+  end
+
   def eu_body(date) do
     footnotes = false # will have to get real value from config
     eu = eu_today(date)
@@ -119,7 +129,9 @@ defmodule SundayReading do
 
   def lesson_with_body(list) do
     list |> Enum.map(fn(lesson)->
-      lesson |> Map.put(:body, EsvText.request(lesson.read) )
+      lesson 
+      |> Map.put(:body, EsvText.request(lesson.read) )
+      |> Map.put(:show, true)
     end)
   end
 
@@ -1242,7 +1254,7 @@ defmodule SundayReading do
                 "c" => %{ ot: [%{style: "req", read: "Isaiah 6.1-7"}],
                           ps: [%{style: "req", read: "Psalm 29"}],
                           nt: [%{style: "req", read: "Rev 4.1-11"}],
-                          gs: [%{style: "opt", read: "Jn 16.5-11"},%{style: "req", read: "Jn 16.12-15}] "}]
+                          gs: [%{style: "opt", read: "Jn 16.5-11"},%{style: "req", read: "Jn 16.12-15"}]
                         }
             }
           },

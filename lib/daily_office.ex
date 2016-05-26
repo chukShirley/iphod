@@ -127,6 +127,23 @@ defmodule DailyReading do
     # get the ESV text, put it the body for ep1, ep2, epp
   end
 
+  def reading_map("mp", date) do
+    r = readings(date)
+    %{  mp1: r.mp1 |> Enum.map(&(&1.read)),
+        mp2: r.mp2 |> Enum.map(&(&1.read)),
+        mpp: r.mpp |> Enum.map(&(&1.read))
+    }
+  end
+
+  def reading_map("ep", date) do
+    r = readings(date)
+    %{  ep1: r.ep1 |> Enum.map(&(&1.read)),
+        ep2: r.ep2 |> Enum.map(&(&1.read)),
+        epp: r.epp |> Enum.map(&(&1.read))
+    }
+  end
+
+
   def color_for(date) do
     {red_letter_date, holy_day} = Lityear.next_holy_day(date)
     colors = if date == red_letter_date do
@@ -167,7 +184,9 @@ defmodule DailyReading do
 
   def lesson_with_body(list) do
     list |> Enum.map(fn(lesson)->
-      lesson |> Map.put(:body, EsvText.request(lesson.read) )
+      lesson 
+      |> Map.put(:body, EsvText.request(lesson.read) )
+      |> Map.put(:show, true)
     end)
   end
 
@@ -882,9 +901,9 @@ defmodule DailyReading do
                             },
             "Saturday" => %{title: "Saturday",
                             colors: ["green"],
-                            mp1: [%{style: "req", read: "Jonah 1 & 2"}],
+                            mp1: [%{style: "req", read: "Jonah 1 and 2"}],
                             mp2: [%{style: "req", read: "1 Cor 15.35-end"}],
-                            ep1: [%{style: "req", read: "Jonah 3 & 4"}],
+                            ep1: [%{style: "req", read: "Jonah 3 and 4"}],
                             ep2: [%{style: "req", read: "1 Cor 16"}]
                             }
             },
@@ -1412,7 +1431,7 @@ defmodule DailyReading do
                             colors: ["violet"],
                             mp1: [%{style: "req", read: "Num 6"}],
                             mp2: [%{style: "req", read: "John 10.22-end"}],
-                            ep1: [%{style: "req", read: "Num 9.15-end & 10.19-end"}],
+                            ep1: [%{style: "req", read: "Num 9.15-end and 10.19-end"}],
                             ep2: [%{style: "req", read: "Titus 1.1-2.8"}]
                             },
             "Tuesday" =>  %{title: "Tuesday",
@@ -1458,7 +1477,7 @@ defmodule DailyReading do
                           colors: ["red"],
                             mp1: [%{style: "req", read: "Exod 11"}],
                             mp2: [%{style: "req", read: "Matt 26"}],
-                            ep1: [%{style: "req", read: "Isa 52.13 & 53.1-end"}],
+                            ep1: [%{style: "req", read: "Isa 52.13 and 53.1-end"}],
                             ep2: [%{style: "req", read: "Luke 19.29-end"}]
                             },
             "Monday" =>   %{title: "Monday in Holy Week",
@@ -1472,7 +1491,7 @@ defmodule DailyReading do
                             colors: ["violet"],
                             mp1: [%{style: "req", read: "Isa 42.1-9"}],
                             mp2: [%{style: "req", read: "John 15.1-16"}],
-                            ep1: [%{style: "req", read: "Wisd 2.1 & 12-end"}],
+                            ep1: [%{style: "req", read: "Wisd 2.1 and 12-end"}],
                             ep2: [%{style: "req", read: "John 15.17-end"}]
                             },
             "Wednesday" => %{title: "Wednesday in Holy Week",
@@ -1707,7 +1726,7 @@ defmodule DailyReading do
                             colors: ["white"],
                             mp1: [%{style: "req", read: "Deut 33"}],
                             mp2: [%{style: "req", read: "Acts 20.1-16"}],
-                            ep1: [%{style: "req", read: "Deut 32.48-end & 34"}],
+                            ep1: [%{style: "req", read: "Deut 32.48-end and 34"}],
                             ep2: [%{style: "req", read: "Acts 20.17-end"}]
                             }
             },
@@ -2122,7 +2141,7 @@ defmodule DailyReading do
                             colors: ["green"],
                             mp1: [%{style: "req", read: "Job 24"}],
                             mp2: [%{style: "req", read: "1 Pet 5"}],
-                            ep1: [%{style: "req", read: "Job 25 & 26"}],
+                            ep1: [%{style: "req", read: "Job 25 and 26"}],
                             ep2: [%{style: "req", read: "Mark 7.24-8.10"}]
                             }
             },
@@ -2150,7 +2169,7 @@ defmodule DailyReading do
                             },
             "Wednesday" => %{title: "Wednesday",
                             colors: ["green"],
-                            mp1: [%{style: "req", read: "Job 32 & 33"}],
+                            mp1: [%{style: "req", read: "Job 32 and 33"}],
                             mp2: [%{style: "req", read: "2 Pet 3"}],
                             ep1: [%{style: "req", read: "Job 34"},%{style: "opt", read: "Job 35"}],
                             ep2: [%{style: "req", read: "Mark 9.30-end"}]
@@ -3049,7 +3068,7 @@ defmodule DailyReading do
                           colors: ["green"],
                             mp1: [%{style: "req", read: "Prov 31.10-end"}],
                             mp2: [%{style: "req", read: "Luke 12.22-34"}],
-                            ep1: [%{style: "req", read: "Jonah 3 & 4"}],
+                            ep1: [%{style: "req", read: "Jonah 3 and 4"}],
                             ep2: [%{style: "req", read: "Matt 13.44-end"}]
                             },
             "Monday" =>     %{title: "Monday",
@@ -3142,7 +3161,7 @@ defmodule DailyReading do
                             colors: ["green"],
                             mp1: [%{style: "req", read: "Esther 3"}],
                             mp2: [%{style: "req", read: "1 Pet 2.11-3.7"}],
-                            ep1: [%{style: "req", read: "Esther 4 & 5"}],
+                            ep1: [%{style: "req", read: "Esther 4 and 5"}],
                             ep2: [%{style: "req", read: "1 Pet 3.8-end"}]
                             }
             },
@@ -3156,9 +3175,9 @@ defmodule DailyReading do
                             },
             "Monday" =>     %{title: "Monday",
                             colors: ["green"],
-                            mp1: [%{style: "req", read: "Esther 6 & 7"}],
+                            mp1: [%{style: "req", read: "Esther 6 and 7"}],
                             mp2: [%{style: "req", read: "1 Pet 4.1-11"}],
-                            ep1: [%{style: "req", read: "Esther 8"},%{style: "opt", read: "Esther 9 & 10"}],
+                            ep1: [%{style: "req", read: "Esther 8"},%{style: "opt", read: "Esther 9 and 10"}],
                             ep2: [%{style: "req", read: "1 Pet 4.12-end"}]
                             },
             "Tuesday" =>    %{title: "Tuesday",
@@ -3404,7 +3423,7 @@ defmodule DailyReading do
         "29" =>
           %{"Sunday" =>     %{title: "Sunday closest to November 23",
                           colors: ["green"],
-                            mp1: [%{style: "req", read: "Eccles 11 & 12"}],
+                            mp1: [%{style: "req", read: "Eccles 11 and 12"}],
                             mp2: [%{style: "req", read: "Heb 11.1-16"}],
                             ep1: [%{style: "req", read: "Mal 3.13-4 end"}],
                             ep2: [%{style: "req", read: "Heb 11.17-12.2"}]

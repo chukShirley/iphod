@@ -1,18 +1,19 @@
-module Iphod.Models ( Config, Lesson, Sunday, Daily, Day,
-                      Email, Collect, SundayCollect, Proper,
-                      DailyMP, DailyEP,
-                      configInit, sundayInit, dailyInit,
-                      emailInit, initCollect, initSundayCollect,
-                      initProper, initDay,
-                      initDailyMP, initDailyEP
-                    ) where
+module Iphod.Models exposing
+  ( Config, Lesson, Sunday, Daily, Day
+  , Email, Collect, SundayCollect, Proper
+  , DailyMP, DailyEP
+  , configInit, sundayInit, dailyInit
+  , emailInit, initCollect, initSundayCollect
+  , initProper, initDay
+  , initDailyMP, initDailyEP
+  ) 
 
 type alias Config =
   { ot: String
   , ps: String
   , nt: String
   , gs: String
-  , fnotes: String
+  , fnotes: Bool
   , vers: List String
   , current: String
   }
@@ -23,7 +24,7 @@ configInit =
   , ps = "Coverdale"
   , nt = "ESV"
   , gs = "ESV"
-  , fnotes = "fnotes"
+  , fnotes = True
   , vers = []
   , current = "ESV"
   }

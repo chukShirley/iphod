@@ -1,16 +1,12 @@
-module Iphod.MorningPrayer (Model, init, Action, update, view) where
-
+module Iphod.MorningPrayer exposing (Model, init, Msg, update, view)
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Effects exposing (Effects, Never)
-import Task exposing (Task)
 import String
 import Markdown
 import Regex exposing (split, regex)
 
 import Iphod.Models as Models
-import Iphod.Helper exposing (onClickLimited, hideable, getText)
+import Iphod.Helper exposing (hideable)
 
 
 -- MODEL
@@ -23,14 +19,14 @@ init = Models.dailyInit
 
 -- UPDATE
 
-type Action
+type Msg
   = NoOp
   | Show
   | JustToday
 
-update: Action -> Model -> Model
-update action model =
-  case action of
+update: Msg -> Model -> Model
+update msg model =
+  case msg of
     NoOp -> model
     Show -> {model | show = not model.show}
     JustToday -> {model | justToday = not model.justToday}
@@ -793,8 +789,8 @@ mpStyle model =
 
 -- VIEW MORNING PRAYER 
 
-view: Signal.Address Action -> Model -> Html
-view address model =
+view: Model -> Html Msg
+view model =
   div 
   [ mpStyle model ]
   ( (title1 "Daily Morning Prayer")

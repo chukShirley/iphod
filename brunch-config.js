@@ -43,8 +43,8 @@ exports.config = {
       "deps/phoenix_html/web/static",
       "web/static",
       "test/static",
-      "web/elm/Iphod.elm",
-      "web/elm/Translations.elm",
+      // "web/elm/Iphod.elm",
+      // "web/elm/Translations.elm",
       "web/elm/Calendar.elm",
       "web/elm/Header.elm"
     ],

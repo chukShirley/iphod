@@ -1,16 +1,15 @@
-module Iphod.EPReading (Model, init, Action, update, view, textStyle) where
+module Iphod.EPReading exposing (Model, init, Msg, update, view, textStyle) -- where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
+import Json.Decode as Json
 import Http
 import String
 import Markdown
-import DynamicStyle exposing (hover)
 
 import Iphod.Models as Models
 import Iphod.Config as Config
-import Iphod.Helper exposing (onClickLimited, hideable, getText)
+import Iphod.Helper exposing (hideable)
 
 -- MODEL
 
@@ -27,16 +26,23 @@ type Section
   | EP2
   | EPP
 
-type Action 
+type Msg 
   = NoOp
+  | GetText List (String, String)
   | ToggleModelShow
   | ToggleShow Models.Lesson
   | SetReading Model
 
-update: Action -> Model -> Model
-update action model =
-  case action of
+update: Msg -> Model -> Model
+update msg model =
+  case msg of
     NoOp -> model
+
+    GetText list ->
+      let
+        foo = "EP GETTEXT" list
+      in
+       model
 
     ToggleModelShow -> {model | show = not model.show}
 
@@ -66,12 +72,12 @@ update action model =
 -- VIEW
 
 
-view: Signal.Address Action -> Model -> Html
-view address model =
+view: Model -> Html Msg
+view model =
   div
   []
   [ table [class "readings_table", tableStyle model]
-      [ caption [titleStyle model, onClick address ToggleModelShow] [text (String.join " " ["Evening Prayer:", model.date])] 
+      [ caption [titleStyle model, onClick ToggleModelShow] [text (String.join " " ["Evening Prayer:", model.date])] 
       , tr
           [ class "rowStyle" ]
           [ th [] [ text "Evening 1"]
@@ -82,79 +88,86 @@ view address model =
           [ class "rowStyle" ]
           [ td 
               [class "tdStyle", style [("width", "16%")] ]
-              [ ul [textStyle model] ( thisReading address model EP1)]
-              -- [ ul [textStyle model] ( thisReading address model.ep1 model.config.ep1 model.config.fnotes ) ]
+              [ ul [textStyle model] ( thisReading model EP1)]
+              -- [ ul [textStyle model] ( thisReading model.ep1 model.config.ep1 model.config.fnotes ) ]
           , td
               [class "tdStyle", style [("width", "16%")] ]
-              [ ul [textStyle model] ( thisReading address model EP2)]
-              -- [ ul [textStyle model] ( thisReading address model.ep2 model.config.ep2 model.config.fnotes ) ]
+              [ ul [textStyle model] ( thisReading model EP2)]
+              -- [ ul [textStyle model] ( thisReading model.ep2 model.config.ep2 model.config.fnotes ) ]
           , td
               [class "tdStyle", style [("width", "16%")] ]
-              [ ul [textStyle model] ( thisReading address model EPP)]
-              -- [ ul [textStyle model] ( thisReading address model.epp model.config.epp model.config.fnotes ) ]
+              [ ul [textStyle model] ( thisReading model EPP)]
+              -- [ ul [textStyle model] ( thisReading model.epp model.config.epp model.config.fnotes ) ]
           ] -- end of row
       ] -- end of table
-    , div [] (thisText address model model.ep1)
-    , div [] (thisText address model model.ep2)
-    , div [] (thisText address model model.epp)
+    , div [] (thisText model model.ep1)
+    , div [] (thisText model model.ep2)
+    , div [] (thisText model model.epp)
   ] -- end of div 
 
 
 -- HELPERS
 
-thisText: Signal.Address Action -> Model -> List Models.Lesson -> List Html
-thisText address model lessons =
+thisText: Model -> List Models.Lesson -> (List Html msg)
+thisText model lessons =
   let
     this_text l =
       let
         getTranslation s = 
-          onClick getText.address [("ofType", "daily"), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", "fnotes")]
+          onClick GetText [("ofType", "daily"), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", True)]
       in
         if l.section == "epp" || l.section == "epp"
           then
             div [id l.id, bodyStyle l, class "esv_text"] 
                [ span
                   [ style [("position", "relative"), ("top", "1em")] ]
-                  [ button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
+                  [ button [class "translationButton", onClick (ToggleShow l)] [text "Hide"]
                   , button 
                      [ class "translationButton", getTranslation "Coverdale"]
                      [ text "Coverdale"]
                   , button 
                      [ class "translationButton", getTranslation "BCP"]
                      [ text "BCP"]
-                  , versionSelect address model l
+                  , versionSelect model l
                   ]
                , Markdown.toHtml l.body
                ]
           else
             div [id l.id, bodyStyle l, class "esv_text"] 
             [ span [style [("position", "relative"), ("top", "1em")]]
-                [ button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
-                , versionSelect address model l
+                [ button [class "translationButton", onClick (ToggleShow l)] [text "Hide"]
+                , versionSelect model l
                 ]
             , Markdown.toHtml l.body
             ]
   in
     List.map this_text lessons
 
-versionSelect: Signal.Address Action -> Model -> Models.Lesson -> Html
-versionSelect address model lesson =
+versionSelect: Model -> Models.Lesson -> Html Msg
+versionSelect model lesson =
   let
     thisVersion ver =
       option [value ver, selected (ver == lesson.version)] [text ver]
   in
     select
-      [ on "change" targetValue 
-        (\resp -> Signal.message 
-                  getText.address 
-                  [("ofType", "daily"), ("section", lesson.section), ("id", lesson.id), ("read", lesson.read), ("ver", resp), ("fnotes", "fnotes")]
+      [ on "change" 
+        ( Json.succeed
+          ( GetText 
+            [ ("ofType", "daily")
+            , ("section", lesson.section)
+            , ("id", lesson.id)
+            , ("read", lesson.read)
+            , ("ver", thisVersion model.config.vers)
+            , ("fnotes", True)
+            ]
+          )
         )
       ]
       (List.map thisVersion model.config.vers)
 
 
-thisReading: Signal.Address Action -> Model -> Section -> List Html
-thisReading address model section =
+thisReading: Model -> Section -> List (Html Msg)
+thisReading model section =
   let
     lessons = case section of
       EP1 -> model.ep1
@@ -170,18 +183,18 @@ thisReading address model section =
       if String.length l.body == 0
         then
           li
-            (hoverable [this_style l, onClick getText.address (req l)] )
+            (hoverable [this_style l, onClick GetText (req l)] )
             [text l.read]
         else
           li 
-            (hoverable [this_style l, onClick address (ToggleShow l)] )
+            (hoverable [this_style l, onClick (ToggleShow l)] )
             [text l.read]
   in
     List.map this_lesson lessons
 
 
 
-this_style: Models.Lesson -> Attribute
+this_style: Models.Lesson -> Attribute msg
 this_style l =
   case l.style of
     "req"     -> class "req_style"
@@ -191,7 +204,7 @@ this_style l =
     "alt-opt" -> class "altOpt_style"
     _         -> class "bogis_style"
 
-hoverable: List Attribute -> List Attribute
+hoverable: List (Attribute msg) -> List (Attribute msg)
 hoverable attrs =
   hover [("background-color", "white", "skyblue")] ++ attrs
   
@@ -200,20 +213,20 @@ hoverable attrs =
 
 -- STYLE
 
-tableStyle: Model -> Attribute
+tableStyle: Model -> Attribute msg
 tableStyle model =
   hideable
     model.show
     [ ("width", "100%")]
 
 
-bodyStyle: Models.Lesson -> Attribute
+bodyStyle: Models.Lesson -> Attribute msg
 bodyStyle lesson =
   hideable
     lesson.show
     []
 
-titleStyle: Model -> Attribute
+titleStyle: Model -> Attribute msg
 titleStyle model =
   hideable
     model.show
@@ -222,7 +235,7 @@ titleStyle model =
     , ("height", "2em")
     ]
 
-textStyle: Model -> Attribute
+textStyle: Model -> Attribute msg
 textStyle model =
   hideable
     model.show

@@ -15871,12 +15871,15 @@ Elm.Iphod.Config.make = function (_elm) {
               {case "OT": return _U.update(model,{ot: _p2});
                  case "PS": return _U.update(model,{ps: _p2});
                  case "NT": return _U.update(model,{nt: _p2});
-                 default: return _U.update(model,{gs: _p2});}
+                 case "GS": return _U.update(model,{gs: _p2});
+                 default: return _U.update(model,{current: _p2});}
            }();
            return newModel;
          case "ChangeVersion": var _p3 = _p0._0;
            var newModel = _U.update(model,
-           {ot: _p3,ps: _p3,nt: _p3,gs: _p3});
+           {ot: _p3,ps: _p3,nt: _p3,gs: _p3,current: _p3});
+           var foo = A2($Debug.log,"CHANGE VERSION",newModel);
+           var bar = A2($Debug.log,"CHANGE VERSION ARGS",_p3);
            return newModel;
          default: var newModel = _p0._0 ? _U.update(model,
            {fnotes: "fnotes"}) : _U.update(model,{fnotes: ""});
@@ -15950,6 +15953,7 @@ Elm.Iphod.Config.make = function (_elm) {
               _U.list([$Html.text(val)]))]));
    });
    var NoOp = {ctor: "NoOp"};
+   var Current = {ctor: "Current"};
    var GS = {ctor: "GS"};
    var NT = {ctor: "NT"};
    var PS = {ctor: "PS"};
@@ -15983,6 +15987,7 @@ Elm.Iphod.Config.make = function (_elm) {
                                      ,PS: PS
                                      ,NT: NT
                                      ,GS: GS
+                                     ,Current: Current
                                      ,NoOp: NoOp
                                      ,Change: Change
                                      ,ChangeVersion: ChangeVersion
@@ -16844,15 +16849,13 @@ Elm.Iphod.make = function (_elm) {
    var newEmail = Elm.Native.Port.make(_elm).inboundSignal("newEmail",
    "Iphod.Models.Email",
    function (v) {
-      return typeof v === "object" && "from" in v && "topic" in v && "text" in v && "show" in v ? {_: {}
-                                                                                                  ,from: typeof v.from === "string" || typeof v.from === "object" && v.from instanceof String ? v.from : _U.badPort("a string",
-                                                                                                  v.from)
-                                                                                                  ,topic: typeof v.topic === "string" || typeof v.topic === "object" && v.topic instanceof String ? v.topic : _U.badPort("a string",
-                                                                                                  v.topic)
-                                                                                                  ,text: typeof v.text === "string" || typeof v.text === "object" && v.text instanceof String ? v.text : _U.badPort("a string",
-                                                                                                  v.text)
-                                                                                                  ,show: typeof v.show === "boolean" ? v.show : _U.badPort("a boolean (true or false)",
-                                                                                                  v.show)} : _U.badPort("an object with fields `from`, `topic`, `text`, `show`",
+      return typeof v === "object" && "from" in v && "topic" in v && "text" in v ? {_: {}
+                                                                                   ,from: typeof v.from === "string" || typeof v.from === "object" && v.from instanceof String ? v.from : _U.badPort("a string",
+                                                                                   v.from)
+                                                                                   ,topic: typeof v.topic === "string" || typeof v.topic === "object" && v.topic instanceof String ? v.topic : _U.badPort("a string",
+                                                                                   v.topic)
+                                                                                   ,text: typeof v.text === "string" || typeof v.text === "object" && v.text instanceof String ? v.text : _U.badPort("a string",
+                                                                                   v.text)} : _U.badPort("an object with fields `from`, `topic`, `text`",
       v);
    });
    var newText = Elm.Native.Port.make(_elm).inboundSignal("newText",
@@ -17600,15 +17603,13 @@ Elm.Iphod.make = function (_elm) {
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          v.eveningPrayer.config.current)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`, `vers`, `current`",
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           v.eveningPrayer.config)} : _U.badPort("an object with fields `date`, `season`, `week`, `day`, `title`, `mp1`, `mp2`, `mpp`, `ep1`, `ep2`, `epp`, `show`, `justToday`, `config`",
                                                                                                                                                                                                            v.eveningPrayer)
-                                                                                                                                                                                                           ,email: typeof v.email === "object" && "from" in v.email && "topic" in v.email && "text" in v.email && "show" in v.email ? {_: {}
-                                                                                                                                                                                                                                                                                                                                      ,from: typeof v.email.from === "string" || typeof v.email.from === "object" && v.email.from instanceof String ? v.email.from : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                      v.email.from)
-                                                                                                                                                                                                                                                                                                                                      ,topic: typeof v.email.topic === "string" || typeof v.email.topic === "object" && v.email.topic instanceof String ? v.email.topic : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                      v.email.topic)
-                                                                                                                                                                                                                                                                                                                                      ,text: typeof v.email.text === "string" || typeof v.email.text === "object" && v.email.text instanceof String ? v.email.text : _U.badPort("a string",
-                                                                                                                                                                                                                                                                                                                                      v.email.text)
-                                                                                                                                                                                                                                                                                                                                      ,show: typeof v.email.show === "boolean" ? v.email.show : _U.badPort("a boolean (true or false)",
-                                                                                                                                                                                                                                                                                                                                      v.email.show)} : _U.badPort("an object with fields `from`, `topic`, `text`, `show`",
+                                                                                                                                                                                                           ,email: typeof v.email === "object" && "from" in v.email && "topic" in v.email && "text" in v.email ? {_: {}
+                                                                                                                                                                                                                                                                                                                 ,from: typeof v.email.from === "string" || typeof v.email.from === "object" && v.email.from instanceof String ? v.email.from : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                 v.email.from)
+                                                                                                                                                                                                                                                                                                                 ,topic: typeof v.email.topic === "string" || typeof v.email.topic === "object" && v.email.topic instanceof String ? v.email.topic : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                 v.email.topic)
+                                                                                                                                                                                                                                                                                                                 ,text: typeof v.email.text === "string" || typeof v.email.text === "object" && v.email.text instanceof String ? v.email.text : _U.badPort("a string",
+                                                                                                                                                                                                                                                                                                                 v.email.text)} : _U.badPort("an object with fields `from`, `topic`, `text`",
                                                                                                                                                                                                            v.email)
                                                                                                                                                                                                            ,config: typeof v.config === "object" && "ot" in v.config && "ps" in v.config && "nt" in v.config && "gs" in v.config && "fnotes" in v.config && "vers" in v.config && "current" in v.config ? {_: {}
                                                                                                                                                                                                                                                                                                                                                                                                           ,ot: typeof v.config.ot === "string" || typeof v.config.ot === "object" && v.config.ot instanceof String ? v.config.ot : _U.badPort("a string",
@@ -17642,10 +17643,7 @@ Elm.Iphod.make = function (_elm) {
    $Iphod$Helper.getText.signal);
    var sendEmail = Elm.Native.Port.make(_elm).outboundSignal("sendEmail",
    function (v) {
-      return {from: v.from
-             ,topic: v.topic
-             ,text: v.text
-             ,show: v.show};
+      return {from: v.from,topic: v.topic,text: v.text};
    },
    $Iphod$Email.sendContactMe.signal);
    var saveThisConfig = $Signal.mailbox($Iphod$Models.configInit);
@@ -17961,10 +17959,9 @@ Elm.Iphod.make = function (_elm) {
          case "ToggleAbout": return {ctor: "_Tuple2"
                                     ,_0: _U.update(model,{about: $Basics.not(model.about)})
                                     ,_1: $Effects.none};
-         case "ToggleEmail": var email = model.email;
-           var newEmail = _U.update(email,{show: $Basics.not(email.show)});
-           var newModel = _U.update(model,{email: newEmail});
-           return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
+         case "ToggleEmail": return {ctor: "_Tuple2"
+                                    ,_0: model
+                                    ,_1: $Effects.none};
          case "ToggleMp": var mp = model.morningPrayer;
            var newmp = _U.update(mp,{show: $Basics.not(mp.show)});
            var newModel = _U.update(model,{morningPrayer: newmp});

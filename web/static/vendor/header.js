@@ -12883,12 +12883,15 @@ Elm.Iphod.Config.make = function (_elm) {
               {case "OT": return _U.update(model,{ot: _p2});
                  case "PS": return _U.update(model,{ps: _p2});
                  case "NT": return _U.update(model,{nt: _p2});
-                 default: return _U.update(model,{gs: _p2});}
+                 case "GS": return _U.update(model,{gs: _p2});
+                 default: return _U.update(model,{current: _p2});}
            }();
            return newModel;
          case "ChangeVersion": var _p3 = _p0._0;
            var newModel = _U.update(model,
-           {ot: _p3,ps: _p3,nt: _p3,gs: _p3});
+           {ot: _p3,ps: _p3,nt: _p3,gs: _p3,current: _p3});
+           var foo = A2($Debug.log,"CHANGE VERSION",newModel);
+           var bar = A2($Debug.log,"CHANGE VERSION ARGS",_p3);
            return newModel;
          default: var newModel = _p0._0 ? _U.update(model,
            {fnotes: "fnotes"}) : _U.update(model,{fnotes: ""});
@@ -12962,6 +12965,7 @@ Elm.Iphod.Config.make = function (_elm) {
               _U.list([$Html.text(val)]))]));
    });
    var NoOp = {ctor: "NoOp"};
+   var Current = {ctor: "Current"};
    var GS = {ctor: "GS"};
    var NT = {ctor: "NT"};
    var PS = {ctor: "PS"};
@@ -12995,6 +12999,7 @@ Elm.Iphod.Config.make = function (_elm) {
                                      ,PS: PS
                                      ,NT: NT
                                      ,GS: GS
+                                     ,Current: Current
                                      ,NoOp: NoOp
                                      ,Change: Change
                                      ,ChangeVersion: ChangeVersion
@@ -13128,6 +13133,9 @@ Elm.Header.make = function (_elm) {
    var UpdateEmail = function (a) {
       return {ctor: "UpdateEmail",_0: a};
    };
+   var UpdateConfig = function (a) {
+      return {ctor: "UpdateConfig",_0: a};
+   };
    var SetHeader = function (a) {
       return {ctor: "SetHeader",_0: a};
    };
@@ -13226,6 +13234,29 @@ Elm.Header.make = function (_elm) {
                                                                                                                                                                                                                                                                      ,current: typeof v.config.current === "string" || typeof v.config.current === "object" && v.config.current instanceof String ? v.config.current : _U.badPort("a string",
                                                                                                                                                                                                                                                                      v.config.current)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`, `vers`, `current`",
                                                                       v.config)} : _U.badPort("an object with fields `email`, `config`",
+      v);
+   });
+   var newConfig = Elm.Native.Port.make(_elm).inboundSignal("newConfig",
+   "Iphod.Models.Config",
+   function (v) {
+      return typeof v === "object" && "ot" in v && "ps" in v && "nt" in v && "gs" in v && "fnotes" in v && "vers" in v && "current" in v ? {_: {}
+                                                                                                                                           ,ot: typeof v.ot === "string" || typeof v.ot === "object" && v.ot instanceof String ? v.ot : _U.badPort("a string",
+                                                                                                                                           v.ot)
+                                                                                                                                           ,ps: typeof v.ps === "string" || typeof v.ps === "object" && v.ps instanceof String ? v.ps : _U.badPort("a string",
+                                                                                                                                           v.ps)
+                                                                                                                                           ,nt: typeof v.nt === "string" || typeof v.nt === "object" && v.nt instanceof String ? v.nt : _U.badPort("a string",
+                                                                                                                                           v.nt)
+                                                                                                                                           ,gs: typeof v.gs === "string" || typeof v.gs === "object" && v.gs instanceof String ? v.gs : _U.badPort("a string",
+                                                                                                                                           v.gs)
+                                                                                                                                           ,fnotes: typeof v.fnotes === "string" || typeof v.fnotes === "object" && v.fnotes instanceof String ? v.fnotes : _U.badPort("a string",
+                                                                                                                                           v.fnotes)
+                                                                                                                                           ,vers: typeof v.vers === "object" && v.vers instanceof Array ? Elm.Native.List.make(_elm).fromArray(v.vers.map(function (v) {
+                                                                                                                                              return typeof v === "string" || typeof v === "object" && v instanceof String ? v : _U.badPort("a string",
+                                                                                                                                              v);
+                                                                                                                                           })) : _U.badPort("an array",
+                                                                                                                                           v.vers)
+                                                                                                                                           ,current: typeof v.current === "string" || typeof v.current === "object" && v.current instanceof String ? v.current : _U.badPort("a string",
+                                                                                                                                           v.current)} : _U.badPort("an object with fields `ot`, `ps`, `nt`, `gs`, `fnotes`, `vers`, `current`",
       v);
    });
    var newEmail = Elm.Native.Port.make(_elm).inboundSignal("newEmail",
@@ -13337,9 +13368,14 @@ Elm.Header.make = function (_elm) {
          case "Cancel": var newModel = _U.update(model,
            {email: $Iphod$Models.emailInit});
            return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
-         case "SetHeader": return {ctor: "_Tuple2"
-                                  ,_0: _p0._0
-                                  ,_1: $Effects.none};
+         case "SetHeader": var _p1 = _p0._0;
+           var foo = A2($Debug.log,"SET HEADER",_p1);
+           return {ctor: "_Tuple2",_0: _p1,_1: $Effects.none};
+         case "UpdateConfig": var _p2 = _p0._0;
+           var foo = A2($Debug.log,"UPDATE CONFIG",_p2);
+           return {ctor: "_Tuple2"
+                  ,_0: _U.update(model,{config: _p2})
+                  ,_1: $Effects.none};
          case "UpdateEmail": return {ctor: "_Tuple2"
                                     ,_0: _U.update(model,{email: _p0._0})
                                     ,_1: $Effects.none};
@@ -13355,13 +13391,14 @@ Elm.Header.make = function (_elm) {
            var newEmail = _U.update(e,{text: _p0._0});
            var newModel = _U.update(model,{email: newEmail});
            return {ctor: "_Tuple2",_0: newModel,_1: $Effects.none};
-         default: var newModel = _U.update(model,
-           {config: A2($Iphod$Config.update,_p0._1,_p0._0)});
-           var foo = A2($Debug.log,"CONFIG",model.config);
+         default: var newConfig = A2($Iphod$Config.update,_p0._1,_p0._0);
+           var newModel = _U.update(model,{config: newConfig});
+           var foo = A2($Debug.log,"MOD CONFIG",newModel);
            return {ctor: "_Tuple2"
                   ,_0: newModel
                   ,_1: saveConfig(newModel.config)};}
    });
+   var incomingConfig = A2($Signal.map,UpdateConfig,newConfig);
    var incomingEmail = A2($Signal.map,UpdateEmail,newEmail);
    var incomingActions = A2($Signal.map,SetHeader,newHeader);
    var initModel = {email: $Iphod$Models.emailInit
@@ -13373,7 +13410,9 @@ Elm.Header.make = function (_elm) {
    var app = $StartApp.start({init: init
                              ,update: update
                              ,view: view
-                             ,inputs: _U.list([incomingActions,incomingEmail])});
+                             ,inputs: _U.list([incomingActions
+                                              ,incomingEmail
+                                              ,incomingConfig])});
    var main = app.html;
    var tasks = Elm.Native.Task.make(_elm).performSignal("tasks",
    app.tasks);
@@ -13385,6 +13424,7 @@ Elm.Header.make = function (_elm) {
                                ,init: init
                                ,incomingActions: incomingActions
                                ,incomingEmail: incomingEmail
+                               ,incomingConfig: incomingConfig
                                ,saveThisConfig: saveThisConfig
                                ,sendContactMe: sendContactMe
                                ,NoOp: NoOp
@@ -13392,6 +13432,7 @@ Elm.Header.make = function (_elm) {
                                ,Clear: Clear
                                ,Cancel: Cancel
                                ,SetHeader: SetHeader
+                               ,UpdateConfig: UpdateConfig
                                ,UpdateEmail: UpdateEmail
                                ,EmailAddress: EmailAddress
                                ,Topic: Topic

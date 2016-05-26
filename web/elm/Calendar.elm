@@ -1,30 +1,30 @@
-module Calendar where
-
+module Calendar exposing (..) -- where
 import Debug
 
-import StartApp
+-- import StartApp
+import Html exposing (..)
+import Html.App as Html
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Regex
 import Json.Decode as Json exposing ((:=))
-import Effects exposing (Effects, Never)
-import Task exposing (Task, andThen)
+-- import Effects exposing (Effects, Never)
+import Platform.Cmd as Cmd exposing (Cmd)
 import String exposing (join)
 import Markdown
-import Graphics.Element as Graphics
 
-import Iphod.Helper exposing (onClickLimited, hideable, getText)
-import Iphod.Email as Email
-import Iphod.Email exposing(sendContactMe)
-import Iphod.Config as Config
+import Iphod.Helper exposing (hideable)
+-- import Iphod.Email as Email
+-- import Iphod.Email exposing(sendContactMe)
+-- import Iphod.Config as Config
 import Iphod.Models as Models
 import Iphod.Sunday as Sunday
 import Iphod.MPReading as MPReading
 import Iphod.EPReading as EPReading
 
 app =
-  StartApp.start
+  Html.program
     { init = init
     , update = update
     , view = view
@@ -33,14 +33,8 @@ app =
 
 -- MAIN
 
-main: Signal Html
-main = 
-  app.html
-
-port tasks: Signal (Task Never ())
-port tasks =
-  app.tasks
-
+main: Html
+main = app.html
 
 -- MODEL
 
@@ -57,38 +51,45 @@ initModel =
   , ep = Models.initDailyEP
   }
 
-init:   (Model, Effects Action)
-init =  (initModel, Effects.none)
+init:   (Model, Cmd Msg)
+init =  (initModel, Cmd.none)
 
 
 -- SIGNALS
 
-incomingActions: Signal Action
-incomingActions =
-  Signal.map InitCalendar newCalendar
-
-incomingEU: Signal Action
-incomingEU =
-  Signal.map UpdateEU newEU
-
-incomingMP: Signal Action
-incomingMP =
-  Signal.map UpdateMP newMP
-
-incomingEP: Signal Action
-incomingEP =
-  Signal.map UpdateEP newEP
+-- incomingActions: Signal Msg
+-- incomingActions =
+--   Signal.map InitCalendar newCalendar
+-- 
+-- incomingEU: Signal Msg
+-- incomingEU =
+--   Signal.map UpdateEU newEU
+-- 
+-- incomingMP: Signal Msg
+-- incomingMP =
+--   Signal.map UpdateMP newMP
+-- 
+-- incomingEP: Signal Msg
+-- incomingEP =
+--   Signal.map UpdateEP newEP
 
 -- PORTS
 
-port newCalendar: Signal Model
-port newEU: Signal Models.Sunday
-port newMP: Signal Models.DailyMP
-port newEP: Signal Models.DailyEP
+-- port newCalendar: Signal Model
+port newCalendar: (Model -> msg) -> InitCalendar msg
+
+-- port newEU: Signal Models.Sunday
+port newEU: (Models.Sunday -> msg) -> UpdateEU msg
+
+-- port newMP: Signal Models.DailyMP
+port newMP: (Models.DailyMP -> msg) -> UpdateMP msg
+
+-- port newEP: Signal Models.DailyEP
+port newEP: (Models.DailyEP -> msg) -> UpdateEP msg
 
 -- UPDATE
 
-type Action
+type Msg
   = NoOp
   | InitCalendar Model
   | UpdateEU Models.Sunday
@@ -98,49 +99,49 @@ type Action
   | ModMP MPReading.Model MPReading.Action
   | ModEP EPReading.Model EPReading.Action
 
-update: Action -> Model -> (Model, Effects Action)
-update action model =
-  case action of
-    NoOp -> (model, Effects.none)
+update: Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+  case msg of
+    NoOp -> (model, Cmd.none)
 
-    InitCalendar newCalendar -> (newCalendar, Effects.none)
+    InitCalendar newCalendar -> (newCalendar, Cmd.none)
 
     UpdateEU eu -> 
       let
         newModel = {model | eu = eu}
       in
-        (newModel, Effects.none)
+        (newModel, Cmd.none)
 
     UpdateMP mp -> 
       let
         newModel = {model | mp = mp}
       in
-        (newModel, Effects.none)
+        (newModel, Cmd.none)
 
     UpdateEP ep -> 
       let
         newModel = {model | ep = ep}
       in
-        (newModel, Effects.none)
+        (newModel, Cmd.none)
 
     ModEU reading readingAction ->
       let
         foo = Debug.log "MODEU" (readingAction, reading)
         newModel = {model | eu = Sunday.update readingAction reading}
       in 
-        (newModel, Effects.none)
+        (newModel, Cmd.none)
 
     ModMP reading readingAction ->
       let
         newModel = {model | mp = MPReading.update readingAction reading}
       in 
-        (newModel, Effects.none)
+        (newModel, Cmd.none)
 
     ModEP reading readingAction ->
       let
         newModel = {model | ep = EPReading.update readingAction reading}
       in 
-        (newModel, Effects.none)
+        (newModel, Cmd.none)
 
 
 -- HELPERS
@@ -148,164 +149,54 @@ update action model =
 
 -- VIEW
 
-view: Signal.Address Action -> Model -> Html
-view address model =
+view: Model -> Html Msg
+view model =
   div [] 
-  [ euDiv address model
-  , mpDiv address model
-  , epDiv address model
+  [ euDiv model
+  , mpDiv model
+  , epDiv model
   ]
 
 
 -- HELPERS
 
-euDiv: Signal.Address Action -> Model -> Html
-euDiv address model =
-  div [] [ (Sunday.view (Signal.forwardTo address (ModEU model.eu)) model.eu) ]
+euDiv: Model -> Html Msg
+euDiv model =
+  div [] [ map ModEu (Sunday.view model.eu) ]
+  -- [ (Sunday.view (Signal.forwardTo (ModEU model.eu)) model.eu) ]
 
-mpDiv: Signal.Address Action -> Model -> Html
-mpDiv address model =
+mpDiv: Model -> Html Msg
+mpDiv model =
   div []
-  [ (MPReading.view (Signal.forwardTo address (ModMP model.mp)) model.mp)
+  [ map ModMp (MPReading.view model.mp)
+  --(MPReading.view (Signal.forwardTo (ModMP model.mp)) model.mp)
   ]
 
-epDiv: Signal.Address Action -> Model -> Html
-epDiv address model =
+epDiv: Model -> Html Msg
+epDiv model =
   div []
-  [ (EPReading.view (Signal.forwardTo address (ModEP model.ep)) model.ep)
+  [ map ModEP (EPReading.view model.ep)
+  -- (EPReading.view (Signal.forwardTo (ModEP model.ep)) model.ep)
   ]
 
 
--- readingsMP: Models.Daily -> List Html
--- readingsMP daily =
---   let
---     (thisId, thisRef, thisClose) = httpReferences "mp" daily.date
---   in
---     [ a [ href thisRef ] 
---         [ button [] [text "MP"] ]
---     , div 
---         [ id thisId, class "modalDialog" ]
---         [ div []
---             [ a [href thisClose, title "Close", class "close"] [text "X"] 
---             , h2 [class "modal_header"] 
---                 [ text "Morning Prayer"
---                 , br [] []
---                 , text daily.date
---                 ]
---             , reading daily.mp1
---             , reading daily.mp2
---             , reading daily.mpp
---             ]
---         ]
---     ]
--- 
--- readingsEP: Models.Daily -> List Html
--- readingsEP daily =
---   let
---     (thisId, thisRef, thisClose) = httpReferences "ep" daily.date
---   in
---     [ a [ href thisRef ] 
---         [ button [] [text "EP"] ]
---     , div 
---         [ id thisId, class "modalDialog" ]
---         [ div []
---             [ a [href thisClose, title "Close", class "close"] [text "X"] 
---             , h2 [class "modal_header"] 
---                 [ text "Evening Prayer"
---                 , br [] []
---                 , text daily.date
---                 ]
---             , reading daily.ep1
---             , reading daily.ep2
---             , reading daily.epp
---             ]
---         ]
---     ]
--- 
--- readingsEU: Models.Sunday -> List Html
--- readingsEU sunday =
---   let
---     (thisId, thisRef, thisClose) = httpReferences "he" sunday.date
---   in
---     [ a [ href thisRef ] 
---         [ button [] [text "HE"] ]
---     , div 
---         [ id thisId, class "modalDialog" ]
---         [ div []
---             [ a [href thisClose, title "Close", class "close"] [text "X"] 
---             , h2 [class "modal_header"] 
---                 [ text "Eucharistic Readings"
---                 , br [] []
---                 , text sunday.date
---                 ]
---             , reading sunday.ot
---             , reading sunday.ps
---             , reading sunday.nt
---             , reading sunday.gs
---             ]
---         ]
---     ]
--- 
--- httpReferences: String -> String -> (String, String, String)
--- httpReferences ante date =
---   let
---     id = ante ++ Regex.replace Regex.All (Regex.regex "[^A-Za-z0-9]") (\_ -> "") date
---     ref = "#" ++ id
---     close = "#close" ++ id
---   in
---     (id, ref, close)
--- 
--- reading: List Models.Lesson -> Html
--- reading lessons =
---   let
---     this_reading l =
---       li [class "reading_item"] [ text l.read ]
---   in
---     ul [class "reading_list"] (List.map this_reading lessons)
--- 
--- 
--- -- STYLE
--- 
--- day_classes: Models.Day -> Attribute
--- day_classes day =
---   let
---     firstColor = day.colors |> List.head |> Maybe.withDefault "green"
---     color_class = "day_" ++ firstColor
---   in
---     class ("day_of_month " ++ color_class)
--- 
--- styleBorder: Bool -> Attribute
--- styleBorder today =
---   if today 
---     then style [("border", "3px solid #555")]
---     else style []
-
-euReadingStyle: Model -> Attribute
+euReadingStyle: Model -> Attribute msg
 euReadingStyle model =
-  let
-    foo = Debug.log "STYLE EU" model.eu
-  in
-    hideable
-      model.eu.show
-      []
+  hideable
+    model.eu.show
+    []
 
-mpReadingStyle: Model -> Attribute
+mpReadingStyle: Model -> Attribute msg
 mpReadingStyle model =
-  let
-    foo = Debug.log "STYLE MP" model.mp
-  in
-    hideable
-      model.mp.show
-      []
+  hideable
+    model.mp.show
+    []
 
-epReadingStyle: Model -> Attribute
+epReadingStyle: Model -> Attribute msg
 epReadingStyle model =
-  let
-    foo = Debug.log "STYLE EP" model.ep
-  in
-    hideable
-      model.ep.show
-      []
+  hideable
+    model.ep.show
+    []
 
 
 

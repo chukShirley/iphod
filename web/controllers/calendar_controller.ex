@@ -65,12 +65,14 @@ defmodule Iphod.CalendarController do
 
   def _list_of_weeks_from(start_date, end_date, n, [head|list]) do
     day = %{  date: start_date |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"),
+              id: start_date |> Timex.format!("{WDfull}{Mfull}{D}_{YYYY}"),
               name: start_date |> Timex.format!("{WDfull}"),
               dayOfMonth: start_date |> Timex.format!("{D}"),
               colors: DailyReading.color_for(start_date),
               title: DailyReading.title_for(start_date),
-              # daily: DailyReading.readings(start_date),
-              # sunday: SundayReading.readings(start_date),
+              mp_reading: DailyReading.reading_map("mp", start_date),
+              ep_reading: DailyReading.reading_map("ep", start_date),
+              eu_reading: SundayReading.reading_map(start_date),
               today: start_date == Date.now
           }
     new_head = [day | head]

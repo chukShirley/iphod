@@ -431,6 +431,25 @@ th.cal_move_month a {
   margin: 0;
 }
 
+.color_options {
+  text-decoration: none;
+  color: black;
+}
+
+table.reading {
+}
+
+table.reading_table th {
+  font-size: 1.5em;
+  text-align: center;
+}
+
+td.reading_table_td {
+  font-size: 1.5em;
+  position: relative;
+  vertical-align: top;
+}
+
 .day_white, .day_gold {
 /* Permalink - use to edit and share this gradient: 
   http://colorzilla.com/gradient-editor/#fefcea+0,f1da36+100;Gold+3D */
@@ -575,7 +594,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', end
 .modalDialog > div {
   width: 600px;
   max-height: 75%;
-  overflow: scroll;
+  overflow: auto;
   position: fixed;
   top: -10px;
   left: 120px;

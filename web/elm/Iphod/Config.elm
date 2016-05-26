@@ -1,13 +1,12 @@
-module Iphod.Config where
+module Iphod.Config exposing (..) -- where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Effects exposing (Effects, Never)
+import Html.Events exposing (on, onCheck)
 import String exposing (join)
 import Json.Decode as Json
 
-import Iphod.Helper exposing (onClickLimited, hideable, getText)
+import Iphod.Helper exposing (hideable)
 import Iphod.Models exposing (Config, configInit)
 
 -- MODEL
@@ -25,16 +24,17 @@ type Key
   | PS
   | NT
   | GS
+  | Current
 
-type Action
+type Msg
   = NoOp
   | Change Key String
   | ChangeVersion String
   | ChangeFootnote Bool
 
-update: Action -> Model -> Model
-update action model =
-  case action of
+update: Msg -> Model -> Model
+update msg model =
+  case msg of
     NoOp -> model
 
     Change key val -> 
@@ -44,6 +44,7 @@ update action model =
           PS -> {model | ps = val}
           NT -> {model | nt = val}
           GS -> {model | gs = val}
+          Current -> {model | current = val}
       in 
         newModel
 
@@ -54,83 +55,97 @@ update action model =
                   , ps = ver
                   , nt = ver
                   , gs = ver
+                  , current = ver
           }
       in
         newModel
 
-    ChangeFootnote torf ->
-      let
-        newModel = if torf 
-          then {model | fnotes = "fnotes"}
-          else {model | fnotes = ""}
-      in
-        newModel
+    ChangeFootnote bool -> {model | fnotes = bool}
 
 
 -- VIEW
 
-view: Signal.Address Action -> Model -> Html
-view address model =
+view: Model -> Html Msg
+view model =
   div
-    [ class "config"]
-    [ p 
-        []
-        [ text "Psalms in: "
-        , psRadio address model PS "Coverdale"
-        , psRadio address model PS "ESV"
-        , psRadio address model PS "BCP"
-        ]
-    , p 
-        [style [("margin-left", "2em")]]
-        [ text "FootNotes: "
-        , ftnoteCheck address model "fnotes"
-        ]
-    , p
-        [style [("margin-left", "2em")]]
-        [ text "Version: "
-        , versionSelect address model
-        ]
-    ]
+  [ class "config"]
+  [ p 
+      []
+      [ text "Psalms in: "
+      , psRadio model PS "Coverdale"
+      , psRadio model PS "ESV"
+      , psRadio model PS "BCP"
+      ]
+  , p 
+      [style [("margin-left", "2em")]]
+      [ text "FootNotes: "
+      , ftnoteCheck model "fnotes"
+      ]
+  , p
+      [style [("margin-left", "2em")]]
+      [ text "Version: "
+      , versionSelect model
+      ]
+  ]
 
 
 -- HELPERS
 
-versionSelect: Signal.Address Action -> Model -> Html
-versionSelect address model =
+versionSelect: Model -> Html Msg
+versionSelect model =
   let
+    onChange = on "change" (Json.succeed (ChangeVersion model.current))
     thisVersion ver =
-      option [value ver, selected (ver == model.current)] [text ver]
+      option [value ver, selected (ver == model.current), onChange] [text ver]
   in
-    select 
-      [ on "change" targetValue (\resp -> Signal.message address (ChangeVersion resp))] 
-      (List.map thisVersion model.vers)
+    select [] (List.map thisVersion model.vers)
+--    select 
+--      [ on "change" (Json.succeed (ChangeVersion model.current))] 
+--      (List.map thisVersion model.vers)
 
-psRadio: Signal.Address Action -> Model -> Key -> String -> Html
-psRadio address model key val =
-  span [class "radio_button"]
-  [ input
+psRadio: Model -> Key -> String -> Html Msg
+psRadio model key val =
+  let 
+    isSelected = model.ps == val
+  in
+    span [class "radio_button"]
+    [ input 
       [ type' "radio"
-      , id val
-      , checked (model.ps == val)
-      , on "change" targetChecked (\_ -> Signal.message address (Change key val))
+      , checked isSelected 
+      , onCheck (\_ -> Change key val)
       , name "psalm"
       , class "radio_button"
-      ]
-      []
+      ] []
+--  [ input
+--      [ type' "radio"
+--      , id val
+--      , checked (model.ps == val)
+--      , onCheck "change" (Json.succeed (Change key val))
+--      , name "psalm"
+--      , class "radio_button"
+--      ]
+--      []
   , label [class "radio_label", for val] [text val]
   ]
 
-ftnoteCheck: Signal.Address Action -> Model -> String -> Html
-ftnoteCheck address model val =
+ftnoteCheck: Model -> String -> Html Msg
+ftnoteCheck model val =
   span [class "config_checkbox"]
-  [ input
-      [ type' "checkbox"
-      , id val
-      , checked (model.fnotes == val)
-      , on "change" targetChecked (\resp -> Signal.message address (ChangeFootnote resp))
-      , name val
-      , class "config_checkbox"
-      ]
-      []
+  [ input 
+    [ type' "checkbox"
+    , id val
+    , checked model.fnotes, onCheck ChangeFootnote 
+    , name val
+    , class "config_checkbox"
+    ] []
+--  [ input
+--      [ type' "checkbox"
+--      , id val
+--      , checked (model.fnotes == val)
+--      , on "change" (Json.succeed (ChangeFootnote resp))
+--      , name val
+--      , class "config_checkbox"
+--      ]
+--      []
   , label [class "checkbox_label", for val] [text "Show"]
   ]

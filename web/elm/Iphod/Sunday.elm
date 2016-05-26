@@ -1,15 +1,14 @@
-module Iphod.Sunday ( Model, init, Action, update, view,
-                      textStyle) where
+module Iphod.Sunday exposing ( Model, init, Msg, update, view, textStyle) -- where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Json.Decode as Json
 import String exposing (join)
 import Regex exposing (..)
 import Markdown
-import DynamicStyle exposing (hover, hover')
 
-import Iphod.Helper exposing (onClickLimited, hideable, getText)
+import Iphod.Helper exposing (hideable)
 import Iphod.Models as Models
 
 -- MODEL
@@ -28,21 +27,28 @@ type Section
   | NT
   | GS
 
-type Action
+type Msg
   = NoOp
   | SetReading Model
+  | GetText (List (String, String))
   | ToggleShow Models.Lesson
   | ToggleModelShow
   | ToggleCollect
 
-update: Action -> Model -> Model
-update action model =
-  case action of
+update: Msg -> Model -> Model
+update msg model =
+  case msg of
     NoOp -> model
 
     ToggleModelShow -> {model | show = not model.show}
 
     SetReading newModel -> newModel
+
+    GetText list ->
+      let
+        foo = "SUNDAY GETTEXT" list
+      in
+       model
 
     ToggleShow lesson ->
       let 
@@ -77,18 +83,18 @@ update action model =
 
 -- VIEW
 
-view: Signal.Address Action -> Model -> Html
-view address model =
+view: Model -> Html Msg
+view model =
   div
   []
   [ table [class "readings_table", tableStyle model]
       [ caption 
         [titleStyle model]
-        [ span [onClick address ToggleModelShow] [text model.title]
+        [ span [onClick ToggleModelShow] [text model.title]
         , br [] []
         , button 
           [ class "button"
-          , onClick address ToggleCollect
+          , onClick ToggleCollect
           ] 
           [text "Collect"]
         ]
@@ -103,36 +109,36 @@ view address model =
           [ class "rowStyle" ]
           [ td 
               [class "tdStyle", style [("width", "20%")] ]
-              [ ul [textStyle model] ( thisReading address model OT) ]
-              -- [ ul [textStyle model] ( thisReading address model.ofType model.ot model.config.gs model.config.fnotes) ]
+              [ ul [textStyle model] ( thisReading model OT) ]
+              -- [ ul [textStyle model] ( thisReading model.ofType model.ot model.config.gs model.config.fnotes) ]
           , td
               [class "tdStyle", style [("width", "20%")] ]
-              [ ul [textStyle model] ( thisReading address model PS)]
-              -- [ ul [textStyle model] ( thisReading address model.ofType model.ps model.config.gs model.config.fnotes) ]
+              [ ul [textStyle model] ( thisReading model PS)]
+              -- [ ul [textStyle model] ( thisReading model.ofType model.ps model.config.gs model.config.fnotes) ]
            , td
               [class "tdStyle", style [("width", "20%")] ]
-              [ ul [textStyle model] ( thisReading address model NT)]
-              -- [ ul [textStyle model] ( thisReading address model.ofType model.nt model.config.gs model.config.fnotes) ]
+              [ ul [textStyle model] ( thisReading model NT)]
+              -- [ ul [textStyle model] ( thisReading model.ofType model.nt model.config.gs model.config.fnotes) ]
            , td
               [class "tdStyle", style [("width", "20%")] ]
-              [ ul [textStyle model] ( thisReading address model GS)]
+              [ ul [textStyle model] ( thisReading model GS)]
           ] -- end of row
       ] -- end of table
-    , div [] (thisText address model model.ot )
-    , div [] (thisText address model model.ps )
-    , div [] (thisText address model model.nt )
-    , div [] (thisText address model model.gs )
-    , div [ collectStyle model.collect ] (thisCollect address model.collect)
+    , div [] (thisText model model.ot )
+    , div [] (thisText model model.ps )
+    , div [] (thisText model model.nt )
+    , div [] (thisText model model.gs )
+    , div [ collectStyle model.collect ] (thisCollect model.collect)
 
---    [ li [titleStyle model, onClick address ToggleModelShow] [text model.title]
+--    [ li [titleStyle model, onClick ToggleModelShow] [text model.title]
  
   ] -- end of div 
 
 
 -- HELPERS
 
-thisCollect: Signal.Address Action -> Models.SundayCollect -> List Html
-thisCollect address sundayCollect =
+thisCollect: Models.SundayCollect -> List (Html Msg)
+thisCollect sundayCollect =
   let
     this_collect c = 
       p 
@@ -144,7 +150,7 @@ thisCollect address sundayCollect =
         [ text sundayCollect.instruction ]
     , button 
         [ class "collect_hide"
-        , onClick address ToggleCollect
+        , onClick ToggleCollect
         ] 
         [text "hide"]
     , p
@@ -155,50 +161,50 @@ thisCollect address sundayCollect =
         (List.map this_collect sundayCollect.collects)
     ]
 
-thisProper: Models.Proper -> Html
+thisProper: Models.Proper -> Html msg
 thisProper proper =
   div []
       [ p [class "proper_title"] [text ("Proper: " ++ proper.title)]
       , p [class "proper_text"] [text proper.text]
       ]
 
-thisText: Signal.Address Action -> Model -> List Models.Lesson -> List Html
-thisText address model lessons =
+thisText: Model -> List Models.Lesson -> List (Html Msg)
+thisText model lessons =
   let
     this_text l =
       let
         getTranslation s = 
-          onClick getText.address [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", "fnotes")]
+          onClick GetText [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", True)]
       in
         if l.section == "ps"
           then
             div [id l.id, bodyStyle l, class "esv_text"] 
                [ span 
                   [ style [("position", "relative"), ("top", "1em")]]
-                  [ button [ class "translationButton", onClick address (ToggleShow l) ] [ text "Hide" ]
+                  [ button [ class "translationButton", onClick (ToggleShow l) ] [ text "Hide" ]
                   , button 
                      [ class "translationButton", getTranslation "Coverdale"]
                      [ text "Coverdale"]
                   , button 
                      [ class "translationButton", getTranslation "BCP"]
                      [ text "BCP"]
-                  , versionSelect address model l
+                  , versionSelect model l
                   ]
                , Markdown.toHtml l.body
                ]
           else
             div [id l.id, bodyStyle l, class "esv_text"] 
             [ span [style [("position", "relative"), ("top", "1em")]]
-                [ button [class "translationButton", onClick address (ToggleShow l)] [text "Hide"]
-                , versionSelect address model l
+                [ button [class "translationButton", onClick (ToggleShow l)] [text "Hide"]
+                , versionSelect model l
                 ]
             , Markdown.toHtml l.body
             ]
   in
     List.map this_text lessons
 
-thisReading: Signal.Address Action -> Model -> Section -> List Html
-thisReading address model section =
+thisReading: Model -> Section -> List (Html Msg)
+thisReading model section =
   let
     lessons = case section of
       OT -> model.ot
@@ -216,16 +222,16 @@ thisReading address model section =
       if String.length l.body == 0
         then
           li
-            (hoverable [this_style l, onClick getText.address (req l)] )
+            (hoverable [this_style l, onClick GetText (req l)] )
             [text l.read]
         else
           li 
-            (hoverable [this_style l, onClick address (ToggleShow l)] )
+            (hoverable [this_style l, onClick (ToggleShow l)] )
             [text l.read]
   in
     List.map this_lesson lessons
 
-this_style: Models.Lesson -> Attribute
+this_style: Models.Lesson -> Attribute msg
 this_style l =
   case l.style of
     "req"     -> class "req_style" 
@@ -235,21 +241,29 @@ this_style l =
     "alt-opt" -> class "altOpt_style"
     _         -> class "bogis_style"
 
-hoverable: List Attribute -> List Attribute
+hoverable: List (Attribute msg) -> List (Attribute msg)
 hoverable attrs =
-  hover [("background-color", "white", "skyblue")] ++ attrs
+  -- hover [("background-color", "white", "skyblue")] ++ attrs
+  style [("background-color", "white", "skyblue")] ++ attrs
   
-versionSelect: Signal.Address Action -> Model -> Models.Lesson -> Html
-versionSelect address model lesson =
+versionSelect: Model -> Models.Lesson -> Html Msg
+versionSelect model lesson =
   let
     thisVersion ver =
       option [value ver, selected (ver == lesson.version)] [text ver]
   in
     select
-      [ on "change" targetValue 
-        (\resp -> Signal.message 
-                  getText.address 
-                  [("ofType", model.ofType), ("section", lesson.section), ("id", lesson.id), ("read", lesson.read), ("ver", resp), ("fnotes", "fnotes")]
+      [ on "change" 
+        (Json.succeed
+          ( GetText 
+            [ ("ofType", model.ofType)
+            , ("section", lesson.section)
+            , ("id", lesson.id)
+            , ("read", lesson.read)
+            , ("ver", thisVersion model.config.vers)
+            , ("fnotes", True)
+            ]
+          )
         )
       ]
       (List.map thisVersion model.config.vers)
@@ -258,19 +272,19 @@ versionSelect address model lesson =
 
 -- STYLE
 
-tableStyle: Model -> Attribute
+tableStyle: Model -> Attribute msg
 tableStyle model =
   hideable
     model.show
     [ ("width", "100%")]
 
-bodyStyle: Models.Lesson -> Attribute
+bodyStyle: Models.Lesson -> Attribute msg
 bodyStyle lesson =
   hideable
     lesson.show
     [ ("background-color", "white") ]
 
-titleStyle: Model -> Attribute
+titleStyle: Model -> Attribute msg
 titleStyle model =
   hideable
     model.show
@@ -279,7 +293,7 @@ titleStyle model =
     , ("height", "2.3em")
     ]
 
-textStyle: Model -> Attribute
+textStyle: Model -> Attribute msg
 textStyle model =
   hideable
     model.show
@@ -291,7 +305,7 @@ textStyle model =
     , ("display", "inline-block")
     ]
 
-collectStyle: Models.SundayCollect -> Attribute
+collectStyle: Models.SundayCollect -> Attribute msg
 collectStyle model =
   hideable
     model.show

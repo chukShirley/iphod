@@ -16,7 +16,7 @@ defmodule Iphod.Router do
   scope "/", Iphod do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", CalendarController, :index
     get "/printables", PrintableController, :index
     get "/versions", BibleVersionsController, :index
     get "/calendar", CalendarController, :index

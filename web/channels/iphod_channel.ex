@@ -204,10 +204,10 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_in("init_calendar", _, socket) do
-    date = Date.now(@tz)
-    push socket, "eu_today", SundayReading.eu_today(date)
-    push socket, "mp_today", DailyReading.mp_today(date)
-    push socket, "ep_today", DailyReading.ep_today(date)
+    # date = Date.now(@tz)
+    # push socket, "eu_today", SundayReading.eu_today(date)
+    # push socket, "mp_today", DailyReading.mp_today(date)
+    # push socket, "ep_today", DailyReading.ep_today(date)
     push socket, "init_email", @email
     {:noreply, socket}  
   end
