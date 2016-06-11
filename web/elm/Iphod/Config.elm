@@ -60,7 +60,7 @@ update msg model =
       in
         newModel
 
-    ChangeFootnote bool -> {model | fnotes = bool}
+    ChangeFootnote bool -> {model | fnotes = if bool then "True" else "False"}
 
 
 -- VIEW
@@ -130,22 +130,25 @@ psRadio model key val =
 
 ftnoteCheck: Model -> String -> Html Msg
 ftnoteCheck model val =
-  span [class "config_checkbox"]
-  [ input 
-    [ type' "checkbox"
-    , id val
-    , checked model.fnotes, onCheck ChangeFootnote 
-    , name val
-    , class "config_checkbox"
-    ] []
---  [ input
---      [ type' "checkbox"
---      , id val
---      , checked (model.fnotes == val)
---      , on "change" (Json.succeed (ChangeFootnote resp))
---      , name val
---      , class "config_checkbox"
---      ]
---      []
-  , label [class "checkbox_label", for val] [text "Show"]
-  ]
+  let
+    isChecked = model.fnotes == "True"
+  in
+    span [class "config_checkbox"]
+    [ input 
+      [ type' "checkbox"
+      , id val
+      , checked isChecked, onCheck ChangeFootnote 
+      , name val
+      , class "config_checkbox"
+      ] []
+  --  [ input
+  --      [ type' "checkbox"
+  --      , id val
+  --      , checked (model.fnotes == val)
+  --      , on "change" (Json.succeed (ChangeFootnote resp))
+  --      , name val
+  --      , class "config_checkbox"
+  --      ]
+  --      []
+    , label [class "checkbox_label", for val] [text "Show"]
+    ]

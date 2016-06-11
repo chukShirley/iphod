@@ -1,5 +1,5 @@
 <%# <div id="elm-container"></div> %>
-<%# <div id= "header-elm-container"></div> %>
+<div id= "header-elm-container"></div>
 <div>
   <table id= "calendar">
     <tr>
@@ -65,5 +65,5 @@
     </tr>
   </table>
 </div>
-<%# <div id="cal-elm-container"></div> %>
+<div id="cal-elm-container"></div>
 

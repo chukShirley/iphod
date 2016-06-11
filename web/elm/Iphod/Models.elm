@@ -13,7 +13,7 @@ type alias Config =
   , ps: String
   , nt: String
   , gs: String
-  , fnotes: Bool
+  , fnotes: String
   , vers: List String
   , current: String
   }
@@ -24,7 +24,7 @@ configInit =
   , ps = "Coverdale"
   , nt = "ESV"
   , gs = "ESV"
-  , fnotes = True
+  , fnotes = "True"
   , vers = []
   , current = "ESV"
   }

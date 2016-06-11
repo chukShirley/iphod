@@ -46,7 +46,7 @@ update msg model =
 
     GetText list ->
       let
-        foo = "SUNDAY GETTEXT" list
+        foo = Debug.log "SUNDAY GETTEXT" list
       in
        model
 
@@ -161,7 +161,7 @@ thisCollect sundayCollect =
         (List.map this_collect sundayCollect.collects)
     ]
 
-thisProper: Models.Proper -> Html msg
+thisProper: Models.Proper -> Html Msg
 thisProper proper =
   div []
       [ p [class "proper_title"] [text ("Proper: " ++ proper.title)]
@@ -174,7 +174,7 @@ thisText model lessons =
     this_text l =
       let
         getTranslation s = 
-          onClick GetText [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", True)]
+          onClick (GetText [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", "True")])
       in
         if l.section == "ps"
           then
@@ -190,7 +190,7 @@ thisText model lessons =
                      [ text "BCP"]
                   , versionSelect model l
                   ]
-               , Markdown.toHtml l.body
+               , Markdown.toHtml [] l.body
                ]
           else
             div [id l.id, bodyStyle l, class "esv_text"] 
@@ -198,7 +198,7 @@ thisText model lessons =
                 [ button [class "translationButton", onClick (ToggleShow l)] [text "Hide"]
                 , versionSelect model l
                 ]
-            , Markdown.toHtml l.body
+            , Markdown.toHtml [] l.body
             ]
   in
     List.map this_text lessons
@@ -222,7 +222,7 @@ thisReading model section =
       if String.length l.body == 0
         then
           li
-            (hoverable [this_style l, onClick GetText (req l)] )
+            (hoverable [this_style l, onClick (GetText (req l))] )
             [text l.read]
         else
           li 
@@ -244,7 +244,7 @@ this_style l =
 hoverable: List (Attribute msg) -> List (Attribute msg)
 hoverable attrs =
   -- hover [("background-color", "white", "skyblue")] ++ attrs
-  style [("background-color", "white", "skyblue")] ++ attrs
+  attrs
   
 versionSelect: Model -> Models.Lesson -> Html Msg
 versionSelect model lesson =
@@ -260,8 +260,8 @@ versionSelect model lesson =
             , ("section", lesson.section)
             , ("id", lesson.id)
             , ("read", lesson.read)
-            , ("ver", thisVersion model.config.vers)
-            , ("fnotes", True)
+            -- , ("ver", this_ver)
+            , ("fnotes", "True")
             ]
           )
         )

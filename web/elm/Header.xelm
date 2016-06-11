@@ -1,4 +1,4 @@
-module Header exposing (..) -- where
+port module Header exposing (..) -- where
 
 import Debug
 
@@ -6,6 +6,8 @@ import Html exposing (..)
 import Html.App as Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Json.Decode as Json exposing (..)
+import Platform.Sub as Sub exposing (batch, none)
 import Platform.Cmd as Cmd exposing (Cmd)
 import String exposing (join)
 import Markdown
@@ -14,28 +16,22 @@ import Iphod.Helper exposing (hideable)
 import Iphod.Models as Models
 import Iphod.Config as Config
 
-app =
+
+-- MAIN
+
+main =
   Html.program
     { init = init
     , update = update
     , view = view
-    , inputs =  [ incomingActions
-                , incomingEmail
-                , incomingConfig
-                ]
+    , subscriptions = subscriptions
     }
-
-
--- MAIN
-
-main: Html
-main = app.html
 
 
 -- MODEL
 
 type alias  Model =
-  { email:  Models.Email 
+  { email:  Models.Email
   , config: Models.Config
   }
 
@@ -48,51 +44,50 @@ initModel =
 init: (Model, Cmd Msg)
 init = (initModel, Cmd.none)
 
-
--- SIGNALS
-
--- incomingActions: Signal Msg
--- incomingActions =
---   Signal.map SetHeader newHeader
-
-
--- incomingEmail: Signal Msg
--- incomingEmail =
---   Signal.map UpdateEmail newEmail
-
--- incomingConfig: Signal Msg
--- incomingConfig =
---   Signal.map UpdateConfig newConfig
-
--- saveThisConfig: Signal.Mailbox Models.Config
--- saveThisConfig =
---   Signal.mailbox Models.configInit
-
--- sendContactMe: Signal.Mailbox Models.Email
--- sendContactMe =
---   Signal.mailbox Models.emailInit
-
-
-  -- PORTS
+-- PORTS
   
--- -- port savingConfig: Signal Models.Config
--- -- port savingConfig = 
--- --   saveThisConfig.signal
--- port savingConfig: Models.Config -> Cmd msg
--- 
--- -- port sendEmail: Signal Models.Email
--- -- port sendEmail =
--- --   sendContactMe.signal
--- port sendEmail: Models.Email -> Cmd msg
--- 
--- -- port newEmail: Signal Models.Email
--- port newEmail: (Models.Email -> msg) -> UpdateEmail msg
--- 
--- -- port newConfig: Signal Models.Config
+-- port savingConfig: Signal Models.Config
+-- port savingConfig = 
+--   saveThisConfig.signal
+port savingConfig: Models.Config -> Cmd msg
+
+-- port sendEmail: Signal Models.Email
+-- port sendEmail =
+--   sendContactMe.signal
+port sendEmail: Models.Email -> Cmd msg
+
+-- port newEmail: Signal Models.Email
+port newEmail: Models.Email -> Cmd msg
+
+-- port newConfig: Signal Models.Config
 -- port newConfig: (Models.Config -> msg) -> UpdateConfig msg
--- 
--- -- port newHeader: Signal Model
--- port newHeader: (Model -> msg) -> SetHeader msg
+
+port saveConfig: Models.Config -> Cmd msg
+
+
+-- port newHeader: Signal Model
+port newHeader: Model -> Cmd msg
+
+
+-- SUBSCRIPTIONS
+
+--   Signal.map UpdateConfig newConfig
+port portConfig: (Models.Config -> msg) -> Sub msg
+subscribeConfig: Model -> Sub Msg
+subscribeConfig config = 
+  portConfig UpdateConfig
+
+port portEmail: (Models.Email -> msg) -> Sub msg
+subscribeEmail: Model -> Sub Msg
+subscribeEmail email = 
+  portEmail UpdateEmail
+
+subscriptions : Model -> Sub Msg
+subscriptions model = 
+  Sub.batch
+  [ subscribeConfig
+  , subscribeEmail
+  ]
 
 
 -- UPDATE
@@ -102,22 +97,25 @@ type Msg
   | Send
   | Clear
   | Cancel
-  | GetConfig 
   | SetHeader Model
   | UpdateConfig Models.Config
   | UpdateEmail Models.Email
   | EmailAddress String
   | Topic String
   | Message String
---  | ModEmail Email.Model Email.Action
-  | ModConfig Config.Model Config.Action
+--  | ModEmail Email.Model Email.Msg
+  | ModConfig Config.Msg
 
 update: Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     NoOp -> (model, Cmd.none)
 
-    Send -> (model, Cmd.none)
+    Send -> 
+      let
+        foo = Debug.log "SEND" model
+      in
+        (model, sendEmail model.email)
 
     Clear -> 
       let
@@ -132,8 +130,6 @@ update msg model =
         newModel = {model | email = Models.emailInit}
       in
         (newModel, Cmd.none)
-
-    GetConfig -> (model, getConfig model.config)
 
     SetHeader newModel -> 
       let
@@ -173,23 +169,23 @@ update msg model =
       in
         (newModel, Cmd.none)
 
-    ModConfig cmodel cmsg ->
+    ModConfig msg ->
       let
-        newConfig = Config.update cmsg cmodel
+        newConfig = Config.update msg model.config
         newModel = {model | config = newConfig}
         foo = Debug.log "MOD CONFIG" newModel
       in
-        (newModel, saveConfig newModel.config)
+        (newModel, saveConfig newConfig)
 
 
 -- HELPERS
 
-saveConfig: Models.Config -> Cmd Msg
-saveConfig config =
-  Signal.send saveThisConfig (config)
-  |> Task.toMaybe
-  |> Task.map (always NoOp)
-  |> Cmd.task
+-- saveConfig: Models.Config -> Cmd Msg
+-- saveConfig config =
+--   Signal.send saveThisConfig (config)
+--   |> Task.toMaybe
+--   |> Task.map (always NoOp)
+--   |> Cmd.task
 
 
 -- VIEW
@@ -219,7 +215,7 @@ emailMe model =
       , (inputEmailAddress model.email)
       , (inputSubject model.email)
       , (inputMessage model.email)
-      , button [ class "email-button", onClick sendContactMe model.email ] [text "Send"]
+      , button [ class "email-button", onClick Send ] [text "Send"]
       , button [ class "email-button", onClick Clear] [text "Clear"]
       , a [href "#closeemail-create", title "Cancel"] 
           [ button [ class "email-button", onClick Cancel] [text "Cancel"] ]
@@ -242,7 +238,7 @@ configModal model =
         ]
     ]
 
-aboutModal: Html
+aboutModal: Html Msg
 aboutModal =
   span []
   [ a [ href "#about-text" ] [ button [] [text "About"] ]
@@ -251,12 +247,12 @@ aboutModal =
         [ div []
             [ a [href "#closeabout-text", title "Close", class "close"] [text "X"] 
             , h2 [class "modal_header"] [ text "About" ]
-            , p [] [Markdown.toHtml about]
+            , p [] [Markdown.toHtml [] about]
             ]
         ]
     ]
 
-howToModal: Html
+howToModal: Html Msg
 howToModal =
   span []
   [ a [ href "#howTo-text" ] 
@@ -266,7 +262,7 @@ howToModal =
         [ div []
             [ a [href "#closehowTo-text", title "Close", class "close"] [text "X"] 
             , h2 [class "modal_header"] [ text "How to Use" ]
-            , p [] [Markdown.toHtml howToUse]
+            , p [] [Markdown.toHtml [] howToUse]
             ]
         ]
     ]
@@ -276,17 +272,13 @@ inputEmailAddress model =
   p []
     [ input 
         [ id "from"
+        , class "email-addr"
+        , name "from"
         , type' "text"
         , placeholder "Your Email Address - required"
+        , Html.Attributes.value model.from
+        , onInput EmailAddress
         , autofocus True
-        , name "from"
-        , on "input" (Json.succeed (EmailAddress str))
-        -- , onClickLimited NoOp
-        , onWithOptions "click" 
-          { stopPropagation = True, preventDefault = True }
-          (Json.succeed NoOp)
-        , value model.from
-        , class "email-addr"
         ]
         []
     ]
@@ -296,17 +288,13 @@ inputSubject model =
   p []
     [ input 
         [ id "topic"
+        , class "email-subject"
+        , name "topic"
         , type' "text"
         , placeholder "Subject - required"
+        , Html.Attributes.value model.topic
+        , onInput Topic
         , autofocus True
-        , name "topic"
-        , on "input" (Json.succeed (Topic str))
-        -- , onClickLimited NoOp
-        , onWithOptions "click" 
-          { stopPropagation = True, preventDefault = True }
-          (Json.succeed NoOp)
-        , value model.topic
-        , class "email-subject"
         ]
         []
     ]
@@ -316,14 +304,13 @@ inputMessage model =
   p []
     [ textarea 
         [ id "text"
+        , class "email-msg-addr"
+        , name "text"
         , type' "text"
         , placeholder "Enter Message - required"
+        , Html.Attributes.value model.text
+        , onInput Message
         , autofocus True
-        , name "text"
-        , on "input" (Json.succeed (Message str))
-        , onClickLimited NoOp
-        , value model.text
-        , class "email-msg-addr"
         ]
         []
     ]
@@ -407,7 +394,7 @@ about = """
 
 -- STYLE
 
-buttonStyle:  msg
+buttonStyle:  Attribute msg
 buttonStyle =
   style
     [ ("position", "relative")

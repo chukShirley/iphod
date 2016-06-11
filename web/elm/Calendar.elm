@@ -1,40 +1,35 @@
-module Calendar exposing (..) -- where
+port module Calendar exposing (..) -- where
 import Debug
 
 -- import StartApp
 import Html exposing (..)
-import Html.App as Html
-import Html exposing (..)
+import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Regex
 import Json.Decode as Json exposing ((:=))
--- import Effects exposing (Effects, Never)
+import Platform.Sub as Sub exposing (batch)
 import Platform.Cmd as Cmd exposing (Cmd)
 import String exposing (join)
 import Markdown
 
 import Iphod.Helper exposing (hideable)
--- import Iphod.Email as Email
--- import Iphod.Email exposing(sendContactMe)
--- import Iphod.Config as Config
 import Iphod.Models as Models
 import Iphod.Sunday as Sunday
 import Iphod.MPReading as MPReading
 import Iphod.EPReading as EPReading
 
-app =
-  Html.program
-    { init = init
-    , update = update
-    , view = view
-    , inputs =  [ incomingActions, incomingEU, incomingMP, incomingEP ]
-    }
 
 -- MAIN
 
-main: Html
-main = app.html
+main =
+  App.program
+    { init = init
+    , update = update
+    , view = view
+    , subscriptions = subscriptions
+    }
+
 
 -- MODEL
 
@@ -55,37 +50,43 @@ init:   (Model, Cmd Msg)
 init =  (initModel, Cmd.none)
 
 
--- SIGNALS
 
--- incomingActions: Signal Msg
--- incomingActions =
---   Signal.map InitCalendar newCalendar
+-- SUBSCRIPTIONS
+
+-- port suggestions : (List String -> msg) -> Sub msg
 -- 
--- incomingEU: Signal Msg
--- incomingEU =
---   Signal.map UpdateEU newEU
+-- subscriptions : Model -> Sub Msg
+-- subscriptions model =
+--   suggestions Suggest
 -- 
--- incomingMP: Signal Msg
--- incomingMP =
---   Signal.map UpdateMP newMP
--- 
--- incomingEP: Signal Msg
--- incomingEP =
---   Signal.map UpdateEP newEP
 
--- PORTS
+port portCalendar: (Model -> msg) -> Sub msg
+subscribeCalendar: Model -> Sub Msg
+subscribeCalendar model =
+  portCalendar InitCalendar
 
--- port newCalendar: Signal Model
-port newCalendar: (Model -> msg) -> InitCalendar msg
+port portEU: (Models.Sunday -> msg) -> Sub msg
+subscribeEU: Model -> Sub Msg
+subscribeEU eu =
+  portEU UpdateEU
 
--- port newEU: Signal Models.Sunday
-port newEU: (Models.Sunday -> msg) -> UpdateEU msg
+port portMP: (Models.DailyMP -> msg) -> Sub msg
+subscribeMP: Model -> Sub Msg
+subscribeMP mp =
+  portMP UpdateMP
 
--- port newMP: Signal Models.DailyMP
-port newMP: (Models.DailyMP -> msg) -> UpdateMP msg
+port portEP: (Models.DailyEP -> msg) -> Sub msg
+subscribeEP: Model -> Sub Msg
+subscribeEP ep =
+  portEP UpdateEP
 
--- port newEP: Signal Models.DailyEP
-port newEP: (Models.DailyEP -> msg) -> UpdateEP msg
+subscriptions : Model -> Sub Msg  
+subscriptions model = 
+  Sub.batch
+    [ subscribeEU
+    , subscribeMP
+    , subscribeEP
+    ]
 
 -- UPDATE
 
@@ -95,9 +96,9 @@ type Msg
   | UpdateEU Models.Sunday
   | UpdateMP Models.DailyMP
   | UpdateEP Models.DailyEP
-  | ModEU Sunday.Model Sunday.Action
-  | ModMP MPReading.Model MPReading.Action
-  | ModEP EPReading.Model EPReading.Action
+  | ModEU Sunday.Model Sunday.Msg
+  | ModMP MPReading.Model MPReading.Msg
+  | ModEP EPReading.Model EPReading.Msg
 
 update: Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -162,20 +163,20 @@ view model =
 
 euDiv: Model -> Html Msg
 euDiv model =
-  div [] [ map ModEu (Sunday.view model.eu) ]
+  div [] [ App.map ModEU (Sunday.view model.eu) ]
   -- [ (Sunday.view (Signal.forwardTo (ModEU model.eu)) model.eu) ]
 
 mpDiv: Model -> Html Msg
 mpDiv model =
   div []
-  [ map ModMp (MPReading.view model.mp)
+  [ App.map ModMP (MPReading.view model.mp)
   --(MPReading.view (Signal.forwardTo (ModMP model.mp)) model.mp)
   ]
 
 epDiv: Model -> Html Msg
 epDiv model =
   div []
-  [ map ModEP (EPReading.view model.ep)
+  [ App.map ModEP (EPReading.view model.ep)
   -- (EPReading.view (Signal.forwardTo (ModEP model.ep)) model.ep)
   ]
 

@@ -140,51 +140,52 @@ channel.push("init_calendar", "");
 //})
 
 
-// var elmHeaderDiv = document.getElementById('header-elm-container')
-//   , email_model = {
-//       from: ""
-//     , topic: ""
-//     , text: ""
-//   }
-//   , config_model = {
-//       ot: ""
-//     , ps: ""
-//     , nt: ""
-//     , gs: ""
-//     , fnotes: ""
-//     , vers: []
-//     , current: "ESV"
-//   }
-//   , initialHeaderState = {
-//     newHeader: {
-//       email: email_model
-//     , config: init_config_model()
-//     }
-//     , newConfig: init_config_model()
-//     , newEmail: email_model
-//   }
-//   , elmHeaderApp = Elm.embed(Elm.Header, elmHeaderDiv, initialHeaderState)
-// 
-// elmHeaderApp.ports.sendEmail.subscribe(function(email) {
-//   channel.push("request_send_email", email)
-// })
-// 
-// elmHeaderApp.ports.savingConfig.subscribe(function(config) {
-//   // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
-//   if ( storageAvailable('localStorage') ) {
-//     let s = window.localStorage
-//     s.setItem("iphod_ot", config.ot)
-//     s.setItem("iphod_ps", config.ps)
-//     s.setItem("iphod_nt", config.nt)
-//     s.setItem("iphod_gs", config.ot)
-//     s.setItem("iphod_fnotes", config.fnotes)
-//   }
-// })
-// 
-// elmHeaderApp.ports.newConfig.subscribe( function(data) {
-//   console.log("CONFIG: ", data)
-// })
-//   
+var elmHeaderDiv = document.getElementById('header-elm-container')
+  , email_model = {
+      from: ""
+    , topic: ""
+    , text: ""
+  }
+  , config_model = {
+      ot: ""
+    , ps: ""
+    , nt: ""
+    , gs: ""
+    , fnotes: ""
+    , vers: []
+    , current: "ESV"
+  }
+  , initialHeaderState = {
+    newHeader: {
+      email: email_model
+    , config: init_config_model()
+    }
+    , newConfig: init_config_model()
+    , newEmail: email_model
+  }
+  , elmHeaderApp = Elm.embed(Elm.Header, elmHeaderDiv, initialHeaderState)
+
+console.log("HEADER: ", elmHeaderApp)
+elmHeaderApp.ports.sendEmail.subscribe(function(email) {
+  channel.push("request_send_email", email)
+})
+
+elmHeaderApp.ports.savingConfig.subscribe(function(config) {
+  // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
+  if ( storageAvailable('localStorage') ) {
+    let s = window.localStorage
+    s.setItem("iphod_ot", config.ot)
+    s.setItem("iphod_ps", config.ps)
+    s.setItem("iphod_nt", config.nt)
+    s.setItem("iphod_gs", config.ot)
+    s.setItem("iphod_fnotes", config.fnotes)
+  }
+})
+
+elmHeaderApp.ports.saveConfig.subscribe( function(data) {
+  console.log("CONFIG: ", data)
+})
+  
 
 
 // calendar 
@@ -202,17 +203,17 @@ $("#rollup").click( function() {
 
 channel.on('eu_today', data => {
   data.config = init_config_model();
-  elmCalApp.ports.newEU.send(data)
+  elmCalApp.ports.portEU.send(data)
 })
   
 channel.on('mp_today', data => {
   data.config = init_config_model();
-  elmCalApp.ports.newMP.send(data)
+  elmCalApp.ports.portMP.send(data)
 })
   
 channel.on('ep_today', data => {
   data.config = init_config_model();
-  elmCalApp.ports.newEP.send(data)
+  elmCalApp.ports.portEP.send(data)
 })
 
 $(".reading_button").click( function() {

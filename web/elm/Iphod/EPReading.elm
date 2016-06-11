@@ -1,7 +1,10 @@
-module Iphod.EPReading exposing (Model, init, Msg, update, view, textStyle) -- where
+module Iphod.EPReading exposing (Model, init, Msg, update, view, textStyle) 
+
+-- where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (on, onClick)
 import Json.Decode as Json
 import Http
 import String
@@ -28,7 +31,7 @@ type Section
 
 type Msg 
   = NoOp
-  | GetText List (String, String)
+  | GetText (List (String, String))
   | ToggleModelShow
   | ToggleShow Models.Lesson
   | SetReading Model
@@ -40,7 +43,9 @@ update msg model =
 
     GetText list ->
       let
-        foo = "EP GETTEXT" list
+        -- thisVersion ver =
+        --   option [value ver, selected (ver == lesson.version)] [text ver]
+        foo = Debug.log "EP GETTEXT" list
       in
        model
 
@@ -108,13 +113,13 @@ view model =
 
 -- HELPERS
 
-thisText: Model -> List Models.Lesson -> (List Html msg)
+thisText: Model -> List Models.Lesson -> List (Html Msg)
 thisText model lessons =
   let
     this_text l =
       let
         getTranslation s = 
-          onClick GetText [("ofType", "daily"), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", True)]
+          onClick (GetText [("ofType", "daily"), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", "True")])
       in
         if l.section == "epp" || l.section == "epp"
           then
@@ -130,7 +135,7 @@ thisText model lessons =
                      [ text "BCP"]
                   , versionSelect model l
                   ]
-               , Markdown.toHtml l.body
+               , Markdown.toHtml [] l.body
                ]
           else
             div [id l.id, bodyStyle l, class "esv_text"] 
@@ -138,7 +143,7 @@ thisText model lessons =
                 [ button [class "translationButton", onClick (ToggleShow l)] [text "Hide"]
                 , versionSelect model l
                 ]
-            , Markdown.toHtml l.body
+            , Markdown.toHtml [] l.body
             ]
   in
     List.map this_text lessons
@@ -157,8 +162,8 @@ versionSelect model lesson =
             , ("section", lesson.section)
             , ("id", lesson.id)
             , ("read", lesson.read)
-            , ("ver", thisVersion model.config.vers)
-            , ("fnotes", True)
+            -- , ("ver", this_ver)
+            , ("fnotes", "True")
             ]
           )
         )
@@ -183,7 +188,7 @@ thisReading model section =
       if String.length l.body == 0
         then
           li
-            (hoverable [this_style l, onClick GetText (req l)] )
+            (hoverable [this_style l, onClick (GetText (req l))] )
             [text l.read]
         else
           li 
@@ -206,7 +211,8 @@ this_style l =
 
 hoverable: List (Attribute msg) -> List (Attribute msg)
 hoverable attrs =
-  hover [("background-color", "white", "skyblue")] ++ attrs
+  -- hover [("background-color", "white", "skyblue")] ++ attrs
+  attrs
   
 
 

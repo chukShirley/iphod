@@ -1,4 +1,4 @@
-module Iphod.Email exposing (..)
+module Iphod.Email exposing (..) --where
   ( Model, init, Msg, update, view )
 
 import Html exposing (..)
@@ -7,7 +7,7 @@ import Html.Events exposing (..)
 import String exposing (join)
 import Json.Decode as Json
 
-import Iphod.Helper exposing (onClickLimited, hideable)
+import Iphod.Helper exposing (hideable)
 import Iphod.Models exposing (Email, emailInit)
 
 -- MODEL
@@ -56,15 +56,6 @@ update msg model =
 view: Model -> Html Msg
 view model =
   (contactModal model)
---  div
---  [ class "email"]
---  [ (inputEmailAddress model)
---  , (inputSubject model)
---  , (inputMessage model)
---  , button [ class "email-button", onClick sendContactMe model ] [text "Send"]
---  , button [ class "email-button", onClick Clear] [text "Clear"]
---  , button [ class "email-button", onClick Cancel] [text "Cancel"]
---  ]
 
 contactModal: Model -> Html Msg
 contactModal model =
