@@ -1,7 +1,7 @@
 require IEx
 
 defmodule SundayReading do
-  import Lityear, only: [namedDayDate: 2, is_sunday?: 1]
+  import Lityear, only: [namedDayDate: 2, is_sunday?: 1, next_holy_day: 1]
   use Timex
   @tz "America/Los_Angeles"
 
@@ -12,9 +12,16 @@ defmodule SundayReading do
   def identity(), do: Agent.get(__MODULE__, &(&1))
   def readings(season, wk, yr), do: identity[season][wk][yr]
   def readings(date) do
-    if date |> Lityear.is_sunday?, do: this_sunday(date), else: last_sunday(date)
+    # should check for red letter day first
+    {hd, title} = Lityear.next_holy_day date
+    if hd == date do
+      holy_day title, date
+    else
+      if date |> Lityear.is_sunday?, do: this_sunday(date), else: last_sunday(date)
+    end
   end
 
+  def holy_day(title, date),    do:  eu_map {"redLetter", title, "a", date}
   def next_sunday,        do: Date.now(@tz) |> next_sunday
   def next_sunday(date),  do: date |> Lityear.next_sunday |> _sunday
   def this_sunday(date),  do: date |> Lityear.to_season |> _sunday
@@ -22,10 +29,14 @@ defmodule SundayReading do
   def last_sunday(date),  do: date |> Lityear.last_sunday |> _sunday
   def from_now,           do: Date.now(@tz) |> this_sunday
 
+  def holy_day_color(title), do: identity["redLetter"][title]["colors"]
+  def holy_day_title(title), do: identity["redLetter"][title]["title"]
 
-  defp _sunday({season, wk, yr, sunday}) do
-    if identity[season][wk][yr] |> is_nil, do: IEx.pry
-    # IO.puts "SUNDAY: #{season}, #{wk}"
+  defp _sunday({season, wk, yr, sunday}), do: eu_map {season, wk, yr, sunday}
+
+  defp eu_map(nil, _date), do: IEx.pry
+  defp eu_map({season, wk, yr, sunday}) do
+    if identity[season][wk]["colors"] == nil, do: IEx.pry
     identity[season][wk][yr]
       |> add_ids
       |> Map.merge( %{
@@ -34,7 +45,7 @@ defmodule SundayReading do
                 week:     wk, 
                 title:    identity[season][wk]["title"],
                 colors:   identity[season][wk]["colors"],
-                collect:  Collects.get(season, wk)
+                collect:  Collects.get("advent", "1")
               })
   end
 
@@ -74,17 +85,13 @@ defmodule SundayReading do
     |> Map.put_new(:version, "")
   end
 
-  def next_holy_day(), do: next_holy_day(Date.now(@tz))
-  def next_holy_day(date) do
-    {st_date, festival} = Lityear.next_holy_day(date)
-    _sunday({"redLetter", festival, "a", st_date})
-    # Map.merge identity["redLetter"][festival][Lityear.abc_atom st_date],
-    #   %{date: st_date, season: "", week: "", title: identity["redLetter"][festival]["title"]}
-  end
-
-  def holy_day(festival) do
-    identity["redLetter"][festival]
-  end
+#   def next_holy_day(), do: next_holy_day(Date.now(@tz))
+#   def next_holy_day(date) do
+#     {st_date, festival} = Lityear.next_holy_day(date)
+#     _sunday({"redLetter", festival, "a", st_date})
+#     # Map.merge identity["redLetter"][festival][Lityear.abc_atom st_date],
+#     #   %{date: st_date, season: "", week: "", title: identity["redLetter"][festival]["title"]}
+#   end
 
   def eu_today(date) do
     # if date is redletter, use those readings

@@ -2,7 +2,7 @@ module Iphod.Models exposing
   ( Config, Lesson, Sunday, Daily, Day
   , Email, Collect, SundayCollect, Proper
   , DailyMP, DailyEP
-  , configInit, sundayInit, dailyInit
+  , configInit, initLesson, sundayInit, dailyInit
   , emailInit, initCollect, initSundayCollect
   , initProper, initDay
   , initDailyMP, initDailyEP
@@ -25,7 +25,7 @@ configInit =
   , nt = "ESV"
   , gs = "ESV"
   , fnotes = "True"
-  , vers = []
+  , vers = ["ESV"]
   , current = "ESV"
   }
 
@@ -50,6 +50,17 @@ type alias Lesson =
   , id:       String
   , section:  String
   , version:  String
+  }
+
+initLesson: Lesson
+initLesson =
+  { style =   ""
+  , show =    False
+  , read =    ""
+  , body =    ""
+  , id =      ""
+  , section = ""
+  , version = ""
   }
 
 type alias Proper = 
@@ -95,14 +106,14 @@ type alias Sunday =
   , season:   String
   , week:     String
   , title:    String
+  , show:     Bool
+  , config:   Config
   , colors:   List String
   , collect:  SundayCollect
   , ot:       List Lesson
   , ps:       List Lesson
   , nt:       List Lesson
   , gs:       List Lesson
-  , show:     Bool
-  , config:   Config
 }
 
 sundayInit: Sunday
@@ -112,14 +123,14 @@ sundayInit =
   , season  = ""
   , week    = ""
   , title   = ""
+  , show    = False
+  , config  = configInit
   , colors  = []
   , collect = initSundayCollect
   , ot      = []
   , ps      = []
   , nt      = []
   , gs      = []
-  , show    = False
-  , config  = configInit
   }
 
 type alias Daily =
@@ -171,11 +182,11 @@ type alias DailyMP =
   , season: String
   , title:  String
   , week:   String
+  , config: Config
+  , show:   Bool
   , mp1:    List Lesson
   , mp2:    List Lesson
   , mpp:    List Lesson
-  , config: Config
-  , show:   Bool
   }
 
 initDailyMP: DailyMP
@@ -186,11 +197,11 @@ initDailyMP =
   , season  = ""
   , title   = ""
   , week    = ""
+  , config  = configInit
+  , show    = False
   , mp1     = []
   , mp2     = []
   , mpp     = []
-  , config  = configInit
-  , show    = False
   }
 
 type alias DailyEP =
@@ -200,11 +211,11 @@ type alias DailyEP =
   , season: String
   , title:  String
   , week:   String
+  , config: Config
+  , show:   Bool
   , ep1:    List Lesson
   , ep2:    List Lesson
   , epp:    List Lesson
-  , config: Config
-  , show:   Bool
   }
 
 initDailyEP: DailyEP
@@ -215,11 +226,11 @@ initDailyEP =
   , season  = ""
   , title   = ""
   , week    = ""
+  , config  = configInit
+  , show    = False
   , ep1     = []
   , ep2     = []
   , epp     = []
-  , config  = configInit
-  , show    = False
   }
 
 type alias ESV =

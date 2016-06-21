@@ -289,13 +289,21 @@ button {
   padding-left: 1em;
 }
 input[type=radio].radio_button {
-  position:absolute; z-index:-1000; left:-1000px; overflow: hidden; clip: rect(0 0 0 0); height:1px; width:1px; margin:-1px; padding:0; border:0;
+  position:absolute; 
+  z-index:-1000; 
+  left:-1000px; 
+  overflow: hidden; 
+  clip: rect(0 0 0 0); 
+  height:1px; 
+  width:1px; 
+  margin:-1px; 
+  padding:0; 
+  border:0;
 }
 
 input[type=radio].radio_button + label.radio_label {
   padding-left: 25px;
   height: 20px; 
-  display:i nline-block;
   line-height: 20px;
   background-repeat: no-repeat;
   background-position: 0 0;
@@ -309,6 +317,7 @@ input[type=radio].radio_button:checked + label.radio_label {
   background-position: 0 -20px;
 }
 label.radio_label {
+  margin-right: 2px;
   background-image: url("/images/checkbox.png");
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -409,6 +418,9 @@ label.radio_label {
   text-align: left;
   vertical-align: bottom;
 }
+
+#calendar td.today {border: 3px solid black;}
+
 #calendar td ul {
   margin-top: 3.5em;
   padding-left: 0;
@@ -551,13 +563,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', end
 }
  
 .email-subject {
-    width: 45em;
+    width: 90%;
     margin-left: 1em;
     padding-left: 1em;
 } 
 
 .email-msg-addr {
-    width: 45em;
+    width: 90%;
     height: 5em;
     margin-left: 1em;
     padding-left: 1em;
@@ -591,23 +603,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', end
   pointer-events: auto;
 }
 
-.modalDialog > div {
-  width: 600px;
-  max-height: 75%;
-  overflow: auto;
-  position: fixed;
-  top: -10px;
-  left: 120px;
-  margin: 10% auto;
-  padding: 5px 20px 13px 20px;
-  border-radius: 10px;
-  background: #fff;
-  background: -moz-linear-gradiant(#fff, #999);
-  background: -webkit-linear-gradiant(#fff, #999);
-  background: -o-linear-gradiant(#fff, #999);  
-}
-
-.emailModalDialog > div {
+.configModalDialog > div, .modalDialog > div, .emailModalDialog > div {
   width: 25em;
   height: auto;
   position: relative;
@@ -620,6 +616,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', end
   background: -o-linear-gradiant(#fff, #999);  
 }
 
+.modalDialog > div {
+  width: 70%;
+}
+.configModalDialog > div {
+  padding: 5px 20px 80px 20px;
+}
+/*
 .configModalDialog > div {
   width: 33.2em;
   height: auto;
@@ -632,6 +635,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', end
   background: -webkit-linear-gradiant(#fff, #999);
   background: -o-linear-gradiant(#fff, #999);  
 }
+*/
 
  > div {
   width: 33.2em;
@@ -650,10 +654,12 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', end
   background: #606061;
   color: #ffffff;
   line-height: 25px;
-  position: fixed;
-  left: 110px;
-  top: 65px;
-  width: 24px;
+  position: relative;
+  left: -30px;
+  top: -10px;
+  width: 4px;
+  padding: 5px 8px;
+  z-index: 99999999;
   text-align: center;
   text-decoration: none;
   font-weight: bold;

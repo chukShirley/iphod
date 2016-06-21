@@ -1,4 +1,3 @@
-<%# <div id="elm-container"></div> %>
 <div id= "header-elm-container"></div>
 <div>
   <table id= "calendar">
@@ -7,7 +6,7 @@
       <th class= "mpep_link">Today</th>
       <th class= "mpep_link" colspan= "3"><a href= "eveningPrayer"><button>Evening Prayer</button></a></th>
     </tr>
-    <tr id= "calendar">
+    <tr>
       <th class= "cal_move_month">
         <a href= "<%="/calendar/prev/#{@model.month}/#{@model.year}"%>" ><</a>
       </th>
@@ -28,7 +27,7 @@
     <%= for week <- @model.calendar do %>
       <tr class= "calendar-week">
         <%= for day <- week.days do %>
-          <td>
+          <td class="<%= if day.today, do: 'today', else: '' %>" >
             <span>
               <a href= "#<%=day.id%>_color" class= "color_options">
                 <p class= "<%="day_of_month day_#{hd day.colors}"%>"><%=day.dayOfMonth%></p>

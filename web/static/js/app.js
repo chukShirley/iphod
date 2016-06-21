@@ -46,7 +46,7 @@ function init_config_model() {
     , ps: "Coverdale"
     , nt: "ESV"
     , gs: "ESV"
-    , fnotes: "fnotes"
+    , fnotes: "True"
     , vers: ["ESV"]
     , current: "ESV"
     }
@@ -55,9 +55,9 @@ function init_config_model() {
         , ps: get_init("iphod_ps", "Coverdale")
         , nt: get_init("iphod_nt", "ESV")
         , gs: get_init("iphod_gs", "ESV")
-        , fnotes: get_init("iphod_fnotes", "fnotes")
-        , vers: get_versions("iphod_vers", "ESV")
-        , current: "ESV"
+        , fnotes: get_init("iphod_fnotes", "True")
+        , vers: get_versions("iphod_vers", ["ESV"])
+        , current: get_init("iphod_current", "ESV")
         }
   }
   return m;
@@ -109,111 +109,75 @@ import socket from "./socket"
 
 let channel = socket.channel("iphod:readings")
 channel.join()
-  .receive("ok", resp => { console.log("Joined Iphod successfully", resp) })
+  .receive("ok", resp => { 
+    console.log("Joined Iphod successfully", resp);
+    elmHeaderApp.ports.portConfig.send(init_config_model());
+  })
   .receive("error", resp => { console.log("Unable to join Iphod", resp) })
   
 channel.push("init_calendar", "");
-//  channel.push("request_today", "");
-//  channel.on("next_sunday", data => {
-//      var z = data,
-//          icm = init_config_model();
-//      z.config = icm;
-//      z.daily.config = icm;
-//      z.sunday.config = icm;
-//      z.redLetter.config = icm;
-//      z.eveningPrayer.config = icm;
-//      z.morningPrayer.config = icm;
-//    
-//      elmApp.ports.nextSunday.send(z);
-//  })
 
-
-// Hook up Elm
 
 // header
 
-//channel.on("init_email", data => {
-//  let config = init_config_model();
-//  config.current = config.gs;
-//  elmHeaderApp.ports.newConfig.send(config);
-//  elmHeaderApp.ports.newEmail.send(data)
-//})
-
-
 var elmHeaderDiv = document.getElementById('header-elm-container')
-  , email_model = {
-      from: ""
-    , topic: ""
-    , text: ""
-  }
-  , config_model = {
-      ot: ""
-    , ps: ""
-    , nt: ""
-    , gs: ""
-    , fnotes: ""
-    , vers: []
-    , current: "ESV"
-  }
-  , initialHeaderState = {
-    newHeader: {
-      email: email_model
-    , config: init_config_model()
-    }
-    , newConfig: init_config_model()
-    , newEmail: email_model
-  }
-  , elmHeaderApp = Elm.embed(Elm.Header, elmHeaderDiv, initialHeaderState)
+  , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
 
-console.log("HEADER: ", elmHeaderApp)
 elmHeaderApp.ports.sendEmail.subscribe(function(email) {
   channel.push("request_send_email", email)
 })
 
-elmHeaderApp.ports.savingConfig.subscribe(function(config) {
+elmHeaderApp.ports.saveConfig.subscribe(function(config) {
   // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
   if ( storageAvailable('localStorage') ) {
-    let s = window.localStorage
+    let s = window.localStorage;
     s.setItem("iphod_ot", config.ot)
     s.setItem("iphod_ps", config.ps)
     s.setItem("iphod_nt", config.nt)
-    s.setItem("iphod_gs", config.ot)
+    s.setItem("iphod_gs", config.gs)
     s.setItem("iphod_fnotes", config.fnotes)
+    s.setItem("iphod_vers", config.vers.join(","))
+    s.setItem("iphod_current", config.current)
   }
 })
-
-elmHeaderApp.ports.saveConfig.subscribe( function(data) {
-  console.log("CONFIG: ", data)
-})
-  
 
 
 // calendar 
 
+function rollup() {
+  $(".calendar-week").hide();
+  $("#rollup").text("Roll Down");
+}
+function rolldown() {
+  $(".calendar-week").show();
+  $("#rollup").text("Roll Up");   
+}
+
 $("#rollup").click( function() {
-  if ( $(".calendar-week").is(":visible") ) {
-    $(".calendar-week").hide();
-    $("#rollup").text("Roll Down");
-  }
-  else {
-    $(".calendar-week").show();
-    $("#rollup").text("Roll Up");   
-  }
+  $(".calendar-week").is(":visible") ? rollup() : rolldown()
 });
 
 channel.on('eu_today', data => {
   data.config = init_config_model();
-  elmCalApp.ports.portEU.send(data)
+  elmCalApp.ports.portEU.send(data);
+  rollup();
 })
   
 channel.on('mp_today', data => {
   data.config = init_config_model();
   elmCalApp.ports.portMP.send(data)
+  rollup();
 })
   
 channel.on('ep_today', data => {
   data.config = init_config_model();
   elmCalApp.ports.portEP.send(data)
+  rollup();
+})
+
+channel.on('update_lesson', data => {
+  data.config = init_config_model();
+  elmCalApp.ports.portLesson.send(data.lesson);
 })
 
 $(".reading_button").click( function() {
@@ -221,197 +185,45 @@ $(".reading_button").click( function() {
     , of_type = $(this).attr("data-type");
   channel.push("get_text", [of_type, date]);
 });
- 
 
-  var elmCalDiv = document.getElementById('cal-elm-container')
-    , config_model = {
-        ot: ""
-      , ps: ""
-      , nt: ""
-      , gs: ""
-      , fnotes: ""
-      , vers: []
-      , current: "ESV"
-    }
-    , sunday_collect_model = {
-        instruction: "String"
-      , title: ""
-      , collects: []
-      , show: false
-    }
-    , sunday_model = {
-          show: false
-        , config: config_model
-        , ofType: ""
-        , date: ""
-        , season: ""
-        , week: ""
-        , title: ""
-        , colors: []
-        , collect: sunday_collect_model
-        , ot: []
-        , ps: []
-        , nt: []
-        , gs: []
-      }
-    , mp_model = {
-        show:   false
-      , config: config_model
-      , colors: []
-      , date:   ""
-      , day:    ""
-      , season: ""
-      , title:  ""
-      , week:   ""
-      , mp1:    []
-      , mp2:    []
-      , mpp:    []
-    }
-    , ep_model = {
-        show:   false
-      , config: config_model
-      , colors: []
-      , date:   ""
-      , day:    ""
-      , season: ""
-      , title:  ""
-      , week:   ""
-      , ep1:    []
-      , ep2:    []
-      , epp:    []
-    }
-    , initialCalState = {
-        newCalendar: {
-            eu: sunday_model
-          , mp: mp_model
-          , ep: ep_model
-        }
-      , newEU: sunday_model
-      , newMP: mp_model
-      , newEP: ep_model
-    }
-    , elmCalApp = Elm.embed(Elm.Calendar, elmCalDiv, initialCalState)
+var elmCalDiv = document.getElementById('cal-elm-container')
+  , elmCalApp = Elm.Calendar.embed(elmCalDiv)
+
+elmCalApp.ports.requestReading.subscribe(function(request) {
+  channel.push("get_lesson", request)
+})
 
 
 
-// index - I think
+// translations
 
-//  var elmDiv = document.getElementById('elm-container')
-//    , config_model = {
-//        ot: ""
-//      , ps: ""
-//      , nt: ""
-//      , gs: ""
-//      , fnotes: ""
-//      , vers: []
-//      , current: "ESV"
-//    }
-//    , sunday_collect_model = {
-//        instruction: "String"
-//      , title: ""
-//      , collects: []
-//      , show: false
-//    }
-//    , email_model = {
-//          from: ""
-//        , topic: ""
-//        , text: ""
-//        , show: false
-//      }
-//    , sunday_model = {
-//          ofType: ""
-//        , date: ""
-//        , season: ""
-//        , week: ""
-//        , title: ""
-//        , colors: []
-//        , collect: sunday_collect_model
-//        , ot: []
-//        , ps: []
-//        , nt: []
-//        , gs: []
-//        , show: false
-//        , config: config_model
-//      }
-//    , daily_reading = {
-//          date: ""
-//        , season: ""
-//        , week: ""
-//        , day: ""
-//        , title: ""
-//        , mp1: []
-//        , mp2: []
-//        , mpp: []
-//        , ep1: []
-//        , ep2: []
-//        , epp: []
-//        , show: false
-//        , justToday: false
-//        , config: config_model
-//      }
-//    , initialState = {
-//        nextSunday: {
-//            today:         ""
-//          , sunday:        sunday_model
-//          , redLetter:     sunday_model
-//          , daily:         daily_reading
-//          , morningPrayer: daily_reading
-//          , eveningPrayer: daily_reading
-//          , email:         email_model
-//          , config:        config_model
-//          , about:         false
-//        }
-//      , newText:   { 
-//          model:    ""
-//        , section:  ""
-//        , id:       ""
-//        , body:     ""
-//        , version:  ""
-//        }
-//      , newEmail: email_model
-//    }
-//    , elmApp = Elm.embed(Elm.Iphod, elmDiv, initialState)
-  
-  
-//  elmApp.ports.requestMoveDate.subscribe(function(request) {
-//    channel.push("request_move_date", request)
-//  });
-//  
-//  elmApp.ports.requestMoveDay.subscribe(function(request) {
-//    channel.push("request_move_day", request)
-//  });
-//  
-//  elmApp.ports.requestText.subscribe(function(request) {
-//    var model = {};
-//    request.forEach( function(tuple) {
-//      model[tuple[0]] = tuple[1];
-//    })
-//  if ( $("#" + request[0]).text().length == 0 ) {channel.push("request_text", model)}
-//  })
-//  
-//  elmApp.ports.requestNamedDay.subscribe(function(request) {
-//    channel.push("request_named_day", request)
-//  })
-//  
-//  elmApp.ports.requestAllText.subscribe(function(request) {
-//    channel.push("request_all_text", request)
-//  })
-//  
-//  elmApp.ports.sendEmail.subscribe(function(email) {
-//    channel.push("request_send_email", email)
-//  })
-//  
-//  elmApp.ports.savingConfig.subscribe(function(config) {
-//    // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
-//    if ( storageAvailable('localStorage') ) {
-//      let s = window.localStorage
-//      s.setItem("iphod_ot", config.ot)
-//      s.setItem("iphod_ps", config.ps)
-//      s.setItem("iphod_nt", config.nt)
-//      s.setItem("iphod_gs", config.ot)
-//      s.setItem("iphod_fnotes", config.fnotes)
-//    }
-//  })
-// }
+let trans_channel = socket.channel("versions")
+trans_channel.join()
+  .receive("ok", resp => { 
+    console.log("Joined Versions successfully", resp);
+  })
+  .receive("error", resp => { console.log("Unable to join Iphod", resp) })
 
+var elmTransDiv = document.getElementById("elm-versions")
+  , elmTransApp = Elm.Translations.embed(elmTransDiv)
+
+trans_channel.on("all_versions", data => {
+  var saved_vers = init_config_model().vers;
+  data.list.forEach(function(ver){
+    if (saved_vers.includes(ver.abbr)) {ver.selected = true;}
+  })
+  data.list.sort(function(a,b) {
+    if (a.selected && !b.selected) {return -1};
+    if (!a.selected && b.selected) {return 1};
+    if (a.abbr < b.abbr) {return -1};
+    if (a.abbr > b.abbr) {return 1};
+    return 0;
+  })
+  elmTransApp.ports.allVersions.send(data.list);
+});
+
+elmTransApp.ports.updateVersions.subscribe(function(version){
+  if (version.selected) { save_version(version.abbr) }
+  else { unsave_version(version.abbr) }
+})
 

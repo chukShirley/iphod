@@ -4,6 +4,7 @@ defmodule Iphod.CalendarController do
   use Timex
 
   def index(conn, _params) do
+    # x = get_month(Date.now)
     # IEx.pry
     render conn, "index.html", model: get_month(Date.now)
   end

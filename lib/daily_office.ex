@@ -42,6 +42,11 @@ defmodule DailyReading do
     readings select_season(date)
   end
 
+  def lesson(date, section, ver) do
+    readings(date)[section |> String.to_atom]
+    |> lesson_with_body(ver)
+  end
+
   def select_season(date) do
     {season, wk, lityr, _sundayDate} = if date |> Lityear.is_sunday? do
       date |> Lityear.to_season
@@ -147,7 +152,7 @@ defmodule DailyReading do
   def color_for(date) do
     {red_letter_date, holy_day} = Lityear.next_holy_day(date)
     colors = if date == red_letter_date do
-      SundayReading.holy_day(holy_day)["colors"]
+      SundayReading.holy_day_color(holy_day)
     else
       readings(date).colors
     end
@@ -159,7 +164,7 @@ defmodule DailyReading do
 
   def update_title(date, title) do
     {red_letter_date, holy_day} = Lityear.next_holy_day(date)
-    if date == red_letter_date, do: SundayReading.holy_day(holy_day)["title"], else: title
+    if date == red_letter_date, do: SundayReading.holy_day_title(holy_day), else: title
   end
 
   def mp_body(date) do
@@ -182,10 +187,18 @@ defmodule DailyReading do
     |> Map.put(:show, true)
   end
 
-  def lesson_with_body(list) do
+  def lesson_with_body(list), do: lesson_with_body(list, "ESV")
+  def lesson_with_body(list, "ESV") do
     list |> Enum.map(fn(lesson)->
       lesson 
       |> Map.put(:body, EsvText.request(lesson.read) )
+      |> Map.put(:show, true)
+    end)
+  end
+  def lesson_with_body(list, ver) do
+    list |> Enum.map(fn(lesson)->
+      lesson 
+      |> Map.put(:body, BibleComText.request(ver, lesson.read) )
       |> Map.put(:show, true)
     end)
   end

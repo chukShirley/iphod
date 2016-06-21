@@ -1,11 +1,12 @@
 module Basics.Extra
     exposing
         ( never
+        , (=>)
         )
 
-{-| Additional basic functions
+{-| Additional basic functions.
 
-@docs never
+@docs never, (=>)
 -}
 
 
@@ -33,3 +34,10 @@ never n =
 --
 -- never (Never n) =
 --     never n
+
+
+{-| A shorthand for writing 2-tuples.  Very commonly used when expressing key/value pairs
+in CSS or Json encoders.
+-}
+(=>) : a -> b -> (a, b)
+(=>) = (,)

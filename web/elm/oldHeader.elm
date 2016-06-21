@@ -6,16 +6,14 @@ import Html exposing (..)
 import Html.App as Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Json.Decode as Json exposing (..)
-import Platform.Sub as Sub exposing (batch, none)
 import Platform.Cmd as Cmd exposing (Cmd)
 import String exposing (join)
 import Markdown
+import Json.Decode as Json
 
 import Iphod.Helper exposing (hideable)
 import Iphod.Models as Models
 import Iphod.Config as Config
-
 
 -- MAIN
 
@@ -28,10 +26,25 @@ main =
     }
 
 
+-- SUBSCRIPTIONS
+
+subscriptions: Model -> Sub Msg
+subscriptions model =
+  Sub.batch
+  [ configuration GetConfig
+  , email GetEmail
+  ]
+
+port configuration: (Models.Config -> msg) -> Sub msg
+port email: (Models.Email -> msg) -> Sub msg
+
+port sendEmail: Models.Email -> Cmd msg
+port saveConfig: Models.Config -> Cmd msg
+
 -- MODEL
 
 type alias  Model =
-  { email:  Models.Email
+  { email:  Models.Email 
   , config: Models.Config
   }
 
@@ -44,52 +57,6 @@ initModel =
 init: (Model, Cmd Msg)
 init = (initModel, Cmd.none)
 
--- PORTS
-  
--- port savingConfig: Signal Models.Config
--- port savingConfig = 
---   saveThisConfig.signal
-port savingConfig: Models.Config -> Cmd msg
-
--- port sendEmail: Signal Models.Email
--- port sendEmail =
---   sendContactMe.signal
-port sendEmail: Models.Email -> Cmd msg
-
--- port newEmail: Signal Models.Email
-port newEmail: Models.Email -> Cmd msg
-
--- port newConfig: Signal Models.Config
--- port newConfig: (Models.Config -> msg) -> UpdateConfig msg
-
-port saveConfig: Models.Config -> Cmd msg
-
-
--- port newHeader: Signal Model
-port newHeader: Model -> Cmd msg
-
-
--- SUBSCRIPTIONS
-
---   Signal.map UpdateConfig newConfig
-port portConfig: (Models.Config -> msg) -> Sub msg
-subscribeConfig: Model -> Sub Msg
-subscribeConfig config = 
-  portConfig UpdateConfig
-
-port portEmail: (Models.Email -> msg) -> Sub msg
-subscribeEmail: Model -> Sub Msg
-subscribeEmail email = 
-  portEmail UpdateEmail
-
-subscriptions : Model -> Sub Msg
-subscriptions model = 
-  Sub.batch
-  [ subscribeConfig
-  , subscribeEmail
-  ]
-
-
 -- UPDATE
 
 type Msg
@@ -97,25 +64,21 @@ type Msg
   | Send
   | Clear
   | Cancel
+  | SaveConfig
+  | GetConfig Models.Config
+  | GetEmail Models.Email
   | SetHeader Model
-  | UpdateConfig Models.Config
-  | UpdateEmail Models.Email
   | EmailAddress String
   | Topic String
   | Message String
---  | ModEmail Email.Model Email.Msg
-  | ModConfig Config.Msg
+  | ConfigMsg Config.Msg
 
 update: Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     NoOp -> (model, Cmd.none)
 
-    Send -> 
-      let
-        foo = Debug.log "SEND" model
-      in
-        (model, sendEmail model.email)
+    Send -> (model, sendEmail model.email)
 
     Clear -> 
       let
@@ -131,19 +94,21 @@ update msg model =
       in
         (newModel, Cmd.none)
 
+    SaveConfig -> (model, saveConfig model.config)
+
     SetHeader newModel -> 
       let
         foo = Debug.log "SET HEADER" newModel
       in
         (newModel, Cmd.none)
   
-    UpdateConfig this_config -> 
+    GetConfig this_config -> 
       let
         foo = Debug.log "UPDATE CONFIG" this_config
       in
         ({model | config = this_config}, Cmd.none)
 
-    UpdateEmail this_email -> ({model | email = this_email}, Cmd.none)
+    GetEmail this_email -> ({model | email = this_email}, Cmd.none)
 
     EmailAddress s ->
       let 
@@ -169,24 +134,14 @@ update msg model =
       in
         (newModel, Cmd.none)
 
-    ModConfig msg ->
+    ConfigMsg msg ->
       let
-        newConfig = Config.update msg model.config
-        newModel = {model | config = newConfig}
-        foo = Debug.log "MOD CONFIG" newModel
+        foo = Debug.log "CONFIG MSG" msg
       in
-        (newModel, saveConfig newConfig)
+        (model, Cmd.none)
 
 
 -- HELPERS
-
--- saveConfig: Models.Config -> Cmd Msg
--- saveConfig config =
---   Signal.send saveThisConfig (config)
---   |> Task.toMaybe
---   |> Task.map (always NoOp)
---   |> Cmd.task
-
 
 -- VIEW
 
@@ -215,7 +170,7 @@ emailMe model =
       , (inputEmailAddress model.email)
       , (inputSubject model.email)
       , (inputMessage model.email)
-      , button [ class "email-button", onClick Send ] [text "Send"]
+      , button [ class "email-button", onClick Send] [text "Send"]
       , button [ class "email-button", onClick Clear] [text "Clear"]
       , a [href "#closeemail-create", title "Cancel"] 
           [ button [ class "email-button", onClick Cancel] [text "Cancel"] ]
@@ -232,8 +187,7 @@ configModal model =
         [ div []
             [ a [href "#closeconfig-text", title "Close", class "close"] [text "X"] 
             , h2 [class "modal_header"] [ text "Config" ]
-            , map ModConfig (Config.view model.config)
-            --, (Config.view (Signal.forwardTo (ModConfig model.config)) model.config)
+            , (Config.view model.config |> Html.map ConfigMsg)
             ]
         ]
     ]
@@ -272,13 +226,17 @@ inputEmailAddress model =
   p []
     [ input 
         [ id "from"
-        , class "email-addr"
-        , name "from"
         , type' "text"
         , placeholder "Your Email Address - required"
-        , Html.Attributes.value model.from
-        , onInput EmailAddress
         , autofocus True
+        , name "from"
+        , on "input" (Json.succeed (EmailAddress model.from))
+        -- , onClickLimited NoOp
+        , onWithOptions "click" 
+          { stopPropagation = True, preventDefault = True }
+          (Json.succeed NoOp)
+        , value model.from
+        , class "email-addr"
         ]
         []
     ]
@@ -288,13 +246,17 @@ inputSubject model =
   p []
     [ input 
         [ id "topic"
-        , class "email-subject"
-        , name "topic"
         , type' "text"
         , placeholder "Subject - required"
-        , Html.Attributes.value model.topic
-        , onInput Topic
         , autofocus True
+        , name "topic"
+        , on "input" (Json.succeed (Topic model.from))
+        -- , onClickLimited NoOp
+        , onWithOptions "click" 
+          { stopPropagation = True, preventDefault = True }
+          (Json.succeed NoOp)
+        , value model.topic
+        , class "email-subject"
         ]
         []
     ]
@@ -304,13 +266,17 @@ inputMessage model =
   p []
     [ textarea 
         [ id "text"
-        , class "email-msg-addr"
-        , name "text"
         , type' "text"
         , placeholder "Enter Message - required"
-        , Html.Attributes.value model.text
-        , onInput Message
         , autofocus True
+        , name "text"
+        , on "input" (Json.succeed (Message model.from))
+        -- , onClickLimited NoOp
+        , onWithOptions "click" 
+          { stopPropagation = True, preventDefault = True }
+          (Json.succeed NoOp)
+        , value model.text
+        , class "email-msg-addr"
         ]
         []
     ]

@@ -4,7 +4,7 @@ module Iphod.EPReading exposing (Model, init, Msg, update, view, textStyle)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (on, onClick)
+import Html.Events exposing (on, onClick, targetValue)
 import Json.Decode as Json
 import Http
 import String
@@ -32,6 +32,7 @@ type Section
 type Msg 
   = NoOp
   | GetText (List (String, String))
+  | ChangeText String String
   | ToggleModelShow
   | ToggleShow Models.Lesson
   | SetReading Model
@@ -41,13 +42,17 @@ update msg model =
   case msg of
     NoOp -> model
 
-    GetText list ->
+    GetText list -> model
+
+    ChangeText section ver ->
       let
-        -- thisVersion ver =
-        --   option [value ver, selected (ver == lesson.version)] [text ver]
-        foo = Debug.log "EP GETTEXT" list
+        newModel = case section of 
+          "ep1" -> {model | ep1 = changeText model ver model.ep1}
+          "ep2" -> {model | ep2 = changeText model ver model.ep2}
+          _     -> {model | epp = changeText model ver model.epp}
       in
-       model
+        newModel
+
 
     ToggleModelShow -> {model | show = not model.show}
 
@@ -72,6 +77,16 @@ update msg model =
           _     -> {model | epp = newSection}
       in
         newModel
+
+
+-- HELPERS
+
+changeText: Model -> String -> List Models.Lesson -> List Models.Lesson
+changeText model ver lessons =
+  let 
+    changeText lesson = {lesson | version = ver}
+  in
+    List.map changeText lessons
 
 
 -- VIEW
@@ -156,19 +171,10 @@ versionSelect model lesson =
   in
     select
       [ on "change" 
-        ( Json.succeed
-          ( GetText 
-            [ ("ofType", "daily")
-            , ("section", lesson.section)
-            , ("id", lesson.id)
-            , ("read", lesson.read)
-            -- , ("ver", this_ver)
-            , ("fnotes", "True")
-            ]
-          )
-        )
+        (Json.map (ChangeText lesson.section) targetValue)
       ]
       (List.map thisVersion model.config.vers)
+
 
 
 thisReading: Model -> Section -> List (Html Msg)

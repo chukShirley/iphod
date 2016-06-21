@@ -12,13 +12,15 @@ import Iphod.Models as Models
 import Iphod.Config as Config
 import Iphod.Helper exposing (hideable)
 
+
+
+
 -- MODEL
 
 type alias Model = Models.DailyMP
 
 init: Model
 init = Models.initDailyMP
-
 
 -- UPDATE
 
@@ -30,6 +32,7 @@ type Section
 type Msg 
   = NoOp
   | GetText (List (String, String))
+  | ChangeText String String
   | ToggleModelShow
   | ToggleShow Models.Lesson
   | SetReading Model
@@ -41,11 +44,18 @@ update msg model =
 
     ToggleModelShow -> {model | show = not model.show}
 
-    GetText list ->
+    GetText list -> model
+
+    ChangeText section ver ->
       let
-        foo = Debug.log "MP GETTEXT" list
+        newModel = case section of 
+          "mp1" -> {model | mp1 = changeText model ver model.mp1}
+          "mp2" -> {model | mp2 = changeText model ver model.mp2}
+          _     -> {model | mpp = changeText model ver model.mpp}
       in
-       model
+        newModel
+
+
 
     SetReading newModel -> newModel
 
@@ -70,6 +80,15 @@ update msg model =
         newModel
 
 
+-- HELPERS
+
+changeText: Model -> String -> List Models.Lesson -> List Models.Lesson
+changeText model ver lessons =
+  let 
+    changeText lesson = {lesson | version = ver}
+  in
+    List.map changeText lessons
+
 -- VIEW
 
 
@@ -78,7 +97,7 @@ view model =
   div
   []
   [ table [class "readings_table", tableStyle model]
-      [ caption [titleStyle model, onClick ToggleModelShow] [text (String.join " " ["Evening Prayer:", model.date])] 
+      [ caption [titleStyle model, onClick ToggleModelShow] [text (String.join " " ["Morning Prayer:", model.date])] 
       , tr
           [ class "rowStyle" ]
           [ th [] [ text "Morning 1"]
@@ -152,17 +171,7 @@ versionSelect model lesson =
   in
     select
       [ on "change" 
-        (Json.succeed
-          ( GetText 
-            [ ("ofType", "daily")
-            , ("section", lesson.section)
-            , ("id", lesson.id)
-            , ("read", lesson.read)
-            -- , ("ver", this_ver) -- HOW DO WE GET THE CORRECT VERSION?
-            , ("fnotes", "True")
-            ]
-          )
-        )
+        (Json.map (ChangeText lesson.section) targetValue)
       ]
       (List.map thisVersion model.config.vers)
 

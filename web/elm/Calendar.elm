@@ -50,43 +50,33 @@ init:   (Model, Cmd Msg)
 init =  (initModel, Cmd.none)
 
 
+-- REQUEST PORTS
+
+-- requestReading: [Date, section, ver]
+port requestReading: List String -> Cmd msg
+
 
 -- SUBSCRIPTIONS
 
--- port suggestions : (List String -> msg) -> Sub msg
--- 
--- subscriptions : Model -> Sub Msg
--- subscriptions model =
---   suggestions Suggest
--- 
-
 port portCalendar: (Model -> msg) -> Sub msg
-subscribeCalendar: Model -> Sub Msg
-subscribeCalendar model =
-  portCalendar InitCalendar
 
 port portEU: (Models.Sunday -> msg) -> Sub msg
-subscribeEU: Model -> Sub Msg
-subscribeEU eu =
-  portEU UpdateEU
 
 port portMP: (Models.DailyMP -> msg) -> Sub msg
-subscribeMP: Model -> Sub Msg
-subscribeMP mp =
-  portMP UpdateMP
 
 port portEP: (Models.DailyEP -> msg) -> Sub msg
-subscribeEP: Model -> Sub Msg
-subscribeEP ep =
-  portEP UpdateEP
 
-subscriptions : Model -> Sub Msg  
-subscriptions model = 
+port portLesson: (List Models.Lesson -> msg) -> Sub msg
+
+subscriptions: Model -> Sub Msg
+subscriptions model =
   Sub.batch
-    [ subscribeEU
-    , subscribeMP
-    , subscribeEP
-    ]
+  [ portCalendar InitCalendar
+  , portEU UpdateEU
+  , portMP UpdateMP
+  , portEP UpdateEP
+  , portLesson UpdateLesson
+  ]
 
 -- UPDATE
 
@@ -96,9 +86,10 @@ type Msg
   | UpdateEU Models.Sunday
   | UpdateMP Models.DailyMP
   | UpdateEP Models.DailyEP
-  | ModEU Sunday.Model Sunday.Msg
-  | ModMP MPReading.Model MPReading.Msg
-  | ModEP EPReading.Model EPReading.Msg
+  | UpdateLesson (List Models.Lesson)
+  | ModEU Sunday.Msg
+  | ModMP MPReading.Msg
+  | ModEP EPReading.Msg
 
 update: Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -109,43 +100,186 @@ update msg model =
 
     UpdateEU eu -> 
       let
-        newModel = {model | eu = eu}
+        newModel = 
+          {model  | eu = eu
+                  , mp = Models.initDailyMP
+                  , ep = Models.initDailyEP
+          }
       in
         (newModel, Cmd.none)
 
     UpdateMP mp -> 
       let
-        newModel = {model | mp = mp}
+        newModel = 
+          {model  | eu = Models.sundayInit
+                  , mp = mp
+                  , ep = Models.initDailyEP
+          }
       in
         (newModel, Cmd.none)
 
     UpdateEP ep -> 
       let
-        newModel = {model | ep = ep}
+        newModel = 
+          {model  | eu = Models.sundayInit
+                  , mp = Models.initDailyMP
+                  , ep = ep
+          }
       in
         (newModel, Cmd.none)
 
-    ModEU reading readingAction ->
-      let
-        foo = Debug.log "MODEU" (readingAction, reading)
-        newModel = {model | eu = Sunday.update readingAction reading}
-      in 
+    UpdateLesson lesson -> 
+      let 
+        section = (List.head lesson |> Maybe.withDefault Models.initLesson).section
+        newModel = setLesson model section lesson
+      in
         (newModel, Cmd.none)
 
-    ModMP reading readingAction ->
+    ModEU msg ->
       let
-        newModel = {model | mp = MPReading.update readingAction reading}
+        newModel = {model | eu = Sunday.update msg model.eu}
+        newCmd =
+          let 
+            otVer = (List.head newModel.eu.ot |> Maybe.withDefault Models.initLesson).version
+            psVer = (List.head newModel.eu.ps |> Maybe.withDefault Models.initLesson).version
+            ntVer = (List.head newModel.eu.nt |> Maybe.withDefault Models.initLesson).version
+            gsVer = (List.head newModel.eu.gs |> Maybe.withDefault Models.initLesson).version
+          in
+            if otVer /= "" then
+              requestReading ["ot", otVer, model.eu.date]
+            else if psVer /= "" then 
+              requestReading ["ps", psVer, model.eu.date]
+            else if ntVer /= "" then
+              requestReading ["nt", ntVer, model.eu.date]
+            else if gsVer /= "" then
+              requestReading ["gs", gsVer, model.eu.date]
+            else
+              Cmd.none
       in 
-        (newModel, Cmd.none)
+        (newModel, newCmd)
 
-    ModEP reading readingAction ->
+    ModMP msg ->
       let
-        newModel = {model | ep = EPReading.update readingAction reading}
+        newModel = {model | mp = MPReading.update msg model.mp}
+        newCmd =
+          let 
+            mp1Ver = (List.head newModel.mp.mp1 |> Maybe.withDefault Models.initLesson).version
+            mp2Ver = (List.head newModel.mp.mp2 |> Maybe.withDefault Models.initLesson).version
+            mppVer = (List.head newModel.mp.mpp |> Maybe.withDefault Models.initLesson).version
+          in
+            if mp1Ver /= "" then
+              requestReading ["mp1", mp1Ver, model.mp.date]
+            else if mp2Ver /= "" then 
+              requestReading ["mp2", mp2Ver, model.mp.date]
+            else if mppVer /= "" then
+              requestReading ["mpp", mppVer, model.mp.date]
+            else
+              Cmd.none
       in 
-        (newModel, Cmd.none)
+        (newModel, newCmd)
 
+    ModEP msg ->
+      let
+        newModel = {model | ep = EPReading.update msg model.ep}
+        newCmd =
+          let 
+            ep1Ver = (List.head newModel.ep.ep1 |> Maybe.withDefault Models.initLesson).version
+            ep2Ver = (List.head newModel.ep.ep2 |> Maybe.withDefault Models.initLesson).version
+            eppVer = (List.head newModel.ep.epp |> Maybe.withDefault Models.initLesson).version
+          in
+            if ep1Ver /= "" then
+              requestReading ["ep1", ep1Ver, model.ep.date]
+            else if ep2Ver /= "" then 
+              requestReading ["ep2", ep2Ver, model.ep.date]
+            else if eppVer /= "" then
+              requestReading ["epp", eppVer, model.ep.date]
+            else
+              Cmd.none
+      in 
+        (newModel, newCmd)
+--    Top msg ->
+--      { model | topCounter = Counter.update msg model.topCounter }
 
 -- HELPERS
+
+setLesson: Model -> String -> List Models.Lesson -> Model
+setLesson model section lesson =
+ let
+    newModel = case section of
+      "mp1" -> 
+        let
+          thisMP = model.mp
+          newMP = {thisMP | mp1 = lesson}
+          newModel = {model | mp = newMP}
+        in
+          newModel
+      "mp2" -> 
+        let
+          thisMP = model.mp
+          newMP = {thisMP | mp2 = lesson}
+          newModel = {model | mp = newMP}
+        in
+          newModel
+      "mpp" -> 
+        let
+          thisMP = model.mp
+          newMP = {thisMP | mpp = lesson}
+          newModel = {model | mp = newMP}
+        in
+          newModel
+      "ep1" -> 
+        let
+          thisEP = model.ep
+          newEP = {thisEP | ep1 = lesson}
+          newModel = {model | ep = newEP}
+        in
+          newModel
+      "ep2" -> 
+        let
+          thisEP = model.ep
+          newEP = {thisEP | ep2 = lesson}
+          newModel = {model | ep = newEP}
+        in
+          newModel
+      "epp" -> 
+        let
+          thisEP = model.ep
+          newEP = {thisEP | epp = lesson}
+          newModel = {model | ep = newEP}
+        in
+          newModel
+      "ot" -> 
+        let
+          thisEU = model.eu
+          newEU = {thisEU | ot = lesson}
+          newModel = {model | eu = newEU}
+        in
+          newModel
+      "ps"  -> 
+         let
+           thisEU = model.eu
+           newEU = {thisEU | ps = lesson}
+           newModel = {model | eu = newEU}
+         in
+           newModel
+      "nt"  -> 
+         let
+           thisEU = model.eu
+           newEU = {thisEU | nt = lesson}
+           newModel = {model | eu = newEU}
+         in
+           newModel
+      "gs"  -> 
+         let
+           thisEU = model.eu
+           newEU = {thisEU | gs = lesson}
+           newModel = {model | eu = newEU}
+         in
+           newModel
+           
+      _   -> model
+ in
+   newModel
 
 
 -- VIEW

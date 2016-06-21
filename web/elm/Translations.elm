@@ -1,34 +1,26 @@
-module Translations where
+port module Translations exposing (..) -- where
 
 import Debug
 
-import StartApp
 import Html exposing (..)
+import Html.App as Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Effects exposing (Effects, Never)
-import Task exposing (Task)
 import Regex exposing (regex, contains, caseInsensitive)
+import Json.Decode as Json
 
-import Iphod.Helper exposing (onClickLimited, hideable, getText)
+import Iphod.Helper exposing (hideable)
 
 
-app = 
-  StartApp.start
+-- MAIN
+
+main = 
+  Html.program
     { init = init
     , update = update
     , view = view
-    , inputs = [incomingVersion]
+    , subscriptions = subscriptions
     }
-
--- MAIN
-main: Signal Html
-main =
-  app.html
-
-port tasks: Signal (Task Never ())
-port tasks =
-  app.tasks
 
 -- MODEL
 
@@ -53,41 +45,48 @@ initVersion =
 
 type alias Model = List Version
 
-init: (Model, Effects Action)
-init = ([], Effects.none)
+init: (Model, Cmd Msg)
+init = ([], Cmd.none)
 
+
+-- Subscriptions
 -- SIGNALS
 
-incomingVersion: Signal Action
-incomingVersion =
-  Signal.map AddModel allVersions
-
-dbSaveVersion: Signal.Mailbox (String, Version)
-dbSaveVersion = 
-  Signal.mailbox ("", initVersion)
+-- dbSaveVersion: Signal.Mailbox (String, Version)
+-- dbSaveVersion = 
+--   Signal.mailbox ("", initVersion)
 
 
 -- PORTS
 
-port allVersions: Signal Model
-port requestSaveVersion: Signal (String, Version)
-port requestSaveVersion =
-  dbSaveVersion.signal
+-- port allVersions: Signal Model
+-- port requestSaveVersion: Signal (String, Version)
+-- port requestSaveVersion =
+--   dbSaveVersion.signal
 
+port updateVersions: Version -> Cmd msg
+
+
+port allVersions: (Model -> msg) -> Sub msg
+
+subscriptions: Model -> Sub Msg
+subscriptions model =
+  Sub.batch
+  [ allVersions AddModel ]
 
 -- UPDATE
 
-type Action
+type Msg
   = NoOp
   | AddModel Model
   | Find String String
   | UseVersion Version
 
-update: Action -> Model -> (Model, Effects Action)
-update action model =
-  case action of
-    NoOp -> (model, Effects.none)
-    AddModel newModel -> (newModel, Effects.none)
+update: Msg -> Model -> (Model, Cmd Msg)
+update msg model =
+  case msg of
+    NoOp -> (model, Cmd.none)
+    AddModel newModel -> (newModel, Cmd.none)
     Find col name ->
       let
         findThis ver = 
@@ -107,7 +106,7 @@ update action model =
 
         newModel = List.map findThis model
       in
-        (newModel, Effects.none)
+        (newModel, Cmd.none)
 
     UseVersion ver ->
       let
@@ -118,24 +117,24 @@ update action model =
             else this_model          
         newModel = List.map selectModel model
       in
-        (newModel, saveVersion newVer)
+        (newModel, updateVersions newVer)
 
 
-saveVersion: Version -> Effects Action
-saveVersion ver =
-  let 
-    saving = if ver.selected then "save" else "unsave"
-  in
-    Signal.send dbSaveVersion.address (saving, ver)
-    |> Task.toMaybe
-    |> Task.map (always NoOp)
-    |> Effects.task
+-- saveVersion: Version -> Effects Action
+-- saveVersion ver =
+--   let 
+--     saving = if ver.selected then "save" else "unsave"
+--   in
+--     Signal.send dbSaveVersion.address (saving, ver)
+--     |> Task.toMaybe
+--     |> Task.map (always NoOp)
+--     |> Effects.task
 
 
 -- VIEW
 
-view: Signal.Address Action -> Model -> Html
-view address model =
+view: Model -> Html Msg
+view model =
   let
     this_version ver =
       let
@@ -146,7 +145,7 @@ view address model =
           , td [class "ver_name"] [text ver.name]
           , td [class "ver_language"] [text ver.lang]
           , td  [ class "ver_use"
-                , onClick address (UseVersion ver)
+                , onClick (UseVersion ver)
                 ] [ button [] [text using] ]
           ]
   in
@@ -161,9 +160,9 @@ view address model =
                   , th [class "ver_use"] [text "Select"]
                   ]
               , tr []
-                  [ findVersion address 
-                  , findName address 
-                  , findLanguage address 
+                  [ findVersion 
+                  , findName 
+                  , findLanguage 
                   , td [class "ver_use"] [text "<<< Search"]
                   ]
               ]
@@ -174,8 +173,8 @@ view address model =
 -- HELPERS
 
 
-findVersion: Signal.Address Action  -> Html
-findVersion address  =
+findVersion: Html Msg
+findVersion  =
   th []
     [ input 
         [ id "find_version"
@@ -183,16 +182,16 @@ findVersion address  =
         , placeholder "Version"
         , autofocus True
         , name "find_version"
-        , on "keyup" targetValue (\str -> Signal.message address (Find "abbr" str))
-        , onClickLimited address NoOp
+        , on "keyup" (Json.map (Find "abbr") targetValue)
+        , onClick NoOp
         , style [("width", "90%")]
         ]
         []
     ]
 
 
-findName: Signal.Address Action -> Html
-findName address  =
+findName: Html Msg
+findName =
   th []
     [ input 
         [ id "find_name"
@@ -200,16 +199,16 @@ findName address  =
         , placeholder "Version Name"
         , autofocus True
         , name "find_name"
-        , on "keyup" targetValue (\str -> Signal.message address (Find "name" str))
-        , onClickLimited address NoOp
+        , on "keyup" (Json.map (Find "name") targetValue)
+        , onClick NoOp
         , style [("width", "90%")]
         ]
         []
     ]
 
 
-findLanguage: Signal.Address Action -> Html
-findLanguage address =
+findLanguage: Html Msg
+findLanguage =
   th []
     [ input 
         [ id "find_lang"
@@ -217,8 +216,8 @@ findLanguage address =
         , placeholder "Language"
         , autofocus True
         , name "find_lang"
-        , on "keyup" targetValue (\str -> Signal.message address (Find "lang" str))
-        , onClickLimited address NoOp
+        , on "keyup" (Json.map (Find "lang") targetValue)
+        , onClick NoOp
         , style [("width", "90%")]
         ]
         []
@@ -227,7 +226,7 @@ findLanguage address =
 
 -- STYLE
 
-versionRow: Version -> Attribute
+versionRow: Version -> Attribute msg
 versionRow model =
   let
     this_style = 

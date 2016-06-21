@@ -2,7 +2,7 @@ module Iphod.Config exposing (..) -- where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (on, onCheck)
+import Html.Events exposing (on, onCheck, onClick, targetValue)
 import String exposing (join)
 import Json.Decode as Json
 
@@ -28,7 +28,7 @@ type Key
 
 type Msg
   = NoOp
-  | Change Key String
+  | Checked Key String
   | ChangeVersion String
   | ChangeFootnote Bool
 
@@ -37,7 +37,7 @@ update msg model =
   case msg of
     NoOp -> model
 
-    Change key val -> 
+    Checked key val -> 
       let
         newModel = case key of
           OT -> {model | ot = val}
@@ -94,14 +94,14 @@ view model =
 versionSelect: Model -> Html Msg
 versionSelect model =
   let
-    onChange = on "change" (Json.succeed (ChangeVersion model.current))
     thisVersion ver =
-      option [value ver, selected (ver == model.current), onChange] [text ver]
+      option 
+        [ value ver
+        , selected (ver == model.current)
+        ] 
+        [text ver]
   in
-    select [] (List.map thisVersion model.vers)
---    select 
---      [ on "change" (Json.succeed (ChangeVersion model.current))] 
---      (List.map thisVersion model.vers)
+    select [on "change" (Json.map ChangeVersion targetValue)] (List.map thisVersion model.vers)
 
 psRadio: Model -> Key -> String -> Html Msg
 psRadio model key val =
@@ -112,19 +112,11 @@ psRadio model key val =
     [ input 
       [ type' "radio"
       , checked isSelected 
-      , onCheck (\_ -> Change key val)
+      , onCheck (\_ -> Checked key val)
       , name "psalm"
       , class "radio_button"
+      , id val
       ] []
---  [ input
---      [ type' "radio"
---      , id val
---      , checked (model.ps == val)
---      , onCheck "change" (Json.succeed (Change key val))
---      , name "psalm"
---      , class "radio_button"
---      ]
---      []
   , label [class "radio_label", for val] [text val]
   ]
 
@@ -141,14 +133,5 @@ ftnoteCheck model val =
       , name val
       , class "config_checkbox"
       ] []
-  --  [ input
-  --      [ type' "checkbox"
-  --      , id val
-  --      , checked (model.fnotes == val)
-  --      , on "change" (Json.succeed (ChangeFootnote resp))
-  --      , name val
-  --      , class "config_checkbox"
-  --      ]
-  --      []
     , label [class "checkbox_label", for val] [text "Show"]
     ]

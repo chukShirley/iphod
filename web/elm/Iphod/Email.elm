@@ -39,11 +39,7 @@ update: Msg -> Model -> Model
 update msg model =
   case msg of
     NoOp -> model
-    Send -> 
-      let
-        foo = Debug.log "EMAIL" model
-      in
-        model
+    Send -> model
     Clear -> {model | text = ""}
     Cancel -> init
     EmailAddress s -> {model | from = s}

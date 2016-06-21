@@ -31,6 +31,7 @@ type Msg
   = NoOp
   | SetReading Model
   | GetText (List (String, String))
+  | ChangeText String String
   | ToggleShow Models.Lesson
   | ToggleModelShow
   | ToggleCollect
@@ -44,11 +45,17 @@ update msg model =
 
     SetReading newModel -> newModel
 
-    GetText list ->
+    GetText list -> model
+
+    ChangeText section ver ->
       let
-        foo = Debug.log "SUNDAY GETTEXT" list
+        newModel = case section of 
+          "ot" -> {model | ot = changeText model ver model.ot}
+          "ps" -> {model | ps = changeText model ver model.ps}
+          "nt" -> {model | nt = changeText model ver model.nt}
+          _    -> {model | gs = changeText model ver model.gs}
       in
-       model
+        newModel
 
     ToggleShow lesson ->
       let 
@@ -79,6 +86,16 @@ update msg model =
         newModel = {model | collect = newCollect}
       in
         newModel
+
+
+-- HELPERS
+
+changeText: Model -> String -> List Models.Lesson -> List Models.Lesson
+changeText model ver lessons =
+  let 
+    changeText lesson = {lesson | version = ver}
+  in
+    List.map changeText lessons
 
 
 -- VIEW
@@ -254,17 +271,7 @@ versionSelect model lesson =
   in
     select
       [ on "change" 
-        (Json.succeed
-          ( GetText 
-            [ ("ofType", model.ofType)
-            , ("section", lesson.section)
-            , ("id", lesson.id)
-            , ("read", lesson.read)
-            -- , ("ver", this_ver)
-            , ("fnotes", "True")
-            ]
-          )
-        )
+        (Json.map (ChangeText lesson.section) targetValue)
       ]
       (List.map thisVersion model.config.vers)
 
