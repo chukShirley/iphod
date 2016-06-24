@@ -29,8 +29,16 @@ defmodule SundayReading do
   def last_sunday(date),  do: date |> Lityear.last_sunday |> _sunday
   def from_now,           do: Date.now(@tz) |> this_sunday
 
-  def holy_day_color(title), do: identity["redLetter"][title]["colors"]
-  def holy_day_title(title), do: identity["redLetter"][title]["title"]
+  def holy_day_color("epiphany"),   do: identity["theEpiphany"]["1"]["colors"]
+  def holy_day_color("christmas"),  do: identity["christmasDay"]["1"]["colors"]
+  def holy_day_color("christmasEve"),  do: identity["christmasDay"]["1"]["colors"]
+  def holy_day_color("christmasDay"),  do: identity["christmasDay"]["1"]["colors"]
+  def holy_day_color(title),        do: identity["redLetter"][title]["colors"]
+
+  def holy_day_title("epiphany"),   do: identity["theEpiphany"]["1"]["title"]
+  def holy_day_title("christmasEve"),   do: "Christmas Eve"
+  def holy_day_title("christmasDay"),   do: "Christmas Day"
+  def holy_day_title(title),        do: identity["redLetter"][title]["title"]
 
   defp _sunday({season, wk, yr, sunday}), do: eu_map {season, wk, yr, sunday}
 
@@ -47,6 +55,11 @@ defmodule SundayReading do
                 colors:   identity[season][wk]["colors"],
                 collect:  Collects.get("advent", "1")
               })
+  end
+
+  def lesson(date, section, ver) do
+    eu_today(date)[section |> String.to_atom]
+    |> lesson_with_body(ver)
   end
 
   def namedReadings(season, wk) do
@@ -134,13 +147,25 @@ defmodule SundayReading do
     end)
   end
 
-  def lesson_with_body(list) do
+
+  def lesson_with_body(list), do: lesson_with_body(list, "ESV")
+
+  def lesson_with_body(list, "ESV") do
     list |> Enum.map(fn(lesson)->
       lesson 
       |> Map.put(:body, EsvText.request(lesson.read) )
       |> Map.put(:show, true)
     end)
   end
+
+  def lesson_with_body(list, ver) do
+    list |> Enum.map(fn(lesson)->
+      lesson 
+      |> Map.put(:body, BibleComText.request(ver, lesson.read) )
+      |> Map.put(:show, true)
+    end)
+  end
+
 
   def formatted_date(d), do: d |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
 

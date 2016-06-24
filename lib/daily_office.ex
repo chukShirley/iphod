@@ -15,15 +15,17 @@ defmodule DailyReading do
     |> Enum.random
   end
 
-  def readings("christmas", wk, "Sunday", _date) do
-    identity["christmas"][wk]["Sunday"]
-  end
-  def readings("christmas", wk, day, date) do
-    identity["christmas"][wk][date |> Timex.format!("{Mshort}{0D}")]
-  end
+  # def readings("christmas", wk, "Sunday", _date) do
+  #   identity["christmas"][wk]["Sunday"]
+  # end
+  # def readings("christmas", wk, day, date) do
+  #   identity["christmas"][wk][date |> Timex.format!("{Mshort}{0D}")]
+  # end
   def readings(season, wk, day, _date), do: identity[season][wk][day]
-  def readings({season, wk, _litYr, date}) do
-    dow = date |> Timex.format!("{WDfull}")
+  def readings({season, wk, litYr, date}) do
+    # dow = date |> Timex.format!("{WDfull}")
+    # day_of_week - special to handle Christmas, a real mess
+    {season, wk, dow, date} = day_of_week({season, wk, litYr, date})
     if readings(season, wk, dow, date) |> is_nil, do: IEx.pry
     readings(season, wk, dow, date)
       |> add_psalms(date.day)
@@ -42,12 +44,51 @@ defmodule DailyReading do
     readings select_season(date)
   end
 
+  def day_of_week({"christmas", "1", _litYr, date}) do
+    dow = date |> Timex.format!("{WDfull}")
+    dec_n =  date |> Timex.format!("{D}")
+    cond do
+      dow == "Sunday" -> {"christmas", "1", "Sunday", date}
+      dec_n == "26" -> {"christmas", "1", "stStephen", date}
+      dec_n == "27" -> {"christmas", "1", "stJohn", date}
+      dec_n == "28" -> {"christmas", "1", "holyInnocents", date}
+      dec_n == "29" -> {"christmas", "1", "Dec29", date}
+      dec_n == "30" -> {"christmas", "1", "Dec30", date}
+      dec_n == "31" -> {"christmas", "1", "Dec31", date}
+      true -> dow
+    end
+  end
+  def day_of_week({"christmas", "2", litYr, date}) do
+    dow = date |> Timex.format!("{WDfull}")
+    jan_n =  date |> Timex.format!("{D}")
+    cond do
+      dow == "Sunday" -> {"christmas", "2", "Sunday", date}
+      jan_n == "2"  -> {"christmas", "2", "Jan02", date}
+      jan_n == "3"  -> {"christmas", "2", "Jan03", date}
+      jan_n == "4"  -> {"christmas", "2", "Jan04", date}
+      jan_n == "5"  -> {"christmas", "2", "Jan05", date}
+      jan_n == "6"  -> {"epiphany", "0", dow, date}
+      jan_n == "7"  -> {"epiphany", "0", dow, date}
+      jan_n == "8"  -> {"epiphany", "0", dow, date}
+      jan_n == "9"  -> {"epiphany", "0", dow, date}
+      jan_n == "10" -> {"epiphany", "0", dow, date}
+      jan_n == "11" -> {"epiphany", "0", dow, date}
+
+      true -> dow
+    end
+  end
+  def day_of_week({season, wk, litYr, date}) do
+    dow = date |> Timex.format!("{WDfull}")
+    {season, wk, dow, date}
+  end
+
   def lesson(date, section, ver) do
     readings(date)[section |> String.to_atom]
     |> lesson_with_body(ver)
   end
 
   def select_season(date) do
+    # if date == Timex.date({2016, 12, 25}), do: IEx.pry
     {season, wk, lityr, _sundayDate} = if date |> Lityear.is_sunday? do
       date |> Lityear.to_season
     else
@@ -150,8 +191,8 @@ defmodule DailyReading do
 
 
   def color_for(date) do
-    {red_letter_date, holy_day} = Lityear.next_holy_day(date)
-    colors = if date == red_letter_date do
+    {ok, holy_day} = Lityear.holy_day? date
+    colors = if ok do
       SundayReading.holy_day_color(holy_day)
     else
       readings(date).colors
@@ -163,8 +204,12 @@ defmodule DailyReading do
   end
 
   def update_title(date, title) do
-    {red_letter_date, holy_day} = Lityear.next_holy_day(date)
-    if date == red_letter_date, do: SundayReading.holy_day_title(holy_day), else: title
+    {ok, holy_day} = Lityear.holy_day? date
+    if ok do 
+      SundayReading.holy_day_title(holy_day) 
+    else 
+      title
+    end
   end
 
   def mp_body(date) do

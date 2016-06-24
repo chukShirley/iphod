@@ -8692,7 +8692,6 @@ var _user$project$Iphod_Sunday$update = F2(
 			case 'SetReading':
 				return _p1._0;
 			case 'GetText':
-				var foo = A2(_elm_lang$core$Debug$log, 'SUNDAY GETTEXT', _p1._0);
 				return model;
 			case 'ChangeText':
 				var _p3 = _p1._1;

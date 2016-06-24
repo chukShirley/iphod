@@ -3,9 +3,7 @@ defmodule Iphod.CalendarController do
   use Iphod.Web, :controller
   use Timex
 
-  def index(conn, _params) do
-    # x = get_month(Date.now)
-    # IEx.pry
+  def index(conn, params) do
     render conn, "index.html", model: get_month(Date.now)
   end
 
@@ -27,6 +25,13 @@ defmodule Iphod.CalendarController do
         1
       }) |> Date.shift(months: 1)
     render conn, "index.html", model: get_month(date)
+  end
+
+  def season(conn, params) do
+    # something like `get_month next_season("advent", Date.now)`
+    # and get the calendar month for the beginning of advent
+    this_month = get_month(Lityear.next_season(params["season"], Date.now))
+    render conn, "index.html", model: this_month
   end
 
 # HELPERS

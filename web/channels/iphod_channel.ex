@@ -80,14 +80,14 @@ defmodule Iphod.IphodChannel do
 
   def handle_in("get_lesson", [section, version, date], socket) when section in ~w(ot ps nt gs) do
     day = text_to_date date
-    # lesson = DailyReading.lesson(day, section, version)
-    # push socket, "update_lesson", %{lesson: lesson}
+    lesson = SundayReading.lesson(day, section, version)
+    push socket, "update_lesson", %{lesson: lesson}
     {:noreply, socket}
   end
 
   def handle_in("get_lesson", [section, version, date], socket) do
-    day = text_to_date date
-    # lesson = DailyReading.lesson(day, section, version)
+    # day = text_to_date date
+    # lesson = SundayReading.lesson(day, section, version)
     # push socket, "update_lesson", %{lesson: lesson}
     {:noreply, socket}
   end
