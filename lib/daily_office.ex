@@ -15,15 +15,17 @@ defmodule DailyReading do
     |> Enum.random
   end
 
-  def readings("christmas", wk, "Sunday", _date) do
-    identity["christmas"][wk]["Sunday"]
-  end
-  def readings("christmas", wk, day, date) do
-    identity["christmas"][wk][date |> Timex.format!("{Mshort}{0D}")]
-  end
+  # def readings("christmas", wk, "Sunday", _date) do
+  #   identity["christmas"][wk]["Sunday"]
+  # end
+  # def readings("christmas", wk, day, date) do
+  #   identity["christmas"][wk][date |> Timex.format!("{Mshort}{0D}")]
+  # end
   def readings(season, wk, day, _date), do: identity[season][wk][day]
-  def readings({season, wk, _litYr, date}) do
-    dow = date |> Timex.format!("{WDfull}")
+  def readings({season, wk, litYr, date}) do
+    # dow = date |> Timex.format!("{WDfull}")
+    # day_of_week - special to handle Christmas, a real mess
+    {season, wk, dow, date} = day_of_week({season, wk, litYr, date})
     if readings(season, wk, dow, date) |> is_nil, do: IEx.pry
     readings(season, wk, dow, date)
       |> add_psalms(date.day)
@@ -42,7 +44,51 @@ defmodule DailyReading do
     readings select_season(date)
   end
 
+  def day_of_week({"christmas", "1", _litYr, date}) do
+    dow = date |> Timex.format!("{WDfull}")
+    dec_n =  date |> Timex.format!("{D}")
+    cond do
+      dow == "Sunday" -> {"christmas", "1", "Sunday", date}
+      dec_n == "26" -> {"christmas", "1", "stStephen", date}
+      dec_n == "27" -> {"christmas", "1", "stJohn", date}
+      dec_n == "28" -> {"christmas", "1", "holyInnocents", date}
+      dec_n == "29" -> {"christmas", "1", "Dec29", date}
+      dec_n == "30" -> {"christmas", "1", "Dec30", date}
+      dec_n == "31" -> {"christmas", "1", "Dec31", date}
+      true -> dow
+    end
+  end
+  def day_of_week({"christmas", "2", litYr, date}) do
+    dow = date |> Timex.format!("{WDfull}")
+    jan_n =  date |> Timex.format!("{D}")
+    cond do
+      dow == "Sunday" -> {"christmas", "2", "Sunday", date}
+      jan_n == "2"  -> {"christmas", "2", "Jan02", date}
+      jan_n == "3"  -> {"christmas", "2", "Jan03", date}
+      jan_n == "4"  -> {"christmas", "2", "Jan04", date}
+      jan_n == "5"  -> {"christmas", "2", "Jan05", date}
+      jan_n == "6"  -> {"epiphany", "0", dow, date}
+      jan_n == "7"  -> {"epiphany", "0", dow, date}
+      jan_n == "8"  -> {"epiphany", "0", dow, date}
+      jan_n == "9"  -> {"epiphany", "0", dow, date}
+      jan_n == "10" -> {"epiphany", "0", dow, date}
+      jan_n == "11" -> {"epiphany", "0", dow, date}
+
+      true -> dow
+    end
+  end
+  def day_of_week({season, wk, litYr, date}) do
+    dow = date |> Timex.format!("{WDfull}")
+    {season, wk, dow, date}
+  end
+
+  def lesson(date, section, ver) do
+    readings(date)[section |> String.to_atom]
+    |> lesson_with_body(ver)
+  end
+
   def select_season(date) do
+    # if date == Timex.date({2016, 12, 25}), do: IEx.pry
     {season, wk, lityr, _sundayDate} = if date |> Lityear.is_sunday? do
       date |> Lityear.to_season
     else
@@ -93,18 +139,116 @@ defmodule DailyReading do
     |> Map.put_new(:version, "")
   end
 
+  def mp_today(date) do
+    r = readings(date)
+    mp = %{
+      colors: r.colors,
+      date:   r.date,
+      day:    r.day,
+      season: r.season,
+      title:  r.title,
+      week:   r.week,
+      mp1:    r.mp1,
+      mp2:    r.mp2,
+      mpp:    r.mpp,
+      show:   false
+    }
+    # get the ESV text, put it the body for mp1, mp2, mpp
+  end
+
+  def ep_today(date) do
+    r = readings(date)
+    mp = %{
+      colors: r.colors,
+      date:   r.date,
+      day:    r.day,
+      season: r.season,
+      title:  r.title,
+      week:   r.week,
+      ep1:    r.ep1,
+      ep2:    r.ep2,
+      epp:    r.epp,
+      show:   false
+    }
+    # get the ESV text, put it the body for ep1, ep2, epp
+  end
+
+  def reading_map("mp", date) do
+    r = readings(date)
+    %{  mp1: r.mp1 |> Enum.map(&(&1.read)),
+        mp2: r.mp2 |> Enum.map(&(&1.read)),
+        mpp: r.mpp |> Enum.map(&(&1.read))
+    }
+  end
+
+  def reading_map("ep", date) do
+    r = readings(date)
+    %{  ep1: r.ep1 |> Enum.map(&(&1.read)),
+        ep2: r.ep2 |> Enum.map(&(&1.read)),
+        epp: r.epp |> Enum.map(&(&1.read))
+    }
+  end
+
+
   def color_for(date) do
-    {red_letter_date, holy_day} = Lityear.next_holy_day(date)
-    colors = if date == red_letter_date do
-      SundayReading.holy_day(holy_day)["colors"]
+    {ok, holy_day} = Lityear.holy_day? date
+    colors = if ok do
+      SundayReading.holy_day_color(holy_day)
     else
       readings(date).colors
     end
   end
-  def update_title(date, title) do
-    {red_letter_date, holy_day} = Lityear.next_holy_day(date)
-    if date == red_letter_date, do: SundayReading.holy_day(holy_day)["title"], else: title
+
+  def title_for(date) do
+    update_title(date, readings(date).title)
   end
+
+  def update_title(date, title) do
+    {ok, holy_day} = Lityear.holy_day? date
+    if ok do 
+      SundayReading.holy_day_title(holy_day) 
+    else 
+      title
+    end
+  end
+
+  def mp_body(date) do
+    footnotes = false # will have to get real value from config
+    mp = mp_today(date)
+    [:mp1, :mp2, :mpp] 
+      |> Enum.reduce(mp, fn(r, acc)-> 
+        acc |> Map.put(r, lesson_with_body(mp[r]) )
+      end)
+    |> Map.put(:show, true)
+  end
+
+  def ep_body(date) do
+    footnotes = false # will have to get real value from config
+    ep = ep_today(date)
+    [:ep1, :ep2, :epp] 
+      |> Enum.reduce(ep, fn(r, acc)-> 
+        acc |> Map.put(r, lesson_with_body(ep[r]) )
+      end)
+    |> Map.put(:show, true)
+  end
+
+  def lesson_with_body(list), do: lesson_with_body(list, "ESV")
+  def lesson_with_body(list, "ESV") do
+    list |> Enum.map(fn(lesson)->
+      lesson 
+      |> Map.put(:body, EsvText.request(lesson.read) )
+      |> Map.put(:show, true)
+    end)
+  end
+  def lesson_with_body(list, ver) do
+    list |> Enum.map(fn(lesson)->
+      lesson 
+      |> Map.put(:body, BibleComText.request(ver, lesson.read) )
+      |> Map.put(:show, true)
+    end)
+  end
+
+
 
   def build do
     %{"antiphon" =>
@@ -815,9 +959,9 @@ defmodule DailyReading do
                             },
             "Saturday" => %{title: "Saturday",
                             colors: ["green"],
-                            mp1: [%{style: "req", read: "Jonah 1 & 2"}],
+                            mp1: [%{style: "req", read: "Jonah 1 and 2"}],
                             mp2: [%{style: "req", read: "1 Cor 15.35-end"}],
-                            ep1: [%{style: "req", read: "Jonah 3 & 4"}],
+                            ep1: [%{style: "req", read: "Jonah 3 and 4"}],
                             ep2: [%{style: "req", read: "1 Cor 16"}]
                             }
             },
@@ -1345,7 +1489,7 @@ defmodule DailyReading do
                             colors: ["violet"],
                             mp1: [%{style: "req", read: "Num 6"}],
                             mp2: [%{style: "req", read: "John 10.22-end"}],
-                            ep1: [%{style: "req", read: "Num 9.15-end & 10.19-end"}],
+                            ep1: [%{style: "req", read: "Num 9.15-end and 10.19-end"}],
                             ep2: [%{style: "req", read: "Titus 1.1-2.8"}]
                             },
             "Tuesday" =>  %{title: "Tuesday",
@@ -1391,7 +1535,7 @@ defmodule DailyReading do
                           colors: ["red"],
                             mp1: [%{style: "req", read: "Exod 11"}],
                             mp2: [%{style: "req", read: "Matt 26"}],
-                            ep1: [%{style: "req", read: "Isa 52.13 & 53.1-end"}],
+                            ep1: [%{style: "req", read: "Isa 52.13 and 53.1-end"}],
                             ep2: [%{style: "req", read: "Luke 19.29-end"}]
                             },
             "Monday" =>   %{title: "Monday in Holy Week",
@@ -1405,7 +1549,7 @@ defmodule DailyReading do
                             colors: ["violet"],
                             mp1: [%{style: "req", read: "Isa 42.1-9"}],
                             mp2: [%{style: "req", read: "John 15.1-16"}],
-                            ep1: [%{style: "req", read: "Wisd 2.1 & 12-end"}],
+                            ep1: [%{style: "req", read: "Wisd 2.1 and 12-end"}],
                             ep2: [%{style: "req", read: "John 15.17-end"}]
                             },
             "Wednesday" => %{title: "Wednesday in Holy Week",
@@ -1640,7 +1784,7 @@ defmodule DailyReading do
                             colors: ["white"],
                             mp1: [%{style: "req", read: "Deut 33"}],
                             mp2: [%{style: "req", read: "Acts 20.1-16"}],
-                            ep1: [%{style: "req", read: "Deut 32.48-end & 34"}],
+                            ep1: [%{style: "req", read: "Deut 32.48-end and 34"}],
                             ep2: [%{style: "req", read: "Acts 20.17-end"}]
                             }
             },
@@ -2055,7 +2199,7 @@ defmodule DailyReading do
                             colors: ["green"],
                             mp1: [%{style: "req", read: "Job 24"}],
                             mp2: [%{style: "req", read: "1 Pet 5"}],
-                            ep1: [%{style: "req", read: "Job 25 & 26"}],
+                            ep1: [%{style: "req", read: "Job 25 and 26"}],
                             ep2: [%{style: "req", read: "Mark 7.24-8.10"}]
                             }
             },
@@ -2083,7 +2227,7 @@ defmodule DailyReading do
                             },
             "Wednesday" => %{title: "Wednesday",
                             colors: ["green"],
-                            mp1: [%{style: "req", read: "Job 32 & 33"}],
+                            mp1: [%{style: "req", read: "Job 32 and 33"}],
                             mp2: [%{style: "req", read: "2 Pet 3"}],
                             ep1: [%{style: "req", read: "Job 34"},%{style: "opt", read: "Job 35"}],
                             ep2: [%{style: "req", read: "Mark 9.30-end"}]
@@ -2982,7 +3126,7 @@ defmodule DailyReading do
                           colors: ["green"],
                             mp1: [%{style: "req", read: "Prov 31.10-end"}],
                             mp2: [%{style: "req", read: "Luke 12.22-34"}],
-                            ep1: [%{style: "req", read: "Jonah 3 & 4"}],
+                            ep1: [%{style: "req", read: "Jonah 3 and 4"}],
                             ep2: [%{style: "req", read: "Matt 13.44-end"}]
                             },
             "Monday" =>     %{title: "Monday",
@@ -3075,7 +3219,7 @@ defmodule DailyReading do
                             colors: ["green"],
                             mp1: [%{style: "req", read: "Esther 3"}],
                             mp2: [%{style: "req", read: "1 Pet 2.11-3.7"}],
-                            ep1: [%{style: "req", read: "Esther 4 & 5"}],
+                            ep1: [%{style: "req", read: "Esther 4 and 5"}],
                             ep2: [%{style: "req", read: "1 Pet 3.8-end"}]
                             }
             },
@@ -3089,9 +3233,9 @@ defmodule DailyReading do
                             },
             "Monday" =>     %{title: "Monday",
                             colors: ["green"],
-                            mp1: [%{style: "req", read: "Esther 6 & 7"}],
+                            mp1: [%{style: "req", read: "Esther 6 and 7"}],
                             mp2: [%{style: "req", read: "1 Pet 4.1-11"}],
-                            ep1: [%{style: "req", read: "Esther 8"},%{style: "opt", read: "Esther 9 & 10"}],
+                            ep1: [%{style: "req", read: "Esther 8"},%{style: "opt", read: "Esther 9 and 10"}],
                             ep2: [%{style: "req", read: "1 Pet 4.12-end"}]
                             },
             "Tuesday" =>    %{title: "Tuesday",
@@ -3337,7 +3481,7 @@ defmodule DailyReading do
         "29" =>
           %{"Sunday" =>     %{title: "Sunday closest to November 23",
                           colors: ["green"],
-                            mp1: [%{style: "req", read: "Eccles 11 & 12"}],
+                            mp1: [%{style: "req", read: "Eccles 11 and 12"}],
                             mp2: [%{style: "req", read: "Heb 11.1-16"}],
                             ep1: [%{style: "req", read: "Mal 3.13-4 end"}],
                             ep2: [%{style: "req", read: "Heb 11.17-12.2"}]

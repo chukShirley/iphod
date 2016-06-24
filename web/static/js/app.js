@@ -18,6 +18,7 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
+
 // LOCAL STORAGE ------------------------
 
 function storageAvailable(of_type) {
@@ -45,7 +46,7 @@ function init_config_model() {
     , ps: "Coverdale"
     , nt: "ESV"
     , gs: "ESV"
-    , fnotes: "fnotes"
+    , fnotes: "True"
     , vers: ["ESV"]
     , current: "ESV"
     }
@@ -54,9 +55,9 @@ function init_config_model() {
         , ps: get_init("iphod_ps", "Coverdale")
         , nt: get_init("iphod_nt", "ESV")
         , gs: get_init("iphod_gs", "ESV")
-        , fnotes: get_init("iphod_fnotes", "fnotes")
-        , vers: get_versions("iphod_vers", "ESV")
-        , current: "ESV"
+        , fnotes: get_init("iphod_fnotes", "True")
+        , vers: get_versions("iphod_vers", ["ESV"])
+        , current: get_init("iphod_current", "ESV")
         }
   }
   return m;
@@ -96,243 +97,133 @@ function unsave_version(abbr) {
 function remove_abbr(v, i, ary){
   return v != this;
 }
-  
+
+
 // SOCKETS ------------------------
 
 import "./menu"
 import socket from "./socket"
 
-if (window.location.pathname == "/versions") {
-  let channel_v = socket.channel("versions");
-  channel_v.join()
-    .receive("ok", resp => { console.log("Joined Versions successfully", resp) })
-    .receive("error", resp => { console.log("Unable to join Versions", resp) })
-  
-  var elmDiv = document.getElementById('elm-container')
-    , initialState = {
-        allVersions: []
-    } 
-    , elmApp = Elm.embed(Elm.Translations, elmDiv, initialState);
-  
-//  channel_v.on("version", data => {
-//    elmApp.ports.thisVersion.send(data);
-//  })
 
-  channel_v.on("all_versions", data => {
-    let list = data.list
-      , in_use = get_versions("iphod_vers", "ESV");
-    list.forEach(function(ver) {
-      if (in_use.indexOf(ver.abbr) > -1) { ver.selected = true }
-    });
-    elmApp.ports.allVersions.send(list);
+// if (window.location.pathname == "/") {
+
+let channel = socket.channel("iphod:readings")
+channel.join()
+  .receive("ok", resp => { 
+    console.log("Joined Iphod successfully", resp);
+    elmHeaderApp.ports.portConfig.send(init_config_model());
   })
+  .receive("error", resp => { console.log("Unable to join Iphod", resp) })
   
-  channel_v.push("request_list", "");
+channel.push("init_calendar", "");
 
-  elmApp.ports.requestSaveVersion.subscribe(function(request) {
-    let   cmnd = request[0]
-        , ver  = request[1];
-    if (cmnd == "save") {
-      save_version(ver.abbr);
-    } 
-    else {
-      unsave_version(ver.abbr);
-    }
-  });
 
+// header
+
+var elmHeaderDiv = document.getElementById('header-elm-container')
+  , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
+
+elmHeaderApp.ports.sendEmail.subscribe(function(email) {
+  channel.push("request_send_email", email)
+})
+
+elmHeaderApp.ports.saveConfig.subscribe(function(config) {
+  // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
+  if ( storageAvailable('localStorage') ) {
+    let s = window.localStorage;
+    s.setItem("iphod_ot", config.ot)
+    s.setItem("iphod_ps", config.ps)
+    s.setItem("iphod_nt", config.nt)
+    s.setItem("iphod_gs", config.gs)
+    s.setItem("iphod_fnotes", config.fnotes)
+    s.setItem("iphod_vers", config.vers.join(","))
+    s.setItem("iphod_current", config.current)
+  }
+})
+
+
+// calendar 
+
+function rollup() {
+  $(".calendar-week").hide();
+  $("#rollup").text("Roll Down");
+}
+function rolldown() {
+  $(".calendar-week").show();
+  $("#rollup").text("Roll Up");   
 }
 
-if (window.location.pathname == "/calendar") {
-  let channel_c = socket.channel("calendar");
-  channel_c.join()
-    .receive("ok",    resp => {console.log("Joined Calendar successfully", resp)})
-    .receive("error", resp => {console.log("Unable to join Calendar", resp)})
+$("#rollup").click( function() {
+  $(".calendar-week").is(":visible") ? rollup() : rolldown()
+});
 
-  var elmDiv = document.getElementById('elm-container')
-    , initialState = {
-        thisMonth: {
-          calendar: [],
-          month:    "",
-          year:     ""
-        }
-    }
-    , elmApp = Elm.embed(Elm.Calendar, elmDiv, initialState)
-
-  channel_c.on("this_month", data => {
-    var z = data.calendar,
-        icm = init_config_model();
-    z.forEach( function(week){
-      week.days.forEach( function(day){
-        day.daily.config = icm;
-        day.daily.show = false;
-        day.daily.justToday = false;
-        day.sunday.config = icm;
-        day.sunday.show = false;
-        day.sunday.ofType = "sunday"
-      })
-    })
-    elmApp.ports.thisMonth.send( data )
-  })
-
-  channel_c.push("request_calendar", "")
-
-  elmApp.ports.requestMoveMonth.subscribe(function(request) {
-    console.log("MOVE MONTH: ", request)
-    channel_c.push("request_move_month", request)
-  })
-}
-
-
-if (window.location.pathname == "/") {
-
-  let channel = socket.channel("iphod:readings")
-  channel.join()
-    .receive("ok", resp => { console.log("Joined Iphod successfully", resp) })
-    .receive("error", resp => { console.log("Unable to join Iphod", resp) })
+channel.on('eu_today', data => {
+  data.config = init_config_model();
+  elmCalApp.ports.portEU.send(data);
+  rollup();
+})
   
-  channel.push("request_today", "");
-  channel.on("next_sunday", data => {
-      var z = data,
-          icm = init_config_model();
-      z.config = icm;
-      z.daily.config = icm;
-      z.sunday.config = icm;
-      z.redLetter.config = icm;
-      z.eveningPrayer.config = icm;
-      z.morningPrayer.config = icm;
-    
-      elmApp.ports.nextSunday.send(z);
-  })
+channel.on('mp_today', data => {
+  data.config = init_config_model();
+  elmCalApp.ports.portMP.send(data)
+  rollup();
+})
   
-  channel.on('new_text', data => {
-    elmApp.ports.newText.send(data);
-  })
-  
-  channel.on('new_email', data => {
-    elmApp.ports.newEmail.send(data);
-  })
+channel.on('ep_today', data => {
+  data.config = init_config_model();
+  elmCalApp.ports.portEP.send(data)
+  rollup();
+})
+
+channel.on('update_lesson', data => {
+  data.config = init_config_model();
+  elmCalApp.ports.portLesson.send(data.lesson);
+})
+
+$(".reading_button").click( function() {
+  let date = $(this).attr("data-date")
+    , of_type = $(this).attr("data-type");
+  channel.push("get_text", [of_type, date]);
+});
+
+var elmCalDiv = document.getElementById('cal-elm-container')
+  , elmCalApp = Elm.Calendar.embed(elmCalDiv)
+
+elmCalApp.ports.requestReading.subscribe(function(request) {
+  channel.push("get_lesson", request)
+})
 
 
-  // Hook up Elm
-  
-  
-  var elmDiv = document.getElementById('elm-container')
-    , config_model = {
-        ot: ""
-      , ps: ""
-      , nt: ""
-      , gs: ""
-      , fnotes: ""
-      , vers: []
-      , current: "ESV"
-    }
-    , sunday_collect_model = {
-        instruction: "String"
-      , title: ""
-      , collects: []
-      , show: false
-    }
-    , email_model = {
-          from: ""
-        , topic: ""
-        , text: ""
-        , show: false
-      }
-    , sunday_model = {
-          ofType: ""
-        , date: ""
-        , season: ""
-        , week: ""
-        , title: ""
-        , colors: []
-        , collect: sunday_collect_model
-        , ot: []
-        , ps: []
-        , nt: []
-        , gs: []
-        , show: false
-        , config: config_model
-      }
-    , daily_reading = {
-          date: ""
-        , season: ""
-        , week: ""
-        , day: ""
-        , title: ""
-        , mp1: []
-        , mp2: []
-        , mpp: []
-        , ep1: []
-        , ep2: []
-        , epp: []
-        , show: false
-        , justToday: false
-        , config: config_model
-      }
-    , initialState = {
-        nextSunday: {
-            today:         ""
-          , sunday:        sunday_model
-          , redLetter:     sunday_model
-          , daily:         daily_reading
-          , morningPrayer: daily_reading
-          , eveningPrayer: daily_reading
-          , email:         email_model
-          , config:        config_model
-          , about:         false
-        }
-      , newText:   { 
-          model:    ""
-        , section:  ""
-        , id:       ""
-        , body:     ""
-        , version:  ""
-        }
-      , newEmail: email_model
-    }
-    , elmApp = Elm.embed(Elm.Iphod, elmDiv, initialState)
-  
-  
-  
-  elmApp.ports.requestMoveDate.subscribe(function(request) {
-    channel.push("request_move_date", request)
-  });
-  
-  elmApp.ports.requestMoveDay.subscribe(function(request) {
-    channel.push("request_move_day", request)
-  });
-  
-  elmApp.ports.requestText.subscribe(function(request) {
-    var model = {};
-    request.forEach( function(tuple) {
-      model[tuple[0]] = tuple[1];
-    })
-  if ( $("#" + request[0]).text().length == 0 ) {channel.push("request_text", model)}
-  })
-  
-  elmApp.ports.requestNamedDay.subscribe(function(request) {
-    channel.push("request_named_day", request)
-  })
-  
-  elmApp.ports.requestAllText.subscribe(function(request) {
-    channel.push("request_all_text", request)
-  })
-  
-  elmApp.ports.sendEmail.subscribe(function(email) {
-    channel.push("request_send_email", email)
-  })
-  
-  elmApp.ports.savingConfig.subscribe(function(config) {
-    // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
-    if ( storageAvailable('localStorage') ) {
-      let s = window.localStorage
-      s.setItem("iphod_ot", config.ot)
-      s.setItem("iphod_ps", config.ps)
-      s.setItem("iphod_nt", config.nt)
-      s.setItem("iphod_gs", config.ot)
-      s.setItem("iphod_fnotes", config.fnotes)
-    }
-  })
-}
 
+// translations
+
+let trans_channel = socket.channel("versions")
+trans_channel.join()
+  .receive("ok", resp => { 
+    console.log("Joined Versions successfully", resp);
+  })
+  .receive("error", resp => { console.log("Unable to join Iphod", resp) })
+
+var elmTransDiv = document.getElementById("elm-versions")
+  , elmTransApp = Elm.Translations.embed(elmTransDiv)
+
+trans_channel.on("all_versions", data => {
+  var saved_vers = init_config_model().vers;
+  data.list.forEach(function(ver){
+    if (saved_vers.includes(ver.abbr)) {ver.selected = true;}
+  })
+  data.list.sort(function(a,b) {
+    if (a.selected && !b.selected) {return -1};
+    if (!a.selected && b.selected) {return 1};
+    if (a.abbr < b.abbr) {return -1};
+    if (a.abbr > b.abbr) {return 1};
+    return 0;
+  })
+  elmTransApp.ports.allVersions.send(data.list);
+});
+
+elmTransApp.ports.updateVersions.subscribe(function(version){
+  if (version.selected) { save_version(version.abbr) }
+  else { unsave_version(version.abbr) }
+})
 

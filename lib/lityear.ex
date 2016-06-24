@@ -43,20 +43,27 @@ defmodule  Lityear do
     sunday = if day |> is_sunday?, do: day, else: day |> date_next_sunday
     y = lityear sunday
     yrABC = abc sunday
+    dOfMon = "#{day.month}/#{day.day}"
 
     # Timex.diff is a scaler not a vector
     # that's why the second step
     # see also from_easter
     till_advent = Timex.diff(sunday, advent(1, sunday.year), :weeks)
     till_advent = if sunday |> Timex.before?( advent(1, sunday.year)), do: till_advent, else: -till_advent
+    till_epiphany = Timex.diff(sunday, epiphany(y), :days)
+    till_epiphany = if sunday |> Timex.before?(epiphany(y)), do: till_epiphany, else: -till_epiphany
 
     from_christmas = Timex.diff(sunday, christmas(1, y), :weeks)
+    is_christmas2 = cond do
+      dOfMon == "1/1" && day |> is_sunday? -> true
+      dOfMon in ~w(1/2 1/3 1/4 1/5) -> true
+      till_epiphany in 1..4 -> true
+      true -> false
+    end
 
     from_easter = Timex.diff(easter_day(y), sunday, :weeks) |> abs
     from_easter = if easter_day(y) |> Timex.before?(sunday), do: from_easter, else: -from_easter
 
-    till_epiphany = Timex.diff(sunday, epiphany(y), :days)
-    till_epiphany = if sunday |> Timex.before?(epiphany(y)), do: till_epiphany, else: -till_epiphany
     
     from_epiphany = Timex.diff(epiphany(1, y), sunday, :weeks)
 
@@ -67,11 +74,11 @@ defmodule  Lityear do
     cond do
       # to whom it may concern...
       # changes the order of these conditions at your paril
-      day == epiphany(y)   -> {"theEpiphany", "1", yrABC, day}
-      day == christmas(y)  -> {"christmasDay", "1", yrABC, day}
-      till_epiphany in 1..4   -> {"christmas", "2", yrABC, day}
-      till_epiphany == 5      -> {"holyName", "1", yrABC, day}
-      till_epiphany in 6..11  -> {"christmas", "1", yrABC, day}
+      day == epiphany(y)      -> {"theEpiphany", "1", yrABC, day}
+      day == christmas(y-1)   -> {"christmas", "1", yrABC, day}
+      is_christmas2           -> {"christmas", "2", yrABC, day} 
+      # till_epiphany == 5      -> {"holyName", "1", yrABC, day}
+      till_epiphany in 5..11  -> {"christmas", "1", yrABC, day}
       from_easter in -2..-6   -> {"lent", to_string(7 + from_easter), yrABC, day}
       from_easter == -1       -> {"palmSunday", "1", yrABC, day}
       from_easter == -7       -> {"epiphany", "9", yrABC, day}
@@ -86,6 +93,26 @@ defmodule  Lityear do
       from_epiphany in 0..8   -> {"epiphany", to_string(from_epiphany + 1), yrABC, day}
       true -> {"unknown", "unknown", :unknown, day}
     end
+   end
+
+   def next_season("advent", date) do
+      if Timex.before?( advent, date), do: advent(1, date.year + 1), else: advent
+   end
+
+   def next_season("epiphany", date) do
+      if Timex.before?( epiphany, date), do: epiphany(1, date.year + 1), else: epiphany
+   end
+
+   def next_season("lent", date) do
+      if Timex.before?( lent, date), do: lent(1, date.year + 1), else: lent
+   end
+
+   def next_season("easter", date) do
+      if Timex.before?( easter, date), do: easter(1, date.year + 1), else: easter
+   end
+
+   def next_season("pentecost", date) do
+      if Timex.before?( pentecost, date), do: pentecost(1, date.year + 1), else: pentecost
    end
 
 
@@ -172,8 +199,9 @@ defmodule  Lityear do
   def sunday_to_date('epiphany', week, year),   do: epiphany(week, year)
   def sunday_to_date('lent', week, year),       do: epiphany(week, year)
 
-  defp hd_index() do
-    %{  18  => "confessionOfStPeter",
+  def hd_index() do
+    %{  6   => "epiphany",
+        18  => "confessionOfStPeter",
         382 => "confessionOfStPeter", # for dates at end of dec
         25  => "conversionOfStPaul",
         55  => "stMatthias",
@@ -201,12 +229,14 @@ defmodule  Lityear do
         315 => "remembrance",
         333 => "stAndrew",
         355 => "stThomas",
+        358 => "christmasEve",
+        359 => "christmasDay",
         361 => "stStephen",
         361 => "stJohn",
         362 => "holyInnocents"
     }
   end
-  defp hd_doy() do
+  def hd_doy() do
     [ 0, # zero indexed
       18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,25,25,25,25,25,25,25,55,55,55,55,55,55,  # jan
       55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,78,78,78,78,           # feb
@@ -221,6 +251,15 @@ defmodule  Lityear do
       315,315,315,315,315,315,315,315,315,315,315,333,333,333,333,333,333,333,333,333,333,333,333,333,333,333,333,333,333,333,     # nov
       355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,355,361,361,361,361,361,362,382,382,382,382  # dec
     ]
+  end
+
+  def holy_day?(date) do
+    # need to check if date is a sunday and 
+    # if yesterday was sunday and and holy day
+    # this should probably handle christmas & epiphany
+    # since they float around like a holy day
+    d = leap_year_correction(date)
+    if hd_index[d] |> is_nil, do: {false, ""}, else: {true, hd_index[d]}
   end
 
   def next_holy_day(date) do # {date_of_holy_day, name_of_holy_day}

@@ -30,6 +30,11 @@ defmodule Iphod.CalendarChannel do
     {:noreply, socket}
   end
 
+  def handle_in("get_text", [of_type, date], socket) do
+    IO.puts "GET TEXT: #{of_type}, #{date}"
+    {:noreply, socket}
+  end
+
   def shift_get_month(month, year, n) do
     imonth = Timex.month_to_num(month)
     iyr = String.to_integer(year)

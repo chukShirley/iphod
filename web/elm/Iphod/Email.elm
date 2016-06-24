@@ -1,14 +1,13 @@
-module Iphod.Email (  Model, init, Action, update, view, 
-                      sendContactMe) where
+module Iphod.Email exposing (..) --where
+  ( Model, init, Msg, update, view )
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Effects exposing (Effects, Never)
 import String exposing (join)
 import Json.Decode as Json
 
-import Iphod.Helper exposing (onClickLimited, hideable, getText)
+import Iphod.Helper exposing (hideable)
 import Iphod.Models exposing (Email, emailInit)
 
 -- MODEL
@@ -20,14 +19,14 @@ init = emailInit
 
 -- MAILBOX
 
-sendContactMe: Signal.Mailbox Model
-sendContactMe =
-  Signal.mailbox init
+-- sendContactMe: Signal.Mailbox Model
+-- sendContactMe =
+--   Signal.mailbox init
 
 
 -- UPDATE
 
-type Action
+type Msg
   = NoOp
   | Send
   | Clear
@@ -36,15 +35,11 @@ type Action
   | Topic String
   | Message String
 
-update: Action -> Model -> Model
-update action model =
-  case action of
+update: Msg -> Model -> Model
+update msg model =
+  case msg of
     NoOp -> model
-    Send -> 
-      let
-        foo = Debug.log "EMAIL" model
-      in
-        model
+    Send -> model
     Clear -> {model | text = ""}
     Cancel -> init
     EmailAddress s -> {model | from = s}
@@ -54,20 +49,26 @@ update action model =
 
 -- VIEW
 
-view: Signal.Address Action -> Model -> Html
-view address model =
-  div
-  [ contactStyle model]
-  [ (inputEmailAddress address model)
-  , (inputSubject address model)
-  , (inputMessage address model)
-  , button [ buttonStyle, onClick sendContactMe.address model ] [text "Send"]
-  , button [ buttonStyle, onClick address Clear] [text "Clear"]
-  , button [ buttonStyle, onClick address Cancel] [text "Cancel"]
-  ]
+view: Model -> Html Msg
+view model =
+  (contactModal model)
 
-inputEmailAddress: Signal.Address Action -> Model -> Html
-inputEmailAddress address model =
+contactModal: Model -> Html Msg
+contactModal model =
+  div [ id "email-create", class "modalDialog" ]
+    [ a [href "#closeemail-text", title "Close", class "close"] [text "X"] 
+    , h2 [class "modal_header"] [ text "Contact" ]
+    , (inputEmailAddress model)
+    , (inputSubject model)
+    , (inputMessage model)
+    , button [ class "email-button", onClick sendContactMe model ] [text "Send"]
+    , button [ class "email-button", onClick Clear] [text "Clear"]
+    , button [ class "email-button", onClick Cancel] [text "Cancel"]
+    ]
+
+
+inputEmailAddress: Model -> Html Msg
+inputEmailAddress model =
   p []
     [ input 
         [ id "from"
@@ -75,16 +76,19 @@ inputEmailAddress address model =
         , placeholder "Your Email Address - required"
         , autofocus True
         , name "from"
-        , on "input" targetValue (\str -> Signal.message address (EmailAddress str))
-        , onClickLimited address NoOp
+        , on "input"  (Json.succeed (EmailAddress str))
+        -- , onClickLimited NoOp
+        , onWithOptions "click" 
+          { stopPropagation = True, preventDefault = True }
+          (Json.succeed NoOp)
         , value model.from
-        , emailAddrStyle model
+        , class "email-addr"
         ]
         []
     ]
 
-inputSubject: Signal.Address Action -> Model -> Html
-inputSubject address model =
+inputSubject: Model -> Html Msg
+inputSubject model =
   p []
     [ input 
         [ id "topic"
@@ -92,16 +96,19 @@ inputSubject address model =
         , placeholder "Subject - required"
         , autofocus True
         , name "topic"
-        , on "input" targetValue (\str -> Signal.message address (Topic str))
-        , onClickLimited address NoOp
+        , on "input" (Json.succeed (Topic str))
+        -- , onClickLimited NoOp
+        , onWithOptions "click" 
+          { stopPropagation = True, preventDefault = True }
+          (Json.succeed NoOp)
         , value model.topic
-        , subjectStyle model
+        , class "email-subject"
         ]
         []
     ]
 
-inputMessage: Signal.Address Action -> Model -> Html
-inputMessage address model =
+inputMessage: Model -> Html Msg
+inputMessage model =
   p []
     [ textarea 
         [ id "text"
@@ -109,64 +116,13 @@ inputMessage address model =
         , placeholder "Enter Message - required"
         , autofocus True
         , name "text"
-        , on "input" targetValue (\str -> Signal.message address (Message str))
-        , onClickLimited address NoOp
+        , on "input" (Json.succeed (Message str))
+        -- , onClickLimited NoOp
+        , onWithOptions "click" 
+          { stopPropagation = True, preventDefault = True }
+          (Json.succeed NoOp)
         , value model.text
-        , msgAddrStyle model 
+        , class "email-msg-addr"
         ]
         []
     ]
-
--- STYLE
-
-contactStyle: Model -> Attribute
-contactStyle model =
-  hideable
-    model.show
-    [ ("position", "absolute")
-    , ("z-index", "999")
-    , ("height", "15em")
-    , ("width", "50em")
-    , ("margin-top", "0.5em")
-    , ("border", "2px solid darkblue")
-    , ("border-radius", "0.5em")
-    , ("background-color", "linen") 
-    ]
-
-emailAddrStyle: Model -> Attribute
-emailAddrStyle model =
-  style
-    [ ("width", "20em")
-    , ("margin-left", "1em")
-    , ("margin-top", "1em")
-    , ("padding-left", "1em")
-    ]
-
-subjectStyle: Model -> Attribute
-subjectStyle model =
-  style
-    [ ("width", "45em")
-    , ("margin-left", "1em")
-    , ("padding-left", "1em")
-    ]
-
-msgAddrStyle: Model -> Attribute
-msgAddrStyle model =
-  style
-    [ ("width", "45em")
-    , ("height", "5em")
-    , ("margin-left", "1em")
-    , ("padding-left", "1em")
-    ]
-
-buttonStyle: Attribute
-buttonStyle =
-  style
-    [ ("float", "left")
-    , ("margin-left", "1em")
-    , ("padding", "2px 2px")
-    , ("font-size", "0.8em")
-    , ("display", "inline-block")
-    ]
-
-

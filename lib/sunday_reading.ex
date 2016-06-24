@@ -1,7 +1,7 @@
 require IEx
 
 defmodule SundayReading do
-  import Lityear, only: [namedDayDate: 2, is_sunday?: 1]
+  import Lityear, only: [namedDayDate: 2, is_sunday?: 1, next_holy_day: 1]
   use Timex
   @tz "America/Los_Angeles"
 
@@ -12,9 +12,16 @@ defmodule SundayReading do
   def identity(), do: Agent.get(__MODULE__, &(&1))
   def readings(season, wk, yr), do: identity[season][wk][yr]
   def readings(date) do
-    if date |> Lityear.is_sunday?, do: this_sunday(date), else: last_sunday(date)
+    # should check for red letter day first
+    {hd, title} = Lityear.next_holy_day date
+    if hd == date do
+      holy_day title, date
+    else
+      if date |> Lityear.is_sunday?, do: this_sunday(date), else: last_sunday(date)
+    end
   end
 
+  def holy_day(title, date),    do:  eu_map {"redLetter", title, "a", date}
   def next_sunday,        do: Date.now(@tz) |> next_sunday
   def next_sunday(date),  do: date |> Lityear.next_sunday |> _sunday
   def this_sunday(date),  do: date |> Lityear.to_season |> _sunday
@@ -22,20 +29,37 @@ defmodule SundayReading do
   def last_sunday(date),  do: date |> Lityear.last_sunday |> _sunday
   def from_now,           do: Date.now(@tz) |> this_sunday
 
+  def holy_day_color("epiphany"),   do: identity["theEpiphany"]["1"]["colors"]
+  def holy_day_color("christmas"),  do: identity["christmasDay"]["1"]["colors"]
+  def holy_day_color("christmasEve"),  do: identity["christmasDay"]["1"]["colors"]
+  def holy_day_color("christmasDay"),  do: identity["christmasDay"]["1"]["colors"]
+  def holy_day_color(title),        do: identity["redLetter"][title]["colors"]
 
-  defp _sunday({season, wk, yr, sunday}) do
-    if identity[season][wk][yr] |> is_nil, do: IEx.pry
-    # IO.puts "SUNDAY: #{season}, #{wk}"
+  def holy_day_title("epiphany"),   do: identity["theEpiphany"]["1"]["title"]
+  def holy_day_title("christmasEve"),   do: "Christmas Eve"
+  def holy_day_title("christmasDay"),   do: "Christmas Day"
+  def holy_day_title(title),        do: identity["redLetter"][title]["title"]
+
+  defp _sunday({season, wk, yr, sunday}), do: eu_map {season, wk, yr, sunday}
+
+  defp eu_map(nil, _date), do: IEx.pry
+  defp eu_map({season, wk, yr, sunday}) do
+    if identity[season][wk]["colors"] == nil, do: IEx.pry
     identity[season][wk][yr]
       |> add_ids
       |> Map.merge( %{
-                date:   sunday |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"), 
-                season: season, 
-                week:   wk, 
-                title:  identity[season][wk]["title"],
-                colors: identity[season][wk]["colors"],
-                collect: Collects.get(season, wk)
+                date:     sunday |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"), 
+                season:   season, 
+                week:     wk, 
+                title:    identity[season][wk]["title"],
+                colors:   identity[season][wk]["colors"],
+                collect:  Collects.get("advent", "1")
               })
+  end
+
+  def lesson(date, section, ver) do
+    eu_today(date)[section |> String.to_atom]
+    |> lesson_with_body(ver)
   end
 
   def namedReadings(season, wk) do
@@ -74,17 +98,74 @@ defmodule SundayReading do
     |> Map.put_new(:version, "")
   end
 
-  def next_holy_day(), do: next_holy_day(Date.now(@tz))
-  def next_holy_day(date) do
-    {st_date, festival} = Lityear.next_holy_day(date)
-    _sunday({"redLetter", festival, "a", st_date})
-    # Map.merge identity["redLetter"][festival][Lityear.abc_atom st_date],
-    #   %{date: st_date, season: "", week: "", title: identity["redLetter"][festival]["title"]}
+#   def next_holy_day(), do: next_holy_day(Date.now(@tz))
+#   def next_holy_day(date) do
+#     {st_date, festival} = Lityear.next_holy_day(date)
+#     _sunday({"redLetter", festival, "a", st_date})
+#     # Map.merge identity["redLetter"][festival][Lityear.abc_atom st_date],
+#     #   %{date: st_date, season: "", week: "", title: identity["redLetter"][festival]["title"]}
+#   end
+
+  def eu_today(date) do
+    # if date is redletter, use those readings
+    # but if date is sunday, use those sunday readings
+    # otherwise use last_sunday 
+    r = readings(date)
+    eu =     %{  
+      ofType:   "sunday", # but it could be redletter
+      date:     r.date,
+      season:   r.season,
+      week:     r.week,
+      title:    r.title,
+      colors:   r.colors,
+      collect:  r.collect,
+      ot:       r.ot,
+      ps:       r.ps,
+      nt:       r.nt,
+      gs:       r.gs,
+      show:     true
+      }
+    # now load up the text bodies
+
   end
 
-  def holy_day(festival) do
-    identity["redLetter"][festival]
+  def reading_map(date) do
+    r = readings(date)
+    %{  title:  r.title,
+        ot:     r.ot |> Enum.map(&(&1.read)),
+        ps:     r.ps |> Enum.map(&(&1.read)),
+        nt:     r.nt |> Enum.map(&(&1.read)),
+        gs:     r.gs |> Enum.map(&(&1.read))
+    }
   end
+
+  def eu_body(date) do
+    footnotes = false # will have to get real value from config
+    eu = eu_today(date)
+    [:ot, :ps, :nt, :gs] |> Enum.reduce(eu, fn(r, acc)-> 
+      acc |> Map.put(r, lesson_with_body(eu[r]) )
+    end)
+  end
+
+
+  def lesson_with_body(list), do: lesson_with_body(list, "ESV")
+
+  def lesson_with_body(list, "ESV") do
+    list |> Enum.map(fn(lesson)->
+      lesson 
+      |> Map.put(:body, EsvText.request(lesson.read) )
+      |> Map.put(:show, true)
+    end)
+  end
+
+  def lesson_with_body(list, ver) do
+    list |> Enum.map(fn(lesson)->
+      lesson 
+      |> Map.put(:body, BibleComText.request(ver, lesson.read) )
+      |> Map.put(:show, true)
+    end)
+  end
+
 
   def formatted_date(d), do: d |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
 
@@ -1205,7 +1286,7 @@ defmodule SundayReading do
                 "c" => %{ ot: [%{style: "req", read: "Isaiah 6.1-7"}],
                           ps: [%{style: "req", read: "Psalm 29"}],
                           nt: [%{style: "req", read: "Rev 4.1-11"}],
-                          gs: [%{style: "opt", read: "Jn 16.5-11"},%{style: "req", read: "Jn 16.12-15}] "}]
+                          gs: [%{style: "opt", read: "Jn 16.5-11"},%{style: "req", read: "Jn 16.12-15"}]
                         }
             }
           },

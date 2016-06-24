@@ -5,7 +5,7 @@ defmodule Iphod.VersionsChannel do
 
   def join("versions", payload, socket) do
     if authorized?(payload) do
-      # send self(), :after_join
+      send self(), :after_join
       {:ok, socket}
     else
       {:error, %{reason: "unauthorized"}}

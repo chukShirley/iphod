@@ -1,9 +1,12 @@
-module Iphod.Models ( Config, Lesson, Sunday, Daily, Day,
-                      Email, Collect, SundayCollect, Proper,
-                      configInit, sundayInit, dailyInit,
-                      emailInit, initCollect, initSundayCollect,
-                      initProper, initDay
-                    ) where
+module Iphod.Models exposing
+  ( Config, Lesson, Sunday, Daily, Day
+  , Email, Collect, SundayCollect, Proper
+  , DailyMP, DailyEP
+  , configInit, initLesson, sundayInit, dailyInit
+  , emailInit, initCollect, initSundayCollect
+  , initProper, initDay
+  , initDailyMP, initDailyEP
+  ) 
 
 type alias Config =
   { ot: String
@@ -21,8 +24,8 @@ configInit =
   , ps = "Coverdale"
   , nt = "ESV"
   , gs = "ESV"
-  , fnotes = "fnotes"
-  , vers = []
+  , fnotes = "True"
+  , vers = ["ESV"]
   , current = "ESV"
   }
 
@@ -30,7 +33,6 @@ type alias Email =
   { from: String
   , topic: String
   , text:  String
-  , show: Bool
   }
 
 emailInit: Email
@@ -38,7 +40,6 @@ emailInit =
   { from = ""
   , topic = ""
   , text = ""
-  , show = False
   }
 
 type alias Lesson =
@@ -49,6 +50,17 @@ type alias Lesson =
   , id:       String
   , section:  String
   , version:  String
+  }
+
+initLesson: Lesson
+initLesson =
+  { style =   ""
+  , show =    False
+  , read =    ""
+  , body =    ""
+  , id =      ""
+  , section = ""
+  , version = ""
   }
 
 type alias Proper = 
@@ -94,14 +106,14 @@ type alias Sunday =
   , season:   String
   , week:     String
   , title:    String
+  , show:     Bool
+  , config:   Config
   , colors:   List String
   , collect:  SundayCollect
   , ot:       List Lesson
   , ps:       List Lesson
   , nt:       List Lesson
   , gs:       List Lesson
-  , show:     Bool
-  , config:   Config
 }
 
 sundayInit: Sunday
@@ -111,14 +123,14 @@ sundayInit =
   , season  = ""
   , week    = ""
   , title   = ""
+  , show    = False
+  , config  = configInit
   , colors  = []
   , collect = initSundayCollect
   , ot      = []
   , ps      = []
   , nt      = []
   , gs      = []
-  , show    = False
-  , config  = configInit
   }
 
 type alias Daily =
@@ -154,6 +166,71 @@ dailyInit =
   , show      = False
   , justToday = False
   , config    = configInit
+  }
+
+-- type alias DailyEU = Sunday
+-- 
+-- initDailyEU: DailyEU
+-- initDailyEU = sundayInit
+
+
+
+type alias DailyMP =
+  { colors: List String
+  , date:   String
+  , day:    String
+  , season: String
+  , title:  String
+  , week:   String
+  , config: Config
+  , show:   Bool
+  , mp1:    List Lesson
+  , mp2:    List Lesson
+  , mpp:    List Lesson
+  }
+
+initDailyMP: DailyMP
+initDailyMP =
+  { colors  = []
+  , date    = ""
+  , day     = ""
+  , season  = ""
+  , title   = ""
+  , week    = ""
+  , config  = configInit
+  , show    = False
+  , mp1     = []
+  , mp2     = []
+  , mpp     = []
+  }
+
+type alias DailyEP =
+  { colors: List String
+  , date:   String
+  , day:    String
+  , season: String
+  , title:  String
+  , week:   String
+  , config: Config
+  , show:   Bool
+  , ep1:    List Lesson
+  , ep2:    List Lesson
+  , epp:    List Lesson
+  }
+
+initDailyEP: DailyEP
+initDailyEP =
+  { colors  = []
+  , date    = ""
+  , day     = ""
+  , season  = ""
+  , title   = ""
+  , week    = ""
+  , config  = configInit
+  , show    = False
+  , ep1     = []
+  , ep2     = []
+  , epp     = []
   }
 
 type alias ESV =
