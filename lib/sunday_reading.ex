@@ -1479,7 +1479,7 @@ defmodule SundayReading do
                         },
                 "c" => %{ ot: [%{style: "req", read: "1 Kings 19.15-21"}],
                           ps: [%{style: "req", read: "Psalm 16"}],
-                          nt: [%{style: "req", read: "Gal 5.1,13-25"}],
+                          nt: [%{style: "req", read: "Gal 5.1 13-25"}],
                           gs: [%{style: "req", read: "Lk 9.51-62"}]
                         }
             },
