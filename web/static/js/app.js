@@ -64,8 +64,9 @@ function init_config_model() {
 }
 
 function get_versions(arg1, arg2) {
-  let versions = get_init(arg1, arg2);
-  return versions.split(",");
+  var versions = get_init(arg1, arg2)
+    , version_list = versions.split(",");
+  return version_list;
 }
 
 function save_version(abbr) {
@@ -104,126 +105,128 @@ function remove_abbr(v, i, ary){
 import "./menu"
 import socket from "./socket"
 
+let path = window.location.pathname
 
-// if (window.location.pathname == "/") {
-
-let channel = socket.channel("iphod:readings")
-channel.join()
-  .receive("ok", resp => { 
-    console.log("Joined Iphod successfully", resp);
-    elmHeaderApp.ports.portConfig.send(init_config_model());
+if ( path == "/" || path.match(/calendar/)) {
+  
+  let channel = socket.channel("iphod:readings")
+  channel.join()
+    .receive("ok", resp => { 
+      //console.log("Joined Iphod successfully", resp);
+      elmHeaderApp.ports.portConfig.send(init_config_model());
+    })
+    .receive("error", resp => { console.log("Unable to join Iphod", resp) })
+    
+  channel.push("init_calendar", "");
+  
+  
+  // header
+  
+  var elmHeaderDiv = document.getElementById('header-elm-container')
+    , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
+  
+  elmHeaderApp.ports.sendEmail.subscribe(function(email) {
+    channel.push("request_send_email", email)
   })
-  .receive("error", resp => { console.log("Unable to join Iphod", resp) })
   
-channel.push("init_calendar", "");
-
-
-// header
-
-var elmHeaderDiv = document.getElementById('header-elm-container')
-  , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
-
-elmHeaderApp.ports.sendEmail.subscribe(function(email) {
-  channel.push("request_send_email", email)
-})
-
-elmHeaderApp.ports.saveConfig.subscribe(function(config) {
-  // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
-  if ( storageAvailable('localStorage') ) {
-    let s = window.localStorage;
-    s.setItem("iphod_ot", config.ot)
-    s.setItem("iphod_ps", config.ps)
-    s.setItem("iphod_nt", config.nt)
-    s.setItem("iphod_gs", config.gs)
-    s.setItem("iphod_fnotes", config.fnotes)
-    s.setItem("iphod_vers", config.vers.join(","))
-    s.setItem("iphod_current", config.current)
+  elmHeaderApp.ports.saveConfig.subscribe(function(config) {
+    // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
+    if ( storageAvailable('localStorage') ) {
+      let s = window.localStorage;
+      s.setItem("iphod_ot", config.ot)
+      s.setItem("iphod_ps", config.ps)
+      s.setItem("iphod_nt", config.nt)
+      s.setItem("iphod_gs", config.gs)
+      s.setItem("iphod_fnotes", config.fnotes)
+      s.setItem("iphod_vers", config.vers.join(","))
+      s.setItem("iphod_current", config.current)
+    }
+  })
+  
+  
+  // calendar 
+  
+  function rollup() {
+    $(".calendar-week").hide();
+    $("#rollup").text("Roll Down");
   }
-})
-
-
-// calendar 
-
-function rollup() {
-  $(".calendar-week").hide();
-  $("#rollup").text("Roll Down");
-}
-function rolldown() {
-  $(".calendar-week").show();
-  $("#rollup").text("Roll Up");   
-}
-
-$("#rollup").click( function() {
-  $(".calendar-week").is(":visible") ? rollup() : rolldown()
-});
-
-channel.on('eu_today', data => {
-  data.config = init_config_model();
-  elmCalApp.ports.portEU.send(data);
-  rollup();
-})
+  function rolldown() {
+    $(".calendar-week").show();
+    $("#rollup").text("Roll Up");   
+  }
   
-channel.on('mp_today', data => {
-  data.config = init_config_model();
-  elmCalApp.ports.portMP.send(data)
-  rollup();
-})
+  $("#rollup").click( function() {
+    $(".calendar-week").is(":visible") ? rollup() : rolldown()
+  });
   
-channel.on('ep_today', data => {
-  data.config = init_config_model();
-  elmCalApp.ports.portEP.send(data)
-  rollup();
-})
-
-channel.on('update_lesson', data => {
-  data.config = init_config_model();
-  elmCalApp.ports.portLesson.send(data.lesson);
-})
-
-$(".reading_button").click( function() {
-  let date = $(this).attr("data-date")
-    , of_type = $(this).attr("data-type");
-  channel.push("get_text", [of_type, date]);
-});
-
-var elmCalDiv = document.getElementById('cal-elm-container')
-  , elmCalApp = Elm.Calendar.embed(elmCalDiv)
-
-elmCalApp.ports.requestReading.subscribe(function(request) {
-  channel.push("get_lesson", request)
-})
-
+  channel.on('eu_today', data => {
+    data.config = init_config_model();
+    elmCalApp.ports.portEU.send(data);
+    rollup();
+  })
+    
+  channel.on('mp_today', data => {
+    data.config = init_config_model();
+    elmCalApp.ports.portMP.send(data)
+    rollup();
+  })
+    
+  channel.on('ep_today', data => {
+    data.config = init_config_model();
+    elmCalApp.ports.portEP.send(data)
+    rollup();
+  })
+  
+  channel.on('update_lesson', data => {
+    data.config = init_config_model();
+    elmCalApp.ports.portLesson.send(data.lesson);
+  })
+  
+  $(".reading_button").click( function() {
+    let date = $(this).attr("data-date")
+      , of_type = $(this).attr("data-type");
+    channel.push("get_text", [of_type, date]);
+  });
+  
+  var elmCalDiv = document.getElementById('cal-elm-container')
+    , elmCalApp = Elm.Calendar.embed(elmCalDiv)
+  
+  elmCalApp.ports.requestReading.subscribe(function(request) {
+    channel.push("get_lesson", request)
+  })
+}
 
 
 // translations
-
-let trans_channel = socket.channel("versions")
-trans_channel.join()
-  .receive("ok", resp => { 
-    console.log("Joined Versions successfully", resp);
+if ( path.match(/versions/) ) {
+  let trans_channel = socket.channel("versions")
+  trans_channel.join()
+    .receive("ok", resp => { 
+      // console.log("Joined Versions successfully", resp);
+    })
+    .receive("error", resp => { console.log("Unable to join Iphod", resp) })
+  
+  var elmTransDiv = document.getElementById("elm-versions")
+    , elmTransApp = Elm.Translations.embed(elmTransDiv)
+  
+  trans_channel.on("all_versions", data => {
+    var saved_vers = init_config_model().vers;
+    data.list.forEach(function(ver){
+      if (saved_vers.includes(ver.abbr)) {ver.selected = true;}
+    })
+    data.list.sort(function(a,b) {
+      if (a.selected && !b.selected) {return -1};
+      if (!a.selected && b.selected) {return 1};
+      if (a.abbr < b.abbr) {return -1};
+      if (a.abbr > b.abbr) {return 1};
+      return 0;
+    })
+    elmTransApp.ports.allVersions.send(data.list);
+  });
+  
+  elmTransApp.ports.updateVersions.subscribe(function(version){
+    if (version.selected) { save_version(version.abbr) }
+    else { unsave_version(version.abbr) }
   })
-  .receive("error", resp => { console.log("Unable to join Iphod", resp) })
-
-var elmTransDiv = document.getElementById("elm-versions")
-  , elmTransApp = Elm.Translations.embed(elmTransDiv)
-
-trans_channel.on("all_versions", data => {
-  var saved_vers = init_config_model().vers;
-  data.list.forEach(function(ver){
-    if (saved_vers.includes(ver.abbr)) {ver.selected = true;}
-  })
-  data.list.sort(function(a,b) {
-    if (a.selected && !b.selected) {return -1};
-    if (!a.selected && b.selected) {return 1};
-    if (a.abbr < b.abbr) {return -1};
-    if (a.abbr > b.abbr) {return 1};
-    return 0;
-  })
-  elmTransApp.ports.allVersions.send(data.list);
-});
-
-elmTransApp.ports.updateVersions.subscribe(function(version){
-  if (version.selected) { save_version(version.abbr) }
-  else { unsave_version(version.abbr) }
-})
+}
 

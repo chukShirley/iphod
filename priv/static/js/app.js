@@ -1288,8 +1288,9 @@ function init_config_model() {
 }
 
 function get_versions(arg1, arg2) {
-  var versions = get_init(arg1, arg2);
-  return versions.split(",");
+  var versions = get_init(arg1, arg2),
+      version_list = versions.split(",");
+  return version_list;
 }
 
 function save_version(abbr) {
@@ -1325,136 +1326,148 @@ function remove_abbr(v, i, ary) {
 
 // SOCKETS ------------------------
 
-// if (window.location.pathname == "/") {
+var path = window.location.pathname;
 
-var channel = _socket2.default.channel("iphod:readings");
-channel.join().receive("ok", function (resp) {
-  console.log("Joined Iphod successfully", resp);
-  elmHeaderApp.ports.portConfig.send(init_config_model());
-}).receive("error", function (resp) {
-  console.log("Unable to join Iphod", resp);
-});
+if (path == "/" || path.match(/calendar/)) {
+  var elmHeaderDiv, elmHeaderApp;
+  var elmCalDiv, elmCalApp;
 
-channel.push("init_calendar", "");
+  (function () {
 
-// header
+    // calendar
 
-var elmHeaderDiv = document.getElementById('header-elm-container'),
+    var rollup = function rollup() {
+      $(".calendar-week").hide();
+      $("#rollup").text("Roll Down");
+    };
+
+    var rolldown = function rolldown() {
+      $(".calendar-week").show();
+      $("#rollup").text("Roll Up");
+    };
+
+    var channel = _socket2.default.channel("iphod:readings");
+    channel.join().receive("ok", function (resp) {
+      //console.log("Joined Iphod successfully", resp);
+      elmHeaderApp.ports.portConfig.send(init_config_model());
+    }).receive("error", function (resp) {
+      console.log("Unable to join Iphod", resp);
+    });
+
+    channel.push("init_calendar", "");
+
+    // header
+
+    elmHeaderDiv = document.getElementById('header-elm-container');
     elmHeaderApp = Elm.Header.embed(elmHeaderDiv);
 
-elmHeaderApp.ports.sendEmail.subscribe(function (email) {
-  channel.push("request_send_email", email);
-});
 
-elmHeaderApp.ports.saveConfig.subscribe(function (config) {
-  // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
-  if (storageAvailable('localStorage')) {
-    var s = window.localStorage;
-    s.setItem("iphod_ot", config.ot);
-    s.setItem("iphod_ps", config.ps);
-    s.setItem("iphod_nt", config.nt);
-    s.setItem("iphod_gs", config.gs);
-    s.setItem("iphod_fnotes", config.fnotes);
-    s.setItem("iphod_vers", config.vers.join(","));
-    s.setItem("iphod_current", config.current);
-  }
-});
+    elmHeaderApp.ports.sendEmail.subscribe(function (email) {
+      channel.push("request_send_email", email);
+    });
 
-// calendar
+    elmHeaderApp.ports.saveConfig.subscribe(function (config) {
+      // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
+      if (storageAvailable('localStorage')) {
+        var s = window.localStorage;
+        s.setItem("iphod_ot", config.ot);
+        s.setItem("iphod_ps", config.ps);
+        s.setItem("iphod_nt", config.nt);
+        s.setItem("iphod_gs", config.gs);
+        s.setItem("iphod_fnotes", config.fnotes);
+        s.setItem("iphod_vers", config.vers.join(","));
+        s.setItem("iphod_current", config.current);
+      }
+    });
 
-function rollup() {
-  $(".calendar-week").hide();
-  $("#rollup").text("Roll Down");
-}
-function rolldown() {
-  $(".calendar-week").show();
-  $("#rollup").text("Roll Up");
-}
+    $("#rollup").click(function () {
+      $(".calendar-week").is(":visible") ? rollup() : rolldown();
+    });
 
-$("#rollup").click(function () {
-  $(".calendar-week").is(":visible") ? rollup() : rolldown();
-});
+    channel.on('eu_today', function (data) {
+      data.config = init_config_model();
+      elmCalApp.ports.portEU.send(data);
+      rollup();
+    });
 
-channel.on('eu_today', function (data) {
-  data.config = init_config_model();
-  elmCalApp.ports.portEU.send(data);
-  rollup();
-});
+    channel.on('mp_today', function (data) {
+      data.config = init_config_model();
+      elmCalApp.ports.portMP.send(data);
+      rollup();
+    });
 
-channel.on('mp_today', function (data) {
-  data.config = init_config_model();
-  elmCalApp.ports.portMP.send(data);
-  rollup();
-});
+    channel.on('ep_today', function (data) {
+      data.config = init_config_model();
+      elmCalApp.ports.portEP.send(data);
+      rollup();
+    });
 
-channel.on('ep_today', function (data) {
-  data.config = init_config_model();
-  elmCalApp.ports.portEP.send(data);
-  rollup();
-});
+    channel.on('update_lesson', function (data) {
+      data.config = init_config_model();
+      elmCalApp.ports.portLesson.send(data.lesson);
+    });
 
-channel.on('update_lesson', function (data) {
-  data.config = init_config_model();
-  elmCalApp.ports.portLesson.send(data.lesson);
-});
+    $(".reading_button").click(function () {
+      var date = $(this).attr("data-date"),
+          of_type = $(this).attr("data-type");
+      channel.push("get_text", [of_type, date]);
+    });
 
-$(".reading_button").click(function () {
-  var date = $(this).attr("data-date"),
-      of_type = $(this).attr("data-type");
-  channel.push("get_text", [of_type, date]);
-});
-
-var elmCalDiv = document.getElementById('cal-elm-container'),
+    elmCalDiv = document.getElementById('cal-elm-container');
     elmCalApp = Elm.Calendar.embed(elmCalDiv);
 
-elmCalApp.ports.requestReading.subscribe(function (request) {
-  channel.push("get_lesson", request);
-});
+
+    elmCalApp.ports.requestReading.subscribe(function (request) {
+      channel.push("get_lesson", request);
+    });
+  })();
+}
 
 // translations
+if (path.match(/versions/)) {
+  var trans_channel = _socket2.default.channel("versions");
+  trans_channel.join().receive("ok", function (resp) {
+    // console.log("Joined Versions successfully", resp);
+  }).receive("error", function (resp) {
+    console.log("Unable to join Iphod", resp);
+  });
 
-var trans_channel = _socket2.default.channel("versions");
-trans_channel.join().receive("ok", function (resp) {
-  console.log("Joined Versions successfully", resp);
-}).receive("error", function (resp) {
-  console.log("Unable to join Iphod", resp);
-});
+  var elmTransDiv = document.getElementById("elm-versions"),
+      elmTransApp = Elm.Translations.embed(elmTransDiv);
 
-var elmTransDiv = document.getElementById("elm-versions"),
-    elmTransApp = Elm.Translations.embed(elmTransDiv);
+  trans_channel.on("all_versions", function (data) {
+    var saved_vers = init_config_model().vers;
+    data.list.forEach(function (ver) {
+      if (saved_vers.includes(ver.abbr)) {
+        ver.selected = true;
+      }
+    });
+    data.list.sort(function (a, b) {
+      if (a.selected && !b.selected) {
+        return -1;
+      };
+      if (!a.selected && b.selected) {
+        return 1;
+      };
+      if (a.abbr < b.abbr) {
+        return -1;
+      };
+      if (a.abbr > b.abbr) {
+        return 1;
+      };
+      return 0;
+    });
+    elmTransApp.ports.allVersions.send(data.list);
+  });
 
-trans_channel.on("all_versions", function (data) {
-  var saved_vers = init_config_model().vers;
-  data.list.forEach(function (ver) {
-    if (saved_vers.includes(ver.abbr)) {
-      ver.selected = true;
+  elmTransApp.ports.updateVersions.subscribe(function (version) {
+    if (version.selected) {
+      save_version(version.abbr);
+    } else {
+      unsave_version(version.abbr);
     }
   });
-  data.list.sort(function (a, b) {
-    if (a.selected && !b.selected) {
-      return -1;
-    };
-    if (!a.selected && b.selected) {
-      return 1;
-    };
-    if (a.abbr < b.abbr) {
-      return -1;
-    };
-    if (a.abbr > b.abbr) {
-      return 1;
-    };
-    return 0;
-  });
-  elmTransApp.ports.allVersions.send(data.list);
-});
-
-elmTransApp.ports.updateVersions.subscribe(function (version) {
-  if (version.selected) {
-    save_version(version.abbr);
-  } else {
-    unsave_version(version.abbr);
-  }
-});
+}
 });
 
 ;require.register("web/static/js/menu.js", function(exports, require, module) {

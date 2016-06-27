@@ -4,6 +4,7 @@
   <%# IEx.pry %>
   <a href= "#<%=@day.id%>_readings" class= "color_options">
     <p class= "cal_day_title"><%=@day.title%></p>
+  </a>
   <div id= "<%=@day.id%>_readings" class= "modalDialog">
     <div>
       <a href= "#close<%=@day.id%>_readings", title= "Close", class= "close">X</a>
@@ -62,5 +63,4 @@
       </table>
     </div>
   </div>
-  </a>
 </span>
