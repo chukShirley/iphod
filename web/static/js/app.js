@@ -158,6 +158,14 @@ if ( path == "/" || path.match(/calendar/)) {
   $("#rollup").click( function() {
     $(".calendar-week").is(":visible") ? rollup() : rolldown()
   });
+
+  $(".prayer-button").click(function() {
+    let prayer_type = $(this).attr("data-prayer")
+      , ps = get_init("iphod_ps", "Coverdale")
+      , ver = get_init("iphod_current", "ESV");
+    console.log("PRAYER BUTTON: ", prayer_type, ver)
+    window.location = "/" + prayer_type + "/" + ps + "/" + ver
+  })
   
   channel.on('eu_today', data => {
     data.config = init_config_model();

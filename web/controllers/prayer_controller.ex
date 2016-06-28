@@ -69,10 +69,17 @@ defmodule Iphod.PrayerController do
       ps |> Map.put(:body, Psalms.to_html( ps.read, psalm_translation) )
     end)
   end
-  defp put_lesson(dreading, lsx, _text_translation) do
+  defp put_lesson(dreading, lsx, "ESV") do
     dreading[lsx] 
     |> Enum.map(fn(lsn)->
       lsn |> Map.put(:body, EsvText.request(lsn.read, false) )
+    end)
+  end
+
+  defp put_lesson(dreading, lsx, text_translation) do
+    dreading[lsx] 
+    |> Enum.map(fn(lsn)->
+      lsn |> Map.put(:body, BibleComText.request(text_translation, lsn.read, false) )
     end)
   end
 

@@ -7,6 +7,10 @@ defmodule Iphod.CalendarController do
     render conn, "index.html", model: get_month(Date.now)
   end
 
+  def mindex(conn, params) do
+    render conn, "mindex.html", model: get_month(Date.now)
+  end
+
   def prev(conn, params) do
     IO.puts "PARAMS: #{inspect params}"
     date = Date.from(

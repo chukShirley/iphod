@@ -39,7 +39,7 @@ defmodule BibleComText do
       |> Enum.reduce( {"",""}, fn(passage, {text, fnotes}) -> 
           passage_text = if passage["text"] |> String.length == 0, do: "Not Available", else: passage["text"]
           text = text <> passage["display"] <> "\n" <> passage_text
-          fnotes = fnotes <> footnotes_to_string(passage["footnotes"])
+          fnotes = if passage["footnotes"], do: fnotes <> footnotes_to_string(passage["footnotes"]), else: fnotes
           {text, fnotes}
         end) 
     text <> "<b>Footnotes</b></br>" <> fnotes

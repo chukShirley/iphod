@@ -1384,6 +1384,14 @@ if (path == "/" || path.match(/calendar/)) {
       $(".calendar-week").is(":visible") ? rollup() : rolldown();
     });
 
+    $(".prayer-button").click(function () {
+      var prayer_type = $(this).attr("data-prayer"),
+          ps = get_init("iphod_ps", "Coverdale"),
+          ver = get_init("iphod_current", "ESV");
+      console.log("PRAYER BUTTON: ", prayer_type, ver);
+      window.location = "/" + prayer_type + "/" + ps + "/" + ver;
+    });
+
     channel.on('eu_today', function (data) {
       data.config = init_config_model();
       elmCalApp.ports.portEU.send(data);

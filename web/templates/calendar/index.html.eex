@@ -2,9 +2,9 @@
 <div>
   <table id= "calendar">
     <tr>
-      <th class= "mpep_link" colspan= "3"><a href= "morningPrayer"><button>Morning Prayer</button></a></th>
+      <th class= "mpep_link" colspan= "3"><button class= "prayer-button" data-prayer="morningPrayer">Morning Prayer</button></th>
       <th class= "mpep_link">Today</th>
-      <th class= "mpep_link" colspan= "3"><a href= "eveningPrayer"><button>Evening Prayer</button></a></th>
+      <th class= "mpep_link" colspan= "3"><button class= "prayer-button" data-prayer="eveningPrayer">Evening Prayer</button></th>
     </tr>
     <tr>
       <th class= "season_link" colspan= "2">

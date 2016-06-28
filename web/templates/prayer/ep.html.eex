@@ -38,7 +38,7 @@
   </br>
 
   <p class= "section">The Lessons</p>
-  <p style= "margin-bottom: -1.0em;">The First Lesson from</p>
+  <p>The First Lesson from</p>
   <p class= "reading"> <%= 
       raw( @model.ep1 |> Enum.reduce("", fn(ls, acc)-> acc = acc <> ls.body end) )
   %></p>
@@ -57,7 +57,7 @@
   <%= render "_#{@model.ot_canticle}.html" %>
   </br>
 
-  <p style= "margin-bottom: -1.0em;">The Second Lesson from</p>
+  <p>The Second Lesson from</p>
   <p class= "reading"> <%= 
       raw( @model.ep2 |> Enum.reduce("", fn(ls, acc)-> acc = acc <> ls.body end) )
   %></p>
