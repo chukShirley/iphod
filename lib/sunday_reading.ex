@@ -53,7 +53,7 @@ defmodule SundayReading do
                 week:     wk, 
                 title:    identity[season][wk]["title"],
                 colors:   identity[season][wk]["colors"],
-                collect:  Collects.get("advent", "1")
+                collect:  Collects.get(season, wk)
               })
   end
 
