@@ -37,6 +37,7 @@ type alias Model =
   { eu: Models.Sunday
   , mp: Models.DailyMP
   , ep: Models.DailyEP
+  , reflection: Models.Reflection
   }
 
 initModel: Model
@@ -44,6 +45,7 @@ initModel =
   { eu = Models.sundayInit
   , mp = Models.initDailyMP
   , ep = Models.initDailyEP
+  , reflection = Models.initReflection
   }
 
 init:   (Model, Cmd Msg)
@@ -68,6 +70,8 @@ port portEP: (Models.DailyEP -> msg) -> Sub msg
 
 port portLesson: (List Models.Lesson -> msg) -> Sub msg
 
+port portReflection: (Models.Reflection -> msg) -> Sub msg
+
 subscriptions: Model -> Sub Msg
 subscriptions model =
   Sub.batch
@@ -76,6 +80,7 @@ subscriptions model =
   , portMP UpdateMP
   , portEP UpdateEP
   , portLesson UpdateLesson
+  , portReflection UpdateReflection
   ]
 
 -- UPDATE
@@ -86,6 +91,7 @@ type Msg
   | UpdateEU Models.Sunday
   | UpdateMP Models.DailyMP
   | UpdateEP Models.DailyEP
+  | UpdateReflection Models.Reflection
   | UpdateLesson (List Models.Lesson)
   | ModEU Sunday.Msg
   | ModMP MPReading.Msg
@@ -104,6 +110,7 @@ update msg model =
           {model  | eu = eu
                   , mp = Models.initDailyMP
                   , ep = Models.initDailyEP
+                  , reflection = Models.initReflection
           }
       in
         (newModel, Cmd.none)
@@ -114,6 +121,7 @@ update msg model =
           {model  | eu = Models.sundayInit
                   , mp = mp
                   , ep = Models.initDailyEP
+                  , reflection = Models.initReflection
           }
       in
         (newModel, Cmd.none)
@@ -124,6 +132,18 @@ update msg model =
           {model  | eu = Models.sundayInit
                   , mp = Models.initDailyMP
                   , ep = ep
+                  , reflection = Models.initReflection
+          }
+      in
+        (newModel, Cmd.none)
+
+    UpdateReflection reflection -> 
+      let
+        newModel = 
+          {model  | eu = Models.sundayInit
+                  , mp = Models.initDailyMP
+                  , ep = Models.initDailyEP
+                  , reflection = reflection
           }
       in
         (newModel, Cmd.none)
@@ -290,6 +310,7 @@ view model =
   [ euDiv model
   , mpDiv model
   , epDiv model
+  , reflectionDiv model
   ]
 
 
@@ -312,6 +333,13 @@ epDiv model =
   div []
   [ App.map ModEP (EPReading.view model.ep)
   -- (EPReading.view (Signal.forwardTo (ModEP model.ep)) model.ep)
+  ]
+
+reflectionDiv: Model -> Html Msg
+reflectionDiv model =
+  div []
+  [ div [id "reflection"] [Markdown.toHtml [] model.reflection.markdown]
+  , p [class "author"] [text ("--- " ++ model.reflection.author)]
   ]
 
 

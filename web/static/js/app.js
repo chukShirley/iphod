@@ -133,16 +133,11 @@ if ( path == "/" || path.match(/calendar/) || path.match(/mindex/)) {
     
   channel.push("init_calendar", "");
 
-if ( path.match(/mindex/)) {
+  
+// header
 
-  console.log("MOBILE INDEX")
   var elmHeaderDiv = document.getElementById('header-elm-container')
     , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
-
-}
-  
-  
-  // header
   
   elmHeaderApp.ports.sendEmail.subscribe(function(email) {
     channel.push("request_send_email", email)
@@ -163,10 +158,10 @@ if ( path.match(/mindex/)) {
   })
 
   // mindex
-
+if ( path.match(/mindex/) ) { 
     var elmMindexDiv = document.getElementById('m-elm-container')
     , elmMindexApp = Elm.MIndex.embed(elmMindexDiv)
-
+}
   
   // calendar 
   
@@ -189,6 +184,11 @@ if ( path.match(/mindex/)) {
       , ver = get_init("iphod_current", "ESV");
     console.log("PRAYER BUTTON: ", prayer_type, ver)
     window.location = "/" + prayer_type + "/" + ps + "/" + ver
+  })
+
+  channel.on('reflection_today', data => {
+    elmCalApp.ports.portReflection.send(data);
+    rollup();
   })
   
   channel.on('eu_today', data => {
@@ -217,6 +217,14 @@ if ( path.match(/mindex/)) {
   $(".reading_button").click( function() {
     let date = $(this).attr("data-date")
       , of_type = $(this).attr("data-type");
+    if (date == null) {
+      let d = new Date()
+        , days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+        , mons = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+        , dow = days[d.getDay()]
+        , mon = mons[d.getMonth()]
+      date = dow + " " + mon + " " + d.getDate() + ", " + d.getFullYear();
+    }
     channel.push("get_text", [of_type, date]);
   });
   
@@ -224,6 +232,7 @@ if ( path.match(/mindex/)) {
     , elmCalApp = Elm.Calendar.embed(elmCalDiv)
   
   elmCalApp.ports.requestReading.subscribe(function(request) {
+    console.log("REQUEST READING: ", request)
     channel.push("get_lesson", request)
   })
 }

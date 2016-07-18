@@ -391,7 +391,6 @@ label.radio_label {
 }
 
 .mpep_link, .season_link{
-  display: inline;
   text-decoration: none;
   font-size: 1.3em;
 }
@@ -407,6 +406,7 @@ label.radio_label {
   font-size: 0.8em;
   width: 100%;
 }
+
 
 #calendar th {
   border: 1px solid black;
@@ -427,6 +427,11 @@ label.radio_label {
 }
 
 #calendar td.today {border: 3px solid black;}
+
+#calendar th.mpep_link {
+  border: none;
+}
+
 
 .td-top, .td-bottom { position: relative; }
 .td-top { 

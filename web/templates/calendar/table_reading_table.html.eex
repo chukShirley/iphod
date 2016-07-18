@@ -1,0 +1,66 @@
+<span>
+  <%# require IEx %>
+  <%# day = @day %>
+  <%# IEx.pry %>
+  <a href= "#<%=@day.id%>_readings" class= "color_options">
+    <p class= "cal_day_title"><%=@day.title%></p>
+  <div id= "<%=@day.id%>_readings" class= "modalDialog">
+    <div>
+      <a href= "#close<%=@day.id%>_readings", title= "Close", class= "close">X</a>
+      <h2 class= "modal_header">Readings for Today</h2>
+      <table class= "reading_table">
+        <tr><th colspan= "3"><%= @day.date %></th></tr>
+        <tr>
+          <th>Morning Prayer</th>
+          <th>Evening Prayer</th>
+          <th>Eucharist - <%= @day.eu_reading.title %></th>
+        </tr>
+        <tr>
+          <td class= "reading_table_td">
+            <ul>
+              <%= for reading <- @day.mp_reading.mpp do %>
+                <li><%=reading%></li>
+              <% end %>
+              <%= for reading <- @day.mp_reading.mp1 do %>
+                <li><%=reading%></li>
+              <% end %>
+              <%= for reading <- @day.mp_reading.mp2 do %>
+                <li><%=reading%></li>
+              <% end %>
+            </ul>
+          </td>
+          <td class= "reading_table_td">
+            <ul>
+              <%= for reading <- @day.ep_reading.epp do %>
+                <li><%=reading%></li>
+              <% end %>
+              <%= for reading <- @day.ep_reading.ep1 do %>
+                <li><%=reading%></li>
+              <% end %>
+              <%= for reading <- @day.ep_reading.ep2 do %>
+                <li><%=reading%></li>
+              <% end %>
+            </ul>
+          </td>
+          <td class= "reading_table_td">
+            <ul>
+              <%= for reading <- @day.eu_reading.ot do %>
+                <li><%=reading%></li>
+              <% end %>
+              <%= for reading <- @day.eu_reading.ps do %>
+                <li><%=reading%></li>
+              <% end %>
+              <%= for reading <- @day.eu_reading.nt do %>
+                <li><%=reading%></li>
+              <% end %>
+              <%= for reading <- @day.eu_reading.gs do %>
+                <li><%=reading%></li>
+              <% end %>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  </a>
+</span>

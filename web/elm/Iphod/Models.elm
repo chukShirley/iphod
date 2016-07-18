@@ -1,11 +1,11 @@
 module Iphod.Models exposing
   ( Config, Lesson, Sunday, Daily, Day
   , Email, Collect, SundayCollect, Proper
-  , DailyMP, DailyEP
+  , DailyMP, DailyEP, Reflection
   , configInit, initLesson, sundayInit, dailyInit
   , emailInit, initCollect, initSundayCollect
   , initProper, initDay
-  , initDailyMP, initDailyEP
+  , initDailyMP, initDailyEP, initReflection
   ) 
 
 type alias Config =
@@ -231,6 +231,16 @@ initDailyEP =
   , ep1     = []
   , ep2     = []
   , epp     = []
+  }
+
+type alias Reflection =
+  { author:   String
+  , markdown: String
+  }
+
+initReflection =
+  { author    = ""
+  , markdown  = ""
   }
 
 type alias ESV =

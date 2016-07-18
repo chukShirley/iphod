@@ -1,0 +1,9 @@
+<h2>Show Reflection</h2>
+
+<ul>
+  <li><%= @reflection.author %>, <%= @reflection.date %></li>
+  <li><%= @reflection.markdown %></li>
+</ul>
+
+<%= link "Edit", to: reflection_path(@conn, :edit, @reflection) %>
+<%= link "Back", to: reflection_path(@conn, :index) %>

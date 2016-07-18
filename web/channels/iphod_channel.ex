@@ -1,6 +1,10 @@
 require IEx
 require Logger
 require Poison
+require Ecto.Query
+alias Iphod.Repo
+alias Iphod.Reflection
+
 defmodule Iphod.IphodChannel do
   import Iphod.Mailer
   use Iphod.Web, :channel
@@ -41,6 +45,14 @@ defmodule Iphod.IphodChannel do
     # push socket, "ep_today", DailyReading.ep_today(date)
     push socket, "init_email", @email
     {:noreply, socket}  
+  end
+
+  def handle_in("get_text", ["Reflection", date], socket) do
+    [_, day] = date |> String.split(~r{day }, parts: 2)
+    resp = Repo.one(from r in Iphod.Reflection, where: r.date == ^day, select: {r.author, r.markdown})
+    {author, markdown} = if resp, do: resp, else: {"", "Sorry, nothing today"}
+    push socket, "reflection_today", %{author: author, markdown: markdown}
+    {:noreply, socket}
   end
 
   def handle_in("get_text", ["EU", date], socket) do

@@ -2,8 +2,10 @@
 <div>
   <table id= "calendar">
     <tr>
+      <th class= "mpep_link" colspan= "7" style= "border-bottom: none;">Today</th>
+    <tr>
       <th class= "mpep_link" colspan= "3"><button class= "prayer-button" data-prayer="morningPrayer">Morning Prayer</button></th>
-      <th class= "mpep_link">Today</th>
+      <th class= "mpep_link"><button class= "reading_button" data-type= "Reflection">Reflection</button></th>
       <th class= "mpep_link" colspan= "3"><button class= "prayer-button" data-prayer="eveningPrayer">Evening Prayer</button></th>
     </tr>
     <tr>
@@ -75,6 +77,10 @@
             <%# render "_reading_table.html", day: day %>
             <div class= "td-bottom">
             <ul class= "day_options">
+              <li class= "reading_group">
+                <button class= "reading_button" data-date= "<%=day.date%>" data-type= "Reflection">Reflection</button>
+                </br>
+              </li>
               <li class= "reading_group">
                 <button class= "reading_button" data-date= "<%=day.date%>" data-type= "MP">MP</button></li>
               <li class= "reading_group">

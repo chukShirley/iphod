@@ -1,0 +1,32 @@
+<h2>Listing reflections</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for reflection <- @reflections do %>
+    <tr>
+      <td class="text-right">
+        <%= reflection.date %>
+      </td>
+      <td class="text-right">
+        <%= reflection.author %>
+      </td>
+      <td class="text-right">
+        <%= reflection.markdown |> String.slice(0..50) %>...
+      </td>
+      <td class="text-right">
+        <%= link "Show", to: reflection_path(@conn, :show, reflection), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: reflection_path(@conn, :edit, reflection), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: reflection_path(@conn, :delete, reflection), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New reflection", to: reflection_path(@conn, :new) %>

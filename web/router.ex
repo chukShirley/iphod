@@ -31,6 +31,8 @@ defmodule Iphod.Router do
     get "/versions", BibleVersionsController, :index
 
     get "/mindex", CalendarController, :mindex
+
+    resources "/reflections", ReflectionController
   end
 
   # Other scopes may use custom stacks.

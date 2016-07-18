@@ -1,0 +1,159 @@
+<div id= "header-elm-container"></div>
+<div>
+  <table id= "calendar">
+    <tr>
+      <th class= "mpep_link" colspan= "3"><a href= "morningPrayer"><button>Morning Prayer</button></a></th>
+      <th class= "mpep_link">Today</th>
+      <th class= "mpep_link" colspan= "3"><a href= "eveningPrayer"><button>Evening Prayer</button></a></th>
+    </tr>
+    <tr>
+      <th class= "season_link" colspan= "2">
+        <a href= "<%="/calendar/next/advent"%>" >
+          <button class= "season_button" data-season= "Advent">Advent</button>
+        </a>
+      </th>
+      <th class= "season_link">
+        <a href= "<%="/calendar/next/epiphany"%>" >
+          <button class= "season_button" data-season= "Epiphany">Epiphany</button>
+        </a>
+      </th>
+      <th class= "season_link">
+        <a href= "<%="/calendar/next/lent"%>" >
+          <button class= "season_button" data-season= "Lent">Lent</button>
+        </a>
+      </th>
+      <th class= "season_link">
+        <a href= "<%="/calendar/next/easter"%>" >
+          <button class= "season_button" data-season= "Easter">Easter</button>
+        </a>
+      </th>
+      <th class= "season_link" colspan= "2">
+        <a href= "<%="/calendar/next/pentecost"%>" >
+          <button class= "season_button" data-season= "Pentecost">Pentecost</button>
+          </a>
+      </th>
+    </tr>
+    <tr>
+      <th class= "cal_move_month">
+        <a href= "<%="/calendar/prev/#{@model.month}/#{@model.year}"%>" ><</a>
+      </th>
+      <th colspan= "5"><%= "#{@model.month}, #{@model.year}"%></th>
+      <th class= "cal_move_month">
+        <a href= "<%="/calendar/next/#{@model.month}/#{@model.year}"%>" >></a>
+      </th>
+    </tr>
+    <tr class= "calendar-week">
+      <th>Sun</th>
+      <th>Mon</th>
+      <th>Tue</th>
+      <th>Wed</th>
+      <th>Thu</th>
+      <th>Fri</th>
+      <th>Sat</th>
+    </tr>
+    <%= for week <- @model.calendar do %>
+      <tr class= "calendar-week">
+        <%= for day <- week.days do %>
+          <td class="<%= if day.today, do: 'today', else: '' %>" >
+            <span>
+              <a href= "#<%=day.id%>_color" class= "color_options">
+                <p class= "<%="day_of_month day_#{hd day.colors}"%>"><%=day.dayOfMonth%></p>
+              <div id= "<%=day.id%>_color" class= "modalDialog">
+                <div>
+                  <a href= "#close<%=day.id%>_color", title= "Close", class= "close">X</a>
+                  <h2 class= "modal_header">Color Options</h2>
+                  <ul>
+                    <%= for color <- day.colors do %>
+                      <li><%= color %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+              </a>
+            </span>
+
+            <span>
+              <a href= "#<%=day.id%>_readings" class= "color_options">
+                <p class= "cal_day_title"><%=day.title%></p>
+              <div id= "<%=day.id%>_readings" class= "modalDialog">
+                <div>
+                  <a href= "#close<%=day.id%>_readings", title= "Close", class= "close">X</a>
+                  <h2 class= "modal_header">Readings for Today</h2>
+                  <table class= "reading_table">
+                    <tr><th colspan= "3"><%= day.date %></th></tr>
+                    <tr>
+                      <th>Morning Prayer</th>
+                      <th>Evening Prayer</th>
+                      <th>Eucharist - <%= day.eu_reading.title %></th>
+                    </tr>
+                    <tr>
+                      <td class= "reading_table_td">
+                        <ul>
+                          <%= for reading <- day.mp_reading.mpp do %>
+                            <li><%=reading%></li>
+                          <% end %>
+                          <%= for reading <- day.mp_reading.mp1 do %>
+                            <li><%=reading%></li>
+                          <% end %>
+                          <%= for reading <- day.mp_reading.mp2 do %>
+                            <li><%=reading%></li>
+                          <% end %>
+                        </ul>
+                      </td>
+                      <td class= "reading_table_td">
+                        <ul>
+                          <%= for reading <- day.ep_reading.epp do %>
+                            <li><%=reading%></li>
+                          <% end %>
+                          <%= for reading <- day.ep_reading.ep1 do %>
+                            <li><%=reading%></li>
+                          <% end %>
+                          <%= for reading <- day.ep_reading.ep2 do %>
+                            <li><%=reading%></li>
+                          <% end %>
+                        </ul>
+                      </td>
+                      <td class= "reading_table_td">
+                        <ul>
+                          <%= for reading <- day.eu_reading.ot do %>
+                            <li><%=reading%></li>
+                          <% end %>
+                          <%= for reading <- day.eu_reading.ps do %>
+                            <li><%=reading%></li>
+                          <% end %>
+                          <%= for reading <- day.eu_reading.nt do %>
+                            <li><%=reading%></li>
+                          <% end %>
+                          <%= for reading <- day.eu_reading.gs do %>
+                            <li><%=reading%></li>
+                          <% end %>
+                        </ul>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              </a>
+            </span>
+
+            <ul class= "day_options">
+              <li class= "reading_group">
+                <button class= "reading_button" data-date= "<%=day.date%>" data-type= "MP">MP</button></li>
+              <li class= "reading_group">
+                <button class= "reading_button" data-date= "<%=day.date%>" data-type= "EP" >EP</button></li>
+              <li class= "reading_group">
+                <button class= "reading_button" data-date= "<%=day.date%>" data-type= "EU" >EU</button></li>
+            </ul>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+    <tr>
+      <td id="table-rollup" colspan= "7">
+        <button id= "rollup">Roll Up</button>
+      </td>
+    </tr>
+  </table>
+</div>
+<div id="cal-elm-container"></div>
+
