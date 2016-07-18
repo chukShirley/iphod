@@ -8,7 +8,8 @@ defmodule Iphod.CalendarController do
   end
 
   def mindex(conn, params) do
-    render conn, "mindex.html", model: get_month(Date.now)
+    IO.puts "CALENDAR CONTROLLER - mindex"
+    render conn, "mindex.html"
   end
 
   def prev(conn, params) do

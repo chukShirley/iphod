@@ -390,7 +390,9 @@ label.radio_label {
   margin-bottom: 0;
 }
 
-.mpep_link {
+.mpep_link, .season_link{
+  display: inline;
+  text-decoration: none;
   font-size: 1.3em;
 }
 
@@ -695,6 +697,18 @@ background: linear-gradient(135deg,  #87e0fd 1%,#87e0fd 1%,#e8f7fc 1%,#53cbf1 69
   display: inline;
   text-decoration: none;
 }
+
+.m-options1 ul, .m-seasons ul{
+  text-align: center;
+}
+.m-options1 ul li, .m-seasons ul li{
+  display: inline;
+  text-decoration: none;
+  padding: 0 5px;
+}
+
+
+
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 .cssmenu,
 .cssmenu ul,

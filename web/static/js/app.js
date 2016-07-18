@@ -107,23 +107,42 @@ import socket from "./socket"
 
 let path = window.location.pathname
 
-if ( path == "/" || path.match(/calendar/)) {
+// mobile landing page
+
+console.log("PATH: ", path)
+
+if ( path.match(/mindex/)) {
+
+  console.log("MOBILE INDEX")
+  var elmHeaderDiv = document.getElementById('header-elm-container')
+    , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
+
+}
+
+// landing page, calendar
+
+if ( path == "/" || path.match(/calendar/) || path.match(/mindex/)) {
   
   let channel = socket.channel("iphod:readings")
   channel.join()
     .receive("ok", resp => { 
-      //console.log("Joined Iphod successfully", resp);
+      console.log("Joined Iphod successfully", resp);
       elmHeaderApp.ports.portConfig.send(init_config_model());
     })
     .receive("error", resp => { console.log("Unable to join Iphod", resp) })
     
   channel.push("init_calendar", "");
+
+if ( path.match(/mindex/)) {
+
+  console.log("MOBILE INDEX")
+  var elmHeaderDiv = document.getElementById('header-elm-container')
+    , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
+
+}
   
   
   // header
-  
-  var elmHeaderDiv = document.getElementById('header-elm-container')
-    , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
   
   elmHeaderApp.ports.sendEmail.subscribe(function(email) {
     channel.push("request_send_email", email)
@@ -142,7 +161,12 @@ if ( path == "/" || path.match(/calendar/)) {
       s.setItem("iphod_current", config.current)
     }
   })
-  
+
+  // mindex
+
+    var elmMindexDiv = document.getElementById('m-elm-container')
+    , elmMindexApp = Elm.MIndex.embed(elmMindexDiv)
+
   
   // calendar 
   

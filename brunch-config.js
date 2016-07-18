@@ -46,7 +46,8 @@ exports.config = {
       "web/elm/Iphod.elm",
       "web/elm/Translations.elm",
       "web/elm/Calendar.elm",
-      "web/elm/Header.elm"
+      "web/elm/Header.elm",
+      "web/elm/MIndex.elm"
     ],
 
     // Where to compile files to
@@ -61,7 +62,8 @@ exports.config = {
         'Iphod.elm', 
         'Translations.elm', 
         'Calendar.elm',
-        'Header.elm'
+        'Header.elm',
+        'MIndex.elm'
       ],
       outputFolder: '../static/vendor'
     },

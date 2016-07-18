@@ -1,0 +1,89 @@
+<div id= "header-elm-container"></div>
+<div> Date Picker </div>
+<div>
+  
+    <ul #mFirstRow>
+      <li class= "mpep_link" colspan= "3"><a href= "morningPrayer"><button>Morning Prayer</button></a></li>
+      <li class= "mpep_link"><button>Reflections</button></li>
+      <li class= "mpep_link" colspan= "3"><a href= "eveningPrayer"><button>Evening Prayer</button></a></li>
+    </ul>
+    <ul>
+      <li class= "season_link" colspan= "2">
+        <a href= "<%="/calendar/next/advent"%>" >
+          <button class= "season_button" data-season= "Advent">Advent</button>
+        </a>
+      </li>
+      <li class= "season_link">
+        <a href= "<%="/calendar/next/epiphany"%>" >
+          <button class= "season_button" data-season= "Epiphany">Epiphany</button>
+        </a>
+      </li>
+      <li class= "season_link">
+        <a href= "<%="/calendar/next/lent"%>" >
+          <button class= "season_button" data-season= "Lent">Lent</button>
+        </a>
+      </li>
+      <li class= "season_link">
+        <a href= "<%="/calendar/next/easter"%>" >
+          <button class= "season_button" data-season= "Easter">Easter</button>
+        </a>
+      </li>
+      <li class= "season_link" colspan= "2">
+        <a href= "<%="/calendar/next/pentecost"%>" >
+          <button class= "season_button" data-season= "Pentecost">Pentecost</button>
+          </a>
+      </li>
+    </ul>
+    <ul>
+      <li class= "cal_move_month">
+        <a href= "<%="/calendar/prev/#{@model.month}/#{@model.year}"%>" ><</a>
+      </li>
+      <li colspan= "5"><%= "#{@model.month}, #{@model.year}"%></li>
+      <li class= "cal_move_month">
+        <a href= "<%="/calendar/next/#{@model.month}/#{@model.year}"%>" >></a>
+      </li>
+    </ul>
+    <%= for week <- @model.calendar do %>
+      <ul class= "calendar-week">
+        <%= for day <- week.days do %>
+          <li class="<%= if day.today, do: 'today', else: '' %>" >
+            <div class= "td-top">
+              <a href= "#<%=day.id%>_color" class= "color_options">
+                <p class= "<%="day_of_month day_#{hd day.colors}"%>"><%=day.dayOfMonth%></p>
+              <div id= "<%=day.id%>_color" class= "modalDialog">
+                <div>
+                  <a href= "#close<%=day.id%>_color", title= "Close", class= "close">X</a>
+                  <h2 class= "modal_header">Color Options</h2>
+                  <ul>
+                    <%= for color <- day.colors do %>
+                      <li><%= color %></li>
+                    <% end %>
+                  </ul>
+                </div>
+              </div>
+              </a>
+              <p><%= day.title %></p>
+            </div>
+            <%# render "_reading_table.html", day: day %>
+            <div class= "td-bottom">
+            <ul class= "day_options">
+              <li class= "reading_group">
+                <button class= "reading_button" data-date= "<%=day.date%>" data-type= "MP">MP</button></li>
+              <li class= "reading_group">
+                <button class= "reading_button" data-date= "<%=day.date%>" data-type= "EP" >EP</button></li>
+              <li class= "reading_group">
+                <button class= "reading_button" data-date= "<%=day.date%>" data-type= "EU" >EU</button></li>
+            </ul>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+    <ul>
+      <li id="table-rollup" colspan= "7">
+        <button id= "rollup">Roll Up</button>
+      </li>
+    </ul>
+</div>
+<div id="cal-elm-container"></div>
+
