@@ -4,12 +4,52 @@ defmodule DailyReading do
   use Timex
   def start_link, do: Agent.start_link fn -> build end, name: __MODULE__
   def identity(), do: Agent.get(__MODULE__, &(&1))
+
+  def mp_body(date) do
+    footnotes = false # will have to get real value from config
+    mp = mp_today(date)
+    [:mp1, :mp2, :mpp] 
+      |> Enum.reduce(mp, fn(r, acc)-> 
+        acc |> Map.put(r, BibleText.lesson_with_body(mp[r]) )
+      end)
+    |> Map.put(:show, true)
+  end
+
+  def ep_body(date) do
+    footnotes = false # will have to get real value from config
+    ep = ep_today(date)
+    [:ep1, :ep2, :epp] 
+      |> Enum.reduce(ep, fn(r, acc)-> 
+        acc |> Map.put(r, BibleText.lesson_with_body(ep[r]) )
+      end)
+    |> Map.put(:show, true)
+  end
+
+#  def lesson_with_body(list), do: lesson_with_body(list, "ESV")
+#
+#  def lesson_with_body(list, "ESV") do
+#    list |> Enum.map(fn(lesson)->
+#      lesson 
+#      |> Map.put(:body, EsvText.request(lesson.read) )
+#      |> Map.put(:show, true)
+#    end)
+#  end
+#
+#  def lesson_with_body(list, ver) do
+#    list |> Enum.map(fn(lesson)->
+#      lesson 
+#      |> Map.put(:body, BibleComText.request(ver, lesson.read) )
+#      |> Map.put(:show, true)
+#    end)
+#  end
+
   def opening_sentence(mpep, date) do
     {season, _wk, _lityr, _date} = select_season(date)
     identity["#{mpep}_opening"][season]
     |> Enum.random
   end
-    def antiphon(date) do
+    
+  def antiphon(date) do
     {season, _wk, _lityr, _date} = select_season(date)
     identity["antiphon"][season]
     |> Enum.random
@@ -84,7 +124,7 @@ defmodule DailyReading do
 
   def lesson(date, section, ver) do
     readings(date)[section |> String.to_atom]
-    |> lesson_with_body(ver)
+    |> BibleText.lesson_with_body(ver)
   end
 
   def select_season(date) do
@@ -210,42 +250,6 @@ defmodule DailyReading do
     else 
       title
     end
-  end
-
-  def mp_body(date) do
-    footnotes = false # will have to get real value from config
-    mp = mp_today(date)
-    [:mp1, :mp2, :mpp] 
-      |> Enum.reduce(mp, fn(r, acc)-> 
-        acc |> Map.put(r, lesson_with_body(mp[r]) )
-      end)
-    |> Map.put(:show, true)
-  end
-
-  def ep_body(date) do
-    footnotes = false # will have to get real value from config
-    ep = ep_today(date)
-    [:ep1, :ep2, :epp] 
-      |> Enum.reduce(ep, fn(r, acc)-> 
-        acc |> Map.put(r, lesson_with_body(ep[r]) )
-      end)
-    |> Map.put(:show, true)
-  end
-
-  def lesson_with_body(list), do: lesson_with_body(list, "ESV")
-  def lesson_with_body(list, "ESV") do
-    list |> Enum.map(fn(lesson)->
-      lesson 
-      |> Map.put(:body, EsvText.request(lesson.read) )
-      |> Map.put(:show, true)
-    end)
-  end
-  def lesson_with_body(list, ver) do
-    list |> Enum.map(fn(lesson)->
-      lesson 
-      |> Map.put(:body, BibleComText.request(ver, lesson.read) )
-      |> Map.put(:show, true)
-    end)
   end
 
 

@@ -1,6 +1,11 @@
 <h2>Edit reflection</h2>
 
-<%= render "form.html", changeset: @changeset,
-                        action: reflection_path(@conn, :update, @reflection) %>
-
-<%= link "Back", to: reflection_path(@conn, :index) %>
+<reflection 
+  id="refl"
+  data-recno= "<%= @reflection.id %>"
+  data-date="<%= @reflection.date %>"
+  data-author="<%= @reflection.author %>"
+  data-text="<%= @reflection.markdown %>"
+  data-published="<%= @reflection.published %>"
+>
+<div id= "reflection-elm-container"></div>

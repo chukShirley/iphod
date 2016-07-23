@@ -20,6 +20,9 @@
         <%= reflection.markdown |> String.slice(0..50) %>...
       </td>
       <td class="text-right">
+      <%= if reflection.published, do: "Published", else: "Draft" %>
+      </td>
+      <td class="text-right">
         <%= link "Show", to: reflection_path(@conn, :show, reflection), class: "btn btn-default btn-xs" %>
         <%= link "Edit", to: reflection_path(@conn, :edit, reflection), class: "btn btn-default btn-xs" %>
         <%= link "Delete", to: reflection_path(@conn, :delete, reflection), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>

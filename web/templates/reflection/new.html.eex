@@ -1,6 +1,11 @@
 <h2>New reflection</h2>
+<reflection 
+  id="refl"
+  data-recno= 0
+  data-date=""
+  data-author=""
+  data-text=""
+  data-published=false
+>
 
-<%= render "form.html", changeset: @changeset,
-                        action: reflection_path(@conn, :create) %>
-
-<%= link "Back", to: reflection_path(@conn, :index) %>
+<div id= "reflection-elm-container"></div>

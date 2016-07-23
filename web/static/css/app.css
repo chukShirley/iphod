@@ -712,4 +712,37 @@ background: linear-gradient(135deg,  #87e0fd 1%,#87e0fd 1%,#e8f7fc 1%,#53cbf1 69
   padding: 0 5px;
 }
 
+#refl-edit ul{
+  margin-left: -2.5em;
+}
+#refl-edit li {
+  text-decoration: none;
+  // display: inline;
+  margin-left: 0em;
+}
 
+#refl-edit li button {
+  width: 80px;
+}
+
+#refl-edit textarea {
+  width: 75%;
+  position: relative;
+  float: right;
+  margin-right: 0;
+  top: -110px;  
+  height: 200px;
+}
+
+#preview {
+  margin-top: 1.8em;
+}
+
+#md-text {
+  margin-top: -6em;
+  margin-right: 0;
+  float: right;
+  padding: 0.5em;
+  width: 95%;
+  border: 1px solid black;
+}

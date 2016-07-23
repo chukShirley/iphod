@@ -59,7 +59,7 @@ defmodule SundayReading do
 
   def lesson(date, section, ver) do
     eu_today(date)[section |> String.to_atom]
-    |> lesson_with_body(ver)
+    |> BibleText.lesson_with_body(ver)
   end
 
   def namedReadings(season, wk) do
@@ -143,28 +143,28 @@ defmodule SundayReading do
     footnotes = false # will have to get real value from config
     eu = eu_today(date)
     [:ot, :ps, :nt, :gs] |> Enum.reduce(eu, fn(r, acc)-> 
-      acc |> Map.put(r, lesson_with_body(eu[r]) )
+      acc |> Map.put(r, BibleText.lesson_with_body(eu[r]) )
     end)
   end
 
 
-  def lesson_with_body(list), do: lesson_with_body(list, "ESV")
-
-  def lesson_with_body(list, "ESV") do
-    list |> Enum.map(fn(lesson)->
-      lesson 
-      |> Map.put(:body, EsvText.request(lesson.read) )
-      |> Map.put(:show, true)
-    end)
-  end
-
-  def lesson_with_body(list, ver) do
-    list |> Enum.map(fn(lesson)->
-      lesson 
-      |> Map.put(:body, BibleComText.request(ver, lesson.read) )
-      |> Map.put(:show, true)
-    end)
-  end
+#   def lesson_with_body(list), do: lesson_with_body(list, "ESV")
+# 
+#   def lesson_with_body(list, "ESV") do
+#     list |> Enum.map(fn(lesson)->
+#       lesson 
+#       |> Map.put(:body, EsvText.request(lesson.read) )
+#       |> Map.put(:show, true)
+#     end)
+#   end
+# 
+#   def lesson_with_body(list, ver) do
+#     list |> Enum.map(fn(lesson)->
+#       lesson 
+#       |> Map.put(:body, BibleComText.request(ver, lesson.read) )
+#       |> Map.put(:show, true)
+#     end)
+#   end
 
 
   def formatted_date(d), do: d |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")

@@ -25,7 +25,7 @@ defmodule BibleComText do
         |> Poison.decode!
         |> body_to_string
       {:error, _reason} ->
-        "ESV text Failed badly"
+        "BibleCom text Failed badly"
     end
   end
 

@@ -6,11 +6,12 @@ defmodule Iphod.Reflection do
         field :markdown, :string
         field :author, :string
         field :read_cnt, :integer, default: 0
+        field :published, :boolean, default: false
 
     timestamps
   end
 
-  @required_fields ~w(date author markdown)
+  @required_fields ~w(date author markdown published)
   @optional_fields ~w()
 
   @doc """

@@ -109,8 +109,6 @@ let path = window.location.pathname
 
 // mobile landing page
 
-console.log("PATH: ", path)
-
 if ( path.match(/mindex/)) {
 
   console.log("MOBILE INDEX")
@@ -126,7 +124,6 @@ if ( path == "/" || path.match(/calendar/) || path.match(/mindex/)) {
   let channel = socket.channel("iphod:readings")
   channel.join()
     .receive("ok", resp => { 
-      console.log("Joined Iphod successfully", resp);
       elmHeaderApp.ports.portConfig.send(init_config_model());
     })
     .receive("error", resp => { console.log("Unable to join Iphod", resp) })
@@ -182,7 +179,6 @@ if ( path.match(/mindex/) ) {
     let prayer_type = $(this).attr("data-prayer")
       , ps = get_init("iphod_ps", "Coverdale")
       , ver = get_init("iphod_current", "ESV");
-    console.log("PRAYER BUTTON: ", prayer_type, ver)
     window.location = "/" + prayer_type + "/" + ps + "/" + ver
   })
 
@@ -232,7 +228,6 @@ if ( path.match(/mindex/) ) {
     , elmCalApp = Elm.Calendar.embed(elmCalDiv)
   
   elmCalApp.ports.requestReading.subscribe(function(request) {
-    console.log("REQUEST READING: ", request)
     channel.push("get_lesson", request)
   })
 }
@@ -271,3 +266,49 @@ if ( path.match(/versions/) ) {
   })
 }
 
+// reflections
+
+if ( path.match(/reflections.+[new|edit]/) ) {
+  var elmReflDiv = document.getElementById("reflection-elm-container")
+    , elmReflApp = Elm.NewReflection.embed(elmReflDiv)
+    , refl_channel = socket.channel("reflection")
+  refl_channel.join()
+    .receive("ok", resp => { 
+      let refl = {
+          id:     $("reflection").data("recno")
+        , date:   $("reflection").data("date")
+        , author: $("reflection").data("author")
+        , text:   $("reflection").data("text")
+        , published: $("reflection").data("published")
+      }
+      console.log("REFL: ", refl)
+      elmReflApp.ports.portReflection.send(refl);
+    })
+    .receive("error", resp => {console.log("Failed to join reflection")})
+
+    elmReflApp.ports.portSubmit.subscribe(function(d) {
+    //channel.push("request_send_email", email)
+    refl_channel.push("submit", [d.id, d.date, d.text, d.author, d.published])
+    });
+
+    elmReflApp.ports.portReset.subscribe(function(data) {
+    //channel.push("request_send_email", email)
+      refl_channel.push("reset", data.id)
+    });
+
+    elmReflApp.ports.portBack.subscribe(function(data) {
+    //channel.push("request_send_email", email)
+      window.location = "/reflections"
+    });
+
+    refl_channel.on("reflection", data => {
+      elmReflApp.ports.portReflection.send(data)
+    })
+
+    refl_channel.on("submitted", data => {
+      console.log("SUBMITTED: ", data)
+    })
+
+
+
+} // END OF reflections

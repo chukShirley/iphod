@@ -49,7 +49,7 @@ defmodule Iphod.IphodChannel do
 
   def handle_in("get_text", ["Reflection", date], socket) do
     [_, day] = date |> String.split(~r{day }, parts: 2)
-    resp = Repo.one(from r in Iphod.Reflection, where: r.date == ^day, select: {r.author, r.markdown})
+    resp = Repo.one(from r in Iphod.Reflection, where: [date: ^day, published: true], select: {r.author, r.markdown})
     {author, markdown} = if resp, do: resp, else: {"", "Sorry, nothing today"}
     push socket, "reflection_today", %{author: author, markdown: markdown}
     {:noreply, socket}
