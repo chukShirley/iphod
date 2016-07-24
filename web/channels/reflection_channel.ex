@@ -29,6 +29,18 @@ defmodule Iphod.ReflectionChannel do
     {:noreply, socket}
   end
 
+  def handle_in("submit", [0, date, text, author, published], socket) do
+    # refl = Repo.insert!(Reflection, id)
+    # changeset = Reflection.changeset(refl, %{date: date, markdown: text, author: author, published: published})
+    case Repo.insert( %Reflection{date: date, markdown: text, author: author, published: published}) do
+      {:ok, user} -> 
+        push socket, "submitted", %{resp: "ok"}
+      {:error, changeset} ->
+        push socket, "submitted", %{resp: "error"}
+    end
+    {:noreply, socket}
+  end
+
   def handle_in("submit", [id, date, text, author, published], socket) do
     refl = Repo.get!(Reflection, id)
     changeset = Reflection.changeset(refl, %{id: id, date: date, markdown: text, author: author, published: published})
