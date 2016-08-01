@@ -19,6 +19,7 @@ defmodule Iphod do
       worker(Collects, []),
       worker(Printable, []),
       worker(BibleVersions, [])
+      # worker(LocalText, [])
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
