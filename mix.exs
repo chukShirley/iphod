@@ -4,7 +4,7 @@ defmodule Iphod.Mixfile do
   def project do
     [app: :iphod,
      version: "0.0.1",
-     elixir: "~> 1.2.0",
+     elixir: ">= 1.3.2",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -35,10 +35,10 @@ defmodule Iphod.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, "~> 1.1.4"},
+    [{:phoenix, ">= 1.2.0"},
      {:phoenix_ecto, "~> 2.0"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 2.4"},
+     {:phoenix_html, ">= 2.6.0"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
@@ -46,10 +46,10 @@ defmodule Iphod.Mixfile do
      {:exrm, "~> 1.0.3"},
      # {:mock, github: "jjh42/mock", only: :dev},
      {:httpoison, "~> 0.8.2"},
-     {:mailgun, "~> 0.1.2"},
-     {:exometer_core, github: "PSPDFKit-labs/exometer_core", override: true},
-     {:exometer, github: "PSPDFKit-labs/exometer"},
-     {:edown, github: "uwiger/edown", tag: "0.7", override: true}
+     {:mailgun, "~> 0.1.2"}
+     # {:exometer_core, "~> 1.4.0"},
+     # {:exometer, "~> 1.2.1"},
+     # {:edown, github: "uwiger/edown", tag: "0.7", override: true}
     ]
   end
 

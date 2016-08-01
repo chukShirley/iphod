@@ -281,7 +281,6 @@ if ( path.match(/reflections.+[new|edit]/) ) {
         , text:   $("reflection").data("text")
         , published: $("reflection").data("published")
       }
-      console.log("REFL: ", refl)
       elmReflApp.ports.portReflection.send(refl);
     })
     .receive("error", resp => {console.log("Failed to join reflection")})

@@ -746,3 +746,14 @@ background: linear-gradient(135deg,  #87e0fd 1%,#87e0fd 1%,#e8f7fc 1%,#53cbf1 69
   width: 95%;
   border: 1px solid black;
 }
+#md-text p{
+  text-indent: 4em;
+}
+
+#md-text code {
+  font-family: inherit;
+}
+
+blockquote p{
+  margin: 0;
+}

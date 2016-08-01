@@ -11,6 +11,7 @@ defmodule BibleText do
   end
 
   def lesson_with_body(list, ver) do
+    IO.puts ">>>>> GET LESSON: #{inspect list}, #{ver}, #{BibleVersions.source(ver)}"
     lesson_with_body(list, ver, BibleVersions.source(ver))
   end
 
@@ -26,6 +27,14 @@ defmodule BibleText do
     list |> Enum.map(fn(lesson)->
       lesson 
       |> Map.put(:body, GetBibleText.request(ver, lesson.read) )
+      |> Map.put(:show, true)
+    end)
+  end
+
+  def lesson_with_body(list, ver, "local") do
+    list |> Enum.map(fn(lesson)->
+      lesson 
+      |> Map.put(:body, Iphod.LocalText.request(ver, lesson.read) )
       |> Map.put(:show, true)
     end)
   end
