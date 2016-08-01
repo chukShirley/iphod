@@ -755,7 +755,7 @@ background: linear-gradient(135deg,  #87e0fd 1%,#87e0fd 1%,#e8f7fc 1%,#53cbf1 69
 }
 
 blockquote p{
-  margin: 0;
+  margin: -1em;
 }
 
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
