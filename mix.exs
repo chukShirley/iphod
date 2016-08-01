@@ -4,7 +4,7 @@ defmodule Iphod.Mixfile do
   def project do
     [app: :iphod,
      version: "0.0.1",
-     elixir: ">= 1.3.2",
+     elixir: ">= 1.3.1",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -19,7 +19,7 @@ defmodule Iphod.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Iphod, []},
-     applications: [:phoenix, :phoenix_html, 
+     applications: [:phoenix, :phoenix_html, :phoenix_pubsub,
                     :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :timex, :httpoison,
                     :mailgun
@@ -36,6 +36,7 @@ defmodule Iphod.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [{:phoenix, ">= 1.2.0"},
+     {:phoenix_pubsub, "~> 1.0"},
      {:phoenix_ecto, "~> 2.0"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, ">= 2.6.0"},
