@@ -113,9 +113,9 @@ view model =
   , inputAuthor model
   , inputText model
   , ul [id "refl-buttons"]
-      [ li [] [ button [ onClick Submit ] [ text "Submit" ] ] 
+      [ li [] [ button [ onClick Submit ] [ text "Save" ] ] 
       , li [] [ button [ onClick Reset ]  [ text "Reset" ] ]
-      , li [] [ button [ onClick Back ] [ text "Back" ] ]
+      , li [] [ button [ onClick Back ] [ text "List" ] ]
       ]
   , showText model
   ]
