@@ -7809,7 +7809,7 @@ var _user$project$NewReflection$view = function (model) {
 									]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html$text('Submit')
+										_elm_lang$html$Html$text('Save')
 									]))
 							])),
 						A2(
@@ -7843,7 +7843,7 @@ var _user$project$NewReflection$view = function (model) {
 									]),
 								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html$text('Back')
+										_elm_lang$html$Html$text('List')
 									]))
 							]))
 					])),

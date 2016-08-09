@@ -758,6 +758,10 @@ blockquote p{
   margin: -1em;
 }
 
+sup {
+  color: darkred;
+}
+
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
 .cssmenu,
 .cssmenu ul,

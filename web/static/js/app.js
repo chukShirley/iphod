@@ -225,7 +225,7 @@ if ( path.match(/mindex/) ) {
   });
   
   var elmCalDiv = document.getElementById('cal-elm-container')
-    , elmCalApp = Elm.Calendar.embed(elmCalDiv)
+    , elmCalApp = Elm.Iphod.embed(elmCalDiv)
   
   elmCalApp.ports.requestReading.subscribe(function(request) {
     channel.push("get_lesson", request)

@@ -10208,6 +10208,10 @@ var _user$project$Iphod_Sunday$ChangeText = F2(
 var _user$project$Iphod_Sunday$versionSelect = F2(
 	function (model, lesson) {
 		var thisVersion = function (ver) {
+			var foo = A2(
+				_elm_lang$core$Debug$log,
+				'VERSION SELECT',
+				{ctor: '_Tuple2', _0: ver, _1: lesson.version});
 			return A2(
 				_elm_lang$html$Html$option,
 				_elm_lang$core$Native_List.fromArray(

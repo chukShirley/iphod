@@ -30,12 +30,13 @@ defmodule BibleText do
     end)
   end
 
-#   def lesson_with_body(list, ver, "local") do
-#     list |> Enum.map(fn(lesson)->
-#       lesson 
-#       |> Map.put(:body, Iphod.LocalText.request(ver, lesson.read) )
-#       |> Map.put(:show, true)
-#     end)
-#   end
+  def lesson_with_body(list, ver, "local") do
+    IO.puts "LESSON WITH BODY LOCAL: #{ver}, #{inspect list}"
+    list |> Enum.map(fn(lesson)->
+      lesson 
+      |> Map.put(:body, LocalText.request(ver, lesson.read) )
+      |> Map.put(:show, true)
+    end)
+  end
 
 end

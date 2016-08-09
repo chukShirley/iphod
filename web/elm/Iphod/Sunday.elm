@@ -267,7 +267,11 @@ versionSelect: Model -> Models.Lesson -> Html Msg
 versionSelect model lesson =
   let
     thisVersion ver =
-      option [value ver, selected (ver == lesson.version)] [text ver]
+      let
+        foo = Debug.log "VERSION SELECT" (ver, lesson.version)
+      in
+        option [value ver, selected (ver == lesson.version)] [text ver]
+      
   in
     select
       [ on "change" 

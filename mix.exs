@@ -20,7 +20,7 @@ defmodule Iphod.Mixfile do
   def application do
     [mod: {Iphod, []},
      applications: [:phoenix, :phoenix_html, :phoenix_pubsub,
-                    :cowboy, :logger, :gettext,
+                    :phoenix_live_reload, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :timex, :httpoison,
                     :mailgun
                   ]
@@ -40,11 +40,11 @@ defmodule Iphod.Mixfile do
      {:phoenix_ecto, "~> 2.0"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, ">= 2.6.0"},
-     {:phoenix_live_reload, "~> 1.0", only: :dev},
+     {:phoenix_live_reload, "~> 1.0"},
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
+     {:exrm, "~> 1.0.8", only: :prod},
      {:timex, github: "frpaulas/timex"},
-     {:exrm, "~> 1.0.3"},
      # {:mock, github: "jjh42/mock", only: :dev},
      {:httpoison, "~> 0.8.2"},
      {:mailgun, "~> 0.1.2"}

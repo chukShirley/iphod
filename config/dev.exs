@@ -12,7 +12,11 @@ config :iphod, Iphod.Endpoint,
   code_reloader: true,
   cache_static_lookup: false,
   check_origin: false,
-  watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin"]]
+  watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin", cd: Path.expand("../", __DIR__)]]
+  # url: [host: "localhost"],
+  # root: ".",
+  # version: "0.0.1", #Mix.Project.config[:version],
+  # server: true,
 
 # Watch static and templates for browser reloading.
 config :iphod, Iphod.Endpoint,
@@ -33,11 +37,18 @@ config :logger, :console, format: "[$level] $message\n"
 # and calculating stacktraces is usually expensive.
 config :phoenix, :stacktrace_depth, 20
 
+# ## Using releases
+# if you are doing OTP releases, you need to instruct Phoenix
+# to start the server for all endpoints
+#
+
+# config :phoenix, :serve_end_points, true
+
 # Configure your database
 config :iphod, Iphod.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "postgres",
-  password: "",
-  database: "iphod",
-  hostname: "localhost",
+  username: "frpaulas",
+  password: "Barafundle1570",
+  database: "legereme",
+  hostname: "legereme.com",
   pool_size: 10
