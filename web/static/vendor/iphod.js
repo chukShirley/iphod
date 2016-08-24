@@ -9291,7 +9291,6 @@ var _user$project$Iphod_Sunday$bodyStyle = function (lesson) {
 			]));
 };
 var _user$project$Iphod_Sunday$tableStyle = function (model) {
-	var foo = A2(_elm_lang$core$Debug$log, 'SUNDAY TABLE', model.show);
 	return A2(
 		_user$project$Iphod_Helper$hideable,
 		model.show,

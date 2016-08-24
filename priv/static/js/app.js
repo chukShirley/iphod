@@ -33305,7 +33305,6 @@ var _user$project$Iphod_Sunday$bodyStyle = function (lesson) {
 			]));
 };
 var _user$project$Iphod_Sunday$tableStyle = function (model) {
-	var foo = A2(_elm_lang$core$Debug$log, 'SUNDAY TABLE', model.show);
 	return A2(
 		_user$project$Iphod_Helper$hideable,
 		model.show,
@@ -48082,7 +48081,6 @@ var _user$project$Iphod_Sunday$bodyStyle = function (lesson) {
 			]));
 };
 var _user$project$Iphod_Sunday$tableStyle = function (model) {
-	var foo = A2(_elm_lang$core$Debug$log, 'SUNDAY TABLE', model.show);
 	return A2(
 		_user$project$Iphod_Helper$hideable,
 		model.show,
@@ -48934,21 +48932,21 @@ var _user$project$MIndex$update = F2(
 					{
 						eu: A2(_user$project$Iphod_Sunday$update, _p0._0, model.eu)
 					});
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
 			case 'ModMP':
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
 					{
 						mp: A2(_user$project$Iphod_MPReading$update, _p0._0, model.mp)
 					});
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
 			default:
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
 					{
 						ep: A2(_user$project$Iphod_EPReading$update, _p0._0, model.ep)
 					});
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
 		}
 	});
 var _user$project$MIndex$portEU = _elm_lang$core$Native_Platform.incomingPort(
@@ -49920,7 +49918,6 @@ var _user$project$MIndex$ModEU = function (a) {
 	return {ctor: 'ModEU', _0: a};
 };
 var _user$project$MIndex$euDiv = function (model) {
-	var foo = A2(_elm_lang$core$Debug$log, 'MINDEX EUDIV', model.eu.show);
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
