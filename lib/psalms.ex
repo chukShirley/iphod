@@ -21,6 +21,14 @@ defmodule Psalms do
   def psalm(n, "ESV"), do: EsvText.request("Ps #{n}")
   def psalm(n, ver), do: BibleComText.request(ver, "Ps #{n}")
 
+  def psalm_as_html([n], ver), do: psalm_as_html([n, 1, 999], ver)
+  def psalm_as_html([n, v1, v2], "Coverdale") do
+    psalm(n, v1, v2, "Coverdale") |> _to_html("Coverdale")
+  end
+  def psalm_as_html([n, v1, v2], "BCP") do
+    psalm(n, v1, v2, "BCP") |> _to_html("BCP")
+  end
+
   def psalm(n,v1,v2, "COVERDALE"), do: psalm(n,v1,v2, "Coverdale")
   def psalm(n,v1,v2, "Coverdale") do
     identity.coverdale[n] |> Map.take(list_of_vss(v1, v2))

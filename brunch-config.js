@@ -21,7 +21,9 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: "css/app.css"
+      joinTo: { 'css/app.css': /^(?!mobile)/,
+                'css/mobile.css': /^web\/static\/css\/mobile.?/
+            }
     },
     templates: {
       joinTo: "js/app.js"
@@ -45,9 +47,9 @@ exports.config = {
       "test/static",
       "web/elm/Iphod.elm",
       "web/elm/Translations.elm",
-      "web/elm/Calendar.elm",
       "web/elm/Header.elm",
       "web/elm/MIndex.elm",
+      "web/elm/MPanel.elm",
       "web/elm/NewReflection.elm"
     ],
 
@@ -62,9 +64,9 @@ exports.config = {
       mainModules: [
         'Iphod.elm', 
         'Translations.elm', 
-        'Calendar.elm',
         'Header.elm',
         'MIndex.elm',
+        'MPanel.elm',
         'NewReflection.elm'
       ],
       outputFolder: '../static/vendor'
@@ -72,6 +74,9 @@ exports.config = {
     babel: {
       // Do not use ES6 compiler in vendor code
       ignore: [/web\/static\/vendor/]
+    },
+    sass: {
+      mode: "native" // This is the important part!
     }
   },
 

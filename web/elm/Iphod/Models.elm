@@ -2,7 +2,7 @@ module Iphod.Models exposing
   ( Config, Lesson, Sunday, Daily, Day
   , Email, Collect, SundayCollect, Proper
   , DailyMP, DailyEP, Reflection
-  , configInit, initLesson, sundayInit, dailyInit
+  , configInit, initLesson, sundayInit, initDaily
   , emailInit, initCollect, initSundayCollect
   , initProper, initDay
   , initDailyMP, initDailyEP, initReflection
@@ -135,27 +135,23 @@ sundayInit =
 
 type alias Daily =
   { date:     String  -- "Thursday March 31, 2016"
-  , season:   String  -- e.g. "easter"
-  , week:     String  -- e.g. "2"
-  , day:      String  -- e.g. "Thursday"
   , title:    String
-  , mp1: List Lesson
-  , mp2: List Lesson
-  , mpp: List Lesson
-  , ep1: List Lesson
-  , ep2: List Lesson
-  , epp: List Lesson
+  , mp1: List String
+  , mp2: List String
+  , mpp: List String
+  , ep1: List String
+  , ep2: List String
+  , epp: List String
+  , ot: List String
+  , ps: List String
+  , nt: List String
+  , gs: List String
   , show:     Bool
-  , justToday: Bool
-  , config:   Config
   }
 
-dailyInit: Daily
-dailyInit =
+initDaily: Daily
+initDaily =
   { date      = ""
-  , season    = ""
-  , week      = ""
-  , day       = ""
   , title     = ""
   , mp1  = []
   , mp2  = []
@@ -163,9 +159,11 @@ dailyInit =
   , ep1  = []
   , ep2  = []
   , epp  = []
-  , show      = False
-  , justToday = False
-  , config    = configInit
+  , ot   = []
+  , ps   = []
+  , nt   = []
+  , gs   = []
+  , show = False
   }
 
 -- type alias DailyEU = Sunday
@@ -286,7 +284,7 @@ initDay =
   , colors =      []
   , dayOfMonth =  ""
   , date  =       ""
-  , daily =       dailyInit
+  , daily =       initDaily
   , sunday =      sundayInit
   , today =       False
   }

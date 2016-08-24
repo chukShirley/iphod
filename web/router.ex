@@ -21,6 +21,8 @@ defmodule Iphod.Router do
     get "/calendar/next/:season", CalendarController, :season
     get "/calendar/next/:month/:year", CalendarController, :next
     get "/calendar/prev/:month/:year", CalendarController, :prev
+    get "/calendar/next/:month/:year/:min", CalendarController, :next
+    get "/calendar/prev/:month/:year/:min", CalendarController, :prev
     get "/morningPrayer", PrayerController, :mp
     get "/morningPrayer/:psalm", PrayerController, :mp
     get "/morningPrayer/:psalm/:text", PrayerController, :mp
@@ -33,6 +35,7 @@ defmodule Iphod.Router do
     get "/mindex", CalendarController, :mindex
 
     resources "/reflections", ReflectionController
+
   end
 
   # Other scopes may use custom stacks.

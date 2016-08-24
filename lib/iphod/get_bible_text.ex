@@ -21,7 +21,6 @@ defmodule GetBibleText do
   def request(ver, vss, fnotes \\ "") do
     vss_for_url = Regex.replace(~r/\s/, vss, "+")
     url = "http://getbible.net/json?p=#{vss_for_url}&v=#{ver}"
-    IO.puts ">>>>> GETTING: #{url}"
     case HTTPoison.get(url, [{"Accept", "application/jsonrequest"}], [follow_redirect: true]) do
       {:ok, resp} ->
         Regex.replace(~r/^\(|\)\;$/, resp.body, "")
@@ -42,10 +41,7 @@ defmodule GetBibleText do
     body_to_string map["book"], "<h2>#{vss}</h2>"
   end
 
-  def verses([], text) do
-    IO.puts "TEXT: #{text}"
-    text
-  end
+  def verses([], text), do: text
 
   def verses([{vs, map}|t], text) do
     verses t, text <> verse_num(vs) <> verse_text(map["verse"])

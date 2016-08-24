@@ -267,10 +267,7 @@ versionSelect: Model -> Models.Lesson -> Html Msg
 versionSelect model lesson =
   let
     thisVersion ver =
-      let
-        foo = Debug.log "VERSION SELECT" (ver, lesson.version)
-      in
-        option [value ver, selected (ver == lesson.version)] [text ver]
+      option [value ver, selected (ver == lesson.version)] [text ver]
       
   in
     select
@@ -285,9 +282,12 @@ versionSelect model lesson =
 
 tableStyle: Model -> Attribute msg
 tableStyle model =
-  hideable
-    model.show
-    [ ("width", "100%")]
+  let
+    foo = Debug.log "SUNDAY TABLE" model.show
+  in
+    hideable
+      model.show
+      [ ("width", "100%")]
 
 bodyStyle: Models.Lesson -> Attribute msg
 bodyStyle lesson =

@@ -1,7 +1,7 @@
 ExUnit.start
 defmodule RefParser do
 
-  import Version.BookNames, only: [book_name: 1]
+  import BookNames, only: [book_name: 1]
   use ExUnit.Case
   
   def tokenize(s) do
@@ -27,6 +27,7 @@ defmodule RefParser do
 
   @spec chapter_vss(Enum.t) :: {integer, integer, integer}
   def chapter_vss([chapter]), do: {String.to_integer(chapter), 1, 999}
+  def chapter_vss([chapter, first, "-", last]), do: {String.to_integer(chapter), String.to_integer(first), String.to_integer(last)}
   def chapter_vss([chapter, ":", vs ]), do: {String.to_integer(chapter), String.to_integer(vs), String.to_integer(vs)}
   def chapter_vss([chapter, ":", first, "-", "end"]), do: chapter_vss([chapter, ":", first, "ff"])
   def chapter_vss([chapter, ":", first, "-", last]), do: {String.to_integer(chapter), String.to_integer(first), String.to_integer(last)}
@@ -85,6 +86,7 @@ defmodule RefParser do
   test "get chapter and verses" do
     assert {3,16,16} == chapter_vss(["3", ":", "16"])
     assert {3,16,20} == chapter_vss(["3", ":", "16", "-", "20"])
+    assert chapter_vss(["119", "33", "-", "72"]) == {119, 33, 72}
   end
 
   test "get list of chapters and vss" do
@@ -104,5 +106,6 @@ defmodule RefParser do
   test "get biblical reference" do
     assert {"john", [{3, 16, 16}]} == reference("john 3:16")
     assert {"john", [{3, 1, 999}]} == reference("John 3")
+    assert {"psalm", [{119, 33, 72}]} == reference("Psalm 119 33-72")
   end
 end

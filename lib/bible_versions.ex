@@ -34,9 +34,10 @@ defmodule BibleVersions do
             acc = acc |> Map.put_new(ver["abbreviation"], ver)
           end)
         local_bible_translations
-          |> Enum.reduce(map, fn(ver, acc)->
+          |> Enum.reduce(map2, fn(ver, acc)->
             acc = acc |> Map.put_new(ver["abbreviation"], ver)
           end)
+
       {:error, _reason} ->
         "ESV List of Versions failed badly"
     end
@@ -92,6 +93,9 @@ defmodule BibleVersions do
   defp local_bible_translations do
     [ %{"lang_name_eng" =>"English", "name" => "World English Bible", "abbreviation" => "web", "source" => "local"},
       %{"lang_name_eng" =>"Latin", "name" => "Latin: Vulgata Clementina", "abbreviation" => "vulgate", "source" => "local"},
+      %{"lang_name_eng" =>"English", "name" => "Coverdale", "abbreviation" => "Coverdale", "source" => "Coverdale"},
+      %{"lang_name_eng" =>"English", "name" => "BCP", "abbreviation" => "BCP", "source" => "BCP"},
     ]
   end
+
 end

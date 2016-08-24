@@ -4,42 +4,47 @@ defmodule Iphod.CalendarController do
   use Timex
 
   def index(conn, params) do
-    render conn, "index.html", model: get_month(Date.now)
+    render_calendar conn, Date.now, nil
   end
 
   def mindex(conn, params) do
-    IO.puts "CALENDAR CONTROLLER - mindex"
-    render conn, "mindex.html"
+    render_calendar conn, Date.now, "min"
   end
 
   def prev(conn, params) do
-    IO.puts "PARAMS: #{inspect params}"
-    date = Date.from(
-      { params["year"] |>String.to_integer, 
-        params["month"] |> Timex.month_to_num,
-        1
-      }) |> Date.shift(months: -1)
-    IO.puts "DATE NOW: #{inspect date}"
-    render conn, "index.html", model: get_month(date)
+    date = params_to_date(params, -1)
+    render_calendar conn, date, params["min"]
   end
 
   def next(conn, params) do
-    date = Date.from(
-      { params["year"] |>String.to_integer, 
-        params["month"] |> Timex.month_to_num,
-        1
-      }) |> Date.shift(months: 1)
-    render conn, "index.html", model: get_month(date)
+    date = params_to_date(params, 1)
+    render_calendar conn, date, params["min"]
   end
 
   def season(conn, params) do
     # something like `get_month next_season("advent", Date.now)`
     # and get the calendar month for the beginning of advent
     this_month = get_month(Lityear.next_season(params["season"], Date.now))
-    render conn, "index.html", model: this_month
+    render_calendar conn, this_month, params["min"]
   end
 
 # HELPERS
+
+  def params_to_date(params, shift) do
+    Date.from(
+      { params["year"] |>String.to_integer, 
+        params["month"] |> Timex.month_to_num,
+        1
+      }) |> Date.shift(months: shift)
+  end
+
+  def render_calendar(conn, date, min \\ nil) do
+    {layout, view} = if min, do: {"app.html", "mindex.html"}, else: {"desktop_app.html", "index.html"}
+    conn
+      |> put_layout(layout)
+      |> render(view, model: get_month(date))
+    
+  end
 
   def get_month(date) do
     days = list_of_weeks_from begin_month(date), end_month(date)

@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script type="text/javascript">
+    <!--
+      if (screen.width <= 600) { window.location = "http://athomeanglican:4000/mindex"}
+    //-->
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,11 +15,8 @@
     <title>Legereme</title>
     <link rel="apple-touch-icon-precomposed" href="/priv/apple-touch-icon-precomposed.png" />
     <link rel="apple-touch-icon" href="/priv/apple-touch-icon.png" />
-    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/mobile.css") %>" media="screen and (min-device-width: 320px)" />
+    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/mobile.css") %>" media="screen and (min-device-width: 320px) and (max-device-width: 568)" />
     <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>" media="screen  and (min-width: 600px)" />
-    <!--
-    -->
-
     <!--[if (lt IE 9)&(!IEMobile)]>
     <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/mobile.css") %>" />
     <![endif]-->
@@ -36,5 +38,14 @@
     </div> <!-- /container -->
     
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+    <script>
+      $(function() {
+        $("#datepicker").datepicker({
+          changeMonth: true,
+          changeYear: true,
+          dateFormat: "DD MM d, yy"
+        });
+      });
+    </script>
   </body>
 </html>

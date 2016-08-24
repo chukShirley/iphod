@@ -5817,141 +5817,6 @@ var _elm_lang$core$Json_Decode$dict = function (decoder) {
 };
 var _elm_lang$core$Json_Decode$Decoder = {ctor: 'Decoder'};
 
-//import Maybe, Native.List //
-
-var _elm_lang$core$Native_Regex = function() {
-
-function escape(str)
-{
-	return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-}
-function caseInsensitive(re)
-{
-	return new RegExp(re.source, 'gi');
-}
-function regex(raw)
-{
-	return new RegExp(raw, 'g');
-}
-
-function contains(re, string)
-{
-	return string.match(re) !== null;
-}
-
-function find(n, re, str)
-{
-	n = n.ctor === 'All' ? Infinity : n._0;
-	var out = [];
-	var number = 0;
-	var string = str;
-	var lastIndex = re.lastIndex;
-	var prevLastIndex = -1;
-	var result;
-	while (number++ < n && (result = re.exec(string)))
-	{
-		if (prevLastIndex === re.lastIndex) break;
-		var i = result.length - 1;
-		var subs = new Array(i);
-		while (i > 0)
-		{
-			var submatch = result[i];
-			subs[--i] = submatch === undefined
-				? _elm_lang$core$Maybe$Nothing
-				: _elm_lang$core$Maybe$Just(submatch);
-		}
-		out.push({
-			match: result[0],
-			submatches: _elm_lang$core$Native_List.fromArray(subs),
-			index: result.index,
-			number: number
-		});
-		prevLastIndex = re.lastIndex;
-	}
-	re.lastIndex = lastIndex;
-	return _elm_lang$core$Native_List.fromArray(out);
-}
-
-function replace(n, re, replacer, string)
-{
-	n = n.ctor === 'All' ? Infinity : n._0;
-	var count = 0;
-	function jsReplacer(match)
-	{
-		if (count++ >= n)
-		{
-			return match;
-		}
-		var i = arguments.length - 3;
-		var submatches = new Array(i);
-		while (i > 0)
-		{
-			var submatch = arguments[i];
-			submatches[--i] = submatch === undefined
-				? _elm_lang$core$Maybe$Nothing
-				: _elm_lang$core$Maybe$Just(submatch);
-		}
-		return replacer({
-			match: match,
-			submatches: _elm_lang$core$Native_List.fromArray(submatches),
-			index: arguments[i - 1],
-			number: count
-		});
-	}
-	return string.replace(re, jsReplacer);
-}
-
-function split(n, re, str)
-{
-	n = n.ctor === 'All' ? Infinity : n._0;
-	if (n === Infinity)
-	{
-		return _elm_lang$core$Native_List.fromArray(str.split(re));
-	}
-	var string = str;
-	var result;
-	var out = [];
-	var start = re.lastIndex;
-	while (n--)
-	{
-		if (!(result = re.exec(string))) break;
-		out.push(string.slice(start, result.index));
-		start = re.lastIndex;
-	}
-	out.push(string.slice(start));
-	return _elm_lang$core$Native_List.fromArray(out);
-}
-
-return {
-	regex: regex,
-	caseInsensitive: caseInsensitive,
-	escape: escape,
-
-	contains: F2(contains),
-	find: F3(find),
-	replace: F4(replace),
-	split: F3(split)
-};
-
-}();
-
-var _elm_lang$core$Regex$split = _elm_lang$core$Native_Regex.split;
-var _elm_lang$core$Regex$replace = _elm_lang$core$Native_Regex.replace;
-var _elm_lang$core$Regex$find = _elm_lang$core$Native_Regex.find;
-var _elm_lang$core$Regex$contains = _elm_lang$core$Native_Regex.contains;
-var _elm_lang$core$Regex$caseInsensitive = _elm_lang$core$Native_Regex.caseInsensitive;
-var _elm_lang$core$Regex$regex = _elm_lang$core$Native_Regex.regex;
-var _elm_lang$core$Regex$escape = _elm_lang$core$Native_Regex.escape;
-var _elm_lang$core$Regex$Match = F4(
-	function (a, b, c, d) {
-		return {match: a, submatches: b, index: c, number: d};
-	});
-var _elm_lang$core$Regex$Regex = {ctor: 'Regex'};
-var _elm_lang$core$Regex$AtMost = function (a) {
-	return {ctor: 'AtMost', _0: a};
-};
-var _elm_lang$core$Regex$All = {ctor: 'All'};
-
 //import Native.Json //
 
 var _elm_lang$virtual_dom$Native_VirtualDom = function() {
@@ -8038,307 +7903,425 @@ var _user$project$Iphod_Helper$hideable = F2(
 				]));
 	});
 
-var _user$project$Translations$versionRow = function (model) {
-	var this_style = _elm_lang$core$Native_List.fromArray(
-		[
-			model.selected ? {ctor: '_Tuple2', _0: 'background-color', _1: 'lightgreen'} : {ctor: '_Tuple2', _0: 'background-color', _1: 'white'}
-		]);
-	return A2(_user$project$Iphod_Helper$hideable, model.show, this_style);
-};
-var _user$project$Translations$init = {
-	ctor: '_Tuple2',
-	_0: _elm_lang$core$Native_List.fromArray(
+var _user$project$Iphod_Models$initBiblesOrg = {url: 'https://bibles.org/v2/passages.js?q[]=', key: 'P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT', foot_notes: true};
+var _user$project$Iphod_Models$initESV = {url: 'www.esvapi.org/v2/rest/passageQuery?', key: '10b28dac7c57fd96', foot_notes: true};
+var _user$project$Iphod_Models$initReflection = {author: '', markdown: ''};
+var _user$project$Iphod_Models$initDaily = {
+	date: '',
+	title: '',
+	mp1: _elm_lang$core$Native_List.fromArray(
 		[]),
-	_1: _elm_lang$core$Platform_Cmd$none
+	mp2: _elm_lang$core$Native_List.fromArray(
+		[]),
+	mpp: _elm_lang$core$Native_List.fromArray(
+		[]),
+	ep1: _elm_lang$core$Native_List.fromArray(
+		[]),
+	ep2: _elm_lang$core$Native_List.fromArray(
+		[]),
+	epp: _elm_lang$core$Native_List.fromArray(
+		[]),
+	ot: _elm_lang$core$Native_List.fromArray(
+		[]),
+	ps: _elm_lang$core$Native_List.fromArray(
+		[]),
+	nt: _elm_lang$core$Native_List.fromArray(
+		[]),
+	gs: _elm_lang$core$Native_List.fromArray(
+		[]),
+	show: false
 };
-var _user$project$Translations$initVersion = {id: '', abbr: '', name: '', lang: '', show: false, selected: false};
-var _user$project$Translations$updateVersions = _elm_lang$core$Native_Platform.outgoingPort(
-	'updateVersions',
-	function (v) {
-		return {id: v.id, abbr: v.abbr, name: v.name, lang: v.lang, show: v.show, selected: v.selected};
+var _user$project$Iphod_Models$initSundayCollect = {
+	instruction: '',
+	title: '',
+	collects: _elm_lang$core$Native_List.fromArray(
+		[]),
+	show: false
+};
+var _user$project$Iphod_Models$initCollect = {
+	collect: '',
+	propers: _elm_lang$core$Native_List.fromArray(
+		[])
+};
+var _user$project$Iphod_Models$initProper = {title: '', text: ''};
+var _user$project$Iphod_Models$initLesson = {style: '', show: false, read: '', body: '', id: '', section: '', version: ''};
+var _user$project$Iphod_Models$emailInit = {from: '', topic: '', text: ''};
+var _user$project$Iphod_Models$configInit = {
+	ot: 'ESV',
+	ps: 'Coverdale',
+	nt: 'ESV',
+	gs: 'ESV',
+	fnotes: 'True',
+	vers: _elm_lang$core$Native_List.fromArray(
+		['ESV']),
+	current: 'ESV'
+};
+var _user$project$Iphod_Models$sundayInit = {
+	ofType: '',
+	date: '',
+	season: '',
+	week: '',
+	title: '',
+	show: false,
+	config: _user$project$Iphod_Models$configInit,
+	colors: _elm_lang$core$Native_List.fromArray(
+		[]),
+	collect: _user$project$Iphod_Models$initSundayCollect,
+	ot: _elm_lang$core$Native_List.fromArray(
+		[]),
+	ps: _elm_lang$core$Native_List.fromArray(
+		[]),
+	nt: _elm_lang$core$Native_List.fromArray(
+		[]),
+	gs: _elm_lang$core$Native_List.fromArray(
+		[])
+};
+var _user$project$Iphod_Models$initDay = {
+	name: '',
+	colors: _elm_lang$core$Native_List.fromArray(
+		[]),
+	dayOfMonth: '',
+	date: '',
+	daily: _user$project$Iphod_Models$initDaily,
+	sunday: _user$project$Iphod_Models$sundayInit,
+	today: false
+};
+var _user$project$Iphod_Models$initDailyMP = {
+	colors: _elm_lang$core$Native_List.fromArray(
+		[]),
+	date: '',
+	day: '',
+	season: '',
+	title: '',
+	week: '',
+	config: _user$project$Iphod_Models$configInit,
+	show: false,
+	mp1: _elm_lang$core$Native_List.fromArray(
+		[]),
+	mp2: _elm_lang$core$Native_List.fromArray(
+		[]),
+	mpp: _elm_lang$core$Native_List.fromArray(
+		[])
+};
+var _user$project$Iphod_Models$initDailyEP = {
+	colors: _elm_lang$core$Native_List.fromArray(
+		[]),
+	date: '',
+	day: '',
+	season: '',
+	title: '',
+	week: '',
+	config: _user$project$Iphod_Models$configInit,
+	show: false,
+	ep1: _elm_lang$core$Native_List.fromArray(
+		[]),
+	ep2: _elm_lang$core$Native_List.fromArray(
+		[]),
+	epp: _elm_lang$core$Native_List.fromArray(
+		[])
+};
+var _user$project$Iphod_Models$Config = F7(
+	function (a, b, c, d, e, f, g) {
+		return {ot: a, ps: b, nt: c, gs: d, fnotes: e, vers: f, current: g};
 	});
-var _user$project$Translations$update = F2(
+var _user$project$Iphod_Models$Email = F3(
+	function (a, b, c) {
+		return {from: a, topic: b, text: c};
+	});
+var _user$project$Iphod_Models$Lesson = F7(
+	function (a, b, c, d, e, f, g) {
+		return {style: a, show: b, read: c, body: d, id: e, section: f, version: g};
+	});
+var _user$project$Iphod_Models$Proper = F2(
+	function (a, b) {
+		return {title: a, text: b};
+	});
+var _user$project$Iphod_Models$Collect = F2(
+	function (a, b) {
+		return {collect: a, propers: b};
+	});
+var _user$project$Iphod_Models$SundayCollect = F4(
+	function (a, b, c, d) {
+		return {instruction: a, title: b, collects: c, show: d};
+	});
+var _user$project$Iphod_Models$Sunday = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return {ofType: a, date: b, season: c, week: d, title: e, show: f, config: g, colors: h, collect: i, ot: j, ps: k, nt: l, gs: m};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Iphod_Models$Daily = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return {date: a, title: b, mp1: c, mp2: d, mpp: e, ep1: f, ep2: g, epp: h, ot: i, ps: j, nt: k, gs: l, show: m};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Iphod_Models$DailyMP = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, mp1: i, mp2: j, mpp: k};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Iphod_Models$DailyEP = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, ep1: i, ep2: j, epp: k};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Iphod_Models$Reflection = F2(
+	function (a, b) {
+		return {author: a, markdown: b};
+	});
+var _user$project$Iphod_Models$ESV = F3(
+	function (a, b, c) {
+		return {url: a, key: b, foot_notes: c};
+	});
+var _user$project$Iphod_Models$BiblesOrg = F3(
+	function (a, b, c) {
+		return {url: a, key: b, foot_notes: c};
+	});
+var _user$project$Iphod_Models$Day = F7(
+	function (a, b, c, d, e, f, g) {
+		return {name: a, colors: b, dayOfMonth: c, date: d, daily: e, sunday: f, today: g};
+	});
+
+var _user$project$MPanel$panelStyle = function (model) {
+	return A2(
+		_user$project$Iphod_Helper$hideable,
+		model.show,
+		_elm_lang$core$Native_List.fromArray(
+			[]));
+};
+var _user$project$MPanel$initModel = _user$project$Iphod_Models$initDaily;
+var _user$project$MPanel$init = {ctor: '_Tuple2', _0: _user$project$MPanel$initModel, _1: _elm_lang$core$Platform_Cmd$none};
+var _user$project$MPanel$requestReading = _elm_lang$core$Native_Platform.outgoingPort(
+	'requestReading',
+	function (v) {
+		return _elm_lang$core$Native_List.toArray(v).map(
+			function (v) {
+				return v;
+			});
+	});
+var _user$project$MPanel$requestService = _elm_lang$core$Native_Platform.outgoingPort(
+	'requestService',
+	function (v) {
+		return _elm_lang$core$Native_List.toArray(v).map(
+			function (v) {
+				return v;
+			});
+	});
+var _user$project$MPanel$requestReflection = _elm_lang$core$Native_Platform.outgoingPort(
+	'requestReflection',
+	function (v) {
+		return v;
+	});
+var _user$project$MPanel$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
 		switch (_p0.ctor) {
 			case 'NoOp':
 				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'AddModel':
+			case 'UpdateMenu':
 				return {ctor: '_Tuple2', _0: _p0._0, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'Find':
-				var _p2 = _p0._1;
-				var findThis = function (ver) {
-					var _p1 = _p0._0;
-					switch (_p1) {
-						case 'abbr':
-							return A2(
-								_elm_lang$core$Regex$contains,
-								_elm_lang$core$Regex$caseInsensitive(
-									_elm_lang$core$Regex$regex(_p2)),
-								ver.abbr) ? _elm_lang$core$Native_Utils.update(
-								ver,
-								{show: true}) : _elm_lang$core$Native_Utils.update(
-								ver,
-								{show: false});
-						case 'name':
-							return A2(
-								_elm_lang$core$Regex$contains,
-								_elm_lang$core$Regex$caseInsensitive(
-									_elm_lang$core$Regex$regex(_p2)),
-								ver.name) ? _elm_lang$core$Native_Utils.update(
-								ver,
-								{show: true}) : _elm_lang$core$Native_Utils.update(
-								ver,
-								{show: false});
-						default:
-							return A2(
-								_elm_lang$core$Regex$contains,
-								_elm_lang$core$Regex$caseInsensitive(
-									_elm_lang$core$Regex$regex(_p2)),
-								ver.lang) ? _elm_lang$core$Native_Utils.update(
-								ver,
-								{show: true}) : _elm_lang$core$Native_Utils.update(
-								ver,
-								{show: false});
-					}
-				};
-				var newModel = A2(_elm_lang$core$List$map, findThis, model);
-				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
-			default:
-				var _p3 = _p0._0;
-				var newVer = _elm_lang$core$Native_Utils.update(
-					_p3,
-					{
-						selected: _elm_lang$core$Basics$not(_p3.selected)
-					});
-				var selectModel = function (this_model) {
-					return _elm_lang$core$Native_Utils.eq(this_model.id, _p3.id) ? _elm_lang$core$Native_Utils.update(
-						this_model,
-						{selected: newVer.selected}) : this_model;
-				};
-				var newModel = A2(_elm_lang$core$List$map, selectModel, model);
+			case 'GetLesson':
 				return {
 					ctor: '_Tuple2',
-					_0: newModel,
-					_1: _user$project$Translations$updateVersions(newVer)
+					_0: model,
+					_1: _user$project$MPanel$requestReading(_p0._0)
+				};
+			case 'GetAllLessons':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$MPanel$requestService(_p0._0)
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$MPanel$requestReflection(_p0._0)
 				};
 		}
 	});
-var _user$project$Translations$allVersions = _elm_lang$core$Native_Platform.incomingPort(
-	'allVersions',
-	_elm_lang$core$Json_Decode$list(
-		A2(
-			_elm_lang$core$Json_Decode$andThen,
-			A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
-			function (id) {
-				return A2(
-					_elm_lang$core$Json_Decode$andThen,
-					A2(_elm_lang$core$Json_Decode_ops[':='], 'abbr', _elm_lang$core$Json_Decode$string),
-					function (abbr) {
-						return A2(
-							_elm_lang$core$Json_Decode$andThen,
-							A2(_elm_lang$core$Json_Decode_ops[':='], 'name', _elm_lang$core$Json_Decode$string),
-							function (name) {
-								return A2(
-									_elm_lang$core$Json_Decode$andThen,
-									A2(_elm_lang$core$Json_Decode_ops[':='], 'lang', _elm_lang$core$Json_Decode$string),
-									function (lang) {
-										return A2(
-											_elm_lang$core$Json_Decode$andThen,
-											A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
-											function (show) {
-												return A2(
-													_elm_lang$core$Json_Decode$andThen,
-													A2(_elm_lang$core$Json_Decode_ops[':='], 'selected', _elm_lang$core$Json_Decode$bool),
-													function (selected) {
-														return _elm_lang$core$Json_Decode$succeed(
-															{id: id, abbr: abbr, name: name, lang: lang, show: show, selected: selected});
-													});
-											});
-									});
-							});
-					});
-			})));
-var _user$project$Translations$Version = F6(
-	function (a, b, c, d, e, f) {
-		return {id: a, abbr: b, name: c, lang: d, show: e, selected: f};
-	});
-var _user$project$Translations$UseVersion = function (a) {
-	return {ctor: 'UseVersion', _0: a};
+var _user$project$MPanel$portReadings = _elm_lang$core$Native_Platform.incomingPort(
+	'portReadings',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		A2(_elm_lang$core$Json_Decode_ops[':='], 'date', _elm_lang$core$Json_Decode$string),
+		function (date) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				A2(_elm_lang$core$Json_Decode_ops[':='], 'title', _elm_lang$core$Json_Decode$string),
+				function (title) {
+					return A2(
+						_elm_lang$core$Json_Decode$andThen,
+						A2(
+							_elm_lang$core$Json_Decode_ops[':='],
+							'mp1',
+							_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+						function (mp1) {
+							return A2(
+								_elm_lang$core$Json_Decode$andThen,
+								A2(
+									_elm_lang$core$Json_Decode_ops[':='],
+									'mp2',
+									_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+								function (mp2) {
+									return A2(
+										_elm_lang$core$Json_Decode$andThen,
+										A2(
+											_elm_lang$core$Json_Decode_ops[':='],
+											'mpp',
+											_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+										function (mpp) {
+											return A2(
+												_elm_lang$core$Json_Decode$andThen,
+												A2(
+													_elm_lang$core$Json_Decode_ops[':='],
+													'ep1',
+													_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+												function (ep1) {
+													return A2(
+														_elm_lang$core$Json_Decode$andThen,
+														A2(
+															_elm_lang$core$Json_Decode_ops[':='],
+															'ep2',
+															_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+														function (ep2) {
+															return A2(
+																_elm_lang$core$Json_Decode$andThen,
+																A2(
+																	_elm_lang$core$Json_Decode_ops[':='],
+																	'epp',
+																	_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+																function (epp) {
+																	return A2(
+																		_elm_lang$core$Json_Decode$andThen,
+																		A2(
+																			_elm_lang$core$Json_Decode_ops[':='],
+																			'ot',
+																			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+																		function (ot) {
+																			return A2(
+																				_elm_lang$core$Json_Decode$andThen,
+																				A2(
+																					_elm_lang$core$Json_Decode_ops[':='],
+																					'ps',
+																					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+																				function (ps) {
+																					return A2(
+																						_elm_lang$core$Json_Decode$andThen,
+																						A2(
+																							_elm_lang$core$Json_Decode_ops[':='],
+																							'nt',
+																							_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+																						function (nt) {
+																							return A2(
+																								_elm_lang$core$Json_Decode$andThen,
+																								A2(
+																									_elm_lang$core$Json_Decode_ops[':='],
+																									'gs',
+																									_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+																								function (gs) {
+																									return A2(
+																										_elm_lang$core$Json_Decode$andThen,
+																										A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																										function (show) {
+																											return _elm_lang$core$Json_Decode$succeed(
+																												{date: date, title: title, mp1: mp1, mp2: mp2, mpp: mpp, ep1: ep1, ep2: ep2, epp: epp, ot: ot, ps: ps, nt: nt, gs: gs, show: show});
+																										});
+																								});
+																						});
+																				});
+																		});
+																});
+														});
+												});
+										});
+								});
+						});
+				});
+		}));
+var _user$project$MPanel$GetReflection = function (a) {
+	return {ctor: 'GetReflection', _0: a};
 };
-var _user$project$Translations$Find = F2(
-	function (a, b) {
-		return {ctor: 'Find', _0: a, _1: b};
-	});
-var _user$project$Translations$AddModel = function (a) {
-	return {ctor: 'AddModel', _0: a};
-};
-var _user$project$Translations$subscriptions = function (model) {
-	return _elm_lang$core$Platform_Sub$batch(
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_user$project$Translations$allVersions(_user$project$Translations$AddModel)
-			]));
-};
-var _user$project$Translations$NoOp = {ctor: 'NoOp'};
-var _user$project$Translations$findVersion = A2(
-	_elm_lang$html$Html$th,
-	_elm_lang$core$Native_List.fromArray(
-		[]),
-	_elm_lang$core$Native_List.fromArray(
-		[
-			A2(
-			_elm_lang$html$Html$input,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$id('find_version'),
-					_elm_lang$html$Html_Attributes$type$('text'),
-					_elm_lang$html$Html_Attributes$placeholder('Version'),
-					_elm_lang$html$Html_Attributes$autofocus(true),
-					_elm_lang$html$Html_Attributes$name('find_version'),
-					A2(
-					_elm_lang$html$Html_Events$on,
-					'keyup',
-					A2(
-						_elm_lang$core$Json_Decode$map,
-						_user$project$Translations$Find('abbr'),
-						_elm_lang$html$Html_Events$targetValue)),
-					_elm_lang$html$Html_Events$onClick(_user$project$Translations$NoOp),
-					_elm_lang$html$Html_Attributes$style(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'width', _1: '90%'}
-						]))
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[]))
-		]));
-var _user$project$Translations$findName = A2(
-	_elm_lang$html$Html$th,
-	_elm_lang$core$Native_List.fromArray(
-		[]),
-	_elm_lang$core$Native_List.fromArray(
-		[
-			A2(
-			_elm_lang$html$Html$input,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$id('find_name'),
-					_elm_lang$html$Html_Attributes$type$('text'),
-					_elm_lang$html$Html_Attributes$placeholder('Version Name'),
-					_elm_lang$html$Html_Attributes$autofocus(true),
-					_elm_lang$html$Html_Attributes$name('find_name'),
-					A2(
-					_elm_lang$html$Html_Events$on,
-					'keyup',
-					A2(
-						_elm_lang$core$Json_Decode$map,
-						_user$project$Translations$Find('name'),
-						_elm_lang$html$Html_Events$targetValue)),
-					_elm_lang$html$Html_Events$onClick(_user$project$Translations$NoOp),
-					_elm_lang$html$Html_Attributes$style(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'width', _1: '90%'}
-						]))
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[]))
-		]));
-var _user$project$Translations$findLanguage = A2(
-	_elm_lang$html$Html$th,
-	_elm_lang$core$Native_List.fromArray(
-		[]),
-	_elm_lang$core$Native_List.fromArray(
-		[
-			A2(
-			_elm_lang$html$Html$input,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$id('find_lang'),
-					_elm_lang$html$Html_Attributes$type$('text'),
-					_elm_lang$html$Html_Attributes$placeholder('Language'),
-					_elm_lang$html$Html_Attributes$autofocus(true),
-					_elm_lang$html$Html_Attributes$name('find_lang'),
-					A2(
-					_elm_lang$html$Html_Events$on,
-					'keyup',
-					A2(
-						_elm_lang$core$Json_Decode$map,
-						_user$project$Translations$Find('lang'),
-						_elm_lang$html$Html_Events$targetValue)),
-					_elm_lang$html$Html_Events$onClick(_user$project$Translations$NoOp),
-					_elm_lang$html$Html_Attributes$style(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'width', _1: '90%'}
-						]))
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[]))
-		]));
-var _user$project$Translations$view = function (model) {
-	var this_version = function (ver) {
-		var using = ver.selected ? 'Using' : 'Use';
-		return A2(
-			_elm_lang$html$Html$tr,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_user$project$Translations$versionRow(ver)
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A2(
-					_elm_lang$html$Html$td,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$class('ver_abbr')
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html$text(ver.abbr)
-						])),
-					A2(
-					_elm_lang$html$Html$td,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$class('ver_name')
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html$text(ver.name)
-						])),
-					A2(
-					_elm_lang$html$Html$td,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$class('ver_language')
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html$text(ver.lang)
-						])),
-					A2(
-					_elm_lang$html$Html$td,
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_elm_lang$html$Html_Attributes$class('ver_use'),
-							_elm_lang$html$Html_Events$onClick(
-							_user$project$Translations$UseVersion(ver))
-						]),
-					_elm_lang$core$Native_List.fromArray(
-						[
-							A2(
-							_elm_lang$html$Html$button,
-							_elm_lang$core$Native_List.fromArray(
-								[]),
-							_elm_lang$core$Native_List.fromArray(
-								[
-									_elm_lang$html$Html$text(using)
-								]))
-						]))
-				]));
-	};
+var _user$project$MPanel$reflection = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
@@ -8346,111 +8329,386 @@ var _user$project$Translations$view = function (model) {
 		_elm_lang$core$Native_List.fromArray(
 			[
 				A2(
-				_elm_lang$html$Html$h1,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
+				_elm_lang$html$Html$button,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text('Select Versions')
-					])),
-				A2(
-				_elm_lang$html$Html$table,
+						_elm_lang$html$Html_Events$onClick(
+						_user$project$MPanel$GetReflection(model.date))
+					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Attributes$class('versions')
+						_elm_lang$html$Html$text('Reflection')
+					]))
+			]));
+};
+var _user$project$MPanel$GetAllLessons = function (a) {
+	return {ctor: 'GetAllLessons', _0: a};
+};
+var _user$project$MPanel$GetLesson = function (a) {
+	return {ctor: 'GetLesson', _0: a};
+};
+var _user$project$MPanel$passageList = F4(
+	function (title, service, section, vss) {
+		var liVss = function (vs) {
+			return A2(
+				_elm_lang$html$Html$li,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('reading-li')
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
-						_elm_lang$html$Html$thead,
+						_elm_lang$html$Html$button,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Events$onClick(
+								_user$project$MPanel$GetLesson(
+									_elm_lang$core$Native_List.fromArray(
+										[vs, section, service])))
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(vs)
+							]))
+					]));
+		};
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$p,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('section-title')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(title)
+						])),
+					A2(
+					_elm_lang$html$Html$ul,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					A2(_elm_lang$core$List$map, liVss, vss))
+				]));
+	});
+var _user$project$MPanel$euchReadings = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('panel-paragraph service-name')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$button,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Events$onClick(
+								_user$project$MPanel$GetAllLessons(
+									_elm_lang$core$Native_List.fromArray(
+										['EU', model.date])))
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Eucharist')
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$ul,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('service-readings')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('passage-section')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A4(_user$project$MPanel$passageList, 'OT', 'eu', 'ot', model.ot)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('passage-section')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A4(_user$project$MPanel$passageList, 'PS', 'eu', 'ps', model.ps)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('passage-section')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A4(_user$project$MPanel$passageList, 'NT', 'eu', 'nt', model.nt)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('passage-section')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A4(_user$project$MPanel$passageList, 'GS', 'eu', 'gs', model.gs)
+							]))
+					]))
+			]));
+};
+var _user$project$MPanel$mpReadings = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('panel-paragraph service-name')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$button,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Events$onClick(
+								_user$project$MPanel$GetAllLessons(
+									_elm_lang$core$Native_List.fromArray(
+										['MP', model.date])))
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Morning Prayer')
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$ul,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('service-readings')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('passage-section')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A4(_user$project$MPanel$passageList, 'First', 'mp', 'ot', model.mp1)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('passage-section')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A4(_user$project$MPanel$passageList, 'Second', 'mp', 'nt', model.mp2)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('passage-section')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A4(_user$project$MPanel$passageList, 'Psalms', 'mp', 'ps', model.mpp)
+							]))
+					]))
+			]));
+};
+var _user$project$MPanel$epReadings = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('panel-paragraph service-name')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$button,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Events$onClick(
+								_user$project$MPanel$GetAllLessons(
+									_elm_lang$core$Native_List.fromArray(
+										['EP', model.date])))
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Evening Prayer')
+							]))
+					])),
+				A2(
+				_elm_lang$html$Html$ul,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('service-readings')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('passage-section')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A4(_user$project$MPanel$passageList, 'First', 'ep', 'ot', model.ep1)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('passage-section')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A4(_user$project$MPanel$passageList, 'Second', 'ep', 'nt', model.ep2)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('passage-section')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A4(_user$project$MPanel$passageList, 'Psalms', 'ep', 'ps', model.epp)
+							]))
+					]))
+			]));
+};
+var _user$project$MPanel$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$id('reading-panel'),
+				_elm_lang$html$Html_Attributes$class('ui-widget-content ui-corner-all'),
+				_user$project$MPanel$panelStyle(model)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('panel-header')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(model.date)
+					])),
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('panel-header')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(model.title)
+					])),
+				A2(
+				_elm_lang$html$Html$ul,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$id('reading-menu')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$li,
 						_elm_lang$core$Native_List.fromArray(
 							[]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A2(
-								_elm_lang$html$Html$tr,
-								_elm_lang$core$Native_List.fromArray(
-									[]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										A2(
-										_elm_lang$html$Html$th,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class('ver_abbr')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text('Version')
-											])),
-										A2(
-										_elm_lang$html$Html$th,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class('ver_name')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text('Version Name')
-											])),
-										A2(
-										_elm_lang$html$Html$th,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class('ver_language')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text('Language')
-											])),
-										A2(
-										_elm_lang$html$Html$th,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class('ver_use')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text('Select')
-											]))
-									])),
-								A2(
-								_elm_lang$html$Html$tr,
-								_elm_lang$core$Native_List.fromArray(
-									[]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_user$project$Translations$findVersion,
-										_user$project$Translations$findName,
-										_user$project$Translations$findLanguage,
-										A2(
-										_elm_lang$html$Html$td,
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html_Attributes$class('ver_use')
-											]),
-										_elm_lang$core$Native_List.fromArray(
-											[
-												_elm_lang$html$Html$text('<<< Search')
-											]))
-									]))
+								_user$project$MPanel$reflection(model)
 							])),
 						A2(
-						_elm_lang$html$Html$tbody,
+						_elm_lang$html$Html$li,
 						_elm_lang$core$Native_List.fromArray(
 							[]),
-						A2(_elm_lang$core$List$map, this_version, model))
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$MPanel$euchReadings(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$MPanel$mpReadings(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$MPanel$epReadings(model)
+							]))
 					]))
 			]));
 };
-var _user$project$Translations$main = {
-	main: _elm_lang$html$Html_App$program(
-		{init: _user$project$Translations$init, update: _user$project$Translations$update, view: _user$project$Translations$view, subscriptions: _user$project$Translations$subscriptions})
+var _user$project$MPanel$UpdateMenu = function (a) {
+	return {ctor: 'UpdateMenu', _0: a};
 };
+var _user$project$MPanel$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_user$project$MPanel$portReadings(_user$project$MPanel$UpdateMenu)
+			]));
+};
+var _user$project$MPanel$main = {
+	main: _elm_lang$html$Html_App$program(
+		{init: _user$project$MPanel$init, update: _user$project$MPanel$update, view: _user$project$MPanel$view, subscriptions: _user$project$MPanel$subscriptions})
+};
+var _user$project$MPanel$NoOp = {ctor: 'NoOp'};
 
 var Elm = {};
-Elm['Translations'] = Elm['Translations'] || {};
-_elm_lang$core$Native_Platform.addPublicModule(Elm['Translations'], 'Translations', typeof _user$project$Translations$main === 'undefined' ? null : _user$project$Translations$main);
+Elm['MPanel'] = Elm['MPanel'] || {};
+_elm_lang$core$Native_Platform.addPublicModule(Elm['MPanel'], 'MPanel', typeof _user$project$MPanel$main === 'undefined' ? null : _user$project$MPanel$main);
 
 if (typeof define === "function" && define['amd'])
 {

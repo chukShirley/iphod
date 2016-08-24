@@ -69,6 +69,15 @@ function get_versions(arg1, arg2) {
   return version_list;
 }
 
+function get_version(arg) {
+  var m = { ot: "ESV"
+  , ps: "Coverdale"
+  , nt: "ESV"
+  , gs: "ESV"
+  }
+  return get_init("iphod_" + arg, m[arg])
+}
+
 function save_version(abbr) {
   var s = window.localStorage
     , t = s.getItem("iphod_vers");
@@ -158,9 +167,86 @@ if ( path == "/" || path.match(/calendar/) || path.match(/mindex/)) {
 if ( path.match(/mindex/) ) { 
     var elmMindexDiv = document.getElementById('m-elm-container')
     , elmMindexApp = Elm.MIndex.embed(elmMindexDiv)
-}
+    , elmMPanelDiv = document.getElementById('m-reading-container')
+    , elmMPanelApp = Elm.MPanel.embed(elmMPanelDiv)
+
+  $("#reflection-today-button").click( function() {
+    channel.push("get_text", ["Reflection", (new Date).toDateString()])
+  });
+
+  $("#m-reading-container").click( function() {
+    $("#reading-panel").effect("drop", "fast");
+  });
+
+  channel.on('reflection_today', data => {
+    console.log("REFLECTION")
+    elmMindexApp.ports.portReflection.send(data);
+    rollup();
+  })
   
+  channel.on('eu_today', data => {
+    data.config = init_config_model();
+    elmMindexApp.ports.portEU.send(data);
+    rollup();
+  })
+    
+  channel.on('mp_today', data => {
+    console.log("MP TODAY")
+    data.config = init_config_model();
+    elmMindexApp.ports.portMP.send(data)
+    rollup();
+  })
+    
+  channel.on('ep_today', data => {
+    console.log("EP TODAY")
+    data.config = init_config_model();
+    elmMindexApp.ports.portEP.send(data)
+    rollup();
+  })
+  
+  channel.on("single_lesson", data => {
+    elmMindexApp.ports.portOneLesson.send(data.resp)
+  })
+  
+
   // calendar 
+
+  // mobile calendar
+  $(".td_link").click( function() {
+    var r = $(this).find("readings").data()
+      , readings = 
+          { date: $(this).attr("value")
+          , title: r.title
+          , mp1: r.mp1.split(",")
+          , mp2: r.mp2.split(",")
+          , mpp: r.mpp.split(",")
+          , ep1: r.ep1.split(",")
+          , ep2: r.ep2.split(",")
+          , epp: r.epp.split(",")
+          , ot: r.ot.split(",")
+          , ps: r.ps.split(",")
+          , nt: r.nt.split(",")
+          , gs: r.gs.split(",")
+          , show: true
+          }
+    elmMPanelApp.ports.portReadings.send(readings);
+    // $(elmMPanelDiv).panel("open", {})
+    $("#reading-panel").effect("slide", "fast")
+  })
+
+  elmMPanelApp.ports.requestReading.subscribe( function(request) {
+    var [vss, ver, service] = request
+    channel.push("get_single_reading", [vss, get_version(ver), service, ver])
+  })
+
+  elmMPanelApp.ports.requestService.subscribe( function(request) {
+    channel.push("get_text", request)
+  })
+
+  elmMPanelApp.ports.requestReflection.subscribe( function(date) {
+    channel.push("get_text", ["Reflection", date])
+  })
+}
   
   function rollup() {
     $(".calendar-week").hide();
@@ -209,7 +295,7 @@ if ( path.match(/mindex/) ) {
     data.config = init_config_model();
     elmCalApp.ports.portLesson.send(data.lesson);
   })
-  
+
   $(".reading_button").click( function() {
     let date = $(this).attr("data-date")
       , of_type = $(this).attr("data-type");

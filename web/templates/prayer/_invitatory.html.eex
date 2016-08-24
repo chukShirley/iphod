@@ -1,34 +1,34 @@
 <table class= "invitatory">
   <tr>
-      <td style=  "font-style: italic; padding-right: 3em">Officiant</td>
+      <td class='invitatory-init'>Officiant</td>
       <td>O Lord, open our lips;</td>
   </tr>
   <tr>
-      <td style=  "font-style: italic;">People</td>
+      <td class='invitatory-speaker'>People</td>
       <td>And our mouth shall proclaim your praise.</td>
   </tr>
   <tr>
-      <td style=  "font-style: italic;">Officiant</td>
+      <td class='invitatory-speaker'>Officiant</td>
       <td>O God, make speed to save us;</td>
   </tr>
   <tr>
-      <td style=  "font-style: italic;">People</td>
+      <td class='invitatory-speaker'>People</td>
       <td>O Lord, make haste to help us.</td>
   </tr>
   <tr>
-      <td style=  "font-style: italic;">Officiant</td>
+      <td class='invitatory-speaker'>Officiant</td>
       <td>Glory to the Father, and to the Son, and to the Holy Spirit;</td>
   </tr>
   <tr>
-      <td style=  "font-style: italic;">People</td>
+      <td class='invitatory-speaker'>People</td>
       <td>As it was in the beginning, is now, and ever shall be, world without end. Amen.</td>
   </tr>
   <tr>
-      <td style=  "font-style: italic;">Officiant</td>
+      <td class='invitatory-speaker'>Officiant</td>
       <td>Praise the Lord.</td>
   </tr>
   <tr>
-      <td style=  "font-style: italic;">People</td>
+      <td class='invitatory-speaker'>People</td>
       <td>The Lord’s name be praised.</td>
   </tr>
 </table>

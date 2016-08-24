@@ -3,7 +3,7 @@ require Logger
 require Poison
 require Ecto.Query
 alias Iphod.Repo
-alias Iphod.Reflection
+# alias Iphod.Reflection
 
 defmodule Iphod.IphodChannel do
   import Iphod.Mailer
@@ -47,8 +47,19 @@ defmodule Iphod.IphodChannel do
     {:noreply, socket}  
   end
 
+  def handle_in("get_single_reading", [vss, version, service, section], socket) do
+    IO.puts "GET LESSON: #{vss}; #{version}, #{service}"
+    # resp should contain 
+    #  [:collect, :colors, :date, :gs, :nt, :ofType, :ot, :ps, :season, :show, :title,
+    #  :week]
+    resp = BibleText.selection( vss, version, service)
+    resp_name = service <> "_today"
+    push socket, "single_lesson", %{resp: resp}
+    {:noreply, socket}
+  end
+
   def handle_in("get_text", ["Reflection", date], socket) do
-    [_, day] = date |> String.split(~r{day }, parts: 2)
+    [_, day] = date |> String.split(~r{\w+ }, parts: 2)
     resp = Repo.one(from r in Iphod.Reflection, where: [date: ^day, published: true], select: {r.author, r.markdown})
     {author, markdown} = if resp, do: resp, else: {"", "Sorry, nothing today"}
     push socket, "reflection_today", %{author: author, markdown: markdown}
@@ -76,13 +87,6 @@ defmodule Iphod.IphodChannel do
     {:noreply, socket}  
   end
   
-
-  def handle_in("request_send_email", email, socket) do
-    send_contact_me email["from"], email["topic"], email["text"]
-    push socket, "new_email", @email
-    {:noreply, socket}
-  end
-
   def handle_in("get_lesson", [section, version, date], socket) when section in ~w(mp1 mp2 mpp ep1 ep2 epp) do
     day = text_to_date date
     lesson = DailyReading.lesson(day, section, version)
@@ -97,12 +101,29 @@ defmodule Iphod.IphodChannel do
     {:noreply, socket}
   end
 
-  def handle_in("get_lesson", [section, version, date], socket) do
+  def handle_in("get_lesson", [_section, _version, _date], socket) do
     # day = text_to_date date
     # lesson = SundayReading.lesson(day, section, version)
     # push socket, "update_lesson", %{lesson: lesson}
     {:noreply, socket}
   end
+
+  def handle_in("request_send_email", email, socket) do
+    send_contact_me email["from"], email["topic"], email["text"]
+    push socket, "new_email", @email
+    {:noreply, socket}
+  end
+
+
+  def handle_in("get_text", date, socket) do
+    IO.puts "GET ALL FOR: #{date}"
+    handle_in("get_text", ["Reflection", date], socket)
+    handle_in("get_text", ["EU", date], socket)
+    handle_in("get_text", ["MP", date], socket)
+    handle_in("get_text", ["EP", date], socket)
+  end
+
+
 
   def handle_in("shout", payload, socket) do
     broadcast socket, "shout", payload

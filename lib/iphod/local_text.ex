@@ -29,16 +29,20 @@ defmodule LocalText do
     lists_to_html(lists, "<h3>#{ref |> String.capitalize}</h3>")
   end
 
-  def lists_to_html([], html), do: html
-
-  def lists_to_html([h|t], html) do
-    new_html = html <> "<p>" <> Enum.join(h, "</br>") <> "</p>"
-    lists_to_html t, new_html
-  end
-
   def request(ver, {book, []}, list), do: {ver, book, list}
   def request(ver, {book, [{chap, first, last}|t]}, list) do
     request(ver, {book, t}, list ++ [passage(ver, book, chap, first, last)])
+  end
+
+# if it's not a list, just send the string back
+  def list_to_html(s), do: s
+
+  def lists_to_html([], html), do: html
+
+  def lists_to_html([h|t], html) do
+    IEx.pry
+    new_html = html <> "<p>" <> Enum.join(h, "</br>") <> "</p>"
+    lists_to_html t, new_html
   end
 
   def tokenize(s) do
@@ -64,6 +68,7 @@ defmodule LocalText do
 
   @spec chapter_vss(Enum.t) :: {integer, integer, integer}
   def chapter_vss([chapter]), do: {String.to_integer(chapter), 1, 999}
+  def chapter_vss([chapter, first, "-", last]), do: {String.to_integer(chapter), String.to_integer(first), String.to_integer(last)}
   def chapter_vss([chapter, ":", vs ]), do: {String.to_integer(chapter), String.to_integer(vs), String.to_integer(vs)}
   def chapter_vss([chapter, ":", first, "-", "end"]), do: chapter_vss([chapter, ":", first, "ff"])
   def chapter_vss([chapter, ":", first, "-", last]), do: {String.to_integer(chapter), String.to_integer(first), String.to_integer(last)}

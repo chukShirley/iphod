@@ -1,1 +1,65 @@
+<div id= "m-reading-container"></div> 
+<div class='m-options1'>
+  <ul>
+    <li class='prayer-button' data-prayer='morningPrayer'>Morning Prayer</li>
+    <li class='prayer-button' data-prayer='eveningPrayer'>Evening Prayer</li>
+    <li id='reflection-today-button' data-prayer='reflection'>Reflection</li>
+    <li class='config-button' data-prayer='config'>Config</li>
+  </ul>
+</div>
+<div>
+  <table id= "calendar">
+    <tr>
+      <th class= "cal_move_month">
+        <a href= "<%="/calendar/prev/#{@model.month}/#{@model.year}/mindex"%>" ><</a>
+      </th>
+      <th colspan= "5"><%= "#{@model.month}, #{@model.year}"%></th>
+      <th class= "cal_move_month">
+        <a href= "<%="/calendar/next/#{@model.month}/#{@model.year}/mindex"%>" >></a>
+      </th>
+    </tr>
+    <tr class= "calendar-week">
+      <th>Sun</th>
+      <th>Mon</th>
+      <th>Tue</th>
+      <th>Wed</th>
+      <th>Thu</th>
+      <th>Fri</th>
+      <th>Sat</th>
+    </tr>
+    <%= for week <- @model.calendar do %>
+      <tr class= "calendar-week">
+        <%= for day <- week.days do %>
+          <td class="<%= if day.today, do: 'today', else: '' %>" >
+            <div 
+              class="td_link color_options <%="day_of_month day_#{hd day.colors}"%>"
+              value="<%=day.date%>"
+            >
+              <%=day.dayOfMonth%>
+              <readings 
+                data-mp1='<%= day.mp_reading.mp1 |> Enum.join(",") %>'
+                data-mp2='<%= day.mp_reading.mp2 |> Enum.join(",") %>'
+                data-mpp='<%= day.mp_reading.mpp |> Enum.join(",") %>'
+                data-ep1='<%= day.ep_reading.ep1 |> Enum.join(",") %>'
+                data-ep2='<%= day.ep_reading.ep2 |> Enum.join(",") %>'
+                data-epp='<%= day.ep_reading.epp |> Enum.join(",") %>'
+                data-gs ='<%= day.eu_reading.gs  |> Enum.join(",") %>'
+                data-ot ='<%= day.eu_reading.ot  |> Enum.join(",") %>'
+                data-nt ='<%= day.eu_reading.nt  |> Enum.join(",") %>'
+                data-ps ='<%= day.eu_reading.ps  |> Enum.join(",") %>'
+                data-title='<%= day.eu_reading.title %>'
+              </readings>
+            </div>
+            <%# render "_reading_table.html", day: day %>
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+    <tr>
+      <td id="table-rollup" colspan= "7">
+        <button id= "rollup">Roll Up</button>
+      </td>
+    </tr>
+  </table>
+</div>
 <div id= "m-elm-container"></div>

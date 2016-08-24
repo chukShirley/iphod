@@ -1,58 +1,58 @@
   <table class= "prayer_table">
     <tr>
-      <td style= "font-style: italic; padding-right: 3em")>Officiant</td>
+      <td class='invitatory-init'>Officiant</td>
       <td>O Lord, show us your mercy;</td>
     </tr>
     <tr>
-      <td class= "italic">People</td>
+      <td class='invitatory-speaker'>People</td>
       <td>And grant us your salvation.</td>
     </tr>
     <tr>
-      <td class= "italic">Officiant</td>
+      <td class='invitatory-speaker'>Officiant</td>
       <td>O Lord, save our nations;</td>
     </tr>
     <tr>
-      <td class= "italic">People</td>
+      <td class='invitatory-speaker'>People</td>
       <td>And guide us in the way of justice and truth.</td>
     </tr>
     <tr>
-      <td class= "italic">Officiant</td>
+      <td class='invitatory-speaker'>Officiant</td>
       <td>Clothe your ministers with righteousness;</td>
     </tr>
     <tr>
-      <td class= "italic">People</td>
+      <td class='invitatory-speaker'>People</td>
       <td>And make your chosen people joyful.</td>
     </tr>
     <tr>
-      <td class= "italic">Officiant</td>
+      <td class='invitatory-speaker'>Officiant</td>
       <td>O Lord, save your people;</td>
     </tr>
     <tr>
-      <td class= "italic">People</td>
+      <td class='invitatory-speaker'>People</td>
       <td>And bless your inheritance.</td>
     </tr>
     <tr>
-      <td class= "italic">Officiant</td>
+      <td class='invitatory-speaker'>Officiant</td>
       <td>Give peace in our time, O Lord;</td>
     </tr>
     <tr>
-      <td class= "italic">People</td>
+      <td class='invitatory-speaker'>People</td>
       <td>For only in you can we live in safety.</td>
     </tr>
     <tr>
-      <td class= "italic">Officiant</td>
+      <td class='invitatory-speaker'>Officiant</td>
       <td>Let not the needy, O Lord, be forgotten;</td>
     </tr>
     <tr>
-      <td class= "italic">People</td>
+      <td class='invitatory-speaker'>People</td>
       <td>Nor the hope of the poor be taken away.</td>
     </tr>
     <tr>
-      <td class= "italic">Officiant</td>
+      <td class='invitatory-speaker'>Officiant</td>
       <td>Create in us clean hearts, O God;</td>
     </tr>
     <tr>
-      <td class= "italic">People</td>
+      <td class='invitatory-speaker'>People</td>
       <td>And take not your Holy Spirit from us.</td>
     </tr>
 </table>

@@ -1,14 +1,14 @@
 <table class= "prayer_table">
   <tr>
-    <td style= "font-style: italic; padding-right: 3em;")] ]>Officiant</td>
+    <td class='invitatory-init'>Officiant</td>
     <td>The Lord be with you.</td>
   </tr>
   <tr>
-    <td class= "italic">People</td>
+    <td class='invitatory-speaker'>People</td>
     <td>And with your spirit.</td>
   </tr>
   <tr>
-    <td class= "italic">Officiant</td>
+    <td class='invitatory-speaker'>Officiant</td>
     <td>Let us pray.</td>
   </tr>
 </table>

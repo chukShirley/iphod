@@ -1,4 +1,17 @@
+require IEx
 defmodule BibleText do
+
+  def selection(vss, ver, section) do
+    lesson_with_body(
+      [ %{ body: "",
+        id: Regex.replace(~r/[\s\.]/, vss, "_"),
+        read: vss,
+        section: section,
+        show: true,
+        style: "req",
+        version: ver
+      }], ver)
+  end
 
   def lesson_with_body(list), do: lesson_with_body(list, "ESV")
   
@@ -12,6 +25,22 @@ defmodule BibleText do
 
   def lesson_with_body(list, ver) do
     lesson_with_body(list, ver, BibleVersions.source(ver))
+  end
+
+  def lesson_with_body(list, ver, "Coverdale") do
+    list |> Enum.map(fn(lesson)->
+      lesson
+        |> Map.put(:body, Psalms.to_html(lesson.read, "Coverdale"))
+        |> Map.put(:show, true)
+    end)
+  end
+
+  def lesson_with_body(list, ver, "BCP") do
+    list |> Enum.map(fn(lesson)->
+      lesson
+        |> Map.put(:body, Psalms.to_html(lesson.read, "BCP"))
+        |> Map.put(:show, true)
+    end)
   end
 
   def lesson_with_body(list, ver, "bibles.org") do
@@ -31,7 +60,6 @@ defmodule BibleText do
   end
 
   def lesson_with_body(list, ver, "local") do
-    IO.puts "LESSON WITH BODY LOCAL: #{ver}, #{inspect list}"
     list |> Enum.map(fn(lesson)->
       lesson 
       |> Map.put(:body, LocalText.request(ver, lesson.read) )
