@@ -282,12 +282,9 @@ versionSelect model lesson =
 
 tableStyle: Model -> Attribute msg
 tableStyle model =
-  let
-    foo = Debug.log "SUNDAY TABLE" model.show
-  in
-    hideable
-      model.show
-      [ ("width", "100%")]
+  hideable
+    model.show
+    [ ("width", "100%")]
 
 bodyStyle: Models.Lesson -> Attribute msg
 bodyStyle lesson =

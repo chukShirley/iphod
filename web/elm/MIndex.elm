@@ -165,7 +165,7 @@ update msg model =
 --            else
 --              Cmd.none
       in 
-        (model, Cmd.none)
+        (newModel, Cmd.none)
 
     ModMP msg ->
       let
@@ -185,7 +185,7 @@ update msg model =
 --            else
 --              Cmd.none
       in 
-        (model, Cmd.none)
+        (newModel, Cmd.none)
 
     ModEP msg ->
       let
@@ -205,7 +205,7 @@ update msg model =
 --            else
 --              Cmd.none
       in 
-        (model, Cmd.none)
+        (newModel, Cmd.none)
 
 -- HELPERS
 
@@ -227,10 +227,7 @@ view model =
 
 euDiv: Model -> Html Msg
 euDiv model =
-  let
-    foo = Debug.log "MINDEX EUDIV" model.eu.show
-  in
-    div [] [ App.map ModEU (Sunday.view model.eu) ]
+  div [] [ App.map ModEU (Sunday.view model.eu) ]
   -- [ (Sunday.view (Signal.forwardTo (ModEU model.eu)) model.eu) ]
 
 mpDiv: Model -> Html Msg
