@@ -48,7 +48,6 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_in("get_single_reading", [vss, version, service, section], socket) do
-    IO.puts "GET LESSON: #{vss}; #{version}, #{service}"
     # resp should contain 
     #  [:collect, :colors, :date, :gs, :nt, :ofType, :ot, :ps, :season, :show, :title,
     #  :week]
@@ -59,11 +58,16 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_in("get_text", ["Reflection", date], socket) do
-    [_, day] = date |> String.split(~r{\w+ }, parts: 2)
-    resp = Repo.one(from r in Iphod.Reflection, where: [date: ^day, published: true], select: {r.author, r.markdown})
+    day = text_to_date date
+    resp = Repo.one(from r in Iphod.Reflection, where: [date: ^date, published: true], select: {r.author, r.markdown})
     {author, markdown} = if resp, do: resp, else: {"", "Sorry, nothing today"}
     push socket, "reflection_today", %{author: author, markdown: markdown}
     {:noreply, socket}
+  end
+
+  def handle_in("get_text", ["NextSunday", date], socket) do
+    nextSunday = text_to_date(date) |> Lityear.date_next_sunday
+    push socket, "eu_today", SundayReading.eu_body(nextSunday)
   end
 
   def handle_in("get_text", ["EU", date], socket) do
@@ -116,7 +120,6 @@ defmodule Iphod.IphodChannel do
 
 
   def handle_in("get_text", date, socket) do
-    IO.puts "GET ALL FOR: #{date}"
     handle_in("get_text", ["Reflection", date], socket)
     handle_in("get_text", ["EU", date], socket)
     handle_in("get_text", ["MP", date], socket)
@@ -144,7 +147,8 @@ defmodule Iphod.IphodChannel do
   end
 
   defp text_to_date(s) do
-    Timex.parse!(s, "{WDfull} {Mfull} {D}, {YYYY}")
-    |> Timex.to_date
+    {ok, okDate} = Timex.parse(s, "{WDfull} {Mfull} {D}, {YYYY}")
+    {ok, date} = if ok == :error, do: Timex.parse(s, "{WDshort} {Mshort} {D} {YYYY}"), else: {ok, okDate}
+    Timex.to_date date
   end
 end

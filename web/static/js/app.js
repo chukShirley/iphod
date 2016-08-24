@@ -120,7 +120,6 @@ let path = window.location.pathname
 
 if ( path.match(/mindex/)) {
 
-  console.log("MOBILE INDEX")
   var elmHeaderDiv = document.getElementById('header-elm-container')
     , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
 
@@ -174,12 +173,15 @@ if ( path.match(/mindex/) ) {
     channel.push("get_text", ["Reflection", (new Date).toDateString()])
   });
 
+  $("#next-sunday-button").click( function() {
+    channel.push("get_text", ["NextSunday", (new Date).toDateString() ] )
+  })
+
   $("#m-reading-container").click( function() {
     $("#reading-panel").effect("drop", "fast");
   });
 
   channel.on('reflection_today', data => {
-    console.log("REFLECTION")
     elmMindexApp.ports.portReflection.send(data);
     rollup();
   })
@@ -191,14 +193,12 @@ if ( path.match(/mindex/) ) {
   })
     
   channel.on('mp_today', data => {
-    console.log("MP TODAY")
     data.config = init_config_model();
     elmMindexApp.ports.portMP.send(data)
     rollup();
   })
     
   channel.on('ep_today', data => {
-    console.log("EP TODAY")
     data.config = init_config_model();
     elmMindexApp.ports.portEP.send(data)
     rollup();

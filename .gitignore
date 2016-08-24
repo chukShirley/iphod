@@ -67,3 +67,5 @@ Helper.elmi
 deploy
 
 .DS_Store
+priv/static/printable/
+priv/static/printables/
