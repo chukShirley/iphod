@@ -1651,7 +1651,7 @@ defmodule SundayReading do
                 "c" => %{ ot: [%{style: "req", read: "Ecclesiasticus 10:7-18"}],
                           ps: [%{style: "req", read: "Psalm 112"}],
                           nt: [%{style: "req", read: "Heb 13:1-8"}],
-                          gs: [%{style: "req", read: "Lk 14:1 7-14"}]
+                          gs: [%{style: "req", read: "Lk 14:1, 7-14"}]
                         }
             },
           "18" =>

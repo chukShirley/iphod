@@ -22,7 +22,7 @@ defmodule Iphod.Mixfile do
      applications: [:phoenix, :phoenix_html, :phoenix_pubsub,
                     :phoenix_live_reload, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :timex, :httpoison,
-                    :mailgun
+                    :mailgun, :earmark
                   ]
     ]
   end
@@ -47,7 +47,8 @@ defmodule Iphod.Mixfile do
      {:timex, github: "frpaulas/timex"},
      # {:mock, github: "jjh42/mock", only: :dev},
      {:httpoison, "~> 0.8.2"},
-     {:mailgun, "~> 0.1.2"}
+     {:mailgun, "~> 0.1.2"},
+     {:earmark, "~> 1.0.1"}
      # {:exometer_core, "~> 1.4.0"},
      # {:exometer, "~> 1.2.1"},
      # {:edown, github: "uwiger/edown", tag: "0.7", override: true}

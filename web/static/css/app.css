@@ -203,13 +203,14 @@ form.link, form.button {
   .ps_vs_num {
     margin-top: -2em;
     margin-bottom: 1.3em;
+    width: 4em;
     color: blue;
   }
   
   .ps_first {
     position: relative;
     top: -2.2em;
-    padding-left: 3em ;
+    padding-left: 2.8em ;
     text-indent: -1.5em ;
   }
   

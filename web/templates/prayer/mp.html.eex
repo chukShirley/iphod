@@ -35,9 +35,7 @@
   </br>
   <p class= "rubric">Then follow</p>
   <p class= "section">The Psalm or Psalms Appointed</p>
-  <p class= "reading"><%= 
-      raw( @model.mpp |> Enum.reduce("", fn(ps, acc)-> acc = acc <> ps.body end) ) %>
-  </p> 
+  <p class= "reading"><%= @model.mpp |> text_list_to_html %></p> 
   <p class= "rubric">At the end of the Psalms is sung or said</p>
 
   <p class= "vs">Glory to the Father, and to the Son, and to the Holy Spirit;</p>
@@ -48,9 +46,7 @@
   <p class= "section">The Lessons</p>
   <p class= "rubric">One or more Lessons, as appointed, are read, the Readerfirst saying</p>
   <p>The First Lesson from</p>
-  <p class= "reading"> <%= 
-      raw( @model.mp1 |> Enum.reduce("", fn(ls, acc)-> acc = acc <> ls.body end) )
-  %></p>
+  <p class= "reading"> <%= @model.mp1 |> text_list_to_html %></p>
 
   <p class= "rubric">A citation giving chapter and verse may be added.</p>
   <p class= "rubric">After each Lesson the Reader may say</p>
@@ -67,9 +63,7 @@
   </br>
 
   <p>The Second Lesson from</p>
-  <p class= "reading"> <%= 
-      raw( @model.mp2 |> Enum.reduce("", fn(ls, acc)-> acc = acc <> ls.body end) )
-  %></p>
+  <p class= "reading"> <%= @model.mp2 |> text_list_to_html %></p>
   </br>
   <%= render "_#{@model.nt_canticle}.html" %>
   </br>
