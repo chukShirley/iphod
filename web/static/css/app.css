@@ -194,7 +194,8 @@ form.link, form.button {
     padding: 0 1em;
     margin-top: -1em;
   }
-  
+
+/*  
   .ps_title {
     font-size: 0.9em;
     font-style: italic;
@@ -221,6 +222,7 @@ form.link, form.button {
     text-indent: -1.5em ;
     margin-bottom: -2.8em;
   }
+  */
   
   .rowStyle {
     text-align: left;

@@ -48,7 +48,8 @@ defmodule Iphod.Mixfile do
      # {:mock, github: "jjh42/mock", only: :dev},
      {:httpoison, "~> 0.8.2"},
      {:mailgun, "~> 0.1.2"},
-     {:earmark, "~> 1.0.1"}
+     {:earmark, "~> 1.0.1"},
+     {:mix_test_watch, "~> 0.2", only: :dev}
      # {:exometer_core, "~> 1.4.0"},
      # {:exometer, "~> 1.2.1"},
      # {:edown, github: "uwiger/edown", tag: "0.7", override: true}

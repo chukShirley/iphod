@@ -1,6 +1,6 @@
 require IEx
 defmodule GetBibleText do
-
+  import RequestParser, only: [get_bible_query: 1]
 # PARAMETERS
 # 
 # There are just two parameters available, both are self-explanatory, passage and version.
@@ -19,8 +19,7 @@ defmodule GetBibleText do
 # http://getbible.net/json?passage=Acts 15:1-5, 10, 15&version=aov
 
   def request(ver, vss, fnotes \\ "") do
-    vss_for_url = Regex.replace(~r/\s/, vss, "+")
-    url = "http://getbible.net/json?p=#{vss_for_url}&v=#{ver}"
+    url = "http://getbible.net/json?p=#{get_bible_query(vss)}&v=#{ver}"
     case HTTPoison.get(url, [{"Accept", "application/jsonrequest"}], [follow_redirect: true]) do
       {:ok, resp} ->
         Regex.replace(~r/^\(|\)\;$/, resp.body, "")

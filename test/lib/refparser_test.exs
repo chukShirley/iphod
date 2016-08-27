@@ -1,57 +1,9 @@
 ExUnit.start
 defmodule RefParser do
-
   import BookNames, only: [book_name: 1]
+  import RequestParser
   use ExUnit.Case
   
-  def tokenize(s) do
-    Regex.split(~r/\d+|[a-z]+/, s |> String.downcase, include_captures: true)
-    |> Enum.reduce([], fn(el, acc)-> 
-        acc = if String.strip(el) |> String.length == 0, do: acc, else: acc ++ [String.strip el]
-      end)
-  end
-
-  @spec book(String.t) :: {String.t, Enum.t}
-  def book(s), do: book(tokenize(s), {"", []})
-  def book([h|t], {"", []}), do: _book(t, {h,[]})
-
-  def _book([], tup), do: tup
-
-  def _book([h|t], {name, []}) do
-    if Regex.match?(~r/\d+/, h) do
-      _book([], {name, [h|t]})
-    else 
-      _book(t, {name <> " " <> h, []})
-    end
-  end
-
-  @spec chapter_vss(Enum.t) :: {integer, integer, integer}
-  def chapter_vss([chapter]), do: {String.to_integer(chapter), 1, 999}
-  def chapter_vss([chapter, first, "-", last]), do: {String.to_integer(chapter), String.to_integer(first), String.to_integer(last)}
-  def chapter_vss([chapter, ":", vs ]), do: {String.to_integer(chapter), String.to_integer(vs), String.to_integer(vs)}
-  def chapter_vss([chapter, ":", first, "-", "end"]), do: chapter_vss([chapter, ":", first, "ff"])
-  def chapter_vss([chapter, ":", first, "-", last]), do: {String.to_integer(chapter), String.to_integer(first), String.to_integer(last)}
-  def chapter_vss([chapter, ":", first, "ff"]), do: {String.to_integer(chapter), String.to_integer(first), 999}
-
-  @spec all_vss(Enum.t) :: Enum.t
-  def all_vss(l), do: all_vss l |> Enum.chunk_by(&(&1 == ",")), []
-
-  def all_vss([], list), do: list |> Enum.reverse
-  def all_vss([[","]|t], list), do: all_vss(t, list)
-  def all_vss([[first, "ff"] | t], list), do: all_vss([[first, "-", "999"] | t], list)
-  def all_vss([[first, "-", "end"]|t], list), do: all_vss([[first, "-", "999"]|t], list)
-  def all_vss([[first, "-", last]|t], list) do
-    {chap, _, _} = list |> hd
-    all_vss t, [{chap, String.to_integer(first), String.to_integer(last)}] ++ list
-  end
-  def all_vss([h|t], list) when is_list(h) do
-    all_vss t, [chapter_vss(h)] ++ list
-  end
-
-  def reference(s) do
-    {b, vss} = book(s)
-    {b, all_vss(vss)}
-  end
 
   test  "sanity" do
     assert true, "insane if fails"
@@ -106,6 +58,36 @@ defmodule RefParser do
   test "get biblical reference" do
     assert {"john", [{3, 16, 16}]} == reference("john 3:16")
     assert {"john", [{3, 1, 999}]} == reference("John 3")
-    assert {"psalm", [{119, 33, 72}]} == reference("Psalm 119 33-72")
+    assert {"psalms", [{119, 33, 72}]} == reference("Psalm 119 33-72")
+  end
+
+  test "problematic readings" do
+    assert reference("Isaiah 61:10-end, 62:1-5") == {"isaiah", [{61,10,999}, {62,1,5}]}
+    assert reference("Jer 3:19-4:4") == {"jeremiah", [{3,19,999},{4,1,4}]}
+    assert reference("2 Kings 5:1-15ab") == {"2 kings", [{5,1,15}]}
+    assert reference("Lev 19:1-2, 19:9-18") == {"leviticus", [{19,1,2},{19,9,18}]}
+    assert reference("1 Cor 12:27-13:13") == {"1 corinthians", [{12,27,999},{13,1,13}]}
+    assert reference("Gen 2:4-9, 2:15-17, 2:25-end, 3:1-7") == {"genesis", [{2,4,9},{2,15,17},{2,25,999},{3,1,7}]}
+    assert reference("Genesis 1, 2:1-2") == {"genesis", [{1,1,999},{2,1,2}]}
+    assert reference("Genesis 7:1-5, 7:11-18, 8:8-18, 9:8-13") == {"genesis", [{7,1,5},{7,11,18},{8,8,18},{9,8,13}]}
+    assert reference("Acts 3:12a, 3:13-15, 3:17-26") == {"acts", [{3,12,12},{3,13,15},{3,17,26}]}
+    assert reference("Acts 13:14b-16, 13:26-39") == {"acts", [{13,14,16},{13,26,39}]}
+    assert reference("Rev 21:1-4, 21:22-end, 22:1-5") == {"revelation", [{21,1,4},{21,22,999},{22,1,5}]}
+    assert reference("1 Kings 8:22-30, 41-43") == {"1 kings", [{8,22,30},{8,41,43}]}
+    assert reference("Gen 25:7-11, 19-end") == {"genesis", [{25,7,11},{25,19,999}]}
+    assert reference("Exod 33, 34") == {"exodus", [{33,1,999},{34,1,999}]}
+    assert reference("Lev 19:1-18, 30- end") == {"leviticus", [{19,1,18},{19,30,999}]}
+    assert reference("Num 9:15-end, 10:19-end") == {"numbers", [{9,15,999},{10,19,999}]}
+    assert reference("Num 13:1-2, 17-end") == {"numbers", [{13,1,2},{13,17,999}]}
+    assert reference("1 Thess 2:17-end, 3") == {"1 thessalonians", [{2,17,999},{3,1,999}]}
+  end
+
+  test "ESV queries" do
+    assert esv_query("john 3:16") == "john+3:16-16"
+    assert esv_query("John 3") == "john+3:1-999"
+    assert esv_query("Isaiah 61:10-end, 62:1-5") == "isaiah+61:10-999+62:1-5"
+    assert esv_query("Acts 3:12a, 3:13-15, 3:17-26") == "acts+3:12-12+3:13-15+3:17-26"
+    assert esv_query("Gen 2:4-9, 2:15-17, 2:25-end, 3:1-7") == "genesis+2:4-9+2:15-17+2:25-999+3:1-7"
+    assert esv_query("1 Thess 2:17-end, 3") == "1+thessalonians+2:17-999+3:1-999"
   end
 end

@@ -27,13 +27,11 @@
   <%= render "_invitatory.html" %>
   </br>
   <p class= "rubric">Then follows the Venite. Alternatively, the Jubilate may be used.</p>
-  <p class= "rubric">These seasonal antiphons may be sung or said before and after the Invitatory Psalm.</p>
+  <p class= "rubric-newline">These seasonal antiphons may be sung or said before and after the Invitatory Psalm.</p>
   <p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
   <p class= "default"><%=@model.antiphon%></p>
-  </br>
   <%= render "_#{@model.invitatory_canticle}.html" %>
-  </br>
-  <p class= "rubric">Then follow</p>
+  <p class= "rubric">Then follows</p>
   <p class= "section">The Psalm or Psalms Appointed</p>
   <p class= "reading"><%= @model.mpp |> text_list_to_html %></p> 
   <p class= "rubric">At the end of the Psalms is sung or said</p>
