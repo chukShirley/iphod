@@ -268,6 +268,12 @@ if ( path.match(/mindex/) ) {
     window.location = "/" + prayer_type + "/" + ps + "/" + ver
   })
 
+  $("#next-sunday-button").click( function() {
+    channel.push("get_text", ["NextSunday", (new Date).toDateString() ] )
+  })
+
+  
+
   channel.on('reflection_today', data => {
     elmCalApp.ports.portReflection.send(data);
     rollup();

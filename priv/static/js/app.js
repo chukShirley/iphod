@@ -1765,6 +1765,10 @@ if (path == "/" || path.match(/calendar/) || path.match(/mindex/)) {
       window.location = "/" + prayer_type + "/" + ps + "/" + ver;
     });
 
+    $("#next-sunday-button").click(function () {
+      channel.push("get_text", ["NextSunday", new Date().toDateString()]);
+    });
+
     channel.on('reflection_today', function (data) {
       elmCalApp.ports.portReflection.send(data);
       rollup();

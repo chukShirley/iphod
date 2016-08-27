@@ -4,9 +4,11 @@
     <tr>
       <th class= "mpep_link" colspan= "7" style= "border-bottom: none;">Today</th>
     <tr>
-      <th class= "mpep_link" colspan= "3"><button class= "prayer-button" data-prayer="morningPrayer">Morning Prayer</button></th>
-      <th class= "mpep_link"><button class= "reading_button" data-type= "Reflection">Reflection</button></th>
-      <th class= "mpep_link" colspan= "3"><button class= "prayer-button" data-prayer="eveningPrayer">Evening Prayer</button></th>
+      <th class= "mpep_link" colspan= "2"><button class= "prayer-button" data-prayer="morningPrayer">Morning Prayer</button></th>
+      <th class= "mpep_link" colspan="3">
+        <button id= "next-sunday-button">Next Sunday</button>
+        <button class= "reading_button" data-type= "Reflection">Reflection</button></th>
+      <th class= "mpep_link" colspan= "2"><button class= "prayer-button" data-prayer="eveningPrayer">Evening Prayer</button></th>
     </tr>
     <tr>
       <th class= "season_link" colspan= "2">
