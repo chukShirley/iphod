@@ -1669,7 +1669,7 @@ defmodule SundayReading do
                         },
                 "c" => %{ ot: [%{style: "req", read: "Deut 30:15-20"}],
                           ps: [%{style: "req", read: "Psalm 1"}],
-                          nt: [%{style: "req", read: "Philemon 1-3"},%{style: "req", read: "Philemon 4-21"},%{style: "opt", read: "Philemon 22-25"}],
+                          nt: [%{style: "opt", read: "Philemon 1-3"},%{style: "req", read: "Philemon 4-21"},%{style: "opt", read: "Philemon 22-25"}],
                           gs: [%{style: "req", read: "Lk 14:25-33"}]
                         }
             },

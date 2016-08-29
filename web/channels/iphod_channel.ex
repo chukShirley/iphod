@@ -68,6 +68,7 @@ defmodule Iphod.IphodChannel do
   def handle_in("get_text", ["NextSunday", date], socket) do
     nextSunday = text_to_date(date) |> Lityear.date_next_sunday
     push socket, "eu_today", SundayReading.eu_body(nextSunday)
+    {:noreply, socket}  
   end
 
   def handle_in("get_text", ["EU", date], socket) do

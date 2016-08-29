@@ -24,6 +24,7 @@ defmodule RequestParser do
 
   @spec chapter_vss(Enum.t) :: {integer, integer, integer}
   def chapter_vss([chapter]), do: ref_to_tup chapter, 1, 999
+  def chapter_vss([first, "-", last]), do: ref_to_tup first, last
   def chapter_vss([chapter, first, "-", last]), do: ref_to_tup chapter, first, last
   def chapter_vss([chapter, ":", vs ]), do: ref_to_tup chapter, vs, vs
   def chapter_vss([chapter, ":", first, "-", "end"]), do: ref_to_tup chapter, first, 999
@@ -42,15 +43,22 @@ defmodule RequestParser do
     ]
   end
 
+  def ref_to_tup(v1, v2), do: {nil, String.to_integer(v1), String.to_integer(v2)}
   def ref_to_tup(chap, 1, 999), do: {String.to_integer(chap), 1, 999}
   def ref_to_tup(chap, 1, v2), do: {String.to_integer(chap), 1, String.to_integer(v2)}
   def ref_to_tup(chap, v1, 999), do: {String.to_integer(chap), String.to_integer(v1), 999}
   def ref_to_tup(chap, v1, v2), do: {String.to_integer(chap), String.to_integer(v1), String.to_integer(v2)}
 
   @spec all_vss(Enum.t) :: Enum.t
-  def all_vss(l), do: all_vss l |> Enum.chunk_by(&(&1 == ",")), []
+  def all_vss(l) do 
+    all_vss l |> Enum.chunk_by(&(&1 == ",")), []
+  end
 
   def all_vss([], list), do: list |> List.flatten |> Enum.reverse
+  def all_vss([[first, "-", last]|t], []) do
+    all_vss t, [{nil, String.to_integer(first), String.to_integer(last)}]
+  end
+
   def all_vss([[","]|t], list), do: all_vss(t, list)
   def all_vss([[first, "ff"] | t], list), do: all_vss([[first, "-", "999"] | t], list)
   def all_vss([[first, "-", "end"]|t], list), do: all_vss([[first, "-", "999"]|t], list)
@@ -75,7 +83,7 @@ defmodule RequestParser do
     {book, vs_list} = reference(s)
     vs_list 
       |> Enum.reduce("#{book}", fn({chap, first, last}, acc)->
-          acc = acc <> " #{chap}.#{first}-#{last}"
+          acc = if chap, do: acc <> " #{chap}.#{first}-#{last}", else: acc <> " #{first}-#{last}"
         end)
   end
 

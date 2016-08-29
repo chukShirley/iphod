@@ -16,6 +16,7 @@ defmodule RefParser do
     assert (["1", "john", "1", ":", "12", "-", "20"]) = tokenize("1john1:12-20")
     assert (["1", "john", "1", ":", "12", "-", "2", ":", "10"]) = tokenize("1 john 1:12 - 2:10")
     assert (["1", "john", "1", ":", "12", "-", "15", ",", "2", ":", "10", "-", "15"]) = tokenize("1 john 1:12-15, 2:10-15")
+    assert tokenize("philemon 1-3") == ["philemon", "1", "-", "3"]
   end
 
   test "all remaining vss in chapter" do
@@ -29,6 +30,7 @@ defmodule RefParser do
     assert({"1 john", ["1", ":", "12", "-", "2", ":", "10"]} = book("1 john 1:12 - 2:10") )
     assert({"1 john", ["1", ":", "12", "-", "15", ",", "2", ":", "10", "-", "15"]} = book("1 john 1:12-15, 2:10-15") )
     assert {"song of solomon", ["1", ":", "1", "-", "10"]} = book ("Song of Solomon 1:1-10")
+    assert book("philemon 1-3") == {"philemon", ["1", "-", "3"]}
   end
 
   test "best guess of book name" do
@@ -39,6 +41,7 @@ defmodule RefParser do
     assert {3,16,16} == chapter_vss(["3", ":", "16"])
     assert {3,16,20} == chapter_vss(["3", ":", "16", "-", "20"])
     assert chapter_vss(["119", "33", "-", "72"]) == {119, 33, 72}
+    assert chapter_vss(["1", "-", "3"]) == {nil, 1, 3}
   end
 
   test "get list of chapters and vss" do
@@ -53,6 +56,10 @@ defmodule RefParser do
     assert [{3, 16, 999}] == all_vss(~w(3 : 16 ff))
     assert [{3, 1, 6}, {3, 16, 999}] == all_vss(~w(3 : 1 - 6 , 3 : 16 ff))
     assert [{3, 1, 6}, {3, 16, 999}] == all_vss(~w(3 : 1 - 6 , 16 ff))
+  end
+
+  test "get vss where book has one chapter (e.g. philemon)" do
+    assert all_vss(["1", "-", "3"]) == [{nil, 1, 3}]
   end
 
   test "get biblical reference" do
@@ -80,14 +87,16 @@ defmodule RefParser do
     assert reference("Num 9:15-end, 10:19-end") == {"numbers", [{9,15,999},{10,19,999}]}
     assert reference("Num 13:1-2, 17-end") == {"numbers", [{13,1,2},{13,17,999}]}
     assert reference("1 Thess 2:17-end, 3") == {"1 thessalonians", [{2,17,999},{3,1,999}]}
+    assert reference("Philemon 1-3") == {"philemon", [{nil,1,3}]}
   end
 
   test "ESV queries" do
-    assert esv_query("john 3:16") == "john+3:16-16"
-    assert esv_query("John 3") == "john+3:1-999"
-    assert esv_query("Isaiah 61:10-end, 62:1-5") == "isaiah+61:10-999+62:1-5"
-    assert esv_query("Acts 3:12a, 3:13-15, 3:17-26") == "acts+3:12-12+3:13-15+3:17-26"
-    assert esv_query("Gen 2:4-9, 2:15-17, 2:25-end, 3:1-7") == "genesis+2:4-9+2:15-17+2:25-999+3:1-7"
-    assert esv_query("1 Thess 2:17-end, 3") == "1+thessalonians+2:17-999+3:1-999"
+    assert esv_query("john 3:16") == "john 3.16-16"
+    assert esv_query("John 3") == "john 3.1-999"
+    assert esv_query("Isaiah 61:10-end, 62:1-5") == "isaiah 61.10-999 62.1-5"
+    assert esv_query("Acts 3:12a, 3:13-15, 3:17-26") == "acts 3.12-12 3.13-15 3.17-26"
+    assert esv_query("Gen 2:4-9, 2:15-17, 2:25-end, 3:1-7") == "genesis 2.4-9 2.15-17 2.25-999 3.1-7"
+    assert esv_query("1 Thess 2:17-end, 3") == "1 thessalonians 2.17-999 3.1-999"
+    assert esv_query("Philemon 1-3") == "philemon 1-3"
   end
 end
