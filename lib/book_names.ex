@@ -78,7 +78,7 @@ defmodule BookNames do
     "1 timothy"=>"1 timothy", "1 tim"=>"1 timothy", "1 ti"=>"1 timothy", "i ti"=>"1 timothy", "1ti"=>"1 timothy", "i tim"=>"1 timothy", "1tim"=>"1 timothy", "i timothy"=>"1 timothy", "1timothy"=>"1 timothy", "1st timothy"=>"1 timothy", "first timothy"=>"1 timothy",
     "2 timothy"=>"2 timothy", "2 tim"=>"2 timothy", "2 ti"=>"2 timothy", "ii ti"=>"2 timothy", "2ti"=>"2 timothy", "ii tim"=>"2 timothy", "2tim"=>"2 timothy", "ii timothy"=>"2 timothy", "2timothy"=>"2 timothy", "2nd timothy"=>"2 timothy", "second timothy"=>"2 timothy",
     "titus"=>"titus",  "tit"=>"titus",
-    "philemon"=>"philemon",  "phil"=>"philemon", "phm"=>"philemon",
+    "philemon"=>"philemon", "phm"=>"philemon",
     "hebrews"=>"hebrews",  "heb"=>"hebrews",
     "james"=>"james", "jas"=>"james", "jm"=>"james",
     "1 peter"=>"1 peter", "1 pet"=>"1 peter", "1 pe"=>"1 peter", "i pe"=>"1 peter", "1pe"=>"1 peter", "i pet"=>"1 peter", "1pet"=>"1 peter", "i pt"=>"1 peter", "1 pt"=>"1 peter", "1pt"=>"1 peter", "i peter"=>"1 peter", "1peter"=>"1 peter", "1st peter"=>"1 peter", "first peter"=>"1 peter",
