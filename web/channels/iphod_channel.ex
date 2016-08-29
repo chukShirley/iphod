@@ -58,8 +58,8 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_in("get_text", ["Reflection", date], socket) do
-    day = text_to_date date
-    resp = Repo.one(from r in Iphod.Reflection, where: [date: ^date, published: true], select: {r.author, r.markdown})
+    day = date |> String.split(" ", [parts: 2, trim: 2]) |> List.last
+    resp = Repo.one(from r in Iphod.Reflection, where: [date: ^day, published: true], select: {r.author, r.markdown})
     {author, markdown} = if resp, do: resp, else: {"", "Sorry, nothing today"}
     push socket, "reflection_today", %{author: author, markdown: markdown}
     {:noreply, socket}
