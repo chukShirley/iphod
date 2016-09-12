@@ -24,7 +24,8 @@ defmodule Iphod.CalendarController do
   def season(conn, params) do
     # something like `get_month next_season("advent", Date.now)`
     # and get the calendar month for the beginning of advent
-    this_month = get_month(Lityear.next_season(params["season"], Date.now))
+    # this_month = get_month(Lityear.next_season(params["season"], Date.now))
+    this_month = Lityear.next_season(params["season"], Date.now)
     render_calendar conn, this_month, params["min"]
   end
 

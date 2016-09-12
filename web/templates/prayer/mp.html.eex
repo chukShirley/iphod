@@ -42,7 +42,7 @@
 
   </br>
   <p class= "section">The Lessons</p>
-  <p class= "rubric">One or more Lessons, as appointed, are read, the Readerfirst saying</p>
+  <p class= "rubric">One or more Lessons, as appointed, are read, the Reader first saying</p>
   <p>The First Lesson from</p>
   <p class= "reading"> <%= @model.mp1 |> text_list_to_html %></p>
 
