@@ -55,7 +55,7 @@ form.link, form.button {
 }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width:600px) {
+@media screen and (min-width:769) {
   /* Remove the padding we set earlier */
   .header,
   .marketing {

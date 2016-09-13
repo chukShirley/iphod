@@ -10,6 +10,7 @@
     padding: 2px;
     color: black;
     margin-left: 0;
+    width: 100%;
   }
   .container {
     margin-left: 0;
@@ -67,7 +68,7 @@
   }
 
   #calendar {
-    width: 86%;
+    width: 80%;
     margin-left: auto;
     margin-right: auto;
     border-collapse: collapse;
@@ -261,3 +262,17 @@ h3 {
 
 
 } /* end of @media screen and (min-device-width: 320px) and (max-device-width: 568) */
+
+/* TABLET COMPUTERS -------------------------------- */
+@media screen and (min-width: 768px) {
+  #calendar {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+  }
+  .td_link {
+    height: 3em;
+    width: 100%;
+  }
+}

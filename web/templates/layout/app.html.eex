@@ -11,7 +11,7 @@
     <link rel="apple-touch-icon-precomposed" href="/priv/apple-touch-icon-precomposed.png" />
     <link rel="apple-touch-icon" href="/priv/apple-touch-icon.png" />
     <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/mobile.css") %>" media="screen and (min-device-width: 320px)" />
-    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>" media="screen  and (min-width: 600px)" />
+    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>" media="screen  and (min-width: 769px)" />
     <!--
     -->
 
