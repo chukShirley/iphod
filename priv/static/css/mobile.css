@@ -264,9 +264,21 @@ h3 {
 } /* end of @media screen and (min-device-width: 320px) and (max-device-width: 568) */
 
 /* TABLET COMPUTERS -------------------------------- */
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 641px) {
   #calendar {
     width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+  }
+  .td_link {
+    height: 3em;
+    width: 100%;
+  }
+}
+@media screen and (min-width: 961px) {
+  #calendar {
+    width: 100%;
     margin-left: auto;
     margin-right: auto;
     border-collapse: collapse;
