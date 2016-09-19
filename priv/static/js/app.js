@@ -48845,6 +48845,9 @@ var _user$project$MIndex$oneLessonDiv = function (model) {
 		A2(_elm_lang$core$List$map, putLesson, model.oneLesson));
 };
 var _user$project$MIndex$reflectionDiv = function (model) {
+	var author = (_elm_lang$core$Native_Utils.cmp(
+		_elm_lang$core$String$length(model.reflection.author),
+		0) > 0) ? A2(_elm_lang$core$Basics_ops['++'], '--- ', model.reflection.author) : '';
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
@@ -48873,8 +48876,7 @@ var _user$project$MIndex$reflectionDiv = function (model) {
 					]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html$text(
-						A2(_elm_lang$core$Basics_ops['++'], '--- ', model.reflection.author))
+						_elm_lang$html$Html$text(author)
 					]))
 			]));
 };

@@ -413,7 +413,6 @@ form.link, form.button {
     display: inline;
   }
   
-  
   #calendar th {
     border: 1px solid black;
     vertical-align: top;
@@ -5855,6 +5854,12 @@ html .ui-popup .ui-field-contain > label + .ui-flipswitch {
   .section-title {
     font-size: 90%;
     margin-bottom: -8%;
+  }
+
+  #reading-panel {
+    margin-left: 0.1em;
+    background-color: wheat;
+    border: 2px solid blueviolet;
   }
   #reading-menu {
     padding-left: 4%;

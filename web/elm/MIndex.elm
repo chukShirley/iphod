@@ -60,7 +60,6 @@ init = (initModel, Cmd.none)
 
 -- SUBSCRIPTIONS
 
--- port portCalendar: (Model -> msg) -> Sub msg
 
 port portEU: (Models.Sunday -> msg) -> Sub msg
 
@@ -147,63 +146,18 @@ update msg model =
     ModEU msg ->
       let
         newModel = {model | eu = Sunday.update msg model.eu}
---        newCmd =
---          let 
---            otVer = (List.head newModel.eu.ot |> Maybe.withDefault Models.initLesson).version
---            psVer = (List.head newModel.eu.ps |> Maybe.withDefault Models.initLesson).version
---            ntVer = (List.head newModel.eu.nt |> Maybe.withDefault Models.initLesson).version
---            gsVer = (List.head newModel.eu.gs |> Maybe.withDefault Models.initLesson).version
---          in
---            if otVer /= "" then
---              requestReading ["ot", otVer, model.eu.date]
---            else if psVer /= "" then 
---              requestReading ["ps", psVer, model.eu.date]
---            else if ntVer /= "" then
---              requestReading ["nt", ntVer, model.eu.date]
---            else if gsVer /= "" then
---              requestReading ["gs", gsVer, model.eu.date]
---            else
---              Cmd.none
       in 
         (newModel, Cmd.none)
 
     ModMP msg ->
       let
         newModel = {model | mp = MPReading.update msg model.mp}
---        newCmd =
---          let 
---            mp1Ver = (List.head newModel.mp.mp1 |> Maybe.withDefault Models.initLesson).version
---            mp2Ver = (List.head newModel.mp.mp2 |> Maybe.withDefault Models.initLesson).version
---            mppVer = (List.head newModel.mp.mpp |> Maybe.withDefault Models.initLesson).version
---          in
---            if mp1Ver /= "" then
---              requestReading ["mp1", mp1Ver, model.mp.date]
---            else if mp2Ver /= "" then 
---              requestReading ["mp2", mp2Ver, model.mp.date]
---            else if mppVer /= "" then
---              requestReading ["mpp", mppVer, model.mp.date]
---            else
---              Cmd.none
       in 
         (newModel, Cmd.none)
 
     ModEP msg ->
       let
         newModel = {model | ep = EPReading.update msg model.ep}
---        newCmd =
---          let 
---            ep1Ver = (List.head newModel.ep.ep1 |> Maybe.withDefault Models.initLesson).version
---            ep2Ver = (List.head newModel.ep.ep2 |> Maybe.withDefault Models.initLesson).version
---            eppVer = (List.head newModel.ep.epp |> Maybe.withDefault Models.initLesson).version
---          in
---            if ep1Ver /= "" then
---              requestReading ["ep1", ep1Ver, model.ep.date]
---            else if ep2Ver /= "" then 
---              requestReading ["ep2", ep2Ver, model.ep.date]
---            else if eppVer /= "" then
---              requestReading ["epp", eppVer, model.ep.date]
---            else
---              Cmd.none
       in 
         (newModel, Cmd.none)
 
@@ -228,28 +182,30 @@ view model =
 euDiv: Model -> Html Msg
 euDiv model =
   div [] [ App.map ModEU (Sunday.view model.eu) ]
-  -- [ (Sunday.view (Signal.forwardTo (ModEU model.eu)) model.eu) ]
 
 mpDiv: Model -> Html Msg
 mpDiv model =
   div []
   [ App.map ModMP (MPReading.view model.mp)
-  --(MPReading.view (Signal.forwardTo (ModMP model.mp)) model.mp)
   ]
 
 epDiv: Model -> Html Msg
 epDiv model =
   div []
   [ App.map ModEP (EPReading.view model.ep)
-  -- (EPReading.view (Signal.forwardTo (ModEP model.ep)) model.ep)
   ]
 
 reflectionDiv: Model -> Html Msg
 reflectionDiv model =
-  div []
-  [ div [id "reflection"] [Markdown.toHtml [] model.reflection.markdown]
-  , p [class "author"] [text ("--- " ++ model.reflection.author)]
-  ]
+  let
+    author =  if String.length model.reflection.author > 0 
+              then "--- " ++ model.reflection.author
+              else ""
+  in
+    div []
+    [ div [id "reflection"] [Markdown.toHtml [] model.reflection.markdown]
+    , p [class "author"] [text author]
+    ]
 
 oneLessonDiv: Model -> Html Msg
 oneLessonDiv model =
