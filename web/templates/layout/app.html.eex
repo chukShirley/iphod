@@ -10,14 +10,7 @@
     <title>Legereme</title>
     <link rel="apple-touch-icon-precomposed" href="/priv/apple-touch-icon-precomposed.png" />
     <link rel="apple-touch-icon" href="/priv/apple-touch-icon.png" />
-    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/mobile.css") %>" media="screen and (min-device-width: 320px)" />
-    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>" media="screen  and (min-width: 769px)" />
-    <!--
-    -->
-
-    <!--[if (lt IE 9)&(!IEMobile)]>
-    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/mobile.css") %>" />
-    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>" 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>

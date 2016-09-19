@@ -337,10 +337,15 @@ epDiv model =
 
 reflectionDiv: Model -> Html Msg
 reflectionDiv model =
-  div []
-  [ div [id "reflection"] [Markdown.toHtml [] model.reflection.markdown]
-  , p [class "author"] [text ("--- " ++ model.reflection.author)]
-  ]
+  let
+    author =  if String.length model.reflection.author > 0 
+              then "--- " ++ model.reflection.author
+              else ""
+  in
+    div []
+    [ div [id "reflection"] [Markdown.toHtml [] model.reflection.markdown]
+    , p [class "author"] [text author]
+    ]
 
 
 euReadingStyle: Model -> Attribute msg

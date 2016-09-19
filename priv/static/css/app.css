@@ -768,7 +768,7 @@ form.link, form.button {
     color: darkred;
   }
 
-
+@import "mobile.css"
 
 /*!
 * jQuery Mobile 1.4.5
@@ -6117,8 +6117,10 @@ h3 {
   font-family: "Georgia, Times New Roman, Times, serif";
   font-size: 1em;
   margin-left: 2em;
-  width: 32em;
 }
+@media screen and (min-width: 320px) { .mpep { width: 17em; } }
+@media screen and (min-width: 768px) { .mpep { width: 30em; } }
+@media screen and (min-width: 940px) { .mpep { width: 32em; } }
 
 .mpep p{
   position: relative;

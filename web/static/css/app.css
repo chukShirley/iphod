@@ -768,4 +768,4 @@ form.link, form.button {
     color: darkred;
   }
 
-
+@import "mobile.css"
