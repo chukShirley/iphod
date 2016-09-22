@@ -1717,17 +1717,17 @@ defmodule SundayReading do
                 "a" => %{ ot: [%{style: "req", read: "Ezek 18:1-4, 18:25-32"}],
                           ps: [%{style: "req", read: "Psalm 25:1-14"},%{style: "opt", read: "Psalm 25:15-21"}],
                           nt: [%{style: "req", read: "Phil 2:1-13"}],
-                          nt: [%{style: "req", read: "Mt 21:28-32"}]
+                          gs: [%{style: "req", read: "Mt 21:28-32"}]
                         },
                 "b" => %{ ot: [%{style: "req", read: "Num 11:4-6, 11:10-17, 11:24-29"}],
                           ps: [%{style: "opt", read: "Psalm 19:1-6"},%{style: "req", read: "Psalm 19:7-14"}],
                           nt: [%{style: "req", read: "James 4:7-12"},%{style: "opt", read: "James 4:13-end, 5:1-6"}],
-                          nt: [%{style: "req", read: "Mk 9:38-48"}]
+                          gs: [%{style: "req", read: "Mk 9:38-48"}]
                         },
                 "c" => %{ ot: [%{style: "req", read: "Amos 6:1-7"}],
                           ps: [%{style: "req", read: "Psalm 146"}],
                           nt: [%{style: "req", read: "1 Tim 6:11-19"}],
-                          nt: [%{style: "req", read: "Lk 16:19-31"}]
+                          gs: [%{style: "req", read: "Lk 16:19-31"}]
                         }
             },
           "22" =>
