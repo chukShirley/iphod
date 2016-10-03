@@ -11,7 +11,7 @@
     The Confession of Sin may be said, or the Office may continue with 
     “O Lord, open our lips.”
   </p>
-  <p class= "section">Opening Sentences of Scripture</p>
+  <p id="opening_scripture" class= "section">Opening Sentences of Scripture</p>
   </br>
   <p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
   <p class= "default">
@@ -21,7 +21,9 @@
   </p>
   </br>
   <%= render "_confession.html" %>
-  <p class= "section"> The Invitatory</p>
+  <p class= "section"> The Invitatory
+  </p>
+
 
   <p class= "rubric">All stand</p>
   <%= render "_invitatory.html" %>

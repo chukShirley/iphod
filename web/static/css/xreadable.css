@@ -1,0 +1,15 @@
+/*!
+* readable.css
+* for web page readers
+*/
+
+.rubric { display: none; }
+.title2 { display: none; }
+.rubric_black { display: none; }
+.bible_ref { display: none; }
+.alt_confession { display: none; }
+.priest_alone { display: none; }
+.invitatory-init { display: none; }
+.invitatory-speaker { display: none; }
+
+#opening_scripture { display: none; }

@@ -5,6 +5,7 @@
  */
 @import "menu_styles.css"
 @import "print.css"
+@import "aural.css"
 @import "mpep.css"
 
 /* Space out content a bit */
@@ -202,6 +203,8 @@ form.link, form.button {
     padding: 0 1em;
     margin-top: -1em;
   }
+
+  .period { display: hide; }
 
 /*  
   .ps_title {

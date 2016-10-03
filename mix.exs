@@ -35,21 +35,24 @@ defmodule Iphod.Mixfile do
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [{:phoenix, ">= 1.2.0"},
-     {:phoenix_pubsub, "~> 1.0"},
-     {:phoenix_ecto, "~> 2.0"},
-     {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, ">= 2.6.0"},
-     {:phoenix_live_reload, "~> 1.0"},
-     {:gettext, "~> 0.9"},
-     {:cowboy, "~> 1.0"},
-     {:exrm, "~> 1.0.8", only: :prod},
-     {:timex, github: "frpaulas/timex"},
-     # {:mock, github: "jjh42/mock", only: :dev},
-     {:httpoison, "~> 0.8.2"},
-     {:mailgun, "~> 0.1.2"},
-     {:earmark, "~> 1.0.1"},
-     {:mix_test_watch, "~> 0.2", only: :dev}
+    [ {:phoenix, ">= 1.2.0"},
+      {:phoenix_pubsub, "~> 1.0"},
+      {:phoenix_ecto, "~> 2.0"},
+      {:postgrex, ">= 0.0.0"},
+      {:phoenix_html, ">= 2.6.0"},
+      {:phoenix_live_reload, "~> 1.0"},
+      {:gettext, "~> 0.9"},
+      {:cowboy, "~> 1.0"},
+      {:exrm, "~> 1.0.8", only: :prod},
+      {:timex, github: "frpaulas/timex"},
+      # {:mock, github: "jjh42/mock", only: :dev},
+      {:httpoison, "~> 0.8.2"},
+      {:mailgun, "~> 0.1.2"},
+      {:earmark, "~> 1.0.1"},
+      {:mix_test_watch, "~> 0.2", only: :dev},
+      {:phoenix_integration, "~> 0.1"},
+      {:mix_test_watch, "~> 0.2", only: :dev}
+
      # {:exometer_core, "~> 1.4.0"},
      # {:exometer, "~> 1.2.1"},
      # {:edown, github: "uwiger/edown", tag: "0.7", override: true}

@@ -21,8 +21,9 @@ exports.config = {
       // }
     },
     stylesheets: {
-      joinTo: { 'css/app.css': /^(?!mobile)/,
-                'css/mobile.css': /^web\/static\/css\/mobile.?/
+      joinTo: { 'css/app.css': /^web\/static\/css\/(?!x).?/,
+                'css/mobile.css': /^web\/static\/css\/xmobile.?/,
+                'css/readable.css': /^web\/static\/css\/xreadable.?/
             }
     },
     templates: {

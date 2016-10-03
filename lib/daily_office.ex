@@ -25,36 +25,23 @@ defmodule DailyReading do
     |> Map.put(:show, true)
   end
 
-#  def lesson_with_body(list), do: lesson_with_body(list, "ESV")
-#
-#  def lesson_with_body(list, "ESV") do
-#    list |> Enum.map(fn(lesson)->
-#      lesson 
-#      |> Map.put(:body, EsvText.request(lesson.read) )
-#      |> Map.put(:show, true)
-#    end)
-#  end
-#
-#  def lesson_with_body(list, ver) do
-#    list |> Enum.map(fn(lesson)->
-#      lesson 
-#      |> Map.put(:body, BibleComText.request(ver, lesson.read) )
-#      |> Map.put(:show, true)
-#    end)
-#  end
-
   def opening_sentence(mpep, date) do
     {season, _wk, _lityr, _date} = select_season(date)
     identity["#{mpep}_opening"][season]
-    |> Enum.random
+    |> pick_one(date)
   end
     
   def antiphon(date) do
     {season, _wk, _lityr, _date} = select_season(date)
     identity["antiphon"][season]
-    |> Enum.random
+    |> pick_one(date)
   end
 
+  def pick_one(list, date) do
+    len = length list
+    at = rem Timex.day(date), len
+    Enum.at list, at
+  end
   # def readings("christmas", wk, "Sunday", _date) do
   #   identity["christmas"][wk]["Sunday"]
   # end

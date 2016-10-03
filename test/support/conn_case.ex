@@ -36,6 +36,6 @@ defmodule Iphod.ConnCase do
       Ecto.Adapters.SQL.restart_test_transaction(Iphod.Repo, [])
     end
 
-    {:ok, conn: Phoenix.ConnTest.conn()}
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

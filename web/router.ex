@@ -23,12 +23,24 @@ defmodule Iphod.Router do
     get "/calendar/prev/:month/:year", CalendarController, :prev
     get "/calendar/next/:month/:year/:min", CalendarController, :next
     get "/calendar/prev/:month/:year/:min", CalendarController, :prev
+    get "/readmp", PrayerController, :readmp
+    get "/readmp/:psalm", PrayerController, :readmp
+    get "/readmp/:psalm/:text", PrayerController, :readmp
+    get "/mp", PrayerController, :mp
+    get "/mp/:psalm", PrayerController, :mp
+    get "/mp/:psalm/:text", PrayerController, :mp
     get "/morningPrayer", PrayerController, :mp
     get "/morningPrayer/:psalm", PrayerController, :mp
     get "/morningPrayer/:psalm/:text", PrayerController, :mp
+    get "/readep", PrayerController, :readep
+    get "/readep/:psalm", PrayerController, :readep
+    get "/readep/:psalm/:text", PrayerController, :readep
     get "/eveningPrayer", PrayerController, :ep
     get "/eveningPrayer/:psalm", PrayerController, :ep
     get "/eveningPrayer/:psalm/:text", PrayerController, :ep
+    get "/ep", PrayerController, :ep
+    get "/ep/:psalm", PrayerController, :ep
+    get "/ep/:psalm/:text", PrayerController, :ep
     get "/printables", PrintableController, :index
     get "/versions", BibleVersionsController, :index
 
