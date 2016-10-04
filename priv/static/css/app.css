@@ -55,6 +55,19 @@ form.link, form.button {
   margin: 35px 0;
 }
 
+  #header-options {
+    position: relative;
+    float: right;
+    margin-top: -1em;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    list-style-type: none;
+  }
+  
+  li.option-item {
+    display: inline;
+  }
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width:768px) {
   /* Remove the padding we set earlier */
@@ -96,20 +109,7 @@ form.link, form.button {
     margin-bottom: 0.1em;
     line-height: 50px;
   }
-  
-  #header-options {
-    position: relative;
-    float: right;
-    margin-top: -1em;
-    margin-bottom: 0;
-    padding-bottom: 0;
-    list-style-type: none;
-  }
-  
-  li.option-item {
-    display: inline;
-  }
-  
+    
   .home_link {
     background-image: url("/images/legereme.jpg");
     background-repeat: no-repeat;

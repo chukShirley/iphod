@@ -1608,9 +1608,7 @@ var path = window.location.pathname;
 // mobile landing page
 
 if (path.match(/mindex/)) {
-
-  var elmHeaderDiv = document.getElementById('header-elm-container'),
-      elmHeaderApp = Elm.Header.embed(elmHeaderDiv);
+  $('#header-elm-container').hide();
 }
 
 // landing page, calendar
@@ -1682,6 +1680,10 @@ if (path == "/" || path.match(/calendar/) || path.match(/mindex/)) {
 
       $("#m-reading-container").click(function () {
         $("#reading-panel").effect("drop", "fast");
+      });
+
+      $("#more-button").click(function () {
+        $("#header-elm-container").toggle();
       });
 
       channel.on('reflection_today', function (data) {
