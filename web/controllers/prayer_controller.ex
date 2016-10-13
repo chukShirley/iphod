@@ -8,28 +8,28 @@ defmodule Iphod.PrayerController do
     {psalm, text} = translations(params)
     conn
       |> put_layout("app.html")
-      |> render "mp.html", model: prayer_model("mp", psalm, text)
+      |> render( "mp.html", model: prayer_model("mp", psalm, text))
   end
 
   def ep(conn, params) do
     {psalm, text} = translations(params)
     conn
       |> put_layout("app.html")
-      |> render "ep.html", model: prayer_model("ep", psalm, text)
+      |> render( "ep.html", model: prayer_model("ep", psalm, text))
   end
 
   def readmp(conn, params) do
     {psalm, text} = translations(params)
     conn
       |> put_layout("readable.html")
-      |> render "mp.html", model: prayer_model("mp", psalm, text)
+      |> render( "mp.html", model: prayer_model("mp", psalm, text))
   end
 
   def readep(conn, params) do
     {psalm, text} = translations(params)
     conn
       |> put_layout("readable.html")
-      |> render "ep.html", model: prayer_model("ep", psalm, text)
+      |> render( "ep.html", model: prayer_model("ep", psalm, text))
   end
 
 # HELPERS ------

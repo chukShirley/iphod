@@ -6,7 +6,7 @@ defmodule Iphod.ReflectionController do
   plug :scrub_params, "reflection" when action in [:create, :update]
 
   def index(conn, _params) do
-    reflections = Repo.all(Reflection)
+    reflections = Repo.all from r in Reflection, order_by: :date
     render(conn, "index.html", reflections: reflections)
   end
 

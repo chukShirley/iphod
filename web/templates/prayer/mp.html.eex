@@ -1,17 +1,18 @@
 <div class= "mpep">
-  <p class= "title1">Daily Morning Prayer</p>
+  <p class= "title1"><%= gettext "Daily Morning Prayer"%></p>
   <p class= "title1"><%=@model.date%></p>
-  <p class= "title2 italic">Approved for Provincial Use</p>
-  <p class= "title2">The Anglican Church in North America</p>
-  <p class= "title2 italic">Petertide, A.D. 2013</p>
+  <p class= "title2 italic"><%= gettext "Approved for Provincial Use"%></p>
+  <p class= "title2"><%= gettext "The Anglican Church in North America"%></p>
+  <p class= "title2 italic"><%= gettext "Petertide, A.D. 2013"%></p>
   </br>
-  <p class= "rubric"> 
-    The Officiant may begin Morning Prayer by reading an opening sentence 
-    of Scripture found on pages 17-19 or another appropriate Scripture. 
-    The Confession of Sin may be said, or the Office may continue with 
-    “O Lord, open our lips.”
+  <p class= "rubric"><%= gettext """
+        The Officiant may begin Morning Prayer by reading an opening sentence 
+        of Scripture found on pages 17-19 or another appropriate Scripture. 
+        The Confession of Sin may be said, or the Office may continue with 
+        “O Lord, open our lips.”
+        """%>
   </p>
-  <p id="opening_scripture" class= "section">Opening Sentences of Scripture</p>
+  <p id="opening_scripture" class= "section"><%= gettext "Opening Sentences of Scripture"%></p>
   </br>
   <p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
   <p class= "default">
@@ -19,13 +20,13 @@
     </br>
     <span class= "bible_ref"><%=@model.opening_sentence_ref%></span>
   </p>
+  <p class="rubric_black"><%= gettext "alt opening sentence"%></p>
   </br>
   <%= render "_confession.html" %>
-  <p class= "section"> The Invitatory
-  </p>
+  <p class= "section"><%= gettext " The Invitatory" %></p>
 
 
-  <p class= "rubric">All stand</p>
+  <p class= "rubric"><%= gettext "All stand"%></p>
   <%= render "_invitatory.html" %>
   </br>
   <p class= "rubric">Then follows the Venite. Alternatively, the Jubilate may be used.</p>
