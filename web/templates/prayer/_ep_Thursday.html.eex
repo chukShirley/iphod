@@ -1,7 +1,7 @@
 </br>
-<p class= "section">A Collect for the Presence of Christ (Thursday)</p>
-<p class= "default">Lord Jesus, stay with us, for evening is at hand and the day is past; be
+<p class= "section"><%= dgettext "ep_thr", "A Collect for the Presence of Christ (Thursday)"%></p>
+<p class= "default"><%= dgettext "ep_thr", "Lord Jesus, stay with us, for evening is at hand and the day is past; be
 our companion in the way, kindle our hearts, and awaken hope, that
 we may know you as you are revealed in Scripture and the breaking
-of bread. Grant this for the sake of your love.
-<span class= "italic"> Amen.</span></p>
+of bread. Grant this for the sake of your love."%>
+<span class= "italic"> <%= gettext "Amen"%>.</span></p>

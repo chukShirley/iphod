@@ -1,0 +1,97 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_ep_Friday.html.eex:7
+#: web/templates/prayer/_ep_Monday.html.eex:8
+#: web/templates/prayer/_ep_Saturday.html.eex:7
+#: web/templates/prayer/_ep_Sunday.html.eex:8
+#: web/templates/prayer/_ep_Thursday.html.eex:7
+#: web/templates/prayer/_ep_Tuesday.html.eex:6
+#: web/templates/prayer/_ep_Wednesday.html.eex:9
+#: web/templates/prayer/_mp_Friday.html.eex:10
+#: web/templates/prayer/_mp_Monday.html.eex:3
+#: web/templates/prayer/_mp_Saturday.html.eex:8
+#: web/templates/prayer/_mp_Sunday.html.eex:3
+#: web/templates/prayer/_mp_Thursday.html.eex:7
+#: web/templates/prayer/_mp_Tuesday.html.eex:3
+#: web/templates/prayer/_mp_Wednesday.html.eex:7
+msgid "Amen"
+msgstr ""
+
+#: web/templates/prayer/_prayer_intro.html.eex:8
+msgid "And with your spirit."
+msgstr ""
+
+#: web/templates/prayer/_mercy3.html.eex:2
+msgid "Christ, have mercy [upon us]."
+msgstr ""
+
+#: web/templates/prayer/_eo_prayer.html.eex:4
+msgid "Let us bless the Lord"
+msgstr ""
+
+#: web/templates/prayer/_prayer_intro.html.eex:12
+msgid "Let us pray."
+msgstr ""
+
+#: web/templates/prayer/_mercy3.html.eex:1
+#: web/templates/prayer/_mercy3.html.eex:3
+msgid "Lord, have mercy [upon us]."
+msgstr ""
+
+#: web/templates/prayer/_eo_prayer.html.eex:3
+#: web/templates/prayer/_graces.html.eex:3
+#: web/templates/prayer/_invitatory.html.eex:3
+#: web/templates/prayer/_invitatory.html.eex:11
+#: web/templates/prayer/_invitatory.html.eex:19
+#: web/templates/prayer/_invitatory.html.eex:27
+#: web/templates/prayer/_prayer_intro.html.eex:3
+#: web/templates/prayer/_prayer_intro.html.eex:11
+#: web/templates/prayer/_prayers.html.eex:3
+#: web/templates/prayer/_prayers.html.eex:11
+#: web/templates/prayer/_prayers.html.eex:19
+#: web/templates/prayer/_prayers.html.eex:27
+#: web/templates/prayer/_prayers.html.eex:35
+#: web/templates/prayer/_prayers.html.eex:43
+#: web/templates/prayer/_prayers.html.eex:51
+msgid "Officiant"
+msgstr ""
+
+#: web/templates/prayer/_eo_prayer.html.eex:7
+#: web/templates/prayer/_invitatory.html.eex:7
+#: web/templates/prayer/_invitatory.html.eex:15
+#: web/templates/prayer/_invitatory.html.eex:23
+#: web/templates/prayer/_invitatory.html.eex:31
+#: web/templates/prayer/_prayer_intro.html.eex:7
+#: web/templates/prayer/_prayers.html.eex:7
+#: web/templates/prayer/_prayers.html.eex:15
+#: web/templates/prayer/_prayers.html.eex:23
+#: web/templates/prayer/_prayers.html.eex:31
+#: web/templates/prayer/_prayers.html.eex:39
+#: web/templates/prayer/_prayers.html.eex:47
+#: web/templates/prayer/_prayers.html.eex:55
+#: web/templates/prayer/_the_word_of_the_lord.html.eex:7
+msgid "People"
+msgstr ""
+
+#: web/templates/prayer/_eo_prayer.html.eex:8
+#: web/templates/prayer/_the_word_of_the_lord.html.eex:8
+msgid "Thanks be to God"
+msgstr ""
+
+#: web/templates/prayer/_prayer_intro.html.eex:4
+msgid "The Lord be with you."
+msgstr ""
+
+#: web/templates/prayer/_the_word_of_the_lord.html.eex:4
+msgid "The Word of the Lord"
+msgstr ""

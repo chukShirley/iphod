@@ -1,0 +1,92 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:4
+msgid "Almighty God, Father of all mercies,"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:13
+msgid "And, we pray, give us such an awareness of your mercies,"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:3
+msgid "Officiant and People"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:2
+msgid "The General Thanksgiving"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:8
+msgid "We bless you for our creation, preservation,"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:9
+msgid "and all the blessings of this life;"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:17
+msgid "and by walking before you"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:21
+msgid "be honor and glory throughout all ages. Amen."
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:10
+msgid "but above all for your immeasurable love"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:16
+msgid "by giving up our selves to your service,"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:6
+msgid "for all your goodness and loving-kindness"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:12
+msgid "for the means of grace, and for the hope of glory."
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:18
+msgid "in holiness and righteousness all our days;"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:11
+msgid "in the redemption of the world by our Lord Jesus Christ;"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:15
+msgid "not only with our lips, but in our lives,"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:14
+msgid "that with truly thankful hearts we may show forth your praise,"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:19
+msgid "through Jesus Christ our Lord,"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:7
+msgid "to us and to all whom you have made."
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:20
+msgid "to whom, with you and the Holy Spirit,"
+msgstr ""
+
+#: web/templates/prayer/_general_thanksgiving.html.eex:5
+msgid "we your unworthy servants give you humble thanks"
+msgstr ""

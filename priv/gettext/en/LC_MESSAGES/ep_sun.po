@@ -1,0 +1,19 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_ep_Sunday.html.eex:2
+msgid "A Collect for Resurrection Hope (Sunday)"
+msgstr ""
+
+#: web/templates/prayer/_ep_Sunday.html.eex:3
+msgid "Lord God, whose Son our Savior Jesus Christ triumphed over the\npowers of death and prepared for us our place in the new Jerusalem:\nGrant that we, who have this day given thanks for his resurrection,\nmay praise you in that City of which he is the light, and where he\nlives and reigns forever and ever."
+msgstr ""

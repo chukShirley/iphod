@@ -1,11 +1,11 @@
 <table>
   <tr>
-    <td style= "font-style: italic; padding-right: 3em">Officiant</td>
-    <td>Let us bless the Lord</td>
+    <td style= "font-style: italic; padding-right: 3em"><%= gettext "Officiant"%></td>
+    <td><%= gettext "Let us bless the Lord"%></td>
   </tr>
   <tr>
-    <td class= "italic">People</td>
-    <td>Thanks be to God</td>
+    <td class= "italic"><%= gettext "People"%></td>
+    <td><%= gettext "Thanks be to God"%></td>
   </tr>
 </table>
 

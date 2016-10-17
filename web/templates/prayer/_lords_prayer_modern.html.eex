@@ -1,7 +1,7 @@
-<p class= "vs">Our Father in heaven, hallowed be your Name.</p>
-<p class= "vs">Your kingdom come, your will be done, on earth as it is in heaven.</p>
-<p class= "vs">Give us today our daily bread.</p>
-<p class= "vs">And forgive us our sins as we forgive those who sin against us.</p>
-<p class= "vs">Save us from the time of trial, and deliver us from evil.</p>
-<p class= "vs">For the kingdom, the power, and the glory are yours,</p>
-<p class= "vs_indent">now and forever. Amen.</p>
+<p class= "vs"><%= dgettext "lp_mod", "Our Father in heaven, hallowed be your Name."%></p>
+<p class= "vs"><%= dgettext "lp_mod", "Your kingdom come, your will be done, on earth as it is in heaven."%></p>
+<p class= "vs"><%= dgettext "lp_mod", "Give us today our daily bread."%></p>
+<p class= "vs"><%= dgettext "lp_mod", "And forgive us our sins as we forgive those who sin against us."%></p>
+<p class= "vs"><%= dgettext "lp_mod", "Save us from the time of trial, and deliver us from evil."%></p>
+<p class= "vs"><%= dgettext "lp_mod", "For the kingdom, the power, and the glory are yours,"%></p>
+<p class= "vs_indent"><%= dgettext "lp_mod", "now and forever. Amen."%></p>

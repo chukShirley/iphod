@@ -1,8 +1,8 @@
 </br>
-<p class= "section">A Collect for Resurrection Hope (Sunday)</p>
-<p class= "default">Lord God, whose Son our Savior Jesus Christ triumphed over the
+<p class= "section"><%= dgettext "ep_sun", "A Collect for Resurrection Hope (Sunday)"%></p>
+<p class= "default"><%= dgettext "ep_sun", "Lord God, whose Son our Savior Jesus Christ triumphed over the
 powers of death and prepared for us our place in the new Jerusalem:
 Grant that we, who have this day given thanks for his resurrection,
 may praise you in that City of which he is the light, and where he
-lives and reigns forever and ever.
-<span class= "italic"> Amen.</span></p>
+lives and reigns forever and ever."%>
+<span class= "italic"> <%= gettext "Amen"%>.</span></p>

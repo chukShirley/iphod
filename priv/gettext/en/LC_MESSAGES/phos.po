@@ -1,0 +1,55 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_phos_hilaron.html.eex:8
+msgid "Now as we come to the setting of the sun,"
+msgstr ""
+
+#: web/templates/prayer/_phos_hilaron.html.eex:3
+msgid "O Gladsome Light"
+msgstr ""
+
+#: web/templates/prayer/_phos_hilaron.html.eex:7
+msgid "O Jesus Christ, holy and blessed!"
+msgstr ""
+
+#: web/templates/prayer/_phos_hilaron.html.eex:12
+msgid "O Son of God, O Giver of Life,"
+msgstr ""
+
+#: web/templates/prayer/_phos_hilaron.html.eex:5
+msgid "O gladsome light,"
+msgstr ""
+
+#: web/templates/prayer/_phos_hilaron.html.eex:2
+msgid "Phos hilaron"
+msgstr ""
+
+#: web/templates/prayer/_phos_hilaron.html.eex:11
+msgid "You are worthy at all times to be praised by happy voices,"
+msgstr ""
+
+#: web/templates/prayer/_phos_hilaron.html.eex:9
+msgid "and our eyes behold the vesper light,"
+msgstr ""
+
+#: web/templates/prayer/_phos_hilaron.html.eex:13
+msgid "and to be glorified through all the worlds."
+msgstr ""
+
+#: web/templates/prayer/_phos_hilaron.html.eex:6
+msgid "pure brightness of the ever-living Father in heaven,"
+msgstr ""
+
+#: web/templates/prayer/_phos_hilaron.html.eex:10
+msgid "we sing praises to God: the Father, the Son, and the Holy Spirit."
+msgstr ""

@@ -1,20 +1,20 @@
-<p class= "section">The Apostles’ Creed</p>
-<p class= "rubric">Officiant and People together, all standing</p>
-<p class= "vs">I believe in God, the Father almighty,</p>
-<p class= "vs_indent">creator of heaven and earth.</p>
-<p class= "vs">I believe in Jesus Christ, his only Son, our Lord.</p>
-<p class= "vs_indent">He was conceived by the Holy Spirit</p>
-<p class= "vs_indent">and born of the Virgin Mary.</p>
-<p class= "vs_indent">He suffered under Pontius Pilate,</p>
-<p class= "vs_indent">was crucified, died, and was buried.</p>
-<p class= "vs_indent">He descended to the dead.</p>
-<p class= "vs_indent">On the third day he rose again.</p>
-<p class= "vs_indent">He ascended into heaven,</p>
-<p class= "vs_indent">and is seated at the right hand of the Father.</p>
-<p class= "vs_indent">He will come again to judge the living and the dead.</p>
-<p class= "vs">I believe in the Holy Spirit,</p>
-<p class= "vs_indent">the holy catholic Church,</p>
-<p class= "vs_indent">the communion of saints,</p>
-<p class= "vs_indent">the forgiveness of sins,</p>
-<p class= "vs_indent">the resurrection of the body,</p>
-<p class= "vs_indent">and the life everlasting. Amen.</p>
+<p class= "section"><%= dgettext "apcreed", "The Apostles’ Creed"%></p>
+<p class= "rubric"><%= dgettext "apcreed", "Officiant and People together, all standi"%>ng</p>
+<p class= "vs"><%= dgettext "apcreed", "I believe in God, the Father almighty,"%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "creator of heaven and earth."%></p>
+<p class= "vs"><%= dgettext "apcreed", "I believe in Jesus Christ, his only Son, "%>our Lord.</p>
+<p class= "vs_indent"><%= dgettext "apcreed", "He was conceived by the Holy Spirit"%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "and born of the Virgin Mary."%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "He suffered under Pontius Pilate,"%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "was crucified, died, and was buried."%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "He descended to the dead."%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "On the third day he rose again."%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "He ascended into heaven,"%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "and is seated at the right hand of "%>the Father.</p>
+<p class= "vs_indent"><%= dgettext "apcreed", "He will come again to judge the living"%> and the dead.</p>
+<p class= "vs"><%= dgettext "apcreed", "I believe in the Holy Spirit,"%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "the holy catholic Church,"%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "the communion of saints,"%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "the forgiveness of sins,"%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "the resurrection of the body,"%></p>
+<p class= "vs_indent"><%= dgettext "apcreed", "and the life everlasting. Amen."%></p>

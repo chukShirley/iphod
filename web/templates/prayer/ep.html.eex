@@ -1,14 +1,16 @@
 <div class= "mpep">
-  <p class= "title1">Daily Evening Prayer</p>
+  <p class= "title1"><%= dgettext "ep", "Daily Evening Prayer"%></p>
   <p class= "title1"><%=@model.date%></p>
-  <p class= "title2 italic">Approved for Provincial Use</p>
-  <p class= "title2">The Anglican Church in North America</p>
-  <p class= "title2 italic">Petertide, A.D. 2013</p>
-  <p class= "rubric"> 
+  <p class= "title2 italic"><%= dgettext "ep", "Approved for Provincial Use"%></p>
+  <p class= "title2"><%= dgettext "ep", "The Anglican Church in North America"%></p>
+  <p class= "title2 italic"><%= dgettext "ep", "Petertide, A.D. 2013"%></p>
+  <p class= "rubric"><%= dgettext "ep", """
     The Officiant may begin Evening Prayer by reading an opening sentence 
     of Scripture found on pages 17-19 or another appropriate Scripture. 
     The Confession of Sin may be said, or the Office may continue with 
     “O Lord, open our lips.”
+    """
+    %>
   </p>
   <p class= "section">Opening Sentences of Scripture</p>
   </br>
@@ -20,61 +22,61 @@
   </p>
   </br>
   <%= render "_confession.html" %>
-  <p class= "section"> The Invitatory</p>
-  <p class= "rubric">All stand</p>
+  <p class= "section"> <%= dgettext "ep", "The Invitatory"%></p>
+  <p class= "rubric"><%= dgettext "ep", "All stand"%></p>
   <%= render "_invitatory.html" %>
-  <p class= "rubric">The following or some other suitable hymn or Psalm may be sung or said</p>
+  <p class= "rubric"><%= dgettext "ep", "The following or some other suitable hymn or Psalm may be sung or said"%></p>
   <%= render "_phos_hilaron.html" %>
   </br>
-  <p class= "rubric">Then follows</p>
-  <p class= "section">The Psalm or Psalms Appointed</p>
+  <p class= "rubric"><%= dgettext "ep", "Then follows"%></p>
+  <p class= "section"><%= dgettext "ep", "The Psalm or Psalms Appointed"%></p>
   <p class= "reading"><%= @model.epp |> text_list_to_html %></p> 
-  <p class= "rubric">At the end of the Psalms is sung or said</p>
-  <p class= "vs">Glory to the Father, and to the Son, and to the Holy Spirit;</p>
-  <p class= "vs_indent">as it was in the beginning, is now, and ever shall be,</p>
-  <p class= "vs_indent">world without end. Amen.</p>
+  <p class= "rubric"><%= dgettext "ep", "At the end of the Psalms is sung or said"%></p>
+  <p class= "vs"><%= dgettext "ep", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
+  <p class= "vs_indent"><%= dgettext "ep", "as it was in the beginning, is now, and ever shall be,"%></p>
+  <p class= "vs_indent"><%= dgettext "ep", "world without end. Amen."%></p>
   </br>
 
-  <p class= "section">The Lessons</p>
-  <p>The First Lesson from</p>
+  <p class= "section"><%= dgettext "ep", "The Lessons"%></p>
+  <p><%= dgettext "ep", "The First Lesson from"%></p>
   <p class= "reading"> <%= @model.ep1 |> text_list_to_html %></p>
 
-  <p class= "rubric">A citation giving chapter and verse may be added.</p>
-  <p class= "rubric">After each Lesson the Reader may say</p>
+  <p class= "rubric"><%= dgettext "ep", "A citation giving chapter and verse may be added."%></p>
+  <p class= "rubric"><%= dgettext "ep", "After each Lesson the Reader may say"%></p>
   <%= render "_the_word_of_the_lord.html" %>
   </br>
 
-  <p class= "rubric">Or the Reader may say</p>
-  <p class= "versical">Here ends the Reading.</p>
+  <p class= "rubric"><%= dgettext "ep", "Or the Reader may say"%></p>
+  <p class= "versical"><%= dgettext "ep", "Here ends the Reading."%></p>
   </br>
 
-  <p class= "rubric">The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise.</p>
+  <p class= "rubric"><%= dgettext "ep", "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."%></p>
   </br>
   <%= render "_#{@model.ot_canticle}.html" %>
   </br>
 
-  <p>The Second Lesson from</p>
+  <p><%= dgettext "ep", "The Second Lesson from"%></p>
   <p class= "reading"> <%= @model.ep2 |> text_list_to_html %></p>
   </br>
   <%= render "_#{@model.nt_canticle}.html" %>
   </br>
-  <p class= "rubric">If desired, a sermon on the Evening Lessons may be preached.</p>
+  <p class= "rubric"><%= dgettext "ep", "If desired, a sermon on the Evening Lessons may be preached."%></p>
   <%= render "_apostles_creed.html" %>
   </br>
-  <p class= "section">The Prayers</p>
-  <p class= "rubric">The People kneel or stand.</p>
+  <p class= "section"><%= dgettext "ep", "The Prayers"%></p>
+  <p class= "rubric"><%= dgettext "ep", "The People kneel or stand."%></p>
   <%= render "_prayer_intro.html" %>
   </br>
   <%= render "_mercy3.html" %>
   </br>
-  <p class= "rubric">Officiant and People</p>
+  <p class= "rubric"><%= dgettext "ep", "Officiant and People"%></p>
   <%= render "_lords_prayer_trad.html" %>
-  <p class= "rubric">or this</p>
+  <p class= "rubric"><%= dgettext "ep", "or this"%></p>
   <%= render "_lords_prayer_modern.html" %>
   </br>
   <%= render "_prayers.html" %>
   </br>
-  <p class= "section">The Collect of the Day</p>
+  <p class= "section"><%= dgettext "ep", "The Collect of the Day"%></p>
   <p><%= @model.collect_of_week %></p>
   <%= render "_mp_#{@model.day}.html" %> <%# collect for this day %>
   <%= render "_ep_for_mission.html" %>
@@ -86,105 +88,3 @@
 
 
 </div>
-<%#
-
-  ++ (rubric "")
-  ++ (apostlesCreed)
-  ++ (blankline)
-
-  ++ (section "The Prayers")
-  ++ (rubric "The People kneel or stand.")
-  ++ thePrayers1
-  ++ (blankline)
-  ++ (mercy3)
-  ++ (blankline)
-
-  ++ (rubric "Officiant and People")
-
-  ++ (vs "Our Father, who art in heaven, hallowed be thy Name.")
-  ++ (vs "Thy kingdom come, thy will be done, on earth as it is in heaven.")
-  ++ (vs "Give us this day our daily bread.")
-  ++ (vs "And forgive us our trespasses, as we forgive those who trespass")
-  ++ (vsIndent "against us.")
-  ++ (vs "And lead us not into temptation, but deliver us from evil.")
-  ++ (vs "For thine is the kingdom, and the power, and the glory,")
-  ++ (vsIndent "forever and ever. Amen.")
-  ++ (blankline)
-
-  ++ (rubric "or this")
-
-  ++ (vs "Our Father in heaven, hallowed be your Name.")
-  ++ (vs "Your kingdom come, your will be done, on earth as it is in heaven.")
-  ++ (vs "Give us today our daily bread.")
-  ++ (vs "And forgive us our sins as we forgive those who sin against us.")
-  ++ (vs "Save us from the time of trial, and deliver us from evil.")
-  ++ (vs "For the kingdom, the power, and the glory are yours,")
-  ++ (vsIndent "now and forever. Amen.")
-  ++ (blankline)
-  ++ (thePrayers2)
-  ++ (blankline)
-
-  ++ (rubric "The Officiant then prays one or more of the following collects. It is traditional to pray the Collects for Peace and Grace daily. Alternatively, one may pray the collects on a weekly rotation, using the suggestions in parentheses.")
-  ++ (section "The Collect of the Day")
-
-  ++ (collectOfDay model)
-
-  ++ (rubric "Unless the Eucharist is to follow, one of the following prayers for mission is added.")
-  ++ (forMission model)
-
-  ++ (rubric "Here may be sung a hymn or anthem.")
-  ++ (rubric "The Officiant may invite the People to offer intercessions and thanksgivings. ")
-  ++ (rubric "Before the close of the Office one or both of the following may be used")
-
-  ++ (section "The General Thanksgiving")
-  ++ (rubric "Officiant and People")
-  ++ (vs "Almighty God, Father of all mercies,")
-  ++ (vs "we your unworthy servants give you humble thanks")
-  ++ (vs "for all your goodness and loving-kindness")
-  ++ (vsIndent "to us and to all whom you have made.")
-  ++ (vs "We bless you for our creation, preservation,")
-  ++ (vsIndent "and all the blessings of this life;")
-  ++ (vs "but above all for your immeasurable love")
-  ++ (vs "in the redemption of the world by our Lord Jesus Christ;")
-  ++ (vs "for the means of grace, and for the hope of glory.")
-  ++ (vs "And, we pray, give us such an awareness of your mercies,")
-  ++ (vs "that with truly thankful hearts we may show forth your praise,")
-  ++ (vs "not only with our lips, but in our lives,")
-  ++ (vs "by giving up our selves to your service,")
-  ++ (vs "and by walking before you")
-  ++ (vsIndent "in holiness and righteousness all our days;")
-  ++ (vs "through Jesus Christ our Lord,")
-  ++ (vs "to whom, with you and the Holy Spirit,")
-  ++ (vs "be honor and glory throughout all ages. Amen.")
-  ++ (blankline)
-
-  ++ (section "A Prayer of St. John Chrysostom")
-  ++ (default "Almighty God, you have given us grace at this time with one accord
-  to make our common supplications to you; and you have promised 
-  through your well beloved Son that when two or three are gathered
-  together in his name you will be in the midst of them: Fulfill now, O
-  Lord, our desires and petitions as may be best for us; granting us in
-  this world knowledge of your truth, and in the age to come life
-  everlasting. Amen.")
-  ++ (eoPrayer)
-  ++ (blankline)
-
-  ++ (rubric "From Easter Day through the Day of Pentecost “Alleluia, alleluia” may be added to the
-  preceding versicle and response.")
-  ++ (rubric "The Officiant may invite the People to join in one of the Graces.")
-  ++ (rubric "Officiant")
-  ++ (theGraces model)
-
-  ++ (section "General Instructions: Morning and Evening Prayer")
-  ++ (italic "The Confession and Apostles’ Creed may be omitted, provided they have been said
-  once during the course of the day.")
-  ++ (italic "In the opening versicles, the Officiant and People may join in saying “Alleluia”
-  (outside of Lent) as an alternative to the versicles “Praise the Lord/The Lord’s
-  name be praised.”")
-  ++ (italic "The following form of the Gloria Patri may be used:")
-  ++ (italicIndent "Glory to the Father, and to the Son, and to the Holy Spirit:")
-  ++ (italicIndent "As it was in the beginning, is now, and will be forever. Amen.")
-  ++ (blankline)
-  ++ (italic "A sermon may also be preached after the Office or after the hymn or anthem (if
-  sung) following the collects.")
-%>

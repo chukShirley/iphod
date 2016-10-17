@@ -1,0 +1,148 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/_cantemus_domino.html.eex:3
+msgid "Cantemus Domino"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:1
+msgid "Especially suitable for use in Easter"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:6
+msgid "Exodus 15:1-6, 11-13, 17-18"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:34
+msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:7
+msgid "I will sing to the Lord, for he is lofty and uplifted;"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:17
+msgid "Red Sea."
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:13
+msgid "The Lord is a mighty warrior;"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:9
+msgid "The Lord is my strength and my refuge;"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:33
+msgid "The Lord shall reign for ever and for ever."
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:4
+msgid "The Song of Moses"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:15
+msgid "The chariots of Pharaoh and his army has he hurled into the sea;"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:18
+msgid "The fathomless deep has overwhelmed them;"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:31
+msgid "The resting-place you have made for yourself, O Lord,"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:11
+msgid "This is my God and I will praise him,"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:22
+msgid "Who can be compared with you, O Lord, among the gods?"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:27
+msgid "With your constant love you led the people you redeemed;"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:14
+msgid "Yahweh is his Name."
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:25
+msgid "You stretched forth your right hand;"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:29
+msgid "You will bring them in and plant them"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:20
+msgid "Your right hand, O Lord, is glorious in might;"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:35
+msgid "as it was in the beginning, is now, and ever shall be,"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:24
+msgid "awesome in renown, and worker of wonders?"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:30
+msgid "on the mount of your possession,"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:12
+msgid "the God of my people and I will exalt him."
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:10
+msgid "the Lord has become my Savior."
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:26
+msgid "the earth swallowed them up."
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:16
+msgid "the finest of those who bear armor have been drowned in the"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:8
+msgid "the horse and its rider has he hurled into the sea."
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:32
+msgid "the sanctuary, O Lord, that your hand has established."
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:19
+msgid "they sank into the depths like a stone."
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:23
+msgid "who is like you, glorious in holiness,"
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:36
+msgid "world without end. Amen."
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:28
+msgid "you brought them in safety to your holy dwelling."
+msgstr ""
+
+#: web/templates/prayer/_cantemus_domino.html.eex:21
+msgid "your right hand, O Lord, has overthrown the enemy."
+msgstr ""

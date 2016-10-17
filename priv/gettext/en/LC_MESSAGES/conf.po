@@ -1,0 +1,116 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_confession.html.eex:34
+msgid "A deacon or layperson remains kneeling and prays"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:29
+msgid "Almighty God, the Father of our Lord Jesus Christ,desires not the death of sinners, but that they may turn from their wickedness and live. He has empowered and commanded his ministers to pronounce to his people, being penitent, the absolution and remission of their sins. He pardons all who truly repent and genuinely believe his holy Gospel. For this reason, we beseech him to grant us true repentance and his Holy Spirit, that our present deeds may please him, the rest of our lives may be pure and holy, and that at the last we may come to his eternal joy; through Jesus Christ our Lord. Amen."
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:11
+msgid "Almighty and most merciful Father,"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:23
+msgid "And grant, O most merciful Father, for his sake,"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:1
+msgid "Confession of Sin"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:5
+msgid "Dearly beloved, the Scriptures teach us to acknowledge our many sins and offenses, not concealing them from our heavenly Father, but confessing them with humble and obedient hearts that we may obtain forgiveness by his infinite goodness and mercy. We ought at all times humbly to acknowledge our sins before Almighty God, but especially when we come together in his presence to give thanks for the great benefits we have received at his hands, to declare his most worthy praise, to hear his holy Word, and to ask, for ourselves and others, those things necessary for our life and our salvation. Therefore, come with me to the throne of heavenly grace.\n"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:36
+msgid "Grant your faithful people, merciful Lord, pardon and peace; that we may be cleansed from all our sins, and serve you with a quiet mind; through Jesus Christ our Lord. Amen."
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:9
+msgid "Let us humbly confess our sins to Almighty God."
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:19
+msgid "O Lord, have mercy upon us."
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:21
+msgid "Restore those who are penitent, according to your promises declared"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:10
+msgid "Silence is kept. All kneeling the Officiant and People say"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:20
+msgid "Spare those who confess their faults."
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:32
+msgid "The Almighty and merciful Lord grant you absolution and remission of all your sins, true repentance, amendment of life, and the grace and consolation of his Holy Spirit. Amen."
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:3
+msgid "The Officiant says to the People"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:27
+msgid "The Priest alone stands and says"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:18
+msgid "and apart from your grace, there is no health in us."
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:17
+msgid "and we have done those things which we ought not to have done;"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:8
+#: web/templates/prayer/_confession.html.eex:30
+msgid "or this"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:14
+msgid "own hearts."
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:24
+msgid "that we may now live a godly, righteous, and sober life,"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:22
+msgid "to all people in Christ Jesus our Lord;"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:25
+msgid "to the glory of your holy Name. Amen."
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:12
+msgid "we have erred and strayed from your ways like lost sheep."
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:13
+msgid "we have followed too much the deceits and desires of our"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:16
+msgid "we have left undone those things which we ought to have done"
+msgstr ""
+
+#: web/templates/prayer/_confession.html.eex:15
+msgid "we have offended against your holy laws."
+msgstr ""

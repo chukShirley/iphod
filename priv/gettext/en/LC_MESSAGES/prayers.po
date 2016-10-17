@@ -1,0 +1,67 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_prayers.html.eex:32
+msgid "And bless your inheritance."
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:8
+msgid "And grant us your salvation."
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:16
+msgid "And guide us in the way of justice and truth."
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:24
+msgid "And make your chosen people joyful."
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:56
+msgid "And take not your Holy Spirit from us."
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:20
+msgid "Clothe your ministers with righteousness;"
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:52
+msgid "Create in us clean hearts, O God;"
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:40
+msgid "For only in you can we live in safety."
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:36
+msgid "Give peace in our time, O Lord;"
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:44
+msgid "Let not the needy, O Lord, be forgotten;"
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:48
+msgid "Nor the hope of the poor be taken away."
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:12
+msgid "O Lord, save our nations;"
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:28
+msgid "O Lord, save your people;"
+msgstr ""
+
+#: web/templates/prayer/_prayers.html.eex:4
+msgid "O Lord, show us your mercy;"
+msgstr ""

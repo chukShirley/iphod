@@ -1,0 +1,87 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:16
+msgid "For you alone are the Holy One,"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:2
+msgid "Gloria in Excelsis"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:4
+msgid "Glory to God in the highest,"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:19
+msgid "Jesus Christ,"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:11
+msgid "Lord God, Lamb of God,"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:6
+msgid "Lord God, heavenly King,"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:10
+msgid "Lord Jesus Christ, only Son of the Father,"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:7
+msgid "almighty God and Father,"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:5
+msgid "and peace to his people on earth."
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:13
+msgid "have mercy on us;"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:21
+msgid "in the glory of God the Father. Amen."
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:15
+msgid "receive our prayer."
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:9
+msgid "we praise you for your glory."
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:8
+msgid "we worship you, we give you thanks,"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:20
+msgid "with the Holy Spirit,"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:17
+msgid "you alone are the Lord,"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:18
+msgid "you alone are the Most High,"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:14
+msgid "you are seated at the right hand of the Father:"
+msgstr ""
+
+#: web/templates/prayer/_gloria_in_excelsis.html.eex:12
+msgid "you take away the sin of the world:"
+msgstr ""

@@ -1,0 +1,65 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:3
+msgid "A Song of Praise"
+msgstr ""
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:2
+msgid "Benedictus es, Domine"
+msgstr ""
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:16
+msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
+msgstr ""
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:8
+msgid "Glory to you for the radiance of your holy Name;"
+msgstr ""
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:10
+msgid "Glory to you in the splendor of your temple;"
+msgstr ""
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:6
+msgid "Glory to you, Lord God of our fathers;"
+msgstr ""
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:14
+msgid "Glory to you, beholding the depths;"
+msgstr ""
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:12
+msgid "Glory to you, seated between the Cherubim;"
+msgstr ""
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:5
+msgid "Song of the Three Young Men, 29-34<"
+msgstr ""
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:15
+msgid "in the high vault of heaven, glory to you."
+msgstr ""
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:11
+msgid "on the throne of your majesty, glory to you."
+msgstr ""
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:9
+#: web/templates/prayer/_benedictis_es_domine.html.eex:13
+#: web/templates/prayer/_benedictis_es_domine.html.eex:17
+msgid "we will praise you and highly exalt you for ever."
+msgstr ""
+
+#: web/templates/prayer/_benedictis_es_domine.html.eex:7
+msgid "you are worthy of praise; glory to you."
+msgstr ""

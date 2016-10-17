@@ -1,0 +1,28 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/_ep_for_mission.html.eex:2
+msgid "Collect for Mission"
+msgstr ""
+
+#: web/templates/prayer/_ep_for_mission.html.eex:10
+msgid "Keep watch, dear Lord, with those who work, or watch, or weep this\nnight, and give your angels charge over those who sleep. Tend the\nsick, Lord Christ; give rest to the weary, bless the dying, soothe the\nsuffering, pity the afflicted, shield the joyous; and all for your love’s\nsake. Amen.\n"
+msgstr ""
+
+#: web/templates/prayer/_ep_for_mission.html.eex:3
+msgid "O God and Father of all, whom the whole heavens adore: Let the\nwhole earth also worship you, all nations obey you, all tongues\nconfess and bless you, and men, women and children everywhere\nlove you and serve you in peace; through Jesus Christ our Lord.\nAmen.\n"
+msgstr ""
+
+#: web/templates/prayer/_ep_for_mission.html.eex:17
+msgid "O God, you manifest in your servants the signs of your presence:\nSend forth upon us the Spirit of love, that in companionship with\none another your abounding grace may increase among us; through\nJesus Christ our Lord. Amen.\n"
+msgstr ""

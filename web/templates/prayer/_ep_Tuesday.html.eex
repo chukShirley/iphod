@@ -1,6 +1,6 @@
 </br>
-<p class= "section">A Collect for Aid against Perils (Tuesday)</p>
-<p class= "default">Lighten our darkness, we beseech you, O Lord; and by your great
+<p class= "section"><%= dgettext "ep_tue", "A Collect for Aid against Perils (Tuesday)"%></p>
+<p class= "default"><%= dgettext "ep_tue", "Lighten our darkness, we beseech you, O Lord; and by your great
 mercy defend us from all perils and dangers of this night; for the love
-of your only Son, our Savior Jesus Christ. 
-<span class= "italic"> Amen.</span></p>
+of your only Son, our Savior Jesus Christ."%> 
+<span class= "italic"> <%= gettext "Amen"%>.</span></p>

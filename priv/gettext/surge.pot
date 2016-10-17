@@ -1,0 +1,120 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/_surge_illuminare.html.eex:4
+msgid "Arise, shine, for your light has come"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:7
+msgid "Arise, shine, for your light has come,"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:11
+msgid "But over you the Lord will rise,"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:1
+msgid "Especially suitable for use during the season after Epiphany"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:9
+msgid "For behold, darkness covers the land;"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:27
+msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:6
+msgid "Isaiah 60:1-3, 11a, 14c, 18-19"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:13
+msgid "Nations will stream to your light,"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:3
+msgid "Surge, illuminare"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:25
+msgid "The Lord will be your everlasting light,"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:23
+msgid "The sun will no more be your light by day;"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:17
+msgid "They will call you, The City of the Lord,"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:19
+msgid "Violence will no more be heard in your land,"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:21
+msgid "You will call your walls, Salvation,"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:15
+msgid "Your gates will always be open;"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:22
+msgid "and all your portals, Praise."
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:12
+msgid "and his glory will appear upon you."
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:14
+msgid "and kings to the brightness of your dawning."
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:8
+msgid "and the glory of the Lord has dawned upon you."
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:26
+msgid "and your God will be your glory."
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:28
+msgid "as it was in the beginning, is now, and ever shall be,"
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:16
+msgid "by day or night they will never be shut."
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:24
+msgid "by night you will not need the brightness of the moon."
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:10
+msgid "deep gloom enshrouds the peoples."
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:20
+msgid "ruin or destruction within your borders."
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:18
+msgid "the Zion of the Holy One of Israel."
+msgstr ""
+
+#: web/templates/prayer/_surge_illuminare.html.eex:29
+msgid "world without end. Amen."
+msgstr ""

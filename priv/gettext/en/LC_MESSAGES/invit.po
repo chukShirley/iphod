@@ -1,0 +1,43 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_invitatory.html.eex:8
+msgid "And our mouth shall proclaim your praise."
+msgstr ""
+
+#: web/templates/prayer/_invitatory.html.eex:24
+msgid "As it was in the beginning, is now, and ever shall be, world without end. Amen."
+msgstr ""
+
+#: web/templates/prayer/_invitatory.html.eex:20
+msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
+msgstr ""
+
+#: web/templates/prayer/_invitatory.html.eex:12
+msgid "O God, make speed to save us;"
+msgstr ""
+
+#: web/templates/prayer/_invitatory.html.eex:16
+msgid "O Lord, make haste to help us."
+msgstr ""
+
+#: web/templates/prayer/_invitatory.html.eex:4
+msgid "O Lord, open our lips;"
+msgstr ""
+
+#: web/templates/prayer/_invitatory.html.eex:28
+msgid "Praise the Lord."
+msgstr ""
+
+#: web/templates/prayer/_invitatory.html.eex:32
+msgid "The Lord’s name be praised."
+msgstr ""

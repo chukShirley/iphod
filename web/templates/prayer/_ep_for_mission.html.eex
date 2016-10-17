@@ -1,18 +1,24 @@
 </br>
-<p class= "section">Collect for Mission</p>
-<p><%=  [ "O God and Father of all, whom the whole heavens adore: Let the
+<p class= "section"><%= dgettext "ep_mis", "Collect for Mission"%></p>
+<p><%=  [ dgettext( "ep_mis", """
+    O God and Father of all, whom the whole heavens adore: Let the
     whole earth also worship you, all nations obey you, all tongues
     confess and bless you, and men, women and children everywhere
     love you and serve you in peace; through Jesus Christ our Lord.
-    Amen.",
-    "Keep watch, dear Lord, with those who work, or watch, or weep this
-    night, and give your angels charge over those who sleep. Tend the
-    sick, Lord Christ; give rest to the weary, bless the dying, soothe the
-    suffering, pity the afflicted, shield the joyous; and all for your love’s
-    sake. Amen.",
-    "O God, you manifest in your servants the signs of your presence:
-    Send forth upon us the Spirit of love, that in companionship with
-    one another your abounding grace may increase among us; through
-    Jesus Christ our Lord. Amen."
+    Amen.
+    """),
+    dgettext( "ep_mis", """
+        Keep watch, dear Lord, with those who work, or watch, or weep this
+        night, and give your angels charge over those who sleep. Tend the
+        sick, Lord Christ; give rest to the weary, bless the dying, soothe the
+        suffering, pity the afflicted, shield the joyous; and all for your love’s
+        sake. Amen.
+        """),
+    dgettext( "ep_mis", """
+        O God, you manifest in your servants the signs of your presence:
+        Send forth upon us the Spirit of love, that in companionship with
+        one another your abounding grace may increase among us; through
+        Jesus Christ our Lord. Amen.
+        """)
     ] |> Enum.random
 %></p>    

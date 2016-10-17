@@ -1,58 +1,58 @@
   <table class= "prayer_table">
     <tr>
-      <td class='invitatory-init'>Officiant</td>
-      <td>O Lord, show us your mercy;</td>
+      <td class='invitatory-init'><%= gettext "Officiant"%></td>
+      <td><%= dgettext "prayers", "O Lord, show us your mercy;"%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>People</td>
-      <td>And grant us your salvation.</td>
+      <td class='invitatory-speaker'><%= gettext "People"%></td>
+      <td><%= dgettext "prayers", "And grant us your salvation."%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>Officiant</td>
-      <td>O Lord, save our nations;</td>
+      <td class='invitatory-speaker'><%= gettext "Officiant"%></td>
+      <td><%= dgettext "prayers", "O Lord, save our nations;"%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>People</td>
-      <td>And guide us in the way of justice and truth.</td>
+      <td class='invitatory-speaker'><%= gettext "People"%></td>
+      <td><%= dgettext "prayers", "And guide us in the way of justice and truth."%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>Officiant</td>
-      <td>Clothe your ministers with righteousness;</td>
+      <td class='invitatory-speaker'><%= gettext "Officiant"%></td>
+      <td><%= dgettext "prayers", "Clothe your ministers with righteousness;"%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>People</td>
-      <td>And make your chosen people joyful.</td>
+      <td class='invitatory-speaker'><%= gettext "People"%></td>
+      <td><%= dgettext "prayers", "And make your chosen people joyful."%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>Officiant</td>
-      <td>O Lord, save your people;</td>
+      <td class='invitatory-speaker'><%= gettext "Officiant"%></td>
+      <td><%= dgettext "prayers", "O Lord, save your people;"%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>People</td>
-      <td>And bless your inheritance.</td>
+      <td class='invitatory-speaker'><%= gettext "People"%></td>
+      <td><%= dgettext "prayers", "And bless your inheritance."%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>Officiant</td>
-      <td>Give peace in our time, O Lord;</td>
+      <td class='invitatory-speaker'><%= gettext "Officiant"%></td>
+      <td><%= dgettext "prayers", "Give peace in our time, O Lord;"%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>People</td>
-      <td>For only in you can we live in safety.</td>
+      <td class='invitatory-speaker'><%= gettext "People"%></td>
+      <td><%= dgettext "prayers", "For only in you can we live in safety."%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>Officiant</td>
-      <td>Let not the needy, O Lord, be forgotten;</td>
+      <td class='invitatory-speaker'><%= gettext "Officiant"%></td>
+      <td><%= dgettext "prayers", "Let not the needy, O Lord, be forgotten;"%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>People</td>
-      <td>Nor the hope of the poor be taken away.</td>
+      <td class='invitatory-speaker'><%= gettext "People"%></td>
+      <td><%= dgettext "prayers", "Nor the hope of the poor be taken away."%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>Officiant</td>
-      <td>Create in us clean hearts, O God;</td>
+      <td class='invitatory-speaker'><%= gettext "Officiant"%></td>
+      <td><%= dgettext "prayers", "Create in us clean hearts, O God;"%></td>
     </tr>
     <tr>
-      <td class='invitatory-speaker'>People</td>
-      <td>And take not your Holy Spirit from us.</td>
+      <td class='invitatory-speaker'><%= gettext "People"%></td>
+      <td><%= dgettext "prayers", "And take not your Holy Spirit from us."%></td>
     </tr>
 </table>

@@ -1,0 +1,44 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/_lords_prayer_trad.html.eex:4
+msgid "And forgive us our trespasses, as we forgive those who trespass"
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_trad.html.eex:6
+msgid "And lead us not into temptation, but deliver us from evil."
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_trad.html.eex:7
+msgid "For thine is the kingdom, and the power, and the glory,"
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_trad.html.eex:3
+msgid "Give us this day our daily bread."
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_trad.html.eex:1
+msgid "Our Father, who art in heaven, hallowed be thy Name."
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_trad.html.eex:2
+msgid "Thy kingdom come, thy will be done, on earth as it is in heaven."
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_trad.html.eex:5
+msgid "against us."
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_trad.html.eex:8
+msgid "forever and ever. Amen."
+msgstr ""

@@ -1,0 +1,51 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: zh\n"
+
+#: web/templates/prayer/_lent_venite.html.eex:3
+msgid "Do not harden your hearts, as at Meribah,"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:7
+msgid "For forty years I loathed that generation"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:2
+msgid "In Lent, and on other penitential occasions, the following verses are added."
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:10
+msgid "Therefore I swore in my wrath,"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:6
+msgid "and put me to the proof, though they had seen my work."
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:8
+msgid "and said, “They are a people who go astray in their heart,"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:9
+msgid "and they have not known my ways.”"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:4
+msgid "as on the day at Massah in the wilderness,"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:5
+msgid "when your fathers put me to the test"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:11
+msgid "“They shall not enter my rest.”"
+msgstr ""

@@ -1,0 +1,140 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/mp.html.eex:52
+msgid "A citation giving chapter and verse may be added."
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:53
+msgid "After each Lesson the Reader may say"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:29
+msgid "All stand"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:4
+msgid "Approved for Provincial Use"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:40
+msgid "At the end of the Psalms is sung or said"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:2
+msgid "Daily Morning Prayer"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:42
+msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:58
+msgid "Here ends the Reading."
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:81
+msgid "Officiant and People"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:48
+msgid "One or more Lessons, as appointed, are read, the Reader first saying"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:15
+msgid "Opening Sentences of Scripture"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:57
+msgid "Or the Reader may say"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:6
+msgid "Petertide, A.D. 2013"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:5
+msgid "The Anglican Church in North America"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:93
+msgid "The Collect of the Day"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:49
+msgid "The First Lesson from"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:26
+msgid "The Invitatory"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:47
+msgid "The Lessons"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:8
+msgid "The Officiant may begin Morning Prayer by reading an opening sentence \nof Scripture found on pages 17-19 or another appropriate Scripture. \nThe Confession of Sin may be said, or the Office may continue with \n“O Lord, open our lips.”\n"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:92
+msgid "The Officiant then prays one or more of the following collects. It is traditional to pray the Collects for Peace and Grace daily. Alternatively, one may pray the collects on a weekly rotation, using the suggestions in parentheses."
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:74
+msgid "The People kneel or stand."
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:73
+msgid "The Prayers"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:38
+msgid "The Psalm or Psalms Appointed"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:66
+msgid "The Second Lesson from"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:61
+msgid "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:37
+msgid "Then follows"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:32
+msgid "Then follows the Venite. Alternatively, the Jubilate may be used."
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:33
+msgid "These seasonal antiphons may be sung or said before and after the Invitatory Psalm."
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:23
+msgid "alt opening sentence"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:43
+msgid "as it was in the beginning, is now, and ever shall be,"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:85
+msgid "or this"
+msgstr ""
+
+#: web/templates/prayer/mp.html.eex:44
+msgid "world without end. Amen."
+msgstr ""

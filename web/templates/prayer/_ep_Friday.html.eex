@@ -1,7 +1,7 @@
 </br>
-<p class= "section">A Collect for Faith (Friday)</p>
-<p class= "default">Lord Jesus Christ, by your death you took away the sting of death:
+<p class= "section"><%= dgettext "ep_fri", "A Collect for Faith (Friday)"%></p>
+<p class= "default"><%= dgettext "ep_fri", "Lord Jesus Christ, by your death you took away the sting of death:
 Grant to us your servants so to follow in faith where you have led the
 way, that we may at length fall asleep peacefully in you and wake up
-in your likeness; for your tender mercies’ sake.
-<span class= "italic"> Amen.</span></p>
+in your likeness; for your tender mercies’ sake."%>
+<span class= "italic"> <%= gettext "Amen"%>.</span></p>

@@ -1,0 +1,20 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/_chrysostom.html.eex:2
+msgid "A Prayer of St. John Chrysostom"
+msgstr ""
+
+#: web/templates/prayer/_chrysostom.html.eex:3
+msgid "Almighty God, you have given us grace at this time with one accord\nto make our common supplications to you; and you have promised \nthrough your well beloved Son that when two or three are gathered\ntogether in his name you will be in the midst of them: Fulfill now, O\nLord, our desires and petitions as may be best for us; granting us in\nthis world knowledge of your truth, and in the age to come life\neverlasting. Amen.\n"
+msgstr ""

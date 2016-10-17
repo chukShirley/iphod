@@ -1,0 +1,116 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/_cantate_domino.html.eex:3
+msgid "Cantate Domino"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:1
+msgid "Especially suitable for use in Easter and at any time outside penitential seasons"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:28
+msgid "Glory to the Father, and tocantate Son, and to the Holy Spirit;"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:13
+msgid "He remembers his mercy and faithfulness to the house of Israel,"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:26
+msgid "In righteousness shall he judge the world"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:23
+msgid "Let the rivers clap their hands,"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:21
+msgid "Let the sea make a noise and all that is in it,"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:6
+msgid "Psalm 98"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:15
+msgid "Shout with joy to the Lord, all you lands; lift up your voice, rejoice,"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:4
+msgid "Sing to the Lord a New Song"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:7
+msgid "Sing to the Lord a new song,"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:17
+msgid "Sing to the Lord with the harp,"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:11
+msgid "The Lord has made known his victory;"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:9
+msgid "With his right hand and his holy arm"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:19
+msgid "With trumpets and the sound of the horn"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:14
+msgid "and all the ends of the earth have seen the victory of our God."
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:24
+msgid "and let the hills ring out with joy before the Lord,"
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:16
+msgid "and sing."
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:27
+msgid "and the peoples with equity."
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:8
+msgid "for he has done marvelous things."
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:10
+msgid "has he won for himself the victory."
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:12
+msgid "his righteousness has he openly shown in the sight of the nations."
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:20
+msgid "shout with joy before the King, the Lord."
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:22
+msgid "the lands and those who dwell therein."
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:25
+msgid "when he comes to judge the earth."
+msgstr ""
+
+#: web/templates/prayer/_cantate_domino.html.eex:18
+msgid "with the harp and the voice of song."
+msgstr ""

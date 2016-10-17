@@ -1,0 +1,52 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/_lent_venite.html.eex:3
+msgid "Do not harden your hearts, as at Meribah,"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:7
+msgid "For forty years I loathed that generation"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:2
+msgid "In Lent, and on other penitential occasions, the following verses are added."
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:10
+msgid "Therefore I swore in my wrath,"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:6
+msgid "and put me to the proof, though they had seen my work."
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:8
+msgid "and said, “They are a people who go astray in their heart,"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:9
+msgid "and they have not known my ways.”"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:4
+msgid "as on the day at Massah in the wilderness,"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:5
+msgid "when your fathers put me to the test"
+msgstr ""
+
+#: web/templates/prayer/_lent_venite.html.eex:11
+msgid "“They shall not enter my rest.”"
+msgstr ""

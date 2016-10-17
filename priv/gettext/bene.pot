@@ -1,0 +1,126 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/_benedictus.html.eex:2
+msgid "Benedictus"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:6
+msgid "Blessed be the Lord, the God of Israel;"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:17
+msgid "Free to worship him without fear,"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:28
+msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:8
+msgid "He has raised up for us a mighty savior,"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:13
+msgid "He promised to show mercy to our fathers"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:24
+msgid "In the tender compassion of our God"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:5
+msgid "Luke 1:68-79"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:3
+msgid "The Song of Zechariah"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:15
+msgid "This was the oath he swore to our father Abraham,"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:10
+msgid "Through his holy prophets he promised of old,"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:22
+msgid "To give his people knowledge of salvation"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:26
+msgid "To shine on those who dwell in darkness and the shadow of death,"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:20
+msgid "You, my child, shall be called the prophet of the Most High,"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:19
+msgid "all the days of our life."
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:27
+msgid "and to guide our feet into the way of peace."
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:14
+msgid "and to remember his holy covenant."
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:29
+#: web/templates/prayer/_cantate_domino.html.eex:29
+msgid "as it was in the beginning, is now, and ever shall be,"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:9
+msgid "born of the house of his servant David."
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:23
+msgid "by the forgiveness of their sins."
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:21
+msgid "for you will go before the Lord to prepare his way,"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:12
+msgid "from the hands of all who hate us."
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:7
+msgid "he has come to his people and set them free."
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:18
+msgid "holy and righteous in his sight"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:11
+msgid "that he would save us from our enemies,"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:25
+msgid "the dawn from on high shall break upon us,"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:16
+msgid "to set us free from the hands of our enemies,"
+msgstr ""
+
+#: web/templates/prayer/_benedictus.html.eex:30
+#: web/templates/prayer/_cantate_domino.html.eex:30
+msgid "world without end. Amen."
+msgstr ""

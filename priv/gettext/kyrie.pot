@@ -1,0 +1,152 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:4
+msgid "A Song of Penitence"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:12
+msgid "All things quake with fear at your presence;"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:23
+msgid "And now, O Lord, I bend the knee of my heart,"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:14
+msgid "But your merciful promise is beyond all measure;"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:29
+msgid "Do not let me perish in my sin,"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:1
+msgid "Especially suitable for use during Lent"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:36
+msgid "For all the powers of heaven sing your praises,"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:31
+msgid "For you, O Lord, are the God of those who repent,"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:28
+msgid "Forgive me, Lord, forgive me."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:8
+msgid "God of Abraham, Isaac, and Jacob,"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:25
+msgid "I have sinned, O Lord, I have sinned,"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:20
+msgid "In your great goodness, Lord,"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:3
+msgid "Kyrie Pantokrator"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:7
+msgid "O Lord and Ruler of the hosts of heaven,"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:16
+msgid "O Lord, you are full of compassion,"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:6
+msgid "Prayer of Manasseh, 1-2, 4, 6-7, 11-15"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:27
+msgid "Therefore I make this prayer to you:"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:33
+msgid "Unworthy as I am, you will save me,"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:18
+msgid "You hold back your hand;"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:10
+msgid "You made the heavens and the earth,"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:26
+msgid "and I know my wickedness only too well."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:35
+msgid "and I will praise you without ceasing all the days of my life."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:32
+msgid "and in me you will show forth your goodness."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:24
+msgid "and make my appeal, sure of your gracious goodness."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:9
+msgid "and of all their righteous offspring:"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:37
+msgid "and yours is the glory to ages of ages. Amen."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:34
+msgid "in accordance with your great mercy,"
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:15
+msgid "it surpasses all that our minds can fathom."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:17
+msgid "long-suffering, and abounding in mercy."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:30
+msgid "nor condemn me to the depths of the earth."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:22
+msgid "that they may repent of their sin and be saved."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:13
+msgid "they tremble because of your power."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:11
+msgid "with all their vast array."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:19
+msgid "you do not punish as we deserve."
+msgstr ""
+
+#: web/templates/prayer/_kyrie_pantokrator.html.eex:21
+msgid "you have promised forgiveness to sinners,"
+msgstr ""

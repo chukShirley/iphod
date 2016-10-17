@@ -1,0 +1,19 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_mp_Saturday.html.eex:2
+msgid "A Collect for Sabbath Rest (Saturday)"
+msgstr ""
+
+#: web/templates/prayer/_mp_Saturday.html.eex:3
+msgid "Almighty God, who after the creation of the world rested from all\nyour works and sanctified a day of rest for all your creatures: Grant\nthat we, putting away all earthly anxieties, may be duly prepared for\nthe service of your sanctuary, and that our rest here upon earth may\nbe a preparation for the eternal rest promised to your people in\nheaven; through Jesus Christ our Lord."
+msgstr ""

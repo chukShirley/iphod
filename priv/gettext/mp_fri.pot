@@ -1,0 +1,20 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/_mp_Friday.html.eex:2
+msgid "A Collect for Endurance (Friday)"
+msgstr ""
+
+#: web/templates/prayer/_mp_Friday.html.eex:3
+msgid "Almighty God, whose most dear Son went not up to joy but first he\nsuffered pain, and entered not into glory before he was crucified:\nMercifully grant that we, walking in the way of the cross, may find it\nnone other than the way of life and peace; through Jesus Christ your\nSon our Lord.\n"
+msgstr ""

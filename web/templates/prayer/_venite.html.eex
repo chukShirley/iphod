@@ -1,21 +1,21 @@
 <p class="canticle">
-  <span class= "canticle_title">Venite</span>
-  <span class= "canticle_name">O Come</span>
+  <span class= "canticle_title"><%= dgettext "ven", "Venite"%></span>
+  <span class= "canticle_name"><%= dgettext "ven", "O Come"%></span>
 </p>
-<p class= "rubric_black">Psalm 95:1-7; 8-11</p>
+<p class= "rubric_black"><%= dgettext "ven", "Psalm 95:1-7; 8-11"%></p>
 </br>
-<p class= "vs">O come, let us sing to the Lord;</p>
-<p class= "vs">Let us make a joyful noise to the rock of our salvation!</p>
-<p class= "vs">Let us come into his presence with thanksgiving;</p>
-<p class= "vs">Let us make a joyful noise to him with songs of praise!</p>
-<p class= "vs">For the Lord is a great God, and a great King above all gods.</p>
-<p class= "vs">In his hand are the depths of the earth;</p>
-<p class= "vs_indent">the heights of the mountains are his also.</p>
-<p class= "vs">The sea is his, for he made it,</p>
-<p class= "vs_indent">and his hands formed the dry land.</p>
-<p class= "vs">O come, let us worship and bow down;</p>
-<p class= "vs_indent">Let us kneel before the Lord, our Maker!</p>
-<p class= "vs">For he is our God, and we are the people of his pasture,</p>
-<p class= "vs_indent">and the sheep of his hand.</p>
-<p class= "vs">O, that today you would hearken to his voice!</p>
+<p class= "vs"><%= dgettext "ven", "O come, let us sing to the Lord;"%></p>
+<p class= "vs"><%= dgettext "ven", "Let us make a joyful noise to the rock of our salvation!"%></p>
+<p class= "vs"><%= dgettext "ven", "Let us come into his presence with thanksgiving;"%></p>
+<p class= "vs"><%= dgettext "ven", "Let us make a joyful noise to him with songs of praise!"%></p>
+<p class= "vs"><%= dgettext "ven", "For the Lord is a great God, and a great King above all gods."%></p>
+<p class= "vs"><%= dgettext "ven", "In his hand are the depths of the earth;"%></p>
+<p class= "vs_indent"><%= dgettext "ven", "the heights of the mountains are his also."%></p>
+<p class= "vs"><%= dgettext "ven", "The sea is his, for he made it,"%></p>
+<p class= "vs_indent"><%= dgettext "ven", "and his hands formed the dry land."%></p>
+<p class= "vs"><%= dgettext "ven", "O come, let us worship and bow down;"%></p>
+<p class= "vs_indent"><%= dgettext "ven", "Let us kneel before the Lord, our Maker!"%></p>
+<p class= "vs"><%= dgettext "ven", "For he is our God, and we are the people of his pasture,"%></p>
+<p class= "vs_indent"><%= dgettext "ven", "and the sheep of his hand."%></p>
+<p class= "vs"><%= dgettext "ven", "O, that today you would hearken to his voice!"%></p>
 <p class= "blankline"></p>

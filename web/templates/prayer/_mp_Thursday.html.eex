@@ -1,7 +1,7 @@
 </br>
-<p class= "section">A Collect for Guidance (Thursday)</p>
-<p class= "default">Heavenly Father, in you we live and move and have our being: We
+<p class= "section"><%= dgettext "mp_thr", "A Collect for Guidance (Thursday)"%></p>
+<p class= "default"><%= dgettext "mp_thr", "Heavenly Father, in you we live and move and have our being: We
 humbly pray you so to guide and govern us by your Holy Spirit, that
 in all the cares and occupations of our life we may not forget you, but
 may remember that we are ever walking in your sight; through Jesus
-Christ our Lord. <span class= "italic"> Amen.</span></p>
+Christ our Lord."%> <span class= "italic"> <%= gettext "Amen"%>.</span></p>

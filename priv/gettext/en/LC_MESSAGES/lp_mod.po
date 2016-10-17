@@ -1,0 +1,39 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_lords_prayer_modern.html.eex:4
+msgid "And forgive us our sins as we forgive those who sin against us."
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_modern.html.eex:6
+msgid "For the kingdom, the power, and the glory are yours,"
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_modern.html.eex:3
+msgid "Give us today our daily bread."
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_modern.html.eex:1
+msgid "Our Father in heaven, hallowed be your Name."
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_modern.html.eex:5
+msgid "Save us from the time of trial, and deliver us from evil."
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_modern.html.eex:2
+msgid "Your kingdom come, your will be done, on earth as it is in heaven."
+msgstr ""
+
+#: web/templates/prayer/_lords_prayer_modern.html.eex:7
+msgid "now and forever. Amen."
+msgstr ""

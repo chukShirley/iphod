@@ -1,18 +1,18 @@
 <div class= "mpep">
-  <p class= "title1"><%= gettext "Daily Morning Prayer"%></p>
+  <p class= "title1"><%= dgettext "mp", "Daily Morning Prayer"%></p>
   <p class= "title1"><%=@model.date%></p>
-  <p class= "title2 italic"><%= gettext "Approved for Provincial Use"%></p>
-  <p class= "title2"><%= gettext "The Anglican Church in North America"%></p>
-  <p class= "title2 italic"><%= gettext "Petertide, A.D. 2013"%></p>
+  <p class= "title2 italic"><%= dgettext "mp", "Approved for Provincial Use"%></p>
+  <p class= "title2"><%= dgettext "mp", "The Anglican Church in North America"%></p>
+  <p class= "title2 italic"><%= dgettext "mp", "Petertide, A.D. 2013"%></p>
   </br>
-  <p class= "rubric"><%= gettext """
+  <p class= "rubric"><%= dgettext "mp", """
         The Officiant may begin Morning Prayer by reading an opening sentence 
         of Scripture found on pages 17-19 or another appropriate Scripture. 
         The Confession of Sin may be said, or the Office may continue with 
         “O Lord, open our lips.”
         """%>
   </p>
-  <p id="opening_scripture" class= "section"><%= gettext "Opening Sentences of Scripture"%></p>
+  <p id="opening_scripture" class= "section"><%= dgettext "mp", "Opening Sentences of Scripture"%></p>
   </br>
   <p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
   <p class= "default">
@@ -20,77 +20,77 @@
     </br>
     <span class= "bible_ref"><%=@model.opening_sentence_ref%></span>
   </p>
-  <p class="rubric_black"><%= gettext "alt opening sentence"%></p>
+  <p class="rubric_black"><%= dgettext "mp", "alt opening sentence"%></p>
   </br>
   <%= render "_confession.html" %>
-  <p class= "section"><%= gettext " The Invitatory" %></p>
+  <p class= "section"><%= dgettext "mp", "The Invitatory" %></p>
 
 
-  <p class= "rubric"><%= gettext "All stand"%></p>
+  <p class= "rubric"><%= dgettext "mp", "All stand"%></p>
   <%= render "_invitatory.html" %>
   </br>
-  <p class= "rubric">Then follows the Venite. Alternatively, the Jubilate may be used.</p>
-  <p class= "rubric-newline">These seasonal antiphons may be sung or said before and after the Invitatory Psalm.</p>
+  <p class= "rubric"><%= dgettext "mp", "Then follows the Venite. Alternatively, the Jubilate may be used."%></p>
+  <p class= "rubric-newline"><%= dgettext "mp", "These seasonal antiphons may be sung or said before and after the Invitatory Psalm."%></p>
   <p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
   <p class= "default"><%=@model.antiphon%></p>
   <%= render "_#{@model.invitatory_canticle}.html" %>
-  <p class= "rubric">Then follows</p>
-  <p class= "section">The Psalm or Psalms Appointed</p>
+  <p class= "rubric"><%= dgettext "mp", "Then follows"%></p>
+  <p class= "section"><%= dgettext "mp", "The Psalm or Psalms Appointed"%></p>
   <p class= "reading"><%= @model.mpp |> text_list_to_html %></p> 
-  <p class= "rubric">At the end of the Psalms is sung or said</p>
+  <p class= "rubric"><%= dgettext "mp", "At the end of the Psalms is sung or said"%></p>
 
-  <p class= "vs">Glory to the Father, and to the Son, and to the Holy Spirit;</p>
-  <p class= "vs_indent">as it was in the beginning, is now, and ever shall be,</p>
-  <p class= "vs_indent">world without end. Amen.</p>
+  <p class= "vs"><%= dgettext "mp", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
+  <p class= "vs_indent"><%= dgettext "mp", "as it was in the beginning, is now, and ever shall be,"%></p>
+  <p class= "vs_indent"><%= dgettext "mp", "world without end. Amen."%></p>
 
   </br>
-  <p class= "section">The Lessons</p>
-  <p class= "rubric">One or more Lessons, as appointed, are read, the Reader first saying</p>
-  <p>The First Lesson from</p>
+  <p class= "section"><%= dgettext "mp", "The Lessons"%></p>
+  <p class= "rubric"><%= dgettext "mp", "One or more Lessons, as appointed, are read, the Reader first saying"%></p>
+  <p><%= dgettext "mp", "The First Lesson from"%></p>
   <p class= "reading"> <%= @model.mp1 |> text_list_to_html %></p>
 
-  <p class= "rubric">A citation giving chapter and verse may be added.</p>
-  <p class= "rubric">After each Lesson the Reader may say</p>
+  <p class= "rubric"><%= dgettext "mp", "A citation giving chapter and verse may be added."%></p>
+  <p class= "rubric"><%= dgettext "mp", "After each Lesson the Reader may say"%></p>
   <%= render "_the_word_of_the_lord.html" %>
   </br>
 
-  <p class= "rubric">Or the Reader may say</p>
-  <p class= "versical">Here ends the Reading.</p>
+  <p class= "rubric"><%= dgettext "mp", "Or the Reader may say"%></p>
+  <p class= "versical"><%= dgettext "mp", "Here ends the Reading."%></p>
   </br>
 
-  <p class= "rubric">The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise.</p>
+  <p class= "rubric"><%= dgettext "mp", "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."%></p>
   </br>
   <%= render "_#{@model.ot_canticle}.html" %>
   </br>
 
-  <p>The Second Lesson from</p>
+  <p><%= dgettext "mp", "The Second Lesson from"%></p>
   <p class= "reading"> <%= @model.mp2 |> text_list_to_html %></p>
   </br>
   <%= render "_#{@model.nt_canticle}.html" %>
   </br>
   <%= render "_apostles_creed.html" %>
   </br>
-  <p class= "section">The Prayers</p>
-  <p class= "rubric">The People kneel or stand.</p>
+  <p class= "section"><%= dgettext "mp", "The Prayers"%></p>
+  <p class= "rubric"><%= dgettext "mp", "The People kneel or stand."%></p>
   <%= render "_prayer_intro.html" %>
   </br>
 
   <%= render "_mercy3.html" %>
   </br>
 
-  <p class= "rubric">Officiant and People</p>
+  <p class= "rubric"><%= dgettext "mp", "Officiant and People"%></p>
 
   <%= render "_lords_prayer_trad.html" %>
   
-  <p class= "rubric">or this</p>
+  <p class= "rubric"><%= dgettext "mp", "or this"%></p>
 
   <%= render "_lords_prayer_modern.html" %>
   </br>
   <%= render "_prayers.html" %>
   </br>
 
-  <p class= "rubric">The Officiant then prays one or more of the following collects. It is traditional to pray the Collects for Peace and Grace daily. Alternatively, one may pray the collects on a weekly rotation, using the suggestions in parentheses.</p>
-  <p class= "section">The Collect of the Day</p>
+  <p class= "rubric"><%= dgettext "mp", "The Officiant then prays one or more of the following collects. It is traditional to pray the Collects for Peace and Grace daily. Alternatively, one may pray the collects on a weekly rotation, using the suggestions in parentheses."%></p>
+  <p class= "section"><%= dgettext "mp", "The Collect of the Day"%></p>
 
   <p><%= @model.collect_of_week %></p>
   <%= render "_mp_#{@model.day}.html" %> <%# collect for this day %>

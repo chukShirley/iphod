@@ -1,0 +1,167 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_te_deum.html.eex:28
+msgid "Come then, Lord, and help your people,"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:34
+msgid "Day by day we bless you;"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:17
+msgid "Father, of majesty unbounded,"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:11
+msgid "Holy, Holy, Holy, Lord God of power and might,"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:40
+msgid "In you, Lord, is our hope,"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:36
+msgid "Keep us today, Lord, from all sin;"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:38
+msgid "Lord, show us your love and mercy,"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:32
+msgid "Save your people, Lord, and bless your inheritance;"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:2
+msgid "Te Deum Laudamus"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:10
+msgid "The cherubim and seraphim, sing in endless praise:"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:13
+msgid "The glorious company of apostles praise you."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:14
+msgid "The noble fellowship of prophets praise you."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:15
+msgid "The white-robed army of martyrs praise you."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:16
+msgid "Throughout the world the holy Church acclaims you:"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:9
+msgid "To you all angels, all the powers of heaven,"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:3
+msgid "We Praise You, O God"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:27
+msgid "We believe that you will come to be our judge."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:5
+msgid "We praise you, O God,"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:22
+msgid "When you took our flesh to set us free"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:26
+msgid "You are seated at God’s right hand in glory."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:24
+msgid "You overcame the sting of death"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:20
+msgid "You, Christ, are the king of glory,"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:7
+msgid "all creation worships you,"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:30
+msgid "and bring us with your saints"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:25
+msgid "and opened the kingdom of heaven to all believers."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:29
+msgid "bought with the price of your own blood,"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:39
+msgid "for we have put our trust in you."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:33
+msgid "govern and uphold them now and always."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:37
+msgid "have mercy on us, Lord, have mercy."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:12
+msgid "heaven and earth are full of your glory."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:41
+msgid "let us never be put to shame."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:8
+msgid "the Father everlasting."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:19
+msgid "the Holy Spirit, advocate and guide."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:21
+msgid "the eternal Son of the Father."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:31
+msgid "to glory everlasting."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:6
+msgid "we acclaim you as Lord;"
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:35
+msgid "we praise your name forever."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:23
+msgid "you humbly chose the Virgin’s womb."
+msgstr ""
+
+#: web/templates/prayer/_te_deum.html.eex:18
+msgid "your true and only Son, worthy of all praise,"
+msgstr ""

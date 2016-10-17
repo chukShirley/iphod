@@ -1,0 +1,27 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_mp_for_mission.html.eex:4
+msgid "Almighty and everlasting God, who alone works great marvels: Send\ndown upon our clergy and the congregations committed to their\ncharge the life-giving Spirit of your grace, shower them with the\ncontinual dew of your blessing, and ignite in them a zealous love of\nyour Gospel, through Jesus Christ our Lord. Amen.\n"
+msgstr ""
+
+#: web/templates/prayer/_mp_for_mission.html.eex:2
+msgid "Collect for Mission"
+msgstr ""
+
+#: web/templates/prayer/_mp_for_mission.html.eex:19
+msgid "Lord Jesus Christ, you stretched out your arms of love on the hard\nwood of the cross that everyone might come within the reach of your\nsaving embrace: So clothe us in your Spirit that we, reaching forth \nour hands in love, may bring those who do not know you to the\nknowledge and love of you; for the honor of your Name. Amen.\n"
+msgstr ""
+
+#: web/templates/prayer/_mp_for_mission.html.eex:11
+msgid "O God, you have made of one blood all the peoples of the earth, and\nsent your blessed Son to preach peace to those who are far off and to\nthose who are near: Grant that people everywhere may seek after you\nand find you; bring the nations into your fold; pour out your Spirit\nupon all flesh; and hasten the coming of your kingdom; through\nJesus Christ our Lord. Amen.\n"
+msgstr ""

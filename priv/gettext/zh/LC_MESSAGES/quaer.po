@@ -1,0 +1,115 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: zh\n"
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:11
+msgid "And let them turn to the Lord, and he will have compassion,"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:20
+msgid "Bringing forth life and giving growth,"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:24
+msgid "But it will accomplish that which I have purposed,"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:1
+msgid "Especially suitable for use during Lent"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:18
+msgid "For as rain and snow fall form the heavens"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:15
+msgid "For as the heavens are higher than the earth,"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:13
+msgid "For my thoughts are not your thoughts,"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:26
+msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:6
+msgid "Isaiah 55:6-11"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:9
+msgid "Let the wicked forsake their ways"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:3
+msgid "Quaerite Dominum"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:4
+msgid "Seek the Lord while he wills to be found"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:7
+msgid "Seek the Lord while he wills to be found;"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:22
+msgid "So is my word that goes forth from my mouth;"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:17
+msgid "and my thoughts than your thoughts."
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:25
+msgid "and prosper in that for which I sent it."
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:19
+msgid "and return not again, but water the earth,"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:10
+msgid "and the evil ones their thoughts;"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:12
+msgid "and to our God, for he will richly pardon."
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:27
+msgid "as it was in the beginning, is now, and ever shall be, world"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:8
+msgid "call upon him when he draws near."
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:23
+msgid "it will not return to me empty;"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:14
+msgid "nor your ways my ways, says the Lord."
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:21
+msgid "seed for sowing and bread for eating,"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:16
+msgid "so are my ways higher than your ways,"
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:28
+msgid "without end. Amen."
+msgstr ""

@@ -1,36 +1,36 @@
-<p class= "rubric">Especially suitable for use in Easter</p>
+<p class= "rubric"><%= dgettext "cantemus", "Especially suitable for use in Easter"%></p>
 <p class= "canticle">
-  <span class= "canticle_title">Cantemus Domino</span>
-  <span class= "canticle_name">The Song of Moses</span>
+  <span class= "canticle_title"><%= dgettext "cantemus", "Cantemus Domino"%></span>
+  <span class= "canticle_name"><%= dgettext "cantemus", "The Song of Moses"%></span>
 </p>
-<p class= "rubric_black">Exodus 15:1-6, 11-13, 17-18</p>
-<p class= "vs">I will sing to the Lord, for he is lofty and uplifted;</p>
-<p class= "vs_indent">the horse and its rider has he hurled into the sea.</p>
-<p class= "vs">The Lord is my strength and my refuge;</p>
-<p class= "vs_indent">the Lord has become my Savior.</p>
-<p class= "vs">This is my God and I will praise him,</p>
-<p class= "vs_indent">the God of my people and I will exalt him.</p>
-<p class= "vs">The Lord is a mighty warrior;</p>
-<p class= "vs">Yahweh is his Name.</p>
-<p class= "vs">The chariots of Pharaoh and his army has he hurled into the sea;</p>
-<p class= "vs_indent">the finest of those who bear armor have been drowned in the</p>
-<p class= "vs">Red Sea.</p>
-<p class= "vs">The fathomless deep has overwhelmed them;</p>
-<p class= "vs_indent">they sank into the depths like a stone.</p>
-<p class= "vs">Your right hand, O Lord, is glorious in might;</p>
-<p class= "vs_indent">your right hand, O Lord, has overthrown the enemy.</p>
-<p class= "vs">Who can be compared with you, O Lord, among the gods?</p>
-<p class= "vs_indent">who is like you, glorious in holiness,</p>
-<p class= "vs_indent">awesome in renown, and worker of wonders?</p>
-<p class= "vs">You stretched forth your right hand;</p>
-<p class= "vs_indent">the earth swallowed them up.</p>
-<p class= "vs">With your constant love you led the people you redeemed;</p>
-<p class= "vs_indent">you brought them in safety to your holy dwelling.</p>
-<p class= "vs">You will bring them in and plant them</p>
-<p class= "vs_indent">on the mount of your possession,</p>
-<p class= "vs">The resting-place you have made for yourself, O Lord,</p>
-<p class= "vs_indent">the sanctuary, O Lord, that your hand has established.</p>
-<p class= "vs">The Lord shall reign for ever and for ever.</p>
-<p class= "vs">Glory to the Father, and to the Son, and to the Holy Spirit;</p>
-<p class= "vs_indent">as it was in the beginning, is now, and ever shall be,</p>
-<p class= "vs_indent">world without end. Amen.</p>
+<p class= "rubric_black"><%= dgettext "cantemus", "Exodus 15:1-6, 11-13, 17-18"%></p>
+<p class= "vs"><%= dgettext "cantemus", "I will sing to the Lord, for he is lofty and uplifted;"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "the horse and its rider has he hurled into the sea."%></p>
+<p class= "vs"><%= dgettext "cantemus", "The Lord is my strength and my refuge;"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "the Lord has become my Savior."%></p>
+<p class= "vs"><%= dgettext "cantemus", "This is my God and I will praise him,"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "the God of my people and I will exalt him."%></p>
+<p class= "vs"><%= dgettext "cantemus", "The Lord is a mighty warrior;"%></p>
+<p class= "vs"><%= dgettext "cantemus", "Yahweh is his Name."%></p>
+<p class= "vs"><%= dgettext "cantemus", "The chariots of Pharaoh and his army has he hurled into the sea;"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "the finest of those who bear armor have been drowned in the"%></p>
+<p class= "vs"><%= dgettext "cantemus", "Red Sea."%></p>
+<p class= "vs"><%= dgettext "cantemus", "The fathomless deep has overwhelmed them;"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "they sank into the depths like a stone."%></p>
+<p class= "vs"><%= dgettext "cantemus", "Your right hand, O Lord, is glorious in might;"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "your right hand, O Lord, has overthrown the enemy."%></p>
+<p class= "vs"><%= dgettext "cantemus", "Who can be compared with you, O Lord, among the gods?"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "who is like you, glorious in holiness,"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "awesome in renown, and worker of wonders?"%></p>
+<p class= "vs"><%= dgettext "cantemus", "You stretched forth your right hand;"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "the earth swallowed them up."%></p>
+<p class= "vs"><%= dgettext "cantemus", "With your constant love you led the people you redeemed;"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "you brought them in safety to your holy dwelling."%></p>
+<p class= "vs"><%= dgettext "cantemus", "You will bring them in and plant them"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "on the mount of your possession,"%></p>
+<p class= "vs"><%= dgettext "cantemus", "The resting-place you have made for yourself, O Lord,"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "the sanctuary, O Lord, that your hand has established."%></p>
+<p class= "vs"><%= dgettext "cantemus", "The Lord shall reign for ever and for ever."%></p>
+<p class= "vs"><%= dgettext "cantemus", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "as it was in the beginning, is now, and ever shall be,"%></p>
+<p class= "vs_indent"><%= dgettext "cantemus", "world without end. Amen."%></p>

@@ -1,0 +1,124 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: web/templates/prayer/ep.html.eex:44
+msgid "A citation giving chapter and verse may be added."
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:45
+msgid "After each Lesson the Reader may say"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:26
+msgid "All stand"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:4
+msgid "Approved for Provincial Use"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:34
+msgid "At the end of the Psalms is sung or said"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:2
+msgid "Daily Evening Prayer"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:35
+msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:50
+msgid "Here ends the Reading."
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:63
+msgid "If desired, a sermon on the Evening Lessons may be preached."
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:72
+msgid "Officiant and People"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:49
+msgid "Or the Reader may say"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:6
+msgid "Petertide, A.D. 2013"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:5
+msgid "The Anglican Church in North America"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:79
+msgid "The Collect of the Day"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:41
+msgid "The First Lesson from"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:25
+msgid "The Invitatory"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:40
+msgid "The Lessons"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:7
+msgid "The Officiant may begin Evening Prayer by reading an opening sentence \nof Scripture found on pages 17-19 or another appropriate Scripture. \nThe Confession of Sin may be said, or the Office may continue with \n“O Lord, open our lips.”\n"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:67
+msgid "The People kneel or stand."
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:66
+msgid "The Prayers"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:32
+msgid "The Psalm or Psalms Appointed"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:58
+msgid "The Second Lesson from"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:53
+msgid "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:28
+msgid "The following or some other suitable hymn or Psalm may be sung or said"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:31
+msgid "Then follows"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:36
+msgid "as it was in the beginning, is now, and ever shall be,"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:74
+msgid "or this"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:37
+msgid "world without end. Amen."
+msgstr ""

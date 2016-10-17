@@ -1,0 +1,71 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_jubilate.html.eex:3
+msgid "Be Joyful"
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:7
+msgid "Be joyful in the Lord, all you lands;"
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:13
+msgid "Enter his gates with thanksgiving;"
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:16
+msgid "For the Lord is good;"
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:2
+msgid "Jubilate"
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:10
+msgid "Know this: the Lord himself is God;"
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:5
+msgid "Psalm 100"
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:9
+msgid "and come before his presence with a song."
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:18
+msgid "and his faithfulness endures from age to age."
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:15
+msgid "give thanks to him and call upon his Name."
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:14
+msgid "go into his courts with praise;"
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:11
+msgid "he himself has made us, and we are his;"
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:17
+msgid "his mercy is everlasting;"
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:8
+msgid "serve the Lord with gladness"
+msgstr ""
+
+#: web/templates/prayer/_jubilate.html.eex:12
+msgid "we are his people and the sheep of his pasture."
+msgstr ""

@@ -1,15 +1,15 @@
 <table class= "prayer_table">
   <tr>
-    <td class='invitatory-init'>Officiant</td>
-    <td>The Lord be with you.</td>
+    <td class='invitatory-init'><%= gettext "Officiant"%></td>
+    <td><%= gettext "The Lord be with you."%></td>
   </tr>
   <tr>
-    <td class='invitatory-speaker'>People</td>
-    <td>And with your spirit.</td>
+    <td class='invitatory-speaker'><%= gettext "People"%></td>
+    <td><%= gettext "And with your spirit."%></td>
   </tr>
   <tr>
-    <td class='invitatory-speaker'>Officiant</td>
-    <td>Let us pray.</td>
+    <td class='invitatory-speaker'><%= gettext "Officiant"%></td>
+    <td><%= gettext "Let us pray."%></td>
   </tr>
 </table>
 

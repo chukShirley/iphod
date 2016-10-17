@@ -1,0 +1,59 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: web/templates/prayer/_nunc_dimittis.html.eex:8
+msgid "For my eyes have seen your salvation,"
+msgstr ""
+
+#: web/templates/prayer/_nunc_dimittis.html.eex:12
+msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
+msgstr ""
+
+#: web/templates/prayer/_nunc_dimittis.html.eex:6
+msgid "Lord, now let your servant depart in peace,"
+msgstr ""
+
+#: web/templates/prayer/_nunc_dimittis.html.eex:5
+msgid "Luke 2:29-32"
+msgstr ""
+
+#: web/templates/prayer/_nunc_dimittis.html.eex:2
+msgid "Nunc dimittis"
+msgstr ""
+
+#: web/templates/prayer/_nunc_dimittis.html.eex:3
+msgid "The Song of Simeon"
+msgstr ""
+
+#: web/templates/prayer/_nunc_dimittis.html.eex:7
+msgid "according to your word."
+msgstr ""
+
+#: web/templates/prayer/_nunc_dimittis.html.eex:11
+msgid "and to be the glory of your people Israel."
+msgstr ""
+
+#: web/templates/prayer/_nunc_dimittis.html.eex:13
+msgid "as it was in the beginning, is now, and ever shall be, world"
+msgstr ""
+
+#: web/templates/prayer/_nunc_dimittis.html.eex:10
+msgid "to be a light to lighten the Gentiles,"
+msgstr ""
+
+#: web/templates/prayer/_nunc_dimittis.html.eex:9
+msgid "which you have prepared before the face of all people;"
+msgstr ""
+
+#: web/templates/prayer/_nunc_dimittis.html.eex:14
+msgid "without end. Amen."
+msgstr ""

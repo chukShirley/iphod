@@ -1,0 +1,75 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: zh\n"
+
+#: web/templates/prayer/_dignus_es.html.eex:4
+msgid "A Song to the Lamb"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:15
+msgid "And so, to him who sits upon the throne,"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:11
+msgid "And yours by right, O Lamb that was slain,"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:17
+msgid "Be worship and praise, dominion and splendor,"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:3
+msgid "Dignus es"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:1
+msgid "Especially suitable for use after Ascension and in Easter season"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:9
+msgid "For you created everything that is,"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:13
+msgid "From every family, language, people and nation,"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:6
+msgid "Revelation 4:11; 5:9-10, 13"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:7
+msgid "Splendor and honor and kingly power"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:14
+msgid "a kingdom of priests to serve our God."
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:10
+msgid "and by your will they were created and have their being;"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:16
+msgid "and to Christ the Lamb,"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:8
+msgid "are yours by right, O Lord our God,"
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:18
+msgid "for ever and for evermore."
+msgstr ""
+
+#: web/templates/prayer/_dignus_es.html.eex:12
+msgid "for with your blood you have redeemed for God,"
+msgstr ""
