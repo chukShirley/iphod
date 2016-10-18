@@ -24,7 +24,7 @@ msgstr ""
 
 #: web/templates/prayer/mp.html.eex:4
 msgid "Approved for Provincial Use"
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/mp.html.eex:40
 msgid "At the end of the Psalms is sung or said"
@@ -60,11 +60,11 @@ msgstr ""
 
 #: web/templates/prayer/mp.html.eex:6
 msgid "Petertide, A.D. 2013"
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/mp.html.eex:5
 msgid "The Anglican Church in North America"
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/mp.html.eex:93
 msgid "The Collect of the Day"
@@ -124,7 +124,7 @@ msgstr ""
 
 #: web/templates/prayer/mp.html.eex:23
 msgid "alt opening sentence"
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/mp.html.eex:43
 msgid "as it was in the beginning, is now, and ever shall be,"

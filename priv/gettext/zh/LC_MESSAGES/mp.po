@@ -12,128 +12,129 @@ msgstr ""
 
 #: web/templates/prayer/mp.html.eex:52
 msgid "A citation giving chapter and verse may be added."
-msgstr ""
+msgstr " " # part of After each lesson
 
 #: web/templates/prayer/mp.html.eex:53
 msgid "After each Lesson the Reader may say"
-msgstr ""
+msgstr "讀畢時說"
 
 #: web/templates/prayer/mp.html.eex:29
 msgid "All stand"
-msgstr ""
+msgstr "眾⽴立。"
 
 #: web/templates/prayer/mp.html.eex:4
 msgid "Approved for Provincial Use"
-msgstr ""
+msgstr " " # intentionally blank
+
 
 #: web/templates/prayer/mp.html.eex:40
 msgid "At the end of the Psalms is sung or said"
-msgstr ""
+msgstr "主禮或司禱與會眾起⽴立啓應當⽇日選定的詩篇。讀畢即啓應榮耀頌"
 
 #: web/templates/prayer/mp.html.eex:2
 msgid "Daily Morning Prayer"
-msgstr ""
+msgstr "早禱禮文"
 
 #: web/templates/prayer/mp.html.eex:42
 msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
-msgstr ""
+msgstr "啓： 但願榮耀歸於聖父、聖子、聖靈；"
 
 #: web/templates/prayer/mp.html.eex:58
 msgid "Here ends the Reading."
-msgstr ""
+msgstr "經課至此讀畢。"
 
 #: web/templates/prayer/mp.html.eex:81
 msgid "Officiant and People"
-msgstr ""
+msgstr "主禮或司禱與會眾同讀"
 
 #: web/templates/prayer/mp.html.eex:48
 msgid "One or more Lessons, as appointed, are read, the Reader first saying"
-msgstr ""
+msgstr "會眾皆坐。讀經員宣讀指定⼀一或多段經課。讀經前說"
 
 #: web/templates/prayer/mp.html.eex:15
 msgid "Opening Sentences of Scripture"
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/mp.html.eex:57
 msgid "Or the Reader may say"
-msgstr ""
+msgstr "讀經員或說"
 
 #: web/templates/prayer/mp.html.eex:6
 msgid "Petertide, A.D. 2013"
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/mp.html.eex:5
 msgid "The Anglican Church in North America"
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/mp.html.eex:93
 msgid "The Collect of the Day"
-msgstr ""
+msgstr "當日祝文"
 
 #: web/templates/prayer/mp.html.eex:49
 msgid "The First Lesson from"
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/mp.html.eex:26
 msgid "The Invitatory"
-msgstr ""
+msgstr "宣 召"
 
 #: web/templates/prayer/mp.html.eex:47
 msgid "The Lessons"
-msgstr ""
+msgstr "經 課"
 
 #: web/templates/prayer/mp.html.eex:8
 msgid "The Officiant may begin Morning Prayer by reading an opening sentence \nof Scripture found on pages 17-19 or another appropriate Scripture. \nThe Confession of Sin may be said, or the Office may continue with \n“O Lord, open our lips.”\n"
-msgstr ""
+msgstr "主禮或司禱可以此經句開始早禱，或從39-40 ⾴頁選讀節期始禮經句，或其他合適的經句。其後可\n讀認罪⽂文，或從26 ⾴頁宣召「主啊，助我們開⼝口」繼續早禱。"
 
 #: web/templates/prayer/mp.html.eex:92
 msgid "The Officiant then prays one or more of the following collects. It is traditional to pray the Collects for Peace and Grace daily. Alternatively, one may pray the collects on a weekly rotation, using the suggestions in parentheses."
-msgstr ""
+msgstr "主禮或司禱可⽤用⼀一段或多段祝⽂文祈禱。傳統每天必⽤用求安禱⽂文及求恩禱⽂文。或每週循環使⽤用以下\n禱⽂文，如括號提⽰示。"
 
 #: web/templates/prayer/mp.html.eex:74
 msgid "The People kneel or stand."
-msgstr ""
+msgstr "會眾跪或站⽴立。"
 
 #: web/templates/prayer/mp.html.eex:73
 msgid "The Prayers"
-msgstr ""
+msgstr "祈 禱"
 
 #: web/templates/prayer/mp.html.eex:38
 msgid "The Psalm or Psalms Appointed"
-msgstr ""
+msgstr "詩 篇"
 
 #: web/templates/prayer/mp.html.eex:66
 msgid "The Second Lesson from"
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/mp.html.eex:61
 msgid "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."
-msgstr ""
+msgstr "每段經課後唱或讀以下聖頌。主禮或司禱也可選⽤用其他獲准使⽤用的聖頌或⼀一⾸首合適讚美的聖詩。"
 
 #: web/templates/prayer/mp.html.eex:37
 msgid "Then follows"
-msgstr ""
+msgstr "繼續讀"
 
 #: web/templates/prayer/mp.html.eex:32
 msgid "Then follows the Venite. Alternatively, the Jubilate may be used."
-msgstr ""
+msgstr "此時全體唱或讀都來頌，或⽤用歡呼頌。"
 
 #: web/templates/prayer/mp.html.eex:33
 msgid "These seasonal antiphons may be sung or said before and after the Invitatory Psalm."
-msgstr ""
+msgstr "如遇節期可在宣召詩篇前後輪讀或唱節期經句。"
 
 #: web/templates/prayer/mp.html.eex:23
 msgid "alt opening sentence"
-msgstr ""
+msgstr "「時候將到，如今就是了，那真正拜父的，要用心靈和誠實拜祂，因為父要\n這樣的人拜祂。」\n約翰福音4:23"
 
 #: web/templates/prayer/mp.html.eex:43
 msgid "as it was in the beginning, is now, and ever shall be,"
-msgstr ""
+msgstr "應： 始初如此，現今如此，後來亦如此，永無窮盡。阿們。"
 
 #: web/templates/prayer/mp.html.eex:85
 msgid "or this"
-msgstr ""
+msgstr "或"
 
 #: web/templates/prayer/mp.html.eex:44
 msgid "world without end. Amen."
-msgstr ""
+msgstr " " # included in as it was...

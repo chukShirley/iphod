@@ -12,105 +12,105 @@ msgstr ""
 
 #: web/templates/prayer/_confession.html.eex:34
 msgid "A deacon or layperson remains kneeling and prays"
-msgstr ""
+msgstr "若牧師不在，會吏或司禱仍跪下祈禱"
 
 #: web/templates/prayer/_confession.html.eex:29
 msgid "Almighty God, the Father of our Lord Jesus Christ,desires not the death of sinners, but that they may turn from their wickedness and live. He has empowered and commanded his ministers to pronounce to his people, being penitent, the absolution and remission of their sins. He pardons all who truly repent and genuinely believe his holy Gospel. For this reason, we beseech him to grant us true repentance and his Holy Spirit, that our present deeds may please him, the rest of our lives may be pure and holy, and that at the last we may come to his eternal joy; through Jesus Christ our Lord. Amen."
-msgstr ""
+msgstr "全能的上帝，我主耶穌基督的父，不願罪人陷於淪亡，但願罪人轉離惡念，\n悔改從善，得享永生。上帝曾以權柄賜與牧師，命牧師向悔罪的子民宣諭，\n赦免他們的罪；上帝必赦免所有真誠悔改、信奉福音的人。所以，我們應當\n懇求上帝，賜我們有真誠的悔改，並賜聖靈，使我們現今所行，蒙主喜悅，\n以後為人純全聖潔，至終可得永遠的喜樂；藉賴我主耶穌基督而求。阿們。"
 
 #: web/templates/prayer/_confession.html.eex:11
 msgid "Almighty and most merciful Father,"
-msgstr ""
+msgstr "全能至慈悲的天父，"
 
 #: web/templates/prayer/_confession.html.eex:23
 msgid "And grant, O most merciful Father, for his sake,"
-msgstr ""
+msgstr "使我們以後尊奉天父，公義待人，安份守己，"
 
 #: web/templates/prayer/_confession.html.eex:1
 msgid "Confession of Sin"
-msgstr ""
+msgstr "認罪文"
 
 #: web/templates/prayer/_confession.html.eex:5
 msgid "Dearly beloved, the Scriptures teach us to acknowledge our many sins and offenses, not concealing them from our heavenly Father, but confessing them with humble and obedient hearts that we may obtain forgiveness by his infinite goodness and mercy. We ought at all times humbly to acknowledge our sins before Almighty God, but especially when we come together in his presence to give thanks for the great benefits we have received at his hands, to declare his most worthy praise, to hear his holy Word, and to ask, for ourselves and others, those things necessary for our life and our salvation. Therefore, come with me to the throne of heavenly grace.\n"
-msgstr ""
+msgstr "親愛的兄弟姊妹，聖經教訓我們承認自己一切罪惡，不應在天父面前隱藏，\n要存謙虛和順從的心承認；如此，主必用無窮的恩惠慈悲，赦免我們。我們\n當常在全能的上帝面前虛心認罪；現今我們齊集在主前，感謝主的恩典，宣\n揚主的美德，敬聽主的聖經，又求主賜與我們及世人生活和得救所必需的恩\n典。所以，我們同到施恩寶座前，謙卑認罪。"
 
 #: web/templates/prayer/_confession.html.eex:36
 msgid "Grant your faithful people, merciful Lord, pardon and peace; that we may be cleansed from all our sins, and serve you with a quiet mind; through Jesus Christ our Lord. Amen."
-msgstr ""
+msgstr "求慈悲的主，將赦罪和平安的恩典，賜給主忠信的子民；洗淨我們一切的罪\n惡，使我們心中安然事奉主；此賴我主耶穌基督而求。阿們。"
 
 #: web/templates/prayer/_confession.html.eex:9
 msgid "Let us humbly confess our sins to Almighty God."
-msgstr ""
+msgstr "親愛的兄弟姊妹，我們應當在全能的上帝面前，謙卑認罪。"
 
 #: web/templates/prayer/_confession.html.eex:19
 msgid "O Lord, have mercy upon us."
-msgstr ""
+msgstr "主啊，憐憫我們。"
 
 #: web/templates/prayer/_confession.html.eex:21
 msgid "Restore those who are penitent, according to your promises declared"
-msgstr ""
+msgstr "悔改的，求主按照主耶穌基督應許世人的恩，饒恕我們。"
 
 #: web/templates/prayer/_confession.html.eex:10
 msgid "Silence is kept. All kneeling the Officiant and People say"
-msgstr ""
+msgstr "安靜⽚片刻。主禮或司禱與全會眾跪下同讀"
 
 #: web/templates/prayer/_confession.html.eex:20
 msgid "Spare those who confess their faults."
-msgstr ""
+msgstr "認罪的，求主赦免；"
 
 #: web/templates/prayer/_confession.html.eex:32
 msgid "The Almighty and merciful Lord grant you absolution and remission of all your sins, true repentance, amendment of life, and the grace and consolation of his Holy Spirit. Amen."
-msgstr ""
+msgstr "全能至慈悲的上帝，寬恕並赦免你們所犯的罪，給你們有真誠悔改和生命更\n新，並在聖靈裏，得恩典和安慰。阿們。"
 
 #: web/templates/prayer/_confession.html.eex:3
 msgid "The Officiant says to the People"
-msgstr ""
+msgstr "主禮或司禱向會眾說"
 
 #: web/templates/prayer/_confession.html.eex:27
 msgid "The Priest alone stands and says"
-msgstr ""
+msgstr "牧師起⽴立向會眾宣讀"
 
 #: web/templates/prayer/_confession.html.eex:18
 msgid "and apart from your grace, there is no health in us."
-msgstr ""
+msgstr "遠離祢的恩典，我們便無力行善。"
 
 #: web/templates/prayer/_confession.html.eex:17
 msgid "and we have done those things which we ought not to have done;"
-msgstr ""
+msgstr " " # part of "and apart from your grace"
 
 #: web/templates/prayer/_confession.html.eex:8
 #: web/templates/prayer/_confession.html.eex:30
 msgid "or this"
-msgstr ""
+msgstr "或說"
 
 #: web/templates/prayer/_confession.html.eex:14
 msgid "own hearts."
-msgstr ""
+msgstr " " # part of "we have followed too much..."
 
 #: web/templates/prayer/_confession.html.eex:24
 msgid "that we may now live a godly, righteous, and sober life,"
-msgstr ""
+msgstr " " # part of "And grant O most..."
 
 #: web/templates/prayer/_confession.html.eex:22
 msgid "to all people in Christ Jesus our Lord;"
-msgstr ""
+msgstr "又求至慈悲的父，因耶穌基督的緣故，"
 
 #: web/templates/prayer/_confession.html.eex:25
 msgid "to the glory of your holy Name. Amen."
-msgstr ""
+msgstr "榮耀天父的聖名。阿們。"
 
 #: web/templates/prayer/_confession.html.eex:12
 msgid "we have erred and strayed from your ways like lost sheep."
-msgstr ""
+msgstr "我們離開聖道，錯行如迷失的羊；"
 
 #: web/templates/prayer/_confession.html.eex:13
 msgid "we have followed too much the deceits and desires of our"
-msgstr ""
+msgstr "我們常任己意，常縱己慾；"
 
 #: web/templates/prayer/_confession.html.eex:16
 msgid "we have left undone those things which we ought to have done"
-msgstr ""
+msgstr "當為者不為，不當為者反為；"
 
 #: web/templates/prayer/_confession.html.eex:15
 msgid "we have offended against your holy laws."
-msgstr ""
+msgstr "違背天父的聖誡；"

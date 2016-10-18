@@ -12,60 +12,60 @@ msgstr ""
 
 #: web/templates/prayer/_jubilate.html.eex:3
 msgid "Be Joyful"
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_jubilate.html.eex:7
 msgid "Be joyful in the Lord, all you lands;"
-msgstr ""
+msgstr "普天下當向耶和華歡呼！"
 
 #: web/templates/prayer/_jubilate.html.eex:13
 msgid "Enter his gates with thanksgiving;"
-msgstr ""
+msgstr "當稱謝進入祂的門；"
 
 #: web/templates/prayer/_jubilate.html.eex:16
 msgid "For the Lord is good;"
-msgstr ""
+msgstr "因為耶和華本為善。"
 
 #: web/templates/prayer/_jubilate.html.eex:2
 msgid "Jubilate"
-msgstr ""
+msgstr "歡呼頌"
 
 #: web/templates/prayer/_jubilate.html.eex:10
 msgid "Know this: the Lord himself is God;"
-msgstr ""
+msgstr "你們當曉得耶和華是上帝！"
 
 #: web/templates/prayer/_jubilate.html.eex:5
 msgid "Psalm 100"
-msgstr ""
+msgstr "（詩100）"
 
 #: web/templates/prayer/_jubilate.html.eex:9
 msgid "and come before his presence with a song."
-msgstr ""
+msgstr "當來向祂歌唱！"
 
 #: web/templates/prayer/_jubilate.html.eex:18
 msgid "and his faithfulness endures from age to age."
-msgstr ""
+msgstr "祂的信實直到萬代。"
 
 #: web/templates/prayer/_jubilate.html.eex:15
 msgid "give thanks to him and call upon his Name."
-msgstr ""
+msgstr "當感謝祂，稱頌祂的名！"
 
 #: web/templates/prayer/_jubilate.html.eex:14
 msgid "go into his courts with praise;"
-msgstr ""
+msgstr "當讚美進入祂的院。"
 
 #: web/templates/prayer/_jubilate.html.eex:11
 msgid "he himself has made us, and we are his;"
-msgstr ""
+msgstr "我們是祂造的，也是屬祂的；"
 
 #: web/templates/prayer/_jubilate.html.eex:17
 msgid "his mercy is everlasting;"
-msgstr ""
+msgstr "祂的慈愛存到永遠；"
 
 #: web/templates/prayer/_jubilate.html.eex:8
 msgid "serve the Lord with gladness"
-msgstr ""
+msgstr "你們當樂意事奉耶和華，"
 
 #: web/templates/prayer/_jubilate.html.eex:12
 msgid "we are his people and the sheep of his pasture."
-msgstr ""
+msgstr "我們是祂的民，也是祂草場的羊。"

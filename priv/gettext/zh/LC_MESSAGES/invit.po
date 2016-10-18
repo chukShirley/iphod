@@ -1,31 +1,31 @@
 #: web/templates/prayer/_invitatory.html.eex:8
 msgid "And our mouth shall proclaim your praise."
-msgstr ""
+msgstr "使我們能用口讚美主。"
 
 #: web/templates/prayer/_invitatory.html.eex:24
 msgid "As it was in the beginning, is now, and ever shall be, world without end. Amen."
-msgstr ""
+msgstr "始初如此，現今如此，後來亦如此，永無窮盡。阿們。"
 
 #: web/templates/prayer/_invitatory.html.eex:20
 msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
-msgstr ""
+msgstr "但願榮耀歸於聖父、聖子、聖靈；"
 
 #: web/templates/prayer/_invitatory.html.eex:12
 msgid "O God, make speed to save us;"
-msgstr ""
+msgstr "上帝啊，快快拯救我們；"
 
 #: web/templates/prayer/_invitatory.html.eex:16
 msgid "O Lord, make haste to help us."
-msgstr ""
+msgstr "主啊，趕快幫助我們。"
 
 #: web/templates/prayer/_invitatory.html.eex:4
 msgid "O Lord, open our lips;"
-msgstr ""
+msgstr "主啊，助我們開口；"
 
 #: web/templates/prayer/_invitatory.html.eex:28
 msgid "Praise the Lord."
-msgstr ""
+msgstr "你們要讚美主；"
 
 #: web/templates/prayer/_invitatory.html.eex:32
 msgid "The Lord’s name be praised."
-msgstr ""
+msgstr "願主之名得讚美。"

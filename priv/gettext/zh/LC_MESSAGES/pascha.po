@@ -12,23 +12,23 @@ msgstr ""
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:7
 msgid "1 Corinthians 5:7-8; Romans 6:9-11; 1 Corinthians 15:20-22"
-msgstr ""
+msgstr "（林前5:7-8; 羅6:9-11; 林前15:20-22）"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:9
 msgid "Alleluia. Christ our Passover has been sacrificed for us;"
-msgstr ""
+msgstr "哈利路亞。我們逾越節的羔羊基督已經被殺獻祭了。"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:13
 msgid "Christ being raised from the dead will never die again;"
-msgstr ""
+msgstr "基督既從死裏復活，就不再死，"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:19
 msgid "Christ has been raised from the dead,"
-msgstr ""
+msgstr "基督已經從死裏復活，"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:5
 msgid "Christ our Passover"
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:1
 msgid "During the first week of Easter, the Pascha Nostrum will be used in place of the Invitatory Psalm. It is appropriate to use this canticle throughout Eastertide."
@@ -36,56 +36,56 @@ msgstr ""
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:23
 msgid "For as in Adam all die,"
-msgstr ""
+msgstr "在亞當裏眾人都死了；"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:21
 msgid "For since by a man came death,"
-msgstr ""
+msgstr "死既是因一人而來，"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:11
 msgid "Not with the old leaven, the leaven of malice and evil,"
-msgstr ""
+msgstr "不可用舊酵，也不可用惡毒、邪惡的酵，"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:4
 msgid "Pascha Nostrum"
-msgstr ""
+msgstr "我們的逾越羔羊"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:17
 msgid "So also consider yourselves dead to sin,"
-msgstr ""
+msgstr "這樣，你們向罪也當看自己是死的；"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:15
 msgid "The death that he died, he died to sin, once for all;"
-msgstr ""
+msgstr "祂死是向罪死了，只有一次；"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:18
 msgid "and alive to God in Jesus Christ our Lord. Alleluia."
-msgstr ""
+msgstr "向上帝在基督耶穌裏，卻當看自己是活的。哈利路亞。"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:16
 msgid "but the life he lives, he lives to God."
-msgstr ""
+msgstr "祂活是向上帝活着。"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:12
 msgid "but with the unleavened bread of sincerity and truth. Alleluia."
-msgstr ""
+msgstr "只用誠實真正的無酵餅。哈利路亞。"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:22
 msgid "by a man has come also the resurrection of the dead."
-msgstr ""
+msgstr "死人復活也是因一人而來。"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:14
 msgid "death no longer has dominion over him."
-msgstr ""
+msgstr "死也不再作祂的主了。"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:24
 msgid "so also in Christ shall all be made alive. Alleluia."
-msgstr ""
+msgstr "照樣，在基督裏眾人也都要復活。哈利路亞。"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:20
 msgid "the first fruits of those who have fallen asleep."
-msgstr ""
+msgstr "成為睡了之人初熟的果子。"
 
 #: web/templates/prayer/_pascha_nostrum.html.eex:10
 msgid "therefore let us keep the feast,"
-msgstr ""
+msgstr "所以，我們當守這節，"
