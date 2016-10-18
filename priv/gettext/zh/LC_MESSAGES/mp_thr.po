@@ -12,8 +12,8 @@ msgstr ""
 
 #: web/templates/prayer/_mp_Thursday.html.eex:2
 msgid "A Collect for Guidance (Thursday)"
-msgstr ""
+msgstr "求引領禱文 （星期四）"
 
 #: web/templates/prayer/_mp_Thursday.html.eex:3
 msgid "Heavenly Father, in you we live and move and have our being: We\nhumbly pray you so to guide and govern us by your Holy Spirit, that\nin all the cares and occupations of our life we may not forget you, but\nmay remember that we are ever walking in your sight; through Jesus\nChrist our Lord."
-msgstr ""
+msgstr "天父啊，我們生活、行動和存留都在祢手中；我們謙卑懇求祢以聖靈引導治\n理我們，使我們在繁忙中不忘記祢，緊記我們行事為人皆在主的鑒察之下。\n此賴我主耶穌基督而求。"

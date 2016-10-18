@@ -12,80 +12,80 @@ msgstr ""
 
 #: web/templates/prayer/_apostles_creed.html.eex:12
 msgid "He ascended into heaven,"
-msgstr ""
+msgstr "升天，"
 
 #: web/templates/prayer/_apostles_creed.html.eex:10
 msgid "He descended to the dead."
-msgstr ""
+msgstr "降至陰間；"
 
 #: web/templates/prayer/_apostles_creed.html.eex:8
 msgid "He suffered under Pontius Pilate,"
-msgstr ""
+msgstr "祂在本丟彼拉多手下受難，"
 
 #: web/templates/prayer/_apostles_creed.html.eex:6
 msgid "He was conceived by the Holy Spirit"
-msgstr ""
+msgstr "因聖靈成孕，"
 
 #: web/templates/prayer/_apostles_creed.html.eex:14
 msgid "He will come again to judge the living"
-msgstr ""
+msgstr "祂將要再來，審判活人死人。"
 
 #: web/templates/prayer/_apostles_creed.html.eex:3
 msgid "I believe in God, the Father almighty,"
-msgstr ""
+msgstr "我信上帝，全能的父，"
 
 #: web/templates/prayer/_apostles_creed.html.eex:5
 msgid "I believe in Jesus Christ, his only Son, "
-msgstr ""
+msgstr "我信我主耶穌基督，是上帝的獨子，"
 
 #: web/templates/prayer/_apostles_creed.html.eex:15
 msgid "I believe in the Holy Spirit,"
-msgstr ""
+msgstr "我信聖靈，"
 
 #: web/templates/prayer/_apostles_creed.html.eex:2
 msgid "Officiant and People together, all standi"
-msgstr ""
+msgstr "主禮或司禱與會眾站⽴立，同聲誦讀"
 
 #: web/templates/prayer/_apostles_creed.html.eex:11
 msgid "On the third day he rose again."
-msgstr ""
+msgstr "第三天復活；"
 
 #: web/templates/prayer/_apostles_creed.html.eex:1
 msgid "The Apostles’ Creed"
-msgstr ""
+msgstr "使徒信經"
 
 #: web/templates/prayer/_apostles_creed.html.eex:7
 msgid "and born of the Virgin Mary."
-msgstr ""
+msgstr "由童貞女馬利亞所生。"
 
 #: web/templates/prayer/_apostles_creed.html.eex:13
-msgid "and is seated at the right hand of "
-msgstr ""
+msgid "and is seated at the right hand of the Father."
+msgstr "坐在聖父的右邊。"
 
 #: web/templates/prayer/_apostles_creed.html.eex:20
 msgid "and the life everlasting. Amen."
-msgstr ""
+msgstr "我信永生。阿們。"
 
 #: web/templates/prayer/_apostles_creed.html.eex:4
 msgid "creator of heaven and earth."
-msgstr ""
+msgstr "是創造天地的主。"
 
 #: web/templates/prayer/_apostles_creed.html.eex:17
 msgid "the communion of saints,"
-msgstr ""
+msgstr "我信聖徒相通，"
 
 #: web/templates/prayer/_apostles_creed.html.eex:18
 msgid "the forgiveness of sins,"
-msgstr ""
+msgstr "我信罪得赦免，"
 
 #: web/templates/prayer/_apostles_creed.html.eex:16
 msgid "the holy catholic Church,"
-msgstr ""
+msgstr "我信聖而公之教會，"
 
 #: web/templates/prayer/_apostles_creed.html.eex:19
 msgid "the resurrection of the body,"
-msgstr ""
+msgstr "我信身體復活，"
 
 #: web/templates/prayer/_apostles_creed.html.eex:9
 msgid "was crucified, died, and was buried."
-msgstr ""
+msgstr "被釘在十字架上，受死、埋葬，"

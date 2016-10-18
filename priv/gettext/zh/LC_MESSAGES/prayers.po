@@ -12,56 +12,56 @@ msgstr ""
 
 #: web/templates/prayer/_prayers.html.eex:32
 msgid "And bless your inheritance."
-msgstr ""
+msgstr "也賜福給祢的子民。"
 
 #: web/templates/prayer/_prayers.html.eex:8
 msgid "And grant us your salvation."
-msgstr ""
+msgstr "也施恩拯救我們。"
 
 #: web/templates/prayer/_prayers.html.eex:16
 msgid "And guide us in the way of justice and truth."
-msgstr ""
+msgstr "也引導我們走在公義和真理上。"
 
 #: web/templates/prayer/_prayers.html.eex:24
 msgid "And make your chosen people joyful."
-msgstr ""
+msgstr "也求主使主的子民常有喜樂。"
 
 #: web/templates/prayer/_prayers.html.eex:56
 msgid "And take not your Holy Spirit from us."
-msgstr ""
+msgstr "不要從我們收回祢的聖靈。"
 
 #: web/templates/prayer/_prayers.html.eex:20
 msgid "Clothe your ministers with righteousness;"
-msgstr ""
+msgstr "求主使主所立的聖品人常有善義；"
 
 #: web/templates/prayer/_prayers.html.eex:52
 msgid "Create in us clean hearts, O God;"
-msgstr ""
+msgstr "上帝啊，為我們造清潔的心；"
 
 #: web/templates/prayer/_prayers.html.eex:40
 msgid "For only in you can we live in safety."
-msgstr ""
+msgstr "只有在主裏才能平安度日。"
 
 #: web/templates/prayer/_prayers.html.eex:36
 msgid "Give peace in our time, O Lord;"
-msgstr ""
+msgstr "求主賜平安；"
 
 #: web/templates/prayer/_prayers.html.eex:44
 msgid "Let not the needy, O Lord, be forgotten;"
-msgstr ""
+msgstr "主啊，叫我們不忘記缺乏的人；"
 
 #: web/templates/prayer/_prayers.html.eex:48
 msgid "Nor the hope of the poor be taken away."
-msgstr ""
+msgstr "求主使貧苦人常存盼望。"
 
 #: web/templates/prayer/_prayers.html.eex:12
 msgid "O Lord, save our nations;"
-msgstr ""
+msgstr "主啊，拯救我們的國家；"
 
 #: web/templates/prayer/_prayers.html.eex:28
 msgid "O Lord, save your people;"
-msgstr ""
+msgstr "主啊，拯救祢的子民；"
 
 #: web/templates/prayer/_prayers.html.eex:4
 msgid "O Lord, show us your mercy;"
-msgstr ""
+msgstr "主啊，憐憫我們；"

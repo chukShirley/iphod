@@ -10,7 +10,7 @@
 <p class= "vs_indent"><%= dgettext "apcreed", "He descended to the dead."%></p>
 <p class= "vs_indent"><%= dgettext "apcreed", "On the third day he rose again."%></p>
 <p class= "vs_indent"><%= dgettext "apcreed", "He ascended into heaven,"%></p>
-<p class= "vs_indent"><%= dgettext "apcreed", "and is seated at the right hand of "%>the Father.</p>
+<p class= "vs_indent"><%= dgettext "apcreed", "and is seated at the right hand of the Father."%></p>
 <p class= "vs_indent"><%= dgettext "apcreed", "He will come again to judge the living"%> and the dead.</p>
 <p class= "vs"><%= dgettext "apcreed", "I believe in the Holy Spirit,"%></p>
 <p class= "vs_indent"><%= dgettext "apcreed", "the holy catholic Church,"%></p>

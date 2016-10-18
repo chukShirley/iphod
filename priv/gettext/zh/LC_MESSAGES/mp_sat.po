@@ -12,8 +12,8 @@ msgstr ""
 
 #: web/templates/prayer/_mp_Saturday.html.eex:2
 msgid "A Collect for Sabbath Rest (Saturday)"
-msgstr ""
+msgstr "安息日禱文 （星期六）"
 
 #: web/templates/prayer/_mp_Saturday.html.eex:3
 msgid "Almighty God, who after the creation of the world rested from all\nyour works and sanctified a day of rest for all your creatures: Grant\nthat we, putting away all earthly anxieties, may be duly prepared for\nthe service of your sanctuary, and that our rest here upon earth may\nbe a preparation for the eternal rest promised to your people in\nheaven; through Jesus Christ our Lord."
-msgstr ""
+msgstr "全能的上帝，祢在第七日歇了一切創造的工，並將此日分別為聖，賜萬物得\n享安息。求主幫助我們，放下世上煩擾，虔敬預備到聖所事奉祢；深知道地\n上的休息，只是祢應許賜給子民在天上永恒安息的預備；此賴我主耶穌基督\n而求。"

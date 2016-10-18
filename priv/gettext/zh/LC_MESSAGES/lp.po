@@ -12,32 +12,32 @@ msgstr ""
 
 #: web/templates/prayer/_lords_prayer_trad.html.eex:4
 msgid "And forgive us our trespasses, as we forgive those who trespass"
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/_lords_prayer_trad.html.eex:6
 msgid "And lead us not into temptation, but deliver us from evil."
-msgstr ""
+msgstr " " # intentionally blnak
 
 #: web/templates/prayer/_lords_prayer_trad.html.eex:7
 msgid "For thine is the kingdom, and the power, and the glory,"
-msgstr ""
+msgstr "因為國度、權柄、榮耀，皆屬於父，永無窮盡。阿們。"
 
 #: web/templates/prayer/_lords_prayer_trad.html.eex:3
 msgid "Give us this day our daily bread."
-msgstr ""
+msgstr "如我們饒恕得罪我們的人。保祐我們，不入誘惑；拯救我們，脫離凶惡；"
 
 #: web/templates/prayer/_lords_prayer_trad.html.eex:1
 msgid "Our Father, who art in heaven, hallowed be thy Name."
-msgstr ""
+msgstr "我們在天上的父，願人皆尊父名為聖；願父國降臨；願父旨意成就在地，"
 
 #: web/templates/prayer/_lords_prayer_trad.html.eex:2
 msgid "Thy kingdom come, thy will be done, on earth as it is in heaven."
-msgstr ""
+msgstr "如同成就在天。我們日用的飲食，求父今日賜與我們。又求饒恕我們的罪，"
 
 #: web/templates/prayer/_lords_prayer_trad.html.eex:5
 msgid "against us."
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/_lords_prayer_trad.html.eex:8
 msgid "forever and ever. Amen."
-msgstr ""
+msgstr " " # intentionally blank

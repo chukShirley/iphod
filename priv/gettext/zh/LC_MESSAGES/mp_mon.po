@@ -12,8 +12,8 @@ msgstr ""
 
 #: web/templates/prayer/_mp_Monday.html.eex:2
 msgid "A Collect for the Renewal of Life (Monday)"
-msgstr ""
+msgstr "求更新生命禱文 （星期一）"
 
 #: web/templates/prayer/_mp_Monday.html.eex:3
 msgid "O God, the King eternal, whose light divides the day from the night and turns the shadow of death into the morning: Drive far from us all wrong desires, incline our hearts to keep your law, and guide our feet into the way of peace; that, having done your will with cheerfulness during the day, we may, when night comes, rejoice to give you thanks; through Jesus Christ our Lord."
-msgstr ""
+msgstr "上帝啊，祢是永恆之君，祢的真光使黑夜分明，亦將死蔭轉為清晨；求祢從\n我們心中驅除一切邪惡謬誤的慾念，感動我們的心，遵守主的法度，引導我\n們走上平安的道路。如此，我們在日間既能樂意遵行主的旨意，夜間亦能歡\n然感謝主；此賴我主耶穌基督而求。"

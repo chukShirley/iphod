@@ -12,80 +12,80 @@ msgstr ""
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:4
 msgid "Almighty God, Father of all mercies,"
-msgstr ""
+msgstr "全能的上帝，萬恩的父，"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:13
 msgid "And, we pray, give us such an awareness of your mercies,"
-msgstr ""
+msgstr "藉賴我主耶穌基督祈求主，"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:3
 msgid "Officiant and People"
-msgstr ""
+msgstr "主禮或司禱與會眾同讀"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:2
 msgid "The General Thanksgiving"
-msgstr ""
+msgstr "感謝文"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:8
 msgid "We bless you for our creation, preservation,"
-msgstr ""
+msgstr "又特別稱謝主：因為主施無窮的仁愛，"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:9
 msgid "and all the blessings of this life;"
-msgstr ""
+msgstr "靠我主耶穌基督救贖世人；"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:17
 msgid "and by walking before you"
-msgstr ""
+msgstr "一生聖潔公義；"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:21
 msgid "be honor and glory throughout all ages. Amen."
-msgstr ""
+msgstr "永無窮盡。阿們。"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:10
 msgid "but above all for your immeasurable love"
-msgstr ""
+msgstr "施與恩典，並賜我們榮耀的盼望。"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:16
 msgid "by giving up our selves to your service,"
-msgstr ""
+msgstr "將自己獻與主，在主面前作工，"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:6
 msgid "for all your goodness and loving-kindness"
-msgstr ""
+msgstr "我們不配的僕人，特此恭敬虔誠向主感謝。"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:12
 msgid "for the means of grace, and for the hope of glory."
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:18
 msgid "in holiness and righteousness all our days;"
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:11
 msgid "in the redemption of the world by our Lord Jesus Christ;"
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:15
 msgid "not only with our lips, but in our lives,"
-msgstr ""
+msgstr "不但口中讚美，亦在行事顯明，"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:14
 msgid "that with truly thankful hearts we may show forth your praise,"
-msgstr ""
+msgstr "賜我們感恩的心，可以真誠感謝主，"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:19
 msgid "through Jesus Christ our Lord,"
-msgstr ""
+msgstr "但願尊貴榮耀歸於聖父、聖子、聖靈，"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:7
 msgid "to us and to all whom you have made."
-msgstr ""
+msgstr "我們稱謝主：創造我們，保全我們，賜福我們。"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:20
 msgid "to whom, with you and the Holy Spirit,"
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:5
 msgid "we your unworthy servants give you humble thanks"
-msgstr ""
+msgstr "將恩惠慈愛賜給我們，以及萬民；"

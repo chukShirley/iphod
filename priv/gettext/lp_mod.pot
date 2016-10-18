@@ -38,3 +38,4 @@ msgstr ""
 #: web/templates/prayer/_lords_prayer_modern.html.eex:7
 msgid "now and forever. Amen."
 msgstr ""
+

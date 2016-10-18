@@ -12,114 +12,114 @@ msgstr ""
 
 #: web/templates/prayer/_benedictus.html.eex:2
 msgid "Benedictus"
-msgstr ""
+msgstr "以色列頌"
 
 #: web/templates/prayer/_benedictus.html.eex:6
 msgid "Blessed be the Lord, the God of Israel;"
-msgstr ""
+msgstr "主—以色列的上帝是應當稱頌的！"
 
 #: web/templates/prayer/_benedictus.html.eex:17
 msgid "Free to worship him without fear,"
-msgstr ""
+msgstr "就可以終身在祂面前，"
 
 #: web/templates/prayer/_benedictus.html.eex:28
 msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
-msgstr ""
+msgstr "但願榮耀歸於聖父、聖子、聖靈，"
 
 #: web/templates/prayer/_benedictus.html.eex:8
 msgid "He has raised up for us a mighty savior,"
-msgstr ""
+msgstr "在祂僕人大衛家中，"
 
 #: web/templates/prayer/_benedictus.html.eex:13
 msgid "He promised to show mercy to our fathers"
-msgstr ""
+msgstr "祂向我們列祖施憐憫，"
 
 #: web/templates/prayer/_benedictus.html.eex:24
 msgid "In the tender compassion of our God"
-msgstr ""
+msgstr "因我們上帝憐憫的心腸，"
 
 #: web/templates/prayer/_benedictus.html.eex:5
 msgid "Luke 1:68-79"
-msgstr ""
+msgstr "（路1:68-79）"
 
 #: web/templates/prayer/_benedictus.html.eex:3
 msgid "The Song of Zechariah"
-msgstr ""
+msgstr "（即撒迦利亞頌）"
 
 #: web/templates/prayer/_benedictus.html.eex:15
 msgid "This was the oath he swore to our father Abraham,"
-msgstr ""
+msgstr "就是祂對我們祖宗亞伯拉罕所起的誓，"
 
 #: web/templates/prayer/_benedictus.html.eex:10
 msgid "Through his holy prophets he promised of old,"
-msgstr ""
+msgstr "正如主藉着古時候聖先知的口所說的，"
 
 #: web/templates/prayer/_benedictus.html.eex:22
 msgid "To give his people knowledge of salvation"
-msgstr ""
+msgstr "叫祂的百姓因罪得赦，"
 
 #: web/templates/prayer/_benedictus.html.eex:26
 msgid "To shine on those who dwell in darkness and the shadow of death,"
-msgstr ""
+msgstr "要照亮坐在黑暗中死蔭裏的人，"
 
 #: web/templates/prayer/_benedictus.html.eex:20
 msgid "You, my child, shall be called the prophet of the Most High,"
-msgstr ""
+msgstr "孩子啊，你要稱為至高者的先知；"
 
 #: web/templates/prayer/_benedictus.html.eex:19
 msgid "all the days of our life."
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/_benedictus.html.eex:27
 msgid "and to guide our feet into the way of peace."
-msgstr ""
+msgstr "把我們的腳引到和平的路上。"
 
 #: web/templates/prayer/_benedictus.html.eex:14
 msgid "and to remember his holy covenant."
-msgstr ""
+msgstr "記得祂的聖約，"
 
 #: web/templates/prayer/_benedictus.html.eex:29
 #: web/templates/prayer/_cantate_domino.html.eex:29
 msgid "as it was in the beginning, is now, and ever shall be,"
-msgstr ""
+msgstr "始初如此，現今如此，後來亦如此，"
 
 #: web/templates/prayer/_benedictus.html.eex:9
 msgid "born of the house of his servant David."
-msgstr ""
+msgstr "為我們興起了拯救的角，"
 
 #: web/templates/prayer/_benedictus.html.eex:23
 msgid "by the forgiveness of their sins."
-msgstr ""
+msgstr "認識救恩；"
 
 #: web/templates/prayer/_benedictus.html.eex:21
 msgid "for you will go before the Lord to prepare his way,"
-msgstr ""
+msgstr "因為你要走在主的前面，為祂預備道路，"
 
 #: web/templates/prayer/_benedictus.html.eex:12
 msgid "from the hands of all who hate us."
-msgstr ""
+msgstr "脫離一切恨我們之人的手。"
 
 #: web/templates/prayer/_benedictus.html.eex:7
 msgid "he has come to his people and set them free."
-msgstr ""
+msgstr "因祂眷顧祂的百姓，為祂們施行救贖，"
 
 #: web/templates/prayer/_benedictus.html.eex:18
 msgid "holy and righteous in his sight"
-msgstr ""
+msgstr "無所懼怕地用聖潔和公義事奉祂。"
 
 #: web/templates/prayer/_benedictus.html.eex:11
 msgid "that he would save us from our enemies,"
-msgstr ""
+msgstr "祂拯救我們脫離仇敵，"
 
 #: web/templates/prayer/_benedictus.html.eex:25
 msgid "the dawn from on high shall break upon us,"
-msgstr ""
+msgstr "叫清晨的日光從高天臨到我們，"
 
 #: web/templates/prayer/_benedictus.html.eex:16
 msgid "to set us free from the hands of our enemies,"
-msgstr ""
+msgstr "叫我們既從仇敵手中被救出來，"
 
 #: web/templates/prayer/_benedictus.html.eex:30
 #: web/templates/prayer/_cantate_domino.html.eex:30
 msgid "world without end. Amen."
-msgstr ""
+msgstr "永無窮盡。阿們。"

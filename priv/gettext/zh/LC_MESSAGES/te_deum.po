@@ -12,156 +12,156 @@ msgstr ""
 
 #: web/templates/prayer/_te_deum.html.eex:28
 msgid "Come then, Lord, and help your people,"
-msgstr ""
+msgstr "所以求主拯救主的僕人，"
 
 #: web/templates/prayer/_te_deum.html.eex:34
 msgid "Day by day we bless you;"
-msgstr ""
+msgstr "我們天天頌主為大；"
 
 #: web/templates/prayer/_te_deum.html.eex:17
 msgid "Father, of majesty unbounded,"
-msgstr ""
+msgstr "威嚴無量的聖父，"
 
 #: web/templates/prayer/_te_deum.html.eex:11
 msgid "Holy, Holy, Holy, Lord God of power and might,"
-msgstr ""
+msgstr "聖哉，聖哉，聖哉，天地萬軍的主，"
 
 #: web/templates/prayer/_te_deum.html.eex:40
 msgid "In you, Lord, is our hope,"
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/_te_deum.html.eex:36
 msgid "Keep us today, Lord, from all sin;"
-msgstr ""
+msgstr "求主保佑我們，今天不犯罪；"
 
 #: web/templates/prayer/_te_deum.html.eex:38
 msgid "Lord, show us your love and mercy,"
-msgstr ""
+msgstr "求主施憐恤與我們，因爲我們倚靠主。"
 
 #: web/templates/prayer/_te_deum.html.eex:32
 msgid "Save your people, Lord, and bless your inheritance;"
-msgstr ""
+msgstr "求主拯救主的百姓，賜福與主的選民；"
 
 #: web/templates/prayer/_te_deum.html.eex:2
 msgid "Te Deum Laudamus"
-msgstr ""
+msgstr "讚美頌"
 
 #: web/templates/prayer/_te_deum.html.eex:10
 msgid "The cherubim and seraphim, sing in endless praise:"
-msgstr ""
+msgstr "基路伯和撒拉弗，時常大聲稱頌主，說："
 
 #: web/templates/prayer/_te_deum.html.eex:13
 msgid "The glorious company of apostles praise you."
-msgstr ""
+msgstr "有榮耀的眾使徒都讚美主。"
 
 #: web/templates/prayer/_te_deum.html.eex:14
 msgid "The noble fellowship of prophets praise you."
-msgstr ""
+msgstr "有名望的眾先知都讚美主。"
 
 #: web/templates/prayer/_te_deum.html.eex:15
 msgid "The white-robed army of martyrs praise you."
-msgstr ""
+msgstr "為道捨命、穿白衣的聖徒都讚美主。"
 
 #: web/templates/prayer/_te_deum.html.eex:16
 msgid "Throughout the world the holy Church acclaims you:"
-msgstr ""
+msgstr "普世聖教會都承認主："
 
 #: web/templates/prayer/_te_deum.html.eex:9
 msgid "To you all angels, all the powers of heaven,"
-msgstr ""
+msgstr "天和天使，並天上一切掌權者，"
 
 #: web/templates/prayer/_te_deum.html.eex:3
 msgid "We Praise You, O God"
-msgstr ""
+msgstr " " # intionally blank
 
 #: web/templates/prayer/_te_deum.html.eex:27
 msgid "We believe that you will come to be our judge."
-msgstr ""
+msgstr "我們信主必再降臨，施行審判。"
 
 #: web/templates/prayer/_te_deum.html.eex:5
 msgid "We praise you, O God,"
-msgstr ""
+msgstr "我們讚美主為上帝，"
 
 #: web/templates/prayer/_te_deum.html.eex:22
 msgid "When you took our flesh to set us free"
-msgstr ""
+msgstr "主要成爲人拯救世人，"
 
 #: web/templates/prayer/_te_deum.html.eex:26
 msgid "You are seated at God’s right hand in glory."
-msgstr ""
+msgstr "主坐在上帝的右邊，與聖父同榮。"
 
 #: web/templates/prayer/_te_deum.html.eex:24
 msgid "You overcame the sting of death"
-msgstr ""
+msgstr "主既勝了死的毒鈎，"
 
 #: web/templates/prayer/_te_deum.html.eex:20
 msgid "You, Christ, are the king of glory,"
-msgstr ""
+msgstr "基督是有榮耀的王，"
 
 #: web/templates/prayer/_te_deum.html.eex:7
 msgid "all creation worships you,"
-msgstr ""
+msgstr "普天之下皆敬拜主，"
 
 #: web/templates/prayer/_te_deum.html.eex:30
 msgid "and bring us with your saints"
-msgstr ""
+msgstr "使我們得列於聖徒中，"
 
 #: web/templates/prayer/_te_deum.html.eex:25
 msgid "and opened the kingdom of heaven to all believers."
-msgstr ""
+msgstr "即為眾信徒大開天國的門。"
 
 #: web/templates/prayer/_te_deum.html.eex:29
 msgid "bought with the price of your own blood,"
-msgstr ""
+msgstr "就是主用寳血所救贖的人，"
 
 #: web/templates/prayer/_te_deum.html.eex:39
 msgid "for we have put our trust in you."
-msgstr ""
+msgstr "我們惟倚靠主，求主使我們永不羞愧。"
 
 #: web/templates/prayer/_te_deum.html.eex:33
 msgid "govern and uphold them now and always."
-msgstr ""
+msgstr "求主治理我們，扶助我們以至永遠。"
 
 #: web/templates/prayer/_te_deum.html.eex:37
 msgid "have mercy on us, Lord, have mercy."
-msgstr ""
+msgstr "求主憐憫我們，憐憫我們。"
 
 #: web/templates/prayer/_te_deum.html.eex:12
 msgid "heaven and earth are full of your glory."
-msgstr ""
+msgstr "主的榮耀威嚴充滿天地。"
 
 #: web/templates/prayer/_te_deum.html.eex:41
 msgid "let us never be put to shame."
-msgstr ""
+msgstr " " # intentionally blank
 
 #: web/templates/prayer/_te_deum.html.eex:8
 msgid "the Father everlasting."
-msgstr ""
+msgstr "無始無終的父。"
 
 #: web/templates/prayer/_te_deum.html.eex:19
 msgid "the Holy Spirit, advocate and guide."
-msgstr ""
+msgstr "安慰人的聖靈。"
 
 #: web/templates/prayer/_te_deum.html.eex:21
 msgid "the eternal Son of the Father."
-msgstr ""
+msgstr "是聖父無始無終的聖子。"
 
 #: web/templates/prayer/_te_deum.html.eex:31
 msgid "to glory everlasting."
-msgstr ""
+msgstr "同享無窮的榮耀。"
 
 #: web/templates/prayer/_te_deum.html.eex:6
 msgid "we acclaim you as Lord;"
-msgstr ""
+msgstr "認爲萬物的主；"
 
 #: web/templates/prayer/_te_deum.html.eex:35
 msgid "we praise your name forever."
-msgstr ""
+msgstr "我們尊奉主的聖名永世無盡。"
 
 #: web/templates/prayer/_te_deum.html.eex:23
 msgid "you humbly chose the Virgin’s womb."
-msgstr ""
+msgstr "甘心為童貞女所生。"
 
 #: web/templates/prayer/_te_deum.html.eex:18
 msgid "your true and only Son, worthy of all praise,"
-msgstr ""
+msgstr "至尊至真的獨一聖子，"

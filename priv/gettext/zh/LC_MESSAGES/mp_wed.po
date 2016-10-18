@@ -12,8 +12,8 @@ msgstr ""
 
 #: web/templates/prayer/_mp_Wednesday.html.eex:2
 msgid "A Collect for Grace (Wednesday)"
-msgstr ""
+msgstr "求恩禱文 （星期三）"
 
 #: web/templates/prayer/_mp_Wednesday.html.eex:3
 msgid "O Lord, our heavenly Father, almighty and everlasting God, you have\nbrought us safely to the beginning of this day: Defend us by your\nmighty power, that we may not fall into sin nor run into any danger;\nand that guided by your Spirit, we may do what is righteous in your\nsight; through Jesus Christ our Lord."
-msgstr ""
+msgstr "全能無始無終的天父上帝，已經使我們平安到今朝；求主仍施大能，保祐我\n們，終日不陷於罪，常行主所歡喜的事；此賴我主耶穌基督而求。"

@@ -12,8 +12,8 @@ msgstr ""
 
 #: web/templates/prayer/_mp_Friday.html.eex:2
 msgid "A Collect for Endurance (Friday)"
-msgstr ""
+msgstr "求堅忍禱文 （星期五）"
 
 #: web/templates/prayer/_mp_Friday.html.eex:3
 msgid "Almighty God, whose most dear Son went not up to joy but first he\nsuffered pain, and entered not into glory before he was crucified:\nMercifully grant that we, walking in the way of the cross, may find it\nnone other than the way of life and peace; through Jesus Christ your\nSon our Lord.\n"
-msgstr ""
+msgstr "全能的上帝，主的愛子昔日寧願經歷痛苦，而不願先享快樂；寧願被釘於十\n字架，而不願先得榮耀；現今求主發大慈悲，使我們甘願背起十字架，從而\n踏上生命與平安之道路；此賴我主耶穌基督而求。"

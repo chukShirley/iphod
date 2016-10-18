@@ -12,8 +12,8 @@ msgstr ""
 
 #: web/templates/prayer/_mp_Sunday.html.eex:2
 msgid "A Collect for Strength to Await Christ’s Return (Sunday)"
-msgstr ""
+msgstr "求賜力量等候基督再臨禱文 （星期日）"
 
 #: web/templates/prayer/_mp_Sunday.html.eex:3
 msgid "O God our King, by the resurrection of your Son Jesus Christ on the first day of the week, you conquered sin, put death to flight, and gave us the hope of everlasting life: Redeem all our days by this victory; forgive our sins, banish our fears, make us bold to praise you and to do your will; and steel us to wait for the consummation of your kingdom on the last great Day; through the same Jesus Christ our Lord."
-msgstr ""
+msgstr "上帝啊，我們的王，藉賴聖子耶穌基督復活，祢戰勝罪惡，粉碎死亡的權勢，\n賜我們永生的盼望。因此，藉基督得勝救贖我們在世的日子；赦免我們的罪，\n驅除懼怕，使我們放膽稱頌祢，遵行祢的旨意；並忍耐等候末日天國的完成。\n此賴我主耶穌基督而求。"

@@ -12,8 +12,8 @@ msgstr ""
 
 #: web/templates/prayer/_mp_Tuesday.html.eex:2
 msgid "A Collect for Peace (Tuesday)"
-msgstr ""
+msgstr "求安禱文 （星期二）"
 
 #: web/templates/prayer/_mp_Tuesday.html.eex:3
 msgid "O God, the author of peace and lover of concord, to know you is eternal life and to serve you is perfect freedom: Defend us, your humble servants, in all assaults of our enemies; that we, surely trusting in your defense, may not fear the power of any adversaries, through the might of Jesus Christ our Lord."
-msgstr ""
+msgstr "主賜人平安，喜悅人和睦；認識主，乃是永生；事奉主，乃是真自由。求主\n引導我們，一生倚賴主的能力，戰勝世上一切艱難危險；此賴我主耶穌基督\n而求。阿們。"

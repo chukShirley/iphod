@@ -12,8 +12,8 @@ msgstr ""
 
 #: web/templates/prayer/_chrysostom.html.eex:2
 msgid "A Prayer of St. John Chrysostom"
-msgstr ""
+msgstr "求允禱文（聖基所登禱文）"
 
 #: web/templates/prayer/_chrysostom.html.eex:3
 msgid "Almighty God, you have given us grace at this time with one accord\nto make our common supplications to you; and you have promised \nthrough your well beloved Son that when two or three are gathered\ntogether in his name you will be in the midst of them: Fulfill now, O\nLord, our desires and petitions as may be best for us; granting us in\nthis world knowledge of your truth, and in the age to come life\neverlasting. Amen.\n"
-msgstr ""
+msgstr "全能的上帝，祢已經施恩，使我們同心一致祈禱；主曾應許，若有兩三人奉\n主的名聚集祈禱，主必同在。現今我們心所願、口所求，若對我們有益，則\n求主成全；願主使我們今世通曉真道，來世得享永生。阿們。"
