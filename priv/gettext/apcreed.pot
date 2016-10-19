@@ -59,10 +59,6 @@ msgstr ""
 msgid "and born of the Virgin Mary."
 msgstr ""
 
-#: web/templates/prayer/_apostles_creed.html.eex:13
-msgid "and is seated at the right hand of "
-msgstr ""
-
 #: web/templates/prayer/_apostles_creed.html.eex:20
 msgid "and the life everlasting. Amen."
 msgstr ""
@@ -89,4 +85,8 @@ msgstr ""
 
 #: web/templates/prayer/_apostles_creed.html.eex:9
 msgid "was crucified, died, and was buried."
+msgstr ""
+
+#: web/templates/prayer/_apostles_creed.html.eex:13
+msgid "and is seated at the right hand of the Father."
 msgstr ""
