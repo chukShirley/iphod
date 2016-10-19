@@ -28,3 +28,5 @@ import_config "config.secret.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+config :iphod, Iphod.Gettext, default_locale: "en"

@@ -25,7 +25,7 @@ msgstr ""
 #: web/templates/prayer/_mp_Tuesday.html.eex:3
 #: web/templates/prayer/_mp_Wednesday.html.eex:7
 msgid "Amen"
-msgstr ""
+msgstr "阿們。"
 
 #: web/templates/prayer/_prayer_intro.html.eex:8
 msgid "And with your spirit."
@@ -33,11 +33,11 @@ msgstr "也與你的心靈同在。"
 
 #: web/templates/prayer/_mercy3.html.eex:2
 msgid "Christ, have mercy [upon us]."
-msgstr ""
+msgstr "求基督憐憫〔我們〕。"
 
 #: web/templates/prayer/_eo_prayer.html.eex:4
 msgid "Let us bless the Lord"
-msgstr ""
+msgstr "我們要頌揚主。"
 
 #: web/templates/prayer/_prayer_intro.html.eex:12
 msgid "Let us pray."
@@ -46,7 +46,7 @@ msgstr "我們要祈禱。"
 #: web/templates/prayer/_mercy3.html.eex:1
 #: web/templates/prayer/_mercy3.html.eex:3
 msgid "Lord, have mercy [upon us]."
-msgstr ""
+msgstr "求主憐憫〔我們〕。"
 
 #: web/templates/prayer/_eo_prayer.html.eex:3
 #: web/templates/prayer/_graces.html.eex:3
@@ -85,8 +85,8 @@ msgstr "會眾："
 
 #: web/templates/prayer/_eo_prayer.html.eex:8
 #: web/templates/prayer/_the_word_of_the_lord.html.eex:8
-msgid "T感謝上主。hanks be to God"
-msgstr ""
+msgid "Thanks be to God"
+msgstr "感謝上主。"
 
 #: web/templates/prayer/_prayer_intro.html.eex:4
 msgid "The Lord be with you."
@@ -94,4 +94,4 @@ msgstr "這是上主的道。"
 
 #: web/templates/prayer/_the_word_of_the_lord.html.eex:4
 msgid "The Word of the Lord"
-msgstr ""
+msgstr "這是上主的道。"

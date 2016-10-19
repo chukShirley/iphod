@@ -1,39 +1,48 @@
-## `msgid`s in this file come from POT (.pot) files.
-##
-## Do not add, change, or remove `msgid`s manually here as
-## they're tied to the ones in the corresponding POT file
-## (with the same domain).
-##
-## Use `mix gettext.extract --merge` or `mix gettext.merge`
-## to merge POT files into PO files.
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
 msgid ""
 msgstr ""
 "Language: zh\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.10\n"
 
 #: web/templates/prayer/_graces.html.eex:8
 msgid "2 Corinthians 13:14"
-msgstr ""
+msgstr "林後13:14"
 
 #: web/templates/prayer/_graces.html.eex:15
 msgid "Ephesians 3:20-21"
-msgstr ""
+msgstr "弗3:20-21"
 
 #: web/templates/prayer/_graces.html.eex:12
-msgid "Glory to God whose power, working in us, can do infinitely more\n      than we can ask or imagine: Glory to him from generation to\n      generation in the Church, and in Christ Jesus forever and ever. Amen."
-msgstr ""
+msgid "Glory to God whose power, working in us, can do infinitely more\nthan we can ask or imagine: Glory to him from generation to\ngeneration in the Church, and in Christ Jesus forever and ever. Amen."
+msgstr "願榮耀歸與上帝，因祂大能運行在我們心裏，充充足足地成就一切，超過我\n們所求所想的。但願祂在教會中，並在基督耶穌裏，得着榮耀，直到世世代\n代，永永遠遠。阿們。"
 
 #: web/templates/prayer/_graces.html.eex:9
-msgid "May the God of hope fill us with all joy and peace in believing\n      through the power of the Holy Spirit. Amen."
-msgstr ""
+msgid "May the God of hope fill us with all joy and peace in believing\nthrough the power of the Holy Spirit. Amen."
+msgstr "願使人有盼望的上帝，因信將諸般的喜樂、平安充滿你們的心，使你們藉着\n聖靈的能力大有盼望。阿們。"
 
 #: web/templates/prayer/_graces.html.eex:11
 msgid "Romans 15:13"
-msgstr ""
+msgstr "羅15:13"
 
 #: web/templates/prayer/_graces.html.eex:2
 msgid "The Officiant may invite the People to join in one of the Graces."
-msgstr ""
+msgstr "主禮或司禱可邀請會眾同誦⼀一段祝福。"
 
 #: web/templates/prayer/_graces.html.eex:6
-msgid "The grace of our Lord Jesus Christ, and the love of God, and the\n      fellowship of the Holy Spirit, be with us all evermore. Amen."
-msgstr ""
+msgid "The grace of our Lord Jesus Christ, and the love of God, and the\nfellowship of the Holy Spirit, be with us all evermore. Amen."
+msgstr "願我主耶穌基督的恩惠，上帝的慈愛，聖靈的感動，常在我們眾人之中。阿\n們。"

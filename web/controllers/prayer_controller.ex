@@ -5,6 +5,7 @@ defmodule Iphod.PrayerController do
   @tz "America/Los_Angeles"
 
   def mp(conn, params) do
+    select_language params
     {psalm, text} = translations(params)
     conn
       |> put_layout("app.html")
@@ -12,6 +13,7 @@ defmodule Iphod.PrayerController do
   end
 
   def ep(conn, params) do
+    select_language params
     {psalm, text} = translations(params)
     conn
       |> put_layout("app.html")
@@ -33,6 +35,10 @@ defmodule Iphod.PrayerController do
   end
 
 # HELPERS ------
+
+  defp select_language(params) do
+    unless params["locale"], do: Gettext.put_locale Iphod.Gettext, "en"
+  end
 
   defp translations(map) do
     psalm = if map |> Map.has_key?("psalm"), do: map["psalm"] |> String.upcase, else: "Coverdale"

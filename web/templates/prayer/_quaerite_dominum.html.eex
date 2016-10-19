@@ -15,7 +15,7 @@
 <p class= "vs"><%= dgettext "quaer", "For as the heavens are higher than the earth,"%></p>
 <p class= "vs_indent"><%= dgettext "quaer", "so are my ways higher than your ways,"%></p>
 <p class= "vs_indent"><%= dgettext "quaer", "and my thoughts than your thoughts."%></p>
-<p class= "vs"><%= dgettext "quaer", "For as rain and snow fall form the heavens"%></p>
+<p class= "vs"><%= dgettext "quaer", "For as rain and snow fall from the heavens"%></p>
 <p class= "vs_indent"><%= dgettext "quaer", "and return not again, but water the earth,"%></p>
 <p class= "vs"><%= dgettext "quaer", "Bringing forth life and giving growth,"%></p>
 <p class= "vs_indent"><%= dgettext "quaer", "seed for sowing and bread for eating,"%></p>
