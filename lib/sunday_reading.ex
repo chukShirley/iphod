@@ -129,6 +129,8 @@ defmodule SundayReading do
 
   end
 
+  def collect_today(date), do: readings(date).collect
+
   def reading_map(date) do
     r = readings(date)
     %{  title:  r.title,
@@ -146,26 +148,6 @@ defmodule SundayReading do
       acc |> Map.put(r, BibleText.lesson_with_body(eu[r]) )
     end)
   end
-
-
-#   def lesson_with_body(list), do: lesson_with_body(list, "ESV")
-# 
-#   def lesson_with_body(list, "ESV") do
-#     list |> Enum.map(fn(lesson)->
-#       lesson 
-#       |> Map.put(:body, EsvText.request(lesson.read) )
-#       |> Map.put(:show, true)
-#     end)
-#   end
-# 
-#   def lesson_with_body(list, ver) do
-#     list |> Enum.map(fn(lesson)->
-#       lesson 
-#       |> Map.put(:body, BibleComText.request(ver, lesson.read) )
-#       |> Map.put(:show, true)
-#     end)
-#   end
-
 
   def formatted_date(d), do: d |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
 

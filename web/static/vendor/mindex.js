@@ -8987,9 +8987,17 @@ var _user$project$Iphod_Helper$hideable = F2(
 var _user$project$Iphod_Models$initBiblesOrg = {url: 'https://bibles.org/v2/passages.js?q[]=', key: 'P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT', foot_notes: true};
 var _user$project$Iphod_Models$initESV = {url: 'www.esvapi.org/v2/rest/passageQuery?', key: '10b28dac7c57fd96', foot_notes: true};
 var _user$project$Iphod_Models$initReflection = {author: '', markdown: ''};
+var _user$project$Iphod_Models$initSundayCollect = {
+	instruction: '',
+	title: '',
+	collects: _elm_lang$core$Native_List.fromArray(
+		[]),
+	show: true
+};
 var _user$project$Iphod_Models$initDaily = {
 	date: '',
 	title: '',
+	collect: _user$project$Iphod_Models$initSundayCollect,
 	mp1: _elm_lang$core$Native_List.fromArray(
 		[]),
 	mp2: _elm_lang$core$Native_List.fromArray(
@@ -9009,13 +9017,6 @@ var _user$project$Iphod_Models$initDaily = {
 	nt: _elm_lang$core$Native_List.fromArray(
 		[]),
 	gs: _elm_lang$core$Native_List.fromArray(
-		[]),
-	show: false
-};
-var _user$project$Iphod_Models$initSundayCollect = {
-	instruction: '',
-	title: '',
-	collects: _elm_lang$core$Native_List.fromArray(
 		[]),
 	show: false
 };
@@ -9077,6 +9078,7 @@ var _user$project$Iphod_Models$initDailyMP = {
 	week: '',
 	config: _user$project$Iphod_Models$configInit,
 	show: false,
+	collect: _user$project$Iphod_Models$initSundayCollect,
 	mp1: _elm_lang$core$Native_List.fromArray(
 		[]),
 	mp2: _elm_lang$core$Native_List.fromArray(
@@ -9094,6 +9096,7 @@ var _user$project$Iphod_Models$initDailyEP = {
 	week: '',
 	config: _user$project$Iphod_Models$configInit,
 	show: false,
+	collect: _user$project$Iphod_Models$initSundayCollect,
 	ep1: _elm_lang$core$Native_List.fromArray(
 		[]),
 	ep2: _elm_lang$core$Native_List.fromArray(
@@ -9165,7 +9168,9 @@ var _user$project$Iphod_Models$Daily = function (a) {
 										return function (k) {
 											return function (l) {
 												return function (m) {
-													return {date: a, title: b, mp1: c, mp2: d, mpp: e, ep1: f, ep2: g, epp: h, ot: i, ps: j, nt: k, gs: l, show: m};
+													return function (n) {
+														return {date: a, title: b, collect: c, mp1: d, mp2: e, mpp: f, ep1: g, ep2: h, epp: i, ot: j, ps: k, nt: l, gs: m, show: n};
+													};
 												};
 											};
 										};
@@ -9190,7 +9195,9 @@ var _user$project$Iphod_Models$DailyMP = function (a) {
 								return function (i) {
 									return function (j) {
 										return function (k) {
-											return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, mp1: i, mp2: j, mpp: k};
+											return function (l) {
+												return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, mp1: j, mp2: k, mpp: l};
+											};
 										};
 									};
 								};
@@ -9213,7 +9220,9 @@ var _user$project$Iphod_Models$DailyEP = function (a) {
 								return function (i) {
 									return function (j) {
 										return function (k) {
-											return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, ep1: i, ep2: j, epp: k};
+											return function (l) {
+												return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, ep1: j, ep2: k, epp: l};
+											};
 										};
 									};
 								};
@@ -9463,6 +9472,20 @@ var _user$project$Iphod_Config$view = function (model) {
 };
 var _user$project$Iphod_Config$NoOp = {ctor: 'NoOp'};
 
+var _user$project$Iphod_EPReading$collectStyle = function (model) {
+	return A2(
+		_user$project$Iphod_Helper$hideable,
+		model.show,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'font-size', _1: '1em'},
+				{ctor: '_Tuple2', _0: 'background-color', _1: 'white'},
+				{ctor: '_Tuple2', _0: 'margin', _1: '0em'},
+				{ctor: '_Tuple2', _0: 'padding', _1: '0em'},
+				{ctor: '_Tuple2', _0: 'list-style-type', _1: 'none'},
+				{ctor: '_Tuple2', _0: 'display', _1: 'inline-block'}
+			]));
+};
 var _user$project$Iphod_EPReading$textStyle = function (model) {
 	return A2(
 		_user$project$Iphod_Helper$hideable,
@@ -9523,6 +9546,36 @@ var _user$project$Iphod_EPReading$this_style = function (l) {
 			return _elm_lang$html$Html_Attributes$class('bogis_style');
 	}
 };
+var _user$project$Iphod_EPReading$thisProper = function (proper) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('proper_title')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						A2(_elm_lang$core$Basics_ops['++'], 'Proper: ', proper.title))
+					])),
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('proper_text')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(proper.text)
+					]))
+			]));
+};
 var _user$project$Iphod_EPReading$changeText = F3(
 	function (model, ver, lessons) {
 		var changeText = function (lesson) {
@@ -9574,7 +9627,7 @@ var _user$project$Iphod_EPReading$update = F2(
 					});
 			case 'SetReading':
 				return _p1._0;
-			default:
+			case 'ToggleShow':
 				var _p6 = _p1._0;
 				var update_text = function (this_lesson) {
 					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p6.id) ? _elm_lang$core$Native_Utils.update(
@@ -9613,6 +9666,17 @@ var _user$project$Iphod_EPReading$update = F2(
 					}
 				}();
 				return newModel;
+			default:
+				var collect = model.collect;
+				var newCollect = _elm_lang$core$Native_Utils.update(
+					collect,
+					{
+						show: _elm_lang$core$Basics$not(collect.show)
+					});
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{collect: newCollect});
+				return newModel;
 		}
 	});
 var _user$project$Iphod_EPReading$init = _user$project$Iphod_Models$initDailyEP;
@@ -9621,6 +9685,63 @@ var _user$project$Iphod_EPReading$EP2 = {ctor: 'EP2'};
 var _user$project$Iphod_EPReading$EP1 = {ctor: 'EP1'};
 var _user$project$Iphod_EPReading$SetReading = function (a) {
 	return {ctor: 'SetReading', _0: a};
+};
+var _user$project$Iphod_EPReading$ToggleCollect = {ctor: 'ToggleCollect'};
+var _user$project$Iphod_EPReading$thisCollect = function (sundayCollect) {
+	var this_collect = function (c) {
+		return A2(
+			_elm_lang$html$Html$p,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(c.collect)
+					]),
+				A2(_elm_lang$core$List$map, _user$project$Iphod_EPReading$thisProper, c.propers)));
+	};
+	return _elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_lang$html$Html$p,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('collect_instruction')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text(sundayCollect.instruction)
+				])),
+			A2(
+			_elm_lang$html$Html$button,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('collect_hide'),
+					_elm_lang$html$Html_Events$onClick(_user$project$Iphod_EPReading$ToggleCollect)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text('hide')
+				])),
+			A2(
+			_elm_lang$html$Html$p,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('collect_title')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text(sundayCollect.title)
+				])),
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('collect_text')
+				]),
+			A2(_elm_lang$core$List$map, this_collect, sundayCollect.collects))
+		]);
 };
 var _user$project$Iphod_EPReading$ToggleShow = function (a) {
 	return {ctor: 'ToggleShow', _0: a};
@@ -10021,11 +10142,39 @@ var _user$project$Iphod_EPReading$view = function (model) {
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
 					[]),
-				A2(_user$project$Iphod_EPReading$thisText, model, model.epp))
+				A2(_user$project$Iphod_EPReading$thisText, model, model.epp)),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_user$project$Iphod_EPReading$collectStyle(model.collect)
+					]),
+				_user$project$Iphod_EPReading$thisCollect(model.collect))
 			]));
 };
 var _user$project$Iphod_EPReading$NoOp = {ctor: 'NoOp'};
 
+var _user$project$Iphod_MPReading$collectStyle = function (model) {
+	return A2(
+		_user$project$Iphod_Helper$hideable,
+		model.show,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'font-size', _1: '1em'},
+				{ctor: '_Tuple2', _0: 'background-color', _1: 'white'},
+				{ctor: '_Tuple2', _0: 'margin', _1: '0em'},
+				{ctor: '_Tuple2', _0: 'padding', _1: '0em'},
+				{ctor: '_Tuple2', _0: 'list-style-type', _1: 'none'},
+				{ctor: '_Tuple2', _0: 'display', _1: 'inline-block'}
+			]));
+};
+var _user$project$Iphod_MPReading$collectButtonStyle = function (model) {
+	return A2(
+		_user$project$Iphod_Helper$hideable,
+		model.show,
+		_elm_lang$core$Native_List.fromArray(
+			[]));
+};
 var _user$project$Iphod_MPReading$textStyle = function (model) {
 	return A2(
 		_user$project$Iphod_Helper$hideable,
@@ -10086,6 +10235,36 @@ var _user$project$Iphod_MPReading$this_style = function (l) {
 			return _elm_lang$html$Html_Attributes$class('bogis_style');
 	}
 };
+var _user$project$Iphod_MPReading$thisProper = function (proper) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('proper_title')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						A2(_elm_lang$core$Basics_ops['++'], 'Proper: ', proper.title))
+					])),
+				A2(
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('proper_text')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(proper.text)
+					]))
+			]));
+};
 var _user$project$Iphod_MPReading$changeText = F3(
 	function (model, ver, lessons) {
 		var changeText = function (lesson) {
@@ -10137,7 +10316,7 @@ var _user$project$Iphod_MPReading$update = F2(
 				return newModel;
 			case 'SetReading':
 				return _p1._0;
-			default:
+			case 'ToggleShow':
 				var _p6 = _p1._0;
 				var update_text = function (this_lesson) {
 					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p6.id) ? _elm_lang$core$Native_Utils.update(
@@ -10176,6 +10355,17 @@ var _user$project$Iphod_MPReading$update = F2(
 					}
 				}();
 				return newModel;
+			default:
+				var collect = model.collect;
+				var newCollect = _elm_lang$core$Native_Utils.update(
+					collect,
+					{
+						show: _elm_lang$core$Basics$not(collect.show)
+					});
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{collect: newCollect});
+				return newModel;
 		}
 	});
 var _user$project$Iphod_MPReading$init = _user$project$Iphod_Models$initDailyMP;
@@ -10184,6 +10374,63 @@ var _user$project$Iphod_MPReading$MP2 = {ctor: 'MP2'};
 var _user$project$Iphod_MPReading$MP1 = {ctor: 'MP1'};
 var _user$project$Iphod_MPReading$SetReading = function (a) {
 	return {ctor: 'SetReading', _0: a};
+};
+var _user$project$Iphod_MPReading$ToggleCollect = {ctor: 'ToggleCollect'};
+var _user$project$Iphod_MPReading$thisCollect = function (sundayCollect) {
+	var this_collect = function (c) {
+		return A2(
+			_elm_lang$html$Html$p,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(c.collect)
+					]),
+				A2(_elm_lang$core$List$map, _user$project$Iphod_MPReading$thisProper, c.propers)));
+	};
+	return _elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_lang$html$Html$p,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('collect_instruction')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text(sundayCollect.instruction)
+				])),
+			A2(
+			_elm_lang$html$Html$button,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('collect_hide'),
+					_elm_lang$html$Html_Events$onClick(_user$project$Iphod_MPReading$ToggleCollect)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text('hide')
+				])),
+			A2(
+			_elm_lang$html$Html$p,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('collect_title')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text(sundayCollect.title)
+				])),
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('collect_text')
+				]),
+			A2(_elm_lang$core$List$map, this_collect, sundayCollect.collects))
+		]);
 };
 var _user$project$Iphod_MPReading$ToggleShow = function (a) {
 	return {ctor: 'ToggleShow', _0: a};
@@ -10452,17 +10699,42 @@ var _user$project$Iphod_MPReading$view = function (model) {
 						_elm_lang$html$Html$caption,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_user$project$Iphod_MPReading$titleStyle(model),
-								_elm_lang$html$Html_Events$onClick(_user$project$Iphod_MPReading$ToggleModelShow)
+								_user$project$Iphod_MPReading$titleStyle(model)
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html$text(
 								A2(
-									_elm_lang$core$String$join,
-									' ',
-									_elm_lang$core$Native_List.fromArray(
-										['Morning Prayer:', model.date])))
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Events$onClick(_user$project$Iphod_MPReading$ToggleModelShow)
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$String$join,
+											' ',
+											_elm_lang$core$Native_List.fromArray(
+												['Morning Prayer:', model.date])))
+									])),
+								A2(
+								_elm_lang$html$Html$br,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[])),
+								A2(
+								_elm_lang$html$Html$button,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('button'),
+										_elm_lang$html$Html_Events$onClick(_user$project$Iphod_MPReading$ToggleCollect)
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('Collect')
+									]))
 							])),
 						A2(
 						_elm_lang$html$Html$tr,
@@ -10584,7 +10856,14 @@ var _user$project$Iphod_MPReading$view = function (model) {
 				_elm_lang$html$Html$div,
 				_elm_lang$core$Native_List.fromArray(
 					[]),
-				A2(_user$project$Iphod_MPReading$thisText, model, model.mpp))
+				A2(_user$project$Iphod_MPReading$thisText, model, model.mpp)),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_user$project$Iphod_MPReading$collectStyle(model.collect)
+					]),
+				_user$project$Iphod_MPReading$thisCollect(model.collect))
 			]));
 };
 var _user$project$Iphod_MPReading$NoOp = {ctor: 'NoOp'};
@@ -10695,6 +10974,51 @@ var _user$project$Iphod_Sunday$thisProper = function (proper) {
 						_elm_lang$html$Html$text(proper.text)
 					]))
 			]));
+};
+var _user$project$Iphod_Sunday$thisCollect = function (sundayCollect) {
+	var this_collect = function (c) {
+		return A2(
+			_elm_lang$html$Html$p,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(c.collect)
+					]),
+				A2(_elm_lang$core$List$map, _user$project$Iphod_Sunday$thisProper, c.propers)));
+	};
+	return _elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_lang$html$Html$p,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('collect_instruction')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text(sundayCollect.instruction)
+				])),
+			A2(
+			_elm_lang$html$Html$p,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('collect_title')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text(sundayCollect.title)
+				])),
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('collect_text')
+				]),
+			A2(_elm_lang$core$List$map, this_collect, sundayCollect.collects))
+		]);
 };
 var _user$project$Iphod_Sunday$changeText = F3(
 	function (model, ver, lessons) {
@@ -10817,62 +11141,6 @@ var _user$project$Iphod_Sunday$NT = {ctor: 'NT'};
 var _user$project$Iphod_Sunday$PS = {ctor: 'PS'};
 var _user$project$Iphod_Sunday$OT = {ctor: 'OT'};
 var _user$project$Iphod_Sunday$ToggleCollect = {ctor: 'ToggleCollect'};
-var _user$project$Iphod_Sunday$thisCollect = function (sundayCollect) {
-	var this_collect = function (c) {
-		return A2(
-			_elm_lang$html$Html$p,
-			_elm_lang$core$Native_List.fromArray(
-				[]),
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(c.collect)
-					]),
-				A2(_elm_lang$core$List$map, _user$project$Iphod_Sunday$thisProper, c.propers)));
-	};
-	return _elm_lang$core$Native_List.fromArray(
-		[
-			A2(
-			_elm_lang$html$Html$p,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$class('collect_instruction')
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html$text(sundayCollect.instruction)
-				])),
-			A2(
-			_elm_lang$html$Html$button,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$class('collect_hide'),
-					_elm_lang$html$Html_Events$onClick(_user$project$Iphod_Sunday$ToggleCollect)
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html$text('hide')
-				])),
-			A2(
-			_elm_lang$html$Html$p,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$class('collect_title')
-				]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html$text(sundayCollect.title)
-				])),
-			A2(
-			_elm_lang$html$Html$div,
-			_elm_lang$core$Native_List.fromArray(
-				[
-					_elm_lang$html$Html_Attributes$class('collect_text')
-				]),
-			A2(_elm_lang$core$List$map, this_collect, sundayCollect.collects))
-		]);
-};
 var _user$project$Iphod_Sunday$ToggleModelShow = {ctor: 'ToggleModelShow'};
 var _user$project$Iphod_Sunday$ToggleShow = function (a) {
 	return {ctor: 'ToggleShow', _0: a};
@@ -11919,51 +12187,65 @@ var _user$project$MIndex$portMP = _elm_lang$core$Native_Platform.incomingPort(
 																		_elm_lang$core$Json_Decode$andThen,
 																		A2(
 																			_elm_lang$core$Json_Decode_ops[':='],
-																			'mp1',
-																			_elm_lang$core$Json_Decode$list(
-																				A2(
-																					_elm_lang$core$Json_Decode$andThen,
-																					A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
-																					function (style) {
-																						return A2(
-																							_elm_lang$core$Json_Decode$andThen,
-																							A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
-																							function (show) {
-																								return A2(
-																									_elm_lang$core$Json_Decode$andThen,
-																									A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
-																									function (read) {
-																										return A2(
+																			'collect',
+																			A2(
+																				_elm_lang$core$Json_Decode$andThen,
+																				A2(_elm_lang$core$Json_Decode_ops[':='], 'instruction', _elm_lang$core$Json_Decode$string),
+																				function (instruction) {
+																					return A2(
+																						_elm_lang$core$Json_Decode$andThen,
+																						A2(_elm_lang$core$Json_Decode_ops[':='], 'title', _elm_lang$core$Json_Decode$string),
+																						function (title) {
+																							return A2(
+																								_elm_lang$core$Json_Decode$andThen,
+																								A2(
+																									_elm_lang$core$Json_Decode_ops[':='],
+																									'collects',
+																									_elm_lang$core$Json_Decode$list(
+																										A2(
 																											_elm_lang$core$Json_Decode$andThen,
-																											A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
-																											function (body) {
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'collect', _elm_lang$core$Json_Decode$string),
+																											function (collect) {
 																												return A2(
 																													_elm_lang$core$Json_Decode$andThen,
-																													A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
-																													function (id) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
-																															function (section) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
-																																	function (version) {
-																																		return _elm_lang$core$Json_Decode$succeed(
-																																			{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
-																																	});
-																															});
+																													A2(
+																														_elm_lang$core$Json_Decode_ops[':='],
+																														'propers',
+																														_elm_lang$core$Json_Decode$list(
+																															A2(
+																																_elm_lang$core$Json_Decode$andThen,
+																																A2(_elm_lang$core$Json_Decode_ops[':='], 'title', _elm_lang$core$Json_Decode$string),
+																																function (title) {
+																																	return A2(
+																																		_elm_lang$core$Json_Decode$andThen,
+																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																		function (text) {
+																																			return _elm_lang$core$Json_Decode$succeed(
+																																				{title: title, text: text});
+																																		});
+																																}))),
+																													function (propers) {
+																														return _elm_lang$core$Json_Decode$succeed(
+																															{collect: collect, propers: propers});
 																													});
-																											});
-																									});
-																							});
-																					}))),
-																		function (mp1) {
+																											}))),
+																								function (collects) {
+																									return A2(
+																										_elm_lang$core$Json_Decode$andThen,
+																										A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																										function (show) {
+																											return _elm_lang$core$Json_Decode$succeed(
+																												{instruction: instruction, title: title, collects: collects, show: show});
+																										});
+																								});
+																						});
+																				})),
+																		function (collect) {
 																			return A2(
 																				_elm_lang$core$Json_Decode$andThen,
 																				A2(
 																					_elm_lang$core$Json_Decode_ops[':='],
-																					'mp2',
+																					'mp1',
 																					_elm_lang$core$Json_Decode$list(
 																						A2(
 																							_elm_lang$core$Json_Decode$andThen,
@@ -12002,12 +12284,12 @@ var _user$project$MIndex$portMP = _elm_lang$core$Native_Platform.incomingPort(
 																											});
 																									});
 																							}))),
-																				function (mp2) {
+																				function (mp1) {
 																					return A2(
 																						_elm_lang$core$Json_Decode$andThen,
 																						A2(
 																							_elm_lang$core$Json_Decode_ops[':='],
-																							'mpp',
+																							'mp2',
 																							_elm_lang$core$Json_Decode$list(
 																								A2(
 																									_elm_lang$core$Json_Decode$andThen,
@@ -12046,9 +12328,54 @@ var _user$project$MIndex$portMP = _elm_lang$core$Native_Platform.incomingPort(
 																													});
 																											});
 																									}))),
-																						function (mpp) {
-																							return _elm_lang$core$Json_Decode$succeed(
-																								{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, mp1: mp1, mp2: mp2, mpp: mpp});
+																						function (mp2) {
+																							return A2(
+																								_elm_lang$core$Json_Decode$andThen,
+																								A2(
+																									_elm_lang$core$Json_Decode_ops[':='],
+																									'mpp',
+																									_elm_lang$core$Json_Decode$list(
+																										A2(
+																											_elm_lang$core$Json_Decode$andThen,
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
+																											function (style) {
+																												return A2(
+																													_elm_lang$core$Json_Decode$andThen,
+																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																													function (show) {
+																														return A2(
+																															_elm_lang$core$Json_Decode$andThen,
+																															A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
+																															function (read) {
+																																return A2(
+																																	_elm_lang$core$Json_Decode$andThen,
+																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
+																																	function (body) {
+																																		return A2(
+																																			_elm_lang$core$Json_Decode$andThen,
+																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
+																																			function (id) {
+																																				return A2(
+																																					_elm_lang$core$Json_Decode$andThen,
+																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																																					function (section) {
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																																							function (version) {
+																																								return _elm_lang$core$Json_Decode$succeed(
+																																									{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																																							});
+																																					});
+																																			});
+																																	});
+																															});
+																													});
+																											}))),
+																								function (mpp) {
+																									return _elm_lang$core$Json_Decode$succeed(
+																										{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, mp1: mp1, mp2: mp2, mpp: mpp});
+																								});
 																						});
 																				});
 																		});
@@ -12143,51 +12470,65 @@ var _user$project$MIndex$portEP = _elm_lang$core$Native_Platform.incomingPort(
 																		_elm_lang$core$Json_Decode$andThen,
 																		A2(
 																			_elm_lang$core$Json_Decode_ops[':='],
-																			'ep1',
-																			_elm_lang$core$Json_Decode$list(
-																				A2(
-																					_elm_lang$core$Json_Decode$andThen,
-																					A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
-																					function (style) {
-																						return A2(
-																							_elm_lang$core$Json_Decode$andThen,
-																							A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
-																							function (show) {
-																								return A2(
-																									_elm_lang$core$Json_Decode$andThen,
-																									A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
-																									function (read) {
-																										return A2(
+																			'collect',
+																			A2(
+																				_elm_lang$core$Json_Decode$andThen,
+																				A2(_elm_lang$core$Json_Decode_ops[':='], 'instruction', _elm_lang$core$Json_Decode$string),
+																				function (instruction) {
+																					return A2(
+																						_elm_lang$core$Json_Decode$andThen,
+																						A2(_elm_lang$core$Json_Decode_ops[':='], 'title', _elm_lang$core$Json_Decode$string),
+																						function (title) {
+																							return A2(
+																								_elm_lang$core$Json_Decode$andThen,
+																								A2(
+																									_elm_lang$core$Json_Decode_ops[':='],
+																									'collects',
+																									_elm_lang$core$Json_Decode$list(
+																										A2(
 																											_elm_lang$core$Json_Decode$andThen,
-																											A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
-																											function (body) {
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'collect', _elm_lang$core$Json_Decode$string),
+																											function (collect) {
 																												return A2(
 																													_elm_lang$core$Json_Decode$andThen,
-																													A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
-																													function (id) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
-																															function (section) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
-																																	function (version) {
-																																		return _elm_lang$core$Json_Decode$succeed(
-																																			{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
-																																	});
-																															});
+																													A2(
+																														_elm_lang$core$Json_Decode_ops[':='],
+																														'propers',
+																														_elm_lang$core$Json_Decode$list(
+																															A2(
+																																_elm_lang$core$Json_Decode$andThen,
+																																A2(_elm_lang$core$Json_Decode_ops[':='], 'title', _elm_lang$core$Json_Decode$string),
+																																function (title) {
+																																	return A2(
+																																		_elm_lang$core$Json_Decode$andThen,
+																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																		function (text) {
+																																			return _elm_lang$core$Json_Decode$succeed(
+																																				{title: title, text: text});
+																																		});
+																																}))),
+																													function (propers) {
+																														return _elm_lang$core$Json_Decode$succeed(
+																															{collect: collect, propers: propers});
 																													});
-																											});
-																									});
-																							});
-																					}))),
-																		function (ep1) {
+																											}))),
+																								function (collects) {
+																									return A2(
+																										_elm_lang$core$Json_Decode$andThen,
+																										A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																										function (show) {
+																											return _elm_lang$core$Json_Decode$succeed(
+																												{instruction: instruction, title: title, collects: collects, show: show});
+																										});
+																								});
+																						});
+																				})),
+																		function (collect) {
 																			return A2(
 																				_elm_lang$core$Json_Decode$andThen,
 																				A2(
 																					_elm_lang$core$Json_Decode_ops[':='],
-																					'ep2',
+																					'ep1',
 																					_elm_lang$core$Json_Decode$list(
 																						A2(
 																							_elm_lang$core$Json_Decode$andThen,
@@ -12226,12 +12567,12 @@ var _user$project$MIndex$portEP = _elm_lang$core$Native_Platform.incomingPort(
 																											});
 																									});
 																							}))),
-																				function (ep2) {
+																				function (ep1) {
 																					return A2(
 																						_elm_lang$core$Json_Decode$andThen,
 																						A2(
 																							_elm_lang$core$Json_Decode_ops[':='],
-																							'epp',
+																							'ep2',
 																							_elm_lang$core$Json_Decode$list(
 																								A2(
 																									_elm_lang$core$Json_Decode$andThen,
@@ -12270,9 +12611,54 @@ var _user$project$MIndex$portEP = _elm_lang$core$Native_Platform.incomingPort(
 																													});
 																											});
 																									}))),
-																						function (epp) {
-																							return _elm_lang$core$Json_Decode$succeed(
-																								{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, ep1: ep1, ep2: ep2, epp: epp});
+																						function (ep2) {
+																							return A2(
+																								_elm_lang$core$Json_Decode$andThen,
+																								A2(
+																									_elm_lang$core$Json_Decode_ops[':='],
+																									'epp',
+																									_elm_lang$core$Json_Decode$list(
+																										A2(
+																											_elm_lang$core$Json_Decode$andThen,
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
+																											function (style) {
+																												return A2(
+																													_elm_lang$core$Json_Decode$andThen,
+																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																													function (show) {
+																														return A2(
+																															_elm_lang$core$Json_Decode$andThen,
+																															A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
+																															function (read) {
+																																return A2(
+																																	_elm_lang$core$Json_Decode$andThen,
+																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
+																																	function (body) {
+																																		return A2(
+																																			_elm_lang$core$Json_Decode$andThen,
+																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
+																																			function (id) {
+																																				return A2(
+																																					_elm_lang$core$Json_Decode$andThen,
+																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																																					function (section) {
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																																							function (version) {
+																																								return _elm_lang$core$Json_Decode$succeed(
+																																									{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																																							});
+																																					});
+																																			});
+																																	});
+																															});
+																													});
+																											}))),
+																								function (epp) {
+																									return _elm_lang$core$Json_Decode$succeed(
+																										{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, ep1: ep1, ep2: ep2, epp: epp});
+																								});
 																						});
 																				});
 																		});
@@ -12352,78 +12738,137 @@ var _user$project$MIndex$portReadings = _elm_lang$core$Native_Platform.incomingP
 						_elm_lang$core$Json_Decode$andThen,
 						A2(
 							_elm_lang$core$Json_Decode_ops[':='],
-							'mp1',
-							_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
-						function (mp1) {
-							return A2(
+							'collect',
+							A2(
 								_elm_lang$core$Json_Decode$andThen,
-								A2(
-									_elm_lang$core$Json_Decode_ops[':='],
-									'mp2',
-									_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
-								function (mp2) {
+								A2(_elm_lang$core$Json_Decode_ops[':='], 'instruction', _elm_lang$core$Json_Decode$string),
+								function (instruction) {
 									return A2(
 										_elm_lang$core$Json_Decode$andThen,
-										A2(
-											_elm_lang$core$Json_Decode_ops[':='],
-											'mpp',
-											_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
-										function (mpp) {
+										A2(_elm_lang$core$Json_Decode_ops[':='], 'title', _elm_lang$core$Json_Decode$string),
+										function (title) {
 											return A2(
 												_elm_lang$core$Json_Decode$andThen,
 												A2(
 													_elm_lang$core$Json_Decode_ops[':='],
-													'ep1',
+													'collects',
+													_elm_lang$core$Json_Decode$list(
+														A2(
+															_elm_lang$core$Json_Decode$andThen,
+															A2(_elm_lang$core$Json_Decode_ops[':='], 'collect', _elm_lang$core$Json_Decode$string),
+															function (collect) {
+																return A2(
+																	_elm_lang$core$Json_Decode$andThen,
+																	A2(
+																		_elm_lang$core$Json_Decode_ops[':='],
+																		'propers',
+																		_elm_lang$core$Json_Decode$list(
+																			A2(
+																				_elm_lang$core$Json_Decode$andThen,
+																				A2(_elm_lang$core$Json_Decode_ops[':='], 'title', _elm_lang$core$Json_Decode$string),
+																				function (title) {
+																					return A2(
+																						_elm_lang$core$Json_Decode$andThen,
+																						A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																						function (text) {
+																							return _elm_lang$core$Json_Decode$succeed(
+																								{title: title, text: text});
+																						});
+																				}))),
+																	function (propers) {
+																		return _elm_lang$core$Json_Decode$succeed(
+																			{collect: collect, propers: propers});
+																	});
+															}))),
+												function (collects) {
+													return A2(
+														_elm_lang$core$Json_Decode$andThen,
+														A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+														function (show) {
+															return _elm_lang$core$Json_Decode$succeed(
+																{instruction: instruction, title: title, collects: collects, show: show});
+														});
+												});
+										});
+								})),
+						function (collect) {
+							return A2(
+								_elm_lang$core$Json_Decode$andThen,
+								A2(
+									_elm_lang$core$Json_Decode_ops[':='],
+									'mp1',
+									_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+								function (mp1) {
+									return A2(
+										_elm_lang$core$Json_Decode$andThen,
+										A2(
+											_elm_lang$core$Json_Decode_ops[':='],
+											'mp2',
+											_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+										function (mp2) {
+											return A2(
+												_elm_lang$core$Json_Decode$andThen,
+												A2(
+													_elm_lang$core$Json_Decode_ops[':='],
+													'mpp',
 													_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
-												function (ep1) {
+												function (mpp) {
 													return A2(
 														_elm_lang$core$Json_Decode$andThen,
 														A2(
 															_elm_lang$core$Json_Decode_ops[':='],
-															'ep2',
+															'ep1',
 															_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
-														function (ep2) {
+														function (ep1) {
 															return A2(
 																_elm_lang$core$Json_Decode$andThen,
 																A2(
 																	_elm_lang$core$Json_Decode_ops[':='],
-																	'epp',
+																	'ep2',
 																	_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
-																function (epp) {
+																function (ep2) {
 																	return A2(
 																		_elm_lang$core$Json_Decode$andThen,
 																		A2(
 																			_elm_lang$core$Json_Decode_ops[':='],
-																			'ot',
+																			'epp',
 																			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
-																		function (ot) {
+																		function (epp) {
 																			return A2(
 																				_elm_lang$core$Json_Decode$andThen,
 																				A2(
 																					_elm_lang$core$Json_Decode_ops[':='],
-																					'ps',
+																					'ot',
 																					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
-																				function (ps) {
+																				function (ot) {
 																					return A2(
 																						_elm_lang$core$Json_Decode$andThen,
 																						A2(
 																							_elm_lang$core$Json_Decode_ops[':='],
-																							'nt',
+																							'ps',
 																							_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
-																						function (nt) {
+																						function (ps) {
 																							return A2(
 																								_elm_lang$core$Json_Decode$andThen,
 																								A2(
 																									_elm_lang$core$Json_Decode_ops[':='],
-																									'gs',
+																									'nt',
 																									_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
-																								function (gs) {
+																								function (nt) {
 																									return A2(
 																										_elm_lang$core$Json_Decode$andThen,
-																										A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
-																										function (show) {
-																											return _elm_lang$core$Json_Decode$succeed(
-																												{date: date, title: title, mp1: mp1, mp2: mp2, mpp: mpp, ep1: ep1, ep2: ep2, epp: epp, ot: ot, ps: ps, nt: nt, gs: gs, show: show});
+																										A2(
+																											_elm_lang$core$Json_Decode_ops[':='],
+																											'gs',
+																											_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+																										function (gs) {
+																											return A2(
+																												_elm_lang$core$Json_Decode$andThen,
+																												A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																												function (show) {
+																													return _elm_lang$core$Json_Decode$succeed(
+																														{date: date, title: title, collect: collect, mp1: mp1, mp2: mp2, mpp: mpp, ep1: ep1, ep2: ep2, epp: epp, ot: ot, ps: ps, nt: nt, gs: gs, show: show});
+																												});
 																										});
 																								});
 																						});

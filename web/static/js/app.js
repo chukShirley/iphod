@@ -216,6 +216,7 @@ if ( path.match(/mindex/) ) {
       , readings = 
           { date: $(this).attr("value")
           , title: r.title
+          , collect: r.collect
           , mp1: r.mp1.split(",")
           , mp2: r.mp2.split(",")
           , mpp: r.mpp.split(",")

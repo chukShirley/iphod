@@ -107,9 +107,6 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_in("get_lesson", [_section, _version, _date], socket) do
-    # day = text_to_date date
-    # lesson = SundayReading.lesson(day, section, version)
-    # push socket, "update_lesson", %{lesson: lesson}
     {:noreply, socket}
   end
 

@@ -97,7 +97,7 @@ initSundayCollect =
   { instruction = ""
   , title = ""
   , collects = []
-  , show = False
+  , show = True
   }
 
 type alias Sunday =
@@ -136,6 +136,7 @@ sundayInit =
 type alias Daily =
   { date:     String  -- "Thursday March 31, 2016"
   , title:    String
+  , collect:  SundayCollect
   , mp1: List String
   , mp2: List String
   , mpp: List String
@@ -153,6 +154,7 @@ initDaily: Daily
 initDaily =
   { date      = ""
   , title     = ""
+  , collect = initSundayCollect
   , mp1  = []
   , mp2  = []
   , mpp  = []
@@ -182,6 +184,7 @@ type alias DailyMP =
   , week:   String
   , config: Config
   , show:   Bool
+  , collect:  SundayCollect
   , mp1:    List Lesson
   , mp2:    List Lesson
   , mpp:    List Lesson
@@ -197,6 +200,7 @@ initDailyMP =
   , week    = ""
   , config  = configInit
   , show    = False
+  , collect = initSundayCollect
   , mp1     = []
   , mp2     = []
   , mpp     = []
@@ -211,6 +215,7 @@ type alias DailyEP =
   , week:   String
   , config: Config
   , show:   Bool
+  , collect:  SundayCollect
   , ep1:    List Lesson
   , ep2:    List Lesson
   , epp:    List Lesson
@@ -226,6 +231,7 @@ initDailyEP =
   , week    = ""
   , config  = configInit
   , show    = False
+  , collect = initSundayCollect
   , ep1     = []
   , ep2     = []
   , epp     = []

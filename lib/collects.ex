@@ -1,4 +1,5 @@
 defmodule Collects do
+  @default_show true
   def start_link do
     Agent.start_link fn -> build end, name: __MODULE__
   end
@@ -9,7 +10,7 @@ defmodule Collects do
       |> Enum.map( fn({c, pkeys}) -> 
         %{ collect: c, propers: list_propers(pkeys)} 
       end)
-    %{ instruction: instruction, title: title, collects: cmap, show: false }
+    %{ instruction: instruction, title: title, collects: cmap, show: @default_show }
   end
   def get({season, week, _lityear, _date}) do
     season <> week |> get

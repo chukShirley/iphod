@@ -165,11 +165,6 @@ thisCollect sundayCollect =
     [ p 
         [class "collect_instruction"]
         [ text sundayCollect.instruction ]
-    , button 
-        [ class "collect_hide"
-        , onClick ToggleCollect
-        ] 
-        [text "hide"]
     , p
         [class "collect_title"]
         [ text sundayCollect.title ]

@@ -35,6 +35,7 @@ type Msg
   | ChangeText String String
   | ToggleModelShow
   | ToggleShow Models.Lesson
+  | ToggleCollect
   | SetReading Model
 
 update: Msg -> Model -> Model
@@ -79,6 +80,14 @@ update msg model =
       in
         newModel
 
+    ToggleCollect ->
+      let
+        collect = model.collect
+        newCollect = {collect | show = not collect.show}
+        newModel = {model | collect = newCollect}
+      in
+        newModel
+
 
 -- HELPERS
 
@@ -97,7 +106,13 @@ view model =
   div
   []
   [ table [class "readings_table", tableStyle model]
-      [ caption [titleStyle model, onClick ToggleModelShow] [text (String.join " " ["Morning Prayer:", model.date])] 
+      [ caption 
+        [titleStyle model]
+        [ span [onClick ToggleModelShow] [text (String.join " " ["Morning Prayer:", model.date])] 
+        , br [] []
+        , button
+          [ class "button", onClick ToggleCollect] [text "Collect"]
+        ]
       , tr
           [ class "rowStyle" ]
           [ th [] [ text "Morning 1"]
@@ -123,10 +138,42 @@ view model =
     , div [] (thisText model model.mp1)
     , div [] (thisText model model.mp2)
     , div [] (thisText model model.mpp)
+    , div [ collectStyle model.collect ] (thisCollect model.collect)
   ] -- end of div 
 
 
 -- HELPERS
+
+thisCollect: Models.SundayCollect -> List (Html Msg)
+thisCollect sundayCollect =
+  let
+    this_collect c = 
+      p 
+      [] 
+      ([text c.collect] ++ List.map thisProper c.propers)
+  in
+    [ p 
+        [class "collect_instruction"]
+        [ text sundayCollect.instruction ]
+    , button 
+        [ class "collect_hide"
+        , onClick ToggleCollect
+        ] 
+        [text "hide"]
+    , p
+        [class "collect_title"]
+        [ text sundayCollect.title ]
+    , div
+        [class "collect_text"]
+        (List.map this_collect sundayCollect.collects)
+    ]
+
+thisProper: Models.Proper -> Html Msg
+thisProper proper =
+  div []
+      [ p [class "proper_title"] [text ("Proper: " ++ proper.title)]
+      , p [class "proper_text"] [text proper.text]
+      ]
 
 thisText: Model -> List Models.Lesson -> List (Html Msg)
 thisText model lessons =
@@ -252,6 +299,24 @@ textStyle model =
     model.show
     [ ("font-size", "1em")
     , ("margin", "0")
+    , ("padding", "0em")
+    , ("list-style-type", "none")
+    , ("display", "inline-block")
+    ]
+
+collectButtonStyle: Models.SundayCollect -> Attribute msg
+collectButtonStyle model =
+  hideable
+    model.show
+    []
+
+collectStyle: Models.SundayCollect -> Attribute msg
+collectStyle model =
+  hideable
+    model.show
+    [ ("font-size", "1em")
+    , ("background-color", "white")
+    , ("margin", "0em")
     , ("padding", "0em")
     , ("list-style-type", "none")
     , ("display", "inline-block")

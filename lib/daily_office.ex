@@ -1,6 +1,7 @@
 require IEx
 defmodule DailyReading do
   # import Psalms, only: [morning: 1, evening: 1]
+  import SundayReading, only: [collect_today: 1]
   use Timex
   def start_link, do: Agent.start_link fn -> build end, name: __MODULE__
   def identity(), do: Agent.get(__MODULE__, &(&1))
@@ -13,6 +14,7 @@ defmodule DailyReading do
         acc |> Map.put(r, BibleText.lesson_with_body(mp[r]) )
       end)
     |> Map.put(:show, true)
+    |> Map.put(:collect, collect_today(date))
   end
 
   def ep_body(date) do
@@ -23,6 +25,7 @@ defmodule DailyReading do
         acc |> Map.put(r, BibleText.lesson_with_body(ep[r]) )
       end)
     |> Map.put(:show, true)
+    |> Map.put(:collect, collect_today(date))
   end
 
   def opening_sentence(mpep, date) do
