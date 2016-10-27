@@ -1,0 +1,148 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: lib/daily_office.ex:312
+msgid "Acts 1:8"
+msgstr ""
+
+#: lib/daily_office.ex:303
+msgid "Christ is risen! The Lord is risen indeed!"
+msgstr ""
+
+#: lib/daily_office.ex:287
+msgid "Fear not, for behold, I bring you good news of a great joy that will be for all people. For unto you is born this day in the city of David a Savior, who is Christ the Lord."
+msgstr ""
+
+#: lib/daily_office.ex:291
+msgid "For from the rising of the sun to its setting my name will be great among the nations, and in every place incense will be offered to my name, and a pure offering. For my name will be great among the nations, says the Lord of hosts."
+msgstr ""
+
+#: lib/daily_office.ex:308
+msgid "Hebrews 4:14, 16"
+msgstr ""
+
+#: lib/daily_office.ex:315
+msgid "Holy, holy, holy, is the Lord God Almighty, who was and is and is to come!"
+msgstr ""
+
+#: lib/daily_office.ex:319
+msgid "Honor the Lord with your wealth and with the firstfruits of all your produce; then your barns will be filled with plenty, and your vats will be bursting with wine."
+msgstr ""
+
+#: lib/daily_office.ex:283
+msgid "In the wilderness prepare the way of the Lord; make straight in the desert a highway for our God."
+msgstr ""
+
+#: lib/daily_office.ex:299
+msgid "Is it nothing to you, all you who pass by? Look and see if there is any sorrow like my sorrow, which was brought upon me, which the Lord inflicted on the day of his fierce anger."
+msgstr ""
+
+#: lib/daily_office.ex:284
+msgid "Isaiah 40:3"
+msgstr ""
+
+#: lib/daily_office.ex:300
+msgid "Lamentations 1:12"
+msgstr ""
+
+#: lib/daily_office.ex:288
+msgid "Luke 2:10-11"
+msgstr ""
+
+#: lib/daily_office.ex:292
+msgid "Malachi 1:11"
+msgstr ""
+
+#: lib/daily_office.ex:304
+msgid "Mark 16:6 and Luke 24:34"
+msgstr ""
+
+#: lib/daily_office.ex:296
+msgid "Matthew 3:2"
+msgstr ""
+
+#: lib/daily_office.ex:320
+msgid "Proverbs 3:9-10"
+msgstr ""
+
+#: lib/daily_office.ex:295
+msgid "Repent, for the kingdom of heaven is at hand."
+msgstr ""
+
+#: lib/daily_office.ex:316
+msgid "Revelation 4:8"
+msgstr ""
+
+#: lib/daily_office.ex:307
+msgid "Since then we have a great high priest who has passed through the heavens, Jesus, the Son of God, let us hold fast our confession. Let us then with confidence draw near to the throne of grace, that we may receive mercy and find grace to help in time of need."
+msgstr ""
+
+#: lib/daily_office.ex:311
+msgid "You will receive power when the Holy Spirit has come upon you, and you will be my witnesses in Jerusalem and in all Judea and Samaria, and to the end of the earth."
+msgstr ""
+
+#: lib/daily_office.ex:335
+msgid "For thus says the One who is high and lifted up, who inhabits eternity, whose name is Holy: “I dwell in the high and holy place, and also with him who is of a contrite and lowly spirit, to revive the spirit of the lowly, and to revive the heart of the contrite.”"
+msgstr ""
+
+#: lib/daily_office.ex:341
+msgid "Grace to you and peace from God our Father and the Lord Jesus Christ."
+msgstr ""
+
+#: lib/daily_office.ex:324
+msgid "Habakkuk 2:20"
+msgstr ""
+
+#: lib/daily_office.ex:326
+msgid "I was glad when they said to me, “Let us go to the house of the Lord!”"
+msgstr ""
+
+#: lib/daily_office.ex:336
+msgid "Isaiah 57:15"
+msgstr ""
+
+#: lib/daily_office.ex:339
+msgid "John 4:23"
+msgstr ""
+
+#: lib/daily_office.ex:329
+msgid "Let the words of my mouth and the meditation of my heart be acceptable in your sight, O Lord, my rock and my redeemer."
+msgstr ""
+
+#: lib/daily_office.ex:342
+msgid "Philippians 1:2"
+msgstr ""
+
+#: lib/daily_office.ex:327
+msgid "Psalm 122:1"
+msgstr ""
+
+#: lib/daily_office.ex:330
+msgid "Psalm 19:14"
+msgstr ""
+
+#: lib/daily_office.ex:333
+msgid "Psalm 43:3"
+msgstr ""
+
+#: lib/daily_office.ex:332
+msgid "Send out your light and your truth; let them lead me; let them bring me to your holy hill and to your dwelling!"
+msgstr ""
+
+#: lib/daily_office.ex:323
+msgid "The Lord is in his holy temple; let all the earth keep silence before him."
+msgstr ""
+
+#: lib/daily_office.ex:338
+msgid "The hour is coming, and is now here, when the true worshipers will worship the Father in spirit and truth, for the Father is seeking such people to worship him."
+msgstr ""

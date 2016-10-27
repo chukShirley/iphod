@@ -16,9 +16,9 @@
   </br>
   <p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
   <p class= "default">
-    <%=@model.opening_sentence%>
+    <%= Gettext.dgettext Iphod.Gettext, "mp_opening", @model.opening_sentence %>
     </br>
-    <span class= "bible_ref"><%=@model.opening_sentence_ref%></span>
+    <span class= "bible_ref"><%= Gettext.dgettext Iphod.Gettext, "mp_opening", @model.opening_sentence_ref%></span>
   </p>
   <p class="rubric_black"><%= dgettext "mp", "alt opening sentence"%></p>
   </br>
@@ -31,8 +31,8 @@
   </br>
   <p class= "rubric"><%= dgettext "mp", "Then follows the Venite. Alternatively, the Jubilate may be used."%></p>
   <p class= "rubric-newline"><%= dgettext "mp", "These seasonal antiphons may be sung or said before and after the Invitatory Psalm."%></p>
-  <p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
-  <p class= "default"><%=@model.antiphon%></p>
+  <p class= "rubric_black"><%= Gettext.dgettext Iphod.Gettext, "antiphon", @model.season |> String.capitalize%></p>
+  <p class= "default"><%= Gettext.dgettext Iphod.Gettext, "antiphon", @model.antiphon%></p>
   <%= render "_#{@model.invitatory_canticle}.html" %>
   <p class= "rubric"><%= dgettext "mp", "Then follows"%></p>
   <p class= "section"><%= dgettext "mp", "The Psalm or Psalms Appointed"%></p>

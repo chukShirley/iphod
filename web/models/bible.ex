@@ -2,6 +2,10 @@ require IEx
 alias Iphod.Repo
 defmodule Iphod.Bible do
   use Iphod.Web, :model
+  @trans "cu89s"
+  @name "Chinese Union Simplified"
+  @direction "LTR"
+
 
   schema "bible" do
       field :trans, :string
@@ -48,6 +52,7 @@ defmodule Iphod.Bible do
         end)
       end)
   end
+
 #   def load(s) do
 #     {:ok, file} = File.open(s, [:read, :utf8])
 #     map = 

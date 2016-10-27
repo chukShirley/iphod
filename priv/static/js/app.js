@@ -35219,7 +35219,7 @@ var _user$project$Iphod_EPReading$thisCollect = function (sundayCollect) {
 				]),
 			_elm_lang$core$Native_List.fromArray(
 				[
-					_elm_lang$html$Html$text('hide')
+					_elm_lang$html$Html$text('collect')
 				])),
 			A2(
 			_elm_lang$html$Html$p,
@@ -35507,17 +35507,42 @@ var _user$project$Iphod_EPReading$view = function (model) {
 						_elm_lang$html$Html$caption,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_user$project$Iphod_EPReading$titleStyle(model),
-								_elm_lang$html$Html_Events$onClick(_user$project$Iphod_EPReading$ToggleModelShow)
+								_user$project$Iphod_EPReading$titleStyle(model)
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html$text(
 								A2(
-									_elm_lang$core$String$join,
-									' ',
-									_elm_lang$core$Native_List.fromArray(
-										['Evening Prayer:', model.date])))
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Events$onClick(_user$project$Iphod_EPReading$ToggleModelShow)
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$String$join,
+											' ',
+											_elm_lang$core$Native_List.fromArray(
+												['Evening Prayer:', model.date])))
+									])),
+								A2(
+								_elm_lang$html$Html$br,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[])),
+								A2(
+								_elm_lang$html$Html$button,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('button'),
+										_elm_lang$html$Html_Events$onClick(_user$project$Iphod_EPReading$ToggleCollect)
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('Collect')
+									]))
 							])),
 						A2(
 						_elm_lang$html$Html$tr,
@@ -47687,7 +47712,7 @@ var _user$project$Iphod_EPReading$thisCollect = function (sundayCollect) {
 				]),
 			_elm_lang$core$Native_List.fromArray(
 				[
-					_elm_lang$html$Html$text('hide')
+					_elm_lang$html$Html$text('collect')
 				])),
 			A2(
 			_elm_lang$html$Html$p,
@@ -47975,17 +48000,42 @@ var _user$project$Iphod_EPReading$view = function (model) {
 						_elm_lang$html$Html$caption,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_user$project$Iphod_EPReading$titleStyle(model),
-								_elm_lang$html$Html_Events$onClick(_user$project$Iphod_EPReading$ToggleModelShow)
+								_user$project$Iphod_EPReading$titleStyle(model)
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html$text(
 								A2(
-									_elm_lang$core$String$join,
-									' ',
-									_elm_lang$core$Native_List.fromArray(
-										['Evening Prayer:', model.date])))
+								_elm_lang$html$Html$span,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Events$onClick(_user$project$Iphod_EPReading$ToggleModelShow)
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(
+										A2(
+											_elm_lang$core$String$join,
+											' ',
+											_elm_lang$core$Native_List.fromArray(
+												['Evening Prayer:', model.date])))
+									])),
+								A2(
+								_elm_lang$html$Html$br,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[])),
+								A2(
+								_elm_lang$html$Html$button,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('button'),
+										_elm_lang$html$Html_Events$onClick(_user$project$Iphod_EPReading$ToggleCollect)
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text('Collect')
+									]))
 							])),
 						A2(
 						_elm_lang$html$Html$tr,

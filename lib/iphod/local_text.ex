@@ -5,7 +5,7 @@ alias Iphod.Bible
 
 defmodule LocalText do
   import RequestParser, only: [local_query: 1]
-  import BookNames, only: [book_name: 1]
+  import BookNames, only: [book_name: 1, book_title: 1]
   import Ecto.Query, only: [from: 2]
 
   def passage(ver, book, chapter) do
@@ -27,7 +27,7 @@ defmodule LocalText do
 
   def request(ver, ref) do
     {ver, book, lists} = request(ver, local_query(ref), [])
-    lists_to_html(lists, "<h3>#{ref |> String.capitalize}</h3>")
+    lists_to_html(lists, "<h3>#{titlize(ref)}</h3>")
   end
 
   def request(ver, {book, []}, list), do: {ver, book, list}
@@ -43,6 +43,10 @@ defmodule LocalText do
   def lists_to_html([h|t], html) do
     new_html = html <> "<p>" <> Enum.join(h, "</br>") <> "</p>"
     lists_to_html t, new_html
+  end
+
+  def titlize(ref) do
+    Regex.replace ~r/(\d?\s?\w+)/, ref, &(book_title(&1)), global: false
   end
 
 

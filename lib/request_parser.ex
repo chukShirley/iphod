@@ -1,5 +1,5 @@
 defmodule RequestParser do
-  import BookNames, only: [book_name: 1]
+  import BookNames, only: [book_name: 1, web_name: 1]
   
   def tokenize(s) do
     Regex.split(~r/\d+|[a-z]+/, s |> String.downcase, include_captures: true)
@@ -77,6 +77,7 @@ defmodule RequestParser do
 
   def local_query(s) do
     {book, vs_list} = reference(s)
+    {web_name(book), vs_list}
   end
 
   def esv_query(s) do

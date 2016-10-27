@@ -28,12 +28,14 @@ msgstr "我們在天上的父，願祢的名被尊為聖，願祢的國降臨，
 
 #: web/templates/prayer/_lords_prayer_modern.html.eex:5
 msgid "Save us from the time of trial, and deliver us from evil."
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_lords_prayer_modern.html.eex:2
 msgid "Your kingdom come, your will be done, on earth as it is in heaven."
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_lords_prayer_modern.html.eex:7
 msgid "now and forever. Amen."
-msgstr " " # intentionally blank
+msgstr " "

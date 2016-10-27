@@ -58,10 +58,6 @@ msgstr "使徒信經"
 msgid "and born of the Virgin Mary."
 msgstr "由童貞女馬利亞所生。"
 
-#: web/templates/prayer/_apostles_creed.html.eex:13
-msgid "and is seated at the right hand of the Father."
-msgstr "坐在聖父的右邊。"
-
 #: web/templates/prayer/_apostles_creed.html.eex:20
 msgid "and the life everlasting. Amen."
 msgstr "我信永生。阿們。"
@@ -89,3 +85,7 @@ msgstr "我信身體復活，"
 #: web/templates/prayer/_apostles_creed.html.eex:9
 msgid "was crucified, died, and was buried."
 msgstr "被釘在十字架上，受死、埋葬，"
+
+#: web/templates/prayer/_apostles_creed.html.eex:13
+msgid "and is seated at the right hand of the Father."
+msgstr "坐在聖父的右邊。"

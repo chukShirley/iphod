@@ -76,8 +76,9 @@ msgstr "遠離祢的恩典，我們便無力行善。"
 
 #: web/templates/prayer/_confession.html.eex:17
 msgid "and we have done those things which we ought not to have done;"
-msgstr " " # part of "and apart from your grace"
+msgstr " "
 
+# part of "and apart from your grace"
 #: web/templates/prayer/_confession.html.eex:8
 #: web/templates/prayer/_confession.html.eex:30
 msgid "or this"
@@ -85,12 +86,14 @@ msgstr "或說"
 
 #: web/templates/prayer/_confession.html.eex:14
 msgid "own hearts."
-msgstr " " # part of "we have followed too much..."
+msgstr " "
 
+# part of "we have followed too much..."
 #: web/templates/prayer/_confession.html.eex:24
 msgid "that we may now live a godly, righteous, and sober life,"
-msgstr " " # part of "And grant O most..."
+msgstr " "
 
+# part of "And grant O most..."
 #: web/templates/prayer/_confession.html.eex:22
 msgid "to all people in Christ Jesus our Lord;"
 msgstr "又求至慈悲的父，因耶穌基督的緣故，"

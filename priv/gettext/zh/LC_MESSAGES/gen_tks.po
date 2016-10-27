@@ -56,16 +56,19 @@ msgstr "我們不配的僕人，特此恭敬虔誠向主感謝。"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:12
 msgid "for the means of grace, and for the hope of glory."
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_general_thanksgiving.html.eex:18
 msgid "in holiness and righteousness all our days;"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_general_thanksgiving.html.eex:11
 msgid "in the redemption of the world by our Lord Jesus Christ;"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_general_thanksgiving.html.eex:15
 msgid "not only with our lips, but in our lives,"
 msgstr "不但口中讚美，亦在行事顯明，"
@@ -84,8 +87,9 @@ msgstr "我們稱謝主：創造我們，保全我們，賜福我們。"
 
 #: web/templates/prayer/_general_thanksgiving.html.eex:20
 msgid "to whom, with you and the Holy Spirit,"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_general_thanksgiving.html.eex:5
 msgid "we your unworthy servants give you humble thanks"
 msgstr "將恩惠慈愛賜給我們，以及萬民；"

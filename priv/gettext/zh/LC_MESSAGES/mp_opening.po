@@ -1,0 +1,170 @@
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: lib/daily_office.ex:312
+msgid "Acts 1:8"
+msgstr "徒1:8"
+
+#: lib/daily_office.ex:303
+msgid "Christ is risen! The Lord is risen indeed!"
+msgstr "基督已經復活了！主果然復活了！"
+
+#: lib/daily_office.ex:287
+msgid "Fear not, for behold, I bring you good news of a great joy that will be for all people. For unto you is born this day in the city of David a Savior, who is Christ the Lord."
+msgstr ""
+  "不要懼怕！看哪！因為我報給你們大喜的信息，是關乎萬民的：因今天在大\n衛的城"
+  "裏，為你們生了救主，就是主基督。"
+
+#: lib/daily_office.ex:291
+msgid "For from the rising of the sun to its setting my name will be great among the nations, and in every place incense will be offered to my name, and a pure offering. For my name will be great among the nations, says the Lord of hosts."
+msgstr ""
+  "萬軍之耶和華說：「從日出之地到日落之處，我的名在列國中必尊為大。在\n各處，人"
+  "必奉我的名燒香，獻潔淨的供物，因為我的名在列國中必尊為大。」"
+
+#: lib/daily_office.ex:308
+msgid "Hebrews 4:14, 16"
+msgstr "來4:14, 16"
+
+#: lib/daily_office.ex:315
+msgid "Holy, holy, holy, is the Lord God Almighty, who was and is and is to come!"
+msgstr "聖哉！聖哉！聖哉！主上帝是昔在、今在、以後永在的全能者。"
+
+#: lib/daily_office.ex:319
+msgid "Honor the Lord with your wealth and with the firstfruits of all your produce; then your barns will be filled with plenty, and your vats will be bursting with wine."
+msgstr ""
+  "你要以財物和一切初熟的土產尊崇耶和華，這樣，你的倉庫必充滿有餘，你\n的酒池有"
+  "新酒盈溢。"
+
+#: lib/daily_office.ex:283
+msgid "In the wilderness prepare the way of the Lord; make straight in the desert a highway for our God."
+msgstr "要在曠野為耶和華預備道路，在沙漠為我們的上帝修直大道。"
+
+#: lib/daily_office.ex:299
+msgid "Is it nothing to you, all you who pass by? Look and see if there is any sorrow like my sorrow, which was brought upon me, which the Lord inflicted on the day of his fierce anger."
+msgstr ""
+  "你們一切過路的人哪，這事你們不介意嗎？你們要觀看：有像這臨到我的痛\n苦沒有—就"
+  "是耶和華在他發烈怒的日子使我所受的苦？"
+
+#: lib/daily_office.ex:284
+msgid "Isaiah 40:3"
+msgstr "賽40:3"
+
+#: lib/daily_office.ex:300
+msgid "Lamentations 1:12"
+msgstr "哀1:12"
+
+#: lib/daily_office.ex:288
+msgid "Luke 2:10-11"
+msgstr "路2:10-11"
+
+#: lib/daily_office.ex:292
+msgid "Malachi 1:11"
+msgstr "瑪1:11"
+
+#: lib/daily_office.ex:304
+msgid "Mark 16:6 and Luke 24:34"
+msgstr "可16:6 及路24:34"
+
+#: lib/daily_office.ex:296
+msgid "Matthew 3:2"
+msgstr "太3:2"
+
+#: lib/daily_office.ex:320
+msgid "Proverbs 3:9-10"
+msgstr "箴3:9-10"
+
+#: lib/daily_office.ex:295
+msgid "Repent, for the kingdom of heaven is at hand."
+msgstr "你們要悔改！因為天國近了。"
+
+#: lib/daily_office.ex:316
+msgid "Revelation 4:8"
+msgstr "啓4:8"
+
+#: lib/daily_office.ex:307
+msgid "Since then we have a great high priest who has passed through the heavens, Jesus, the Son of God, let us hold fast our confession. Let us then with confidence draw near to the throne of grace, that we may receive mercy and find grace to help in time of need."
+msgstr ""
+  "既然我們有一位偉大、進入高天的大祭司，就是耶穌—上帝的兒子，我們應\n當持定所宣"
+  "認的道。我們只管坦然無懼地來到施恩的寶座前，為要得憐憫，\n蒙恩惠，作及時的幫"
+  "助。"
+
+#: lib/daily_office.ex:311
+msgid "You will receive power when the Holy Spirit has come upon you, and you will be my witnesses in Jerusalem and in all Judea and Samaria, and to the end of the earth."
+msgstr ""
+  "聖靈降臨在你們身上，你們就必得着能力，並要在耶路撒冷、猶太全地和撒\n瑪利亞，"
+  "直到地極，作我的見證。"
+
+#: lib/daily_office.ex:335
+msgid "For thus says the One who is high and lifted up, who inhabits eternity, whose name is Holy: “I dwell in the high and holy place, and also with him who is of a contrite and lowly spirit, to revive the spirit of the lowly, and to revive the heart of the contrite.”"
+msgstr "那至高無上、永遠長存、名為聖者的如此說：「我住在至高至聖的所在，卻<br>與心靈痛悔的謙卑人同住；要使謙卑的人心靈甦醒，使痛悔的人內心復甦。」"
+
+#: lib/daily_office.ex:341
+msgid "Grace to you and peace from God our Father and the Lord Jesus Christ."
+msgstr "願恩惠、平安從我們的父上帝和主耶穌基督歸給你們！"
+
+#: lib/daily_office.ex:324
+msgid "Habakkuk 2:20"
+msgstr "哈2:20"
+
+#: lib/daily_office.ex:326
+msgid "I was glad when they said to me, “Let us go to the house of the Lord!”"
+msgstr "人對我說：「我們往耶和華的殿去！」我就歡喜。"
+
+#: lib/daily_office.ex:336
+msgid "Isaiah 57:15"
+msgstr "賽57:15"
+
+#: lib/daily_office.ex:339
+msgid "John 4:23"
+msgstr "約4:23"
+
+#: lib/daily_office.ex:329
+msgid "Let the words of my mouth and the meditation of my heart be acceptable in your sight, O Lord, my rock and my redeemer."
+msgstr "耶和華－我的磐石，我的救贖主啊，願我口中的言語，心裏的意念在祢面前<br>蒙悅納。"
+
+#: lib/daily_office.ex:342
+msgid "Philippians 1:2"
+msgstr "腓1:2"
+
+#: lib/daily_office.ex:327
+msgid "Psalm 122:1"
+msgstr "詩122:1"
+
+#: lib/daily_office.ex:330
+msgid "Psalm 19:14"
+msgstr "詩19:14"
+
+#: lib/daily_office.ex:333
+msgid "Psalm 43:3"
+msgstr "詩43:3"
+
+#: lib/daily_office.ex:332
+msgid "Send out your light and your truth; let them lead me; let them bring me to your holy hill and to your dwelling!"
+msgstr "求祢發出祢的亮光和信實，好引導我，帶我到祢的聖山，到祢的居所！"
+
+#: lib/daily_office.ex:323
+msgid "The Lord is in his holy temple; let all the earth keep silence before him."
+msgstr "惟耶和華在祂的聖殿中，全地都當在祂面前肅靜。"
+
+#: lib/daily_office.ex:338
+msgid "The hour is coming, and is now here, when the true worshipers will worship the Father in spirit and truth, for the Father is seeking such people to worship him."
+msgstr "時候將到，現在就是了，那真正敬拜父的，要用心靈和誠實敬拜祂，因為父<br>要這樣的人敬拜祂。"

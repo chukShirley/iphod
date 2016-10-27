@@ -1,23 +1,23 @@
-<p class= "rubric"><%= dgettext "deus_mis", "Suitable for use at any time"%></p>
+<p class= "rubric"><%= dgettext "ecce_deus", "Suitable for use at any time"%></p>
 <p class= "canticle">
-  <span class= "canticle_title"><%= dgettext "deus_mis", "Ecce, Deus"%></span>
-  <span class= "canticle_name"><%= dgettext "deus_mis", "Surely, it is God who saves me"%></span>
+  <span class= "canticle_title"><%= dgettext "ecce_deus", "Ecce, Deus"%></span>
+  <span class= "canticle_name"><%= dgettext "ecce_deus", "Surely, it is God who saves me"%></span>
 </p>
-<p class= "rubric_black"><%= dgettext "deus_mis", "Isaiah 12:2-6"%></p>
-<p class= "vs"><%= dgettext "deus_mis", "Surely, it is God who saves me;"%></p>
-<p class= "vs_indent"><%= dgettext "deus_mis", "I will trust in him and not be afraid."%></p>
-<p class= "vs"><%= dgettext "deus_mis", "For the Lord is my stronghold and my sure defense,"%></p>
-<p class= "vs_indent"><%= dgettext "deus_mis", "and he will be my Savior."%></p>
-<p class= "vs"><%= dgettext "deus_mis", "Therefore you shall draw water with rejoicing"%></p>
-<p class= "vs_indent"><%= dgettext "deus_mis", "from the springs of salvation."%></p>
-<p class= "vs"><%= dgettext "deus_mis", "And on that day you shall say,"%></p>
-<p class= "vs_indent"><%= dgettext "deus_mis", "Give thanks to the Lord and call upon his Name;"%></p>
-<p class= "vs"><%= dgettext "deus_mis", "Make his deeds known among the peoples;"%></p>
-<p class= "vs_indent"><%= dgettext "deus_mis", "see that they remember that his Name is exalted."%></p>
-<p class= "vs"><%= dgettext "deus_mis", "Sing the praises of the Lord, for he has done great things,"%></p>
-<p class= "vs_indent"><%= dgettext "deus_mis", "and this is known in all the world."%></p>
-<p class= "vs"><%= dgettext "deus_mis", "Cry aloud, inhabitants of Zion, ring out your joy,"%></p>
-<p class= "vs_indent"><%= dgettext "deus_mis", "for the great one in the midst of you is the Holy One of Israel."%></p>
-<p class= "vs"><%= dgettext "deus_mis", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
-<p class= "vs_indent"><%= dgettext "deus_mis", "as it was in the beginning, is now, and ever shall be,"%></p>
-<p class= "vs_indent"><%= dgettext "deus_mis", "world without end. Amen."%></p>
+<p class= "rubric_black"><%= dgettext "ecce_deus", "Isaiah 12:2-6"%></p>
+<p class= "vs"><%= dgettext "ecce_deus", "Surely, it is God who saves me;"%></p>
+<p class= "vs_indent"><%= dgettext "ecce_deus", "I will trust in him and not be afraid."%></p>
+<p class= "vs"><%= dgettext "ecce_deus", "For the Lord is my stronghold and my sure defense,"%></p>
+<p class= "vs_indent"><%= dgettext "ecce_deus", "and he will be my Savior."%></p>
+<p class= "vs"><%= dgettext "ecce_deus", "Therefore you shall draw water with rejoicing"%></p>
+<p class= "vs_indent"><%= dgettext "ecce_deus", "from the springs of salvation."%></p>
+<p class= "vs"><%= dgettext "ecce_deus", "And on that day you shall say,"%></p>
+<p class= "vs_indent"><%= dgettext "ecce_deus", "Give thanks to the Lord and call upon his Name;"%></p>
+<p class= "vs"><%= dgettext "ecce_deus", "Make his deeds known among the peoples;"%></p>
+<p class= "vs_indent"><%= dgettext "ecce_deus", "see that they remember that his Name is exalted."%></p>
+<p class= "vs"><%= dgettext "ecce_deus", "Sing the praises of the Lord, for he has done great things,"%></p>
+<p class= "vs_indent"><%= dgettext "ecce_deus", "and this is known in all the world."%></p>
+<p class= "vs"><%= dgettext "ecce_deus", "Cry aloud, inhabitants of Zion, ring out your joy,"%></p>
+<p class= "vs_indent"><%= dgettext "ecce_deus", "for the great one in the midst of you is the Holy One of Israel."%></p>
+<p class= "vs"><%= dgettext "ecce_deus", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
+<p class= "vs_indent"><%= dgettext "ecce_deus", "as it was in the beginning, is now, and ever shall be,"%></p>
+<p class= "vs_indent"><%= dgettext "ecce_deus", "world without end. Amen."%></p>

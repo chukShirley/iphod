@@ -1,5 +1,6 @@
 require IEx
 defmodule DailyReading do
+  import Iphod.Gettext, only: [dgettext: 2]
   # import Psalms, only: [morning: 1, evening: 1]
   import SundayReading, only: [collect_today: 1]
   use Timex
@@ -247,193 +248,215 @@ defmodule DailyReading do
   def build do
     %{"antiphon" =>
       %{  "advent" => 
-            ["Our King and Savior now draws near: O come, let us adore him."],
+            [dgettext("antiphon", "Our King and Savior now draws near: O come, let us adore him.")],
           "christmas" =>
-            ["Alleluia, to us a child is born: O come, let us adore him. Alleluia."],
+            [dgettext("antiphon", "Alleluia, to us a child is born: O come, let us adore him. Alleluia.")],
           "epiphany" => 
-            ["The Lord has shown forth his glory: O come, let us adore him."],
+            [dgettext("antiphon", "The Lord has shown forth his glory: O come, let us adore him.")],
           "lent" =>
-            ["The Lord is full of compassion and mercy: O come, let us adore him."],
+            [dgettext("antiphon", "The Lord is full of compassion and mercy: O come, let us adore him.")],
           "palmSunday" =>
-            ["The Lord is full of compassion and mercy: O come, let us adore him."],
+            [dgettext("antiphon", "The Lord is full of compassion and mercy: O come, let us adore him.")],
           "easterDay" =>
-            ["Alleluia. The Lord is risen indeed: O come, let us adore him. Alleluia."],
+            [dgettext("antiphon", "Alleluia. The Lord is risen indeed: O come, let us adore him. Alleluia.")],
           "easter" =>
-            ["Alleluia. The Lord is risen indeed: O come, let us adore him. Alleluia."],
+            [dgettext("antiphon", "Alleluia. The Lord is risen indeed: O come, let us adore him. Alleluia.")],
           "proper" =>
-            ["The earth is the Lord's for he made it: O Come let us adore him.",
-             "Worship the Lord in the beauty of holiness: O Come let us adore him.",
-             "The mercy of the Lord is everlasting: O Come let us adore him.",
-             "Worship the Lord in the beauty of holiness: O Come let us adore him."
+            [dgettext("antiphon", "The earth is the Lord's for he made it: O Come let us adore him."),
+             dgettext("antiphon", "Worship the Lord in the beauty of holiness: O Come let us adore him."),
+             dgettext("antiphon", "The mercy of the Lord is everlasting: O Come let us adore him."),
+             dgettext("antiphon", "Worship the Lord in the beauty of holiness: O Come let us adore him.")
             ],
           "ascension" =>
-            ["Alleluia. Christ the Lord has ascended into heaven: O come, let us adore him. Alleluia."],
+            [dgettext("antiphon", "Alleluia. Christ the Lord has ascended into heaven: O come, let us adore him. Alleluia.")],
           "pentecost" =>
-            ["Alleluia. The Spirit of the Lord renews the face of the earth: O come, let us adore him. Alleluia."],
+            [dgettext("antiphon", "Alleluia. The Spirit of the Lord renews the face of the earth: O come, let us adore him. Alleluia.")],
           "trinity" => 
-            ["Father, Son and Holy Spirit, one God: O come, let us adore him."], 
+            [dgettext("antiphon", "Father, Son and Holy Spirit, one God: O come, let us adore him.")], 
           "incarnation" =>
-            ["The Word was made flesh and dwelt among us: O come, let us adore him."],
+            [dgettext("antiphon", "The Word was made flesh and dwelt among us: O come, let us adore him.")],
           "saints" =>
-            ["The Lord is glorious in his saints: O come, let us adore him."]
+            [dgettext("antiphon", "The Lord is glorious in his saints: O come, let us adore him.")]
       },  
       "mp_opening" =>
       %{ "advent" => [{
-                  "In the wilderness prepare the way of the Lord; make straight in the desert a highway for our God.",
-                  "Isaiah 40:3"
+                  dgettext( "mp_opening", "In the wilderness prepare the way of the Lord; make straight in the desert a highway for our God."),
+                  dgettext( "mp_opening", "Isaiah 40:3")
                   }],
         "christmas" => [{
-                    "Fear not, for behold, I bring you good news of a great joy that will be for all people. For unto you is born this day in the city of David a Savior, who is Christ the Lord.",
-                    "Luke 2:10-11"
+                    dgettext( "mp_opening", "Fear not, for behold, I bring you good news of a great joy that will be for all people. For unto you is born this day in the city of David a Savior, who is Christ the Lord."),
+                    dgettext( "mp_opening", "Luke 2:10-11")
                     }],
         "epiphany" => [{
-                    "For from the rising of the sun to its setting my name will be great among the nations, and in every place incense will be offered to my name, and a pure offering. For my name will be great among the nations, says the Lord of hosts.",
-                    "Malachi 1:11"
+                    dgettext( "mp_opening", "For from the rising of the sun to its setting my name will be great among the nations, and in every place incense will be offered to my name, and a pure offering. For my name will be great among the nations, says the Lord of hosts."),
+                    dgettext( "mp_opening", "Malachi 1:11")
                     }],
         "lent" => [{
-                    "Repent, for the kingdom of heaven is at hand.",
-                    "Matthew 3:2"
+                    dgettext( "mp_opening", "Repent, for the kingdom of heaven is at hand."),
+                    dgettext( "mp_opening", "Matthew 3:2")
                     }],
         "goodFriday" => [{
-                    "Is it nothing to you, all you who pass by? Look and see if there is any sorrow like my sorrow, which was brought upon me, which the Lord inflicted on the day of his fierce anger.",
-                    "Lamentations 1:12",
+                    dgettext( "mp_opening", "Is it nothing to you, all you who pass by? Look and see if there is any sorrow like my sorrow, which was brought upon me, which the Lord inflicted on the day of his fierce anger."),
+                    dgettext( "mp_opening", "Lamentations 1:12"),
                     }],
         "easter" => [{
-                    "Christ is risen! The Lord is risen indeed!",
-                    "Mark 16:6 and Luke 24:34"
+                   dgettext( "mp_opening",  "Christ is risen! The Lord is risen indeed!"),
+                    dgettext( "mp_opening", "Mark 16:6 and Luke 24:34")
                     }],
         "ascension" => [{
-                    "Since then we have a great high priest who has passed through the heavens, Jesus, the Son of God, let us hold fast our confession. Let us then with confidence draw near to the throne of grace, that we may receive mercy and find grace to help in time of need.",
-                    "Hebrews 4:14, 16"
+                    dgettext( "mp_opening", "Since then we have a great high priest who has passed through the heavens, Jesus, the Son of God, let us hold fast our confession. Let us then with confidence draw near to the throne of grace, that we may receive mercy and find grace to help in time of need."),
+                    dgettext( "mp_opening", "Hebrews 4:14, 16")
                     }],
         "pentecost" => [{
-                    "You will receive power when the Holy Spirit has come upon you, and you will be my witnesses in Jerusalem and in all Judea and Samaria, and to the end of the earth.",
-                    "Acts 1:8"
+                    dgettext( "mp_opening", "You will receive power when the Holy Spirit has come upon you, and you will be my witnesses in Jerusalem and in all Judea and Samaria, and to the end of the earth."),
+                    dgettext( "mp_opening", "Acts 1:8")
                     }],
         "trinity" => [{
-                    "Holy, holy, holy, is the Lord God Almighty, who was and is and is to come!",
-                    "Revelation 4:8"
+                    dgettext( "mp_opening", "Holy, holy, holy, is the Lord God Almighty, who was and is and is to come!"),
+                    dgettext( "mp_opening", "Revelation 4:8")
                     }],
         "thanksgiving" => [{
-                    "Honor the Lord with your wealth and with the firstfruits of all your produce; then your barns will be filled with plenty, and your vats will be bursting with wine.",
-                    "Proverbs 3:9-10"
+                    dgettext( "mp_opening", "Honor the Lord with your wealth and with the firstfruits of all your produce; then your barns will be filled with plenty, and your vats will be bursting with wine."),
+                    dgettext( "mp_opening", "Proverbs 3:9-10")
                     }],
         "proper" => 
-          [ { "The Lord is in his holy temple; let all the earth keep silence before him.",
-              "Habakkuk 2:20"
+          [ { dgettext("mp_opening", "The Lord is in his holy temple; let all the earth keep silence before him."),
+              dgettext("mp_opening", "Habakkuk 2:20")
             },
-            { "I was glad when they said to me, “Let us go to the house of the Lord!”",
-              "Psalm 122:1"
+            { dgettext("mp_opening", "I was glad when they said to me, “Let us go to the house of the Lord!”"),
+              dgettext("mp_opening", "Psalm 122:1")
             },
-            { "Let the words of my mouth and the meditation of my heart be acceptable in your sight, O Lord, my rock and my redeemer.",
-              "Psalm 19:14"
+            { dgettext("mp_opening", "Let the words of my mouth and the meditation of my heart be acceptable in your sight, O Lord, my rock and my redeemer."),
+              dgettext("mp_opening", "Psalm 19:14")
             },
-            { "Send out your light and your truth; let them lead me; let them bring me to your holy hill and to your dwelling!",
-              "Psalm 43:3"
+            { dgettext("mp_opening", "Send out your light and your truth; let them lead me; let them bring me to your holy hill and to your dwelling!"),
+              dgettext("mp_opening", "Psalm 43:3")
             },
-            { "For thus says the One who is high and lifted up, who inhabits eternity, whose name is Holy: “I dwell in the high and holy place, and also with him who is of a contrite and lowly spirit, to revive the spirit of the lowly, and to revive the heart of the contrite.”",
-              "Isaiah 57:15"
+            { dgettext("mp_opening", "For thus says the One who is high and lifted up, who inhabits eternity, whose name is Holy: “I dwell in the high and holy place, and also with him who is of a contrite and lowly spirit, to revive the spirit of the lowly, and to revive the heart of the contrite.”"),
+              dgettext("mp_opening", "Isaiah 57:15")
             },
-            { "The hour is coming, and is now here, when the true worshipers will worship the Father in spirit and truth, for the Father is seeking such people to worship him.",
-              "John 4:23"
+            { dgettext("mp_opening", "The hour is coming, and is now here, when the true worshipers will worship the Father in spirit and truth, for the Father is seeking such people to worship him."),
+              dgettext("mp_opening", "John 4:23")
             },
-            { "Grace to you and peace from God our Father and the Lord Jesus Christ.",
-              "Philippians 1:2"
+            { dgettext("mp_opening", "Grace to you and peace from God our Father and the Lord Jesus Christ."),
+              dgettext("mp_opening", "Philippians 1:2")
             }
           ]
       },
       "ep_opening" =>
         %{  "advent" => [{
-              "Therefore stay awake – for you do not know when the master of the
+              dgettext( "ep_opening", """
+                Therefore stay awake – for you do not know when the master of the
               house will come, in the evening, or at midnight, or when the cock
-              crows, or in the morning – lest he come suddenly and find you asleep.",
-              "Mark 13:35-36"
+              crows, or in the morning – lest he come suddenly and find you asleep.
+              """),
+              dgettext( "ep_opening", "Mark 13:35-36")
             }],
 
             "christmas" => [{
-              "Behold, the dwelling place of God is with man. He will dwell with
+              dgettext( "ep_opening", """
+                Behold, the dwelling place of God is with man. He will dwell with
               them, and they will be his people, and God himself will be with them
-              as their God.",
-              "Revelation 21:3"
+              as their God.
+              """),
+              dgettext( "ep_opening", "Revelation 21:3")
             }],
             "epiphany" => [{
-              "Nations shall come to your light, and kings to the brightness of your rising.",
-              "Isaiah 60:3"
+              dgettext( "ep_opening", "Nations shall come to your light, and kings to the brightness of your rising."),
+              dgettext( "ep_opening", "Isaiah 60:3")
             }],
             "lent" => [{
-              "If we say we have no sin, we deceive ourselves, and the truth is not in
+              dgettext( "ep_opening", """
+                If we say we have no sin, we deceive ourselves, and the truth is not in
                  us. If we confess our sins, he is faithful and just to forgive us our sins
-                 and to cleanse us from all unrighteousness.",
-              "1 John 1:8-9"
+                 and to cleanse us from all unrighteousness.
+                 """),
+              dgettext( "ep_opening", "1 John 1:8-9")
               },
-              { "For I know my transgressions, and my sin is ever before me.",
-                "Psalm 51:3"
+              {( dgettext "ep_opening", "For I know my transgressions, and my sin is ever before me."),
+                dgettext( "ep_opening", "Psalm 51:3")
               },
-              { "To the Lord our God belong mercy and forgiveness, for we have against him.",
-                "Daniel 9:9"
+              {( dgettext "ep_opening", "To the Lord our God belong mercy and forgiveness, for we have against him."),
+                dgettext( "ep_opening", "Daniel 9:9")
               }],
             "goodFriday" => [{
-                "All we like sheep have gone astray; we have turned every one to his
-                own way; and the Lord has laid on him the iniquity of us all.",
-                "Isaiah 53:6"
+                dgettext( "ep_opening", """
+                  All we like sheep have gone astray; we have turned every one to his
+                own way; and the Lord has laid on him the iniquity of us all.
+                """),
+                dgettext( "ep_opening", "Isaiah 53:6")
               }],
             "easter" => [{
-                "Thanks be to God, who gives us the victory through our Lord Jesus Christ.",
-                "1 Corinthians 15:57"
+                dgettext( "ep_opening", "Thanks be to God, who gives us the victory through our Lord Jesus Christ."),
+                dgettext( "ep_opening", "1 Corinthians 15:57")
                 },
                 {
-                  "If then you have been raised with Christ, seek the things that are
-                  above, where Christ is, seated at the right hand of God.",
-                  "Colossians 3:1"
+                  dgettext( "ep_opening", """
+                    If then you have been raised with Christ, seek the things that are
+                  above, where Christ is, seated at the right hand of God.
+                  """),
+                  dgettext( "ep_opening", "Colossians 3:1")
                 }],
             "ascension" => [{
-                  "For Christ has entered, not into holy places made with hands, which
+                  dgettext( "ep_opening", """
+                    For Christ has entered, not into holy places made with hands, which
                   are copies of the true things, but into heaven itself, now to appear in
-                  the presence of God on our behalf.",
-                  "Hebrews 9:24"
+                  the presence of God on our behalf.
+                  """),
+                  dgettext( "ep_opening", "Hebrews 9:24")
                 }],
             "pentecost" => [{
-                  "The Spirit and the Bride say, “Come.” And let the one who hears say,
+                  dgettext( "ep_opening", """
+                    The Spirit and the Bride say, “Come.” And let the one who hears say,
                   “Come.” And let the one who is thirsty come; let the one who desires
-                  take the water of life without price.",
-                  "Revelation 22:17"
+                  take the water of life without price.
+                  """),
+                  dgettext( "ep_opening", "Revelation 22:17")
                 },
                 {
-                  "There is a river whose streams make glad the city of God, the holy
-                  habitation of the Most High.",
-                  "Psalm 46:4"
+                  dgettext( "ep_opening", """
+                    There is a river whose streams make glad the city of God, the holy
+                  habitation of the Most High.
+                  """),
+                  dgettext( "ep_opening", "Psalm 46:4")
                 }],
             "trinity" => [{
-                "Holy, holy, holy, is the Lord God of Hosts; the whole earth is full of his glory!",
-                "Isaiah 6:3"
+                dgettext( "ep_opening", "Holy, holy, holy, is the Lord God of Hosts; the whole earth is full of his glory!"),
+                dgettext( "ep_opening", "Isaiah 6:3")
                 }],
             "thanksgiving" => [{
-                "The Lord by wisdom founded the earth; by understanding he
+                dgettext( "ep_opening", """
+                  The Lord by wisdom founded the earth; by understanding he
                   established the heavens; by his knowledge the deeps broke open, and
-                  the clouds drop down the dew.",
-                 "Proverbs 3:19-20"
+                  the clouds drop down the dew.
+                  """),
+                 dgettext( "ep_opening", "Proverbs 3:19-20")
                 }],
             "proper" => [{
-                "The Lord is in his holy temple; let all the earth keep silence before him.",
-                "Habakkuk 2:20"
+                dgettext( "ep_opening", "The Lord is in his holy temple; let all the earth keep silence before him."),
+                dgettext( "ep_opening", "Habakkuk 2:20")
               },
               {
-                "O Lord, I love the habitation of your house and the place where your glory dwells.",
-                "Psalm 46:8"
+                dgettext( "ep_opening", "O Lord, I love the habitation of your house and the place where your glory dwells."),
+                dgettext( "ep_opening", "Psalm 26:8")
               },
               {
-                "Let my prayer be counted as incense before you, and the lifting up of
-                my hands as the evening sacrifice!",
-                "Psalm 141:2"
+                dgettext( "ep_opening", """
+                  Let my prayer be counted as incense before you, and the lifting up of
+                my hands as the evening sacrifice!
+                """),
+                dgettext( "ep_opening", "Psalm 141:2")
               },
               {
-                "Worship the Lord in the splendor of holiness; tremble before him, all the earth!",
-                "Psalm 96:9"
+                dgettext( "ep_opening", "Worship the Lord in the splendor of holiness; tremble before him, all the earth!"),
+                dgettext( "ep_opening", "Psalm 96:9")
               },
               {
-                "Let the words of my mouth and the meditation of my heart be
-                acceptable in your sight, O Lord, my rock and my redeemer.",
-                "Psalm 19:14"
+                dgettext( "ep_opening", """
+                  Let the words of my mouth and the meditation of my heart be
+                acceptable in your sight, O Lord, my rock and my redeemer.
+                """),
+                dgettext( "ep_opening", "Psalm 19:14")
               }]
         },
       "advent" =>

@@ -68,8 +68,9 @@ msgstr "孩子啊，你要稱為至高者的先知；"
 
 #: web/templates/prayer/_benedictus.html.eex:19
 msgid "all the days of our life."
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_benedictus.html.eex:27
 msgid "and to guide our feet into the way of peace."
 msgstr "把我們的腳引到和平的路上。"

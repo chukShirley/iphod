@@ -124,17 +124,14 @@ view model =
           [ td 
               [class "tdStyle", style [("width", "16%")] ]
               [ ul [textStyle model] ( thisReading model MP1)]
-              -- [ ul [textStyle model] ( thisReading model.mp1 model.config.mp1 model.config.fnotes ) ]
           , td
               [class "tdStyle", style [("width", "16%")] ]
               [ ul [textStyle model] ( thisReading model MP2)]
-              -- [ ul [textStyle model] ( thisReading model.mp2 model.config.mp2 model.config.fnotes ) ]
           , td
               [class "tdStyle", style [("width", "16%")] ]
               [ ul [textStyle model] ( thisReading model MPP)]
-              -- [ ul [textStyle model] ( thisReading model.mpp model.config.mpp model.config.fnotes ) ]
           ] -- end of row
-      ] -- end of table
+    ] -- end of table
     , div [] (thisText model model.mp1)
     , div [] (thisText model model.mp2)
     , div [] (thisText model model.mpp)

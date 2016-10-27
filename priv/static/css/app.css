@@ -5936,10 +5936,11 @@ h3 {
 }
 
 .vs {
-  text-indent: 0;
-  font-size: 1em;
-  margin: 0;
-  padding: 0;
+//  text-indent: 0;
+//  font-size: 1em;
+//  margin: 0;
+//  padding: 0;
+  display: none;
 }
 
 .vs_indent {

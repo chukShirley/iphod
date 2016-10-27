@@ -26,10 +26,6 @@ msgstr ""
 msgid "Especially suitable for use during Lent"
 msgstr ""
 
-#: web/templates/prayer/_quaerite_dominum.html.eex:18
-msgid "For as rain and snow fall form the heavens"
-msgstr ""
-
 #: web/templates/prayer/_quaerite_dominum.html.eex:15
 msgid "For as the heavens are higher than the earth,"
 msgstr ""
@@ -112,4 +108,8 @@ msgstr ""
 
 #: web/templates/prayer/_quaerite_dominum.html.eex:28
 msgid "without end. Amen."
+msgstr ""
+
+#: web/templates/prayer/_quaerite_dominum.html.eex:18
+msgid "For as rain and snow fall from the heavens"
 msgstr ""

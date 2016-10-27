@@ -69,3 +69,5 @@ deploy
 .DS_Store
 priv/static/printable/
 priv/static/printables/
+ecce_deus.mo
+*.mo

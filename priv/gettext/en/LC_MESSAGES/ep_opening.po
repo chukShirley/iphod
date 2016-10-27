@@ -1,0 +1,163 @@
+## `msgid`s in this file come from POT (.pot) files.
+##
+## Do not add, change, or remove `msgid`s manually here as
+## they're tied to the ones in the corresponding POT file
+## (with the same domain).
+##
+## Use `mix gettext.extract --merge` or `mix gettext.merge`
+## to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: en\n"
+
+#: lib/daily_office.ex:383
+msgid "  All we like sheep have gone astray; we have turned every one to his\nown way; and the Lord has laid on him the iniquity of us all.\n"
+msgstr ""
+
+#: lib/daily_office.ex:357
+msgid "  Behold, the dwelling place of God is with man. He will dwell with\nthem, and they will be his people, and God himself will be with them\nas their God.\n"
+msgstr ""
+
+#: lib/daily_office.ex:401
+msgid "  For Christ has entered, not into holy places made with hands, which\nare copies of the true things, but into heaven itself, now to appear in\nthe presence of God on our behalf.\n"
+msgstr ""
+
+#: lib/daily_office.ex:394
+msgid "  If then you have been raised with Christ, seek the things that are\nabove, where Christ is, seated at the right hand of God.\n"
+msgstr ""
+
+#: lib/daily_office.ex:444
+msgid "  Let my prayer be counted as incense before you, and the lifting up of\nmy hands as the evening sacrifice!\n"
+msgstr ""
+
+#: lib/daily_office.ex:455
+msgid "  Let the words of my mouth and the meditation of my heart be\nacceptable in your sight, O Lord, my rock and my redeemer.\n"
+msgstr ""
+
+#: lib/daily_office.ex:409
+msgid "  The Spirit and the Bride say, “Come.” And let the one who hears say,\n“Come.” And let the one who is thirsty come; let the one who desires\ntake the water of life without price.\n"
+msgstr ""
+
+#: lib/daily_office.ex:417
+msgid "  There is a river whose streams make glad the city of God, the holy\nhabitation of the Most High.\n"
+msgstr ""
+
+#: lib/daily_office.ex:348
+msgid "  Therefore stay awake – for you do not know when the master of the\nhouse will come, in the evening, or at midnight, or when the cock\ncrows, or in the morning – lest he come suddenly and find you asleep.\n"
+msgstr ""
+
+#: lib/daily_office.ex:391
+msgid "1 Corinthians 15:57"
+msgstr ""
+
+#: lib/daily_office.ex:374
+msgid "1 John 1:8-9"
+msgstr ""
+
+#: lib/daily_office.ex:398
+msgid "Colossians 3:1"
+msgstr ""
+
+#: lib/daily_office.ex:380
+msgid "Daniel 9:9"
+msgstr ""
+
+#: lib/daily_office.ex:376
+msgid "For I know my transgressions, and my sin is ever before me."
+msgstr ""
+
+#: lib/daily_office.ex:437
+msgid "Habakkuk 2:20"
+msgstr ""
+
+#: lib/daily_office.ex:406
+msgid "Hebrews 9:24"
+msgstr ""
+
+#: lib/daily_office.ex:424
+msgid "Holy, holy, holy, is the Lord God of Hosts; the whole earth is full of his glory!"
+msgstr ""
+
+#: lib/daily_office.ex:369
+msgid "If we say we have no sin, we deceive ourselves, and the truth is not in\nus. If we confess our sins, he is faithful and just to forgive us our sins\nand to cleanse us from all unrighteousness.\n"
+msgstr ""
+
+#: lib/daily_office.ex:387
+msgid "Isaiah 53:6"
+msgstr ""
+
+#: lib/daily_office.ex:366
+msgid "Isaiah 60:3"
+msgstr ""
+
+#: lib/daily_office.ex:425
+msgid "Isaiah 6:3"
+msgstr ""
+
+#: lib/daily_office.ex:353
+msgid "Mark 13:35-36"
+msgstr ""
+
+#: lib/daily_office.ex:365
+msgid "Nations shall come to your light, and kings to the brightness of your rising."
+msgstr ""
+
+#: lib/daily_office.ex:440
+msgid "O Lord, I love the habitation of your house and the place where your glory dwells."
+msgstr ""
+
+#: lib/daily_office.ex:433
+msgid "Proverbs 3:19-20"
+msgstr ""
+
+#: lib/daily_office.ex:448
+msgid "Psalm 141:2"
+msgstr ""
+
+#: lib/daily_office.ex:459
+msgid "Psalm 19:14"
+msgstr ""
+
+#: lib/daily_office.ex:421
+msgid "Psalm 46:4"
+msgstr ""
+
+#: lib/daily_office.ex:377
+msgid "Psalm 51:3"
+msgstr ""
+
+#: lib/daily_office.ex:452
+msgid "Psalm 96:9"
+msgstr ""
+
+#: lib/daily_office.ex:362
+msgid "Revelation 21:3"
+msgstr ""
+
+#: lib/daily_office.ex:414
+msgid "Revelation 22:17"
+msgstr ""
+
+#: lib/daily_office.ex:390
+msgid "Thanks be to God, who gives us the victory through our Lord Jesus Christ."
+msgstr ""
+
+#: lib/daily_office.ex:428
+msgid "The Lord by wisdom founded the earth; by understanding he\nestablished the heavens; by his knowledge the deeps broke open, and\nthe clouds drop down the dew.\n"
+msgstr ""
+
+#: lib/daily_office.ex:436
+msgid "The Lord is in his holy temple; let all the earth keep silence before him."
+msgstr ""
+
+#: lib/daily_office.ex:379
+msgid "To the Lord our God belong mercy and forgiveness, for we have against him."
+msgstr ""
+
+#: lib/daily_office.ex:451
+msgid "Worship the Lord in the splendor of holiness; tremble before him, all the earth!"
+msgstr ""
+
+#: lib/daily_office.ex:441
+msgid "Psalm 26:8"
+msgstr ""

@@ -16,8 +16,9 @@ msgstr "全能永生的上帝，惟祢能行神蹟奇事；現今求主施恩，
 
 #: web/templates/prayer/_mp_for_mission.html.eex:2
 msgid "Collect for Mission"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_mp_for_mission.html.eex:19
 msgid "Lord Jesus Christ, you stretched out your arms of love on the hard\nwood of the cross that everyone might come within the reach of your\nsaving embrace: So clothe us in your Spirit that we, reaching forth \nour hands in love, may bring those who do not know you to the\nknowledge and love of you; for the honor of your Name. Amen.\n"
 msgstr "主耶穌基督在十字架上，張開袮慈愛的膀臂，拯救世人進入祢的懷抱。求聖\n靈澆灌我們，教我們伸出慈愛的手，帶領人認識祢，經歷祢的愛，榮耀祢的\n聖名。阿們。\n"

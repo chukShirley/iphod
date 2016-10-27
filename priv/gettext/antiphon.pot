@@ -1,0 +1,64 @@
+## This file is a PO Template file.
+##
+## `msgid`s here are often extracted from source code.
+## Add new translations manually only if they're dynamic
+## translations that can't be statically extracted.
+##
+## Run `mix gettext.extract` to bring this file up to
+## date. Leave `msgstr`s empty as changing them here as no
+## effect: edit them in PO (`.po`) files instead.
+msgid ""
+msgstr ""
+"Language: INSERT LANGUAGE HERE\n"
+
+#: lib/daily_office.ex:253
+msgid "Alleluia, to us a child is born: O come, let us adore him. Alleluia."
+msgstr ""
+
+#: lib/daily_office.ex:271
+msgid "Alleluia. Christ the Lord has ascended into heaven: O come, let us adore him. Alleluia."
+msgstr ""
+
+#: lib/daily_office.ex:261 lib/daily_office.ex:263
+msgid "Alleluia. The Lord is risen indeed: O come, let us adore him. Alleluia."
+msgstr ""
+
+#: lib/daily_office.ex:273
+msgid "Alleluia. The Spirit of the Lord renews the face of the earth: O come, let us adore him. Alleluia."
+msgstr ""
+
+#: lib/daily_office.ex:275
+msgid "Father, Son and Holy Spirit, one God: O come, let us adore him."
+msgstr ""
+
+#: lib/daily_office.ex:251
+msgid "Our King and Savior now draws near: O come, let us adore him."
+msgstr ""
+
+#: lib/daily_office.ex:255
+msgid "The Lord has shown forth his glory: O come, let us adore him."
+msgstr ""
+
+#: lib/daily_office.ex:257 lib/daily_office.ex:259
+msgid "The Lord is full of compassion and mercy: O come, let us adore him."
+msgstr ""
+
+#: lib/daily_office.ex:279
+msgid "The Lord is glorious in his saints: O come, let us adore him."
+msgstr ""
+
+#: lib/daily_office.ex:277
+msgid "The Word was made flesh and dwelt among us: O come, let us adore him."
+msgstr ""
+
+#: lib/daily_office.ex:265
+msgid "The earth is the Lord's for he made it: O Come let us adore him."
+msgstr ""
+
+#: lib/daily_office.ex:267
+msgid "The mercy of the Lord is everlasting: O Come let us adore him."
+msgstr ""
+
+#: lib/daily_office.ex:266 lib/daily_office.ex:268
+msgid "Worship the Lord in the beauty of holiness: O Come let us adore him."
+msgstr ""

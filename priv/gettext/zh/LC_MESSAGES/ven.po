@@ -28,8 +28,9 @@ msgstr "我們要來感謝祂，"
 
 #: web/templates/prayer/_venite.html.eex:17
 msgid "Let us kneel before the Lord, our Maker!"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_venite.html.eex:10
 msgid "Let us make a joyful noise to him with songs of praise!"
 msgstr "用詩歌向祂歡呼！"
@@ -40,8 +41,9 @@ msgstr "向拯救我們的磐石歡呼！"
 
 #: web/templates/prayer/_venite.html.eex:3
 msgid "O Come"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_venite.html.eex:7
 msgid "O come, let us sing to the Lord;"
 msgstr "來啊，我們要向耶和華歌唱，"
@@ -68,12 +70,14 @@ msgstr "都來頌"
 
 #: web/templates/prayer/_venite.html.eex:15
 msgid "and his hands formed the dry land."
-msgstr " " # part of " The sea is his..."
+msgstr " "
 
+# part of " The sea is his..."
 #: web/templates/prayer/_venite.html.eex:19
 msgid "and the sheep of his hand."
-msgstr " " # part of "For he is our God..."
+msgstr " "
 
+# part of "For he is our God..."
 #: web/templates/prayer/_venite.html.eex:13
 msgid "the heights of the mountains are his also."
-msgstr " " # part of "In his hand are...""
+msgstr " "

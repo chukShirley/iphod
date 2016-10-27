@@ -106,7 +106,13 @@ view model =
   div
   []
   [ table [class "readings_table", tableStyle model]
-      [ caption [titleStyle model, onClick ToggleModelShow] [text (String.join " " ["Evening Prayer:", model.date])] 
+      [ caption 
+        [titleStyle model]
+        [ span [onClick ToggleModelShow] [text (String.join " " ["Evening Prayer:", model.date])] 
+        , br [] []
+        , button
+          [ class "button", onClick ToggleCollect] [text "Collect"]
+        ]
       , tr
           [ class "rowStyle" ]
           [ th [] [ text "Evening 1"]
@@ -118,15 +124,12 @@ view model =
           [ td 
               [class "tdStyle", style [("width", "16%")] ]
               [ ul [textStyle model] ( thisReading model EP1)]
-              -- [ ul [textStyle model] ( thisReading model.ep1 model.config.ep1 model.config.fnotes ) ]
           , td
               [class "tdStyle", style [("width", "16%")] ]
               [ ul [textStyle model] ( thisReading model EP2)]
-              -- [ ul [textStyle model] ( thisReading model.ep2 model.config.ep2 model.config.fnotes ) ]
           , td
               [class "tdStyle", style [("width", "16%")] ]
               [ ul [textStyle model] ( thisReading model EPP)]
-              -- [ ul [textStyle model] ( thisReading model.epp model.config.epp model.config.fnotes ) ]
           ] -- end of row
       ] -- end of table
     , div [] (thisText model model.ep1)
@@ -153,7 +156,7 @@ thisCollect sundayCollect =
         [ class "collect_hide"
         , onClick ToggleCollect
         ] 
-        [text "hide"]
+        [text "collect"]
     , p
         [class "collect_title"]
         [ text sundayCollect.title ]

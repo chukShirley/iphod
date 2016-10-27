@@ -1,0 +1,72 @@
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: zh\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+
+#: lib/daily_office.ex:253
+msgid "Alleluia, to us a child is born: O come, let us adore him. Alleluia."
+msgstr "哈利路亞，有一嬰孩為我們而生 / 來吧，我們要崇拜祂。哈利路亞。"
+
+#: lib/daily_office.ex:271
+msgid "Alleluia. Christ the Lord has ascended into heaven: O come, let us adore him. Alleluia."
+msgstr "哈利路亞。主基督已經升天 / 來吧，我們要崇拜祂。哈利路亞。"
+
+#: lib/daily_office.ex:261 lib/daily_office.ex:263
+msgid "Alleluia. The Lord is risen indeed: O come, let us adore him. Alleluia."
+msgstr "哈利路亞。主已經復活 / 來吧，我們要崇拜祂。哈利路亞。"
+
+#: lib/daily_office.ex:273
+msgid "Alleluia. The Spirit of the Lord renews the face of the earth: O come, let us adore him. Alleluia."
+msgstr "哈利路亞。主的靈更新大地 / 來吧，我們要崇拜祂。哈利路亞。"
+
+#: lib/daily_office.ex:275
+msgid "Father, Son and Holy Spirit, one God: O come, let us adore him."
+msgstr "聖父、聖子、聖靈同為一上帝 / 來吧，我們要崇拜祂。"
+
+#: lib/daily_office.ex:251
+msgid "Our King and Savior now draws near: O come, let us adore him."
+msgstr "我們的君王和救主現已臨近 / 來吧，我們要崇拜祂。"
+
+#: lib/daily_office.ex:255
+msgid "The Lord has shown forth his glory: O come, let us adore him."
+msgstr "上主已顯出祂的榮耀 / 來吧，我們要崇拜祂。"
+
+#: lib/daily_office.ex:257 lib/daily_office.ex:259
+msgid "The Lord is full of compassion and mercy: O come, let us adore him."
+msgstr "上主有豐盛的慈愛和憐憫 / 來吧，我們要崇拜祂。"
+
+#: lib/daily_office.ex:279
+msgid "The Lord is glorious in his saints: O come, let us adore him."
+msgstr "上主因祂的聖徒得榮耀 / 來吧，我們要崇拜祂。"
+
+#: lib/daily_office.ex:277
+msgid "The Word was made flesh and dwelt among us: O come, let us adore him."
+msgstr "道成了肉身住在我們中間 / 來吧，我們要崇拜祂。"
+
+#: lib/daily_office.ex:265
+msgid "The earth is the Lord's for he made it: O Come let us adore him."
+msgstr ""
+
+#: lib/daily_office.ex:267
+msgid "The mercy of the Lord is everlasting: O Come let us adore him."
+msgstr "上主有豐盛的慈愛和憐憫 / 來吧，我們要崇拜祂。"
+
+#: lib/daily_office.ex:266 lib/daily_office.ex:268
+msgid "Worship the Lord in the beauty of holiness: O Come let us adore him."
+msgstr ""

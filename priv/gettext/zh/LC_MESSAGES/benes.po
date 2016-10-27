@@ -12,8 +12,9 @@ msgstr ""
 
 #: web/templates/prayer/_benedictis_es_domine.html.eex:3
 msgid "A Song of Praise"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_benedictis_es_domine.html.eex:2
 msgid "Benedictus es, Domine"
 msgstr "我主頌"

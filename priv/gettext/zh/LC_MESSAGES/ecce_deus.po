@@ -1,0 +1,104 @@
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
+msgid ""
+msgstr ""
+"Language: zh\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+
+#: web/templates/prayer/_ecce_deus.html.eex:13
+msgid "And on that day you shall say,"
+msgstr "那日你必说，"
+
+#: web/templates/prayer/_ecce_deus.html.eex:19
+msgid "Cry aloud, inhabitants of Zion, ring out your joy,"
+msgstr "哭出声来，居民的锡安，圈出你的快乐，"
+
+#: web/templates/prayer/_ecce_deus.html.eex:3
+msgid "Ecce, Deus"
+msgstr ""
+
+#: web/templates/prayer/_ecce_deus.html.eex:9
+msgid "For the Lord is my stronghold and my sure defense,"
+msgstr "因为耶和华是我的高台，我肯定有效的防御，"
+
+#: web/templates/prayer/_ecce_deus.html.eex:14
+msgid "Give thanks to the Lord and call upon his Name;"
+msgstr "你 們 要 稱 謝 耶 和 華 、 求 告 他 的 名 、 在 萬 民 中 傳 揚 他 的 作 為"
+
+#: web/templates/prayer/_ecce_deus.html.eex:21
+msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
+msgstr "荣耀的父亲，和儿子和圣灵;"
+
+#: web/templates/prayer/_ecce_deus.html.eex:8
+msgid "I will trust in him and not be afraid."
+msgstr "我会信任他并不害怕。"
+
+#: web/templates/prayer/_ecce_deus.html.eex:6
+msgid "Isaiah 12:2-6"
+msgstr "哀1:12"
+
+#: web/templates/prayer/_ecce_deus.html.eex:15
+msgid "Make his deeds known among the peoples;"
+msgstr "使他的事迹流传的人民;"
+
+#: web/templates/prayer/_ecce_deus.html.eex:17
+msgid "Sing the praises of the Lord, for he has done great things,"
+msgstr "歌颂耶和华，因为他曾做伟大的事情，"
+
+#: web/templates/prayer/_ecce_deus.html.eex:1
+msgid "Suitable for use at any time"
+msgstr "适用"
+
+#: web/templates/prayer/_ecce_deus.html.eex:4
+msgid "Surely, it is God who saves me"
+msgstr "诚然，这是拯救我的神"
+
+#: web/templates/prayer/_ecce_deus.html.eex:7
+msgid "Surely, it is God who saves me;"
+msgstr "诚然，这是拯救我; 神"
+
+#: web/templates/prayer/_ecce_deus.html.eex:11
+msgid "Therefore you shall draw water with rejoicing"
+msgstr "因此，你应取水欢欢喜喜"
+
+#: web/templates/prayer/_ecce_deus.html.eex:10
+msgid "and he will be my Savior."
+msgstr "而他将我的救主。"
+
+#: web/templates/prayer/_ecce_deus.html.eex:18
+msgid "and this is known in all the world."
+msgstr "和这就所谓的在世界上所有。"
+
+#: web/templates/prayer/_ecce_deus.html.eex:22
+msgid "as it was in the beginning, is now, and ever shall be,"
+msgstr "因为它是在开始的时候，现在，和永不"
+
+#: web/templates/prayer/_ecce_deus.html.eex:20
+msgid "for the great one in the midst of you is the Holy One of Israel."
+msgstr "为了伟大的一个，你是以色列的圣者。"
+
+#: web/templates/prayer/_ecce_deus.html.eex:12
+msgid "from the springs of salvation."
+msgstr "救恩的泉源。"
+
+#: web/templates/prayer/_ecce_deus.html.eex:16
+msgid "see that they remember that his Name is exalted."
+msgstr "看他们记住了他的名已被尊崇。"
+
+#: web/templates/prayer/_ecce_deus.html.eex:23
+msgid "world without end. Amen."
+msgstr "没有尽头的世界。阿门。"

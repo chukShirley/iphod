@@ -28,8 +28,9 @@ msgstr "聖哉，聖哉，聖哉，天地萬軍的主，"
 
 #: web/templates/prayer/_te_deum.html.eex:40
 msgid "In you, Lord, is our hope,"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_te_deum.html.eex:36
 msgid "Keep us today, Lord, from all sin;"
 msgstr "求主保佑我們，今天不犯罪；"
@@ -72,8 +73,9 @@ msgstr "天和天使，並天上一切掌權者，"
 
 #: web/templates/prayer/_te_deum.html.eex:3
 msgid "We Praise You, O God"
-msgstr " " # intionally blank
+msgstr " "
 
+# intionally blank
 #: web/templates/prayer/_te_deum.html.eex:27
 msgid "We believe that you will come to be our judge."
 msgstr "我們信主必再降臨，施行審判。"
@@ -132,8 +134,9 @@ msgstr "主的榮耀威嚴充滿天地。"
 
 #: web/templates/prayer/_te_deum.html.eex:41
 msgid "let us never be put to shame."
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/_te_deum.html.eex:8
 msgid "the Father everlasting."
 msgstr "無始無終的父。"

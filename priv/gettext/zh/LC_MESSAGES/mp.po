@@ -12,8 +12,9 @@ msgstr ""
 
 #: web/templates/prayer/mp.html.eex:52
 msgid "A citation giving chapter and verse may be added."
-msgstr " " # part of After each lesson
+msgstr " "
 
+# part of After each lesson
 #: web/templates/prayer/mp.html.eex:53
 msgid "After each Lesson the Reader may say"
 msgstr "讀畢時說"
@@ -24,9 +25,9 @@ msgstr "眾⽴立。"
 
 #: web/templates/prayer/mp.html.eex:4
 msgid "Approved for Provincial Use"
-msgstr " " # intentionally blank
+msgstr " "
 
-
+# intentionally blank
 #: web/templates/prayer/mp.html.eex:40
 msgid "At the end of the Psalms is sung or said"
 msgstr "主禮或司禱與會眾起⽴立啓應當⽇日選定的詩篇。讀畢即啓應榮耀頌"
@@ -53,28 +54,32 @@ msgstr "會眾皆坐。讀經員宣讀指定⼀一或多段經課。讀經前說
 
 #: web/templates/prayer/mp.html.eex:15
 msgid "Opening Sentences of Scripture"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/mp.html.eex:57
 msgid "Or the Reader may say"
 msgstr "讀經員或說"
 
 #: web/templates/prayer/mp.html.eex:6
 msgid "Petertide, A.D. 2013"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/mp.html.eex:5
 msgid "The Anglican Church in North America"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/mp.html.eex:93
 msgid "The Collect of the Day"
 msgstr "當日祝文"
 
 #: web/templates/prayer/mp.html.eex:49
 msgid "The First Lesson from"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/mp.html.eex:26
 msgid "The Invitatory"
 msgstr "宣 召"
@@ -105,8 +110,9 @@ msgstr "詩 篇"
 
 #: web/templates/prayer/mp.html.eex:66
 msgid "The Second Lesson from"
-msgstr " " # intentionally blank
+msgstr " "
 
+# intentionally blank
 #: web/templates/prayer/mp.html.eex:61
 msgid "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."
 msgstr "每段經課後唱或讀以下聖頌。主禮或司禱也可選⽤用其他獲准使⽤用的聖頌或⼀一⾸首合適讚美的聖詩。"
@@ -137,4 +143,4 @@ msgstr "或"
 
 #: web/templates/prayer/mp.html.eex:44
 msgid "world without end. Amen."
-msgstr " " # included in as it was...
+msgstr " "

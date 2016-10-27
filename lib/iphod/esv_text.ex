@@ -7,7 +7,11 @@ defmodule EsvText do
   def request(vss, fnotes \\ "fnotes") do
    case  HTTPoison.get(esv_url(vss, fnotes)) do
       {:ok, resp} ->
-        resp.body
+        if Regex.match?(~r/^ERROR/, resp.body) do
+          LocalText.request("web", vss)
+        else
+          resp.body
+        end
       {:error, _reason} ->
         "ESV text Failed badly"
     end
