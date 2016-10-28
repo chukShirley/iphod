@@ -10,9 +10,13 @@ defmodule LocalText do
 
   def passage(ver, book, chapter) do
     query = from Bible, where: [trans: ^ver, book: ^book, chapter: ^chapter]
-    resp = Repo.one(query)
-    resp.vss
+    respond_with Repo.one(query), ver, book, chapter
+    # resp.vss
   end
+
+  def respond_with(nil, "web", book, chapter), do: "ERROR: Could not find passage #{book} #{chapter}"
+  def respond_with(nil, ver, book, chapter), do: passage("web", book, chapter)
+  def respond_with(resp, _ver, _book, _chapter), do: resp.vss
 
   def passage(ver, book, chapter, from, to) do
     {vss, _} =passage(ver, book, chapter) 

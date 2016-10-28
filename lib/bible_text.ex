@@ -13,6 +13,11 @@ defmodule BibleText do
       }], ver)
   end
 
+  def lesson(list, ver \\ "ESV") do
+    lesson_with_body(list, ver)
+      |> Enum.reduce([], &(&2 ++ [&1.body]))
+  end
+
   def lesson_with_body(list), do: lesson_with_body(list, "ESV")
   
   def lesson_with_body(list, "ESV") do

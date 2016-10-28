@@ -51,10 +51,10 @@ defmodule BibleVersions do
       %{"lang_name_eng" =>"Amharic", "name" => "Haile Selassie Amharic Bible", "abbreviation" => "hsab", "source" => "getbible.net"},
       %{"lang_name_eng" =>"Arabic", "name" => "Smith and Van Dyke", "abbreviation" => "arabicsv", "source" => "getbible.net"},
       %{"lang_name_eng" =>"Bulgarian", "name" => "Bulgarian Bible (1940)", "abbreviation" => "bulgarian1940", "source" => "getbible.net"},
-      %{"lang_name_eng" =>"Chinese", "name" => "NCV Traditional", "abbreviation" => "cnt", "source" => "getbible.net"},
-      %{"lang_name_eng" =>"Chinese", "name" => "Union Simplified", "abbreviation" => "cus", "source" => "getbible.net"},
-      %{"lang_name_eng" =>"Chinese", "name" => "NCV Simplified", "abbreviation" => "cns", "source" => "getbible.net"},
-      %{"lang_name_eng" =>"Chinese", "name" => "Union Traditional", "abbreviation" => "cut", "source" => "getbible.net"},
+      # %{"lang_name_eng" =>"Chinese", "name" => "NCV Traditional", "abbreviation" => "cnt", "source" => "getbible.net"},
+      # %{"lang_name_eng" =>"Chinese", "name" => "Union Simplified", "abbreviation" => "cus", "source" => "getbible.net"},
+      # %{"lang_name_eng" =>"Chinese", "name" => "NCV Simplified", "abbreviation" => "cns", "source" => "getbible.net"},
+      # %{"lang_name_eng" =>"Chinese", "name" => "Union Traditional", "abbreviation" => "cut", "source" => "getbible.net"},
       %{"lang_name_eng" =>"Croatian", "name" => "Croatian", "abbreviation" => "croatia", "source" => "getbible.net"},
       %{"lang_name_eng" =>"Danish", "name" => "Danish", "abbreviation" => "danish", "source" => "getbible.net"},
       %{"lang_name_eng" =>"Dutch", "name" => "Dutch Staten Vertaling", "abbreviation" => "statenvertaling", "source" => "getbible.net"},
@@ -93,6 +93,8 @@ defmodule BibleVersions do
   defp local_bible_translations do
     [ %{"lang_name_eng" =>"English", "name" => "World English Bible", "abbreviation" => "web", "source" => "local"},
       %{"lang_name_eng" =>"Latin", "name" => "Latin: Vulgata Clementina", "abbreviation" => "vulgate", "source" => "local"},
+      %{"lang_name_eng" =>"Chinese", "name" => "Chinese Union Simplified", "abbreviation" => "cu89s", "source" => "local"},
+      %{"lang_name_eng" =>"Chinese", "name" => "Chinese Union Traditional", "abbreviation" => "cu89t", "source" => "local"},
       %{"lang_name_eng" =>"English", "name" => "Coverdale", "abbreviation" => "Coverdale", "source" => "Coverdale"},
       %{"lang_name_eng" =>"English", "name" => "BCP", "abbreviation" => "BCP", "source" => "BCP"},
     ]
