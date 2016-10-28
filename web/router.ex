@@ -30,6 +30,10 @@ defmodule Iphod.Router do
     get "/mp", PrayerController, :mp
     get "/mp/:psalm", PrayerController, :mp
     get "/mp/:psalm/:text", PrayerController, :mp
+    get "/mp_cutrad", PrayerController, :mp_cutrad
+    get "/晨禱傳統", PrayerController, :mp_cutrad
+    get "/mp_cusimp", PrayerController, :mp_cusimp
+    get "/晨禱簡化", PrayerController, :mp_cusimp
     get "/morningPrayer", PrayerController, :mp
     get "/morningPrayer/:psalm", PrayerController, :mp
     get "/morningPrayer/:psalm/:text", PrayerController, :mp
@@ -40,6 +44,10 @@ defmodule Iphod.Router do
     get "/eveningPrayer/:psalm", PrayerController, :ep
     get "/eveningPrayer/:psalm/:text", PrayerController, :ep
     get "/ep", PrayerController, :ep
+    get "/ep_cutrad", PrayerController, :ep_cutrad
+    get "/晚報傳統祈禱", PrayerController, :ep_cutrad
+    get "/ep_cutsimp", PrayerController, :ep_cusimp
+    get "/晚祷简化", PrayerController, :ep_cusimp
     get "/ep/:psalm", PrayerController, :ep
     get "/ep/:psalm/:text", PrayerController, :ep
     get "/printables", PrintableController, :index

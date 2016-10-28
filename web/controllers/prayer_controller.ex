@@ -21,6 +21,17 @@ defmodule Iphod.PrayerController do
       |> render( "ep.html", model: prayer_model("ep", psalm, text))
   end
 
+  def mp_cusimp(conn, _params), do: xlate conn, "mp", "cu89s"
+  def mp_cutrad(conn, _params), do: xlate conn, "mp", "cu89t"
+  def ep_cusimp(conn, _params), do: xlate conn, "ep", "cu89s"
+  def ep_cutrad(conn, _params), do: xlate conn, "ep", "cu89t"
+    
+  def xlate(conn, mpep, ver) do
+        conn
+      |> put_layout("app.html")
+      |> render( "#{mpep}.html", model: prayer_model(mpep, ver, ver))    
+  end
+
   def readmp(conn, params) do
     {psalm, text} = translations(params)
     conn
