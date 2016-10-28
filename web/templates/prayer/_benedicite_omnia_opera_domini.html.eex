@@ -5,52 +5,52 @@
 </p>
 <p class= "rubric_black"><%= dgettext "bood", "Song of the Three Young Men, 35-65"%></p>
 <p class= "italic" style="text-align: center;"><%= dgettext "bood", " Invocation"%></p>
-<p class= "vs"><%= dgettext "bood", "Glorify the Lord, all you works of the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him for ever."%></p>
-<p class= "vs"><%= dgettext "bood", "In the firmament of his power, glorify the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him for ever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Glorify the Lord, all you works of the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him for ever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "In the firmament of his power, glorify the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him for ever."%></p>
 <p class= "italic" style="text-align: center;"><%= dgettext "bood", "I The Cosmic Order"%></p>
-<p class= "vs"><%= dgettext "bood", "Glorify the Lord, you angels and all powers of the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "O heavens and all waters above the heavens."%></p>
-<p class= "vs"><%= dgettext "bood", "Sun and moon and stars of the sky, glorify the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him for ever."%></p>
-<p class= "vs"><%= dgettext "bood", "Glorify the Lord, every shower of rain and fall of dew,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "all winds and fire and heat,"%></p>
-<p class= "vs"><%= dgettext "bood", "Winter and summer, glorify the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him for ever."%></p>
-<p class= "vs"><%= dgettext "bood", "Glorify the Lord, O chill and cold,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "drops of dew and flakes of snow."%></p>
-<p class= "vs"><%= dgettext "bood", "Frost and cold, ice and sleet, glorify the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him for ever."%></p>
-<p class= "vs"><%= dgettext "bood", "Glorify the Lord, of nights and days,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "O shining light and enfolding dark."%></p>
-<p class= "vs"><%= dgettext "bood", "Storm clouds and thunderbolts, glorify the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him for ever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Glorify the Lord, you angels and all powers of the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "O heavens and all waters above the heavens."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Sun and moon and stars of the sky, glorify the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him for ever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Glorify the Lord, every shower of rain and fall of dew,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "all winds and fire and heat,"%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Winter and summer, glorify the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him for ever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Glorify the Lord, O chill and cold,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "drops of dew and flakes of snow."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Frost and cold, ice and sleet, glorify the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him for ever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Glorify the Lord, of nights and days,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "O shining light and enfolding dark."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Storm clouds and thunderbolts, glorify the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him for ever."%></p>
 <p class= "italic" style="text-align: center;"><%= dgettext "bood", "II The Earth and its Creatures"%></p>
-<p class= "vs"><%= dgettext "bood", "Let the earth glorify the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
-<p class= "vs"><%= dgettext "bood", "Glorify the Lord, O mountains and hills,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "and all that grows upon the earth,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
-<p class= "vs"><%= dgettext "bood", "Glorify the Lord, O springs of water, seas, and streams,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "O whales and all that move in the waters."%></p>
-<p class= "vs"><%= dgettext "bood", "All birds of the air, glorify the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
-<p class= "vs"><%= dgettext "bood", "Glorify the Lord, O beasts of the wild,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "and all you flocks and herds."%></p>
-<p class= "vs"><%= dgettext "bood", "O men and women everywhere, glorify the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Let the earth glorify the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Glorify the Lord, O mountains and hills,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "and all that grows upon the earth,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Glorify the Lord, O springs of water, seas, and streams,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "O whales and all that move in the waters."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "All birds of the air, glorify the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Glorify the Lord, O beasts of the wild,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "and all you flocks and herds."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "O men and women everywhere, glorify the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
 <p class= "italic" style="text-align: center;"><%= dgettext "bood", "III The People of God"%></p>
-<p class= "vs"><%= dgettext "bood", "Let the people of God glorify the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
-<p class= "vs"><%= dgettext "bood", "Glorify the Lord, O priests and servants of the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
-<p class= "vs"><%= dgettext "bood", "Glorify the Lord, O spirits and souls of the righteous,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
-<p class= "vs"><%= dgettext "bood", "You that are holy and humble of heart, glorify the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Let the people of God glorify the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Glorify the Lord, O priests and servants of the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Glorify the Lord, O spirits and souls of the righteous,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "You that are holy and humble of heart, glorify the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
 <p class= "italic" style="text-align: center;"><%= dgettext "bood", "Doxology"%></p>
-<p class= "vs"><%= dgettext "bood", "Let us glorify the Lord: the Father, the Son and the Holy Spirit;"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
-<p class= "vs"><%= dgettext "bood", "In the firmament of his power, glorify the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "Let us glorify the Lord: the Father, the Son and the Holy Spirit;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>
+<p class= "pb_vs"><%= dgettext "bood", "In the firmament of his power, glorify the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "bood", "praise him and highly exalt him forever."%></p>

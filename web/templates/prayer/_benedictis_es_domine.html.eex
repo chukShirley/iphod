@@ -3,15 +3,15 @@
   <span class= "canticle_name"><%= dgettext "benes", "A Song of Praise"%></span>
 </p>
 <p class= "rubric_black"><%= dgettext "benes", "Song of the Three Young Men, 29-34<"%>/p>
-<p class= "vs"><%= dgettext "benes", "Glory to you, Lord God of our fathers;"%></p>
-<p class= "vs_indent"><%= dgettext "benes", "you are worthy of praise; glory to you."%></p>
-<p class= "vs"><%= dgettext "benes", "Glory to you for the radiance of your holy Name;"%></p>
-<p class= "vs_indent"><%= dgettext "benes", "we will praise you and highly exalt you for ever."%></p>
-<p class= "vs"><%= dgettext "benes", "Glory to you in the splendor of your temple;"%></p>
-<p class= "vs_indent"><%= dgettext "benes", "on the throne of your majesty, glory to you."%></p>
-<p class= "vs"><%= dgettext "benes", "Glory to you, seated between the Cherubim;"%></p>
-<p class= "vs_indent"><%= dgettext "benes", "we will praise you and highly exalt you for ever."%></p>
-<p class= "vs"><%= dgettext "benes", "Glory to you, beholding the depths;"%></p>
-<p class= "vs_indent"><%= dgettext "benes", "in the high vault of heaven, glory to you."%></p>
-<p class= "vs"><%= dgettext "benes", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
-<p class= "vs_indent"><%= dgettext "benes", "we will praise you and highly exalt you for ever."%></p>
+<p class= "pb_vs"><%= dgettext "benes", "Glory to you, Lord God of our fathers;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "benes", "you are worthy of praise; glory to you."%></p>
+<p class= "pb_vs"><%= dgettext "benes", "Glory to you for the radiance of your holy Name;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "benes", "we will praise you and highly exalt you for ever."%></p>
+<p class= "pb_vs"><%= dgettext "benes", "Glory to you in the splendor of your temple;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "benes", "on the throne of your majesty, glory to you."%></p>
+<p class= "pb_vs"><%= dgettext "benes", "Glory to you, seated between the Cherubim;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "benes", "we will praise you and highly exalt you for ever."%></p>
+<p class= "pb_vs"><%= dgettext "benes", "Glory to you, beholding the depths;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "benes", "in the high vault of heaven, glory to you."%></p>
+<p class= "pb_vs"><%= dgettext "benes", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "benes", "we will praise you and highly exalt you for ever."%></p>

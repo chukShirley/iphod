@@ -8,21 +8,21 @@
   <p class= "alt_confession rubric"><%= dgettext "conf", "or this"%></p>
   <p class= "alt_confession default"><%= dgettext "conf", "Let us humbly confess our sins to Almighty God."%></p>
   <p class= "alt_confession rubric"><%= dgettext "conf", "Silence is kept. All kneeling the Officiant and People say"%></p>
-  <p class= "alt_confession vs"><%= dgettext "conf", "Almighty and most merciful Father,"%></p>
-  <p class= "alt_confession vs"><%= dgettext "conf", "we have erred and strayed from your ways like lost sheep."%></p>
-  <p class= "alt_confession vs"><%= dgettext "conf", "we have followed too much the deceits and desires of our"%></p>
-  <p class= "alt_confession vs_indent"><%= dgettext "conf", "own hearts."%></p>
-  <p class= "alt_confession vs"><%= dgettext "conf", "we have offended against your holy laws."%></p>
-  <p class= "alt_confession vs"><%= dgettext "conf", "we have left undone those things which we ought to have done"%></p>
-  <p class= "alt_confession vs"><%= dgettext "conf", "and we have done those things which we ought not to have done;"%></p>
-  <p class= "alt_confession vs"><%= dgettext "conf", "and apart from your grace, there is no health in us."%></p>
-  <p class= "alt_confession vs"><%= dgettext "conf", "O Lord, have mercy upon us."%></p>
-  <p class= "alt_confession vs"><%= dgettext "conf", "Spare those who confess their faults."%></p>
-  <p class= "alt_confession vs"><%= dgettext "conf", "Restore those who are penitent, according to your promises declared"%></p>
-  <p class= "alt_confession vsIndent"><%= dgettext "conf", "to all people in Christ Jesus our Lord;"%></p>
-  <p class= "alt_confession vs"><%= dgettext "conf", "And grant, O most merciful Father, for his sake,"%></p>
-  <p class= "alt_confession vs_indent"><%= dgettext "conf", "that we may now live a godly, righteous, and sober life,"%></p>
-  <p class= "alt_confession vs_indent"><%= dgettext "conf", "to the glory of your holy Name. Amen."%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "conf", "Almighty and most merciful Father,"%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "conf", "we have erred and strayed from your ways like lost sheep."%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "conf", "we have followed too much the deceits and desires of our"%></p>
+  <p class= "alt_confession pb_vs_indent"><%= dgettext "conf", "own hearts."%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "conf", "we have offended against your holy laws."%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "conf", "we have left undone those things which we ought to have done"%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "conf", "and we have done those things which we ought not to have done;"%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "conf", "and apart from your grace, there is no health in us."%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "conf", "O Lord, have mercy upon us."%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "conf", "Spare those who confess their faults."%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "conf", "Restore those who are penitent, according to your promises declared"%></p>
+  <p class= "alt_confession pb_vsIndent"><%= dgettext "conf", "to all people in Christ Jesus our Lord;"%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "conf", "And grant, O most merciful Father, for his sake,"%></p>
+  <p class= "alt_confession pb_vs_indent"><%= dgettext "conf", "that we may now live a godly, righteous, and sober life,"%></p>
+  <p class= "alt_confession pb_vs_indent"><%= dgettext "conf", "to the glory of your holy Name. Amen."%></p>
   </br>
   <p class= "rubric"><%= dgettext "conf", "The Priest alone stands and says"%></p>
 

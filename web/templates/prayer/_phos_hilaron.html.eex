@@ -2,12 +2,12 @@
   <span class= "canticle_title"><%= dgettext "phos", "Phos hilaron"%></span>
   <span class= "canticle_name"><%= dgettext "phos", "O Gladsome Light"%></span>
 </p>
-<p class= "vs"><%= dgettext "phos", "O gladsome light,"%></p>
-<p class= "vs"><%= dgettext "phos", "pure brightness of the ever-living Father in heaven,"%></p>
-<p class= "vs"><%= dgettext "phos", "O Jesus Christ, holy and blessed!"%></p>
-<p class= "vs"><%= dgettext "phos", "Now as we come to the setting of the sun,"%></p>
-<p class= "vs"><%= dgettext "phos", "and our eyes behold the vesper light,"%></p>
-<p class= "vs"><%= dgettext "phos", "we sing praises to God: the Father, the Son, and the Holy Spirit."%></p>
-<p class= "vs"><%= dgettext "phos", "You are worthy at all times to be praised by happy voices,"%></p>
-<p class= "vs"><%= dgettext "phos", "O Son of God, O Giver of Life,"%></p>
-<p class= "vs"><%= dgettext "phos", "and to be glorified through all the worlds."%></p>
+<p class= "pb_vs"><%= dgettext "phos", "O gladsome light,"%></p>
+<p class= "pb_vs"><%= dgettext "phos", "pure brightness of the ever-living Father in heaven,"%></p>
+<p class= "pb_vs"><%= dgettext "phos", "O Jesus Christ, holy and blessed!"%></p>
+<p class= "pb_vs"><%= dgettext "phos", "Now as we come to the setting of the sun,"%></p>
+<p class= "pb_vs"><%= dgettext "phos", "and our eyes behold the vesper light,"%></p>
+<p class= "pb_vs"><%= dgettext "phos", "we sing praises to God: the Father, the Son, and the Holy Spirit."%></p>
+<p class= "pb_vs"><%= dgettext "phos", "You are worthy at all times to be praised by happy voices,"%></p>
+<p class= "pb_vs"><%= dgettext "phos", "O Son of God, O Giver of Life,"%></p>
+<p class= "pb_vs"><%= dgettext "phos", "and to be glorified through all the worlds."%></p>

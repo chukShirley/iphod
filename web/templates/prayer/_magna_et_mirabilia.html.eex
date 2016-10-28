@@ -5,16 +5,16 @@
 </p>
  
 <p class= "black_rubric"><%= dgettext "magna", "Revelation 15:3-4"%></p>
-<p class= "vs"><%= dgettext "magna", "O ruler of the universe, Lord God,"%></p>
-<p class= "vs_indent"><%= dgettext "magna", "great deeds are they that you have done,"%></p>
-<p class= "vs_indent"><%= dgettext "magna", "surpassing human understanding."%></p>
-<p class= "vs"><%= dgettext "magna", "Your ways are ways of righteousness and truth,"%></p>
-<p class= "vs_indent"><%= dgettext "magna", "O King of all the ages."%></p>
-<p class= "vs"><%= dgettext "magna", "Who can fail to do you homage, Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "magna", "and sing the praises of your Name?"%></p>
-<p class= "vs_indent"><%= dgettext "magna", "for you only are the Holy One."%></p>
-<p class= "vs"><%= dgettext "magna", "All nations will draw near and fall down before you,"%></p>
-<p class= "vs_indent"><%= dgettext "magna", "because your just and holy works have been revealed."%></p>
-<p class= "vs"><%= dgettext "magna", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
-<p class= "vs_indent"><%= dgettext "magna", "as it was in the beginning, is now, and ever shall be, world"%></p>
-<p class= "vs_indent"><%= dgettext "magna", "without end. Amen."%></p>
+<p class= "pb_vs"><%= dgettext "magna", "O ruler of the universe, Lord God,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "magna", "great deeds are they that you have done,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "magna", "surpassing human understanding."%></p>
+<p class= "pb_vs"><%= dgettext "magna", "Your ways are ways of righteousness and truth,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "magna", "O King of all the ages."%></p>
+<p class= "pb_vs"><%= dgettext "magna", "Who can fail to do you homage, Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "magna", "and sing the praises of your Name?"%></p>
+<p class= "pb_vs_indent"><%= dgettext "magna", "for you only are the Holy One."%></p>
+<p class= "pb_vs"><%= dgettext "magna", "All nations will draw near and fall down before you,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "magna", "because your just and holy works have been revealed."%></p>
+<p class= "pb_vs"><%= dgettext "magna", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "magna", "as it was in the beginning, is now, and ever shall be, world"%></p>
+<p class= "pb_vs_indent"><%= dgettext "magna", "without end. Amen."%></p>

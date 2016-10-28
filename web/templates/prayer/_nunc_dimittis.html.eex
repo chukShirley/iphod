@@ -3,12 +3,12 @@
   <span class= "canticle_name"><%= dgettext "nunc", "The Song of Simeon"%></span>
 </p>
 <p class= "rubricBlack"><%= dgettext "nunc", "Luke 2:29-32"%></p>
-<p class= "vs"><%= dgettext "nunc", "Lord, now let your servant depart in peace,"%></p>
-<p class= "vsIndent"><%= dgettext "nunc", "according to your word."%></p>
-<p class= "vs"><%= dgettext "nunc", "For my eyes have seen your salvation,"%></p>
-<p class= "vsIndent"><%= dgettext "nunc", "which you have prepared before the face of all people;"%></p>
-<p class= "vs"><%= dgettext "nunc", "to be a light to lighten the Gentiles,"%></p>
-<p class= "vsIndent"><%= dgettext "nunc", "and to be the glory of your people Israel."%></p>
-<p class= "vs"><%= dgettext "nunc", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
-<p class= "vsIndent"><%= dgettext "nunc", "as it was in the beginning, is now, and ever shall be, world"%></p>
-<p class= "vsIndent"><%= dgettext "nunc", "without end. Amen."%></p>
+<p class= "pb_vs"><%= dgettext "nunc", "Lord, now let your servant depart in peace,"%></p>
+<p class= "pb_vsIndent"><%= dgettext "nunc", "according to your word."%></p>
+<p class= "pb_vs"><%= dgettext "nunc", "For my eyes have seen your salvation,"%></p>
+<p class= "pb_vsIndent"><%= dgettext "nunc", "which you have prepared before the face of all people;"%></p>
+<p class= "pb_vs"><%= dgettext "nunc", "to be a light to lighten the Gentiles,"%></p>
+<p class= "pb_vsIndent"><%= dgettext "nunc", "and to be the glory of your people Israel."%></p>
+<p class= "pb_vs"><%= dgettext "nunc", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
+<p class= "pb_vsIndent"><%= dgettext "nunc", "as it was in the beginning, is now, and ever shall be, world"%></p>
+<p class= "pb_vsIndent"><%= dgettext "nunc", "without end. Amen."%></p>

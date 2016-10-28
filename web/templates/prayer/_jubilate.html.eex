@@ -4,15 +4,15 @@
 </p>
 <p class= "rubric_black"><%= dgettext "jub", "Psalm 100"%></p>
 </br>
-<p class= "vs"><%= dgettext "jub", "Be joyful in the Lord, all you lands;"%></p>
-<p class= "vs_indent"><%= dgettext "jub", "serve the Lord with gladness"%></p>
-<p class= "vs_indent"><%= dgettext "jub", "and come before his presence with a song."%></p>
-<p class= "vs"><%= dgettext "jub", "Know this: the Lord himself is God;"%></p>
-<p class= "vs_indent"><%= dgettext "jub", "he himself has made us, and we are his;"%></p>
-<p class= "vs_indent"><%= dgettext "jub", "we are his people and the sheep of his pasture."%></p>
-<p class= "vs"><%= dgettext "jub", "Enter his gates with thanksgiving;"%></p>
-<p class= "vs_indent"><%= dgettext "jub", "go into his courts with praise;"%></p>
-<p class= "vs_indent"><%= dgettext "jub", "give thanks to him and call upon his Name."%></p>
-<p class= "vs"><%= dgettext "jub", "For the Lord is good;"%></p>
-<p class= "vs_indent"><%= dgettext "jub", "his mercy is everlasting;"%></p>
-<p class= "vs_indent"><%= dgettext "jub", "and his faithfulness endures from age to age."%></p>
+<p class= "pb_vs"><%= dgettext "jub", "Be joyful in the Lord, all you lands;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "jub", "serve the Lord with gladness"%></p>
+<p class= "pb_vs_indent"><%= dgettext "jub", "and come before his presence with a song."%></p>
+<p class= "pb_vs"><%= dgettext "jub", "Know this: the Lord himself is God;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "jub", "he himself has made us, and we are his;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "jub", "we are his people and the sheep of his pasture."%></p>
+<p class= "pb_vs"><%= dgettext "jub", "Enter his gates with thanksgiving;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "jub", "go into his courts with praise;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "jub", "give thanks to him and call upon his Name."%></p>
+<p class= "pb_vs"><%= dgettext "jub", "For the Lord is good;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "jub", "his mercy is everlasting;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "jub", "and his faithfulness endures from age to age."%></p>

@@ -2,40 +2,40 @@
   <span class= "canticle_title"><%= dgettext "te_deum", "Te Deum Laudamus"%></span>
   <span class= "canticle_name"><%= dgettext "te_deum", "We Praise You, O God"%></span>
 </p>
-<p class= "vs"><%= dgettext "te_deum", "We praise you, O God,"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "we acclaim you as Lord;"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "all creation worships you,"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "the Father everlasting."%></p>
-<p class= "vs"><%= dgettext "te_deum", "To you all angels, all the powers of heaven,"%></p>
-<p class= "vs"><%= dgettext "te_deum", "The cherubim and seraphim, sing in endless praise:"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "Holy, Holy, Holy, Lord God of power and might,"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "heaven and earth are full of your glory."%></p>
-<p class= "vs"><%= dgettext "te_deum", "The glorious company of apostles praise you."%></p>
-<p class= "vs"><%= dgettext "te_deum", "The noble fellowship of prophets praise you."%></p>
-<p class= "vs"><%= dgettext "te_deum", "The white-robed army of martyrs praise you."%></p>
-<p class= "vs"><%= dgettext "te_deum", "Throughout the world the holy Church acclaims you:"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "Father, of majesty unbounded,"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "your true and only Son, worthy of all praise,"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "the Holy Spirit, advocate and guide."%></p>
-<p class= "vs"><%= dgettext "te_deum", "You, Christ, are the king of glory,"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "the eternal Son of the Father."%></p>
-<p class= "vs"><%= dgettext "te_deum", "When you took our flesh to set us free"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "you humbly chose the Virgin’s womb."%></p>
-<p class= "vs"><%= dgettext "te_deum", "You overcame the sting of death"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "and opened the kingdom of heaven to all believers."%></p>
-<p class= "vs"><%= dgettext "te_deum", "You are seated at God’s right hand in glory."%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "We believe that you will come to be our judge."%></p>
-<p class= "vs"><%= dgettext "te_deum", "Come then, Lord, and help your people,"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "bought with the price of your own blood,"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "and bring us with your saints"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "to glory everlasting."%></p>
-<p class= "vs"><%= dgettext "te_deum", "Save your people, Lord, and bless your inheritance;"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "govern and uphold them now and always."%></p>
-<p class= "vs"><%= dgettext "te_deum", "Day by day we bless you;"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "we praise your name forever."%></p>
-<p class= "vs"><%= dgettext "te_deum", "Keep us today, Lord, from all sin;"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "have mercy on us, Lord, have mercy."%></p>
-<p class= "vs"><%= dgettext "te_deum", "Lord, show us your love and mercy,"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "for we have put our trust in you."%></p>
-<p class= "vs"><%= dgettext "te_deum", "In you, Lord, is our hope,"%></p>
-<p class= "vs_indent"><%= dgettext "te_deum", "let us never be put to shame."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "We praise you, O God,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "we acclaim you as Lord;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "all creation worships you,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "the Father everlasting."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "To you all angels, all the powers of heaven,"%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "The cherubim and seraphim, sing in endless praise:"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "Holy, Holy, Holy, Lord God of power and might,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "heaven and earth are full of your glory."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "The glorious company of apostles praise you."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "The noble fellowship of prophets praise you."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "The white-robed army of martyrs praise you."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "Throughout the world the holy Church acclaims you:"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "Father, of majesty unbounded,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "your true and only Son, worthy of all praise,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "the Holy Spirit, advocate and guide."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "You, Christ, are the king of glory,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "the eternal Son of the Father."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "When you took our flesh to set us free"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "you humbly chose the Virgin’s womb."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "You overcame the sting of death"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "and opened the kingdom of heaven to all believers."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "You are seated at God’s right hand in glory."%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "We believe that you will come to be our judge."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "Come then, Lord, and help your people,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "bought with the price of your own blood,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "and bring us with your saints"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "to glory everlasting."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "Save your people, Lord, and bless your inheritance;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "govern and uphold them now and always."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "Day by day we bless you;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "we praise your name forever."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "Keep us today, Lord, from all sin;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "have mercy on us, Lord, have mercy."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "Lord, show us your love and mercy,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "for we have put our trust in you."%></p>
+<p class= "pb_vs"><%= dgettext "te_deum", "In you, Lord, is our hope,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "te_deum", "let us never be put to shame."%></p>

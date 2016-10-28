@@ -1,21 +1,21 @@
 <p class= "canticle">
   <span class= "canticle_title"><%= dgettext "gloria", "Gloria in Excelsis"%></span>
 </p>
-<p class= "vs"><%= dgettext "gloria", "Glory to God in the highest,"%></p>
-<p class= "vs_indent"><%= dgettext "gloria", "and peace to his people on earth."%></p>
-<p class= "vs"><%= dgettext "gloria", "Lord God, heavenly King,"%></p>
-<p class= "vs_indent"><%= dgettext "gloria", "almighty God and Father,"%></p>
-<p class= "vs_indent"><%= dgettext "gloria", "we worship you, we give you thanks,"%></p>
-<p class= "vs_indent"><%= dgettext "gloria", "we praise you for your glory."%></p>
-<p class= "vs"><%= dgettext "gloria", "Lord Jesus Christ, only Son of the Father,"%></p>
-<p class= "vs"><%= dgettext "gloria", "Lord God, Lamb of God,"%></p>
-<p class= "vs_indent"><%= dgettext "gloria", "you take away the sin of the world:"%></p>
-<p class= "vs_indent"><%= dgettext "gloria", "have mercy on us;"%></p>
-<p class= "vs_indent"><%= dgettext "gloria", "you are seated at the right hand of the Father:"%></p>
-<p class= "vs_indent"><%= dgettext "gloria", "receive our prayer."%></p>
-<p class= "vs"><%= dgettext "gloria", "For you alone are the Holy One,"%></p>
-<p class= "vs_indent"><%= dgettext "gloria", "you alone are the Lord,"%></p>
-<p class= "vs_indent"><%= dgettext "gloria", "you alone are the Most High,"%></p>
-<p class= "vs"><%= dgettext "gloria", "Jesus Christ,"%></p>
-<p class= "vs_indent"><%= dgettext "gloria", "with the Holy Spirit,"%></p>
-<p class= "vs_indent"><%= dgettext "gloria", "in the glory of God the Father. Amen."%></p>
+<p class= "pb_vs"><%= dgettext "gloria", "Glory to God in the highest,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "gloria", "and peace to his people on earth."%></p>
+<p class= "pb_vs"><%= dgettext "gloria", "Lord God, heavenly King,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "gloria", "almighty God and Father,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "gloria", "we worship you, we give you thanks,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "gloria", "we praise you for your glory."%></p>
+<p class= "pb_vs"><%= dgettext "gloria", "Lord Jesus Christ, only Son of the Father,"%></p>
+<p class= "pb_vs"><%= dgettext "gloria", "Lord God, Lamb of God,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "gloria", "you take away the sin of the world:"%></p>
+<p class= "pb_vs_indent"><%= dgettext "gloria", "have mercy on us;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "gloria", "you are seated at the right hand of the Father:"%></p>
+<p class= "pb_vs_indent"><%= dgettext "gloria", "receive our prayer."%></p>
+<p class= "pb_vs"><%= dgettext "gloria", "For you alone are the Holy One,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "gloria", "you alone are the Lord,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "gloria", "you alone are the Most High,"%></p>
+<p class= "pb_vs"><%= dgettext "gloria", "Jesus Christ,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "gloria", "with the Holy Spirit,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "gloria", "in the glory of God the Father. Amen."%></p>

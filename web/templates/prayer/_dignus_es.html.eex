@@ -3,16 +3,16 @@
   <span class= "canticle_title"><%= dgettext "dignus", "Dignus es"%></span>
   <span class= "canticle_name"><%= dgettext "dignus", "A Song to the Lamb"%></span>
 </p>
-<p class= "vs"><%= dgettext "dignus", "Revelation 4:11; 5:9-10, 13"%></p>
-<p class= "vs"><%= dgettext "dignus", "Splendor and honor and kingly power"%></p>
-<p class= "vs_indent"><%= dgettext "dignus", "are yours by right, O Lord our God,"%></p>
-<p class= "vs"><%= dgettext "dignus", "For you created everything that is,"%></p>
-<p class= "vs_indent"><%= dgettext "dignus", "and by your will they were created and have their being;"%></p>
-<p class= "vs"><%= dgettext "dignus", "And yours by right, O Lamb that was slain,"%></p>
-<p class= "vs_indent"><%= dgettext "dignus", "for with your blood you have redeemed for God,"%></p>
-<p class= "vs"><%= dgettext "dignus", "From every family, language, people and nation,"%></p>
-<p class= "vs_indent"><%= dgettext "dignus", "a kingdom of priests to serve our God."%></p>
-<p class= "vs"><%= dgettext "dignus", "And so, to him who sits upon the throne,"%></p>
-<p class= "vs_indent"><%= dgettext "dignus", "and to Christ the Lamb,"%></p>
-<p class= "vs"><%= dgettext "dignus", "Be worship and praise, dominion and splendor,"%></p>
-<p class= "vs_indent"><%= dgettext "dignus", "for ever and for evermore."%></p>
+<p class= "pb_vs"><%= dgettext "dignus", "Revelation 4:11; 5:9-10, 13"%></p>
+<p class= "pb_vs"><%= dgettext "dignus", "Splendor and honor and kingly power"%></p>
+<p class= "pb_vs_indent"><%= dgettext "dignus", "are yours by right, O Lord our God,"%></p>
+<p class= "pb_vs"><%= dgettext "dignus", "For you created everything that is,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "dignus", "and by your will they were created and have their being;"%></p>
+<p class= "pb_vs"><%= dgettext "dignus", "And yours by right, O Lamb that was slain,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "dignus", "for with your blood you have redeemed for God,"%></p>
+<p class= "pb_vs"><%= dgettext "dignus", "From every family, language, people and nation,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "dignus", "a kingdom of priests to serve our God."%></p>
+<p class= "pb_vs"><%= dgettext "dignus", "And so, to him who sits upon the throne,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "dignus", "and to Christ the Lamb,"%></p>
+<p class= "pb_vs"><%= dgettext "dignus", "Be worship and praise, dominion and splendor,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "dignus", "for ever and for evermore."%></p>

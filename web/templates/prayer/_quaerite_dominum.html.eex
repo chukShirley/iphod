@@ -4,25 +4,25 @@
   <span class= "canticle_name"><%= dgettext "quaer", "Seek the Lord while he wills to be found"%></span>
 </p>
 <p class= "rubric_black"><%= dgettext "quaer", "Isaiah 55:6-11"%></p>
-<p class= "vs"><%= dgettext "quaer", "Seek the Lord while he wills to be found;"%></p>
-<p class= "vs_indent"><%= dgettext "quaer", "call upon him when he draws near."%></p>
-<p class= "vs"><%= dgettext "quaer", "Let the wicked forsake their ways"%></p>
-<p class= "vs_indent"><%= dgettext "quaer", "and the evil ones their thoughts;"%></p>
-<p class= "vs"><%= dgettext "quaer", "And let them turn to the Lord, and he will have compassion,"%></p>
-<p class= "vs_indent"><%= dgettext "quaer", "and to our God, for he will richly pardon."%></p>
-<p class= "vs"><%= dgettext "quaer", "For my thoughts are not your thoughts,"%></p>
-<p class= "vs_indent"><%= dgettext "quaer", "nor your ways my ways, says the Lord."%></p>
-<p class= "vs"><%= dgettext "quaer", "For as the heavens are higher than the earth,"%></p>
-<p class= "vs_indent"><%= dgettext "quaer", "so are my ways higher than your ways,"%></p>
-<p class= "vs_indent"><%= dgettext "quaer", "and my thoughts than your thoughts."%></p>
-<p class= "vs"><%= dgettext "quaer", "For as rain and snow fall from the heavens"%></p>
-<p class= "vs_indent"><%= dgettext "quaer", "and return not again, but water the earth,"%></p>
-<p class= "vs"><%= dgettext "quaer", "Bringing forth life and giving growth,"%></p>
-<p class= "vs_indent"><%= dgettext "quaer", "seed for sowing and bread for eating,"%></p>
-<p class= "vs"><%= dgettext "quaer", "So is my word that goes forth from my mouth;"%></p>
-<p class= "vs_indent"><%= dgettext "quaer", "it will not return to me empty;"%></p>
-<p class= "vs"><%= dgettext "quaer", "But it will accomplish that which I have purposed,"%></p>
-<p class= "vs_indent"><%= dgettext "quaer", "and prosper in that for which I sent it."%></p>
-<p class= "vs"><%= dgettext "quaer", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
-<p class= "vs_indent"><%= dgettext "quaer", "as it was in the beginning, is now, and ever shall be, world"%></p>
-<p class= "vs_indent"><%= dgettext "quaer", "without end. Amen."%></p>
+<p class= "pb_vs"><%= dgettext "quaer", "Seek the Lord while he wills to be found;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "quaer", "call upon him when he draws near."%></p>
+<p class= "pb_vs"><%= dgettext "quaer", "Let the wicked forsake their ways"%></p>
+<p class= "pb_vs_indent"><%= dgettext "quaer", "and the evil ones their thoughts;"%></p>
+<p class= "pb_vs"><%= dgettext "quaer", "And let them turn to the Lord, and he will have compassion,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "quaer", "and to our God, for he will richly pardon."%></p>
+<p class= "pb_vs"><%= dgettext "quaer", "For my thoughts are not your thoughts,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "quaer", "nor your ways my ways, says the Lord."%></p>
+<p class= "pb_vs"><%= dgettext "quaer", "For as the heavens are higher than the earth,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "quaer", "so are my ways higher than your ways,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "quaer", "and my thoughts than your thoughts."%></p>
+<p class= "pb_vs"><%= dgettext "quaer", "For as rain and snow fall from the heavens"%></p>
+<p class= "pb_vs_indent"><%= dgettext "quaer", "and return not again, but water the earth,"%></p>
+<p class= "pb_vs"><%= dgettext "quaer", "Bringing forth life and giving growth,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "quaer", "seed for sowing and bread for eating,"%></p>
+<p class= "pb_vs"><%= dgettext "quaer", "So is my word that goes forth from my mouth;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "quaer", "it will not return to me empty;"%></p>
+<p class= "pb_vs"><%= dgettext "quaer", "But it will accomplish that which I have purposed,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "quaer", "and prosper in that for which I sent it."%></p>
+<p class= "pb_vs"><%= dgettext "quaer", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "quaer", "as it was in the beginning, is now, and ever shall be, world"%></p>
+<p class= "pb_vs_indent"><%= dgettext "quaer", "without end. Amen."%></p>

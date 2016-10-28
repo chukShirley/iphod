@@ -39,9 +39,9 @@
   <p class= "reading"><%= @model.mpp |> text_list_to_html %></p> 
   <p class= "rubric"><%= dgettext "mp", "At the end of the Psalms is sung or said"%></p>
 
-  <p class= "vs"><%= dgettext "mp", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
-  <p class= "vs_indent"><%= dgettext "mp", "as it was in the beginning, is now, and ever shall be,"%></p>
-  <p class= "vs_indent"><%= dgettext "mp", "world without end. Amen."%></p>
+  <p class= "pb_vs"><%= dgettext "mp", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
+  <p class= "pb_vs_indent"><%= dgettext "mp", "as it was in the beginning, is now, and ever shall be,"%></p>
+  <p class= "pb_vs_indent"><%= dgettext "mp", "world without end. Amen."%></p>
 
   </br>
   <p class= "section"><%= dgettext "mp", "The Lessons"%></p>
