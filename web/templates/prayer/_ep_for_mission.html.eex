@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "ep_mis", "Collect for Mission"%></p>
 <p><%=  [ dgettext( "ep_mis", """
     O God and Father of all, whom the whole heavens adore: Let the

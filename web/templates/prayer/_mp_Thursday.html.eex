@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "mp_thr", "A Collect for Guidance (Thursday)"%></p>
 <p class= "default"><%= dgettext "mp_thr", "Heavenly Father, in you we live and move and have our being: We
 humbly pray you so to guide and govern us by your Holy Spirit, that

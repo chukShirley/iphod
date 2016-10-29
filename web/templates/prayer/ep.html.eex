@@ -12,22 +12,22 @@
     """
     %>
   </p>
-  <p class= "section">Opening Sentences of Scripture</p>
-  </br>
+  <p class= "section"><%= dgettext "ep", "Opening Sentences of Scripture"%></p>
+  <br/>
   <p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
   <p class= "default">
     <%=@model.opening_sentence%>
-    </br>
-    <span class= "bible_ref"><%=@model.opening_sentence_ref%></span>
+    <br/>
+    <span class= "bible_ref"><%= Gettext.dgettext Iphod.Gettext, "ep_opening", @model.opening_sentence %></span>
   </p>
-  </br>
+  <br/>
   <%= render "_confession.html" %>
   <p class= "section"> <%= dgettext "ep", "The Invitatory"%></p>
   <p class= "rubric"><%= dgettext "ep", "All stand"%></p>
   <%= render "_invitatory.html" %>
   <p class= "rubric"><%= dgettext "ep", "The following or some other suitable hymn or Psalm may be sung or said"%></p>
   <%= render "_phos_hilaron.html" %>
-  </br>
+  <br/>
   <p class= "rubric"><%= dgettext "ep", "Then follows"%></p>
   <p class= "section"><%= dgettext "ep", "The Psalm or Psalms Appointed"%></p>
   <p class= "reading"><%= @model.epp |> text_list_to_html %></p> 
@@ -35,7 +35,7 @@
   <p class= "pb_vs"><%= dgettext "ep", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
   <p class= "pb_vs_indent"><%= dgettext "ep", "as it was in the beginning, is now, and ever shall be,"%></p>
   <p class= "pb_vs_indent"><%= dgettext "ep", "world without end. Amen."%></p>
-  </br>
+  <br/>
 
   <p class= "section"><%= dgettext "ep", "The Lessons"%></p>
   <p><%= dgettext "ep", "The First Lesson from"%></p>
@@ -44,45 +44,45 @@
   <p class= "rubric"><%= dgettext "ep", "A citation giving chapter and verse may be added."%></p>
   <p class= "rubric"><%= dgettext "ep", "After each Lesson the Reader may say"%></p>
   <%= render "_the_word_of_the_lord.html" %>
-  </br>
+  <br/>
 
   <p class= "rubric"><%= dgettext "ep", "Or the Reader may say"%></p>
   <p class= "versical"><%= dgettext "ep", "Here ends the Reading."%></p>
-  </br>
+  <br/>
 
   <p class= "rubric"><%= dgettext "ep", "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."%></p>
-  </br>
+  <br/>
   <%= render "_#{@model.ot_canticle}.html" %>
-  </br>
+  <br/>
 
   <p><%= dgettext "ep", "The Second Lesson from"%></p>
   <p class= "reading"> <%= @model.ep2 |> text_list_to_html %></p>
-  </br>
+  <br/>
   <%= render "_#{@model.nt_canticle}.html" %>
-  </br>
+  <br/>
   <p class= "rubric"><%= dgettext "ep", "If desired, a sermon on the Evening Lessons may be preached."%></p>
   <%= render "_apostles_creed.html" %>
-  </br>
+  <br/>
   <p class= "section"><%= dgettext "ep", "The Prayers"%></p>
   <p class= "rubric"><%= dgettext "ep", "The People kneel or stand."%></p>
   <%= render "_prayer_intro.html" %>
-  </br>
+  <br/>
   <%= render "_mercy3.html" %>
-  </br>
+  <br/>
   <p class= "rubric"><%= dgettext "ep", "Officiant and People"%></p>
   <%= render "_lords_prayer_trad.html" %>
   <p class= "rubric"><%= dgettext "ep", "or this"%></p>
   <%= render "_lords_prayer_modern.html" %>
-  </br>
+  <br/>
   <%= render "_prayers.html" %>
-  </br>
+  <br/>
   <p class= "section"><%= dgettext "ep", "The Collect of the Day"%></p>
   <p><%= @model.collect_of_week %></p>
   <%= render "_mp_#{@model.day}.html" %> <%# collect for this day %>
   <%= render "_ep_for_mission.html" %>
   <%= render "_general_thanksgiving.html" %>
   <%= render "_chrysostom.html" %>
-  </br>
+  <br/>
   <%= render "_eo_prayer.html" %>
   <%= render "_graces.html" %>
 

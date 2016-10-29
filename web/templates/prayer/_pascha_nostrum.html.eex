@@ -5,7 +5,7 @@
   <span class= "canticle_name"><%= dgettext "pascha", "Christ our Passover"%></span>
 </p>
 <p class= "rubric_black"><%= dgettext "pascha", "1 Corinthians 5:7-8; Romans 6:9-11; 1 Corinthians 15:20-22"%></p>
-</br>
+<br/>
 <p class= "pb_vs"><%= dgettext "pascha", "Alleluia. Christ our Passover has been sacrificed for us;"%></p>
 <p class= "pb_vs_indent"><%= dgettext "pascha", "therefore let us keep the feast,"%></p>
 <p class= "pb_vs"><%= dgettext "pascha", "Not with the old leaven, the leaven of malice and evil,"%></p>

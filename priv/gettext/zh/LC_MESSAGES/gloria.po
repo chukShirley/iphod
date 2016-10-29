@@ -1,87 +1,96 @@
-## `msgid`s in this file come from POT (.pot) files.
-##
-## Do not add, change, or remove `msgid`s manually here as
-## they're tied to the ones in the corresponding POT file
-## (with the same domain).
-##
-## Use `mix gettext.extract --merge` or `mix gettext.merge`
-## to merge POT files into PO files.
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
 msgid ""
 msgstr ""
 "Language: zh\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Paul Sutcliffe <frpaulas@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:16
 msgid "For you alone are the Holy One,"
-msgstr ""
+msgstr "因為惟有基督是聖"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:2
 msgid "Gloria in Excelsis"
-msgstr ""
+msgstr "榮耀主頌"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:4
 msgid "Glory to God in the highest,"
-msgstr ""
+msgstr "惟願在至高之處，榮耀歸於上帝，"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:19
 msgid "Jesus Christ,"
-msgstr ""
+msgstr "惟有耶穌基督和聖靈，"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:11
 msgid "Lord God, Lamb of God,"
-msgstr ""
+msgstr "主上帝，上帝的羔羊，"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:6
 msgid "Lord God, heavenly King,"
-msgstr ""
+msgstr "主上帝，天上的王，"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:10
 msgid "Lord Jesus Christ, only Son of the Father,"
-msgstr ""
+msgstr "主耶穌基督，聖父的獨生聖子，"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:7
 msgid "almighty God and Father,"
-msgstr ""
+msgstr "全能的上帝聖父，"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:5
 msgid "and peace to his people on earth."
-msgstr ""
+msgstr "在地上平安歸於祂的子民。"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:13
 msgid "have mercy on us;"
-msgstr ""
+msgstr "憐憫我們；"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:21
 msgid "in the glory of God the Father. Amen."
-msgstr ""
+msgstr "在上帝聖父榮耀裏，同為至上。阿們。"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:15
 msgid "receive our prayer."
-msgstr ""
+msgstr "應允我們的禱告。"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:9
 msgid "we praise you for your glory."
-msgstr ""
+msgstr "為祢的榮耀稱頌祢。"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:8
 msgid "we worship you, we give you thanks,"
-msgstr ""
+msgstr "我們敬拜祢，感謝祢，"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:20
 msgid "with the Holy Spirit,"
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:17
 msgid "you alone are the Lord,"
-msgstr ""
+msgstr "惟有基督是主，"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:18
 msgid "you alone are the Most High,"
-msgstr ""
+msgstr "你独自一人是至高"
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:14
 msgid "you are seated at the right hand of the Father:"
-msgstr ""
+msgstr "坐在聖父右邊的主："
 
 #: web/templates/prayer/_gloria_in_excelsis.html.eex:12
 msgid "you take away the sin of the world:"
-msgstr ""
+msgstr "除掉世人罪的主："

@@ -81,7 +81,7 @@
             <ul class= "day_options">
               <li class= "reading_group">
                 <button class= "reading_button" data-date= "<%=day.date%>" data-type= "Reflection">Reflection</button>
-                </br>
+                <br/>
               </li>
               <li class= "reading_group">
                 <button class= "reading_button" data-date= "<%=day.date%>" data-type= "MP">MP</button></li>

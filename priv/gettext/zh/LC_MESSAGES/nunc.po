@@ -1,59 +1,68 @@
-## `msgid`s in this file come from POT (.pot) files.
-##
-## Do not add, change, or remove `msgid`s manually here as
-## they're tied to the ones in the corresponding POT file
-## (with the same domain).
-##
-## Use `mix gettext.extract --merge` or `mix gettext.merge`
-## to merge POT files into PO files.
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
 msgid ""
 msgstr ""
 "Language: zh\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Paul Sutcliffe <frpaulas@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: web/templates/prayer/_nunc_dimittis.html.eex:8
 msgid "For my eyes have seen your salvation,"
-msgstr ""
+msgstr "因為我之眼目，已見主之救恩。"
 
 #: web/templates/prayer/_nunc_dimittis.html.eex:12
 msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
-msgstr ""
+msgstr "但願榮耀歸於聖父、聖子、聖靈；"
 
 #: web/templates/prayer/_nunc_dimittis.html.eex:6
 msgid "Lord, now let your servant depart in peace,"
-msgstr ""
+msgstr "主啊，如今可以依主之言，釋放僕人安然而去，"
 
 #: web/templates/prayer/_nunc_dimittis.html.eex:5
 msgid "Luke 2:29-32"
-msgstr ""
+msgstr "（路2:29-32）"
 
 #: web/templates/prayer/_nunc_dimittis.html.eex:2
 msgid "Nunc dimittis"
-msgstr ""
+msgstr "西面頌"
 
 #: web/templates/prayer/_nunc_dimittis.html.eex:3
 msgid "The Song of Simeon"
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_nunc_dimittis.html.eex:7
 msgid "according to your word."
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_nunc_dimittis.html.eex:11
 msgid "and to be the glory of your people Israel."
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_nunc_dimittis.html.eex:13
 msgid "as it was in the beginning, is now, and ever shall be, world"
-msgstr ""
+msgstr "始初如此，現今如此，以後也如此，永無窮盡。阿們。"
 
 #: web/templates/prayer/_nunc_dimittis.html.eex:10
 msgid "to be a light to lighten the Gentiles,"
-msgstr ""
+msgstr "乃照耀外邦人之光，並為主民以色列之榮耀。"
 
 #: web/templates/prayer/_nunc_dimittis.html.eex:9
 msgid "which you have prepared before the face of all people;"
-msgstr ""
+msgstr "即主於萬民之前所預備者，"
 
 #: web/templates/prayer/_nunc_dimittis.html.eex:14
 msgid "without end. Amen."
-msgstr ""
+msgstr " "

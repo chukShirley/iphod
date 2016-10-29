@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "ep_sat", "A Collect for the Eve of Worship (Saturday)"%></p>
 <p class= "default"><%= dgettext "ep_sat", "O God, the source of eternal light: Shed forth your unending day
 upon us who watch for you, that our lips may praise you, our lives

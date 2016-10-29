@@ -28,4 +28,4 @@
 <p class= "pb_vs"><%= dgettext "bene", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
 <p class= "pb_vs_indent"><%= dgettext "bene", "as it was in the beginning, is now, and ever shall be,"%></p>
 <p class= "pb_vs_indent"><%= dgettext "bene", "world without end. Amen."%></p>
-</br>
+<br/>

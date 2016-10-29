@@ -1,3 +1,3 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "mp_sun", "A Collect for Strength to Await Christ’s Return (Sunday)"%></p>
 <p class= "default"><%= dgettext "mp_sun", "O God our King, by the resurrection of your Son Jesus Christ on the first day of the week, you conquered sin, put death to flight, and gave us the hope of everlasting life: Redeem all our days by this victory; forgive our sins, banish our fears, make us bold to praise you and to do your will; and steel us to wait for the consummation of your kingdom on the last great Day; through the same Jesus Christ our Lord."%> <span class= "italic"> <%= gettext "Amen"%>.</span></p>

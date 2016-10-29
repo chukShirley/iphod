@@ -1,19 +1,31 @@
-## `msgid`s in this file come from POT (.pot) files.
-##
-## Do not add, change, or remove `msgid`s manually here as
-## they're tied to the ones in the corresponding POT file
-## (with the same domain).
-##
-## Use `mix gettext.extract --merge` or `mix gettext.merge`
-## to merge POT files into PO files.
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
 msgid ""
 msgstr ""
 "Language: zh\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Paul Sutcliffe <frpaulas@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: web/templates/prayer/_ep_Tuesday.html.eex:2
 msgid "A Collect for Aid against Perils (Tuesday)"
-msgstr ""
+msgstr "求恩助禱⽂文（星期⼆二）"
 
 #: web/templates/prayer/_ep_Tuesday.html.eex:3
-msgid "Lighten our darkness, we beseech you, O Lord; and by your great\nmercy defend us from all perils and dangers of this night; for the love\nof your only Son, our Savior Jesus Christ."
-msgstr ""
+msgid ""
+"Lighten our darkness, we beseech you, O Lord; and by your great\n"
+"mercy defend us from all perils and dangers of this night; for the love\n"
+"of your only Son, our Savior Jesus Christ."
+msgstr "主啊，求祢以祢的榮光，照耀我們的黑暗；又以祢的大慈悲，保護我們今夜<br/>不遇危險；此賴我主耶穌基督而求。阿們。"

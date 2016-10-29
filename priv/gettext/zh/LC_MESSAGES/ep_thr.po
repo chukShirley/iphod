@@ -1,19 +1,32 @@
-## `msgid`s in this file come from POT (.pot) files.
-##
-## Do not add, change, or remove `msgid`s manually here as
-## they're tied to the ones in the corresponding POT file
-## (with the same domain).
-##
-## Use `mix gettext.extract --merge` or `mix gettext.merge`
-## to merge POT files into PO files.
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
 msgid ""
 msgstr ""
 "Language: zh\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Paul Sutcliffe <frpaulas@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: web/templates/prayer/_ep_Thursday.html.eex:2
 msgid "A Collect for the Presence of Christ (Thursday)"
-msgstr ""
+msgstr "求基督同在禱⽂文（星期四）"
 
 #: web/templates/prayer/_ep_Thursday.html.eex:3
-msgid "Lord Jesus, stay with us, for evening is at hand and the day is past; be\nour companion in the way, kindle our hearts, and awaken hope, that\nwe may know you as you are revealed in Scripture and the breaking\nof bread. Grant this for the sake of your love."
-msgstr ""
+msgid ""
+"Lord Jesus, stay with us, for evening is at hand and the day is past; be\n"
+"our companion in the way, kindle our hearts, and awaken hope, that\n"
+"we may know you as you are revealed in Scripture and the breaking\n"
+"of bread. Grant this for the sake of your love."
+msgstr "主耶穌，現已夜幕低垂，請陪伴我們，與我們同行，燃亮我們的心，喚起我<br/>們的盼望，使我們從聖道及聖餐的啓示認識祢；因着祢愛的緣故應允我們。<br/>阿們。"

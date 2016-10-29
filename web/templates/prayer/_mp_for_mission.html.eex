@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "mp_miss", "Collect for Mission"%></p>
 <p><%=  [
       dgettext( "mp_miss", """

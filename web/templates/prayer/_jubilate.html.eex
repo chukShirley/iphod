@@ -3,7 +3,7 @@
   <span class= "canticle_name"><%= dgettext "jub", "Be Joyful"%></span>
 </p>
 <p class= "rubric_black"><%= dgettext "jub", "Psalm 100"%></p>
-</br>
+<br/>
 <p class= "pb_vs"><%= dgettext "jub", "Be joyful in the Lord, all you lands;"%></p>
 <p class= "pb_vs_indent"><%= dgettext "jub", "serve the Lord with gladness"%></p>
 <p class= "pb_vs_indent"><%= dgettext "jub", "and come before his presence with a song."%></p>

@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "gen_tks", "The General Thanksgiving"%></p>
 <p class= "rubric"><%= dgettext "gen_tks", "Officiant and People"%></p>
 <p class= "pb_vs"><%= dgettext "gen_tks", "Almighty God, Father of all mercies,"%></p>
@@ -19,4 +19,4 @@
 <p class= "pb_vs"><%= dgettext "gen_tks", "through Jesus Christ our Lord,"%></p>
 <p class= "pb_vs"><%= dgettext "gen_tks", "to whom, with you and the Holy Spirit,"%></p>
 <p class= "pb_vs"><%= dgettext "gen_tks", "be honor and glory throughout all ages. Amen."%></p>
-</br>
+<br/>

@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "mp_fri", "A Collect for Endurance (Friday)"%></p>
 <p class= "default"><%= dgettext "mp_fri", """
 Almighty God, whose most dear Son went not up to joy but first he

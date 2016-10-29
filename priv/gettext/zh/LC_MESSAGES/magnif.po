@@ -1,107 +1,116 @@
-## `msgid`s in this file come from POT (.pot) files.
-##
-## Do not add, change, or remove `msgid`s manually here as
-## they're tied to the ones in the corresponding POT file
-## (with the same domain).
-##
-## Use `mix gettext.extract --merge` or `mix gettext.merge`
-## to merge POT files into PO files.
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
 msgid ""
 msgstr ""
 "Language: zh\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Paul Sutcliffe <frpaulas@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: web/templates/prayer/_magnificat.html.eex:14
 msgid "And his mercy is on those who fear him,"
-msgstr ""
+msgstr "主憐憫敬畏主的人，至於世世代代。"
 
 #: web/templates/prayer/_magnificat.html.eex:10
 msgid "For behold, from now on,"
-msgstr ""
+msgstr "自今以後，萬代必稱我有福。"
 
 #: web/templates/prayer/_magnificat.html.eex:8
 msgid "For he has regarded"
-msgstr ""
+msgstr "因為主顧念主使女的卑微。"
 
 #: web/templates/prayer/_magnificat.html.eex:12
 msgid "For he that is mighty has magnified me,"
-msgstr ""
+msgstr "因有權能的主，為我已成大事，主的名為聖。"
 
 #: web/templates/prayer/_magnificat.html.eex:24
 msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
-msgstr ""
+msgstr "但願榮耀歸於聖父、聖子、聖靈，"
 
 #: web/templates/prayer/_magnificat.html.eex:18
 msgid "He has brought down the mighty from their thrones,"
-msgstr ""
+msgstr "主使有權者失位，使卑賤者升高。"
 
 #: web/templates/prayer/_magnificat.html.eex:20
 msgid "He has filled the hungry with good things,"
-msgstr ""
+msgstr "使饑餓者得飽美食，使富足者空空而返。"
 
 #: web/templates/prayer/_magnificat.html.eex:16
 msgid "He has shown the strength of his arm;"
-msgstr ""
+msgstr "主用其臂施展大能；"
 
 #: web/templates/prayer/_magnificat.html.eex:22
 msgid "He, remembering his mercy, has helped his servant Israel,"
-msgstr ""
+msgstr "主扶持主的僕人以色列，為要記念亞伯拉罕與其後裔，"
 
 #: web/templates/prayer/_magnificat.html.eex:5
 msgid "Luke 1:46-55"
-msgstr ""
+msgstr "（路1:46-55）"
 
 #: web/templates/prayer/_magnificat.html.eex:2
 msgid "Magnificat"
-msgstr ""
+msgstr "尊主頌"
 
 #: web/templates/prayer/_magnificat.html.eex:6
 msgid "My soul magnifies the Lord,"
-msgstr ""
+msgstr "我心尊主為大，我靈以上帝我的救主為樂。"
 
 #: web/templates/prayer/_magnificat.html.eex:3
 msgid "The Song of Mary"
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_magnificat.html.eex:11
 msgid "all generations will call me blessed."
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_magnificat.html.eex:19
 msgid "and has exalted the humble and meek."
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_magnificat.html.eex:13
 msgid "and holy is his Name."
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_magnificat.html.eex:7
 msgid "and my spirit rejoices in God my Savior."
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_magnificat.html.eex:21
 msgid "and the rich he has sent empty away."
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_magnificat.html.eex:23
 msgid "as he promised to our fathers, Abraham and his seed forever."
-msgstr ""
+msgstr "施憐憫直至世世代代，正如從前向我們列祖所出之言。"
 
 #: web/templates/prayer/_magnificat.html.eex:25
 msgid "as it was in the beginning, is now, and ever shall be,"
-msgstr ""
+msgstr "始初如此，現今如此，以後也如此，永無窮盡。阿們。"
 
 #: web/templates/prayer/_magnificat.html.eex:17
 msgid "he has scattered the proud in the imagination of their hearts."
-msgstr ""
+msgstr "狂傲的人心驕氣傲時，即被主驅散。"
 
 #: web/templates/prayer/_magnificat.html.eex:9
 msgid "the lowliness of his handmaiden."
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_magnificat.html.eex:15
 msgid "throughout all generations."
-msgstr ""
+msgstr " "
 
 #: web/templates/prayer/_magnificat.html.eex:26
 msgid "world without end. Amen."
-msgstr ""
+msgstr " "

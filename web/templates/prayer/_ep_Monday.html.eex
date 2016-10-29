@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "ep_mon", "A Collect for Peace (Monday)"%></p>
 <p class= "default"><%= dgettext "ep_mon", "O God, the source of all holy desires, all good counsels, and all just
 works: Give to your servants that peace which the world cannot give,

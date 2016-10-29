@@ -3,7 +3,7 @@
   <span class= "canticle_name"><%= dgettext "ven", "O Come"%></span>
 </p>
 <p class= "rubric_black"><%= dgettext "ven", "Psalm 95:1-7; 8-11"%></p>
-</br>
+<br/>
 <p class= "pb_vs"><%= dgettext "ven", "O come, let us sing to the Lord;"%></p>
 <p class= "pb_vs"><%= dgettext "ven", "Let us make a joyful noise to the rock of our salvation!"%></p>
 <p class= "pb_vs"><%= dgettext "ven", "Let us come into his presence with thanksgiving;"%></p>

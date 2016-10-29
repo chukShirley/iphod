@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "ep_tue", "A Collect for Aid against Perils (Tuesday)"%></p>
 <p class= "default"><%= dgettext "ep_tue", "Lighten our darkness, we beseech you, O Lord; and by your great
 mercy defend us from all perils and dangers of this night; for the love

@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "ep_fri", "A Collect for Faith (Friday)"%></p>
 <p class= "default"><%= dgettext "ep_fri", "Lord Jesus Christ, by your death you took away the sting of death:
 Grant to us your servants so to follow in faith where you have led the

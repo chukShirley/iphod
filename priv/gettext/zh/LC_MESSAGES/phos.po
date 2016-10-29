@@ -1,55 +1,64 @@
-## `msgid`s in this file come from POT (.pot) files.
-##
-## Do not add, change, or remove `msgid`s manually here as
-## they're tied to the ones in the corresponding POT file
-## (with the same domain).
-##
-## Use `mix gettext.extract --merge` or `mix gettext.merge`
-## to merge POT files into PO files.
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
 msgid ""
 msgstr ""
 "Language: zh\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Paul Sutcliffe <frpaulas@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: web/templates/prayer/_phos_hilaron.html.eex:8
 msgid "Now as we come to the setting of the sun,"
-msgstr ""
+msgstr "現在，夕陽西沉，"
 
 #: web/templates/prayer/_phos_hilaron.html.eex:3
 msgid "O Gladsome Light"
-msgstr ""
+msgstr "恩慈的光"
 
 #: web/templates/prayer/_phos_hilaron.html.eex:7
 msgid "O Jesus Christ, holy and blessed!"
-msgstr ""
+msgstr "耶穌基督，聖潔而多福，"
 
 #: web/templates/prayer/_phos_hilaron.html.eex:12
 msgid "O Son of God, O Giver of Life,"
-msgstr ""
+msgstr "無論何時，祢都配受歡聲讚揚，"
 
 #: web/templates/prayer/_phos_hilaron.html.eex:5
 msgid "O gladsome light,"
-msgstr ""
+msgstr "恩慈的光，"
 
 #: web/templates/prayer/_phos_hilaron.html.eex:2
 msgid "Phos hilaron"
-msgstr ""
+msgstr "恩光頌"
 
 #: web/templates/prayer/_phos_hilaron.html.eex:11
 msgid "You are worthy at all times to be praised by happy voices,"
-msgstr ""
+msgstr "上帝聖子，生命的主，"
 
 #: web/templates/prayer/_phos_hilaron.html.eex:9
 msgid "and our eyes behold the vesper light,"
-msgstr ""
+msgstr "我們看見薄暮的夜色，"
 
 #: web/templates/prayer/_phos_hilaron.html.eex:13
 msgid "and to be glorified through all the worlds."
-msgstr ""
+msgstr "經過萬古千秋，被人尊崇。"
 
 #: web/templates/prayer/_phos_hilaron.html.eex:6
 msgid "pure brightness of the ever-living Father in heaven,"
-msgstr ""
+msgstr "天上永生聖父的純潔輝煌，"
 
 #: web/templates/prayer/_phos_hilaron.html.eex:10
 msgid "we sing praises to God: the Father, the Son, and the Holy Spirit."
-msgstr ""
+msgstr "上帝聖父、聖子、聖靈，我們向祢讚美歌唱，"

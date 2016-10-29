@@ -1,19 +1,32 @@
-## `msgid`s in this file come from POT (.pot) files.
-##
-## Do not add, change, or remove `msgid`s manually here as
-## they're tied to the ones in the corresponding POT file
-## (with the same domain).
-##
-## Use `mix gettext.extract --merge` or `mix gettext.merge`
-## to merge POT files into PO files.
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
 msgid ""
 msgstr ""
 "Language: zh\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Paul Sutcliffe <frpaulas@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: web/templates/prayer/_ep_Friday.html.eex:2
 msgid "A Collect for Faith (Friday)"
-msgstr ""
+msgstr "求信⼼心禱⽂文（星期五）"
 
 #: web/templates/prayer/_ep_Friday.html.eex:3
-msgid "Lord Jesus Christ, by your death you took away the sting of death:\nGrant to us your servants so to follow in faith where you have led the\nway, that we may at length fall asleep peacefully in you and wake up\nin your likeness; for your tender mercies’ sake."
-msgstr ""
+msgid ""
+"Lord Jesus Christ, by your death you took away the sting of death:\n"
+"Grant to us your servants so to follow in faith where you have led the\n"
+"way, that we may at length fall asleep peacefully in you and wake up\n"
+"in your likeness; for your tender merciesâ sake."
+msgstr "主耶穌基督，祢藉十架犠牲解除了死亡的毒鈎，求賜我們眾僕人以信心來跟<br/>隨祢，使我們整夜安睡，在新的一天活像基督。因着祢的慈悲憐憫而求。阿<br/>們。"

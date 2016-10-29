@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "rubric"><%= dgettext "graces", "The Officiant may invite the People to join in one of the Graces."%></p>
 <p class= "rubric"><%= gettext "Officiant"%></p>
 

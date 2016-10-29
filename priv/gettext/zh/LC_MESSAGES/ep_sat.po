@@ -1,19 +1,32 @@
-## `msgid`s in this file come from POT (.pot) files.
-##
-## Do not add, change, or remove `msgid`s manually here as
-## they're tied to the ones in the corresponding POT file
-## (with the same domain).
-##
-## Use `mix gettext.extract --merge` or `mix gettext.merge`
-## to merge POT files into PO files.
+# # `msgid`s in this file come from POT (.pot) files.
+# #
+# # Do not add, change, or remove `msgid`s manually here as
+# # they're tied to the ones in the corresponding POT file
+# # (with the same domain).
+# #
+# # Use `mix gettext.extract --merge` or `mix gettext.merge`
+# # to merge POT files into PO files.
 msgid ""
 msgstr ""
 "Language: zh\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Paul Sutcliffe <frpaulas@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
 
 #: web/templates/prayer/_ep_Saturday.html.eex:2
 msgid "A Collect for the Eve of Worship (Saturday)"
-msgstr ""
+msgstr "崇拜前⼣夕祝⽂文（星期六）"
 
 #: web/templates/prayer/_ep_Saturday.html.eex:3
-msgid "O God, the source of eternal light: Shed forth your unending day\nupon us who watch for you, that our lips may praise you, our lives\nmay bless you, and our worship on the morrow give you glory;\nthrough Jesus Christ our Lord."
-msgstr ""
+msgid ""
+"O God, the source of eternal light: Shed forth your unending day\n"
+"upon us who watch for you, that our lips may praise you, our lives\n"
+"may bless you, and our worship on the morrow give you glory;\n"
+"through Jesus Christ our Lord."
+msgstr "上帝啊，永恆光輝之源，使我們儆醒仰望，並以口讚美祢，以生命稱頌祢，<br/>我們明天的敬拜能歸榮耀給祢；此賴我主耶穌基督而求。阿們。"

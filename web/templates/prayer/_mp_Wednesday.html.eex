@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "mp_wed", "A Collect for Grace (Wednesday)"%></p>
 <p class= "default"><%= dgettext "mp_wed", "O Lord, our heavenly Father, almighty and everlasting God, you have
 brought us safely to the beginning of this day: Defend us by your

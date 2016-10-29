@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "chrys", "A Prayer of St. John Chrysostom"%></p>
 <p class= "default"><%= dgettext "chrys", """
 Almighty God, you have given us grace at this time with one accord

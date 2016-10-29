@@ -1,4 +1,4 @@
-</br>
+<br/>
 <p class= "section"><%= dgettext "mp_sat", "A Collect for Sabbath Rest (Saturday)"%></p>
 <p class= "default"><%= dgettext "mp_sat", "Almighty God, who after the creation of the world rested from all
 your works and sanctified a day of rest for all your creatures: Grant
