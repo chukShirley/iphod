@@ -52,7 +52,6 @@ defmodule Iphod.IphodChannel do
     #  [:collect, :colors, :date, :gs, :nt, :ofType, :ot, :ps, :season, :show, :title,
     #  :week]
     resp = BibleText.selection( vss, version, service)
-    resp_name = service <> "_today"
     push socket, "single_lesson", %{resp: resp}
     {:noreply, socket}
   end

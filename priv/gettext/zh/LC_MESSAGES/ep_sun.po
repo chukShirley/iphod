@@ -24,10 +24,5 @@ msgid "A Collect for Resurrection Hope (Sunday)"
 msgstr "復活盼望祝⽂文（星期⽇日）"
 
 #: web/templates/prayer/_ep_Sunday.html.eex:3
-msgid ""
-"Lord God, whose Son our Savior Jesus Christ triumphed over the\n"
-"powers of death and prepared for us our place in the new Jerusalem:\n"
-"Grant that we, who have this day given thanks for his resurrection,\n"
-"may praise you in that City of which he is the light, and where he\n"
-"lives and reigns forever and ever."
+msgid "Lord God, whose Son our Savior Jesus Christ triumphed over the\npowers of death and prepared for us our place in the new Jerusalem:\nGrant that we, who have this day given thanks for his resurrection,\nmay praise you in that City of which he is the light, and where he\nlives and reigns forever and ever."
 msgstr "主上帝，祢的兒子－我們的救主耶穌基督勝過死亡的權勢，並在新耶路撒冷<br/>為我們預備地方。今天我們為祂的復活而感恩，將來能在新城中讚美祢，因<br/>祂是那城的光，永住當中，永遠作王。阿們。"

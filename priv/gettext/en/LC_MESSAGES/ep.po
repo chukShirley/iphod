@@ -10,11 +10,11 @@ msgid ""
 msgstr ""
 "Language: en\n"
 
-#: web/templates/prayer/ep.html.eex:44
+#: web/templates/prayer/ep.html.eex:51
 msgid "A citation giving chapter and verse may be added."
 msgstr ""
 
-#: web/templates/prayer/ep.html.eex:45
+#: web/templates/prayer/ep.html.eex:52
 msgid "After each Lesson the Reader may say"
 msgstr ""
 
@@ -38,19 +38,19 @@ msgstr ""
 msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
 msgstr ""
 
-#: web/templates/prayer/ep.html.eex:50
+#: web/templates/prayer/ep.html.eex:57
 msgid "Here ends the Reading."
 msgstr ""
 
-#: web/templates/prayer/ep.html.eex:63
+#: web/templates/prayer/ep.html.eex:77
 msgid "If desired, a sermon on the Evening Lessons may be preached."
 msgstr ""
 
-#: web/templates/prayer/ep.html.eex:72
+#: web/templates/prayer/ep.html.eex:86
 msgid "Officiant and People"
 msgstr ""
 
-#: web/templates/prayer/ep.html.eex:49
+#: web/templates/prayer/ep.html.eex:56
 msgid "Or the Reader may say"
 msgstr ""
 
@@ -62,7 +62,7 @@ msgstr ""
 msgid "The Anglican Church in North America"
 msgstr ""
 
-#: web/templates/prayer/ep.html.eex:79
+#: web/templates/prayer/ep.html.eex:93
 msgid "The Collect of the Day"
 msgstr ""
 
@@ -82,11 +82,11 @@ msgstr ""
 msgid "The Officiant may begin Evening Prayer by reading an opening sentence \nof Scripture found on pages 17-19 or another appropriate Scripture. \nThe Confession of Sin may be said, or the Office may continue with \n“O Lord, open our lips.”\n"
 msgstr ""
 
-#: web/templates/prayer/ep.html.eex:67
+#: web/templates/prayer/ep.html.eex:81
 msgid "The People kneel or stand."
 msgstr ""
 
-#: web/templates/prayer/ep.html.eex:66
+#: web/templates/prayer/ep.html.eex:80
 msgid "The Prayers"
 msgstr ""
 
@@ -94,11 +94,11 @@ msgstr ""
 msgid "The Psalm or Psalms Appointed"
 msgstr ""
 
-#: web/templates/prayer/ep.html.eex:58
+#: web/templates/prayer/ep.html.eex:65
 msgid "The Second Lesson from"
 msgstr ""
 
-#: web/templates/prayer/ep.html.eex:53
+#: web/templates/prayer/ep.html.eex:60
 msgid "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."
 msgstr ""
 
@@ -114,10 +114,18 @@ msgstr ""
 msgid "as it was in the beginning, is now, and ever shall be,"
 msgstr ""
 
-#: web/templates/prayer/ep.html.eex:74
+#: web/templates/prayer/ep.html.eex:88
 msgid "or this"
 msgstr ""
 
 #: web/templates/prayer/ep.html.eex:37
 msgid "world without end. Amen."
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:47 web/templates/prayer/ep.html.eex:71
+msgid "Alt Reading"
+msgstr ""
+
+#: web/templates/prayer/ep.html.eex:15
+msgid "Opening Sentences of Scripture"
 msgstr ""

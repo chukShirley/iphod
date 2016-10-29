@@ -46,8 +46,15 @@
   <br/>
   <p class= "section"><%= dgettext "mp", "The Lessons"%></p>
   <p class= "rubric"><%= dgettext "mp", "One or more Lessons, as appointed, are read, the Reader first saying"%></p>
-  <p><%= dgettext "mp", "The First Lesson from"%></p>
-  <p class= "reading"> <%= @model.mp1 |> text_list_to_html %></p>
+  <p><%= dgettext "mp", "The First Lesson from"%>
+    <input  id="first_reading_alt" 
+            class="alt_reading" 
+            type="text" 
+            name="first_reading_alt" 
+            data-reading_target="reading1" 
+            placeholder="<%= dgettext "mp", "Alt Reading"%>">   
+  </p>
+  <p id="reading1" class= "reading"> <%= @model.mp1 |> text_list_to_html %></p>
 
   <p class= "rubric"><%= dgettext "mp", "A citation giving chapter and verse may be added."%></p>
   <p class= "rubric"><%= dgettext "mp", "After each Lesson the Reader may say"%></p>
@@ -63,8 +70,15 @@
   <%= render "_#{@model.ot_canticle}.html" %>
   <br/>
 
-  <p><%= dgettext "mp", "The Second Lesson from"%></p>
-  <p class= "reading"> <%= @model.mp2 |> text_list_to_html %></p>
+  <p><%= dgettext "mp", "The Second Lesson from"%>
+    <input  id="second_reading_alt" 
+            class="alt_reading" 
+            type="text" 
+            name="second_reading_alt" 
+            data-reading_target="reading2" 
+            placeholder="<%= dgettext "mp", "Alt Reading"%>"> 
+  </p>
+  <p id="reading2" class= "reading"> <%= @model.mp2 |> text_list_to_html %></p>
   <br/>
   <%= render "_#{@model.nt_canticle}.html" %>
   <br/>

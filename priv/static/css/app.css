@@ -5918,6 +5918,10 @@ h3 {
 }
 
 .reading { font-size: 1.0em }
+.alt_reading {
+  margin-left: 2em;
+  background-color: lightgrey;
+}
 
 .indent_italic {
   font-size: 1.0em;
@@ -5936,7 +5940,11 @@ h3 {
 }
 
 .vs {
-  display: none;
+  position: relative;
+  top: -0.3em;
+  padding-right: 0.3em;
+  font-size: 0.8em;
+  color: darkred;
 }
 
 .pb_vs {

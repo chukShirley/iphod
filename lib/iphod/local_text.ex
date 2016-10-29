@@ -19,14 +19,11 @@ defmodule LocalText do
   def respond_with(resp, _ver, _book, _chapter), do: resp.vss
 
   def passage(ver, book, chapter, from, to) do
-    {vss, _} =passage(ver, book, chapter) 
+    {from, to} = {from - 1, to - 1} # off by one
+    passage(ver, book, chapter) 
       |> Enum.slice(from..to)
-      |> Enum.reduce({[], from}, fn(vs, {acc, i})->
-        new_vss = "<sup class='vs_number'>#{i}</sup> #{vs}"
-        new_i = i + 1
-        {[new_vss | acc], new_i}
-      end)
-    vss |> Enum.reverse
+    #  |> Enum.reduce({[], from}, &([&1 | &2]))
+    #  |> Enum.reverse
   end
 
   def request(ver, ref) do

@@ -23,28 +23,15 @@ msgstr ""
 msgid "Collect for Mission"
 msgstr "當日祝文"
 
+#, fuzzy
 #: web/templates/prayer/_ep_for_mission.html.eex:10
-msgid ""
-"Keep watch, dear Lord, with those who work, or watch, or weep this\n"
-"night, and give your angels charge over those who sleep. Tend the\n"
-"sick, Lord Christ; give rest to the weary, bless the dying, soothe the\n"
-"suffering, pity the afflicted, shield the joyous; and all for your loveâs\n"
-"sake. Amen.\n"
+msgid "Keep watch, dear Lord, with those who work, or watch, or weep this\nnight, and give your angels charge over those who sleep. Tend the\nsick, Lord Christ; give rest to the weary, bless the dying, soothe the\nsuffering, pity the afflicted, shield the joyous; and all for your love’s\nsake. Amen.\n"
 msgstr "親愛的主，求祢看顧那些在這夜仍要工作、或當夜更、或徹夜哀哭的人，並<br/>差派天使保護安睡者。主基督啊，因祢愛的緣故，求祢照料病患者，賜困乏<br/>者休息、臨終者蒙福、受苦者安慰，受折磨者憐憫，喜樂者常樂。阿們。\n"
 
 #: web/templates/prayer/_ep_for_mission.html.eex:3
-msgid ""
-"O God and Father of all, whom the whole heavens adore: Let the\n"
-"whole earth also worship you, all nations obey you, all tongues\n"
-"confess and bless you, and men, women and children everywhere\n"
-"love you and serve you in peace; through Jesus Christ our Lord.\n"
-"Amen.\n"
+msgid "O God and Father of all, whom the whole heavens adore: Let the\nwhole earth also worship you, all nations obey you, all tongues\nconfess and bless you, and men, women and children everywhere\nlove you and serve you in peace; through Jesus Christ our Lord.\nAmen.\n"
 msgstr "諸天景仰的父上帝啊，願全地都敬拜祢，萬國都順服祢，萬口都承認祢，願<br/>男女老少都敬愛祢，在平安裏服侍祢。此賴我主耶穌基督而求。阿們。\n"
 
 #: web/templates/prayer/_ep_for_mission.html.eex:17
-msgid ""
-"O God, you manifest in your servants the signs of your presence:\n"
-"Send forth upon us the Spirit of love, that in companionship with\n"
-"one another your abounding grace may increase among us; through\n"
-"Jesus Christ our Lord. Amen.\n"
+msgid "O God, you manifest in your servants the signs of your presence:\nSend forth upon us the Spirit of love, that in companionship with\none another your abounding grace may increase among us; through\nJesus Christ our Lord. Amen.\n"
 msgstr "O God, you manifest in your servants the signs of your presence: Send forth upon us<br/>the Spirit of love, that in companionship with one another your abounding grace may<br/>increase among us; through Jesus Christ our Lord. Amen.\n"

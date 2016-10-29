@@ -24,10 +24,5 @@ msgid "A Collect for Peace (Monday)"
 msgstr "求安禱⽂文（星期⼀一）"
 
 #: web/templates/prayer/_ep_Monday.html.eex:3
-msgid ""
-"O God, the source of all holy desires, all good counsels, and all just\n"
-"works: Give to your servants that peace which the world cannot give,\n"
-"that our hearts may be set to obey your commandments, and that we,\n"
-"being defended from the fear of our enemies, may pass our time in \n"
-"rest and quietness, through the merits of Jesus Christ our Savior."
+msgid "O God, the source of all holy desires, all good counsels, and all just\nworks: Give to your servants that peace which the world cannot give,\nthat our hearts may be set to obey your commandments, and that we,\nbeing defended from the fear of our enemies, may pass our time in \nrest and quietness, through the merits of Jesus Christ our Savior."
 msgstr "上帝啊，一切聖潔的意念、良善的言語、公義的行為，都是從祢而來；求祢<br/>將世上不能給的平安賜與我們，使我們一心順從祢的命令，不怕仇敵的威脅，<br/>得享平靜安穩；此賴我們的救主耶穌基督而求。阿們。"

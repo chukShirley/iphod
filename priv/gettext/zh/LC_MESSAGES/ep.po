@@ -19,11 +19,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 1.8.11\n"
 
-#: web/templates/prayer/ep.html.eex:44
+#: web/templates/prayer/ep.html.eex:51
 msgid "A citation giving chapter and verse may be added."
 msgstr " "
 
-#: web/templates/prayer/ep.html.eex:45
+#: web/templates/prayer/ep.html.eex:52
 msgid "After each Lesson the Reader may say"
 msgstr "讀畢時說"
 
@@ -47,19 +47,19 @@ msgstr "晚禱禮文"
 msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
 msgstr "啓： 但願榮耀歸於聖父、聖子、聖靈；"
 
-#: web/templates/prayer/ep.html.eex:50
+#: web/templates/prayer/ep.html.eex:57
 msgid "Here ends the Reading."
 msgstr "報底牌。"
 
-#: web/templates/prayer/ep.html.eex:63
+#: web/templates/prayer/ep.html.eex:77
 msgid "If desired, a sermon on the Evening Lessons may be preached."
 msgstr "此時可選⽤用晚禱經課講道。"
 
-#: web/templates/prayer/ep.html.eex:72
+#: web/templates/prayer/ep.html.eex:86
 msgid "Officiant and People"
 msgstr ""
 
-#: web/templates/prayer/ep.html.eex:49
+#: web/templates/prayer/ep.html.eex:56
 msgid "Or the Reader may say"
 msgstr "讀經員或說"
 
@@ -71,7 +71,7 @@ msgstr " "
 msgid "The Anglican Church in North America"
 msgstr " "
 
-#: web/templates/prayer/ep.html.eex:79
+#: web/templates/prayer/ep.html.eex:93
 msgid "The Collect of the Day"
 msgstr "當日祝文"
 
@@ -87,19 +87,16 @@ msgstr "宣 召"
 msgid "The Lessons"
 msgstr "經 課"
 
+#, fuzzy
 #: web/templates/prayer/ep.html.eex:7
-msgid ""
-"The Officiant may begin Evening Prayer by reading an opening sentence \n"
-"of Scripture found on pages 17-19 or another appropriate Scripture. \n"
-"The Confession of Sin may be said, or the Office may continue with \n"
-"âO Lord, open our lips.â\n"
+msgid "The Officiant may begin Evening Prayer by reading an opening sentence \nof Scripture found on pages 17-19 or another appropriate Scripture. \nThe Confession of Sin may be said, or the Office may continue with \n“O Lord, open our lips.”\n"
 msgstr "主禮或司禱可以此經句開始晚禱，或從51-53 ⾴頁選讀節期始禮經句，或其他合適的經句。其後可<br/>讀認罪⽂文，或從42 ⾴頁宣召「主啊，助我們開⼝口」繼續晚禱。\n"
 
-#: web/templates/prayer/ep.html.eex:67
+#: web/templates/prayer/ep.html.eex:81
 msgid "The People kneel or stand."
 msgstr "會眾跪或站⽴立。"
 
-#: web/templates/prayer/ep.html.eex:66
+#: web/templates/prayer/ep.html.eex:80
 msgid "The Prayers"
 msgstr "祈 禱"
 
@@ -107,11 +104,11 @@ msgstr "祈 禱"
 msgid "The Psalm or Psalms Appointed"
 msgstr "詩 篇"
 
-#: web/templates/prayer/ep.html.eex:58
+#: web/templates/prayer/ep.html.eex:65
 msgid "The Second Lesson from"
 msgstr "救恩的泉源。"
 
-#: web/templates/prayer/ep.html.eex:53
+#: web/templates/prayer/ep.html.eex:60
 msgid "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."
 msgstr "每段經課後唱或讀以下聖頌。主禮或司禱也可選⽤用其他獲准使⽤用的聖頌或⼀一⾸首合適讚美的聖詩。"
 
@@ -127,10 +124,18 @@ msgstr "繼續讀"
 msgid "as it was in the beginning, is now, and ever shall be,"
 msgstr "應： 始初如此，現今如此，後來亦如此，永無窮盡。阿們。"
 
-#: web/templates/prayer/ep.html.eex:74
+#: web/templates/prayer/ep.html.eex:88
 msgid "or this"
 msgstr "或說"
 
 #: web/templates/prayer/ep.html.eex:37
 msgid "world without end. Amen."
 msgstr " "
+
+#: web/templates/prayer/ep.html.eex:47 web/templates/prayer/ep.html.eex:71
+msgid "Alt Reading"
+msgstr "另类解读"
+
+#: web/templates/prayer/ep.html.eex:15
+msgid "Opening Sentences of Scripture"
+msgstr ""

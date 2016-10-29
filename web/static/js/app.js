@@ -122,6 +122,35 @@ if ( path.match(/mindex/)) {
   $('#header-elm-container').hide()
 }
 
+// MP/EP
+// grr - match doesn't match utf8 codes, must find alt solution
+if (path.match(/mp|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
+  let channel = socket.channel("iphod:readings")
+  channel.join()
+    .receive("ok", resp => { 
+      console.log("OK", resp);
+    })
+    .receive("error", resp => { console.log("Unable to join Iphod", resp) })
+    
+// ALT READINGS...
+  $(".alt_reading").change( function(){
+    let vss = $(this).val();
+    $(this).val("");
+    // vss, version, service, section
+    channel.push("get_single_reading", [vss, "ESV", $(this).data("reading_target"), "mp"])
+  })
+
+  channel.on('single_lesson', data => {
+    let resp = data.resp[0],
+        target = "#" + resp.section;
+
+    console.log("SINGLE LESSON", resp);
+    $(target).next().replaceWith(resp.body)
+  })
+
+}
+
+
 // landing page, calendar
 
 if ( path == "/" || path.match(/calendar/) || path.match(/mindex/)) {
@@ -399,7 +428,5 @@ if ( path.match(/reflections.+[new|edit]/) ) {
     refl_channel.on("submitted", data => {
       console.log("SUBMITTED: ", data)
     })
-
-
-
 } // END OF reflections
+

@@ -24,8 +24,5 @@ msgid "A Collect for Aid against Perils (Tuesday)"
 msgstr "求恩助禱⽂文（星期⼆二）"
 
 #: web/templates/prayer/_ep_Tuesday.html.eex:3
-msgid ""
-"Lighten our darkness, we beseech you, O Lord; and by your great\n"
-"mercy defend us from all perils and dangers of this night; for the love\n"
-"of your only Son, our Savior Jesus Christ."
+msgid "Lighten our darkness, we beseech you, O Lord; and by your great\nmercy defend us from all perils and dangers of this night; for the love\nof your only Son, our Savior Jesus Christ."
 msgstr "主啊，求祢以祢的榮光，照耀我們的黑暗；又以祢的大慈悲，保護我們今夜<br/>不遇危險；此賴我主耶穌基督而求。阿們。"

@@ -10,12 +10,12 @@ msgid ""
 msgstr ""
 "Language: zh\n"
 
-#: web/templates/prayer/mp.html.eex:52
+#: web/templates/prayer/mp.html.eex:59
 msgid "A citation giving chapter and verse may be added."
 msgstr " "
 
 # part of After each lesson
-#: web/templates/prayer/mp.html.eex:53
+#: web/templates/prayer/mp.html.eex:60
 msgid "After each Lesson the Reader may say"
 msgstr "讀畢時說"
 
@@ -40,11 +40,11 @@ msgstr "早禱禮文"
 msgid "Glory to the Father, and to the Son, and to the Holy Spirit;"
 msgstr "啓： 但願榮耀歸於聖父、聖子、聖靈；"
 
-#: web/templates/prayer/mp.html.eex:58
+#: web/templates/prayer/mp.html.eex:65
 msgid "Here ends the Reading."
 msgstr "經課至此讀畢。"
 
-#: web/templates/prayer/mp.html.eex:81
+#: web/templates/prayer/mp.html.eex:95
 msgid "Officiant and People"
 msgstr "主禮或司禱與會眾同讀"
 
@@ -57,7 +57,7 @@ msgid "Opening Sentences of Scripture"
 msgstr " "
 
 # intentionally blank
-#: web/templates/prayer/mp.html.eex:57
+#: web/templates/prayer/mp.html.eex:64
 msgid "Or the Reader may say"
 msgstr "讀經員或說"
 
@@ -71,7 +71,7 @@ msgid "The Anglican Church in North America"
 msgstr " "
 
 # intentionally blank
-#: web/templates/prayer/mp.html.eex:93
+#: web/templates/prayer/mp.html.eex:107
 msgid "The Collect of the Day"
 msgstr "當日祝文"
 
@@ -92,15 +92,15 @@ msgstr "經 課"
 msgid "The Officiant may begin Morning Prayer by reading an opening sentence \nof Scripture found on pages 17-19 or another appropriate Scripture. \nThe Confession of Sin may be said, or the Office may continue with \n“O Lord, open our lips.”\n"
 msgstr "主禮或司禱可以此經句開始早禱，或從39-40 ⾴頁選讀節期始禮經句，或其他合適的經句。其後可\n讀認罪⽂文，或從26 ⾴頁宣召「主啊，助我們開⼝口」繼續早禱。"
 
-#: web/templates/prayer/mp.html.eex:92
+#: web/templates/prayer/mp.html.eex:106
 msgid "The Officiant then prays one or more of the following collects. It is traditional to pray the Collects for Peace and Grace daily. Alternatively, one may pray the collects on a weekly rotation, using the suggestions in parentheses."
 msgstr "主禮或司禱可⽤用⼀一段或多段祝⽂文祈禱。傳統每天必⽤用求安禱⽂文及求恩禱⽂文。或每週循環使⽤用以下\n禱⽂文，如括號提⽰示。"
 
-#: web/templates/prayer/mp.html.eex:74
+#: web/templates/prayer/mp.html.eex:88
 msgid "The People kneel or stand."
 msgstr "會眾跪或站⽴立。"
 
-#: web/templates/prayer/mp.html.eex:73
+#: web/templates/prayer/mp.html.eex:87
 msgid "The Prayers"
 msgstr "祈 禱"
 
@@ -108,12 +108,12 @@ msgstr "祈 禱"
 msgid "The Psalm or Psalms Appointed"
 msgstr "詩 篇"
 
-#: web/templates/prayer/mp.html.eex:66
+#: web/templates/prayer/mp.html.eex:73
 msgid "The Second Lesson from"
 msgstr " "
 
 # intentionally blank
-#: web/templates/prayer/mp.html.eex:61
+#: web/templates/prayer/mp.html.eex:68
 msgid "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."
 msgstr "每段經課後唱或讀以下聖頌。主禮或司禱也可選⽤用其他獲准使⽤用的聖頌或⼀一⾸首合適讚美的聖詩。"
 
@@ -137,10 +137,14 @@ msgstr "「時候將到，如今就是了，那真正拜父的，要用心靈和
 msgid "as it was in the beginning, is now, and ever shall be,"
 msgstr "應： 始初如此，現今如此，後來亦如此，永無窮盡。阿們。"
 
-#: web/templates/prayer/mp.html.eex:85
+#: web/templates/prayer/mp.html.eex:99
 msgid "or this"
 msgstr "或"
 
 #: web/templates/prayer/mp.html.eex:44
 msgid "world without end. Amen."
 msgstr " "
+
+#: web/templates/prayer/mp.html.eex:55 web/templates/prayer/mp.html.eex:79
+msgid "Alt Reading"
+msgstr "另类解读"

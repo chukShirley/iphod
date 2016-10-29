@@ -23,10 +23,7 @@ msgstr ""
 msgid "A Collect for Faith (Friday)"
 msgstr "求信⼼心禱⽂文（星期五）"
 
+#, fuzzy
 #: web/templates/prayer/_ep_Friday.html.eex:3
-msgid ""
-"Lord Jesus Christ, by your death you took away the sting of death:\n"
-"Grant to us your servants so to follow in faith where you have led the\n"
-"way, that we may at length fall asleep peacefully in you and wake up\n"
-"in your likeness; for your tender merciesâ sake."
+msgid "Lord Jesus Christ, by your death you took away the sting of death:\nGrant to us your servants so to follow in faith where you have led the\nway, that we may at length fall asleep peacefully in you and wake up\nin your likeness; for your tender mercies’ sake."
 msgstr "主耶穌基督，祢藉十架犠牲解除了死亡的毒鈎，求賜我們眾僕人以信心來跟<br/>隨祢，使我們整夜安睡，在新的一天活像基督。因着祢的慈悲憐憫而求。阿<br/>們。"
