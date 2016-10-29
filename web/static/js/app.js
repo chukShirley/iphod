@@ -124,7 +124,7 @@ if ( path.match(/mindex/)) {
 
 // MP/EP
 // grr - match doesn't match utf8 codes, must find alt solution
-if (path.match(/mp|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
+if (path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   let channel = socket.channel("iphod:readings")
   channel.join()
     .receive("ok", resp => { 
