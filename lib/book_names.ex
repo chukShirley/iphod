@@ -1,3 +1,4 @@
+require IEx
 defmodule BookNames do
 
   @book_names %{
@@ -85,7 +86,7 @@ defmodule BookNames do
     "susanna"=>"susanna",  "sus"=>"susanna",
     "titus"=>"titus",  "tit"=>"titus",
     "tobit"=>"tobit",  "tob"=>"tobit", "tb"=>"tobit",
-    "wisdom of solomon"=>"wisdom of solomon", "wisd of sol"=>"wisdom of solomon", "wis"=>"wisdom of solomon", "ws"=>"wisdom of solomon", "wisdom"=>"wisdom of solomon",
+    "wisdom of solomon"=>"wisdom of solomon", "wisd of sol"=>"wisdom of solomon", "wis"=>"wisdom of solomon", "wisd"=>"wisdom of solomon", "ws"=>"wisdom of solomon", "wisdom"=>"wisdom of solomon",
     "zechariah"=>"zechariah", "zech"=>"zechariah", "zec"=>"zechariah", "zc"=>"zechariah",
     "zephaniah"=>"zephaniah", "zeph"=>"zephaniah", "zep"=>"zephaniah", "zp"=>"zephaniah",
   }
@@ -266,7 +267,9 @@ defmodule BookNames do
   def book_name(s), do: @book_names[s] 
 
   @spec web_name(String.t) :: String.t
-  def web_name(s), do: @web_names[s |> String.downcase |> book_name]
+  def web_name(s) do 
+    @web_names[s |> String.downcase |> book_name]
+  end
 
   @spec book_title(String.t) :: String.t
   def book_title(s), do: @book_title[s |> String.downcase |> book_name]
