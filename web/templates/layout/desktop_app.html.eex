@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<%= Gettext.get_locale(Iphod.Gettext) %>">
   <head>
     <script type="text/javascript">
     <!--

@@ -4,19 +4,23 @@ defmodule Iphod.CalendarController do
   use Timex
 
   def index(conn, params) do
+    select_language params
     render_calendar conn, Date.now, nil
   end
 
   def mindex(conn, params) do
+    select_language params
     render_calendar conn, Date.now, "min"
   end
 
   def prev(conn, params) do
+    select_language params
     date = params_to_date(params, -1)
     render_calendar conn, date, params["min"]
   end
 
   def next(conn, params) do
+    select_language params
     date = params_to_date(params, 1)
     render_calendar conn, date, params["min"]
   end
@@ -25,11 +29,16 @@ defmodule Iphod.CalendarController do
     # something like `get_month next_season("advent", Date.now)`
     # and get the calendar month for the beginning of advent
     # this_month = get_month(Lityear.next_season(params["season"], Date.now))
+    select_language params
     this_month = Lityear.next_season(params["season"], Date.now)
     render_calendar conn, this_month, params["min"]
   end
 
 # HELPERS
+
+  def select_language(params) do
+    unless params["locale"], do: Gettext.put_locale Iphod.Gettext, "en"
+  end
 
   def params_to_date(params, shift) do
     Date.from(

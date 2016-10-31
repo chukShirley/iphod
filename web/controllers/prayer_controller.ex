@@ -21,18 +21,20 @@ defmodule Iphod.PrayerController do
       |> render( "ep.html", model: prayer_model("ep", psalm, text))
   end
 
-  def mp_cusimp(conn, _params), do: xlate conn, "mp", "cu89s"
-  def mp_cutrad(conn, _params), do: xlate conn, "mp", "cu89t"
-  def ep_cusimp(conn, _params), do: xlate conn, "ep", "cu89s"
-  def ep_cutrad(conn, _params), do: xlate conn, "ep", "cu89t"
+  def mp_cusimp(conn, _params), do: xlate conn, "mp", "cu89s", "zh"
+  def mp_cutrad(conn, _params), do: xlate conn, "mp", "cu89t", "zh"
+  def ep_cusimp(conn, _params), do: xlate conn, "ep", "cu89s", "zh"
+  def ep_cutrad(conn, _params), do: xlate conn, "ep", "cu89t", "zh"
     
-  def xlate(conn, mpep, ver) do
-        conn
+  def xlate(conn, mpep, ver, lang) do
+    Gettext.put_locale Iphod.Gettext, lang
+    conn
       |> put_layout("app.html")
       |> render( "#{mpep}.html", model: prayer_model(mpep, ver, ver))    
   end
 
   def readmp(conn, params) do
+    select_language params
     {psalm, text} = translations(params)
     conn
       |> put_layout("readable.html")
@@ -40,6 +42,7 @@ defmodule Iphod.PrayerController do
   end
 
   def readep(conn, params) do
+    select_language params
     {psalm, text} = translations(params)
     conn
       |> put_layout("readable.html")
