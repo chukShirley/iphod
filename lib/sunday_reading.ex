@@ -2443,17 +2443,17 @@ defmodule SundayReading do
                 "colors" => ["red"],
               "a" => %{ ot: [%{style: "req", read: "Ecclesiasticus 44:1-14"}, %{style: "alt", read: "Rev 7:9-17"}],
                         ps: [%{style: "req", read: "Psalm 149"}],
-                        nt: [%{style: "req", read: "Rev 7:9-17"}, %{style: "alt", read: "Eph 1:(11-14)15-23"}],
+                        nt: [%{style: "req", read: "Rev 7:9-17"}, %{style: "opt", read: "Eph 1:11-14"},%{style: "alt", read: "Eph 1:15-23"}],
                         gs: [%{style: "req", read: "Mt 5:1-12"}, %{style: "alt", read: "Lk 6:20-26"},%{style: "opt", read: "Lk 6:27-36"}]
                       },
               "b" => %{ ot: [%{style: "req", read: "Ecclesiasticus 44:1-14"}, %{style: "alt", read: "Rev 7:9-17"}],
                         ps: [%{style: "req", read: "Psalm 149"}],
-                        nt: [%{style: "req", read: "Rev 7:9-17"}, %{style: "alt", read: "Eph 1:(11-14)15-23"}],
+                        nt: [%{style: "req", read: "Rev 7:9-17"}, %{style: "opt", read: "Eph 1:11-14"},%{style: "alt", read: "Eph 1:15-23"}],
                         gs: [%{style: "req", read: "Mt 5:1-12"}, %{style: "alt", read: "Lk 6:20-26"},%{style: "opt", read: "Lk 6:27-36"}]
                       },
               "c" => %{ ot: [%{style: "req", read: "Ecclesiasticus 44:1-14"}, %{style: "alt", read: "Rev 7:9-17"}],
                         ps: [%{style: "req", read: "Psalm 149"}],
-                        nt: [%{style: "req", read: "Rev 7:9-17"}, %{style: "alt", read: "Eph 1:(11-14)15-23"}],
+                        nt: [%{style: "req", read: "Rev 7:9-17"}, %{style: "opt", read: "Eph 1:11-14"},%{style: "alt", read: "Eph 1:15-23"}],
                         gs: [%{style: "req", read: "Mt 5:1-12"}, %{style: "alt", read: "Lk 6:20-26"},%{style: "opt", read: "Lk 6:27-36"}]
                       }
             },
