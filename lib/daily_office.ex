@@ -3446,7 +3446,7 @@ defmodule DailyReading do
         "28" =>
           %{"Sunday" =>     %{title: "Sunday closest to November 16",
                           colors: ["green"],
-                            mp1: [%{style: "req", read: "Prayer of Manasses"}, %{style: "alt", read: "Zech 11"}],
+                            mp1: [%{style: "req", read: "Prayer of Manasses 1"}, %{style: "alt", read: "Zech 11"}],
                             mp2: [%{style: "req", read: "Luke 20:1-19"}],
                             ep1: [%{style: "req", read: "Baruch 4:36-end, 5"}, %{style: "alt", read: "Zech 13"}],
                             ep2: [%{style: "req", read: "Matt 23:1-22"}]

@@ -28,7 +28,7 @@ defmodule LocalText do
 
   def request(ver, ref) do
     {ver, book, lists} = request(ver, local_query(ref), [])
-    lists_to_html(lists, "<h3>#{titlize(ref)}</h3>")
+    lists_to_html(lists, "<h3>#{titlize(String.downcase ref)}</h3>")
   end
 
   def request(ver, {book, []}, list), do: {ver, book, list}
@@ -47,8 +47,26 @@ defmodule LocalText do
   end
 
   def titlize(ref) do
-    Regex.replace ~r/(\d?\s?\w+)/, ref, &(book_title(&1)), global: false
+    list =  ref |> String.split
+    contains_digit_list = list |> Enum.map(&(contains_digit? &1))
+    {ok, title} = titlize(contains_digit_list, list)
+    case ok do
+      :ok -> title
+      _ -> raise "Could not parse \"#{ref}\" as Biblical reference"
+    end
   end
+
+  def titlize([true, false | _], ref_list),          do: _titlize ref_list, 2
+  def titlize([false, true | _], ref_list),          do: _titlize ref_list, 1
+  def titlize([false, false, false | _], ref_list),  do: _titlize ref_list, 3
+  def titlize(_, _), do: {:error, ""}
+
+  def _titlize(ref_list, n) when is_integer(n) do
+    {book_name, vss} = ref_list |> Enum.split(n)
+    {:ok, book_title(book_name |> Enum.join(" ")) <> " " <> (vss |> Enum.join)} 
+  end
+
+  def contains_digit?(s), do: s |> String.match?(~r/\d/)
 
 
 end
