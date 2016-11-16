@@ -51,7 +51,10 @@ exports.config = {
       "web/elm/Header.elm",
       "web/elm/MIndex.elm",
       "web/elm/MPanel.elm",
-      "web/elm/NewReflection.elm"
+      "web/elm/NewReflection.elm",
+      "web/elm/Iphod/Sunday.elm",
+      "web/elm/Iphod/Models.elm"
+
     ],
 
     // Where to compile files to

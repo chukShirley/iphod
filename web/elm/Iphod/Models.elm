@@ -1,5 +1,6 @@
 module Iphod.Models exposing
   ( Config, Lesson, Sunday, Daily, Day
+  , Shout, initShout
   , Email, Collect, SundayCollect, Proper
   , DailyMP, DailyEP, Reflection
   , configInit, initLesson, sundayInit, initDaily
@@ -7,6 +8,39 @@ module Iphod.Models exposing
   , initProper, initDay
   , initDailyMP, initDailyEP, initReflection
   ) 
+
+type alias Note =
+  { reading: String
+  , text: String
+  , time: String  -- i'm thinking seconds in epoc
+  }
+initNote: Note
+initNote =
+  { reading = ""
+  , text = ""
+  , time = ""
+  }
+
+type alias Shout =
+  { section: String
+  , text: String
+  , time: String
+  , user: String
+  , showChat: Bool
+  , chat:     List String
+  , comment:  String
+  }
+
+initShout: Shout
+initShout =
+  { section = ""
+  , text = ""
+  , time = ""
+  , user = ""
+  , showChat = False
+  , chat = []
+  , comment = ""
+  }
 
 type alias Config =
   { ot: String
@@ -50,6 +84,9 @@ type alias Lesson =
   , id:       String
   , section:  String
   , version:  String
+  , altRead:  String
+  , notes: List Note
+  , cmd:      String
   }
 
 initLesson: Lesson
@@ -61,6 +98,9 @@ initLesson =
   , id =      ""
   , section = ""
   , version = ""
+  , altRead = ""
+  , notes = []
+  , cmd = ""
   }
 
 type alias Proper = 

@@ -7,6 +7,7 @@ import Json.Decode as Json
 import String exposing (join)
 import Regex exposing (..)
 import Markdown
+import Debug
 
 import Iphod.Helper exposing (hideable)
 import Iphod.Models as Models
@@ -31,7 +32,9 @@ type Msg
   = NoOp
   | SetReading Model
   | GetText (List (String, String))
+  | UpdateAltReading Models.Lesson String
   | ChangeText String String
+  | RequestAltReading Models.Lesson
   | ToggleShow Models.Lesson
   | ToggleModelShow
   | ToggleCollect
@@ -45,6 +48,7 @@ update msg model =
 
     SetReading newModel -> newModel
 
+
     GetText list -> model
 
     ChangeText section ver ->
@@ -57,13 +61,36 @@ update msg model =
       in
         newModel
 
+    UpdateAltReading lesson str ->
+      let
+        this_section = thisSection model lesson
+        -- newSection = {this_section | altRead = str}
+        update_altReading this_lesson =
+          if this_lesson.id == lesson.id 
+            then 
+              {this_lesson | altRead = str}
+            else 
+              this_lesson
+        newSection = List.map update_altReading this_section
+        newModel = updateModel model lesson newSection
+      in
+        newModel
+
+    RequestAltReading lesson ->
+      let 
+        newLesson = [{lesson | cmd = "alt" ++ String.toUpper(lesson.section)}]
+        newModel = case lesson.section of 
+          "ot" -> {model | ot = newLesson}
+          "ps" -> {model | ps = newLesson}
+          "nt" -> {model | nt = newLesson}
+          _    -> {model | gs = newLesson}
+      in
+        newModel
+
+
     ToggleShow lesson ->
       let 
-        this_section = case lesson.section of
-          "ot" -> model.ot
-          "ps" -> model.ps
-          "nt" -> model.nt
-          _    -> model.gs
+        this_section = thisSection model lesson
         update_text this_lesson =
           if this_lesson.id == lesson.id 
             then 
@@ -71,11 +98,7 @@ update msg model =
             else 
               this_lesson
         newSection = List.map update_text this_section
-        newModel = case lesson.section of
-          "ot" -> {model | ot = newSection}
-          "ps" -> {model | ps = newSection}
-          "nt" -> {model | nt = newSection}
-          _    -> {model | gs = newSection}
+        newModel = updateModel model lesson newSection
       in
         newModel
 
@@ -87,16 +110,30 @@ update msg model =
       in
         newModel
 
-
 -- HELPERS
 
 changeText: Model -> String -> List Models.Lesson -> List Models.Lesson
 changeText model ver lessons =
   let 
-    changeText lesson = {lesson | version = ver}
+    changeText lesson = {lesson | version = ver, cmd = "new" ++ String.toUpper(lesson.section)}
   in
     List.map changeText lessons
 
+thisSection: Model -> Models.Lesson -> List Models.Lesson
+thisSection model lesson =
+  case lesson.section of
+    "ot" -> model.ot
+    "ps" -> model.ps
+    "nt" -> model.nt
+    _    -> model.gs
+
+updateModel: Model -> Models.Lesson -> List Models.Lesson -> Model
+updateModel model lesson newSection =
+  case lesson.section of
+    "ot" -> {model | ot = newSection}
+    "ps" -> {model | ps = newSection}
+    "nt" -> {model | nt = newSection}
+    _    -> {model | gs = newSection}
 
 -- VIEW
 
@@ -108,12 +145,10 @@ view model =
       [ caption 
         [titleStyle model]
         [ span [onClick ToggleModelShow] [text model.title]
-        , br [] []
-        , button 
-          [ class "button"
-          , onClick ToggleCollect
-          ] 
-          [text "Collect"]
+        , p [] 
+          [ button [ class "button", onClick ToggleCollect] 
+            [text "Collect"] 
+          ]
         ]
       , tr 
           [ class "rowStyle" ]
@@ -146,6 +181,7 @@ view model =
     , div [] (thisText model model.nt )
     , div [] (thisText model model.gs )
     , div [ collectStyle model.collect ] (thisCollect model.collect)
+
 
 --    [ li [titleStyle model, onClick ToggleModelShow] [text model.title]
  
@@ -209,6 +245,8 @@ thisText model lessons =
             [ span [style [("position", "relative"), ("top", "1em")]]
                 [ button [class "translationButton", onClick (ToggleShow l)] [text "Hide"]
                 , versionSelect model l
+                , altReading model l
+--                 , comments model l
                 ]
             , Markdown.toHtml [] l.body
             ]
@@ -271,6 +309,33 @@ versionSelect model lesson =
       ]
       (List.map thisVersion model.config.vers)
 
+altReading: Model -> Models.Lesson -> Html Msg
+altReading model lesson =
+  input [ placeholder "Alt Reading"
+        , autofocus True
+        , value lesson.altRead
+        , name "altReading"
+        , onInput (UpdateAltReading lesson)
+        -- , on "keyup" (Json.map 13 keyCode) (RequestAltReading lesson) -- enter
+        , onEnter (RequestAltReading lesson)
+        ] 
+        []
+
+-- comments: Model -> Models.Lesson -> Html Msg
+-- comments model lesson =
+--   button [class "commentsButton", onClick (ToggleComments lesson)] [text "Comments"]
+-- button [class "translationButton", onClick (ToggleShow l)] [text "Hide"]
+
+onEnter : Msg -> Attribute Msg
+onEnter msg =
+  let
+    tagger code =
+      if code == 13 then
+        msg
+      else
+        NoOp
+  in
+    on "keydown" (Json.map tagger keyCode)
 
 
 -- STYLE
@@ -319,6 +384,3 @@ collectStyle model =
     , ("list-style-type", "none")
     , ("display", "inline-block")
     ]
-
-
-

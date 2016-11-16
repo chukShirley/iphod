@@ -9026,7 +9026,19 @@ var _user$project$Iphod_Models$initCollect = {
 		[])
 };
 var _user$project$Iphod_Models$initProper = {title: '', text: ''};
-var _user$project$Iphod_Models$initLesson = {style: '', show: false, read: '', body: '', id: '', section: '', version: ''};
+var _user$project$Iphod_Models$initLesson = {
+	style: '',
+	show: false,
+	read: '',
+	body: '',
+	id: '',
+	section: '',
+	version: '',
+	altRead: '',
+	notes: _elm_lang$core$Native_List.fromArray(
+		[]),
+	cmd: ''
+};
 var _user$project$Iphod_Models$emailInit = {from: '', topic: '', text: ''};
 var _user$project$Iphod_Models$configInit = {
 	ot: 'ESV',
@@ -9104,6 +9116,25 @@ var _user$project$Iphod_Models$initDailyEP = {
 	epp: _elm_lang$core$Native_List.fromArray(
 		[])
 };
+var _user$project$Iphod_Models$initShout = {
+	section: '',
+	text: '',
+	time: '',
+	user: '',
+	showChat: false,
+	chat: _elm_lang$core$Native_List.fromArray(
+		[]),
+	comment: ''
+};
+var _user$project$Iphod_Models$initNote = {reading: '', text: '', time: ''};
+var _user$project$Iphod_Models$Note = F3(
+	function (a, b, c) {
+		return {reading: a, text: b, time: c};
+	});
+var _user$project$Iphod_Models$Shout = F7(
+	function (a, b, c, d, e, f, g) {
+		return {section: a, text: b, time: c, user: d, showChat: e, chat: f, comment: g};
+	});
 var _user$project$Iphod_Models$Config = F7(
 	function (a, b, c, d, e, f, g) {
 		return {ot: a, ps: b, nt: c, gs: d, fnotes: e, vers: f, current: g};
@@ -9112,10 +9143,27 @@ var _user$project$Iphod_Models$Email = F3(
 	function (a, b, c) {
 		return {from: a, topic: b, text: c};
 	});
-var _user$project$Iphod_Models$Lesson = F7(
-	function (a, b, c, d, e, f, g) {
-		return {style: a, show: b, read: c, body: d, id: e, section: f, version: g};
-	});
+var _user$project$Iphod_Models$Lesson = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {style: a, show: b, read: c, body: d, id: e, section: f, version: g, altRead: h, notes: i, cmd: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var _user$project$Iphod_Models$Proper = F2(
 	function (a, b) {
 		return {title: a, text: b};
@@ -11045,19 +11093,61 @@ var _user$project$Iphod_Sunday$thisCollect = function (sundayCollect) {
 			A2(_elm_lang$core$List$map, this_collect, sundayCollect.collects))
 		]);
 };
+var _user$project$Iphod_Sunday$updateModel = F3(
+	function (model, lesson, newSection) {
+		var _p1 = lesson.section;
+		switch (_p1) {
+			case 'ot':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{ot: newSection});
+			case 'ps':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{ps: newSection});
+			case 'nt':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{nt: newSection});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{gs: newSection});
+		}
+	});
+var _user$project$Iphod_Sunday$thisSection = F2(
+	function (model, lesson) {
+		var _p2 = lesson.section;
+		switch (_p2) {
+			case 'ot':
+				return model.ot;
+			case 'ps':
+				return model.ps;
+			case 'nt':
+				return model.nt;
+			default:
+				return model.gs;
+		}
+	});
 var _user$project$Iphod_Sunday$changeText = F3(
 	function (model, ver, lessons) {
 		var changeText = function (lesson) {
 			return _elm_lang$core$Native_Utils.update(
 				lesson,
-				{version: ver});
+				{
+					version: ver,
+					cmd: A2(
+						_elm_lang$core$Basics_ops['++'],
+						'new',
+						_elm_lang$core$String$toUpper(lesson.section))
+				});
 		};
 		return A2(_elm_lang$core$List$map, changeText, lessons);
 	});
 var _user$project$Iphod_Sunday$update = F2(
 	function (msg, model) {
-		var _p1 = msg;
-		switch (_p1.ctor) {
+		var _p3 = msg;
+		switch (_p3.ctor) {
 			case 'NoOp':
 				return model;
 			case 'ToggleModelShow':
@@ -11067,85 +11157,99 @@ var _user$project$Iphod_Sunday$update = F2(
 						show: _elm_lang$core$Basics$not(model.show)
 					});
 			case 'SetReading':
-				return _p1._0;
+				return _p3._0;
 			case 'GetText':
 				return model;
 			case 'ChangeText':
-				var _p3 = _p1._1;
+				var _p5 = _p3._1;
 				var newModel = function () {
-					var _p2 = _p1._0;
-					switch (_p2) {
+					var _p4 = _p3._0;
+					switch (_p4) {
 						case 'ot':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									ot: A3(_user$project$Iphod_Sunday$changeText, model, _p3, model.ot)
+									ot: A3(_user$project$Iphod_Sunday$changeText, model, _p5, model.ot)
 								});
 						case 'ps':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									ps: A3(_user$project$Iphod_Sunday$changeText, model, _p3, model.ps)
+									ps: A3(_user$project$Iphod_Sunday$changeText, model, _p5, model.ps)
 								});
 						case 'nt':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									nt: A3(_user$project$Iphod_Sunday$changeText, model, _p3, model.nt)
+									nt: A3(_user$project$Iphod_Sunday$changeText, model, _p5, model.nt)
 								});
 						default:
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									gs: A3(_user$project$Iphod_Sunday$changeText, model, _p3, model.gs)
+									gs: A3(_user$project$Iphod_Sunday$changeText, model, _p5, model.gs)
 								});
 					}
 				}();
 				return newModel;
-			case 'ToggleShow':
-				var _p6 = _p1._0;
-				var update_text = function (this_lesson) {
+			case 'UpdateAltReading':
+				var _p6 = _p3._0;
+				var update_altReading = function (this_lesson) {
 					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p6.id) ? _elm_lang$core$Native_Utils.update(
+						this_lesson,
+						{altRead: _p3._1}) : this_lesson;
+				};
+				var this_section = A2(_user$project$Iphod_Sunday$thisSection, model, _p6);
+				var newSection = A2(_elm_lang$core$List$map, update_altReading, this_section);
+				var newModel = A3(_user$project$Iphod_Sunday$updateModel, model, _p6, newSection);
+				return newModel;
+			case 'RequestAltReading':
+				var _p8 = _p3._0;
+				var newLesson = _elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$core$Native_Utils.update(
+						_p8,
+						{
+							cmd: A2(
+								_elm_lang$core$Basics_ops['++'],
+								'alt',
+								_elm_lang$core$String$toUpper(_p8.section))
+						})
+					]);
+				var newModel = function () {
+					var _p7 = _p8.section;
+					switch (_p7) {
+						case 'ot':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{ot: newLesson});
+						case 'ps':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{ps: newLesson});
+						case 'nt':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{nt: newLesson});
+						default:
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{gs: newLesson});
+					}
+				}();
+				return newModel;
+			case 'ToggleShow':
+				var _p9 = _p3._0;
+				var update_text = function (this_lesson) {
+					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p9.id) ? _elm_lang$core$Native_Utils.update(
 						this_lesson,
 						{
 							show: _elm_lang$core$Basics$not(this_lesson.show)
 						}) : this_lesson;
 				};
-				var this_section = function () {
-					var _p4 = _p6.section;
-					switch (_p4) {
-						case 'ot':
-							return model.ot;
-						case 'ps':
-							return model.ps;
-						case 'nt':
-							return model.nt;
-						default:
-							return model.gs;
-					}
-				}();
+				var this_section = A2(_user$project$Iphod_Sunday$thisSection, model, _p9);
 				var newSection = A2(_elm_lang$core$List$map, update_text, this_section);
-				var newModel = function () {
-					var _p5 = _p6.section;
-					switch (_p5) {
-						case 'ot':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{ot: newSection});
-						case 'ps':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{ps: newSection});
-						case 'nt':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{nt: newSection});
-						default:
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{gs: newSection});
-					}
-				}();
+				var newModel = A3(_user$project$Iphod_Sunday$updateModel, model, _p9, newSection);
 				return newModel;
 			default:
 				var collect = model.collect;
@@ -11169,6 +11273,9 @@ var _user$project$Iphod_Sunday$ToggleCollect = {ctor: 'ToggleCollect'};
 var _user$project$Iphod_Sunday$ToggleModelShow = {ctor: 'ToggleModelShow'};
 var _user$project$Iphod_Sunday$ToggleShow = function (a) {
 	return {ctor: 'ToggleShow', _0: a};
+};
+var _user$project$Iphod_Sunday$RequestAltReading = function (a) {
+	return {ctor: 'RequestAltReading', _0: a};
 };
 var _user$project$Iphod_Sunday$ChangeText = F2(
 	function (a, b) {
@@ -11204,9 +11311,136 @@ var _user$project$Iphod_Sunday$versionSelect = F2(
 				]),
 			A2(_elm_lang$core$List$map, thisVersion, model.config.vers));
 	});
+var _user$project$Iphod_Sunday$UpdateAltReading = F2(
+	function (a, b) {
+		return {ctor: 'UpdateAltReading', _0: a, _1: b};
+	});
 var _user$project$Iphod_Sunday$GetText = function (a) {
 	return {ctor: 'GetText', _0: a};
 };
+var _user$project$Iphod_Sunday$thisReading = F2(
+	function (model, section) {
+		var req = function (l) {
+			var _p10 = section;
+			switch (_p10.ctor) {
+				case 'OT':
+					return _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
+							{ctor: '_Tuple2', _0: 'section', _1: l.section},
+							{ctor: '_Tuple2', _0: 'id', _1: l.id},
+							{ctor: '_Tuple2', _0: 'read', _1: l.read},
+							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ot},
+							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
+						]);
+				case 'PS':
+					return _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
+							{ctor: '_Tuple2', _0: 'section', _1: l.section},
+							{ctor: '_Tuple2', _0: 'id', _1: l.id},
+							{ctor: '_Tuple2', _0: 'read', _1: l.read},
+							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ps},
+							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
+						]);
+				case 'NT':
+					return _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
+							{ctor: '_Tuple2', _0: 'section', _1: l.section},
+							{ctor: '_Tuple2', _0: 'id', _1: l.id},
+							{ctor: '_Tuple2', _0: 'read', _1: l.read},
+							{ctor: '_Tuple2', _0: 'ver', _1: model.config.nt},
+							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
+						]);
+				default:
+					return _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
+							{ctor: '_Tuple2', _0: 'section', _1: l.section},
+							{ctor: '_Tuple2', _0: 'id', _1: l.id},
+							{ctor: '_Tuple2', _0: 'read', _1: l.read},
+							{ctor: '_Tuple2', _0: 'ver', _1: model.config.gs},
+							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
+						]);
+			}
+		};
+		var this_lesson = function (l) {
+			return _elm_lang$core$Native_Utils.eq(
+				_elm_lang$core$String$length(l.body),
+				0) ? A2(
+				_elm_lang$html$Html$li,
+				_user$project$Iphod_Sunday$hoverable(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_user$project$Iphod_Sunday$this_style(l),
+							_elm_lang$html$Html_Events$onClick(
+							_user$project$Iphod_Sunday$GetText(
+								req(l)))
+						])),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(l.read)
+					])) : A2(
+				_elm_lang$html$Html$li,
+				_user$project$Iphod_Sunday$hoverable(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_user$project$Iphod_Sunday$this_style(l),
+							_elm_lang$html$Html_Events$onClick(
+							_user$project$Iphod_Sunday$ToggleShow(l))
+						])),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(l.read)
+					]));
+		};
+		var lessons = function () {
+			var _p11 = section;
+			switch (_p11.ctor) {
+				case 'OT':
+					return model.ot;
+				case 'PS':
+					return model.ps;
+				case 'NT':
+					return model.nt;
+				default:
+					return model.gs;
+			}
+		}();
+		return A2(_elm_lang$core$List$map, this_lesson, lessons);
+	});
+var _user$project$Iphod_Sunday$SetReading = function (a) {
+	return {ctor: 'SetReading', _0: a};
+};
+var _user$project$Iphod_Sunday$NoOp = {ctor: 'NoOp'};
+var _user$project$Iphod_Sunday$onEnter = function (msg) {
+	var tagger = function (code) {
+		return _elm_lang$core$Native_Utils.eq(code, 13) ? msg : _user$project$Iphod_Sunday$NoOp;
+	};
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'keydown',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$keyCode));
+};
+var _user$project$Iphod_Sunday$altReading = F2(
+	function (model, lesson) {
+		return A2(
+			_elm_lang$html$Html$input,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$placeholder('Alt Reading'),
+					_elm_lang$html$Html_Attributes$autofocus(true),
+					_elm_lang$html$Html_Attributes$value(lesson.altRead),
+					_elm_lang$html$Html_Attributes$name('altReading'),
+					_elm_lang$html$Html_Events$onInput(
+					_user$project$Iphod_Sunday$UpdateAltReading(lesson)),
+					_user$project$Iphod_Sunday$onEnter(
+					_user$project$Iphod_Sunday$RequestAltReading(lesson))
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[]));
+	});
 var _user$project$Iphod_Sunday$thisText = F2(
 	function (model, lessons) {
 		var this_text = function (l) {
@@ -11322,7 +11556,8 @@ var _user$project$Iphod_Sunday$thisText = F2(
 									[
 										_elm_lang$html$Html$text('Hide')
 									])),
-								A2(_user$project$Iphod_Sunday$versionSelect, model, l)
+								A2(_user$project$Iphod_Sunday$versionSelect, model, l),
+								A2(_user$project$Iphod_Sunday$altReading, model, l)
 							])),
 						A2(
 						_evancz$elm_markdown$Markdown$toHtml,
@@ -11332,98 +11567,6 @@ var _user$project$Iphod_Sunday$thisText = F2(
 					]));
 		};
 		return A2(_elm_lang$core$List$map, this_text, lessons);
-	});
-var _user$project$Iphod_Sunday$thisReading = F2(
-	function (model, section) {
-		var req = function (l) {
-			var _p7 = section;
-			switch (_p7.ctor) {
-				case 'OT':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ot},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				case 'PS':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ps},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				case 'NT':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.nt},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				default:
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.gs},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-			}
-		};
-		var this_lesson = function (l) {
-			return _elm_lang$core$Native_Utils.eq(
-				_elm_lang$core$String$length(l.body),
-				0) ? A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_Sunday$hoverable(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_user$project$Iphod_Sunday$this_style(l),
-							_elm_lang$html$Html_Events$onClick(
-							_user$project$Iphod_Sunday$GetText(
-								req(l)))
-						])),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(l.read)
-					])) : A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_Sunday$hoverable(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_user$project$Iphod_Sunday$this_style(l),
-							_elm_lang$html$Html_Events$onClick(
-							_user$project$Iphod_Sunday$ToggleShow(l))
-						])),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(l.read)
-					]));
-		};
-		var lessons = function () {
-			var _p8 = section;
-			switch (_p8.ctor) {
-				case 'OT':
-					return model.ot;
-				case 'PS':
-					return model.ps;
-				case 'NT':
-					return model.nt;
-				default:
-					return model.gs;
-			}
-		}();
-		return A2(_elm_lang$core$List$map, this_lesson, lessons);
 	});
 var _user$project$Iphod_Sunday$view = function (model) {
 	return A2(
@@ -11460,21 +11603,22 @@ var _user$project$Iphod_Sunday$view = function (model) {
 										_elm_lang$html$Html$text(model.title)
 									])),
 								A2(
-								_elm_lang$html$Html$br,
+								_elm_lang$html$Html$p,
 								_elm_lang$core$Native_List.fromArray(
 									[]),
 								_elm_lang$core$Native_List.fromArray(
-									[])),
-								A2(
-								_elm_lang$html$Html$button,
-								_elm_lang$core$Native_List.fromArray(
 									[
-										_elm_lang$html$Html_Attributes$class('button'),
-										_elm_lang$html$Html_Events$onClick(_user$project$Iphod_Sunday$ToggleCollect)
-									]),
-								_elm_lang$core$Native_List.fromArray(
-									[
-										_elm_lang$html$Html$text('Collect')
+										A2(
+										_elm_lang$html$Html$button,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('button'),
+												_elm_lang$html$Html_Events$onClick(_user$project$Iphod_Sunday$ToggleCollect)
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html$text('Collect')
+											]))
 									]))
 							])),
 						A2(
@@ -11641,10 +11785,6 @@ var _user$project$Iphod_Sunday$view = function (model) {
 				_user$project$Iphod_Sunday$thisCollect(model.collect))
 			]));
 };
-var _user$project$Iphod_Sunday$SetReading = function (a) {
-	return {ctor: 'SetReading', _0: a};
-};
-var _user$project$Iphod_Sunday$NoOp = {ctor: 'NoOp'};
 
 var _user$project$MIndex$epReadingStyle = function (model) {
 	return A2(
@@ -11734,6 +11874,22 @@ var _user$project$MIndex$initModel = {
 		[])
 };
 var _user$project$MIndex$init = {ctor: '_Tuple2', _0: _user$project$MIndex$initModel, _1: _elm_lang$core$Platform_Cmd$none};
+var _user$project$MIndex$requestReading = _elm_lang$core$Native_Platform.outgoingPort(
+	'requestReading',
+	function (v) {
+		return _elm_lang$core$Native_List.toArray(v).map(
+			function (v) {
+				return v;
+			});
+	});
+var _user$project$MIndex$requestAltReading = _elm_lang$core$Native_Platform.outgoingPort(
+	'requestAltReading',
+	function (v) {
+		return _elm_lang$core$Native_List.toArray(v).map(
+			function (v) {
+				return v;
+			});
+	});
 var _user$project$MIndex$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
@@ -11784,7 +11940,52 @@ var _user$project$MIndex$update = F2(
 					{
 						eu: A2(_user$project$Iphod_Sunday$update, _p0._0, model.eu)
 					});
-				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
+				var newCmd = function () {
+					var gsAlt = A2(
+						_elm_lang$core$Maybe$withDefault,
+						_user$project$Iphod_Models$initLesson,
+						_elm_lang$core$List$head(newModel.eu.gs)).altRead;
+					var ntAlt = A2(
+						_elm_lang$core$Maybe$withDefault,
+						_user$project$Iphod_Models$initLesson,
+						_elm_lang$core$List$head(newModel.eu.nt)).altRead;
+					var otAlt = A2(
+						_elm_lang$core$Maybe$withDefault,
+						_user$project$Iphod_Models$initLesson,
+						_elm_lang$core$List$head(newModel.eu.ot)).altRead;
+					var gsVer = A2(
+						_elm_lang$core$Maybe$withDefault,
+						_user$project$Iphod_Models$initLesson,
+						_elm_lang$core$List$head(newModel.eu.gs)).version;
+					var ntVer = A2(
+						_elm_lang$core$Maybe$withDefault,
+						_user$project$Iphod_Models$initLesson,
+						_elm_lang$core$List$head(newModel.eu.nt)).version;
+					var psVer = A2(
+						_elm_lang$core$Maybe$withDefault,
+						_user$project$Iphod_Models$initLesson,
+						_elm_lang$core$List$head(newModel.eu.ps)).version;
+					var otVer = A2(
+						_elm_lang$core$Maybe$withDefault,
+						_user$project$Iphod_Models$initLesson,
+						_elm_lang$core$List$head(newModel.eu.ot)).version;
+					return (!_elm_lang$core$Native_Utils.eq(otVer, '')) ? _user$project$MIndex$requestReading(
+						_elm_lang$core$Native_List.fromArray(
+							['ot', otVer, model.eu.date])) : ((!_elm_lang$core$Native_Utils.eq(psVer, '')) ? _user$project$MIndex$requestReading(
+						_elm_lang$core$Native_List.fromArray(
+							['ps', psVer, model.eu.date])) : ((!_elm_lang$core$Native_Utils.eq(ntVer, '')) ? _user$project$MIndex$requestReading(
+						_elm_lang$core$Native_List.fromArray(
+							['nt', ntVer, model.eu.date])) : ((!_elm_lang$core$Native_Utils.eq(gsVer, '')) ? _user$project$MIndex$requestReading(
+						_elm_lang$core$Native_List.fromArray(
+							['gs', gsVer, model.eu.date])) : ((!_elm_lang$core$Native_Utils.eq(otAlt, '')) ? _user$project$MIndex$requestAltReading(
+						_elm_lang$core$Native_List.fromArray(
+							['ot', otVer, otAlt])) : ((!_elm_lang$core$Native_Utils.eq(ntAlt, '')) ? _user$project$MIndex$requestAltReading(
+						_elm_lang$core$Native_List.fromArray(
+							['ot', ntVer, ntAlt])) : ((!_elm_lang$core$Native_Utils.eq(gsAlt, '')) ? _user$project$MIndex$requestAltReading(
+						_elm_lang$core$Native_List.fromArray(
+							['gs', gsVer, gsAlt])) : _elm_lang$core$Platform_Cmd$none))))));
+				}();
+				return {ctor: '_Tuple2', _0: newModel, _1: newCmd};
 			case 'ModMP':
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
@@ -11972,8 +12173,43 @@ var _user$project$MIndex$portEU = _elm_lang$core$Native_Platform.incomingPort(
 																																			_elm_lang$core$Json_Decode$andThen,
 																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
 																																			function (version) {
-																																				return _elm_lang$core$Json_Decode$succeed(
-																																					{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																																				return A2(
+																																					_elm_lang$core$Json_Decode$andThen,
+																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																					function (altRead) {
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(
+																																								_elm_lang$core$Json_Decode_ops[':='],
+																																								'notes',
+																																								_elm_lang$core$Json_Decode$list(
+																																									A2(
+																																										_elm_lang$core$Json_Decode$andThen,
+																																										A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																										function (reading) {
+																																											return A2(
+																																												_elm_lang$core$Json_Decode$andThen,
+																																												A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																												function (text) {
+																																													return A2(
+																																														_elm_lang$core$Json_Decode$andThen,
+																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																														function (time) {
+																																															return _elm_lang$core$Json_Decode$succeed(
+																																																{reading: reading, text: text, time: time});
+																																														});
+																																												});
+																																										}))),
+																																							function (notes) {
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																									function (cmd) {
+																																										return _elm_lang$core$Json_Decode$succeed(
+																																											{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																									});
+																																							});
+																																					});
 																																			});
 																																	});
 																															});
@@ -12016,8 +12252,43 @@ var _user$project$MIndex$portEU = _elm_lang$core$Native_Platform.incomingPort(
 																																					_elm_lang$core$Json_Decode$andThen,
 																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
 																																					function (version) {
-																																						return _elm_lang$core$Json_Decode$succeed(
-																																							{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																							function (altRead) {
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(
+																																										_elm_lang$core$Json_Decode_ops[':='],
+																																										'notes',
+																																										_elm_lang$core$Json_Decode$list(
+																																											A2(
+																																												_elm_lang$core$Json_Decode$andThen,
+																																												A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																												function (reading) {
+																																													return A2(
+																																														_elm_lang$core$Json_Decode$andThen,
+																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																														function (text) {
+																																															return A2(
+																																																_elm_lang$core$Json_Decode$andThen,
+																																																A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																function (time) {
+																																																	return _elm_lang$core$Json_Decode$succeed(
+																																																		{reading: reading, text: text, time: time});
+																																																});
+																																														});
+																																												}))),
+																																									function (notes) {
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																											function (cmd) {
+																																												return _elm_lang$core$Json_Decode$succeed(
+																																													{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																											});
+																																									});
+																																							});
 																																					});
 																																			});
 																																	});
@@ -12060,8 +12331,43 @@ var _user$project$MIndex$portEU = _elm_lang$core$Native_Platform.incomingPort(
 																																							_elm_lang$core$Json_Decode$andThen,
 																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
 																																							function (version) {
-																																								return _elm_lang$core$Json_Decode$succeed(
-																																									{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																									function (altRead) {
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(
+																																												_elm_lang$core$Json_Decode_ops[':='],
+																																												'notes',
+																																												_elm_lang$core$Json_Decode$list(
+																																													A2(
+																																														_elm_lang$core$Json_Decode$andThen,
+																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																														function (reading) {
+																																															return A2(
+																																																_elm_lang$core$Json_Decode$andThen,
+																																																A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																																function (text) {
+																																																	return A2(
+																																																		_elm_lang$core$Json_Decode$andThen,
+																																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																		function (time) {
+																																																			return _elm_lang$core$Json_Decode$succeed(
+																																																				{reading: reading, text: text, time: time});
+																																																		});
+																																																});
+																																														}))),
+																																											function (notes) {
+																																												return A2(
+																																													_elm_lang$core$Json_Decode$andThen,
+																																													A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																													function (cmd) {
+																																														return _elm_lang$core$Json_Decode$succeed(
+																																															{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																													});
+																																											});
+																																									});
 																																							});
 																																					});
 																																			});
@@ -12104,8 +12410,43 @@ var _user$project$MIndex$portEU = _elm_lang$core$Native_Platform.incomingPort(
 																																									_elm_lang$core$Json_Decode$andThen,
 																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
 																																									function (version) {
-																																										return _elm_lang$core$Json_Decode$succeed(
-																																											{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																											function (altRead) {
+																																												return A2(
+																																													_elm_lang$core$Json_Decode$andThen,
+																																													A2(
+																																														_elm_lang$core$Json_Decode_ops[':='],
+																																														'notes',
+																																														_elm_lang$core$Json_Decode$list(
+																																															A2(
+																																																_elm_lang$core$Json_Decode$andThen,
+																																																A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																																function (reading) {
+																																																	return A2(
+																																																		_elm_lang$core$Json_Decode$andThen,
+																																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																																		function (text) {
+																																																			return A2(
+																																																				_elm_lang$core$Json_Decode$andThen,
+																																																				A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																				function (time) {
+																																																					return _elm_lang$core$Json_Decode$succeed(
+																																																						{reading: reading, text: text, time: time});
+																																																				});
+																																																		});
+																																																}))),
+																																													function (notes) {
+																																														return A2(
+																																															_elm_lang$core$Json_Decode$andThen,
+																																															A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																															function (cmd) {
+																																																return _elm_lang$core$Json_Decode$succeed(
+																																																	{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																															});
+																																													});
+																																											});
 																																									});
 																																							});
 																																					});
@@ -12300,8 +12641,43 @@ var _user$project$MIndex$portMP = _elm_lang$core$Native_Platform.incomingPort(
 																																			_elm_lang$core$Json_Decode$andThen,
 																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
 																																			function (version) {
-																																				return _elm_lang$core$Json_Decode$succeed(
-																																					{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																																				return A2(
+																																					_elm_lang$core$Json_Decode$andThen,
+																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																					function (altRead) {
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(
+																																								_elm_lang$core$Json_Decode_ops[':='],
+																																								'notes',
+																																								_elm_lang$core$Json_Decode$list(
+																																									A2(
+																																										_elm_lang$core$Json_Decode$andThen,
+																																										A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																										function (reading) {
+																																											return A2(
+																																												_elm_lang$core$Json_Decode$andThen,
+																																												A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																												function (text) {
+																																													return A2(
+																																														_elm_lang$core$Json_Decode$andThen,
+																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																														function (time) {
+																																															return _elm_lang$core$Json_Decode$succeed(
+																																																{reading: reading, text: text, time: time});
+																																														});
+																																												});
+																																										}))),
+																																							function (notes) {
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																									function (cmd) {
+																																										return _elm_lang$core$Json_Decode$succeed(
+																																											{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																									});
+																																							});
+																																					});
 																																			});
 																																	});
 																															});
@@ -12344,8 +12720,43 @@ var _user$project$MIndex$portMP = _elm_lang$core$Native_Platform.incomingPort(
 																																					_elm_lang$core$Json_Decode$andThen,
 																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
 																																					function (version) {
-																																						return _elm_lang$core$Json_Decode$succeed(
-																																							{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																							function (altRead) {
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(
+																																										_elm_lang$core$Json_Decode_ops[':='],
+																																										'notes',
+																																										_elm_lang$core$Json_Decode$list(
+																																											A2(
+																																												_elm_lang$core$Json_Decode$andThen,
+																																												A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																												function (reading) {
+																																													return A2(
+																																														_elm_lang$core$Json_Decode$andThen,
+																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																														function (text) {
+																																															return A2(
+																																																_elm_lang$core$Json_Decode$andThen,
+																																																A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																function (time) {
+																																																	return _elm_lang$core$Json_Decode$succeed(
+																																																		{reading: reading, text: text, time: time});
+																																																});
+																																														});
+																																												}))),
+																																									function (notes) {
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																											function (cmd) {
+																																												return _elm_lang$core$Json_Decode$succeed(
+																																													{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																											});
+																																									});
+																																							});
 																																					});
 																																			});
 																																	});
@@ -12388,8 +12799,43 @@ var _user$project$MIndex$portMP = _elm_lang$core$Native_Platform.incomingPort(
 																																							_elm_lang$core$Json_Decode$andThen,
 																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
 																																							function (version) {
-																																								return _elm_lang$core$Json_Decode$succeed(
-																																									{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																									function (altRead) {
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(
+																																												_elm_lang$core$Json_Decode_ops[':='],
+																																												'notes',
+																																												_elm_lang$core$Json_Decode$list(
+																																													A2(
+																																														_elm_lang$core$Json_Decode$andThen,
+																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																														function (reading) {
+																																															return A2(
+																																																_elm_lang$core$Json_Decode$andThen,
+																																																A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																																function (text) {
+																																																	return A2(
+																																																		_elm_lang$core$Json_Decode$andThen,
+																																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																		function (time) {
+																																																			return _elm_lang$core$Json_Decode$succeed(
+																																																				{reading: reading, text: text, time: time});
+																																																		});
+																																																});
+																																														}))),
+																																											function (notes) {
+																																												return A2(
+																																													_elm_lang$core$Json_Decode$andThen,
+																																													A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																													function (cmd) {
+																																														return _elm_lang$core$Json_Decode$succeed(
+																																															{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																													});
+																																											});
+																																									});
 																																							});
 																																					});
 																																			});
@@ -12583,8 +13029,43 @@ var _user$project$MIndex$portEP = _elm_lang$core$Native_Platform.incomingPort(
 																																			_elm_lang$core$Json_Decode$andThen,
 																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
 																																			function (version) {
-																																				return _elm_lang$core$Json_Decode$succeed(
-																																					{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																																				return A2(
+																																					_elm_lang$core$Json_Decode$andThen,
+																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																					function (altRead) {
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(
+																																								_elm_lang$core$Json_Decode_ops[':='],
+																																								'notes',
+																																								_elm_lang$core$Json_Decode$list(
+																																									A2(
+																																										_elm_lang$core$Json_Decode$andThen,
+																																										A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																										function (reading) {
+																																											return A2(
+																																												_elm_lang$core$Json_Decode$andThen,
+																																												A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																												function (text) {
+																																													return A2(
+																																														_elm_lang$core$Json_Decode$andThen,
+																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																														function (time) {
+																																															return _elm_lang$core$Json_Decode$succeed(
+																																																{reading: reading, text: text, time: time});
+																																														});
+																																												});
+																																										}))),
+																																							function (notes) {
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																									function (cmd) {
+																																										return _elm_lang$core$Json_Decode$succeed(
+																																											{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																									});
+																																							});
+																																					});
 																																			});
 																																	});
 																															});
@@ -12627,8 +13108,43 @@ var _user$project$MIndex$portEP = _elm_lang$core$Native_Platform.incomingPort(
 																																					_elm_lang$core$Json_Decode$andThen,
 																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
 																																					function (version) {
-																																						return _elm_lang$core$Json_Decode$succeed(
-																																							{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																							function (altRead) {
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(
+																																										_elm_lang$core$Json_Decode_ops[':='],
+																																										'notes',
+																																										_elm_lang$core$Json_Decode$list(
+																																											A2(
+																																												_elm_lang$core$Json_Decode$andThen,
+																																												A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																												function (reading) {
+																																													return A2(
+																																														_elm_lang$core$Json_Decode$andThen,
+																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																														function (text) {
+																																															return A2(
+																																																_elm_lang$core$Json_Decode$andThen,
+																																																A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																function (time) {
+																																																	return _elm_lang$core$Json_Decode$succeed(
+																																																		{reading: reading, text: text, time: time});
+																																																});
+																																														});
+																																												}))),
+																																									function (notes) {
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																											function (cmd) {
+																																												return _elm_lang$core$Json_Decode$succeed(
+																																													{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																											});
+																																									});
+																																							});
 																																					});
 																																			});
 																																	});
@@ -12671,8 +13187,43 @@ var _user$project$MIndex$portEP = _elm_lang$core$Native_Platform.incomingPort(
 																																							_elm_lang$core$Json_Decode$andThen,
 																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
 																																							function (version) {
-																																								return _elm_lang$core$Json_Decode$succeed(
-																																									{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																									function (altRead) {
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(
+																																												_elm_lang$core$Json_Decode_ops[':='],
+																																												'notes',
+																																												_elm_lang$core$Json_Decode$list(
+																																													A2(
+																																														_elm_lang$core$Json_Decode$andThen,
+																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																														function (reading) {
+																																															return A2(
+																																																_elm_lang$core$Json_Decode$andThen,
+																																																A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																																function (text) {
+																																																	return A2(
+																																																		_elm_lang$core$Json_Decode$andThen,
+																																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																		function (time) {
+																																																			return _elm_lang$core$Json_Decode$succeed(
+																																																				{reading: reading, text: text, time: time});
+																																																		});
+																																																});
+																																														}))),
+																																											function (notes) {
+																																												return A2(
+																																													_elm_lang$core$Json_Decode$andThen,
+																																													A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																													function (cmd) {
+																																														return _elm_lang$core$Json_Decode$succeed(
+																																															{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																													});
+																																											});
+																																									});
 																																							});
 																																					});
 																																			});
@@ -12726,8 +13277,43 @@ var _user$project$MIndex$portOneLesson = _elm_lang$core$Native_Platform.incoming
 															_elm_lang$core$Json_Decode$andThen,
 															A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
 															function (version) {
-																return _elm_lang$core$Json_Decode$succeed(
-																	{style: style, show: show, read: read, body: body, id: id, section: section, version: version});
+																return A2(
+																	_elm_lang$core$Json_Decode$andThen,
+																	A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																	function (altRead) {
+																		return A2(
+																			_elm_lang$core$Json_Decode$andThen,
+																			A2(
+																				_elm_lang$core$Json_Decode_ops[':='],
+																				'notes',
+																				_elm_lang$core$Json_Decode$list(
+																					A2(
+																						_elm_lang$core$Json_Decode$andThen,
+																						A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																						function (reading) {
+																							return A2(
+																								_elm_lang$core$Json_Decode$andThen,
+																								A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																								function (text) {
+																									return A2(
+																										_elm_lang$core$Json_Decode$andThen,
+																										A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																										function (time) {
+																											return _elm_lang$core$Json_Decode$succeed(
+																												{reading: reading, text: text, time: time});
+																										});
+																								});
+																						}))),
+																			function (notes) {
+																				return A2(
+																					_elm_lang$core$Json_Decode$andThen,
+																					A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																					function (cmd) {
+																						return _elm_lang$core$Json_Decode$succeed(
+																							{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																					});
+																			});
+																	});
 															});
 													});
 											});

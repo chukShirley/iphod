@@ -18,7 +18,9 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-
+$(document).on('input', 'textarea', function () {
+  $(this).outerHeight('1em').outerHeight(this.scrollHeight); // 38 or '1em' -min-height
+}); 
 // LOCAL STORAGE ------------------------
 
 function storageAvailable(of_type) {
@@ -61,6 +63,18 @@ function init_config_model() {
         }
   }
   return m;
+}
+
+function init_shout() {
+  var shout = { section: ""
+  , text: ""
+  , time: ""
+  , user: get_init("user_name", "")
+  , showChat: false
+  , chat: []
+  , comment: ""
+  }
+  return shout;
 }
 
 function get_versions(arg1, arg2) {
@@ -108,6 +122,12 @@ function remove_abbr(v, i, ary){
   return v != this;
 }
 
+function save_user_name(name) {
+  if (storageAvailable('localStorage')) {
+    window.localStorage.setItem("user_name", name);
+  }
+}
+
 
 // SOCKETS ------------------------
 
@@ -115,6 +135,8 @@ import "./menu"
 import socket from "./socket"
 
 let path = window.location.pathname
+var now = new Date()
+  , tz = now.toString().split("GMT")[1].split(" (")[0]; // timezone, i.e. -0700
 
 // mobile landing page
 
@@ -124,11 +146,17 @@ if ( path.match(/mindex/)) {
 
 // MP/EP
 // grr - match doesn't match utf8 codes, must find alt solution
-if (path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
+if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   let channel = socket.channel("iphod:readings")
+    , elmHeaderDiv = document.getElementById('header-elm-container')
+    , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
+
+  
   channel.join()
     .receive("ok", resp => { 
       console.log("OK", resp);
+      channel.push("lessons_now", [now, tz]);
+      elmHeaderApp.ports.portInitShout.send(init_shout())
     })
     .receive("error", resp => { console.log("Unable to join Iphod", resp) })
     
@@ -143,9 +171,52 @@ if (path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|e
   channel.on('single_lesson', data => {
     let resp = data.resp[0],
         target = "#" + resp.section;
-
-    console.log("SINGLE LESSON", resp);
     $(target).next().replaceWith(resp.body)
+  })
+
+  
+  elmHeaderApp.ports.toggleChat.subscribe(function(request) {
+    request ? showchat() : hidechat();
+  })
+
+  function showchat(){
+    $("#chat-container").show();
+    $(".toggle-chat").text("Hide Chat");
+    $("#reading-container").css("width", "59%")
+  }
+  
+  function hidechat(){
+    $("#chat-container").hide();
+    $(".toggle-chat").text("Show Chat");
+    $("#reading-container").css("width", "99%")
+  }
+
+  $(".toggle-chat").click( function() {
+    $("#chat-container").is(":visible") ? hidechat() : showchat()
+  })
+  
+  elmHeaderApp.ports.submitComment.subscribe(function(data){
+    var payload = {user: data.user, text: data.comment, time: new Date()}
+    if (data.user.trim().length == 0) {
+      alert("You may not post without a name.")
+    }
+    else {
+      $('#say-this').html('')
+      save_user_name(data.user);
+      channel.push("shout", payload)
+    }
+  })
+
+  channel.on('shout', data => {
+    var stamp = new Date(data.time)
+      , shout = data.text 
+                + " " 
+                + "<p class='whowhen'>" 
+                + data.user 
+                + " at " 
+                + stamp.toLocaleString()
+                + "</p>";
+    elmHeaderApp.ports.portShout.send(shout);
   })
 
 }
@@ -153,18 +224,18 @@ if (path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|e
 
 // landing page, calendar
 
-if ( path == "/" || path.match(/calendar/) || path.match(/mindex/)) {
+if ( path.match(/calendar/) || path.match(/mindex/)) {
   
   let channel = socket.channel("iphod:readings")
   channel.join()
     .receive("ok", resp => { 
       elmHeaderApp.ports.portConfig.send(init_config_model());
+      elmHeaderApp.ports.portInitShout.send(init_shout())
     })
     .receive("error", resp => { console.log("Unable to join Iphod", resp) })
     
-  channel.push("init_calendar", "");
+  // channel.push("init_calendar", "");
 
-  
 // header
 
   var elmHeaderDiv = document.getElementById('header-elm-container')
@@ -188,6 +259,23 @@ if ( path == "/" || path.match(/calendar/) || path.match(/mindex/)) {
     }
   })
 
+  elmHeaderApp.ports.toggleChat.subscribe(function(request) {
+    request ? showchat() : hidechat();
+  })
+
+  elmHeaderApp.ports.submitComment.subscribe(function(data){
+    var payload = {user: data.user, text: data.comment, time: new Date()}
+    if (data.user.trim().length == 0) {
+      alert("You may not post without a name.")
+    }
+    else {
+      $('#say-this').html('')
+      save_user_name(data.user);
+      channel.push("shout", payload)
+    }
+  })
+  
+
   // mindex
 if ( path.match(/mindex/) ) { 
     var elmMindexDiv = document.getElementById('m-elm-container')
@@ -208,6 +296,10 @@ if ( path.match(/mindex/) ) {
   });
 
   $("#more-button").click( function() {$("#header-elm-container").toggle()})
+
+  channel.on('shout', data => {
+    console.log("MINDEX RECVD SHOUT: ", data)
+  })
 
   channel.on('reflection_today', data => {
     elmMindexApp.ports.portReflection.send(data);
@@ -245,7 +337,8 @@ if ( path.match(/mindex/) ) {
       , readings = 
           { date: $(this).attr("value")
           , title: r.title
-          , collect: r.collect
+          //, collect: r.collect
+          , collect: {instruction: "", title: "", collects: [], show: true} // required place holder
           , mp1: r.mp1.split(",")
           , mp2: r.mp2.split(",")
           , mpp: r.mpp.split(",")
@@ -263,6 +356,7 @@ if ( path.match(/mindex/) ) {
     $("#reading-panel").effect("slide", "fast")
   })
 
+
   elmMPanelApp.ports.requestReading.subscribe( function(request) {
     var [vss, ver, service] = request
     channel.push("get_single_reading", [vss, get_version(ver), service, ver])
@@ -275,6 +369,11 @@ if ( path.match(/mindex/) ) {
   elmMPanelApp.ports.requestReflection.subscribe( function(date) {
     channel.push("get_text", ["Reflection", date])
   })
+
+  // function init_collect() {
+  //   var empty_collect = {instruction: "", title: "", collects: [], show: true};
+  //   empty_collect;
+  // }
 }
   
   function rollup() {
@@ -285,11 +384,27 @@ if ( path.match(/mindex/) ) {
     $(".calendar-week").show();
     $("#rollup").text("Roll Up");   
   }
-  
+
   $("#rollup").click( function() {
     $(".calendar-week").is(":visible") ? rollup() : rolldown()
   });
 
+  function showchat(){
+    $("#chat-container").show();
+    $(".toggle-chat").text("Hide Chat");
+    $("#reading-container").css("width", "59%")
+  }
+  
+  function hidechat(){
+    $("#chat-container").hide();
+    $(".toggle-chat").text("Show Chat");
+    $("#reading-container").css("width", "99%")
+  }
+
+  $(".toggle-chat").click( function() {
+    $("#chat-container").is(":visible") ? hidechat() : showchat()
+  })
+  
   $(".prayer-button").click(function() {
     let prayer_type = $(this).attr("data-prayer")
       , ps = get_init("iphod_ps", "Coverdale")
@@ -301,7 +416,23 @@ if ( path.match(/mindex/) ) {
     channel.push("get_text", ["NextSunday", (new Date).toDateString() ] )
   })
 
-  
+  channel.on('alt_lesson', data => {
+    // let resp = data.resp[0]
+
+    elmCalApp.ports.portLesson.send(data.resp);
+  })  
+
+  channel.on('shout', data => {
+    var stamp = new Date(data.time)
+      , shout = data.text 
+                + " " 
+                + "<p class='whowhen'>" 
+                + data.user 
+                + " at " 
+                + stamp.toLocaleString()
+                + "</p>";
+    elmHeaderApp.ports.portShout.send(shout);
+  })
 
   channel.on('reflection_today', data => {
     elmCalApp.ports.portReflection.send(data);
@@ -347,10 +478,17 @@ if ( path.match(/mindex/) ) {
   
   var elmCalDiv = document.getElementById('cal-elm-container')
     , elmCalApp = Elm.Iphod.embed(elmCalDiv)
-  
+
   elmCalApp.ports.requestReading.subscribe(function(request) {
     channel.push("get_lesson", request)
   })
+  
+  elmCalApp.ports.requestAltReading.subscribe(function(request) {
+    var [section, ver, vss] = request;
+    ver = get_version(section) 
+    channel.push("get_alt_reading", [section, ver, vss])
+  })
+
 }
 
 

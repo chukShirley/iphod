@@ -5817,6 +5817,141 @@ var _elm_lang$core$Json_Decode$dict = function (decoder) {
 };
 var _elm_lang$core$Json_Decode$Decoder = {ctor: 'Decoder'};
 
+//import Maybe, Native.List //
+
+var _elm_lang$core$Native_Regex = function() {
+
+function escape(str)
+{
+	return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+function caseInsensitive(re)
+{
+	return new RegExp(re.source, 'gi');
+}
+function regex(raw)
+{
+	return new RegExp(raw, 'g');
+}
+
+function contains(re, string)
+{
+	return string.match(re) !== null;
+}
+
+function find(n, re, str)
+{
+	n = n.ctor === 'All' ? Infinity : n._0;
+	var out = [];
+	var number = 0;
+	var string = str;
+	var lastIndex = re.lastIndex;
+	var prevLastIndex = -1;
+	var result;
+	while (number++ < n && (result = re.exec(string)))
+	{
+		if (prevLastIndex === re.lastIndex) break;
+		var i = result.length - 1;
+		var subs = new Array(i);
+		while (i > 0)
+		{
+			var submatch = result[i];
+			subs[--i] = submatch === undefined
+				? _elm_lang$core$Maybe$Nothing
+				: _elm_lang$core$Maybe$Just(submatch);
+		}
+		out.push({
+			match: result[0],
+			submatches: _elm_lang$core$Native_List.fromArray(subs),
+			index: result.index,
+			number: number
+		});
+		prevLastIndex = re.lastIndex;
+	}
+	re.lastIndex = lastIndex;
+	return _elm_lang$core$Native_List.fromArray(out);
+}
+
+function replace(n, re, replacer, string)
+{
+	n = n.ctor === 'All' ? Infinity : n._0;
+	var count = 0;
+	function jsReplacer(match)
+	{
+		if (count++ >= n)
+		{
+			return match;
+		}
+		var i = arguments.length - 3;
+		var submatches = new Array(i);
+		while (i > 0)
+		{
+			var submatch = arguments[i];
+			submatches[--i] = submatch === undefined
+				? _elm_lang$core$Maybe$Nothing
+				: _elm_lang$core$Maybe$Just(submatch);
+		}
+		return replacer({
+			match: match,
+			submatches: _elm_lang$core$Native_List.fromArray(submatches),
+			index: arguments[i - 1],
+			number: count
+		});
+	}
+	return string.replace(re, jsReplacer);
+}
+
+function split(n, re, str)
+{
+	n = n.ctor === 'All' ? Infinity : n._0;
+	if (n === Infinity)
+	{
+		return _elm_lang$core$Native_List.fromArray(str.split(re));
+	}
+	var string = str;
+	var result;
+	var out = [];
+	var start = re.lastIndex;
+	while (n--)
+	{
+		if (!(result = re.exec(string))) break;
+		out.push(string.slice(start, result.index));
+		start = re.lastIndex;
+	}
+	out.push(string.slice(start));
+	return _elm_lang$core$Native_List.fromArray(out);
+}
+
+return {
+	regex: regex,
+	caseInsensitive: caseInsensitive,
+	escape: escape,
+
+	contains: F2(contains),
+	find: F3(find),
+	replace: F4(replace),
+	split: F3(split)
+};
+
+}();
+
+var _elm_lang$core$Regex$split = _elm_lang$core$Native_Regex.split;
+var _elm_lang$core$Regex$replace = _elm_lang$core$Native_Regex.replace;
+var _elm_lang$core$Regex$find = _elm_lang$core$Native_Regex.find;
+var _elm_lang$core$Regex$contains = _elm_lang$core$Native_Regex.contains;
+var _elm_lang$core$Regex$caseInsensitive = _elm_lang$core$Native_Regex.caseInsensitive;
+var _elm_lang$core$Regex$regex = _elm_lang$core$Native_Regex.regex;
+var _elm_lang$core$Regex$escape = _elm_lang$core$Native_Regex.escape;
+var _elm_lang$core$Regex$Match = F4(
+	function (a, b, c, d) {
+		return {match: a, submatches: b, index: c, number: d};
+	});
+var _elm_lang$core$Regex$Regex = {ctor: 'Regex'};
+var _elm_lang$core$Regex$AtMost = function (a) {
+	return {ctor: 'AtMost', _0: a};
+};
+var _elm_lang$core$Regex$All = {ctor: 'All'};
+
 //import Native.Json //
 
 var _elm_lang$virtual_dom$Native_VirtualDom = function() {
@@ -8084,7 +8219,19 @@ var _user$project$Iphod_Models$initCollect = {
 		[])
 };
 var _user$project$Iphod_Models$initProper = {title: '', text: ''};
-var _user$project$Iphod_Models$initLesson = {style: '', show: false, read: '', body: '', id: '', section: '', version: ''};
+var _user$project$Iphod_Models$initLesson = {
+	style: '',
+	show: false,
+	read: '',
+	body: '',
+	id: '',
+	section: '',
+	version: '',
+	altRead: '',
+	notes: _elm_lang$core$Native_List.fromArray(
+		[]),
+	cmd: ''
+};
 var _user$project$Iphod_Models$emailInit = {from: '', topic: '', text: ''};
 var _user$project$Iphod_Models$configInit = {
 	ot: 'ESV',
@@ -8162,6 +8309,25 @@ var _user$project$Iphod_Models$initDailyEP = {
 	epp: _elm_lang$core$Native_List.fromArray(
 		[])
 };
+var _user$project$Iphod_Models$initShout = {
+	section: '',
+	text: '',
+	time: '',
+	user: '',
+	showChat: false,
+	chat: _elm_lang$core$Native_List.fromArray(
+		[]),
+	comment: ''
+};
+var _user$project$Iphod_Models$initNote = {reading: '', text: '', time: ''};
+var _user$project$Iphod_Models$Note = F3(
+	function (a, b, c) {
+		return {reading: a, text: b, time: c};
+	});
+var _user$project$Iphod_Models$Shout = F7(
+	function (a, b, c, d, e, f, g) {
+		return {section: a, text: b, time: c, user: d, showChat: e, chat: f, comment: g};
+	});
 var _user$project$Iphod_Models$Config = F7(
 	function (a, b, c, d, e, f, g) {
 		return {ot: a, ps: b, nt: c, gs: d, fnotes: e, vers: f, current: g};
@@ -8170,10 +8336,27 @@ var _user$project$Iphod_Models$Email = F3(
 	function (a, b, c) {
 		return {from: a, topic: b, text: c};
 	});
-var _user$project$Iphod_Models$Lesson = F7(
-	function (a, b, c, d, e, f, g) {
-		return {style: a, show: b, read: c, body: d, id: e, section: f, version: g};
-	});
+var _user$project$Iphod_Models$Lesson = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {style: a, show: b, read: c, body: d, id: e, section: f, version: g, altRead: h, notes: i, cmd: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var _user$project$Iphod_Models$Proper = F2(
 	function (a, b) {
 		return {title: a, text: b};
@@ -8719,7 +8902,31 @@ var _user$project$Header$translations = function (model) {
 					]))
 			]));
 };
-var _user$project$Header$initModel = {email: _user$project$Iphod_Models$emailInit, config: _user$project$Iphod_Models$configInit};
+var _user$project$Header$innerHtmlDecoder = A2(
+	_elm_lang$core$Json_Decode$at,
+	_elm_lang$core$Native_List.fromArray(
+		['target', 'innerHTML']),
+	_elm_lang$core$Json_Decode$string);
+var _user$project$Header$calendar = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/calendar')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Calendar')
+					]))
+			]));
+};
+var _user$project$Header$initModel = {email: _user$project$Iphod_Models$emailInit, config: _user$project$Iphod_Models$configInit, shout: _user$project$Iphod_Models$initShout};
 var _user$project$Header$init = {ctor: '_Tuple2', _0: _user$project$Header$initModel, _1: _elm_lang$core$Platform_Cmd$none};
 var _user$project$Header$sendEmail = _elm_lang$core$Native_Platform.outgoingPort(
 	'sendEmail',
@@ -8741,6 +8948,50 @@ var _user$project$Header$saveConfig = _elm_lang$core$Native_Platform.outgoingPor
 				}),
 			current: v.current
 		};
+	});
+var _user$project$Header$getConfig = _elm_lang$core$Native_Platform.outgoingPort(
+	'getConfig',
+	function (v) {
+		return {
+			ot: v.ot,
+			ps: v.ps,
+			nt: v.nt,
+			gs: v.gs,
+			fnotes: v.fnotes,
+			vers: _elm_lang$core$Native_List.toArray(v.vers).map(
+				function (v) {
+					return v;
+				}),
+			current: v.current
+		};
+	});
+var _user$project$Header$toggleChat = _elm_lang$core$Native_Platform.outgoingPort(
+	'toggleChat',
+	function (v) {
+		return v;
+	});
+var _user$project$Header$submitComment = _elm_lang$core$Native_Platform.outgoingPort(
+	'submitComment',
+	function (v) {
+		return {
+			section: v.section,
+			text: v.text,
+			time: v.time,
+			user: v.user,
+			showChat: v.showChat,
+			chat: _elm_lang$core$Native_List.toArray(v.chat).map(
+				function (v) {
+					return v;
+				}),
+			comment: v.comment
+		};
+	});
+var _user$project$Header$shoutThis = F2(
+	function (shout, str) {
+		var newShout = _elm_lang$core$Native_Utils.update(
+			shout,
+			{comment: str});
+		return _user$project$Header$submitComment(newShout);
 	});
 var _user$project$Header$update = F2(
 	function (msg, model) {
@@ -8804,7 +9055,7 @@ var _user$project$Header$update = F2(
 					model,
 					{email: newEmail});
 				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
-			default:
+			case 'ModConfig':
 				var newConfig = A2(_user$project$Iphod_Config$update, _p0._0, model.config);
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
@@ -8814,23 +9065,75 @@ var _user$project$Header$update = F2(
 					_0: newModel,
 					_1: _user$project$Header$saveConfig(newConfig)
 				};
+			case 'UpdateComments':
+				var thisShout = model.shout;
+				var newShout = _elm_lang$core$Native_Utils.update(
+					thisShout,
+					{
+						chat: A2(_elm_lang$core$List_ops['::'], _p0._0, thisShout.chat)
+					});
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{shout: newShout});
+				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'CommentText':
+				var _p3 = _p0._0;
+				var doThis = function () {
+					if (A2(_elm_lang$core$String$endsWith, '<div><br></div>', _p3)) {
+						var newComment = A4(
+							_elm_lang$core$Regex$replace,
+							_elm_lang$core$Regex$All,
+							_elm_lang$core$Regex$regex('<[^>]*>'),
+							function (_p2) {
+								return '';
+							},
+							_p3);
+						var newCmd = A2(_user$project$Header$shoutThis, model.shout, newComment);
+						return {ctor: '_Tuple2', _0: model, _1: newCmd};
+					} else {
+						return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+					}
+				}();
+				return doThis;
+			case 'ToggleChat':
+				var thisShout = model.shout;
+				var newShout = _elm_lang$core$Native_Utils.update(
+					thisShout,
+					{
+						showChat: _elm_lang$core$Basics$not(model.shout.showChat)
+					});
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{shout: newShout});
+				return {
+					ctor: '_Tuple2',
+					_0: newModel,
+					_1: _user$project$Header$toggleChat(newModel.shout.showChat)
+				};
+			case 'UpdateUserName':
+				var thisShout = model.shout;
+				var newShout = _elm_lang$core$Native_Utils.update(
+					thisShout,
+					{user: _p0._0});
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{shout: newShout});
+				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'EnterChat':
+				var newCmd = A2(
+					_user$project$Header$shoutThis,
+					model.shout,
+					A2(_elm_lang$core$Basics_ops['++'], model.shout.user, ' has entered chat room...'));
+				return {ctor: '_Tuple2', _0: model, _1: newCmd};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{shout: _p0._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 		}
-	});
-var _user$project$Header$getConfig = _elm_lang$core$Native_Platform.outgoingPort(
-	'getConfig',
-	function (v) {
-		return {
-			ot: v.ot,
-			ps: v.ps,
-			nt: v.nt,
-			gs: v.gs,
-			fnotes: v.fnotes,
-			vers: _elm_lang$core$Native_List.toArray(v.vers).map(
-				function (v) {
-					return v;
-				}),
-			current: v.current
-		};
 	});
 var _user$project$Header$portConfig = _elm_lang$core$Native_Platform.incomingPort(
 	'portConfig',
@@ -8874,10 +9177,98 @@ var _user$project$Header$portConfig = _elm_lang$core$Native_Platform.incomingPor
 						});
 				});
 		}));
-var _user$project$Header$Model = F2(
-	function (a, b) {
-		return {email: a, config: b};
+var _user$project$Header$portShout = _elm_lang$core$Native_Platform.incomingPort('portShout', _elm_lang$core$Json_Decode$string);
+var _user$project$Header$portInitShout = _elm_lang$core$Native_Platform.incomingPort(
+	'portInitShout',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+		function (section) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+				function (text) {
+					return A2(
+						_elm_lang$core$Json_Decode$andThen,
+						A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+						function (time) {
+							return A2(
+								_elm_lang$core$Json_Decode$andThen,
+								A2(_elm_lang$core$Json_Decode_ops[':='], 'user', _elm_lang$core$Json_Decode$string),
+								function (user) {
+									return A2(
+										_elm_lang$core$Json_Decode$andThen,
+										A2(_elm_lang$core$Json_Decode_ops[':='], 'showChat', _elm_lang$core$Json_Decode$bool),
+										function (showChat) {
+											return A2(
+												_elm_lang$core$Json_Decode$andThen,
+												A2(
+													_elm_lang$core$Json_Decode_ops[':='],
+													'chat',
+													_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
+												function (chat) {
+													return A2(
+														_elm_lang$core$Json_Decode$andThen,
+														A2(_elm_lang$core$Json_Decode_ops[':='], 'comment', _elm_lang$core$Json_Decode$string),
+														function (comment) {
+															return _elm_lang$core$Json_Decode$succeed(
+																{section: section, text: text, time: time, user: user, showChat: showChat, chat: chat, comment: comment});
+														});
+												});
+										});
+								});
+						});
+				});
+		}));
+var _user$project$Header$Model = F3(
+	function (a, b, c) {
+		return {email: a, config: b, shout: c};
 	});
+var _user$project$Header$InitShout = function (a) {
+	return {ctor: 'InitShout', _0: a};
+};
+var _user$project$Header$EnterChat = {ctor: 'EnterChat'};
+var _user$project$Header$UpdateUserName = function (a) {
+	return {ctor: 'UpdateUserName', _0: a};
+};
+var _user$project$Header$ToggleChat = {ctor: 'ToggleChat'};
+var _user$project$Header$chat = function (model) {
+	return A2(
+		_elm_lang$html$Html$button,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('toggle-chat'),
+				_elm_lang$html$Html_Events$onClick(_user$project$Header$ToggleChat)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text('Show Chat')
+			]));
+};
+var _user$project$Header$CommentText = function (a) {
+	return {ctor: 'CommentText', _0: a};
+};
+var _user$project$Header$inputComment = function (model) {
+	return A2(
+		_elm_lang$html$Html$p,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$id('say-this'),
+				_elm_lang$html$Html_Attributes$placeholder('Use Markdown'),
+				_elm_lang$html$Html_Attributes$contenteditable(true),
+				A2(
+				_elm_lang$html$Html_Events$on,
+				'input',
+				A2(_elm_lang$core$Json_Decode$map, _user$project$Header$CommentText, _user$project$Header$innerHtmlDecoder))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(model.shout.comment)
+			]));
+};
+var _user$project$Header$UpdateComments = function (a) {
+	return {ctor: 'UpdateComments', _0: a};
+};
 var _user$project$Header$ModConfig = function (a) {
 	return {ctor: 'ModConfig', _0: a};
 };
@@ -9037,7 +9428,9 @@ var _user$project$Header$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$batch(
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_user$project$Header$portConfig(_user$project$Header$UpdateConfig)
+				_user$project$Header$portConfig(_user$project$Header$UpdateConfig),
+				_user$project$Header$portShout(_user$project$Header$UpdateComments),
+				_user$project$Header$portInitShout(_user$project$Header$InitShout)
 			]));
 };
 var _user$project$Header$Cancel = {ctor: 'Cancel'};
@@ -9164,68 +9557,173 @@ var _user$project$Header$emailMe = function (model) {
 					]))
 			]));
 };
-var _user$project$Header$view = function (model) {
+var _user$project$Header$NoOp = {ctor: 'NoOp'};
+var _user$project$Header$onEnter = function (msg) {
+	var tagger = function (code) {
+		return (_elm_lang$core$Native_Utils.eq(code, 13) || _elm_lang$core$Native_Utils.eq(code, 9)) ? msg : _user$project$Header$NoOp;
+	};
 	return A2(
-		_elm_lang$html$Html$ul,
+		_elm_lang$html$Html_Events$on,
+		'keydown',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$keyCode));
+};
+var _user$project$Header$enterUserName = function (model) {
+	return A2(
+		_elm_lang$html$Html$input,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$id('header-options')
+				_elm_lang$html$Html_Attributes$placeholder('User Name'),
+				_elm_lang$html$Html_Attributes$autofocus(true),
+				_elm_lang$html$Html_Attributes$value(model.shout.user),
+				_elm_lang$html$Html_Attributes$name('userName'),
+				_elm_lang$html$Html_Events$onInput(_user$project$Header$UpdateUserName),
+				_user$project$Header$onEnter(_user$project$Header$EnterChat)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[]));
+};
+var _user$project$Header$chatWindow = function (model) {
+	var view_chat = function (chat) {
+		return A2(
+			_elm_lang$html$Html$li,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_evancz$elm_markdown$Markdown$toHtml,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					chat)
+				]));
+	};
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$id('chat-container')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
 				A2(
-				_elm_lang$html$Html$li,
+				_elm_lang$html$Html$p,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Attributes$class('option-item')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[_user$project$Header$aboutModal])),
-				A2(
-				_elm_lang$html$Html$li,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$class('option-item')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_user$project$Header$emailMe(model)
+						_user$project$Header$enterUserName(model),
+						A2(
+						_elm_lang$html$Html$button,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$id('chat-window-toggle'),
+								_elm_lang$html$Html_Events$onClick(_user$project$Header$ToggleChat)
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Hide')
+							]))
 					])),
+				_user$project$Header$inputComment(model),
 				A2(
-				_elm_lang$html$Html$li,
+				_elm_lang$html$Html$ul,
 				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Attributes$class('option-item')
+						_elm_lang$html$Html_Attributes$class('chat_list'),
+						_elm_lang$html$Html_Events$onClick(_user$project$Header$ToggleChat)
+					]),
+				A2(_elm_lang$core$List$map, view_chat, model.shout.chat))
+			]));
+};
+var _user$project$Header$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$ul,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$id('header-options')
 					]),
 				_elm_lang$core$Native_List.fromArray(
-					[_user$project$Header$howToModal])),
-				A2(
-				_elm_lang$html$Html$li,
-				_elm_lang$core$Native_List.fromArray(
 					[
-						_elm_lang$html$Html_Attributes$class('option-item')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_user$project$Header$configModal(model)
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('option-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$calendar(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('option-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[_user$project$Header$aboutModal])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('option-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$emailMe(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('option-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[_user$project$Header$howToModal])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('option-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$configModal(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('option-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$translations(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('option-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$chat(model)
+							]))
 					])),
-				A2(
-				_elm_lang$html$Html$li,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$class('option-item')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_user$project$Header$translations(model)
-					]))
+				_user$project$Header$chatWindow(model)
 			]));
 };
 var _user$project$Header$main = {
 	main: _elm_lang$html$Html_App$program(
 		{init: _user$project$Header$init, update: _user$project$Header$update, view: _user$project$Header$view, subscriptions: _user$project$Header$subscriptions})
 };
-var _user$project$Header$NoOp = {ctor: 'NoOp'};
 
 var Elm = {};
 Elm['Header'] = Elm['Header'] || {};

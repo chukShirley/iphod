@@ -10,9 +10,27 @@ h3 {
   font-size: 1em;
   margin-left: 2em;
 }
-@media screen and (min-width: 320px) { .mpep { width: 17em; } }
-@media screen and (min-width: 768px) { .mpep { width: 30em; } }
-@media screen and (min-width: 940px) { .mpep { width: 32em; } }
+@media screen and (min-width: 320px) { 
+  .mpep { width: 17em; } 
+  #header-elm-container {
+    display: none;
+  }
+}
+@media screen and (min-width: 768px) { 
+  .mpep { width: 30em; } 
+  #header-elm-container {
+    display: block;
+  }
+}
+@media screen and (min-width: 940px) { 
+  .mpep { width: 32em; } 
+  #header-elm-container: block;
+}
+
+div#chat-container {
+  width: 36%;
+  margin-left: 62%;
+}
 
 .mpep p{
   position: relative;

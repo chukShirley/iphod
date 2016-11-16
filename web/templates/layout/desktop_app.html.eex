@@ -37,7 +37,7 @@
 
   <body>
     <div id="header">
-      <a href= "/" class="home_link">Legereme</a>
+      <a href= "/calendar" class="home_link">Legereme</a>
     </div>
     <div class="container">
       <main role="main">

@@ -56,7 +56,8 @@ init = (initModel, Cmd.none)
 
 
 -- REQUEST PORTS
-
+port requestReading: List String -> Cmd msg
+port requestAltReading: List String -> Cmd msg
 
 -- SUBSCRIPTIONS
 
@@ -146,8 +147,37 @@ update msg model =
     ModEU msg ->
       let
         newModel = {model | eu = Sunday.update msg model.eu}
+      -- in 
+      --   (newModel, Cmd.none)
+        newCmd =
+          let 
+            otVer = (List.head newModel.eu.ot |> Maybe.withDefault Models.initLesson).version
+            psVer = (List.head newModel.eu.ps |> Maybe.withDefault Models.initLesson).version
+            ntVer = (List.head newModel.eu.nt |> Maybe.withDefault Models.initLesson).version
+            gsVer = (List.head newModel.eu.gs |> Maybe.withDefault Models.initLesson).version
+            otAlt = (List.head newModel.eu.ot |> Maybe.withDefault Models.initLesson).altRead
+            ntAlt = (List.head newModel.eu.nt |> Maybe.withDefault Models.initLesson).altRead
+            gsAlt = (List.head newModel.eu.gs |> Maybe.withDefault Models.initLesson).altRead
+          in
+            if otVer /= "" then
+              requestReading ["ot", otVer, model.eu.date]
+            else if psVer /= "" then 
+              requestReading ["ps", psVer, model.eu.date]
+            else if ntVer /= "" then
+              requestReading ["nt", ntVer, model.eu.date]
+            else if gsVer /= "" then
+              requestReading ["gs", gsVer, model.eu.date]
+            else if otAlt /= "" then
+              requestAltReading ["ot", otVer, otAlt]
+            else if ntAlt /= "" then
+              requestAltReading ["ot", ntVer, ntAlt]
+            else if gsAlt /= "" then
+              requestAltReading ["gs", gsVer, gsAlt]
+            else
+              Cmd.none
       in 
-        (newModel, Cmd.none)
+        (newModel, newCmd)
+      
 
     ModMP msg ->
       let

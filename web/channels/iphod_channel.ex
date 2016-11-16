@@ -47,6 +47,12 @@ defmodule Iphod.IphodChannel do
     {:noreply, socket}  
   end
 
+  def handle_in("get_alt_reading", [section, version, vss], socket) do
+    resp = BibleText.selection(vss, version, section)
+    push socket, "alt_lesson", %{resp: resp}
+    {:noreply, socket}
+  end
+
   def handle_in("get_single_reading", [vss, version, service, section], socket) do
     # resp should contain 
     #  [:collect, :colors, :date, :gs, :nt, :ofType, :ot, :ps, :season, :show, :title,
@@ -75,8 +81,14 @@ defmodule Iphod.IphodChannel do
     # 1) is the date a redletter day or not
     # 2) are footnotes to be displayed or not
     day = text_to_date date
+    # IO.puts inspect(SundayReading.eu_body(day))
     push socket, "eu_today", SundayReading.eu_body(day)
     {:noreply, socket}  
+  end
+
+  def handle_in("lessons_now", args, socket) do
+    # IEx.pry
+    {:noreply, socket}
   end
   
   def handle_in("get_text", ["MP", date], socket) do

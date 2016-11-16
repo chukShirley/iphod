@@ -57,15 +57,24 @@ form.link, form.button {
 
   #header-options {
     position: relative;
-    float: right;
     margin-top: -1em;
     margin-bottom: 0;
-    padding-bottom: 0;
+    padding-bottom: 0.5em;
+
     list-style-type: none;
   }
   
   li.option-item {
     display: inline;
+    margin-right: 0.5em;
+  }
+
+  li.option-item button {
+    box-shadow: -2px 3px 8px #888888;
+    border-radius: 5px;
+    border: solid 2px darkred;
+    background-color: darkred;
+    color: honeydew;
   }
 
 /* Responsive: Portrait tablets and up */
@@ -115,13 +124,10 @@ form.link, form.button {
     background-repeat: no-repeat;
     background-position: 0em 1em;
     margin-left: 1em;
-    display:block;
-    height:50px;
+    display: block;
+    height:4.5em;
     text-indent: 100%;
-    overflow:hidden;
-    white-space:nowrap;
-    width: 10em;
-    color: green;
+    margin-top: -1em;
   }
   }
   #menu1 {
@@ -546,6 +552,72 @@ form.link, form.button {
     background: -webkit-linear-gradient(-45deg,  #ffecea 0%,#cf0404 100%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(135deg,  #ffecea 0%,#cf0404 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffecea', endColorstr='#cf0404',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  }
+
+  p#say-this {
+    position: relative;
+    width: 96%;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: -3px 3px 5px #888888;
+    //margin-top: -0.3em;
+    margin-left: 0.3em;
+  }
+
+  .whowhen {
+    position: relative;
+    top: -0.5em;
+    font-size: 0.8em;
+    color: lightsalmon;
+    margin-bottom: 0.7em;
+  }
+
+  div#chat-container {
+    display: none; // initial state
+    //border: solid 2px darkgrey;
+    background-color: linen;
+    box-shadow: -6px 6px 10px #888888;
+    position: fixed;
+    margin-right: 0;
+    width: 40%;
+    overflow: auto;
+    height: 85%;   
+    margin-left: 59%;
+    // top: 4.3em; 
+    z-index: 9;
+  }
+
+  #chat-container input {
+    margin-left: 0.3em;
+  }
+
+  #chat-window-toggle {
+    float: right;
+  }
+
+  ul.chat_list {
+    list-style: none;
+    padding-left: 0.5em;
+  }
+  ul.chat_list li {
+    margin-top: 0em;
+    line-height: 0.8em;
+  }
+
+  li.reading {
+    position: relative;
+    display: inline;
+    width: 75%;
+    float: left;
+    left: -2em;
+  }
+
+  li.comments {
+    position: relative;
+    display: inline;
+    background-color: lightgrey;
+    top: 5em;
+    margin-left: 0em;
   }
   
   .reading-group{
@@ -5856,9 +5928,27 @@ h3 {
   font-size: 1em;
   margin-left: 2em;
 }
-@media screen and (min-width: 320px) { .mpep { width: 17em; } }
-@media screen and (min-width: 768px) { .mpep { width: 30em; } }
-@media screen and (min-width: 940px) { .mpep { width: 32em; } }
+@media screen and (min-width: 320px) { 
+  .mpep { width: 17em; } 
+  #header-elm-container {
+    display: none;
+  }
+}
+@media screen and (min-width: 768px) { 
+  .mpep { width: 30em; } 
+  #header-elm-container {
+    display: block;
+  }
+}
+@media screen and (min-width: 940px) { 
+  .mpep { width: 32em; } 
+  #header-elm-container: block;
+}
+
+div#chat-container {
+  width: 36%;
+  margin-left: 62%;
+}
 
 .mpep p{
   position: relative;

@@ -117,13 +117,13 @@ defmodule SundayReading do
       season:   r.season,
       week:     r.week,
       title:    r.title,
+      show:     true,
       colors:   r.colors,
       collect:  r.collect,
       ot:       r.ot,
       ps:       r.ps,
       nt:       r.nt,
       gs:       r.gs,
-      show:     true
       }
     # now load up the text bodies
 
@@ -155,7 +155,7 @@ defmodule SundayReading do
   # to whom it may concern...
   # I came to the conclusion that maintaining the lectionary as code
   # was just as easy - maybe more so - than a formatted file that needed to be parsed
-  # change the following at your paril
+  # change the following at your peril
   %{
     "advent" =>
       %{  "1" =>

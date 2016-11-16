@@ -13,18 +13,27 @@ defmodule BibleText do
       }], ver)
   end
 
+
   def lesson(list, ver \\ "ESV") do
     lesson_with_body(list, ver)
       |> Enum.reduce([], &(&2 ++ [&1.body]))
   end
+
+#  def lesson_with_body(vss, "") when vss |> is_bitstring do
+#    lesson_with_body vss, "ESV"
+#  end
+#
+#  def lesson_with_body(vss, ver) when vss |> is_bitstring do
+#    lesson_with_body [vss], "ESV"
+#  end
 
   def lesson_with_body(list), do: lesson_with_body(list, "ESV")
   
   def lesson_with_body(list, "ESV") do
     list |> Enum.map(fn(lesson)->
       lesson 
-      |> Map.put(:body, EsvText.request(lesson.read) )
-      |> Map.put(:show, true)
+        |> Map.put(:body, EsvText.request(lesson.read) )
+        |> other_init_values
     end)
   end
 
@@ -36,7 +45,7 @@ defmodule BibleText do
     list |> Enum.map(fn(lesson)->
       lesson
         |> Map.put(:body, Psalms.to_html(lesson.read, "Coverdale"))
-        |> Map.put(:show, true)
+        |> other_init_values
     end)
   end
 
@@ -44,7 +53,7 @@ defmodule BibleText do
     list |> Enum.map(fn(lesson)->
       lesson
         |> Map.put(:body, Psalms.to_html(lesson.read, "BCP"))
-        |> Map.put(:show, true)
+        |> other_init_values
     end)
   end
 
@@ -52,7 +61,7 @@ defmodule BibleText do
     list |> Enum.map(fn(lesson)->
       lesson 
       |> Map.put(:body, BibleComText.request(ver, lesson.read) )
-      |> Map.put(:show, true)
+      |> other_init_values
     end)
   end
 
@@ -60,7 +69,7 @@ defmodule BibleText do
     list |> Enum.map(fn(lesson)->
       lesson 
       |> Map.put(:body, GetBibleText.request(ver, lesson.read) )
-      |> Map.put(:show, true)
+      |> other_init_values
     end)
   end
 
@@ -68,8 +77,16 @@ defmodule BibleText do
     list |> Enum.map(fn(lesson)->
       lesson 
       |> Map.put(:body, LocalText.request(ver, lesson.read) )
-      |> Map.put(:show, true)
+      |> other_init_values
     end)
+  end
+
+  def other_init_values(map) do
+    map
+      |> Map.put(:altRead, "")
+      |> Map.put(:cmd, "")
+      |> Map.put(:show, true)
+      |> Map.put(:notes, [])
   end
 
 end

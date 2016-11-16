@@ -38,6 +38,7 @@ type alias Model =
   , mp: Models.DailyMP
   , ep: Models.DailyEP
   , reflection: Models.Reflection
+--  , shout: Models.Shout
   }
 
 initModel: Model
@@ -46,16 +47,17 @@ initModel =
   , mp = Models.initDailyMP
   , ep = Models.initDailyEP
   , reflection = Models.initReflection
+--  , shout = Models.initShout
   }
 
 init:   (Model, Cmd Msg)
 init =  (initModel, Cmd.none)
 
-
 -- REQUEST PORTS
 
 -- requestReading: [Date, section, ver]
 port requestReading: List String -> Cmd msg
+port requestAltReading: List String -> Cmd msg
 
 
 -- SUBSCRIPTIONS
@@ -72,6 +74,7 @@ port portLesson: (List Models.Lesson -> msg) -> Sub msg
 
 port portReflection: (Models.Reflection -> msg) -> Sub msg
 
+
 subscriptions: Model -> Sub Msg
 subscriptions model =
   Sub.batch
@@ -81,6 +84,8 @@ subscriptions model =
   , portEP UpdateEP
   , portLesson UpdateLesson
   , portReflection UpdateReflection
+--  , portShout UpdateComments
+--  , portInitShout InitShout
   ]
 
 -- UPDATE
@@ -157,24 +162,40 @@ update msg model =
 
     ModEU msg ->
       let
+        -- newModel = {model | eu = Sunday.update msg model.eu}
         newModel = {model | eu = Sunday.update msg model.eu}
+        sunday = newModel.eu
         newCmd =
           let 
-            otVer = (List.head newModel.eu.ot |> Maybe.withDefault Models.initLesson).version
-            psVer = (List.head newModel.eu.ps |> Maybe.withDefault Models.initLesson).version
-            ntVer = (List.head newModel.eu.nt |> Maybe.withDefault Models.initLesson).version
-            gsVer = (List.head newModel.eu.gs |> Maybe.withDefault Models.initLesson).version
+            otVer = (List.head sunday.ot |> Maybe.withDefault Models.initLesson).version
+            psVer = (List.head sunday.ps |> Maybe.withDefault Models.initLesson).version
+            ntVer = (List.head sunday.nt |> Maybe.withDefault Models.initLesson).version
+            gsVer = (List.head sunday.gs |> Maybe.withDefault Models.initLesson).version
+            otAlt = (List.head sunday.ot |> Maybe.withDefault Models.initLesson).altRead
+            ntAlt = (List.head sunday.nt |> Maybe.withDefault Models.initLesson).altRead
+            gsAlt = (List.head sunday.gs |> Maybe.withDefault Models.initLesson).altRead
+            otCmd = (List.head sunday.ot |> Maybe.withDefault Models.initLesson).cmd
+            ntCmd = (List.head sunday.nt |> Maybe.withDefault Models.initLesson).cmd
+            gsCmd = (List.head sunday.gs |> Maybe.withDefault Models.initLesson).cmd
+
           in
             if otVer /= "" then
-              requestReading ["ot", otVer, model.eu.date]
+              requestReading ["ot", otVer, sunday.date]
             else if psVer /= "" then 
-              requestReading ["ps", psVer, model.eu.date]
+              requestReading ["ps", psVer, sunday.date]
             else if ntVer /= "" then
-              requestReading ["nt", ntVer, model.eu.date]
+              requestReading ["nt", ntVer, sunday.date]
             else if gsVer /= "" then
-              requestReading ["gs", gsVer, model.eu.date]
+              requestReading ["gs", gsVer, sunday.date]
+            else if otCmd /= "" then
+              requestAltReading ["ot", otVer, otAlt]
+            else if ntCmd /= "" then
+              requestAltReading ["ot", ntVer, ntAlt]
+            else if gsCmd /= "" then
+              requestAltReading ["gs", gsVer, gsAlt]
             else
               Cmd.none
+
       in 
         (newModel, newCmd)
 
@@ -217,8 +238,7 @@ update msg model =
               Cmd.none
       in 
         (newModel, newCmd)
---    Top msg ->
---      { model | topCounter = Counter.update msg model.topCounter }
+
 
 -- HELPERS
 
@@ -306,15 +326,13 @@ setLesson model section lesson =
 
 view: Model -> Html Msg
 view model =
-  div [] 
-  [ euDiv model
-  , mpDiv model
-  , epDiv model
-  , reflectionDiv model
-  ]
+  div [id "reading-container"]
+    [ euDiv model
+    , mpDiv model
+    , epDiv model
+    , reflectionDiv model
+    ]
 
-
--- HELPERS
 
 euDiv: Model -> Html Msg
 euDiv model =
@@ -346,25 +364,3 @@ reflectionDiv model =
     [ div [id "reflection"] [Markdown.toHtml [] model.reflection.markdown]
     , p [class "author"] [text author]
     ]
-
-
-euReadingStyle: Model -> Attribute msg
-euReadingStyle model =
-  hideable
-    model.eu.show
-    []
-
-mpReadingStyle: Model -> Attribute msg
-mpReadingStyle model =
-  hideable
-    model.mp.show
-    []
-
-epReadingStyle: Model -> Attribute msg
-epReadingStyle model =
-  hideable
-    model.ep.show
-    []
-
-
-
