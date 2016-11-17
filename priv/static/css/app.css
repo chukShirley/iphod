@@ -430,7 +430,6 @@ form.link, form.button {
   #calendar td {
     border: 1px solid black;
     text-align: left;
-    // vertical-align: top;
     position: relative;
   }
   
@@ -493,7 +492,7 @@ form.link, form.button {
     position: relative;
     vertical-align: top;
   }
-} // end of large screen
+} /* end of large screen */
   
   .day_white, .day_gold {
   /* Permalink - use to edit and share this gradient: 
@@ -560,7 +559,6 @@ form.link, form.button {
     overflow: hidden;
     background-color: white;
     box-shadow: -3px 3px 5px #888888;
-    //margin-top: -0.3em;
     margin-left: 0.3em;
   }
 
@@ -573,8 +571,7 @@ form.link, form.button {
   }
 
   div#chat-container {
-    display: none; // initial state
-    //border: solid 2px darkgrey;
+    display: none;
     background-color: linen;
     box-shadow: -6px 6px 10px #888888;
     position: fixed;
@@ -583,7 +580,6 @@ form.link, form.button {
     overflow: auto;
     height: 85%;   
     margin-left: 59%;
-    // top: 4.3em; 
     z-index: 9;
   }
 
@@ -797,7 +793,6 @@ form.link, form.button {
   }
   #refl-edit li {
     text-decoration: none;
-    // display: inline;
     margin-left: 0em;
   }
   
@@ -4228,6 +4223,7 @@ fieldset.ui-controlgroup {
 	overflow: hidden;
 	box-sizing: border-box;
 }
+/*
 .ui-popup-arrow-container.ie .ui-popup-arrow {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865474, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865474, SizingMethod='auto expand')";
 	filter: progid:DXImageTransform.Microsoft.Matrix(
@@ -4237,6 +4233,7 @@ fieldset.ui-controlgroup {
         	M22=0.7071067811865474,
         	SizingMethod='auto expand');
 }
+*/
 .ui-checkbox,
 .ui-radio {
 	margin: .5em 0;
