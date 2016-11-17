@@ -21,6 +21,13 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 $(document).on('input', 'textarea', function () {
   $(this).outerHeight('1em').outerHeight(this.scrollHeight); // 38 or '1em' -min-height
 }); 
+
+
+$("button.more-options").click( function() {
+  console.log("CLICKED MORE OPTIONS");
+  $("ul#header-options").toggleClass("responsive");
+})
+
 // LOCAL STORAGE ------------------------
 
 function storageAvailable(of_type) {
@@ -154,7 +161,6 @@ if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統
   
   channel.join()
     .receive("ok", resp => { 
-      console.log("OK", resp);
       channel.push("lessons_now", [now, tz]);
       elmHeaderApp.ports.portInitShout.send(init_shout())
     })
