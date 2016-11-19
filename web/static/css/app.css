@@ -7,6 +7,7 @@
 @import "print.css"
 @import "aural.css"
 @import "mpep.css"
+@import "mobile.css"
 
 /* Space out content a bit */
 body, form, ul, table {
@@ -564,10 +565,10 @@ form.link, form.button {
 
   .whowhen {
     position: relative;
-    top: -0.5em;
+    top: -1.2em;
     font-size: 0.8em;
-    color: lightsalmon;
-    margin-bottom: 0.7em;
+    color: blue;
+    margin-left: 1em;
   }
 
   div#chat-container {
@@ -597,7 +598,10 @@ form.link, form.button {
   }
   ul.chat_list li {
     margin-top: 0em;
-    line-height: 0.8em;
+    margin-bottom: -1.5em;
+    line-height: 1em;
+    font-family: serif;
+    font-size: 0.9em;
   }
 
   li.reading {

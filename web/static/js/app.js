@@ -181,8 +181,9 @@ if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統
   })
 
   
-  elmHeaderApp.ports.toggleChat.subscribe(function(request) {
-    request ? showchat() : hidechat();
+  elmHeaderApp.ports.toggleChat.subscribe(function(shout) {
+    if (shout.chat.length == 0) {channel.push("get_chat", true)}
+    shout.showChat ? showchat() : hidechat();
   })
 
   function showchat(){
@@ -225,6 +226,9 @@ if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統
     elmHeaderApp.ports.portShout.send(shout);
   })
 
+  channel.on('latest_chats', data => {
+    elmHeaderApp.ports.portInitShout.send( data)
+  })
 }
 
 
@@ -236,7 +240,7 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
   channel.join()
     .receive("ok", resp => { 
       elmHeaderApp.ports.portConfig.send(init_config_model());
-      elmHeaderApp.ports.portInitShout.send(init_shout())
+      elmHeaderApp.ports.portInitShout.send(init_shout());
     })
     .receive("error", resp => { console.log("Unable to join Iphod", resp) })
     
@@ -265,8 +269,9 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     }
   })
 
-  elmHeaderApp.ports.toggleChat.subscribe(function(request) {
-    request ? showchat() : hidechat();
+  elmHeaderApp.ports.toggleChat.subscribe(function(shout) {
+    if (shout.chat.length == 0) {channel.push("get_chat", true)}
+    shout.showChat ? showchat() : hidechat();
   })
 
   elmHeaderApp.ports.submitComment.subscribe(function(data){
@@ -289,6 +294,8 @@ if ( path.match(/mindex/) ) {
     , elmMPanelDiv = document.getElementById('m-reading-container')
     , elmMPanelApp = Elm.MPanel.embed(elmMPanelDiv)
 
+  
+
   $("#reflection-today-button").click( function() {
     channel.push("get_text", ["Reflection", (new Date).toDateString()])
   });
@@ -301,11 +308,10 @@ if ( path.match(/mindex/) ) {
     $("#reading-panel").effect("drop", "fast");
   });
 
-  $("#more-button").click( function() {$("#header-elm-container").toggle()})
 
-  channel.on('shout', data => {
-    console.log("MINDEX RECVD SHOUT: ", data)
-  })
+//  channel.on('shout', data => {
+//    console.log("MINDEX RECVD SHOUT: ", data)
+//  })
 
   channel.on('reflection_today', data => {
     elmMindexApp.ports.portReflection.send(data);
@@ -420,6 +426,10 @@ if ( path.match(/mindex/) ) {
 
   $("#next-sunday-button").click( function() {
     channel.push("get_text", ["NextSunday", (new Date).toDateString() ] )
+  })
+
+  channel.on('latest_chats', data => {
+    elmHeaderApp.ports.portInitShout.send( data)
   })
 
   channel.on('alt_lesson', data => {

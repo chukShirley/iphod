@@ -8968,7 +8968,18 @@ var _user$project$Header$getConfig = _elm_lang$core$Native_Platform.outgoingPort
 var _user$project$Header$toggleChat = _elm_lang$core$Native_Platform.outgoingPort(
 	'toggleChat',
 	function (v) {
-		return v;
+		return {
+			section: v.section,
+			text: v.text,
+			time: v.time,
+			user: v.user,
+			showChat: v.showChat,
+			chat: _elm_lang$core$Native_List.toArray(v.chat).map(
+				function (v) {
+					return v;
+				}),
+			comment: v.comment
+		};
 	});
 var _user$project$Header$submitComment = _elm_lang$core$Native_Platform.outgoingPort(
 	'submitComment',
@@ -9079,7 +9090,7 @@ var _user$project$Header$update = F2(
 			case 'CommentText':
 				var _p3 = _p0._0;
 				var doThis = function () {
-					if (A2(_elm_lang$core$String$endsWith, '<div><br></div>', _p3)) {
+					if (A2(_elm_lang$core$String$endsWith, '<br></div>', _p3)) {
 						var newComment = A4(
 							_elm_lang$core$Regex$replace,
 							_elm_lang$core$Regex$All,
@@ -9108,7 +9119,7 @@ var _user$project$Header$update = F2(
 				return {
 					ctor: '_Tuple2',
 					_0: newModel,
-					_1: _user$project$Header$toggleChat(newModel.shout.showChat)
+					_1: _user$project$Header$toggleChat(newShout)
 				};
 			case 'UpdateUserName':
 				var thisShout = model.shout;

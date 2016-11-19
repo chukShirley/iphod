@@ -56,7 +56,7 @@ port saveConfig: Models.Config -> Cmd msg
 
 port getConfig: Models.Config -> Cmd msg
 
-port toggleChat: Bool -> Cmd msg
+port toggleChat: Models.Shout -> Cmd msg
 
 port submitComment: Models.Shout -> Cmd msg
 
@@ -160,7 +160,7 @@ update msg model =
 
     CommentText str ->
       let
-        doThis = if str |> String.endsWith "<div><br></div>"
+        doThis = if str |> String.endsWith "<br></div>"
           then 
             let
               newComment = str |> Regex.replace Regex.All (Regex.regex "<[^>]*>") (\_ -> "")
@@ -178,7 +178,7 @@ update msg model =
         newShout = {thisShout | showChat = not model.shout.showChat}
         newModel = {model | shout = newShout}
       in
-        (newModel, toggleChat newModel.shout.showChat)
+        (newModel, toggleChat newShout)
 
     UpdateUserName str ->
       let

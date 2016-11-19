@@ -3,6 +3,7 @@ require Logger
 require Poison
 require Ecto.Query
 alias Iphod.Repo
+alias Iphod.Chat
 # alias Iphod.Reflection
 
 defmodule Iphod.IphodChannel do
@@ -136,9 +137,38 @@ defmodule Iphod.IphodChannel do
   end
 
 
+def handle_in("get_chat", _bool, socket) do
+  limit = 30
+  resp = Repo.all from c in Chat, [order_by: [desc: :inserted_at], limit: ^limit]
+  chats = resp |> Enum.map( &( "#{&1.text} <p class='whowhen'>#{&1.user} at #{&1.inserted_at}</p>"))
+  shout = %{  section: "",
+              text: "",
+              time: "",
+              user: "",
+              showChat: true,
+              chat: chats,
+              comment: ""
+            }
+  push socket, "latest_chats", shout
+  {:noreply, socket}
+end
 
   def handle_in("shout", payload, socket) do
-    broadcast socket, "shout", payload
+    thisChat = %Chat{ section:  (if payload |> (Map.has_key? "section"), do: payload["section"], else: "lobby"),
+                  text:     payload["text"],
+                  user:     payload["user"]
+                }
+    case Repo.insert( 
+      %Chat{  section:  (if payload |> (Map.has_key? "section"), do: payload["section"], else: "lobby"),
+              text:     payload["text"],
+              user:     payload["user"]
+            }) do
+      {:ok, user} -> 
+        broadcast socket, "shout", payload
+      {:error, changeset} ->
+        # broadcast socket, "shout", payload
+        push socket, "submitted", %{resp: "error"}
+    end
     {:noreply, socket}
   end
 

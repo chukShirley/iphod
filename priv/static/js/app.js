@@ -1521,6 +1521,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 $(document).on('input', 'textarea', function () {
   $(this).outerHeight('1em').outerHeight(this.scrollHeight); // 38 or '1em' -min-height
 });
+
+$("button.more-options").click(function () {
+  console.log("CLICKED MORE OPTIONS");
+  $("ul#header-options").toggleClass("responsive");
+});
+
 // LOCAL STORAGE ------------------------
 
 function storageAvailable(of_type) {
@@ -1663,7 +1669,6 @@ if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統
         elmHeaderApp = Elm.Header.embed(elmHeaderDiv);
 
     channel.join().receive("ok", function (resp) {
-      console.log("OK", resp);
       channel.push("lessons_now", [now, tz]);
       elmHeaderApp.ports.portInitShout.send(init_shout());
     }).receive("error", function (resp) {
@@ -1684,8 +1689,11 @@ if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統
       $(target).next().replaceWith(resp.body);
     });
 
-    elmHeaderApp.ports.toggleChat.subscribe(function (request) {
-      request ? showchat() : hidechat();
+    elmHeaderApp.ports.toggleChat.subscribe(function (shout) {
+      if (shout.chat.length == 0) {
+        channel.push("get_chat", true);
+      }
+      shout.showChat ? showchat() : hidechat();
     });
 
     $(".toggle-chat").click(function () {
@@ -1707,6 +1715,10 @@ if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統
       var stamp = new Date(data.time),
           shout = data.text + " " + "<p class='whowhen'>" + data.user + " at " + stamp.toLocaleString() + "</p>";
       elmHeaderApp.ports.portShout.send(shout);
+    });
+
+    channel.on('latest_chats', function (data) {
+      elmHeaderApp.ports.portInitShout.send(data);
     });
   })();
 }
@@ -1781,8 +1793,11 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
       }
     });
 
-    elmHeaderApp.ports.toggleChat.subscribe(function (request) {
-      request ? showchat() : hidechat();
+    elmHeaderApp.ports.toggleChat.subscribe(function (shout) {
+      if (shout.chat.length == 0) {
+        channel.push("get_chat", true);
+      }
+      shout.showChat ? showchat() : hidechat();
     });
 
     elmHeaderApp.ports.submitComment.subscribe(function (data) {
@@ -1816,13 +1831,9 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
         $("#reading-panel").effect("drop", "fast");
       });
 
-      $("#more-button").click(function () {
-        $("#header-elm-container").toggle();
-      });
-
-      channel.on('shout', function (data) {
-        console.log("MINDEX RECVD SHOUT: ", data);
-      });
+      //  channel.on('shout', data => {
+      //    console.log("MINDEX RECVD SHOUT: ", data)
+      //  })
 
       channel.on('reflection_today', function (data) {
         elmMindexApp.ports.portReflection.send(data);
@@ -1913,6 +1924,10 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
 
     $("#next-sunday-button").click(function () {
       channel.push("get_text", ["NextSunday", new Date().toDateString()]);
+    });
+
+    channel.on('latest_chats', function (data) {
+      elmHeaderApp.ports.portInitShout.send(data);
     });
 
     channel.on('alt_lesson', function (data) {
@@ -23900,7 +23915,18 @@ var _user$project$Header$getConfig = _elm_lang$core$Native_Platform.outgoingPort
 var _user$project$Header$toggleChat = _elm_lang$core$Native_Platform.outgoingPort(
 	'toggleChat',
 	function (v) {
-		return v;
+		return {
+			section: v.section,
+			text: v.text,
+			time: v.time,
+			user: v.user,
+			showChat: v.showChat,
+			chat: _elm_lang$core$Native_List.toArray(v.chat).map(
+				function (v) {
+					return v;
+				}),
+			comment: v.comment
+		};
 	});
 var _user$project$Header$submitComment = _elm_lang$core$Native_Platform.outgoingPort(
 	'submitComment',
@@ -24011,7 +24037,7 @@ var _user$project$Header$update = F2(
 			case 'CommentText':
 				var _p3 = _p0._0;
 				var doThis = function () {
-					if (A2(_elm_lang$core$String$endsWith, '<div><br></div>', _p3)) {
+					if (A2(_elm_lang$core$String$endsWith, '<br></div>', _p3)) {
 						var newComment = A4(
 							_elm_lang$core$Regex$replace,
 							_elm_lang$core$Regex$All,
@@ -24040,7 +24066,7 @@ var _user$project$Header$update = F2(
 				return {
 					ctor: '_Tuple2',
 					_0: newModel,
-					_1: _user$project$Header$toggleChat(newModel.shout.showChat)
+					_1: _user$project$Header$toggleChat(newShout)
 				};
 			case 'UpdateUserName':
 				var thisShout = model.shout;

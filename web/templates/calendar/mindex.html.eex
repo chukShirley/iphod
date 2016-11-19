@@ -1,3 +1,6 @@
+<button class="more-options" type="button">Options</button>
+<div id= "header-elm-container"></div>
+<br>
 <div id= "m-reading-container"></div> 
 <div id= "header-elm-container"></div>
 <div class='m-options1'>
@@ -6,7 +9,6 @@
     <li><button class='prayer-button' data-prayer='eveningPrayer' type="button">Evening Prayer</button></li>
     <li><button id='reflection-today-button' type="button">Reflection</button></li>
     <li><button id='next-sunday-button' type="button">Next Sunday</button></li>
-    <li><button id='more-button' type="button">More</button></li>
 
     <!-- <li class='config-button' data-prayer='config'>Config</li> -->
   </ul>

@@ -3356,7 +3356,6 @@ fieldset.ui-controlgroup {
 	overflow: hidden;
 	box-sizing: border-box;
 }
-/*
 .ui-popup-arrow-container.ie .ui-popup-arrow {
 	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.7071067811865474, M12=-0.7071067811865477, M21=0.7071067811865477, M22=0.7071067811865474, SizingMethod='auto expand')";
 	filter: progid:DXImageTransform.Microsoft.Matrix(
@@ -3366,7 +3365,6 @@ fieldset.ui-controlgroup {
         	M22=0.7071067811865474,
         	SizingMethod='auto expand');
 }
-*/
 .ui-checkbox,
 .ui-radio {
 	margin: .5em 0;
