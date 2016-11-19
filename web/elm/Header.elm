@@ -89,6 +89,7 @@ type Msg
   | ModConfig Config.Msg
   | UpdateComments String
   | CommentText String
+  | ShoutComment
   | ToggleChat
   | UpdateUserName String
   | EnterChat
@@ -160,18 +161,14 @@ update msg model =
 
     CommentText str ->
       let
-        doThis = if str |> String.endsWith "<br></div>"
-          then 
-            let
-              newComment = str |> Regex.replace Regex.All (Regex.regex "<[^>]*>") (\_ -> "")
-              newCmd = shoutThis model.shout newComment
-            in
-              (model, newCmd)
-          else 
-            (model, Cmd.none)
+        thisShout = model.shout
+        newShout = {thisShout | comment = str}
       in
-        doThis
+        ({model | shout = newShout}, Cmd.none)
 
+    ShoutComment ->
+      (model, submitComment model.shout)
+      
     ToggleChat -> 
       let
         thisShout = model.shout
@@ -259,15 +256,15 @@ enterUserName model =
         , Html.Attributes.value model.shout.user
         , name "userName"
         , onInput UpdateUserName
-        , onEnter EnterChat -- enter
+        , onEnter EnterChat [9, 13] -- tab or enter
         ] 
         []
 
-onEnter : Msg -> Attribute Msg
-onEnter msg =
+onEnter : Msg -> List Int -> Attribute Msg
+onEnter msg codes =
   let
     tagger code =
-      if code == 13 || code == 9 then -- Enter or Tab
+      if List.member code codes then -- Enter or Tab
         msg
       else
         NoOp
@@ -282,8 +279,9 @@ inputComment model =
     , placeholder "Use Markdown"
     , contenteditable True
     , on "input" (Json.map CommentText innerHtmlDecoder)
+    , onEnter ShoutComment [13] -- enter key
     ]
-    [ text model.shout.comment]
+    []
 
 innerHtmlDecoder =
   Json.at ["target", "innerHTML"] Json.string
