@@ -1640,7 +1640,9 @@ function save_user_name(name) {
 
 var path = window.location.pathname;
 var now = new Date(),
-    tz = now.toString().split("GMT")[1].split(" (")[0]; // timezone, i.e. -0700
+    tz = now.toString().split("GMT")[1].split(" (")[0] // timezone, i.e. -0700
+,
+    am = now.toString().split(" ")[4] < "12";
 
 // mobile landing page
 
@@ -1649,6 +1651,9 @@ if (path.match(/mindex/)) {
 }
 
 // MP/EP
+if (path == "/") {
+  window.location.href = am ? "/mp" : "/ep";
+}
 // grr - match doesn't match utf8 codes, must find alt solution
 if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   (function () {
@@ -1669,7 +1674,6 @@ if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統
         elmHeaderApp = Elm.Header.embed(elmHeaderDiv);
 
     channel.join().receive("ok", function (resp) {
-      channel.push("lessons_now", [now, tz]);
       elmHeaderApp.ports.portInitShout.send(init_shout());
     }).receive("error", function (resp) {
       console.log("Unable to join Iphod", resp);
