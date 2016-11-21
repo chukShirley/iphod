@@ -163,6 +163,7 @@ if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統
     , elmHeaderDiv = document.getElementById('header-elm-container')
     , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
 
+  elmHeaderApp.ports.portConfig.send(init_config_model());
   
   channel.join()
     .receive("ok", resp => { 
@@ -233,6 +234,21 @@ if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統
   channel.on('latest_chats', data => {
     elmHeaderApp.ports.portInitShout.send( data)
   })
+
+  elmHeaderApp.ports.saveConfig.subscribe(function(config) {
+    // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
+    if ( storageAvailable('localStorage') ) {
+      let s = window.localStorage;
+      s.setItem("iphod_ot", config.ot)
+      s.setItem("iphod_ps", config.ps)
+      s.setItem("iphod_nt", config.nt)
+      s.setItem("iphod_gs", config.gs)
+      s.setItem("iphod_fnotes", config.fnotes)
+      s.setItem("iphod_vers", config.vers.join(","))
+      s.setItem("iphod_current", config.current)
+    }
+  })
+
 }
 
 

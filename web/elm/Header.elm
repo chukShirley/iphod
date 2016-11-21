@@ -168,7 +168,7 @@ update msg model =
 
     ShoutComment ->
       (model, submitComment model.shout)
-      
+
     ToggleChat -> 
       let
         thisShout = model.shout
