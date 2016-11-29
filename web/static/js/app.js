@@ -24,7 +24,6 @@ $(document).on('input', 'textarea', function () {
 
 
 $("button.more-options").click( function() {
-  console.log("CLICKED MORE OPTIONS");
   $("ul#header-options").toggleClass("responsive");
 })
 
@@ -70,18 +69,6 @@ function init_config_model() {
         }
   }
   return m;
-}
-
-function init_shout() {
-  var shout = { section: ""
-  , text: ""
-  , time: ""
-  , user: get_init("user_name", "")
-  , showChat: false
-  , chat: []
-  , comment: ""
-  }
-  return shout;
 }
 
 function get_versions(arg1, arg2) {
@@ -158,19 +145,13 @@ if (am && path.match(/ep/)) { window.location.href = "/mp"}
 if (!am && path.match(/mp/)) { window.location.href = "/ep"}
 
 // grr - match doesn't match utf8 codes, must find alt solution
-if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
+if (path == "/" || path.match(/mp$|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep$|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   let channel = socket.channel("iphod:readings")
     , elmHeaderDiv = document.getElementById('header-elm-container')
     , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
 
   elmHeaderApp.ports.portConfig.send(init_config_model());
   
-  channel.join()
-    .receive("ok", resp => { 
-      elmHeaderApp.ports.portInitShout.send(init_shout())
-    })
-    .receive("error", resp => { console.log("Unable to join Iphod", resp) })
-    
 // ALT READINGS...
   $(".alt_reading").change( function(){
     let vss = $(this).val();
@@ -183,56 +164,6 @@ if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統
     let resp = data.resp[0],
         target = "#" + resp.section;
     $(target).next().replaceWith(resp.body)
-  })
-
-  
-  elmHeaderApp.ports.toggleChat.subscribe(function(shout) {
-    if (shout.chat.length == 0) {channel.push("get_chat", true)}
-    shout.showChat ? showchat() : hidechat();
-  })
-
-  function showchat(){
-    $("#chat-container").show();
-    $(".toggle-chat").text("Hide Chat");
-    $("#reading-container").css("width", "59%")
-  }
-  
-  function hidechat(){
-    $("#chat-container").hide();
-    $(".toggle-chat").text("Show Chat");
-    $("#reading-container").css("width", "99%")
-  }
-
-  $(".toggle-chat").click( function() {
-    $("#chat-container").is(":visible") ? hidechat() : showchat()
-  })
-  
-  elmHeaderApp.ports.submitComment.subscribe(function(data){
-    var payload = {user: data.user, text: data.comment, time: new Date()}
-    if (data.user.trim().length == 0) {
-      alert("You may not post without a name.")
-    }
-    else {
-      $('#say-this').html('')
-      save_user_name(data.user);
-      channel.push("shout", payload)
-    }
-  })
-
-  channel.on('shout', data => {
-    var stamp = new Date(data.time)
-      , shout = data.text 
-                + " " 
-                + "<p class='whowhen'>" 
-                + data.user 
-                + " at " 
-                + stamp.toLocaleString()
-                + "</p>";
-    elmHeaderApp.ports.portShout.send(shout);
-  })
-
-  channel.on('latest_chats', data => {
-    elmHeaderApp.ports.portInitShout.send( data)
   })
 
   elmHeaderApp.ports.saveConfig.subscribe(function(config) {
@@ -255,12 +186,10 @@ if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統
 // landing page, calendar
 
 if ( path.match(/calendar/) || path.match(/mindex/)) {
-  
   let channel = socket.channel("iphod:readings")
   channel.join()
     .receive("ok", resp => { 
       elmHeaderApp.ports.portConfig.send(init_config_model());
-      elmHeaderApp.ports.portInitShout.send(init_shout());
     })
     .receive("error", resp => { console.log("Unable to join Iphod", resp) })
     
@@ -288,24 +217,6 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
       s.setItem("iphod_current", config.current)
     }
   })
-
-  elmHeaderApp.ports.toggleChat.subscribe(function(shout) {
-    if (shout.chat.length == 0) {channel.push("get_chat", true)}
-    shout.showChat ? showchat() : hidechat();
-  })
-
-  elmHeaderApp.ports.submitComment.subscribe(function(data){
-    var payload = {user: data.user, text: data.comment, time: new Date()}
-    if (data.user.trim().length == 0) {
-      alert("You may not post without a name.")
-    }
-    else {
-      $('#say-this').html('')
-      save_user_name(data.user);
-      channel.push("shout", payload)
-    }
-  })
-  
 
   // mindex
 if ( path.match(/mindex/) ) { 
@@ -457,18 +368,6 @@ if ( path.match(/mindex/) ) {
 
     elmCalApp.ports.portLesson.send(data.resp);
   })  
-
-  channel.on('shout', data => {
-    var stamp = new Date(data.time)
-      , shout = data.text 
-                + " " 
-                + "<p class='whowhen'>" 
-                + data.user 
-                + " at " 
-                + stamp.toLocaleString()
-                + "</p>";
-    elmHeaderApp.ports.portShout.send(shout);
-  })
 
   channel.on('reflection_today', data => {
     elmCalApp.ports.portReflection.send(data);

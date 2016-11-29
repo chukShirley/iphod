@@ -86,6 +86,12 @@ defmodule DailyReading do
       dec_n == "29" -> {"christmas", "1", "Dec29", date}
       dec_n == "30" -> {"christmas", "1", "Dec30", date}
       dec_n == "31" -> {"christmas", "1", "Dec31", date}
+      dec_n == "1"  -> {"christmas", "1", "octaveChristmas", date}  # Jan 1
+      dec_n == "2"  -> {"christmas", "2", "Jan02", date}            # these date can also fall in Christmas 1
+      dec_n == "3"  -> {"christmas", "2", "Jan03", date}            # these date can also fall in Christmas 1
+      dec_n == "4"  -> {"christmas", "2", "Jan04", date}            # these date can also fall in Christmas 1
+      dec_n == "5"  -> {"christmas", "2", "Jan05", date}            # these date can also fall in Christmas 1
+      dec_n == "6"  -> {"epiphany",  "0", dow, date}                # these date can also fall in Christmas 1
       true -> dow
     end
   end

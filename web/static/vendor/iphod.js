@@ -9335,7 +9335,7 @@ var _user$project$Iphod_Sunday$titleStyle = function (model) {
 			[
 				{ctor: '_Tuple2', _0: 'font-size', _1: '0.9em'},
 				{ctor: '_Tuple2', _0: 'color', _1: 'blue'},
-				{ctor: '_Tuple2', _0: 'height', _1: '2.3em'}
+				{ctor: '_Tuple2', _0: 'height', _1: '3em'}
 			]));
 };
 var _user$project$Iphod_Sunday$bodyStyle = function (lesson) {
@@ -9970,7 +9970,7 @@ var _user$project$Iphod_Sunday$view = function (model) {
 										_elm_lang$html$Html$button,
 										_elm_lang$core$Native_List.fromArray(
 											[
-												_elm_lang$html$Html_Attributes$class('button'),
+												_elm_lang$html$Html_Attributes$class('button collect-button'),
 												_elm_lang$html$Html_Events$onClick(_user$project$Iphod_Sunday$ToggleCollect)
 											]),
 										_elm_lang$core$Native_List.fromArray(

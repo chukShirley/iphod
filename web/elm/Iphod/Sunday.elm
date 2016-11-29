@@ -49,7 +49,8 @@ update msg model =
     SetReading newModel -> newModel
 
 
-    GetText list -> model
+    GetText list ->
+      model
 
     ChangeText section ver ->
       let
@@ -146,7 +147,7 @@ view model =
         [titleStyle model]
         [ span [onClick ToggleModelShow] [text model.title]
         , p [] 
-          [ button [ class "button", onClick ToggleCollect] 
+          [ button [ class "button collect-button", onClick ToggleCollect] 
             [text "Collect"] 
           ]
         ]
@@ -358,7 +359,7 @@ titleStyle model =
     model.show
     [ ("font-size", "0.9em")
     , ("color", "blue")
-    , ("height", "2.3em")
+    , ("height", "3em")
     ]
 
 textStyle: Model -> Attribute msg

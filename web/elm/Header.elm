@@ -35,14 +35,12 @@ main =
 type alias  Model =
   { email:  Models.Email
   , config: Models.Config
-  , shout: Models.Shout
   }
 
 initModel: Model
 initModel = 
   { email   = Models.emailInit
   , config  = Models.configInit
-  , shout   = Models.initShout
   }
 
 init: (Model, Cmd Msg)
@@ -56,22 +54,14 @@ port saveConfig: Models.Config -> Cmd msg
 
 port getConfig: Models.Config -> Cmd msg
 
-port toggleChat: Models.Shout -> Cmd msg
-
-port submitComment: Models.Shout -> Cmd msg
-
 -- SUBSCRIPTIONS
 
 port portConfig: (Models.Config -> msg) -> Sub msg
-port portShout: (String -> msg) -> Sub msg
-port portInitShout: (Models.Shout -> msg) -> Sub msg
 
 subscriptions : Model -> Sub Msg
 subscriptions model = 
   Sub.batch
   [ portConfig UpdateConfig
-  , portShout UpdateComments
-  , portInitShout InitShout
   ]
 
 
@@ -87,13 +77,6 @@ type Msg
   | Topic String
   | Message String
   | ModConfig Config.Msg
-  | UpdateComments String
-  | CommentText String
-  | ShoutComment
-  | ToggleChat
-  | UpdateUserName String
-  | EnterChat
-  | InitShout Models.Shout
 
 update: Msg -> Model -> (Model, Cmd Msg)
 update msg model =
@@ -151,58 +134,8 @@ update msg model =
       in
         (newModel, saveConfig newConfig)
 
-    UpdateComments shout ->
-      let 
-        thisShout = model.shout
-        newShout = {thisShout | chat = (shout :: thisShout.chat)}
-        newModel = {model | shout = newShout}
-      in
-        (newModel, Cmd.none)
-
-    CommentText str ->
-      let
-        thisShout = model.shout
-        newShout = {thisShout | comment = str}
-      in
-        ({model | shout = newShout}, Cmd.none)
-
-    ShoutComment ->
-      (model, submitComment model.shout)
-
-    ToggleChat -> 
-      let
-        thisShout = model.shout
-        newShout = {thisShout | showChat = not model.shout.showChat}
-        newModel = {model | shout = newShout}
-      in
-        (newModel, toggleChat newShout)
-
-    UpdateUserName str ->
-      let
-        thisShout = model.shout
-        newShout = {thisShout | user = str}
-        newModel = {model | shout = newShout}
-      in
-        (newModel, Cmd.none)
-
-    EnterChat ->
-      let
-        newCmd = shoutThis model.shout (model.shout.user ++ " has entered chat room...")
-      in
-        (model, newCmd)
-
-    InitShout shout -> ({model | shout = shout}, Cmd.none)
-
 
 -- HELPERS
-
-shoutThis: Models.Shout -> String -> Cmd Msg
-shoutThis shout str = 
-  let
-    newShout = {shout | comment = str}
-  in
-    submitComment newShout
-
 
 
 -- VIEW
@@ -217,71 +150,17 @@ view model =
       , li [class "option-item"] [ howToModal ]
       , li [class "option-item"] [ configModal model ]
       , li [class "option-item"] [ translations model ]
-      , li [class "option-item"] [ chat model]
       ]
-    , chatWindow model
     ]
 
 
 -- HELPERS
-
-chat: Model -> Html Msg
-chat model =
-  button [class "toggle-chat", onClick ToggleChat] [text "Show Chat"]
 
 calendar: Model -> Html Msg
 calendar model = 
   a [href "/calendar"]
     [ button [] [text "Calendar"] ]
 
-chatWindow: Model -> Html Msg
-chatWindow model =
-  let
-    view_chat chat = li [] [Markdown.toHtml [] chat]
-  in
-    div [ id "chat-container"]
-      [ p []
-        [ enterUserName model 
-        , button [id "chat-window-toggle", onClick ToggleChat] [text "Hide"]
-        ]
-      , inputComment model
-      , ul [class "chat_list", onClick ToggleChat]
-        (List.map view_chat model.shout.chat)
-      ]
-
-enterUserName: Model -> Html Msg
-enterUserName model =
-  input [ placeholder "User Name"
-        , autofocus True
-        , Html.Attributes.value model.shout.user
-        , name "userName"
-        , onInput UpdateUserName
-        , onEnter EnterChat [9, 13] -- tab or enter
-        ] 
-        []
-
-onEnter : Msg -> List Int -> Attribute Msg
-onEnter msg codes =
-  let
-    tagger code =
-      if List.member code codes then -- Enter or Tab
-        msg
-      else
-        NoOp
-  in
-    on "keydown" (Json.map tagger keyCode)
-
-
-
-inputComment: Model -> Html Msg
-inputComment model =
-  p [ id "say-this"
-    , placeholder "Use Markdown"
-    , contenteditable True
-    , on "input" (Json.map CommentText innerHtmlDecoder)
-    , onEnter ShoutComment [13] -- enter key
-    ]
-    []
 
 innerHtmlDecoder =
   Json.at ["target", "innerHTML"] Json.string

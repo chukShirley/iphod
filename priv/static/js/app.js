@@ -1523,7 +1523,6 @@ $(document).on('input', 'textarea', function () {
 });
 
 $("button.more-options").click(function () {
-  console.log("CLICKED MORE OPTIONS");
   $("ul#header-options").toggleClass("responsive");
 });
 
@@ -1570,18 +1569,6 @@ function init_config_model() {
     };
   }
   return m;
-}
-
-function init_shout() {
-  var shout = { section: "",
-    text: "",
-    time: "",
-    user: get_init("user_name", ""),
-    showChat: false,
-    chat: [],
-    comment: ""
-  };
-  return shout;
 }
 
 function get_versions(arg1, arg2) {
@@ -1662,29 +1649,13 @@ if (!am && path.match(/mp/)) {
 }
 
 // grr - match doesn't match utf8 codes, must find alt solution
-if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
+if (path == "/" || path.match(/mp$|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep$|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   (function () {
-    var showchat = function showchat() {
-      $("#chat-container").show();
-      $(".toggle-chat").text("Hide Chat");
-      $("#reading-container").css("width", "59%");
-    };
-
-    var hidechat = function hidechat() {
-      $("#chat-container").hide();
-      $(".toggle-chat").text("Show Chat");
-      $("#reading-container").css("width", "99%");
-    };
-
     var channel = _socket2.default.channel("iphod:readings"),
         elmHeaderDiv = document.getElementById('header-elm-container'),
         elmHeaderApp = Elm.Header.embed(elmHeaderDiv);
 
-    channel.join().receive("ok", function (resp) {
-      elmHeaderApp.ports.portInitShout.send(init_shout());
-    }).receive("error", function (resp) {
-      console.log("Unable to join Iphod", resp);
-    });
+    elmHeaderApp.ports.portConfig.send(init_config_model());
 
     // ALT READINGS...
     $(".alt_reading").change(function () {
@@ -1700,36 +1671,18 @@ if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統
       $(target).next().replaceWith(resp.body);
     });
 
-    elmHeaderApp.ports.toggleChat.subscribe(function (shout) {
-      if (shout.chat.length == 0) {
-        channel.push("get_chat", true);
+    elmHeaderApp.ports.saveConfig.subscribe(function (config) {
+      // {ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV", fnotes: "fnotes"}
+      if (storageAvailable('localStorage')) {
+        var s = window.localStorage;
+        s.setItem("iphod_ot", config.ot);
+        s.setItem("iphod_ps", config.ps);
+        s.setItem("iphod_nt", config.nt);
+        s.setItem("iphod_gs", config.gs);
+        s.setItem("iphod_fnotes", config.fnotes);
+        s.setItem("iphod_vers", config.vers.join(","));
+        s.setItem("iphod_current", config.current);
       }
-      shout.showChat ? showchat() : hidechat();
-    });
-
-    $(".toggle-chat").click(function () {
-      $("#chat-container").is(":visible") ? hidechat() : showchat();
-    });
-
-    elmHeaderApp.ports.submitComment.subscribe(function (data) {
-      var payload = { user: data.user, text: data.comment, time: new Date() };
-      if (data.user.trim().length == 0) {
-        alert("You may not post without a name.");
-      } else {
-        $('#say-this').html('');
-        save_user_name(data.user);
-        channel.push("shout", payload);
-      }
-    });
-
-    channel.on('shout', function (data) {
-      var stamp = new Date(data.time),
-          shout = data.text + " " + "<p class='whowhen'>" + data.user + " at " + stamp.toLocaleString() + "</p>";
-      elmHeaderApp.ports.portShout.send(shout);
-    });
-
-    channel.on('latest_chats', function (data) {
-      elmHeaderApp.ports.portInitShout.send(data);
     });
   })();
 }
@@ -1773,7 +1726,6 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
     var channel = _socket2.default.channel("iphod:readings");
     channel.join().receive("ok", function (resp) {
       elmHeaderApp.ports.portConfig.send(init_config_model());
-      elmHeaderApp.ports.portInitShout.send(init_shout());
     }).receive("error", function (resp) {
       console.log("Unable to join Iphod", resp);
     });
@@ -1801,24 +1753,6 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
         s.setItem("iphod_fnotes", config.fnotes);
         s.setItem("iphod_vers", config.vers.join(","));
         s.setItem("iphod_current", config.current);
-      }
-    });
-
-    elmHeaderApp.ports.toggleChat.subscribe(function (shout) {
-      if (shout.chat.length == 0) {
-        channel.push("get_chat", true);
-      }
-      shout.showChat ? showchat() : hidechat();
-    });
-
-    elmHeaderApp.ports.submitComment.subscribe(function (data) {
-      var payload = { user: data.user, text: data.comment, time: new Date() };
-      if (data.user.trim().length == 0) {
-        alert("You may not post without a name.");
-      } else {
-        $('#say-this').html('');
-        save_user_name(data.user);
-        channel.push("shout", payload);
       }
     });
 
@@ -1945,12 +1879,6 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
       // let resp = data.resp[0]
 
       elmCalApp.ports.portLesson.send(data.resp);
-    });
-
-    channel.on('shout', function (data) {
-      var stamp = new Date(data.time),
-          shout = data.text + " " + "<p class='whowhen'>" + data.user + " at " + stamp.toLocaleString() + "</p>";
-      elmHeaderApp.ports.portShout.send(shout);
     });
 
     channel.on('reflection_today', function (data) {
@@ -23884,7 +23812,7 @@ var _user$project$Header$calendar = function (model) {
 					]))
 			]));
 };
-var _user$project$Header$initModel = {email: _user$project$Iphod_Models$emailInit, config: _user$project$Iphod_Models$configInit, shout: _user$project$Iphod_Models$initShout};
+var _user$project$Header$initModel = {email: _user$project$Iphod_Models$emailInit, config: _user$project$Iphod_Models$configInit};
 var _user$project$Header$init = {ctor: '_Tuple2', _0: _user$project$Header$initModel, _1: _elm_lang$core$Platform_Cmd$none};
 var _user$project$Header$sendEmail = _elm_lang$core$Native_Platform.outgoingPort(
 	'sendEmail',
@@ -23906,61 +23834,6 @@ var _user$project$Header$saveConfig = _elm_lang$core$Native_Platform.outgoingPor
 				}),
 			current: v.current
 		};
-	});
-var _user$project$Header$getConfig = _elm_lang$core$Native_Platform.outgoingPort(
-	'getConfig',
-	function (v) {
-		return {
-			ot: v.ot,
-			ps: v.ps,
-			nt: v.nt,
-			gs: v.gs,
-			fnotes: v.fnotes,
-			vers: _elm_lang$core$Native_List.toArray(v.vers).map(
-				function (v) {
-					return v;
-				}),
-			current: v.current
-		};
-	});
-var _user$project$Header$toggleChat = _elm_lang$core$Native_Platform.outgoingPort(
-	'toggleChat',
-	function (v) {
-		return {
-			section: v.section,
-			text: v.text,
-			time: v.time,
-			user: v.user,
-			showChat: v.showChat,
-			chat: _elm_lang$core$Native_List.toArray(v.chat).map(
-				function (v) {
-					return v;
-				}),
-			comment: v.comment
-		};
-	});
-var _user$project$Header$submitComment = _elm_lang$core$Native_Platform.outgoingPort(
-	'submitComment',
-	function (v) {
-		return {
-			section: v.section,
-			text: v.text,
-			time: v.time,
-			user: v.user,
-			showChat: v.showChat,
-			chat: _elm_lang$core$Native_List.toArray(v.chat).map(
-				function (v) {
-					return v;
-				}),
-			comment: v.comment
-		};
-	});
-var _user$project$Header$shoutThis = F2(
-	function (shout, str) {
-		var newShout = _elm_lang$core$Native_Utils.update(
-			shout,
-			{comment: str});
-		return _user$project$Header$submitComment(newShout);
 	});
 var _user$project$Header$update = F2(
 	function (msg, model) {
@@ -24024,7 +23897,7 @@ var _user$project$Header$update = F2(
 					model,
 					{email: newEmail});
 				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'ModConfig':
+			default:
 				var newConfig = A2(_user$project$Iphod_Config$update, _p0._0, model.config);
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
@@ -24034,75 +23907,23 @@ var _user$project$Header$update = F2(
 					_0: newModel,
 					_1: _user$project$Header$saveConfig(newConfig)
 				};
-			case 'UpdateComments':
-				var thisShout = model.shout;
-				var newShout = _elm_lang$core$Native_Utils.update(
-					thisShout,
-					{
-						chat: A2(_elm_lang$core$List_ops['::'], _p0._0, thisShout.chat)
-					});
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{shout: newShout});
-				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'CommentText':
-				var _p3 = _p0._0;
-				var doThis = function () {
-					if (A2(_elm_lang$core$String$endsWith, '<br></div>', _p3)) {
-						var newComment = A4(
-							_elm_lang$core$Regex$replace,
-							_elm_lang$core$Regex$All,
-							_elm_lang$core$Regex$regex('<[^>]*>'),
-							function (_p2) {
-								return '';
-							},
-							_p3);
-						var newCmd = A2(_user$project$Header$shoutThis, model.shout, newComment);
-						return {ctor: '_Tuple2', _0: model, _1: newCmd};
-					} else {
-						return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-					}
-				}();
-				return doThis;
-			case 'ToggleChat':
-				var thisShout = model.shout;
-				var newShout = _elm_lang$core$Native_Utils.update(
-					thisShout,
-					{
-						showChat: _elm_lang$core$Basics$not(model.shout.showChat)
-					});
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{shout: newShout});
-				return {
-					ctor: '_Tuple2',
-					_0: newModel,
-					_1: _user$project$Header$toggleChat(newShout)
-				};
-			case 'UpdateUserName':
-				var thisShout = model.shout;
-				var newShout = _elm_lang$core$Native_Utils.update(
-					thisShout,
-					{user: _p0._0});
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{shout: newShout});
-				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'EnterChat':
-				var newCmd = A2(
-					_user$project$Header$shoutThis,
-					model.shout,
-					A2(_elm_lang$core$Basics_ops['++'], model.shout.user, ' has entered chat room...'));
-				return {ctor: '_Tuple2', _0: model, _1: newCmd};
-			default:
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{shout: _p0._0}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
 		}
+	});
+var _user$project$Header$getConfig = _elm_lang$core$Native_Platform.outgoingPort(
+	'getConfig',
+	function (v) {
+		return {
+			ot: v.ot,
+			ps: v.ps,
+			nt: v.nt,
+			gs: v.gs,
+			fnotes: v.fnotes,
+			vers: _elm_lang$core$Native_List.toArray(v.vers).map(
+				function (v) {
+					return v;
+				}),
+			current: v.current
+		};
 	});
 var _user$project$Header$portConfig = _elm_lang$core$Native_Platform.incomingPort(
 	'portConfig',
@@ -24146,98 +23967,10 @@ var _user$project$Header$portConfig = _elm_lang$core$Native_Platform.incomingPor
 						});
 				});
 		}));
-var _user$project$Header$portShout = _elm_lang$core$Native_Platform.incomingPort('portShout', _elm_lang$core$Json_Decode$string);
-var _user$project$Header$portInitShout = _elm_lang$core$Native_Platform.incomingPort(
-	'portInitShout',
-	A2(
-		_elm_lang$core$Json_Decode$andThen,
-		A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
-		function (section) {
-			return A2(
-				_elm_lang$core$Json_Decode$andThen,
-				A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
-				function (text) {
-					return A2(
-						_elm_lang$core$Json_Decode$andThen,
-						A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
-						function (time) {
-							return A2(
-								_elm_lang$core$Json_Decode$andThen,
-								A2(_elm_lang$core$Json_Decode_ops[':='], 'user', _elm_lang$core$Json_Decode$string),
-								function (user) {
-									return A2(
-										_elm_lang$core$Json_Decode$andThen,
-										A2(_elm_lang$core$Json_Decode_ops[':='], 'showChat', _elm_lang$core$Json_Decode$bool),
-										function (showChat) {
-											return A2(
-												_elm_lang$core$Json_Decode$andThen,
-												A2(
-													_elm_lang$core$Json_Decode_ops[':='],
-													'chat',
-													_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)),
-												function (chat) {
-													return A2(
-														_elm_lang$core$Json_Decode$andThen,
-														A2(_elm_lang$core$Json_Decode_ops[':='], 'comment', _elm_lang$core$Json_Decode$string),
-														function (comment) {
-															return _elm_lang$core$Json_Decode$succeed(
-																{section: section, text: text, time: time, user: user, showChat: showChat, chat: chat, comment: comment});
-														});
-												});
-										});
-								});
-						});
-				});
-		}));
-var _user$project$Header$Model = F3(
-	function (a, b, c) {
-		return {email: a, config: b, shout: c};
+var _user$project$Header$Model = F2(
+	function (a, b) {
+		return {email: a, config: b};
 	});
-var _user$project$Header$InitShout = function (a) {
-	return {ctor: 'InitShout', _0: a};
-};
-var _user$project$Header$EnterChat = {ctor: 'EnterChat'};
-var _user$project$Header$UpdateUserName = function (a) {
-	return {ctor: 'UpdateUserName', _0: a};
-};
-var _user$project$Header$ToggleChat = {ctor: 'ToggleChat'};
-var _user$project$Header$chat = function (model) {
-	return A2(
-		_elm_lang$html$Html$button,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Attributes$class('toggle-chat'),
-				_elm_lang$html$Html_Events$onClick(_user$project$Header$ToggleChat)
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html$text('Show Chat')
-			]));
-};
-var _user$project$Header$CommentText = function (a) {
-	return {ctor: 'CommentText', _0: a};
-};
-var _user$project$Header$inputComment = function (model) {
-	return A2(
-		_elm_lang$html$Html$p,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Attributes$id('say-this'),
-				_elm_lang$html$Html_Attributes$placeholder('Use Markdown'),
-				_elm_lang$html$Html_Attributes$contenteditable(true),
-				A2(
-				_elm_lang$html$Html_Events$on,
-				'input',
-				A2(_elm_lang$core$Json_Decode$map, _user$project$Header$CommentText, _user$project$Header$innerHtmlDecoder))
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html$text(model.shout.comment)
-			]));
-};
-var _user$project$Header$UpdateComments = function (a) {
-	return {ctor: 'UpdateComments', _0: a};
-};
 var _user$project$Header$ModConfig = function (a) {
 	return {ctor: 'ModConfig', _0: a};
 };
@@ -24397,9 +24130,7 @@ var _user$project$Header$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$batch(
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_user$project$Header$portConfig(_user$project$Header$UpdateConfig),
-				_user$project$Header$portShout(_user$project$Header$UpdateComments),
-				_user$project$Header$portInitShout(_user$project$Header$InitShout)
+				_user$project$Header$portConfig(_user$project$Header$UpdateConfig)
 			]));
 };
 var _user$project$Header$Cancel = {ctor: 'Cancel'};
@@ -24526,84 +24257,6 @@ var _user$project$Header$emailMe = function (model) {
 					]))
 			]));
 };
-var _user$project$Header$NoOp = {ctor: 'NoOp'};
-var _user$project$Header$onEnter = function (msg) {
-	var tagger = function (code) {
-		return (_elm_lang$core$Native_Utils.eq(code, 13) || _elm_lang$core$Native_Utils.eq(code, 9)) ? msg : _user$project$Header$NoOp;
-	};
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'keydown',
-		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$keyCode));
-};
-var _user$project$Header$enterUserName = function (model) {
-	return A2(
-		_elm_lang$html$Html$input,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Attributes$placeholder('User Name'),
-				_elm_lang$html$Html_Attributes$autofocus(true),
-				_elm_lang$html$Html_Attributes$value(model.shout.user),
-				_elm_lang$html$Html_Attributes$name('userName'),
-				_elm_lang$html$Html_Events$onInput(_user$project$Header$UpdateUserName),
-				_user$project$Header$onEnter(_user$project$Header$EnterChat)
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[]));
-};
-var _user$project$Header$chatWindow = function (model) {
-	var view_chat = function (chat) {
-		return A2(
-			_elm_lang$html$Html$li,
-			_elm_lang$core$Native_List.fromArray(
-				[]),
-			_elm_lang$core$Native_List.fromArray(
-				[
-					A2(
-					_evancz$elm_markdown$Markdown$toHtml,
-					_elm_lang$core$Native_List.fromArray(
-						[]),
-					chat)
-				]));
-	};
-	return A2(
-		_elm_lang$html$Html$div,
-		_elm_lang$core$Native_List.fromArray(
-			[
-				_elm_lang$html$Html_Attributes$id('chat-container')
-			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
-				_elm_lang$html$Html$p,
-				_elm_lang$core$Native_List.fromArray(
-					[]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_user$project$Header$enterUserName(model),
-						A2(
-						_elm_lang$html$Html$button,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$id('chat-window-toggle'),
-								_elm_lang$html$Html_Events$onClick(_user$project$Header$ToggleChat)
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Hide')
-							]))
-					])),
-				_user$project$Header$inputComment(model),
-				A2(
-				_elm_lang$html$Html$ul,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$class('chat_list'),
-						_elm_lang$html$Html_Events$onClick(_user$project$Header$ToggleChat)
-					]),
-				A2(_elm_lang$core$List$map, view_chat, model.shout.chat))
-			]));
-};
 var _user$project$Header$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -24674,25 +24327,15 @@ var _user$project$Header$view = function (model) {
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_user$project$Header$translations(model)
-							])),
-						A2(
-						_elm_lang$html$Html$li,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('option-item')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_user$project$Header$chat(model)
 							]))
-					])),
-				_user$project$Header$chatWindow(model)
+					]))
 			]));
 };
 var _user$project$Header$main = {
 	main: _elm_lang$html$Html_App$program(
 		{init: _user$project$Header$init, update: _user$project$Header$update, view: _user$project$Header$view, subscriptions: _user$project$Header$subscriptions})
 };
+var _user$project$Header$NoOp = {ctor: 'NoOp'};
 
 var Elm = {};
 Elm['Header'] = Elm['Header'] || {};
@@ -34066,7 +33709,7 @@ var _user$project$Iphod_Sunday$titleStyle = function (model) {
 			[
 				{ctor: '_Tuple2', _0: 'font-size', _1: '0.9em'},
 				{ctor: '_Tuple2', _0: 'color', _1: 'blue'},
-				{ctor: '_Tuple2', _0: 'height', _1: '2.3em'}
+				{ctor: '_Tuple2', _0: 'height', _1: '3em'}
 			]));
 };
 var _user$project$Iphod_Sunday$bodyStyle = function (lesson) {
@@ -34701,7 +34344,7 @@ var _user$project$Iphod_Sunday$view = function (model) {
 										_elm_lang$html$Html$button,
 										_elm_lang$core$Native_List.fromArray(
 											[
-												_elm_lang$html$Html_Attributes$class('button'),
+												_elm_lang$html$Html_Attributes$class('button collect-button'),
 												_elm_lang$html$Html_Events$onClick(_user$project$Iphod_Sunday$ToggleCollect)
 											]),
 										_elm_lang$core$Native_List.fromArray(
@@ -50563,7 +50206,7 @@ var _user$project$Iphod_Sunday$titleStyle = function (model) {
 			[
 				{ctor: '_Tuple2', _0: 'font-size', _1: '0.9em'},
 				{ctor: '_Tuple2', _0: 'color', _1: 'blue'},
-				{ctor: '_Tuple2', _0: 'height', _1: '2.3em'}
+				{ctor: '_Tuple2', _0: 'height', _1: '3em'}
 			]));
 };
 var _user$project$Iphod_Sunday$bodyStyle = function (lesson) {
@@ -51198,7 +50841,7 @@ var _user$project$Iphod_Sunday$view = function (model) {
 										_elm_lang$html$Html$button,
 										_elm_lang$core$Native_List.fromArray(
 											[
-												_elm_lang$html$Html_Attributes$class('button'),
+												_elm_lang$html$Html_Attributes$class('button collect-button'),
 												_elm_lang$html$Html_Events$onClick(_user$project$Iphod_Sunday$ToggleCollect)
 											]),
 										_elm_lang$core$Native_List.fromArray(

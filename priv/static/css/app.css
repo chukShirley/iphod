@@ -175,6 +175,12 @@ form.link, form.button {
   button {
     outline: none;
     font-size: 0.8em;
+    cursor: pointer;
+  }
+
+  .collect-button {
+    position: relative;
+    top: -1em;
   }
   
   .collect_hide{
@@ -495,7 +501,18 @@ form.link, form.button {
   }
 } /* end of large screen */
   
-  .day_white, .day_gold {
+
+  .day_gold {
+  /* Permalink - use to edit and share this gradient: 
+    http://colorzilla.com/gradient-editor/#fefcea+0,f1da36+100;Gold+3D */
+    background: #fefcea; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #fefcea 0%, #f1da36 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #fefcea 0%,#f1da36 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #fefcea 0%,#f1da36 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  }
+  
+  .day_white {
   /* Permalink - use to edit and share this gradient: 
     http://colorzilla.com/gradient-editor/#fefcea+0,f1da36+100;Gold+3D */
     background: #fefcea; /* Old browsers */
