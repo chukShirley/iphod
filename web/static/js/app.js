@@ -140,12 +140,12 @@ if ( path.match(/mindex/)) {
 }
 
 // MP/EP
-if (path == "/") { window.location.href = am ? "/mp" : "/ep" }
-if (am && path.match(/ep/)) { window.location.href = "/mp"}
-if (!am && path.match(/mp/)) { window.location.href = "/ep"}
+// if (path == "/") { window.location.href = am ? "/mp" : "/ep" }
+// if (am && path.match(/ep/)) { window.location.href = "/mp"}
+// if (!am && path.match(/mp/)) { window.location.href = "/ep"}
 
 // grr - match doesn't match utf8 codes, must find alt solution
-if (path == "/" || path.match(/mp$|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep$|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
+if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep(?!i)|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   let channel = socket.channel("iphod:readings")
     , elmHeaderDiv = document.getElementById('header-elm-container')
     , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)

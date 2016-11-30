@@ -38,7 +38,6 @@ type alias Model =
   , mp: Models.DailyMP
   , ep: Models.DailyEP
   , reflection: Models.Reflection
---  , shout: Models.Shout
   }
 
 initModel: Model
@@ -47,7 +46,6 @@ initModel =
   , mp = Models.initDailyMP
   , ep = Models.initDailyEP
   , reflection = Models.initReflection
---  , shout = Models.initShout
   }
 
 init:   (Model, Cmd Msg)
@@ -55,7 +53,6 @@ init =  (initModel, Cmd.none)
 
 -- REQUEST PORTS
 
--- requestReading: [Date, section, ver]
 port requestReading: List String -> Cmd msg
 port requestAltReading: List String -> Cmd msg
 
@@ -84,8 +81,6 @@ subscriptions model =
   , portEP UpdateEP
   , portLesson UpdateLesson
   , portReflection UpdateReflection
---  , portShout UpdateComments
---  , portInitShout InitShout
   ]
 
 -- UPDATE
@@ -162,7 +157,6 @@ update msg model =
 
     ModEU msg ->
       let
-        -- newModel = {model | eu = Sunday.update msg model.eu}
         newModel = {model | eu = Sunday.update msg model.eu}
         sunday = newModel.eu
         newCmd =
@@ -337,20 +331,17 @@ view model =
 euDiv: Model -> Html Msg
 euDiv model =
   div [] [ App.map ModEU (Sunday.view model.eu) ]
-  -- [ (Sunday.view (Signal.forwardTo (ModEU model.eu)) model.eu) ]
 
 mpDiv: Model -> Html Msg
 mpDiv model =
   div []
   [ App.map ModMP (MPReading.view model.mp)
-  --(MPReading.view (Signal.forwardTo (ModMP model.mp)) model.mp)
   ]
 
 epDiv: Model -> Html Msg
 epDiv model =
   div []
   [ App.map ModEP (EPReading.view model.ep)
-  -- (EPReading.view (Signal.forwardTo (ModEP model.ep)) model.ep)
   ]
 
 reflectionDiv: Model -> Html Msg

@@ -1638,18 +1638,12 @@ if (path.match(/mindex/)) {
 }
 
 // MP/EP
-if (path == "/") {
-  window.location.href = am ? "/mp" : "/ep";
-}
-if (am && path.match(/ep/)) {
-  window.location.href = "/mp";
-}
-if (!am && path.match(/mp/)) {
-  window.location.href = "/ep";
-}
+// if (path == "/") { window.location.href = am ? "/mp" : "/ep" }
+// if (am && path.match(/ep/)) { window.location.href = "/mp"}
+// if (!am && path.match(/mp/)) { window.location.href = "/ep"}
 
 // grr - match doesn't match utf8 codes, must find alt solution
-if (path == "/" || path.match(/mp$|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep$|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
+if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep(?!i)|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   (function () {
     var channel = _socket2.default.channel("iphod:readings"),
         elmHeaderDiv = document.getElementById('header-elm-container'),
@@ -33890,8 +33884,6 @@ var _user$project$Iphod_Sunday$update = F2(
 					});
 			case 'SetReading':
 				return _p3._0;
-			case 'GetText':
-				return model;
 			case 'ChangeText':
 				var _p5 = _p3._1;
 				var newModel = function () {
@@ -34013,6 +34005,65 @@ var _user$project$Iphod_Sunday$ChangeText = F2(
 	function (a, b) {
 		return {ctor: 'ChangeText', _0: a, _1: b};
 	});
+var _user$project$Iphod_Sunday$thisReading = F2(
+	function (model, section) {
+		var ver = function () {
+			var _p10 = section;
+			switch (_p10.ctor) {
+				case 'OT':
+					return model.config.ot;
+				case 'PS':
+					return model.config.ps;
+				case 'NT':
+					return model.config.nt;
+				default:
+					return model.config.gs;
+			}
+		}();
+		var this_lesson = function (l) {
+			return _elm_lang$core$Native_Utils.eq(
+				_elm_lang$core$String$length(l.body),
+				0) ? A2(
+				_elm_lang$html$Html$li,
+				_user$project$Iphod_Sunday$hoverable(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_user$project$Iphod_Sunday$this_style(l),
+							_elm_lang$html$Html_Events$onClick(
+							A2(_user$project$Iphod_Sunday$ChangeText, l.section, ver))
+						])),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(l.read)
+					])) : A2(
+				_elm_lang$html$Html$li,
+				_user$project$Iphod_Sunday$hoverable(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_user$project$Iphod_Sunday$this_style(l),
+							_elm_lang$html$Html_Events$onClick(
+							_user$project$Iphod_Sunday$ToggleShow(l))
+						])),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(l.read)
+					]));
+		};
+		var lessons = function () {
+			var _p11 = section;
+			switch (_p11.ctor) {
+				case 'OT':
+					return model.ot;
+				case 'PS':
+					return model.ps;
+				case 'NT':
+					return model.nt;
+				default:
+					return model.gs;
+			}
+		}();
+		return A2(_elm_lang$core$List$map, this_lesson, lessons);
+	});
 var _user$project$Iphod_Sunday$versionSelect = F2(
 	function (model, lesson) {
 		var thisVersion = function (ver) {
@@ -34046,101 +34097,6 @@ var _user$project$Iphod_Sunday$versionSelect = F2(
 var _user$project$Iphod_Sunday$UpdateAltReading = F2(
 	function (a, b) {
 		return {ctor: 'UpdateAltReading', _0: a, _1: b};
-	});
-var _user$project$Iphod_Sunday$GetText = function (a) {
-	return {ctor: 'GetText', _0: a};
-};
-var _user$project$Iphod_Sunday$thisReading = F2(
-	function (model, section) {
-		var req = function (l) {
-			var _p10 = section;
-			switch (_p10.ctor) {
-				case 'OT':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ot},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				case 'PS':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ps},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				case 'NT':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.nt},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				default:
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.gs},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-			}
-		};
-		var this_lesson = function (l) {
-			return _elm_lang$core$Native_Utils.eq(
-				_elm_lang$core$String$length(l.body),
-				0) ? A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_Sunday$hoverable(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_user$project$Iphod_Sunday$this_style(l),
-							_elm_lang$html$Html_Events$onClick(
-							_user$project$Iphod_Sunday$GetText(
-								req(l)))
-						])),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(l.read)
-					])) : A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_Sunday$hoverable(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_user$project$Iphod_Sunday$this_style(l),
-							_elm_lang$html$Html_Events$onClick(
-							_user$project$Iphod_Sunday$ToggleShow(l))
-						])),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(l.read)
-					]));
-		};
-		var lessons = function () {
-			var _p11 = section;
-			switch (_p11.ctor) {
-				case 'OT':
-					return model.ot;
-				case 'PS':
-					return model.ps;
-				case 'NT':
-					return model.nt;
-				default:
-					return model.gs;
-			}
-		}();
-		return A2(_elm_lang$core$List$map, this_lesson, lessons);
 	});
 var _user$project$Iphod_Sunday$SetReading = function (a) {
 	return {ctor: 'SetReading', _0: a};
@@ -34178,16 +34134,7 @@ var _user$project$Iphod_Sunday$thisText = F2(
 		var this_text = function (l) {
 			var getTranslation = function (s) {
 				return _elm_lang$html$Html_Events$onClick(
-					_user$project$Iphod_Sunday$GetText(
-						_elm_lang$core$Native_List.fromArray(
-							[
-								{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-								{ctor: '_Tuple2', _0: 'section', _1: l.section},
-								{ctor: '_Tuple2', _0: 'id', _1: l.id},
-								{ctor: '_Tuple2', _0: 'read', _1: l.read},
-								{ctor: '_Tuple2', _0: 'ver', _1: s},
-								{ctor: '_Tuple2', _0: 'fnotes', _1: 'True'}
-							])));
+					A2(_user$project$Iphod_Sunday$ChangeText, l.section, s));
 			};
 			return _elm_lang$core$Native_Utils.eq(l.section, 'ps') ? A2(
 				_elm_lang$html$Html$div,
@@ -50387,8 +50334,6 @@ var _user$project$Iphod_Sunday$update = F2(
 					});
 			case 'SetReading':
 				return _p3._0;
-			case 'GetText':
-				return model;
 			case 'ChangeText':
 				var _p5 = _p3._1;
 				var newModel = function () {
@@ -50510,6 +50455,65 @@ var _user$project$Iphod_Sunday$ChangeText = F2(
 	function (a, b) {
 		return {ctor: 'ChangeText', _0: a, _1: b};
 	});
+var _user$project$Iphod_Sunday$thisReading = F2(
+	function (model, section) {
+		var ver = function () {
+			var _p10 = section;
+			switch (_p10.ctor) {
+				case 'OT':
+					return model.config.ot;
+				case 'PS':
+					return model.config.ps;
+				case 'NT':
+					return model.config.nt;
+				default:
+					return model.config.gs;
+			}
+		}();
+		var this_lesson = function (l) {
+			return _elm_lang$core$Native_Utils.eq(
+				_elm_lang$core$String$length(l.body),
+				0) ? A2(
+				_elm_lang$html$Html$li,
+				_user$project$Iphod_Sunday$hoverable(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_user$project$Iphod_Sunday$this_style(l),
+							_elm_lang$html$Html_Events$onClick(
+							A2(_user$project$Iphod_Sunday$ChangeText, l.section, ver))
+						])),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(l.read)
+					])) : A2(
+				_elm_lang$html$Html$li,
+				_user$project$Iphod_Sunday$hoverable(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_user$project$Iphod_Sunday$this_style(l),
+							_elm_lang$html$Html_Events$onClick(
+							_user$project$Iphod_Sunday$ToggleShow(l))
+						])),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(l.read)
+					]));
+		};
+		var lessons = function () {
+			var _p11 = section;
+			switch (_p11.ctor) {
+				case 'OT':
+					return model.ot;
+				case 'PS':
+					return model.ps;
+				case 'NT':
+					return model.nt;
+				default:
+					return model.gs;
+			}
+		}();
+		return A2(_elm_lang$core$List$map, this_lesson, lessons);
+	});
 var _user$project$Iphod_Sunday$versionSelect = F2(
 	function (model, lesson) {
 		var thisVersion = function (ver) {
@@ -50543,101 +50547,6 @@ var _user$project$Iphod_Sunday$versionSelect = F2(
 var _user$project$Iphod_Sunday$UpdateAltReading = F2(
 	function (a, b) {
 		return {ctor: 'UpdateAltReading', _0: a, _1: b};
-	});
-var _user$project$Iphod_Sunday$GetText = function (a) {
-	return {ctor: 'GetText', _0: a};
-};
-var _user$project$Iphod_Sunday$thisReading = F2(
-	function (model, section) {
-		var req = function (l) {
-			var _p10 = section;
-			switch (_p10.ctor) {
-				case 'OT':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ot},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				case 'PS':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ps},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				case 'NT':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.nt},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				default:
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.gs},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-			}
-		};
-		var this_lesson = function (l) {
-			return _elm_lang$core$Native_Utils.eq(
-				_elm_lang$core$String$length(l.body),
-				0) ? A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_Sunday$hoverable(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_user$project$Iphod_Sunday$this_style(l),
-							_elm_lang$html$Html_Events$onClick(
-							_user$project$Iphod_Sunday$GetText(
-								req(l)))
-						])),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(l.read)
-					])) : A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_Sunday$hoverable(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_user$project$Iphod_Sunday$this_style(l),
-							_elm_lang$html$Html_Events$onClick(
-							_user$project$Iphod_Sunday$ToggleShow(l))
-						])),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(l.read)
-					]));
-		};
-		var lessons = function () {
-			var _p11 = section;
-			switch (_p11.ctor) {
-				case 'OT':
-					return model.ot;
-				case 'PS':
-					return model.ps;
-				case 'NT':
-					return model.nt;
-				default:
-					return model.gs;
-			}
-		}();
-		return A2(_elm_lang$core$List$map, this_lesson, lessons);
 	});
 var _user$project$Iphod_Sunday$SetReading = function (a) {
 	return {ctor: 'SetReading', _0: a};
@@ -50675,16 +50584,7 @@ var _user$project$Iphod_Sunday$thisText = F2(
 		var this_text = function (l) {
 			var getTranslation = function (s) {
 				return _elm_lang$html$Html_Events$onClick(
-					_user$project$Iphod_Sunday$GetText(
-						_elm_lang$core$Native_List.fromArray(
-							[
-								{ctor: '_Tuple2', _0: 'ofType', _1: model.ofType},
-								{ctor: '_Tuple2', _0: 'section', _1: l.section},
-								{ctor: '_Tuple2', _0: 'id', _1: l.id},
-								{ctor: '_Tuple2', _0: 'read', _1: l.read},
-								{ctor: '_Tuple2', _0: 'ver', _1: s},
-								{ctor: '_Tuple2', _0: 'fnotes', _1: 'True'}
-							])));
+					A2(_user$project$Iphod_Sunday$ChangeText, l.section, s));
 			};
 			return _elm_lang$core$Native_Utils.eq(l.section, 'ps') ? A2(
 				_elm_lang$html$Html$div,

@@ -31,7 +31,6 @@ type Section
 type Msg
   = NoOp
   | SetReading Model
-  | GetText (List (String, String))
   | UpdateAltReading Models.Lesson String
   | ChangeText String String
   | RequestAltReading Models.Lesson
@@ -48,10 +47,6 @@ update msg model =
 
     SetReading newModel -> newModel
 
-
-    GetText list ->
-      model
-
     ChangeText section ver ->
       let
         newModel = case section of 
@@ -65,7 +60,6 @@ update msg model =
     UpdateAltReading lesson str ->
       let
         this_section = thisSection model lesson
-        -- newSection = {this_section | altRead = str}
         update_altReading this_lesson =
           if this_lesson.id == lesson.id 
             then 
@@ -163,15 +157,12 @@ view model =
           [ td 
               [class "tdStyle", style [("width", "20%")] ]
               [ ul [textStyle model] ( thisReading model OT) ]
-              -- [ ul [textStyle model] ( thisReading model.ofType model.ot model.config.gs model.config.fnotes) ]
           , td
               [class "tdStyle", style [("width", "20%")] ]
               [ ul [textStyle model] ( thisReading model PS)]
-              -- [ ul [textStyle model] ( thisReading model.ofType model.ps model.config.gs model.config.fnotes) ]
            , td
               [class "tdStyle", style [("width", "20%")] ]
               [ ul [textStyle model] ( thisReading model NT)]
-              -- [ ul [textStyle model] ( thisReading model.ofType model.nt model.config.gs model.config.fnotes) ]
            , td
               [class "tdStyle", style [("width", "20%")] ]
               [ ul [textStyle model] ( thisReading model GS)]
@@ -182,9 +173,6 @@ view model =
     , div [] (thisText model model.nt )
     , div [] (thisText model model.gs )
     , div [ collectStyle model.collect ] (thisCollect model.collect)
-
-
---    [ li [titleStyle model, onClick ToggleModelShow] [text model.title]
  
   ] -- end of div 
 
@@ -223,7 +211,7 @@ thisText model lessons =
     this_text l =
       let
         getTranslation s = 
-          onClick (GetText [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", s), ("fnotes", "True")])
+          onClick (ChangeText l.section s)
       in
         if l.section == "ps"
           then
@@ -247,7 +235,6 @@ thisText model lessons =
                 [ button [class "translationButton", onClick (ToggleShow l)] [text "Hide"]
                 , versionSelect model l
                 , altReading model l
---                 , comments model l
                 ]
             , Markdown.toHtml [] l.body
             ]
@@ -263,17 +250,16 @@ thisReading model section =
       NT -> model.nt
       GS -> model.gs
 
-    req l = case section of
-      OT -> [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.ot), ("fnotes", model.config.fnotes)]
-      PS -> [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.ps), ("fnotes", model.config.fnotes)]
-      NT -> [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.nt), ("fnotes", model.config.fnotes)]
-      GS -> [("ofType", model.ofType), ("section", l.section), ("id", l.id), ("read", l.read), ("ver", model.config.gs), ("fnotes", model.config.fnotes)]
-
+    ver = case section of
+      OT -> model.config.ot
+      PS -> model.config.ps
+      NT -> model.config.nt
+      GS -> model.config.gs
     this_lesson l = 
       if String.length l.body == 0
         then
           li
-            (hoverable [this_style l, onClick (GetText (req l))] )
+            (hoverable [this_style l, onClick (ChangeText l.section ver)] )
             [text l.read]
         else
           li 
@@ -317,15 +303,9 @@ altReading model lesson =
         , value lesson.altRead
         , name "altReading"
         , onInput (UpdateAltReading lesson)
-        -- , on "keyup" (Json.map 13 keyCode) (RequestAltReading lesson) -- enter
         , onEnter (RequestAltReading lesson)
         ] 
         []
-
--- comments: Model -> Models.Lesson -> Html Msg
--- comments model lesson =
---   button [class "commentsButton", onClick (ToggleComments lesson)] [text "Comments"]
--- button [class "translationButton", onClick (ToggleShow l)] [text "Hide"]
 
 onEnter : Msg -> Attribute Msg
 onEnter msg =
