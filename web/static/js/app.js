@@ -133,6 +133,19 @@ var now = new Date()
   , tz = now.toString().split("GMT")[1].split(" (")[0] // timezone, i.e. -0700
   , am = now.toString().split(" ")[4] < "12";
 
+if ( path.match(/office/) ) {
+  var vers = get_version("ps") + "/" + get_version("ot")
+    , till_noon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12) - now
+    , till_midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 24) - now;
+
+  function mp() { window.location.href = "office/mp/" + vers }
+  function ep() { window.location.href = "office/ep/" + vers }
+
+  history.pushState(path, "Legereme", "/office");
+  if (till_noon > 0) { setTimeout(ep, till_noon) }
+  else    { setTimeout(mp, till_midnight) }
+}
+
 // mobile landing page
 
 if ( path.match(/mindex/)) {
@@ -145,6 +158,7 @@ if ( path.match(/mindex/)) {
 // if (!am && path.match(/mp/)) { window.location.href = "/ep"}
 
 // grr - match doesn't match utf8 codes, must find alt solution
+
 if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep(?!i)|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   let channel = socket.channel("iphod:readings")
     , elmHeaderDiv = document.getElementById('header-elm-container')

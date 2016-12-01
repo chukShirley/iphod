@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<html>
+  <head></head>
+  <body>
+    <script src="<%= static_path(@conn, "/js/local_office.js") %>"></script>
+  </body>
+</html>

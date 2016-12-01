@@ -21,6 +21,17 @@ defmodule Iphod.PrayerController do
       |> render( "ep.html", model: prayer_model("ep", psalm, text))
   end
 
+  def office(conn, params) do
+    case params["prayer"] do
+      "mp" -> mp(conn, params)
+      "ep" -> ep(conn, params)
+      _ ->
+        conn
+          |> put_layout("local_office.html")
+          |> render
+    end
+  end
+
   def mp_cusimp(conn, _params), do: xlate conn, "mp", "cu89s", "zh"
   def mp_cutrad(conn, _params), do: xlate conn, "mp", "cu89t", "zh"
   def ep_cusimp(conn, _params), do: xlate conn, "ep", "cu89s", "zh"

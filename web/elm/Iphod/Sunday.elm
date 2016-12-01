@@ -49,11 +49,19 @@ update msg model =
 
     ChangeText section ver ->
       let
+        thisConfig = model.config
+        newConfig = case section of
+          "ot" -> {thisConfig | ot = ver}
+          "ps" -> {thisConfig | ps = ver}
+          "nt" -> {thisConfig | nt = ver}
+          "gs" -> {thisConfig | gs = ver}
+          _    -> thisConfig
+
         newModel = case section of 
-          "ot" -> {model | ot = changeText model ver model.ot}
-          "ps" -> {model | ps = changeText model ver model.ps}
-          "nt" -> {model | nt = changeText model ver model.nt}
-          _    -> {model | gs = changeText model ver model.gs}
+          "ot" -> {model | ot = changeText model ver model.ot, config = newConfig}
+          "ps" -> {model | ps = changeText model ver model.ps, config = newConfig}
+          "nt" -> {model | nt = changeText model ver model.nt, config = newConfig}
+          _    -> {model | gs = changeText model ver model.gs, config = newConfig}
       in
         newModel
 
@@ -294,7 +302,21 @@ versionSelect model lesson =
       [ on "change" 
         (Json.map (ChangeText lesson.section) targetValue)
       ]
-      (List.map thisVersion model.config.vers)
+      -- (List.map thisVersion model.config.vers)
+      (List.map thisVersion (selections model lesson))
+
+selections: Model -> Models.Lesson -> List String
+selections model lesson =
+  let 
+    this_ver =
+      case lesson.section of
+        "ot" -> model.config.ot
+        "ps" -> model.config.ps
+        "nt" -> model.config.nt
+        "gs" -> model.config.nt
+        _    -> model.config.current
+  in
+    this_ver :: model.config.vers
 
 altReading: Model -> Models.Lesson -> Html Msg
 altReading model lesson =

@@ -9356,12 +9356,31 @@ var _user$project$Iphod_Sunday$tableStyle = function (model) {
 				{ctor: '_Tuple2', _0: 'width', _1: '100%'}
 			]));
 };
+var _user$project$Iphod_Sunday$selections = F2(
+	function (model, lesson) {
+		var this_ver = function () {
+			var _p0 = lesson.section;
+			switch (_p0) {
+				case 'ot':
+					return model.config.ot;
+				case 'ps':
+					return model.config.ps;
+				case 'nt':
+					return model.config.nt;
+				case 'gs':
+					return model.config.nt;
+				default:
+					return model.config.current;
+			}
+		}();
+		return A2(_elm_lang$core$List_ops['::'], this_ver, model.config.vers);
+	});
 var _user$project$Iphod_Sunday$hoverable = function (attrs) {
 	return attrs;
 };
 var _user$project$Iphod_Sunday$this_style = function (l) {
-	var _p0 = l.style;
-	switch (_p0) {
+	var _p1 = l.style;
+	switch (_p1) {
 		case 'req':
 			return _elm_lang$html$Html_Attributes$class('req_style');
 		case 'opt':
@@ -9453,8 +9472,8 @@ var _user$project$Iphod_Sunday$thisCollect = function (sundayCollect) {
 };
 var _user$project$Iphod_Sunday$updateModel = F3(
 	function (model, lesson, newSection) {
-		var _p1 = lesson.section;
-		switch (_p1) {
+		var _p2 = lesson.section;
+		switch (_p2) {
 			case 'ot':
 				return _elm_lang$core$Native_Utils.update(
 					model,
@@ -9475,8 +9494,8 @@ var _user$project$Iphod_Sunday$updateModel = F3(
 	});
 var _user$project$Iphod_Sunday$thisSection = F2(
 	function (model, lesson) {
-		var _p2 = lesson.section;
-		switch (_p2) {
+		var _p3 = lesson.section;
+		switch (_p3) {
 			case 'ot':
 				return model.ot;
 			case 'ps':
@@ -9504,8 +9523,8 @@ var _user$project$Iphod_Sunday$changeText = F3(
 	});
 var _user$project$Iphod_Sunday$update = F2(
 	function (msg, model) {
-		var _p3 = msg;
-		switch (_p3.ctor) {
+		var _p4 = msg;
+		switch (_p4.ctor) {
 			case 'NoOp':
 				return model;
 			case 'ToggleModelShow':
@@ -9515,66 +9534,95 @@ var _user$project$Iphod_Sunday$update = F2(
 						show: _elm_lang$core$Basics$not(model.show)
 					});
 			case 'SetReading':
-				return _p3._0;
+				return _p4._0;
 			case 'ChangeText':
-				var _p5 = _p3._1;
+				var _p8 = _p4._1;
+				var _p7 = _p4._0;
+				var thisConfig = model.config;
+				var newConfig = function () {
+					var _p5 = _p7;
+					switch (_p5) {
+						case 'ot':
+							return _elm_lang$core$Native_Utils.update(
+								thisConfig,
+								{ot: _p8});
+						case 'ps':
+							return _elm_lang$core$Native_Utils.update(
+								thisConfig,
+								{ps: _p8});
+						case 'nt':
+							return _elm_lang$core$Native_Utils.update(
+								thisConfig,
+								{nt: _p8});
+						case 'gs':
+							return _elm_lang$core$Native_Utils.update(
+								thisConfig,
+								{gs: _p8});
+						default:
+							return thisConfig;
+					}
+				}();
 				var newModel = function () {
-					var _p4 = _p3._0;
-					switch (_p4) {
+					var _p6 = _p7;
+					switch (_p6) {
 						case 'ot':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									ot: A3(_user$project$Iphod_Sunday$changeText, model, _p5, model.ot)
+									ot: A3(_user$project$Iphod_Sunday$changeText, model, _p8, model.ot),
+									config: newConfig
 								});
 						case 'ps':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									ps: A3(_user$project$Iphod_Sunday$changeText, model, _p5, model.ps)
+									ps: A3(_user$project$Iphod_Sunday$changeText, model, _p8, model.ps),
+									config: newConfig
 								});
 						case 'nt':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									nt: A3(_user$project$Iphod_Sunday$changeText, model, _p5, model.nt)
+									nt: A3(_user$project$Iphod_Sunday$changeText, model, _p8, model.nt),
+									config: newConfig
 								});
 						default:
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									gs: A3(_user$project$Iphod_Sunday$changeText, model, _p5, model.gs)
+									gs: A3(_user$project$Iphod_Sunday$changeText, model, _p8, model.gs),
+									config: newConfig
 								});
 					}
 				}();
 				return newModel;
 			case 'UpdateAltReading':
-				var _p6 = _p3._0;
+				var _p9 = _p4._0;
 				var update_altReading = function (this_lesson) {
-					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p6.id) ? _elm_lang$core$Native_Utils.update(
+					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p9.id) ? _elm_lang$core$Native_Utils.update(
 						this_lesson,
-						{altRead: _p3._1}) : this_lesson;
+						{altRead: _p4._1}) : this_lesson;
 				};
-				var this_section = A2(_user$project$Iphod_Sunday$thisSection, model, _p6);
+				var this_section = A2(_user$project$Iphod_Sunday$thisSection, model, _p9);
 				var newSection = A2(_elm_lang$core$List$map, update_altReading, this_section);
-				var newModel = A3(_user$project$Iphod_Sunday$updateModel, model, _p6, newSection);
+				var newModel = A3(_user$project$Iphod_Sunday$updateModel, model, _p9, newSection);
 				return newModel;
 			case 'RequestAltReading':
-				var _p8 = _p3._0;
+				var _p11 = _p4._0;
 				var newLesson = _elm_lang$core$Native_List.fromArray(
 					[
 						_elm_lang$core$Native_Utils.update(
-						_p8,
+						_p11,
 						{
 							cmd: A2(
 								_elm_lang$core$Basics_ops['++'],
 								'alt',
-								_elm_lang$core$String$toUpper(_p8.section))
+								_elm_lang$core$String$toUpper(_p11.section))
 						})
 					]);
 				var newModel = function () {
-					var _p7 = _p8.section;
-					switch (_p7) {
+					var _p10 = _p11.section;
+					switch (_p10) {
 						case 'ot':
 							return _elm_lang$core$Native_Utils.update(
 								model,
@@ -9595,17 +9643,17 @@ var _user$project$Iphod_Sunday$update = F2(
 				}();
 				return newModel;
 			case 'ToggleShow':
-				var _p9 = _p3._0;
+				var _p12 = _p4._0;
 				var update_text = function (this_lesson) {
-					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p9.id) ? _elm_lang$core$Native_Utils.update(
+					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p12.id) ? _elm_lang$core$Native_Utils.update(
 						this_lesson,
 						{
 							show: _elm_lang$core$Basics$not(this_lesson.show)
 						}) : this_lesson;
 				};
-				var this_section = A2(_user$project$Iphod_Sunday$thisSection, model, _p9);
+				var this_section = A2(_user$project$Iphod_Sunday$thisSection, model, _p12);
 				var newSection = A2(_elm_lang$core$List$map, update_text, this_section);
-				var newModel = A3(_user$project$Iphod_Sunday$updateModel, model, _p9, newSection);
+				var newModel = A3(_user$project$Iphod_Sunday$updateModel, model, _p12, newSection);
 				return newModel;
 			default:
 				var collect = model.collect;
@@ -9640,8 +9688,8 @@ var _user$project$Iphod_Sunday$ChangeText = F2(
 var _user$project$Iphod_Sunday$thisReading = F2(
 	function (model, section) {
 		var ver = function () {
-			var _p10 = section;
-			switch (_p10.ctor) {
+			var _p13 = section;
+			switch (_p13.ctor) {
 				case 'OT':
 					return model.config.ot;
 				case 'PS':
@@ -9682,8 +9730,8 @@ var _user$project$Iphod_Sunday$thisReading = F2(
 					]));
 		};
 		var lessons = function () {
-			var _p11 = section;
-			switch (_p11.ctor) {
+			var _p14 = section;
+			switch (_p14.ctor) {
 				case 'OT':
 					return model.ot;
 				case 'PS':
@@ -9724,7 +9772,10 @@ var _user$project$Iphod_Sunday$versionSelect = F2(
 						_user$project$Iphod_Sunday$ChangeText(lesson.section),
 						_elm_lang$html$Html_Events$targetValue))
 				]),
-			A2(_elm_lang$core$List$map, thisVersion, model.config.vers));
+			A2(
+				_elm_lang$core$List$map,
+				thisVersion,
+				A2(_user$project$Iphod_Sunday$selections, model, lesson)));
 	});
 var _user$project$Iphod_Sunday$UpdateAltReading = F2(
 	function (a, b) {
