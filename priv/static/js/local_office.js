@@ -166,11 +166,11 @@ var now = new Date(),
     till_midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 24) - now;
 
 if (till_midday > 0) {
-  window.location.href = "office/mp/" + vers;
+  window.location.href = "/office/mp/" + vers;
 } else if (till_evening > 0) {
-  window.location.href = "office/midday";
+  window.location.href = "/office/midday";
 } else {
-  window.location.href = "office/ep/" + vers;
+  window.location.href = "/office/ep/" + vers;
 }
 
 // LOCAL STORAGE ------------------------

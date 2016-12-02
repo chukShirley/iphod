@@ -13,9 +13,9 @@ var now = new Date()
   ;
 
 
-if ( till_midday > 0) { window.location.href = "office/mp/" + vers }
-else if ( till_evening > 0 ) { window.location.href = "office/midday"}
-else { window.location.href = "office/ep/" + vers }
+if ( till_midday > 0) { window.location.href = "/office/mp/" + vers }
+else if ( till_evening > 0 ) { window.location.href = "/office/midday"}
+else { window.location.href = "/office/ep/" + vers }
 
 // LOCAL STORAGE ------------------------
 // copied from app.js

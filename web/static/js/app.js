@@ -139,9 +139,9 @@ if ( path.match(/office/) ) {
     , till_evening = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15) - now
     , till_midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 24) - now;
 
-  function mp() { window.location.href = "office/mp/" + vers }
-  function np() { window.location.href = "office/midday" }
-  function ep() { window.location.href = "office/ep/" + vers }
+  function mp() { window.location.href = "/office/mp/" + vers }
+  function np() { window.location.href = "/office/midday" }
+  function ep() { window.location.href = "/office/ep/" + vers }
 
   history.pushState(path, "Legereme", "/office");
   if (till_midday > 0) { setTimeout(np, till_midday) }
