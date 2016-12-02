@@ -18,7 +18,7 @@ defmodule Iphod.PrayerController do
       |> put_layout("app.html")
       |> render("midday.html")
   end
-  
+
   def ep(conn, params) do
     select_language params
     {psalm, text} = translations(params)
@@ -27,10 +27,18 @@ defmodule Iphod.PrayerController do
       |> render( "ep.html", model: prayer_model("ep", psalm, text))
   end
 
+  def compline(conn, _params) do
+    conn
+      |> put_layout("app.html")
+      |> render("compline.html")
+  end
+
   def office(conn, params) do
+    IO.puts "OFFICE: #{inspect params}"
     case params["prayer"] do
       "mp" -> mp(conn, params)
       "ep" -> ep(conn, params)
+      "midday" -> midday(conn, params)
       _ ->
         conn
           |> put_layout("local_office.html")

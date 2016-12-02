@@ -1651,15 +1651,14 @@ if (path.match(/office/)) {
 
   history.pushState(path, "Legereme", "/office");
   if (till_midday > 0) {
-    setTimeout(ep, till_midday);
+    setTimeout(np, till_midday);
   } else if (till_evening > 0) {
-    setTimeout(np, till_noon);
+    setTimeout(ep, till_evening);
   } else {
     setTimeout(mp, till_midnight);
   }
 }
 
-console.log("PATH: ", path);
 // mobile landing page
 
 if (path.match(/mindex/)) {
@@ -2070,12 +2069,16 @@ var now = new Date(),
     tz = now.toString().split("GMT")[1].split(" (")[0] // timezone, i.e. -0700
 ,
     am = now.toString().split(" ")[4] < "12",
-    vers = get_version("ps") + "/" + get_version("ot");
-console.log("VERSIONS: ", vers);
-if (am) {
+    vers = get_version("ps") + "/" + get_version("ot"),
+    till_midday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 30) - now,
+    till_evening = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15) - now,
+    till_midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 24) - now;
+
+if (till_midday > 0) {
   window.location.href = "office/mp/" + vers;
-}
-if (!am) {
+} else if (till_evening > 0) {
+  window.location.href = "office/midday";
+} else {
   window.location.href = "office/ep/" + vers;
 }
 
