@@ -145,7 +145,7 @@ if ( path.match(/office/) ) {
 
   history.pushState(path, "Legereme", "/office");
   if (till_midday > 0) { setTimeout(ep, till_midday) }
-  else if (till_evening > 0) {setTimeout(np, till_noon)}   
+  else if (till_evening > 0) {setTimeout(np, till_evening)}   
   else { setTimeout(mp, till_midnight) }
 }
 
