@@ -6231,6 +6231,14 @@ button.more-options{
   text-align: center;
 }
 
+.midday {
+  position: relative;
+  top: 0em;
+  font-size: 2em;
+  text-align: center;
+  padding-bottom: 1em;
+}
+
 .italic { 
   font-style: italic;
   font-size: 1em; 
@@ -6318,6 +6326,7 @@ button.more-options{
 
 .canticle {
   padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .canticle_title {
@@ -6350,15 +6359,17 @@ button.more-options{
 }
 .invitatory-init {
   font-style: italic;
-  padding-right: 3em;
+  padding-right: 2em;
 }
 .invitatory-speaker {
   font-style: italic;
 }
 
+/*
 .prayer_table td {
   padding: 0;
 }
+*/
 
 .ps_vs_num {
   color: blue;
@@ -6377,6 +6388,12 @@ button.more-options{
     padding-left: 4em;
     text-indent: -1.5em;
 }
+
+.np_collect {
+  padding-bottom: 1.5em;
+}
+.officiant {margin-right: 2em}
+.people {margin-right: 2.8em}
 
 @media screen and (max-width: 320px) { 
   .mpep { width: 17em; } 

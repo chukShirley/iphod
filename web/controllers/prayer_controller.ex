@@ -13,6 +13,12 @@ defmodule Iphod.PrayerController do
       |> render( "mp.html", model: prayer_model("mp", psalm, text))
   end
 
+  def midday(conn, _params) do
+    conn
+      |> put_layout("app.html")
+      |> render("midday.html")
+  end
+  
   def ep(conn, params) do
     select_language params
     {psalm, text} = translations(params)

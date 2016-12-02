@@ -1641,11 +1641,14 @@ if (path.match(/office/)) {
   };
 
   var vers = get_version("ps") + "/" + get_version("ot"),
-      till_noon = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12) - now,
+      till_midday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 30) - now,
+      till_evening = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15) - now,
       till_midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 24) - now;
 
   history.pushState(path, "Legereme", "/office");
-  if (till_noon > 0) {
+  if (till_midday > 0) {
+    setTimeout(ep, till_noon);
+  } else if (till_evening > 0) {
     setTimeout(ep, till_noon);
   } else {
     setTimeout(mp, till_midnight);
@@ -1665,7 +1668,7 @@ if (path.match(/mindex/)) {
 
 // grr - match doesn't match utf8 codes, must find alt solution
 
-if (path == "/" || path.match(/mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep(?!i)|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
+if (path == "/" || path.match(/midday|mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep(?!i)|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   (function () {
     var channel = _socket2.default.channel("iphod:readings"),
         elmHeaderDiv = document.getElementById('header-elm-container'),
