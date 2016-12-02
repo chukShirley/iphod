@@ -6,10 +6,16 @@
 var now = new Date()
   , tz = now.toString().split("GMT")[1].split(" (")[0] // timezone, i.e. -0700
   , am = now.toString().split(" ")[4] < "12"
-  , vers = get_version("ps") + "/" + get_version("ot");
-console.log("VERSIONS: ", vers)
-if (am) { window.location.href = "office/mp/" + vers }
-if (!am) { window.location.href = "office/ep/" + vers }
+  , vers = get_version("ps") + "/" + get_version("ot")
+  , till_midday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 30) - now
+  , till_evening = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15) - now
+  , till_midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 24) - now
+  ;
+
+
+if ( till_midday > 0) { window.location.href = "office/mp/" + vers }
+else if ( till_evening > 0 ) { window.location.href = "office/midday"}
+else { window.location.href = "office/ep/" + vers }
 
 // LOCAL STORAGE ------------------------
 // copied from app.js
