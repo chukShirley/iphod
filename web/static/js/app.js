@@ -140,14 +140,16 @@ if ( path.match(/office/) ) {
     , till_midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 24) - now;
 
   function mp() { window.location.href = "office/mp/" + vers }
+  function np() { window.location.href = "office/midday" }
   function ep() { window.location.href = "office/ep/" + vers }
 
   history.pushState(path, "Legereme", "/office");
-  if (till_midday > 0) { setTimeout(ep, till_noon) }
-  else if (till_evening > 0) {setTimeout(ep, till_noon)}   
+  if (till_midday > 0) { setTimeout(ep, till_midday) }
+  else if (till_evening > 0) {setTimeout(np, till_noon)}   
   else { setTimeout(mp, till_midnight) }
 }
 
+console.log("PATH: ", path)
 // mobile landing page
 
 if ( path.match(/mindex/)) {

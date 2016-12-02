@@ -1636,6 +1636,10 @@ if (path.match(/office/)) {
     window.location.href = "office/mp/" + vers;
   };
 
+  var np = function np() {
+    window.location.href = "office/midday";
+  };
+
   var ep = function ep() {
     window.location.href = "office/ep/" + vers;
   };
@@ -1647,14 +1651,15 @@ if (path.match(/office/)) {
 
   history.pushState(path, "Legereme", "/office");
   if (till_midday > 0) {
-    setTimeout(ep, till_noon);
+    setTimeout(ep, till_midday);
   } else if (till_evening > 0) {
-    setTimeout(ep, till_noon);
+    setTimeout(np, till_noon);
   } else {
     setTimeout(mp, till_midnight);
   }
 }
 
+console.log("PATH: ", path);
 // mobile landing page
 
 if (path.match(/mindex/)) {
