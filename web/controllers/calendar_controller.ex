@@ -71,7 +71,7 @@ defmodule Iphod.CalendarController do
       |> render(view, model: model)
   end
 
-  def get_month(date, service \\ "", this_date \\ "") do
+  def get_month(date, service \\ "nil", this_date \\ "nil") do
     days = list_of_weeks_from begin_month(date), end_month(date)
     %{  calendar: days,
         month:    date |> Timex.format!("{Mfull}"),

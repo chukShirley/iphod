@@ -437,10 +437,11 @@ if ( path.match(/mindex/) ) {
   var elmCalDiv = document.getElementById('cal-elm-container')
     , elmCalApp = Elm.Iphod.embed(elmCalDiv)
 
-  if ( $("#these_readings").data("service") ) {
-    var service = $("#these_readings").data("service")
+  if ( $("#these_readings").data("service") != "nil" ) {
+    var this_service = $("#these_readings").data("service")
       , this_date = $("#these_readings").data("date")
-        channel.push("get_text", [service, this_date])
+        
+    channel.push("get_text", [this_service, this_date])
   }
   elmCalApp.ports.requestReading.subscribe(function(request) {
     channel.push("get_lesson", request)
