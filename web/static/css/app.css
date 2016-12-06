@@ -21,6 +21,8 @@ body, form, ul, table {
 /* Phoenix flash messages */
 .alert:empty { display: none; }
 
+#these_readings { visibility: hidden }
+
 /* Phoenix inline forms in links and buttons */
 form.link, form.button {
   display: inline;

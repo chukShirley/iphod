@@ -216,6 +216,7 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     .receive("error", resp => { console.log("Unable to join Iphod", resp) })
     
   // channel.push("init_calendar", "");
+  history.pushState(path, "Legereme", "/calendar");
 
 // header
 
@@ -436,6 +437,11 @@ if ( path.match(/mindex/) ) {
   var elmCalDiv = document.getElementById('cal-elm-container')
     , elmCalApp = Elm.Iphod.embed(elmCalDiv)
 
+  if ( $("#these_readings").data("service") ) {
+    var service = $("#these_readings").data("service")
+      , this_date = $("#these_readings").data("date")
+        channel.push("get_text", [service, this_date])
+  }
   elmCalApp.ports.requestReading.subscribe(function(request) {
     channel.push("get_lesson", request)
   })

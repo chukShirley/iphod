@@ -32,7 +32,7 @@
     <div id="header">
       <a href= "/calendar" class="home_link">Legereme</a>
     </div>
-    <div class="container">
+    <div id="container">
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>

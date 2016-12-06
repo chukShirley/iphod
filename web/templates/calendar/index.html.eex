@@ -103,4 +103,5 @@
   </table>
 </div>
 <div id="cal-elm-container"></div>
+<div id="these_readings" data-service=<%= @model.service %> data-date=<%= @model.date %> ></div>
 

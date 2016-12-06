@@ -185,9 +185,14 @@ end
     true
   end
 
-  defp text_to_date(s) do
+  def text_to_date(s) do
     {ok, okDate} = Timex.parse(s, "{WDfull} {Mfull} {D}, {YYYY}")
-    {ok, date} = if ok == :error, do: Timex.parse(s, "{WDshort} {Mshort} {D} {YYYY}"), else: {ok, okDate}
+    {ok, date} = if ok == :error, 
+      do: Timex.parse(s, "{WDshort} {Mshort} {D} {YYYY}"), 
+      else: {ok, okDate}
+    {ok, date} = if ok == :error,
+      do: Timex.parse(s, "{0M}/{0D}/{YYYY}"),
+      else: {ok, okDate}
     Timex.to_date date
   end
 end

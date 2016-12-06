@@ -2,27 +2,32 @@ require IEx
 defmodule Iphod.CalendarController do
   use Iphod.Web, :controller
   use Timex
+  import Iphod.IphodChannel
 
   def index(conn, params) do
     select_language params
-    render_calendar conn, Date.now, nil
+    # render_calendar conn, Date.now, nil
+    render_calendar conn, get_month(Date.now), nil
   end
 
   def mindex(conn, params) do
     select_language params
-    render_calendar conn, Date.now, "min"
+    # render_calendar conn, Date.now, "min"
+    render_calendar conn, get_month(Date.now), "min"
   end
 
   def prev(conn, params) do
     select_language params
     date = params_to_date(params, -1)
-    render_calendar conn, date, params["min"]
+    # render_calendar conn, date, params["min"]
+    render_calendar conn, get_month(date), params["min"]
   end
 
   def next(conn, params) do
     select_language params
     date = params_to_date(params, 1)
-    render_calendar conn, date, params["min"]
+    # render_calendar conn, date, params["min"]
+    render_calendar conn, get_month(date), params["min"]
   end
 
   def season(conn, params) do
@@ -31,7 +36,18 @@ defmodule Iphod.CalendarController do
     # this_month = get_month(Lityear.next_season(params["season"], Date.now))
     select_language params
     this_month = Lityear.next_season(params["season"], Date.now)
-    render_calendar conn, this_month, params["min"]
+    # render_calendar conn, this_month, params["min"]
+    render_calendar conn, get_month(this_month), params["min"]
+  end
+
+  def eu(conn, params), do: readings_for(conn, params, "EU")
+  def mp(conn, params), do: readings_for(conn, params, "MP")
+  def ep(conn, params), do: readings_for(conn, params, "EP")
+
+  def readings_for(conn, params, service) do
+    this_date = params["month"] <> "/" <> params["day"] <> "/" <> params["year"]
+    # render_calendar_readings conn, Date.now, this_date, params["service"], nil
+    render_calendar conn, get_month(Date.now, service, this_date), params["min"]    
   end
 
 # HELPERS
@@ -48,19 +64,20 @@ defmodule Iphod.CalendarController do
       }) |> Date.shift(months: shift)
   end
 
-  def render_calendar(conn, date, min \\ nil) do
+  def render_calendar(conn, model, min \\ nil) do
     {layout, view} = if min, do: {"app.html", "mindex.html"}, else: {"desktop_app.html", "index.html"}
     conn
       |> put_layout(layout)
-      |> render(view, model: get_month(date))
-    
+      |> render(view, model: model)
   end
 
-  def get_month(date) do
+  def get_month(date, service \\ "", this_date \\ "") do
     days = list_of_weeks_from begin_month(date), end_month(date)
     %{  calendar: days,
         month:    date |> Timex.format!("{Mfull}"),
-        year:     date |> Timex.format!("{YYYY}")
+        year:     date |> Timex.format!("{YYYY}"),
+        service:  service,
+        date:     this_date
     }
   end
 

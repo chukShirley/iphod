@@ -29,6 +29,11 @@ defmodule Iphod.Router do
     get "/calendar/prev/:month/:year", CalendarController, :prev
     get "/calendar/next/:month/:year/:min", CalendarController, :next
     get "/calendar/prev/:month/:year/:min", CalendarController, :prev
+    # get "/readings/:service/:day/:month/:year", CalendarController, :service
+    get "/calendar/eu/:month/:day/:year", CalendarController, :eu
+    get "/calendar/mp/:month/:day/:year", CalendarController, :mp
+    get "/calendar/ep/:month/:day/:year", CalendarController, :ep
+    
     get "/readmp", PrayerController, :readmp
     get "/readmp/:psalm", PrayerController, :readmp
     get "/readmp/:psalm/:text", PrayerController, :readmp
