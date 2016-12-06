@@ -1721,6 +1721,7 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
   var elmHeaderDiv, elmHeaderApp;
   var elmMindexDiv, elmMindexApp, elmMPanelDiv, elmMPanelApp;
   var elmCalDiv, elmCalApp;
+  var this_service, this_date;
 
   (function () {
 
@@ -1759,6 +1760,7 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
     });
 
     // channel.push("init_calendar", "");
+    history.pushState(path, "Legereme", "/calendar");
 
     // header
 
@@ -1955,6 +1957,13 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
     elmCalApp = Elm.Iphod.embed(elmCalDiv);
 
 
+    if ($("#these_readings").data("service") != "nil") {
+      this_service = $("#these_readings").data("service");
+      this_date = $("#these_readings").data("date");
+
+
+      channel.push("get_text", [this_service, this_date]);
+    }
     elmCalApp.ports.requestReading.subscribe(function (request) {
       channel.push("get_lesson", request);
     });
