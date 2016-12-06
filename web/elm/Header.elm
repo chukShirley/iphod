@@ -144,12 +144,18 @@ view: Model -> Html Msg
 view model =
   div []
     [ ul [id "header-options"]
-      [ li [class "option-item"] [ calendar model]
-      , li [class "option-item"] [ aboutModal ]
-      , li [class "option-item"] [ emailMe model ]
-      , li [class "option-item"] [ howToModal ]
-      , li [class "option-item"] [ configModal model ]
-      , li [class "option-item"] [ translations model ]
+--      [ li [class "option-item"] [ calendar model]
+--      , li [class "option-item"] [ aboutModal ]
+--      , li [class "option-item"] [ emailMe model ]
+--      , li [class "option-item"] [ howToModal ]
+--      , li [class "option-item"] [ configModal model ]
+--      , li [class "option-item"] [ translations model ]
+--      ]
+      [ li [ class "option-item" ] [ calendar model ]
+      , li [ class "option-item" ] [ offices model ]
+      , li [ class "option-item" ] [ configModal model ]
+      , li [ class "option-item" ] [ translations model ]
+      , li [ class "option-item" ] [ aboutOptions model ]
       ]
     ]
 
@@ -161,11 +167,64 @@ calendar model =
   a [href "/calendar"]
     [ button [] [text "Calendar"] ]
 
+offices: Model -> Html Msg
+offices model = 
+  div 
+    [ class "offices" ]
+    [ button [ class "button"] [ text "Offices"]
+    , ul  
+      [ class "offices-options"]
+      [ li [ class "offices-item" ] [ currentOffice model]
+      , li [ class "offices-item" ] [ morning model ]
+      , li [ class "offices-item" ] [ midday model ]
+      , li [ class "offices-item" ] [ evening model ]
+      , li [ class "offices-item" ] [ compline model ]
+       -- li [class "option-item" ] [ family model]
+       -- li [class "option-item" ] [ timeOfDeath model]
+      ]
+    ]
+
+aboutOptions: Model -> Html Msg
+aboutOptions model = 
+  div 
+    [ class "offices"] 
+    [ button [ class "button" ] [ text "About" ]
+    , ul  
+      [ class "offices-options"]
+      [ li [class "offices-item" ] [ aboutModal ]
+      , li [class "offices-item" ] [ emailMe model ]
+      , li [class "offices-item" ] [ howToModal ]
+      ]
+    ]
+
 
 innerHtmlDecoder =
   Json.at ["target", "innerHTML"] Json.string
 
+currentOffice: Model -> Html Msg
+currentOffice model =
+  a [ href "office" ]
+    [ button [] [ text "Current Office" ] ]
 
+morning: Model -> Html Msg
+morning model =
+  a [href "mp"] 
+    [ button [] [ text "Morning Prayer" ]]
+
+midday: Model -> Html Msg
+midday model =
+  a [href "midday"] 
+    [ button [] [ text "Midday Prayer" ]]
+
+evening: Model -> Html Msg
+evening model =
+  a [href "ep"] 
+    [ button [] [ text "Evening Prayer" ]]
+
+compline: Model -> Html Msg
+compline model =
+  a [href "compline"] 
+    [ button [] [ text "Compline" ]]
 
 translations: Model -> Html Msg
 translations model =

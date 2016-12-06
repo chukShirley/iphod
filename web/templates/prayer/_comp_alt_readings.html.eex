@@ -1,0 +1,63 @@
+  <div class="alt_readings">
+    <button class="alt_readings-button button">Alternate Readings</button>
+    <ul class="alt_readings-options">
+      <li class="alt_readings-select" data-ref="Isaiah_26_3_4">Isaiah 26:3-4</li>
+      <li class="alt_readings-select" data-ref="Isaiah_30_15a">Isaiah 30:15a</li>
+      <li class="alt_readings-select" data-ref="Matthew_6_31_34">Matthew 6:31-34</li>
+      <li class="alt_readings-select" data-ref="2_Corinthians_4_6">2 Corinthians 4:6</li>
+      <li class="alt_readings-select" data-ref="1_Thessalonians_5_9_10">1 Thessalonians 5:9-10</li>
+      <li class="alt_readings-select" data-ref="1_Thessalonians_5_23">1 Thessalonians 5:23</li>
+      <li class="alt_readings-select" data-ref="Ephesians_4_26_27">Ephesians 4:26-27</li>
+    </ul>
+
+    <p class="comp_scripture this_alt_reading" id="Isaiah_26_3_4"><%= dgettext "comp_scripture", """
+      You keep him in perfect peace
+        whose mind is stayed on you,
+        because he trusts in you.
+      Trust in the Lord forever,
+        for the Lord God is an everlasting rock.
+      """%>
+      <span class="s_ref">Isaiah 26:3-4</span>
+    </p>
+    <p class="comp_scripture this_alt_reading" id="Isaiah_30_15a"><%= dgettext "comp_scripture", """
+        For thus said the Lord God, the Holy One of Israel,
+        “In returning and rest you shall be saved;
+            in quietness and in trust shall be your strength.”
+      """%>
+      <span class="s_ref">Isaiah 30:15a</span>
+    </p>
+    <p class="comp_scripture this_alt_reading" id="Matthew_6_31_34"><%= dgettext "comp_scripture", """
+      Therefore do not be anxious, saying, ‘What shall we eat?’ or ‘What shall we drink?’ 
+      or ‘What shall we wear?’ For the Gentiles seek after all these things, and your 
+      heavenly Father knows that you need them all. But seek first the kingdom of God 
+      and his righteousness, and all these things will be added to you.
+      “Therefore do not be anxious about tomorrow, for tomorrow will be anxious for itself. 
+      Sufficient for the day is its own trouble.
+      """%>
+      <span class="s_ref">Matthew 6:31-34</span>
+    </p>
+    <p class="comp_scripture this_alt_reading" id="2_Corinthians_4_6"><%= dgettext "comp_scripture", """
+      For God, who said, “Let light shine out of darkness,” has shone in our hearts to 
+      give the light of the knowledge of the glory of God in the face of Jesus Christ.
+      """%>
+      <span class="s_ref">2 Corinthians 4:6</span>
+    </p>
+    <p class="comp_scripture this_alt_reading" id="1_Thessalonians_5_9_10"><%= dgettext "comp_scripture", """
+      For God has not destined us for wrath, but to obtain salvation through our Lord 
+      Jesus Christ, who died for us so that whether we are awake or asleep we might live with him.
+      """%>
+      <span class="s_ref">1 Thessalonians 5:9-10</span>
+    </p>
+    <p class="comp_scripture this_alt_reading" id="1_Thessalonians_5_23"><%= dgettext "comp_scripture", """
+      Now may the God of peace himself sanctify you completely, and may your whole spirit 
+      and soul and body be kept blameless at the coming of our Lord Jesus Christ.
+      """%>
+      <span class="s_ref">1 Thessalonians 5:23</span>
+    </p>
+    <p class="comp_scripture this_alt_reading" id="Ephesians_4_26_27"><%= dgettext "comp_scripture", """
+      Be angry and do not sin; do not let the sun go down on your anger, 
+      and give no opportunity to the devil.
+      """%>
+      <span class="s_ref">Ephesians 4:26-27</span>
+    </p>
+  </div>

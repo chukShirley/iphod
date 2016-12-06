@@ -17,6 +17,11 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 //
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
+$(".alt_readings-select").click( function() {
+  var show_this = "#" + $(this).data("ref");
+  $(".this_alt_reading").hide();
+  $(show_this).show();
+})
 
 $(document).on('input', 'textarea', function () {
   $(this).outerHeight('1em').outerHeight(this.scrollHeight); // 38 or '1em' -min-height

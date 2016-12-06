@@ -35,6 +35,53 @@ form.link, form.button {
   padding-left: 15px;
 }
 
+/* HEADER.ELM menus */
+
+.offices { /* dropdown */
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1em;
+}
+.offices-button{ /* dropbtn */
+  padding: 0.5em;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+  border: solid 1px black;
+}
+.offices-options { /* dropdown-content */
+  position: absolute;
+  display: none;
+  top: 2em;
+  z-index: 9;
+  padding-left: 0em;
+  min-width: 12em;
+  background-color: lightgrey;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+/* li.offices-item { visibility: hidden; } */
+li.offices-item { 
+  float: left;
+  width: 84%;
+}
+
+.offices-options li{ /* dropdown-content a */
+  color: black;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  display: block;
+}
+.offices-options li:hover { 
+  background-color: #f1f1f1 
+}
+.offices:hover .offices-options {
+  display: block;
+}
+.offices-options:hover .offices-button {
+  background-color: #3e8e41;
+}
+
 /* Customize container */
  @media (min-width: 768px) {
    .container {

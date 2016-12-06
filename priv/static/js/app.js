@@ -1486,7 +1486,7 @@ require.register("web/elm/Header.elm", function(exports, require, module) {
 });
 
 ;require.register("web/static/js/app.js", function(exports, require, module) {
-'use strict';
+"use strict";
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }(); // Brunch automatically concatenates all files in your
 // watched paths. Those paths can be configured at
@@ -1503,11 +1503,11 @@ var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = [
 // to also remove its path from "config.paths.watched".
 
 
-require('deps/phoenix_html/web/static/js/phoenix_html');
+require("deps/phoenix_html/web/static/js/phoenix_html");
 
-require('./menu');
+require("./menu");
 
-var _socket = require('./socket');
+var _socket = require("./socket");
 
 var _socket2 = _interopRequireDefault(_socket);
 
@@ -1517,6 +1517,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 //
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
+$(".alt_readings-select").click(function () {
+  var show_this = "#" + $(this).data("ref");
+  $(".this_alt_reading").hide();
+  $(show_this).show();
+});
 
 $(document).on('input', 'textarea', function () {
   $(this).outerHeight('1em').outerHeight(this.scrollHeight); // 38 or '1em' -min-height
@@ -23900,11 +23905,186 @@ var _user$project$Header$translations = function (model) {
 					]))
 			]));
 };
+var _user$project$Header$compline = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('compline')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Compline')
+					]))
+			]));
+};
+var _user$project$Header$evening = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('ep')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Evening Prayer')
+					]))
+			]));
+};
+var _user$project$Header$midday = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('midday')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Midday Prayer')
+					]))
+			]));
+};
+var _user$project$Header$morning = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('mp')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Morning Prayer')
+					]))
+			]));
+};
+var _user$project$Header$currentOffice = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('office')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Current Office')
+					]))
+			]));
+};
 var _user$project$Header$innerHtmlDecoder = A2(
 	_elm_lang$core$Json_Decode$at,
 	_elm_lang$core$Native_List.fromArray(
 		['target', 'innerHTML']),
 	_elm_lang$core$Json_Decode$string);
+var _user$project$Header$offices = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('offices')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('button')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Offices')
+					])),
+				A2(
+				_elm_lang$html$Html$ul,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('offices-options')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$currentOffice(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$morning(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$midday(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$evening(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$compline(model)
+							]))
+					]))
+			]));
+};
 var _user$project$Header$calendar = function (model) {
 	return A2(
 		_elm_lang$html$Html$a,
@@ -24369,6 +24549,62 @@ var _user$project$Header$emailMe = function (model) {
 					]))
 			]));
 };
+var _user$project$Header$aboutOptions = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('offices')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('button')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('About')
+					])),
+				A2(
+				_elm_lang$html$Html$ul,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('offices-options')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[_user$project$Header$aboutModal])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$emailMe(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[_user$project$Header$howToModal]))
+					]))
+			]));
+};
 var _user$project$Header$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -24401,25 +24637,9 @@ var _user$project$Header$view = function (model) {
 								_elm_lang$html$Html_Attributes$class('option-item')
 							]),
 						_elm_lang$core$Native_List.fromArray(
-							[_user$project$Header$aboutModal])),
-						A2(
-						_elm_lang$html$Html$li,
-						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html_Attributes$class('option-item')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_user$project$Header$emailMe(model)
+								_user$project$Header$offices(model)
 							])),
-						A2(
-						_elm_lang$html$Html$li,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('option-item')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[_user$project$Header$howToModal])),
 						A2(
 						_elm_lang$html$Html$li,
 						_elm_lang$core$Native_List.fromArray(
@@ -24439,6 +24659,16 @@ var _user$project$Header$view = function (model) {
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_user$project$Header$translations(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('option-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$aboutOptions(model)
 							]))
 					]))
 			]));

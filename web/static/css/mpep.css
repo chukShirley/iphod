@@ -98,6 +98,23 @@ button.more-options{
   font-size: 1.0em;
 }
 
+ul.psalm {
+  list-style: none;
+  position: relative;
+}
+ul.psalm li{
+  position: relative;
+  left: -2em;
+}
+li.ps_first_cont {
+  margin-left: 0.7em;
+  top: -0.1em;
+}
+li.ps_second_cont {
+  margin-left: 2.5em;
+  top: -0.4em;
+}
+
 .reading { font-size: 1.0em }
 .alt_reading {
   margin-left: 2em;
@@ -190,6 +207,7 @@ button.more-options{
 
 .ps_vs_num {
   color: blue;
+  width: 2em;
 }
 
 .ps_first {
@@ -209,8 +227,98 @@ button.more-options{
 .np_collect {
   padding-bottom: 1.5em;
 }
-.officiant {margin-right: 2em}
-.people {margin-right: 2.8em}
+
+ul.versicals {
+  width: 70%;
+  overflow: hidden;
+  padding-left: 0em;
+  margin-top: 0em;
+}
+li.speaker {
+  float: left;
+  line-height: 1.2em;
+  display: inline;
+  width: 18%;
+  font-style: italic;  
+}
+.says {
+  float: left;
+  line-height: 1.2em;
+  display: inline;
+  width: 82%;
+}
+.extra_indent {
+  float: left;
+  line-height: 1.2em;
+  display: inline;
+  width: 30%;
+}
+.extra_indent_says {
+  float: left;
+  line-height: 1.2em;
+  display: inline;
+  width: 70%;
+}
+
+.s_ref {
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+.comp_scripture {
+  padding-bottom: 1em;
+}
+.comp_collect {
+  padding-bottom: 1em;
+}
+
+ul.appro_readings{
+  list-style: none;
+}
+
+.alt_readings { /* dropdown */
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1em;
+}
+.alt_readings p {
+  display: none;
+  padding-top: 1em;
+}
+.alt_readings-button{ /* dropbtn */
+  padding: 0.5em;
+  font-size: 0.8em;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+  border: solid 1px black;
+}
+.alt_readings-options { /* dropdown-content */
+  position: absolute;
+  display: none;
+  top: 0.8em;
+  z-index: 9;
+  padding-left: 1em;
+  min-width: 12em;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+.alt_readings-options li{ /* dropdown-content a */
+  color: black;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  display: block;
+}
+.alt_readings-options li:hover { 
+  background-color: #f1f1f1 
+}
+.alt_readings:hover .alt_readings-options {
+  display: block;
+}
+.alt_readings-options:hover .alt_readings-button {
+  background-color: #3e8e41;
+}
 
 @media screen and (max-width: 320px) { 
   .mpep { width: 17em; } 

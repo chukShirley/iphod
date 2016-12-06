@@ -57,6 +57,7 @@ defmodule Iphod.Router do
     get "/晚祷简化", PrayerController, :ep_cusimp
     get "/ep/:psalm", PrayerController, :ep
     get "/ep/:psalm/:text", PrayerController, :ep
+    get "/compline", PrayerController, :compline
     get "/printables", PrintableController, :index
     get "/versions", BibleVersionsController, :index
 
