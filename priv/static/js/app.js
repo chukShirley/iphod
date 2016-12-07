@@ -1677,7 +1677,7 @@ if (path.match(/mindex/)) {
 
 // grr - match doesn't match utf8 codes, must find alt solution
 
-if (path == "/" || path.match(/midday|mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep(?!i)|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
+if (path == "/" || path.match(/midday|^mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|$ep(?!i)|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   (function () {
     var channel = _socket2.default.channel("iphod:readings"),
         elmHeaderDiv = document.getElementById('header-elm-container'),
@@ -1963,6 +1963,7 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
 
 
       channel.push("get_text", [this_service, this_date]);
+      $(window).scrollTop(0);
     }
     elmCalApp.ports.requestReading.subscribe(function (request) {
       channel.push("get_lesson", request);
@@ -1977,6 +1978,12 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
 
       ver = get_version(section);
       channel.push("get_alt_reading", [section, ver, vss]);
+    });
+
+    elmCalApp.ports.requestScrollTop.subscribe(function (request) {
+      // if needs be, request to be used to scroll to a location from top
+      // use `setTimeout` to give page a chance to load
+      setTimeout("$(window).scrollTop(0)", 15);
     });
   })();
 }
@@ -36670,6 +36677,11 @@ var _user$project$Iphod$requestAltReading = _elm_lang$core$Native_Platform.outgo
 				return v;
 			});
 	});
+var _user$project$Iphod$requestScrollTop = _elm_lang$core$Native_Platform.outgoingPort(
+	'requestScrollTop',
+	function (v) {
+		return v;
+	});
 var _user$project$Iphod$update = F2(
 	function (msg, model) {
 		var _p1 = msg;
@@ -36682,7 +36694,11 @@ var _user$project$Iphod$update = F2(
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
 					{eu: _p1._0, mp: _user$project$Iphod_Models$initDailyMP, ep: _user$project$Iphod_Models$initDailyEP, reflection: _user$project$Iphod_Models$initReflection});
-				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
+				return {
+					ctor: '_Tuple2',
+					_0: newModel,
+					_1: _user$project$Iphod$requestScrollTop('0')
+				};
 			case 'UpdateMP':
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,

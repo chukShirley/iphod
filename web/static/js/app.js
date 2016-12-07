@@ -167,7 +167,7 @@ if ( path.match(/mindex/)) {
 
 // grr - match doesn't match utf8 codes, must find alt solution
 
-if (path == "/" || path.match(/midday|mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|ep(?!i)|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
+if (path == "/" || path.match(/midday|^mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|$ep(?!i)|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   let channel = socket.channel("iphod:readings")
     , elmHeaderDiv = document.getElementById('header-elm-container')
     , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
@@ -441,7 +441,8 @@ if ( path.match(/mindex/) ) {
     var this_service = $("#these_readings").data("service")
       , this_date = $("#these_readings").data("date")
         
-    channel.push("get_text", [this_service, this_date])
+    channel.push("get_text", [this_service, this_date]);
+    $(window).scrollTop(0);
   }
   elmCalApp.ports.requestReading.subscribe(function(request) {
     channel.push("get_lesson", request)
@@ -452,6 +453,12 @@ if ( path.match(/mindex/) ) {
     ver = get_version(section) 
     channel.push("get_alt_reading", [section, ver, vss])
   })
+
+  elmCalApp.ports.requestScrollTop.subscribe(function(request) {
+    // if needs be, request to be used to scroll to a location from top
+    // use `setTimeout` to give page a chance to load
+    setTimeout("$(window).scrollTop(0)", 15);
+  }) 
 
 }
 

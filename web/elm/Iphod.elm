@@ -55,6 +55,7 @@ init =  (initModel, Cmd.none)
 
 port requestReading: List String -> Cmd msg
 port requestAltReading: List String -> Cmd msg
+port requestScrollTop: String -> Cmd msg
 
 
 -- SUBSCRIPTIONS
@@ -113,7 +114,7 @@ update msg model =
                   , reflection = Models.initReflection
           }
       in
-        (newModel, Cmd.none)
+        (newModel, requestScrollTop "0" )
 
     UpdateMP mp -> 
       let
