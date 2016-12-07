@@ -200,7 +200,7 @@ defmodule SundayReading do
         %{  "title" => "The Third Sunday in Advent",
             "colors" => ["rose", "violet", "blue"],
             "a" => %{ ot: [%{style: "req", read: "Isaiah 35:1-10"}],
-                      ps: [%{style: "req", read: "Psalmalm 146"}],
+                      ps: [%{style: "req", read: "Psalm 146"}],
                       nt: [%{style: "req", read: "James 5:7-12"}],
                       gs: [%{style: "req", read: "Mt 11:2-19"}] 
                     },
@@ -2480,17 +2480,17 @@ defmodule SundayReading do
             %{  "title" => "Remembrance Day (Canada: November 11) and Memorial Day(United States: Monday nearest May 28)",
                 "colors" => ["white"],
               "a" => %{ ot: [%{style: "req", read: "Wisdom 3:1-9"}],
-                        ps: [%{style: "req", read: "Psalmalm 121"}],
+                        ps: [%{style: "req", read: "Psalm 121"}],
                         nt: [%{style: "req", read: "Rev 7:9-17"}],
                         gs: [%{style: "req", read: "Jn 11:21-27"},%{style: "alt", read: "Jn 15:12-17"}]
                       },
               "b" => %{ ot: [%{style: "req", read: "Wisdom 3:1-9"}],
-                        ps: [%{style: "req", read: "Psalmalm 121"}],
+                        ps: [%{style: "req", read: "Psalm 121"}],
                         nt: [%{style: "req", read: "Rev 7:9-17"}],
                         gs: [%{style: "req", read: "Jn 11:21-27"},%{style: "alt", read: "Jn 15:12-17"}]
                       },
               "c" => %{ ot: [%{style: "req", read: "Wisdom 3:1-9"}],
-                        ps: [%{style: "req", read: "Psalmalm 121"}],
+                        ps: [%{style: "req", read: "Psalm 121"}],
                         nt: [%{style: "req", read: "Rev 7:9-17"}],
                         gs: [%{style: "req", read: "Jn 11:21-27"},%{style: "alt", read: "Jn 15:12-17"}]
                       }
@@ -2499,17 +2499,17 @@ defmodule SundayReading do
             %{  "title" => "Memorial Day(United States: Monday nearest May 28)",
                 "colors" => ["white"],
               "a" => %{ ot: [%{style: "req", read: "Wisdom 3:1-9"}],
-                        ps: [%{style: "req", read: "Psalmalm 121"}],
+                        ps: [%{style: "req", read: "Psalm 121"}],
                         nt: [%{style: "req", read: "Rev 7:9-17"}],
                         gs: [%{style: "req", read: "Jn 11:21-27"},%{style: "alt", read: "Jn 15:12-17"}]
                       },
               "b" => %{ ot: [%{style: "req", read: "Wisdom 3:1-9"}],
-                        ps: [%{style: "req", read: "Psalmalm 121"}],
+                        ps: [%{style: "req", read: "Psalm 121"}],
                         nt: [%{style: "req", read: "Rev 7:9-17"}],
                         gs: [%{style: "req", read: "Jn 11:21-27"},%{style: "alt", read: "Jn 15:12-17"}]
                       },
               "c" => %{ ot: [%{style: "req", read: "Wisdom 3:1-9"}],
-                        ps: [%{style: "req", read: "Psalmalm 121"}],
+                        ps: [%{style: "req", read: "Psalm 121"}],
                         nt: [%{style: "req", read: "Rev 7:9-17"}],
                         gs: [%{style: "req", read: "Jn 11:21-27"},%{style: "alt", read: "Jn 15:12-17"}]
                       }
