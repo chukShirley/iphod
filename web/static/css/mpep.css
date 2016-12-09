@@ -1,7 +1,9 @@
 /*!
  * styles for morning and evening prayer
 */
-
+body {
+  width: 35em;
+}
 h3 {
   margin-bottom: 0.2em;
 }
@@ -9,6 +11,7 @@ h3 {
   font-family: "Georgia, Times New Roman, Times, serif";
   font-size: 1em;
   margin-left: 2em;
+  width: 35em;
 }
 
 /*
@@ -38,6 +41,17 @@ button.more-options{
   margin: 0;
 }
 
+p.office {
+  position: relative;
+  width: 100%;
+}
+p.np_scripture {
+  margin-top: 1em;
+}
+ol.fam_ol{
+  list-style-type: lower-alpha;
+}
+
 .title1 {
   font-size: 1.2em;
   text-align: center;
@@ -58,7 +72,7 @@ button.more-options{
 
 .italic { 
   font-style: italic;
-  font-size: 1em; 
+  font-size: 1.1em; 
 }
 
 .rubric {
@@ -66,6 +80,14 @@ button.more-options{
   font-size: 0.8em;
   font-style: italic;
   color: red;
+  width: 100%;
+}
+p.rubric-office {
+  padding: 0.5em 0;
+  font-size: 0.8em;
+  font-style: italic;
+  color: red;
+  width: 100%;  
 }
 .rubric-newline {
   top: -0.6em;
@@ -146,10 +168,11 @@ li.ps_second_cont {
 }
 
 .pb_vs {
-  text-indent: 0;
+  text-indent: -2em;
   font-size: 1em;
   margin: 0;
-  padding: 0;
+  padding: 0 0 0 2em;
+
 }
 
 .pb_vs_indent {
@@ -174,7 +197,7 @@ li.ps_second_cont {
   font-size: 1em;
   margin: 0;
   font-style: italic;
-  padding: 0 2em 0 0;
+  padding: 0;
 }
 
 .mercy {
@@ -247,6 +270,48 @@ li.speaker {
   display: inline;
   width: 82%;
 }
+li.ref-button {
+  float: left;
+  line-height: 1.2em;
+  display: inline;
+  width: 10em;
+}
+button.text_button {
+  font-size: 0.9em;
+  cursor: pointer;
+  box-shadow: -2px 3px 8px #888888;
+  border-radius: 5px;
+  border: solid 2px darkred;
+  background-color: darkred;
+  color: honeydew;
+  margin: 0.2em;
+}
+li.ref-desc {
+  float: left;
+  line-height: 1.2em;
+  display: inline;
+}
+div.text {
+  display: none;
+  position: relative;
+  line-height: 1.2em;
+  width: 30em;
+  margin: 1em 0;
+  }
+
+li.litany1 {
+  position: relative;
+  margin: 0.8em 0;
+  line-height: 0.5em;
+}
+li.litany2 {
+  position: relative;
+  top: -0.2em;
+  font-style: italic;
+  font-size: 1.1em;
+  padding-bottom: 0.5em;
+  line-height: 1em;
+}
 .extra_indent {
   float: left;
   line-height: 1.2em;
@@ -265,11 +330,19 @@ li.speaker {
   font-size: 0.8em;
 }
 
+.prayer-type {
+   padding-top: 1em;
+   font-style: italic;
+}
 .comp_scripture {
   padding-bottom: 1em;
 }
 .comp_collect {
   padding-bottom: 1em;
+}
+.recon-scripture {
+  padding-top: 0.5em;
+  width: 100%;
 }
 
 ul.appro_readings{
@@ -310,6 +383,23 @@ ul.appro_readings{
   text-decoration: none;
   display: block;
 }
+
+p.song_sim_1{
+  margin-left: 2em;
+  text-indent: -2em;
+  width: 100%;
+}
+p.song_sim_2{
+  margin-left: 2em;
+  text-indent: -2em;
+  width: 100%;
+}
+p.family_section_title{
+  padding-top: 1em;
+  font-size: 1.2em;
+  font-style: italic;
+}
+/*
 .alt_readings-options li:hover { 
   background-color: #f1f1f1 
 }
@@ -319,8 +409,30 @@ ul.appro_readings{
 .alt_readings-options:hover .alt_readings-button {
   background-color: #3e8e41;
 }
+*/
 
+/* MOBILE WITH 320PX MAX ------------------------ */
 @media screen and (max-width: 320px) { 
+  .home_link span {
+    display: block;
+  }
+  body { width: 20em; }
+  #header { width: 20em; }
+  #container { width: 20em; }
+  .mpep {
+    width: 100%;
+    margin-left: 0.5em;
+  }
+  .pb_vs_indent { padding: 0 0 0 1em;}
+  h3 { 
+    font-size: 1em;
+  }
+  div.text {
+    width: 18em;
+    margin-left: -1em;
+  }
+  .invitatory-init {padding-right: 1em;}
+  .offices {padding-bottom: 0;}
   .mpep { width: 17em; } 
   button.more-options{
     display: block;
@@ -340,13 +452,28 @@ ul.appro_readings{
   li.option-item { 
     float: right;
     display: inline-block;
+    margin-bottom: 0.5em;
+  }
+
+  .offices-options {
+    position: absolute;
+    top: -3em;
+    left: 7em;
+    padding-left: 1em;
+    min-width: 9em;
   }
 
   ul#header-options.responsive { 
     position: fixed; 
     display: block;
-    margin-left: 55%;
+    margin-left: 0;
+    top: 0.8em;
     z-index: 9;
+    padding-left: 1em;
+    min-width: 7.5em;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    cursor: pointer;
   }
   ul#header-options.responsive li.option-item {
     top: 0;
@@ -361,5 +488,40 @@ ul.appro_readings{
   ul#header-options.responsive li a {
     display: block;
   }
-
+  ul.versicals {
+    width: 100%;
+  }
+  li.litany1 {
+    position: relative;
+    padding-left: 2em;
+    text-indent: -1.5em;
+    line-height: 1em;
+    margin-top: 0;
+    margin-bottom: 0.2em;
+  }
+  li.litany2 {
+    position: relative;
+    padding-left: 2em;
+    padding-top: 0em; 
+    text-indent: -1.5em;
+    line-height: 1em;
+    margin-top: 0;
+    margin-bottom: 0.2em;
+  }
+  li.speaker {width: 25%;}
+  li.says {width: 75%;}
+  .canticle { padding-bottom: 0;}
+  ul.psalm { 
+    width: 100%;
+    margin-top: 0;
+  }
+  .ps_first {
+    width: 92%;
+  }
+  .ps_second {
+    padding-left: 1em;
+    text-indent: -0.5em;
+    width: 90%;
+  }
+  li.ps_second_cont { padding-left: 1.5em; }
 }

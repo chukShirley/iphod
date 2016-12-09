@@ -33,12 +33,40 @@ defmodule Iphod.PrayerController do
       |> render("compline.html")
   end
 
+  def family(conn, _params) do
+    conn
+      |> put_layout("app.html")
+      |> render("family.html")
+  end
+
+  def reconciliation(conn, _params) do
+    conn
+      |> put_layout("app.html")
+      |> render("reconciliation.html")
+  end
+
+  def timeofdeath(conn, _params) do
+    conn
+      |> put_layout("app.html")
+      |> render("timeofdeath.html")
+  end
+
+  def tothesick(conn, _params) do
+    conn
+      |> put_layout("app.html")
+      |> render("tothesick.html")
+  end
+
   def office(conn, params) do
-    IO.puts "OFFICE: #{inspect params}"
     case params["prayer"] do
-      "mp" -> mp(conn, params)
-      "ep" -> ep(conn, params)
-      "midday" -> midday(conn, params)
+      "mp"              -> mp(conn, params)
+      "ep"              -> ep(conn, params)
+      "midday"          -> midday(conn, params)
+      "compline"        -> compline(conn, params)
+      "family"          -> family(conn, params)
+      "reconciliation"  -> reconciliation(conn, params)
+      "timeofdeath"     -> timeofdeath(conn, params)
+      "tothesick"       -> tothesick(conn, params)
       _ ->
         conn
           |> put_layout("local_office.html")

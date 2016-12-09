@@ -1,34 +1,18 @@
-<table class= "invitatory">
-  <tr>
-      <td class='invitatory-init'><%= gettext "Officiant"%></td>
-      <td><%= dgettext "invit", "O Lord, open our lips;"%></td>
-  </tr>
-  <tr>
-      <td class='invitatory-speaker'><%= gettext "People"%></td>
-      <td><%= dgettext "invit", "And our mouth shall proclaim your praise."%></td>
-  </tr>
-  <tr>
-      <td class='invitatory-speaker'><%= gettext "Officiant"%></td>
-      <td><%= dgettext "invit", "O God, make speed to save us;"%></td>
-  </tr>
-  <tr>
-      <td class='invitatory-speaker'><%= gettext "People"%></td>
-      <td><%= dgettext "invit", "O Lord, make haste to help us."%></td>
-  </tr>
-  <tr>
-      <td class='invitatory-speaker'><%= gettext "Officiant"%></td>
-      <td><%= dgettext "invit", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></td>
-  </tr>
-  <tr>
-      <td class='invitatory-speaker'><%= gettext "People"%></td>
-      <td><%= dgettext "invit", "As it was in the beginning, is now, and ever shall be, world without end. Amen."%></td>
-  </tr>
-  <tr>
-      <td class='invitatory-speaker'><%= gettext "Officiant"%></td>
-      <td><%= dgettext "invit", "Praise the Lord."%></td>
-  </tr>
-  <tr>
-      <td class='invitatory-speaker'><%= gettext "People"%></td>
-      <td><%= dgettext "invit", "The Lord’s name be praised."%></td>
-  </tr>
-</table>
+<ul class="versicals" style="margin-top: 1em;">
+  <li class="speaker"><%= gettext "Officiant"%></li>
+  <li class="says"><%= dgettext "invit", "O Lord, open our lips;"%></li>
+  <li class="speaker"><%= gettext "People"%></li>
+  <li class="says"><%= dgettext "invit", "And our mouth shall proclaim your praise."%></li>
+  <li class="speaker"><%= gettext "Officiant"%></li>
+  <li class="says"><%= dgettext "invit", "O God, make speed to save us;"%></li>
+  <li class="speaker"><%= gettext "People"%></li>
+  <li class="says"><%= dgettext "invit", "O Lord, make haste to help us."%></li>
+  <li class="speaker"><%= gettext "Officiant"%></li>
+  <li class="says"><%= dgettext "invit", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></li>
+  <li class="speaker"><%= gettext "People"%></li>
+  <li class="says"><%= dgettext "invit", "As it was in the beginning, is now, and ever shall be, world without end. Amen."%></li>
+  <li class="speaker"><%= gettext "Officiant"%></li>
+  <li class="says"><%= dgettext "invit", "Praise the Lord."%></li>
+  <li class="speaker"><%= gettext "People"%></li>
+  <li class="says"><%= dgettext "invit", "The Lord’s name be praised."%></li>
+</ul>

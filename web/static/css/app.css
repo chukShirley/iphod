@@ -18,6 +18,8 @@ body, form, ul, table {
   margin-right: 10px;
 }
 
+.home_link span { display: none; }
+
 /* Phoenix flash messages */
 .alert:empty { display: none; }
 

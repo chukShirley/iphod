@@ -37,7 +37,7 @@
 
   <body>
     <div id="header">
-      <a href= "/calendar" class="home_link">Legereme</a>
+      <a href= "/calendar" class="home_link"><span>Legereme</span></a>
     </div>
     <div id="container">
       <main role="main">
@@ -47,14 +47,5 @@
     </div> <!-- /container -->
     
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-    <script>
-      $(function() {
-        $("#datepicker").datepicker({
-          changeMonth: true,
-          changeYear: true,
-          dateFormat: "DD MM d, yy"
-        });
-      });
-    </script>
   </body>
 </html>

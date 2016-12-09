@@ -1,11 +1,7 @@
-<table>
-  <tr>
-    <td style= "font-style: italic; padding-right: 3em"><%= gettext "Officiant"%></td>
-    <td><%= gettext "Let us bless the Lord"%></td>
-  </tr>
-  <tr>
-    <td class= "italic"><%= gettext "People"%></td>
-    <td><%= gettext "Thanks be to God"%></td>
-  </tr>
-</table>
+<ul class="versicals" style="margin-top: 1em;">
+  <li class="speaker">&nbsp;</li>
+  <li class="says"><%= gettext "Let us bless the Lord"%></li>
+  <li class="speaker"><%= gettext "People"%></li>
+  <li class="says"><%= gettext "Thanks be to God"%></li>
+</ul>
 

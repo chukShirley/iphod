@@ -179,8 +179,10 @@ offices model =
       , li [ class "offices-item" ] [ midday model ]
       , li [ class "offices-item" ] [ evening model ]
       , li [ class "offices-item" ] [ compline model ]
-       -- li [class "option-item" ] [ family model]
-       -- li [class "option-item" ] [ timeOfDeath model]
+      , li [class "offices-item" ] [ family model]
+      , li [class "offices-item" ] [ reconciliation model]
+      , li [class "offices-item" ] [ tothesick model]
+      , li [class "offices-item" ] [ timeofdeath model]
       ]
     ]
 
@@ -203,28 +205,48 @@ innerHtmlDecoder =
 
 currentOffice: Model -> Html Msg
 currentOffice model =
-  a [ href "office" ]
+  a [ href "/office" ]
     [ button [] [ text "Current Office" ] ]
 
 morning: Model -> Html Msg
 morning model =
-  a [href "mp"] 
+  a [href "/morningPrayer"] 
     [ button [] [ text "Morning Prayer" ]]
 
 midday: Model -> Html Msg
 midday model =
-  a [href "midday"] 
+  a [href "/midday"] 
     [ button [] [ text "Midday Prayer" ]]
 
 evening: Model -> Html Msg
 evening model =
-  a [href "ep"] 
+  a [href "/ep"] 
     [ button [] [ text "Evening Prayer" ]]
 
 compline: Model -> Html Msg
 compline model =
-  a [href "compline"] 
+  a [href "/compline"] 
     [ button [] [ text "Compline" ]]
+
+family: Model -> Html Msg
+family model =
+  a [href "/family"] 
+    [ button [] [ text "Family Prayer" ]]
+
+reconciliation: Model -> Html Msg
+reconciliation model =
+  a [href "/reconciliation"] 
+    [ button [] [ text "Reconciliation" ]]
+
+tothesick: Model -> Html Msg
+tothesick model =
+  a [href "/tothesick"] 
+    [ button [] [ text "To The Sick" ]]
+
+timeofdeath: Model -> Html Msg
+timeofdeath model =
+  a [href "/timeofdeath"] 
+    [ button [] [ text "Time of Death" ]]
 
 translations: Model -> Html Msg
 translations model =

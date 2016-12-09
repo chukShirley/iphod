@@ -1,0 +1,305 @@
+<button class="more-options" type="button">Options</button>
+<div id= "header-elm-container"></div>
+<br>
+<div class= "mpep">
+  <p class= "midday"><%= dgettext "np", "Ministration at the Time of Death (BCP)"%></p>
+  <p class= "rubric-office"><%= dgettext "tod", """
+    When a person is near death, the Minister of the Congregation should be
+    notified, in order that the ministrations of the Church may be provided.
+    """%>
+  </p>
+  <p class="italic">A Prayer for a Person near Death</p>
+  <p class="office"><%= dgettext "tod", """
+      Almighty God, look on this your servant, lying in great
+      weakness, and comfort 
+      """%>
+      <span class="italic"><%= dgettext "tod", "him"%></span> 
+      <%= dgettext "tod", """
+        with the promise of life everlasting, given in the resurrection of your Son Jesus
+        Christ our Lord.
+      """%>
+    <span class="italic"> Amen.</span>
+  </p>
+
+  <h3>Litany at the Time of Death</h3>
+  <p class= "rubric-office"><%= dgettext "tod", """
+    When possible, it is desirable that members of the family and friends
+    come together to join in the Litany.
+    """%>
+  </p>
+  <ul class="versicals">
+    <li class="litany1"><%= dgettext "tod", "God the Father,"%></li>
+    <li class="litany2"><%= dgettext "tod", "Have mercy on your servant."%></li>
+    <li class="litany1"><%= dgettext "tod", "God the Son,"%></li>
+    <li class="litany2"><%= dgettext "tod", "Have mercy on your servant."%></li>
+    <li class="litany1"><%= dgettext "tod", "God the Holy Spirit,"%></li>
+    <li class="litany2"><%= dgettext "tod", "Have mercy on your servant."%></li>
+    <li class="litany1"><%= dgettext "tod", "Holy Trinity, one God,"%></li>
+    <li class="litany2"><%= dgettext "tod", "Have mercy on your servant."%></li>
+    <li class="litany1"><%= dgettext "tod", "From all evil, from all sin, from all tribulation,"%></li>
+    <li class="litany2">
+      <%= dgettext "tod", "Good Lord, deliver "%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+    </li>
+    <li class="litany1"><%= dgettext "tod", "By your holy Incarnation, by your Cross and Passion, by"%></li>
+    <li class="litany1"><%= dgettext "tod", "your precious Death and Burial,"%></li>
+    <li class="litany2">
+      <%= dgettext "tod", "Good Lord, deliver "%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+    </li>
+    <li class="litany1"><%= dgettext "tod", "By your glorious Resurrection and Ascension, and by the"%></li>
+    <li class="litany1"><%= dgettext "tod", "Coming of the Holy Spirit,"%></li>
+    <li class="litany2">
+      <%= dgettext "tod", "Good Lord, deliver "%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+    </li>
+    <li class="litany1"><%= dgettext "tod", "We sinners beseech you to hear us, Lord Christ: That it may"%></li>
+    <li class="litany1"><%= dgettext "tod", "please you to deliver the soul of your servant from the po"%>wer</li>
+    <li class="litany1"><%= dgettext "tod", "of evil, and from eternal death,"%></li>
+    <li class="litany2"><%= dgettext "tod", "We beseech you to hear us, good Lord."%></li>
+    <li class="litany1"><%= dgettext "tod", "That it may please you mercifully to pardon all his sins,"%></li>
+    <li class="litany2"><%= dgettext "tod", "We beseech you to hear us, good Lord."%></li>
+    <li class="litany1">
+      <%= dgettext "tod", "That it may please you to grant "%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+      <%= dgettext "tod", "a place of refreshment"%>
+    </li>
+    <li class="litany1"><%= dgettext "tod", "and everlasting blessedness,"%></li>
+    <li class="litany2"><%= dgettext "tod", "We beseech you to hear us, good Lord."%></li>
+    <li class="litany1">
+      <%= dgettext "tod", "That it may please you to give "%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+      <%= dgettext "tod", "joy and gladness in your"%></li>
+    <li class="litany1"><%= dgettext "tod", "kingdom, with your saints in light,"%></li>
+    <li class="litany2"><%= dgettext "tod", "We beseech you to hear us, good Lord."%></li>
+    <li class="litany1"><%= dgettext "tod", "Jesus, Lamb of God:"%></li>
+    <li class="litany2">
+      <%= dgettext "tod", "Have mercy on "%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+    </li>
+    <li class="litany1"><%= dgettext "tod", "Jesus, bearer of our sins:"%></li>
+    <li class="litany2">
+      <%= dgettext "tod", "Have mercy on "%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+    </li>
+    <li class="litany1"><%= dgettext "tod", "Jesus, redeemer of the world:"%></li>
+    <li class="litany2">
+      <%= dgettext "tod", "Give "%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+    <li class="litany1"><%= dgettext "tod", "Lord, have mercy."%></li>
+    <li class="litany2"><%= dgettext "tod", "Christ, have mercy."%></li>
+    <li class="litany1" style="top: -0.9em;"><%= dgettext "tod", "Lord, have mercy."%></li>
+  </ul>
+  <p class= "rubric-office"><%= dgettext "tod", "Officiant and People"%></p>
+  <%= render "_lords_prayer_trad.html" %>
+
+  <p class="rubric-office"><%= dgettext "tod", "The Officiant says this Collect"%></p>
+  <p class= "rubric-office"><%= dgettext "tod", "Let us pray."%></p>
+  <p class="office"><%= dgettext "tod", """
+      Deliver your servant, N., O Sovereign Lord Christ, from all
+    evil, and set 
+      """%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+      <%= dgettext "tod", "free from every bond; that"%>
+      <span class="italic"><%= dgettext "tod", "he"%></span>
+      <%= dgettext "tod", """
+        may rest with
+        all your saints in the eternal habitations; where with the
+        Father and the Holy Spirit you live and reign, one God, for
+        ever and ever.
+    """%>
+    <span class="italic"> Amen.</span>
+  </p>
+
+  <h3>A Commendation at the Time of Death</h3>
+  <p class="office"><%= dgettext "tod", """
+      Depart, O Christian soul, out of this world;
+    In the Name of God the Father Almighty who created you;
+    In the Name of Jesus Christ who redeemed you;
+    In the Name of the Holy Spirit who sanctifies you.
+    May your rest be this day in peace,
+    and your dwelling place in the Paradise of God.
+    """%>
+  </p>
+
+  <h3 class="italic">A Commendatory Prayer</h3>
+  <p class="office"><%= dgettext "tod", """
+      Into your hands, O merciful Savior, we commend your
+    servant N. Acknowledge, we humbly beseech you, a sheep of
+    your own fold, a lamb of your own flock, a sinner of your
+    own redeeming. Receive 
+    """%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+    <%= dgettext "tod", """
+      into the arms of your mercy,
+    into the blessed rest of everlasting peace, and into the
+    glorious company of the saints in light.
+    """%>
+    <span class="italic"> Amen.</span>
+  </p>
+  <p class="office"><%= dgettext "tod", """
+    May his soul and the souls of all the departed, through the
+    mercy of God, rest in peace.
+    """%>
+    <span class="italic"> Amen.</span>
+  </p>
+
+  <h3>Prayers for a Vigil</h3>
+  <p class= "rubric-office"><%= dgettext "tod", """
+    It is appropriate that the family and friends come together for prayers
+    prior to the funeral. Suitable Psalms, Lessons, and Collects (such as those
+    in the Burial service) may be used. The Litany at the Time of Death may
+    be said, or the following
+    """%>
+  </p>
+  <p class="office"><%= dgettext "tod", """
+      Dear Friends: It was our Lord Jesus himself who said,
+    “Come to me, all you who labor and are burdened, and I will
+    give you rest.” Let us pray, then, for our brother (sister) N.,
+    that 
+    """%>
+      <span class="italic"><%= dgettext "tod", "he"%></span>
+    <%= dgettext "tod", """
+    may rest from his labors, and enter into the light
+    of God’s eternal sabbath rest.
+    """%>
+  </p>
+  <ul class="versicals">
+    <li class="litany1">
+      <%= dgettext "tod", "Receive, O Lord, your servant, for "%>
+      <span class="italic"><%= dgettext "tod", "he"%></span>
+      <%= dgettext "tod", "returns to you."%>
+    </li>
+    <li class="litany2">
+      <%= dgettext "tod", "Into your hands, O Lord,"%>
+      <br>
+      <%= dgettext "tod", "we commend our brother (sister) N."%>
+    </li>
+    <li class="litany1"><%= dgettext "tod", "Wash "%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+      <%= dgettext "tod", "in the holy font of everlasting life, and clothe"%>
+    </li>
+    <li class="litany1">
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+      <%= dgettext "tod", "in his heavenly wedding garment."%>
+    </li>
+    <li class="litany2">
+      <%= dgettext "tod", "Into your hands, O Lord,"%>
+      <br>
+      <%= dgettext "tod", "we commend our brother (sister) N."%>
+    </li>
+    <li class="litany1">
+      <%= dgettext "tod", "May" %>
+      <span class="italic"><%= dgettext "tod", "he"%></span>
+      <%= dgettext "tod", """
+        hear your words of invitation, “Come, you blessed of"
+        """%>
+      </li>
+    <li class="litany1"><%= dgettext "tod", "my Father.”"%></li>
+    <li class="litany2">
+      <%= dgettext "tod", "Into your hands, O Lord,"%>
+      <br>
+      <%= dgettext "tod", "we commend our brother (sister) N."%>
+    </li>
+    <li class="litany1"><%= dgettext "tod", "May"%>
+      <span class="italic"><%= dgettext "tod", "he"%></span>
+      <%= dgettext "tod", "gaze upon you, Lord, face to face, and taste the"%>
+    </li>
+    <li class="litany1"><%= dgettext "tod", "blessedness of perfect rest."%></li>
+    <li class="litany2">
+      <%= dgettext "tod", "Into your hands, O Lord,"%>
+      <br>
+      <%= dgettext "tod", "we commend our brother (sister) N."%>
+    </li>
+    <li class="litany1"><%= dgettext "tod", "May angels surround "%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>, 
+      <%= dgettext "tod", "and saints welcome "%>
+      <span class="italic"><%= dgettext "tod", "him"%></span>
+      <%= dgettext "tod", "in peace."%>
+    </li>
+    <li class="litany2">
+      <%= dgettext "tod", "Into your hands, O Lord,"%>
+      <br>
+      <%= dgettext "tod", "we commend our brother (sister) N."%>
+    </li>
+  </ul>
+  <p class= "rubric-office"><%= dgettext "tod", "The Officiant concludes"%></p>
+  <p class="office"><%= dgettext "tod", """
+      Almighty God, our Father in heaven, before whom live all
+    who die in the Lord: Receive our brother N. into the courts of
+    your heavenly dwelling place. Let his heart and soul now ring
+    out in joy to you, O Lord, the living God, and the God of
+    those who live. This we ask through Christ our Lord.
+    """%>
+    <span class="italic"> Amen.</span>
+  </p>
+
+  <p class="office"><%= dgettext "tod", "Reception of the Body"%></p>
+  <p class= "rubric-office"><%= dgettext "tod", """
+    The following form may be used at whatever time the body is brought to the church.
+    """%>
+  </p>
+  <p class= "rubric-office"><%= dgettext "tod", """
+    The Celebrant meets the body at the door of the church and says
+    """%>
+  </p>
+  <p class="office">
+    <%= dgettext "tod", """
+        With faith in Jesus Christ, we receive the body of our brother
+      (sister) N. for burial. Let us pray with confidence to God, the
+      Giver of life, that 
+      """%>
+      <span class="italic"><%= dgettext "tod", "he"%></span>
+      <%= dgettext "tod", "will raise"%>
+      <span class="italic"><%= dgettext "tod", "him"%></span> 
+      <%= dgettext "tod", "to perfection in the company of the saints."%>
+  </p>
+  <p class= "rubric-office"><%= dgettext "tod", "Silence may be kept; after which the Celebrant says"%></p>
+  <p class="office"><%= dgettext "tod", """
+      Deliver your servant, N., O Sovereign Lord Christ, from all
+    evil, and set 
+    """%>
+    <span class="italic"><%= dgettext "tod", "him"%></span>
+    <%= dgettext "tod", "free from every bond; that"%>
+    <span class="italic"><%= dgettext "tod", "he"%></span>
+    <%= dgettext "tod", """
+      may rest with
+      all your saints in the eternal habitations; where with the
+      Father and the Holy Spirit you live and reign, one God, for
+      ever and ever.
+      """%>
+    <span class="italic"> Amen.</span>
+  </p>
+  <p class="office", style="padding-top: 1em;"><%= dgettext "tod", """
+      Let us also pray for all who mourn, that they may cast their
+    care on God, and know the consolation of his love.
+    """%>
+  </p>
+  <p class= "rubric-office"><%= dgettext "tod", "Silence may be kept; after which the Celebrant says"%></p>
+  <p class="office"><%= dgettext "tod", """
+      Almighty God, look with pity upon the sorrows of your
+    servants for whom we pray. Remember them, Lord, in mercy;
+    nourish them with patience; comfort them with a sense of your
+    goodness; lift up your countenance upon them; and give them
+    peace; through Jesus Christ our Lord.
+    """%>
+    <span class="italic"> Amen.</span>
+  </p>
+  <p class= "rubric-office"><%= dgettext "tod", """
+    If the Burial service is not to follow immediately, the body is then
+    brought into the church, during which time a suitable psalm or anthem
+    may be sung or said. Appropriate devotions, such as those appointed for
+    the Vigil on page 465, may follow.
+    """%>
+  </p>
+  <p class= "rubric-office"><%= dgettext "tod", """
+    When the order for the Burial of the Dead follows immediately, the
+    service continues on page 469 or 491.
+    """%>
+  </p>
+  <p class= "rubric-office"><%= dgettext "tod", """
+    A member of the congregation bearing the lighted Paschal Candle may
+    lead the procession into the church.
+    """%>
+  </p>
+</div>

@@ -61,3 +61,11 @@
       <span class="s_ref">Ephesians 4:26-27</span>
     </p>
   </div>
+<script type="text/javascript">
+  $('button.alt_readings-button').click(function(){
+    $('ul.alt_readings-options').toggle();
+  })
+  $('li.alt_readings-select').click(function(){
+    $('ul.alt_readings-options').toggle();
+  })
+</script>

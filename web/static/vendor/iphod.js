@@ -11945,6 +11945,11 @@ var _user$project$Iphod$requestAltReading = _elm_lang$core$Native_Platform.outgo
 				return v;
 			});
 	});
+var _user$project$Iphod$requestScrollTop = _elm_lang$core$Native_Platform.outgoingPort(
+	'requestScrollTop',
+	function (v) {
+		return v;
+	});
 var _user$project$Iphod$update = F2(
 	function (msg, model) {
 		var _p1 = msg;
@@ -11957,7 +11962,11 @@ var _user$project$Iphod$update = F2(
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
 					{eu: _p1._0, mp: _user$project$Iphod_Models$initDailyMP, ep: _user$project$Iphod_Models$initDailyEP, reflection: _user$project$Iphod_Models$initReflection});
-				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
+				return {
+					ctor: '_Tuple2',
+					_0: newModel,
+					_1: _user$project$Iphod$requestScrollTop('0')
+				};
 			case 'UpdateMP':
 				var newModel = _elm_lang$core$Native_Utils.update(
 					model,

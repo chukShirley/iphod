@@ -49,6 +49,11 @@ defmodule Iphod.Router do
     get "/morningPrayer/:psalm/:text", PrayerController, :mp
     get "/midday", PrayerController, :midday
     get "/noon", PrayerController, :midday
+    get "/family", PrayerController, :family
+    get "/reconciliation", PrayerController, :reconciliation
+    get "/timeofdeath", PrayerController, :timeofdeath
+    get "/tothesick", PrayerController, :tothesick
+
     get "/readep", PrayerController, :readep
     get "/readep/:psalm", PrayerController, :readep
     get "/readep/:psalm/:text", PrayerController, :readep

@@ -45,7 +45,7 @@
     <li class="says">as it was in the beginning, is now, and ever shall be,</li>
     <li class="extra_indent">&nbsp;</li>
     <li class="extra_indent_says">world without end. Amen.</li>
-  </ul>>
+  </ul>
    <p class="rubric"><%= dgettext "comp", "Except in Lent, add "%><span class="default">Alleluia.</span></p>
   <p class="rubric"><%= dgettext "comp", """
     One or more of the following Psalms are sung or said. 
@@ -229,8 +229,8 @@
   <p class= "rubric"><%= dgettext "mp", "or this"%></p>
 
   <%= render "_lords_prayer_modern.html" %>
-  <br/>
-  <ul class="versicals">
+
+  <ul class="versicals" style="margin-top: 1em;">
     <li class="speaker">Officiant</li>
     <li class="says">O Lord, hear our prayer;</li>
     <li class="speaker">People</li>

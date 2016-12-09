@@ -29,6 +29,7 @@ $(document).on('input', 'textarea', function () {
 
 
 $("button.more-options").click( function() {
+  console.log("MORE OPTIONS")
   $("ul#header-options").toggleClass("responsive");
 })
 
@@ -156,9 +157,9 @@ if ( path.match(/office/) ) {
 
 // mobile landing page
 
-if ( path.match(/mindex/)) {
-  $('#header-elm-container').hide()
-}
+// if ( path.match(/mindex/)) {
+//   $('#header-elm-container').hide()
+// }
 
 // MP/EP
 // if (path == "/") { window.location.href = am ? "/mp" : "/ep" }
@@ -167,10 +168,11 @@ if ( path.match(/mindex/)) {
 
 // grr - match doesn't match utf8 codes, must find alt solution
 
+var elmHeaderDiv = document.getElementById('header-elm-container')
+  , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
+
 if (path == "/" || path.match(/midday|^mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|$ep(?!i)|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   let channel = socket.channel("iphod:readings")
-    , elmHeaderDiv = document.getElementById('header-elm-container')
-    , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
 
   elmHeaderApp.ports.portConfig.send(init_config_model());
   
@@ -220,8 +222,8 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
 
 // header
 
-  var elmHeaderDiv = document.getElementById('header-elm-container')
-    , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
+//  var elmHeaderDiv = document.getElementById('header-elm-container')
+//    , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
   
   elmHeaderApp.ports.sendEmail.subscribe(function(email) {
     channel.push("request_send_email", email)

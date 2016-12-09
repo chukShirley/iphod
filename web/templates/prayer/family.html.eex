@@ -1,0 +1,239 @@
+<button class="more-options" type="button">Options</button>
+<div id= "header-elm-container"></div>
+<br>
+<div class= "mpep">
+  <p class= "midday"><%= dgettext "np", "Family Prayer"%></p>
+
+  <p> These devotions follow the basic structure of the Daily Office of the Church and are
+      particularly appropriate for families with young children.
+  <p>
+  <p> The Reading and the Collect may be read by one person, and the other parts said in
+      unison, or in some other convenient manner.
+  </p>
+  <p> Appropriate Opening Sentences, Psalms, Readings, and Collects are provided in each
+      service. When desired, however, the Collect of the Day, or any of the Collects appointed in
+      the Daily Offices, may be used instead. The Opening Sentences may be replaced by those
+      appointed for various seasons in the liturgies for Morning and Evening Prayer.
+  </p>    
+  <p> The Psalms and Readings may be replaced by those appointed in</p>
+  <ol class="fam_ol">
+    <li>the Lectionary for Sundays, Holy Days, or the Common of Saints;</li>
+    <li>the Daily Office Lectionary;</li>
+    <li>some other manual of devotion which provides daily selections for the Church Year.</li>
+  </ol>
+  <p> A concluding Grace from Morning or Evening Prayer may be used at the end of any of
+      these devotions.
+  </p>
+
+  <h3>In the Morning</h3>
+  <p class= "rubric"><%= dgettext "fam", "The following or some other verse of Scripture is said"%></p>
+
+
+  <p class="ps_first"><%= dgettext "fam", "Open my lips, O Lord,"%></p>
+  <p class="ps_second"><%= dgettext "fam", "and my mouth shall proclaim your praise."%>
+     <span class="s_ref">Psalm 51:16</span>
+  </p>
+  <p class= "family_section_title"><%= dgettext "fam", "Psalm 51:11-13"%></p>
+
+
+  <p class="ps_first"><%= dgettext "fam", "Create in me a clean heart, O God, *"%></p>
+  <p class="ps_second"><%= dgettext "fam", "and renew a right spirit within me."%></p>
+  <p class="ps_first"><%= dgettext "fam", "Cast me not away from your presence *"%></p>
+  <p class="ps_second"><%= dgettext "fam", "and take not your holy Spirit from me."%></p>
+  <p class="ps_first"><%= dgettext "fam", "Give me the joy of your saving help again *"%></p>
+  <p class="ps_second"><%= dgettext "fam", "and sustain me with your bountiful Spirit."%></p>
+  <p class="ps_first"><%= dgettext "fam", "Glory to the Father, and to the Son, and to the Holy Spirit: *"%></p>
+  <p class="ps_second"><%= dgettext "fam", "as it was in the beginning, is now, and ever shall be, world without end. Amen."%></p>
+  <p class= "rubric"><%= dgettext "fam", "Alternately, Psalm 5:1-3 may be used."%></p>
+
+  <p class= "family_section_title"><%= dgettext "fam", "A Reading from Holy Scripture"%></p>
+
+  <p class= "fam_scripture"><%= dgettext "fam", """
+    Blessed be the God and Father of our Lord Jesus Christ! According to his great mercy, he
+    has caused us to be born again to a living hope through the resurrection of Jesus Christ
+    from the dead.
+    """%> 
+    <span class="s_ref">1 Peter 1:3</span>
+  </p>
+  <p class= "rubric"><%= dgettext "fam", "or this"%></p>
+  <p class= "fam_scripture"><%= dgettext "fam", """
+    Give thanks to the Father, who has qualified you to share in the inheritance of the saints in
+    light. He has delivered us from the domain of darkness and transferred us to the kingdom
+    of his beloved Son, in whom we have redemption, the forgiveness of sins.
+    """%>
+    <span class="s_ref">Colossians 1:12-14</span>
+  </p>
+  <p class= "rubric"><%= dgettext "fam", "or this"%></p>
+  <p class= "fam_scripture"><%= dgettext "fam", """
+    If you have been raised with Christ, seek the things that are above, where Christ is, seated
+    at the right hand of God. Set your minds on things that are above, not on things that are on
+    earth. For you have died, and your life is hidden with Christ in God. When Christ who is
+    your life appears, then you also will appear with him in glory.
+    """%>
+    <span class="s_ref">Colossians 3:1-4</span>
+  </p>
+
+  <p class= "rubric"><%= dgettext "fam", "A period of silence may follow."%></p>
+  <p class= "rubric"><%= dgettext "fam", "A hymn or canticle may be used; the Apostles’ Creed may be said."%></p>
+  <p class= "rubric"><%= dgettext "fam", "Prayers may be offered for ourselves and others."%></p>
+  <p class= "family_section_title"><%= dgettext "fam", "The Lord’s Prayer"%></p>
+  <p class= "family_section_title"><%= dgettext "fam", "The Collect"%></p>
+  <p class="fam_collect"><%= dgettext "fam", """
+    O Lord, our heavenly Father, almighty and everlasting God, you have brought us safely to
+    the beginning of this day: Defend us by your mighty power, that we may not fall into sin nor
+    run into any danger; and that guided by your Spirit, we may do what is righteous in your
+    sight; through Jesus Christ our Lord.
+    """%>
+    <span class="italic">Amen.</span>
+  </p>
+
+  <h3>At Midday</h3>
+  <p class="rubric"><%= dgettext "fam", "The following or some other verse of Scripture is said"%></p>
+  <p> Blessed be the God and Father of our Lord Jesus Christ, who has blessed us in Christ with
+      every spiritual blessing in the heavenly places.
+      <span class="s_ref">Ephesians 1:3</span>
+  </p>
+  <p class= "family_section_title"><%= dgettext "fam", "Psalm 113:1-4"%></p>
+  <p class="ps_first"><%= dgettext "fam", "Hallelujah!"%></p>
+  <p class="ps_first"><%= dgettext "fam", "Give praise, you servants of the LORD; *"%></p>
+  <p class="ps_second"><%= dgettext "fam", " praise the Name of the LORD."%></p>
+  <p class="ps_first"><%= dgettext "fam", "Let the Name of the LORD be blessed, *"%></p>
+  <p class="ps_second"><%= dgettext "fam", " from this time forth for evermore."%></p>
+  <p class="ps_first"><%= dgettext "fam", "From the rising of the sun to its going down *"%></p>
+  <p class="ps_second"><%= dgettext "fam", " let the Name of the LORD be praised."%></p>
+  <p class="ps_first"><%= dgettext "fam", "The LORD is high above all nations, *"%></p>
+  <p class="ps_second"><%= dgettext "fam", " and his glory above the heavens."%></p>
+  <p class="ps_first"><%= dgettext "fam", "Glory to the Father, and to the Son, and to the Holy Spirit: *"%></p>
+  <p class="ps_second"><%= dgettext "fam", " as it was in the beginning, is now, and ever shall be, world without end. Amen."%></p>
+
+  <p class= "family_section_title"><%= dgettext "fam", "A Reading from Holy Scripture"%></p>
+  <p class= "fam_scripture"><%= dgettext "fam", """
+      Abide in me, and I in you. As the branch cannot bear fruit by itself, unless it abides in the
+      vine, neither can you unless you abide in me. I am the vine; you are the branches.
+      Whoever abides in me and I in him, he it is that bears much fruit, for apart from me you
+      can do nothing. 
+      """%>
+      <span class="s_ref">John 15:4-5</span>
+  <p>
+  <p class="rubric"><%= dgettext "fam", "or this"%></p>
+  <p class= "fam_scripture"><%= dgettext "fam", """
+    Do not worry about anything, but in everything by prayer and supplication with
+    thanksgiving let your requests be made known to God. And the peace of God, which
+    surpasses all understanding, will guard your hearts and your minds in Christ Jesus.
+    """%>
+    <span class="s_ref">Philippians 4:6-7</span>
+  </p>
+  <p class="rubric"><%= dgettext "fam", "A period of silence may follow."%></p>
+  <p class="rubric"><%= dgettext "fam", "Prayers may be offered for ourselves and others."%></p>
+  <p class= "family_section_title"><%= dgettext "fam", "The Lord’s Prayer"%></p>
+  <p class= "family_section_title"><%= dgettext "fam", "The Collect"%></p>
+  <p class="fam_collect"><%= dgettext "fam", """
+    Blessed Savior, at this hour you hung upon the cross, stretching out your loving arms:
+    Grant that all the peoples of the earth may look to you and be saved; for your tender
+    mercies’ sake.
+    """%>
+    <span class="s_ref">Amen.</span>
+
+  <h3>In the Early Evening</h3>
+  <p class="rubric"><%= dgettext "fam", "This devotion may be used before or after the evening meal."%></p>
+  <p class="rubric"><%= dgettext "fam", "The following or some other verse of Scripture is said"%></p>
+  <p class="ps_first"><%= dgettext "fam", "How priceless is your love, O God!"%></p>
+  <p class="ps_second"><%= dgettext "fam", " Your people take refuge under the shadow of your wings."%></p>
+  <p class="ps_first"><%= dgettext "fam", "For with you is the well of life,"%></p>
+  <p class="ps_second"><%= dgettext "fam", " and in your light we see light."%>
+    <span class="s_ref">Psalm 36:7, 9</span>
+  </p>
+  <%= render "_phos_hilaron.html" %>
+  <p class= "family_section_title"><%= dgettext "fam", "A Reading from Holy Scripture"%></p>
+  <p class= "fam_scripture"><%= dgettext "fam", """
+    For what we proclaim is not ourselves, but Jesus Christ as Lord, with ourselves as your
+    servants, for Jesus’ sake. For God, who said, “Let light shine out of darkness,” has shone in
+    our hearts, to give the light of the knowledge of the glory of God in the face of Jesus Christ.
+    """%>
+    <span class="s_ref">2 Corinthians 4:5-6</span>
+  </p>
+  <p class= "rubric"><%= dgettext "fam", "or this"%></p>
+  <p class= "fam_scripture"><%= dgettext "fam", """
+    Jesus spoke to them, saying, “I am the light of the world. Whoever follows me will not walk
+    in darkness, but will have the light of life.”
+    """%>
+    <span class="s_ref">John 8:12</span>
+  </p>
+  <p class= "rubric"><%= dgettext "fam", "or this"%></p>
+  <p class= "fam_scripture"><%= dgettext "fam", """
+    Jesus said, “Behold, I stand at the door and knock. If anyone hears my voice and opens the
+    door, I will come in to him and eat with him, and he with me.”
+    """%>
+    <span class="s_ref">Revelation 3:20</span>
+  </p>
+
+  <p class= "rubric"><%= dgettext "fam", "A period of silence may follow."%></p>
+  <p class= "rubric"><%= dgettext "fam", "A hymn or canticle may be used; the Apostles’ Creed may be said."%></p>
+  <p class= "rubric"><%= dgettext "fam", "Prayers may be offered for ourselves and others."%></p>
+  <p class= "family_section_title"><%= dgettext "fam", "The Lord’s Prayer"%></p>
+  <p class= "family_section_title"><%= dgettext "fam", "The Collect"%></p>
+  <p class="fam_collect"><%= dgettext "fam", """
+    Lord Jesus, stay with us, for evening is at hand and the day is past; be our companion in the
+    way, kindle our hearts, and awaken hope, that we may know you as you are revealed in
+    Scripture and the breaking of bread. Grant this for the sake of your love. 
+    """%>
+    <span class="italic">Amen.</span>
+  </p>
+
+ 
+  <h3>At the Close of Day</h3>
+  <p class= "rubric"><%= dgettext "fam", "The following or some other verse of Scripture is said"%></p>
+  <p class="ps_first"><%= dgettext "fam", "I will both lie down and sleep in peace;"%></p>
+  <p class="ps_second"><%= dgettext "fam", " for you alone, O LORD, make me lie down in safety."%>
+    <span class="s_ref">Psalm 4:8</span>
+  </p>
+  <p class= "family_section_title"><%= dgettext "fam", "Psalm 134"%></p>
+  <p class="ps_first"><%= dgettext "fam", "Behold now, bless the LORD, all you servants of the LORD, *"%></p>
+  <p class="ps_second"><%= dgettext "fam", " you that stand by night in the house of the LORD."%></p>
+  <p class="ps_first"><%= dgettext "fam", "Lift up your hands in the holy place and bless the LORD; *"%></p>
+  <p class="ps_second"><%= dgettext "fam", " the LORD who made heaven and earth bless you out of Zion."%></p>
+  <p class="ps_first"><%= dgettext "fam", "Glory to the Father, and to the Son, and to the Holy Spirit: *"%></p>
+  <p class="ps_second"><%= dgettext "fam", " as it was in the beginning, is now, and ever shall be, world without end."%>
+    <span class="s_ref">Amen.</span>
+  </p>
+  <p class= "family_section_title"><%= dgettext "fam", "A Reading from Holy Scripture"%></p>
+  <p class= "fam_scripture"><%= dgettext "fam", """
+    You keep them in perfect peace whose minds are stayed on you, because they trust in you.
+    Trust in the Lord forever, for the Lord God is an everlasting rock.
+    """%>
+    <span class="s_ref">Isaiah 26:3-4</span>
+  </p>
+  <p class= "rubric"><%= dgettext "fam", "or this"%></p>
+  <p class="fam_collect"><%= dgettext "fam", """
+    Now may the God of peace himself sanctify you completely, and may your whole spirit and
+    soul and body be kept blameless at the coming of our Lord Jesus Christ.
+    """%>
+    <span class="s_ref">1 Thessalonians 5:23</span>
+  </p>
+  <p class= "rubric"><%= dgettext "fam", "A period of silence may follow."%></p>
+  <p class= "rubric"><%= dgettext "fam", """
+    Prayers for ourselves and others may follow. It is appropriate that prayers of thanksgiving for the blessings of
+    the day, and penitence for our sins, be included.
+    """%>
+  </p>
+
+  <p class= "family_section_title"><%= dgettext "fam", "The Lord’s Prayer"%></p>
+  <p class= "family_section_title"><%= dgettext "fam", "The Collect"%></p>
+  <p class="fam_collect"><%= dgettext "fam", """
+    Visit this place, O Lord, and drive far from it all snares of the enemy; let your holy angels
+    dwell with us to preserve us in peace; and let your blessing be upon us always; through
+    Jesus Christ our Lord.
+    """%>
+    <span class="italic">Amen.</span>
+  </p>
+  <%= render "_nunc_dimittis.html" %>
+  <p class= "family_section_title"><%= dgettext "fam", "Concluding Sentence"%></p>
+  <p class= "fam_scripture"><%= dgettext "fam", """
+    The almighty and merciful Lord, Father, Son, and Holy Spirit, bless us and keep us, this
+    night and evermore.
+    """%>
+    <span class="s_ref"> Amen.</span>
+  <p>
+  <p class= "rubric"><%= dgettext "fam", "When the Apostles Creed is included in Family Prayer, the text is as follows:"%></p>
+  <%= render "_apostles_creed.html" %>
+</div>

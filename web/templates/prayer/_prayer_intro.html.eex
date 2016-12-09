@@ -1,15 +1,8 @@
-<table class= "prayer_table">
-  <tr>
-    <td class='invitatory-init'><%= gettext "Officiant"%></td>
-    <td><%= gettext "The Lord be with you."%></td>
-  </tr>
-  <tr>
-    <td class='invitatory-speaker'><%= gettext "People"%></td>
-    <td><%= gettext "And with your spirit."%></td>
-  </tr>
-  <tr>
-    <td class='invitatory-speaker'><%= gettext "Officiant"%></td>
-    <td><%= gettext "Let us pray."%></td>
-  </tr>
-</table>
-
+<ul class="versicals" style="margin-top: 1em;">
+  <li class="speaker"><%= gettext "Officiant"%></li>
+  <li class="says"><%= gettext "Let us bless the Lord"%></li>
+  <li class="speaker"><%= gettext "People"%></li>
+  <li class="says"><%= gettext "And with your spirit."%></li>
+  <li class="speaker"><%= gettext "Officiant"%></li>
+  <li class="says"><%= gettext "Let us pray."%></li>
+</ul>

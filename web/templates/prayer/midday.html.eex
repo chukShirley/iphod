@@ -3,28 +3,19 @@
 <br>
 <div class= "mpep">
   <p class= "midday"><%= dgettext "np", "Midday Prayer"%></p>
-  <table class= "invitatory">
-    <tr>
-        <td class='invitatory-init'><%= gettext "Officiant"%></td>
-        <td><%= dgettext "np_start", "O God, make speed to save us. "%></td>
-    </tr>
-    <tr>
-        <td class='invitatory-speaker'><%= gettext "People"%></td>
-        <td><%= dgettext "np_start", "O Lord, make haste to help us. "%></td>
-    </tr>
-    <tr>
-        <td class='invitatory-speaker'><%= gettext "Officiant"%></td>
-        <td><%= dgettext "np_start", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></td>
-    </tr>
-    <tr>
-        <td class='invitatory-speaker'><%= gettext "People"%></td>
-        <td><%= dgettext "np_start", "as it was in the beginning, is now, and ever shall be, world without end. Amen."%></td>
-    </tr>
-    <tr>
-        <td class='rubric'><%= gettext "Except in Lent, add"%></td>
-        <td><%= dgettext "np_start", "Alleluia."%></td>
-    </tr>
-  </table>
+  <ul class="versicals">
+    <li class="speaker"><%= gettext "Officiant"%></li>
+    <li class="says"><%= dgettext "np_start", "O God, make speed to save us. "%></li>
+    <li class="speaker"><%= gettext "People"%></li>
+    <li class="says"><%= dgettext "np_start", "O Lord, make haste to help us. "%></li>
+    <li class="speaker"><%= gettext "Officiant"%></li>
+    <li class="says"><%= dgettext "np_start", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></li>
+    <li class="speaker"><%= gettext "People"%></li>
+    <li class="says"><%= dgettext "np_start", "as it was in the beginning, is now, and ever shall be, world without end. Amen."%></li>
+    <p class='rubric'><%= gettext "Except in Lent, add"%></li>
+    <li class="speaker">&nbsp;</li>
+    <li class="says"><%= dgettext "np_start", "Alleluia."%></li>
+  </ul>
   <p class="rubric"><%= dgettext "np", "One or more of the following Psalms is sung or said. Other suitable selections include Psalms 19, 67, one or more sections of Psalm 119, or a selection from Psalms 120 through 133." %>
   </p>
 
@@ -147,16 +138,12 @@
 
   <p class= "rubric"><%= dgettext "np", "A meditation, silent or spoken, may follow."%>
   <p class= "rubric"><%= dgettext "np", "The Officiant then begins the Prayers"%>
-  <table class= "prayer_table">
-    <tr>
-      <td class='invitatory-init'><%= gettext "Officiant"%></td>
-      <td><%= dgettext "prayers", "I will bless the Lord at all times."%></td>
-    </tr>
-    <tr>
-      <td class='invitatory-speaker'><%= gettext "People"%></td>
-      <td><%= dgettext "prayers", "His praise shall continually be in my mouth."%></td>
-    </tr>
-  </table>
+  <ul class="versicals" style="margin-top: 1em;">
+    <li class="speaker"><%= gettext "Officiant"%></li>
+    <li class="says"><%= dgettext "prayers", "I will bless the Lord at all times."%></li>
+    <li class="speaker"><%= gettext "People"%></li>
+    <li class="says"><%= dgettext "prayers", "His praise shall continually be in my mouth."%></li>
+  </ul>
 
   <p>Lord, have mercy [upon us].</p>
   <p class="italic">Christ, have mercy [upon us].</p>
@@ -168,14 +155,14 @@
   <p class= "rubric"><%= dgettext "mp", "or this"%></p>
 
   <%= render "_lords_prayer_modern.html" %>
-  <br/>
-
-  <ul class="versicals">
-    <li><div class="officiant">Officiant</div> O Lord, hear our prayer;</li>
-    <li><div class="people">People</div> And let our cry come to you.</li>
-    <li><div class="officiant">Officiant</div> Let us pray.</li>
+  <ul class="versicals" style="margin-top: 1em;">
+    <li class="speaker"><%= gettext "Officiant"%></li>
+    <li class="says"><%= dgettext "np_start", "O Lord, hear our prayer;"%></li>
+    <li class="speaker"><%= gettext "People"%></li>
+    <li class="says"><%= dgettext "np_start", "And let our cry come to you."%></li>
+    <li class="speaker"><%= gettext "Officiant"%></li>
+    <li class="says"><%= dgettext "np_start", "Let us pray."%></li>
   </ul>
-  
 
   <p class= "rubric"><%= dgettext "np", "The Officiant then says one or more of the following Collects. Other appropriate Collects may also be used."%></p>
   <p class="np_collect"><%= dgettext "np", """ 
@@ -216,8 +203,12 @@
   </p>
   
   <p class= "rubric"><%= dgettext "np", "Silence may be kept, and other intercessions and thanksgivings may be offered."%></p>
-  <p><span class="officiant">Officiant</span> Let us bless the Lord.</p>
-  <p><span class="people">People</span> Thanks be to God.</p>
+  <ul class="versicals" style="margin-top: 1em;">
+    <li class="speaker"><%= gettext "Officiant"%></li>
+    <li class="says"><%= dgettext "np_start", "Let us bless the Lord."%></li>
+    <li class="speaker"><%= gettext "People"%></li>
+    <li class="says"><%= dgettext "np_start", "Thanks be to God."%></li>
+  </ul>
   <p class= "rubric"><%= dgettext "np", """
     From Easter Day through the Day of Pentecost “Alleluia, alleluia” may be added to 
     the preceding versicle and response.

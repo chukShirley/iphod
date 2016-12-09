@@ -8902,12 +8902,88 @@ var _user$project$Header$translations = function (model) {
 					]))
 			]));
 };
+var _user$project$Header$timeofdeath = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/timeofdeath')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Time of Death')
+					]))
+			]));
+};
+var _user$project$Header$tothesick = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/tothesick')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('To The Sick')
+					]))
+			]));
+};
+var _user$project$Header$reconciliation = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/reconciliation')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Reconciliation')
+					]))
+			]));
+};
+var _user$project$Header$family = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/family')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Family Prayer')
+					]))
+			]));
+};
 var _user$project$Header$compline = function (model) {
 	return A2(
 		_elm_lang$html$Html$a,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$href('compline')
+				_elm_lang$html$Html_Attributes$href('/compline')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -8926,7 +9002,7 @@ var _user$project$Header$evening = function (model) {
 		_elm_lang$html$Html$a,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$href('ep')
+				_elm_lang$html$Html_Attributes$href('/ep')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -8945,7 +9021,7 @@ var _user$project$Header$midday = function (model) {
 		_elm_lang$html$Html$a,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$href('midday')
+				_elm_lang$html$Html_Attributes$href('/midday')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -8964,7 +9040,7 @@ var _user$project$Header$morning = function (model) {
 		_elm_lang$html$Html$a,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$href('mp')
+				_elm_lang$html$Html_Attributes$href('/morningPrayer')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -8983,7 +9059,7 @@ var _user$project$Header$currentOffice = function (model) {
 		_elm_lang$html$Html$a,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$href('office')
+				_elm_lang$html$Html_Attributes$href('/office')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -9078,6 +9154,46 @@ var _user$project$Header$offices = function (model) {
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_user$project$Header$compline(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$family(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$reconciliation(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$tothesick(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$timeofdeath(model)
 							]))
 					]))
 			]));
