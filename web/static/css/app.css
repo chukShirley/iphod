@@ -72,7 +72,7 @@ li.offices-item {
 
 .offices-options li{ /* dropdown-content a */
   color: black;
-  padding: 0.5em 1em;
+  padding: 0.2em 1em;
   text-decoration: none;
   display: block;
 }

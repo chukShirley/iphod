@@ -444,10 +444,6 @@ p.family_section_title{
     margin-left: 5%;
     width: 90%;
   }
-  #header-options {
-    margin-top: 1em;
-    display: none;
-  }
   li.option-item { visibility: hidden; }
   li.option-item { 
     float: right;
@@ -461,9 +457,10 @@ p.family_section_title{
     left: 7em;
     padding-left: 1em;
     min-width: 9em;
+    background-color: floralwhite;
   }
 
-  ul#header-options.responsive { 
+  ul#header-offices-options li { 
     position: fixed; 
     display: block;
     margin-left: 0;
@@ -475,18 +472,44 @@ p.family_section_title{
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     cursor: pointer;
   }
+
+  ul#header-options.responsive {
+    margin-left: 0;
+    position: fixed;
+    display: block;
+    margin-left: 0;
+    top: 0.8em;
+    z-index: 9;
+    padding-left: 1em;
+    min-width: 7.5em;
+    background-color: floralwhite;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+
   ul#header-options.responsive li.option-item {
+    margin-top: 1em;
+    display: block;
+    line-height: 1em;
+  }
+  ul#header-options.responsive li.offices-item {
     top: 0;
     display: block;
+    margin-top: 0em;
   }
   ul#header-options.responsive li {
     float: none;
     display: inline;
     visibility: visible;
     z-index: 9;
+    line-height: 1em;
   }
   ul#header-options.responsive li a {
     display: block;
+  }
+  li.offices-item button{
+    line-height: 1em;
+    padding: 0;
   }
   ul.versicals {
     width: 100%;

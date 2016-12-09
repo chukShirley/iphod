@@ -1666,9 +1666,9 @@ if (path.match(/office/)) {
 
 // mobile landing page
 
-if (path.match(/mindex/)) {
-  $('#header-elm-container').hide();
-}
+// if ( path.match(/mindex/)) {
+//   $('#header-elm-container').hide()
+// }
 
 // MP/EP
 // if (path == "/") { window.location.href = am ? "/mp" : "/ep" }
@@ -1677,11 +1677,12 @@ if (path.match(/mindex/)) {
 
 // grr - match doesn't match utf8 codes, must find alt solution
 
+var elmHeaderDiv = document.getElementById('header-elm-container'),
+    elmHeaderApp = Elm.Header.embed(elmHeaderDiv);
+
 if (path == "/" || path.match(/midday|^mp|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|$ep(?!i)|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/)) {
   (function () {
-    var channel = _socket2.default.channel("iphod:readings"),
-        elmHeaderDiv = document.getElementById('header-elm-container'),
-        elmHeaderApp = Elm.Header.embed(elmHeaderDiv);
+    var channel = _socket2.default.channel("iphod:readings");
 
     elmHeaderApp.ports.portConfig.send(init_config_model());
 
@@ -1718,7 +1719,6 @@ if (path == "/" || path.match(/midday|^mp|morningPrayer|mp_cutrad|mp_cusimp|晨�
 // landing page, calendar
 
 if (path.match(/calendar/) || path.match(/mindex/)) {
-  var elmHeaderDiv, elmHeaderApp;
   var elmMindexDiv, elmMindexApp, elmMPanelDiv, elmMPanelApp;
   var elmCalDiv, elmCalApp;
   var this_service, this_date;
@@ -1764,9 +1764,8 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
 
     // header
 
-    elmHeaderDiv = document.getElementById('header-elm-container');
-    elmHeaderApp = Elm.Header.embed(elmHeaderDiv);
-
+    //  var elmHeaderDiv = document.getElementById('header-elm-container')
+    //    , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
 
     elmHeaderApp.ports.sendEmail.subscribe(function (email) {
       channel.push("request_send_email", email);
@@ -23921,12 +23920,88 @@ var _user$project$Header$translations = function (model) {
 					]))
 			]));
 };
+var _user$project$Header$timeofdeath = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/timeofdeath')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Time of Death')
+					]))
+			]));
+};
+var _user$project$Header$tothesick = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/tothesick')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('To The Sick')
+					]))
+			]));
+};
+var _user$project$Header$reconciliation = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/reconciliation')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Reconciliation')
+					]))
+			]));
+};
+var _user$project$Header$family = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/family')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Family Prayer')
+					]))
+			]));
+};
 var _user$project$Header$compline = function (model) {
 	return A2(
 		_elm_lang$html$Html$a,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$href('compline')
+				_elm_lang$html$Html_Attributes$href('/compline')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -23945,7 +24020,7 @@ var _user$project$Header$evening = function (model) {
 		_elm_lang$html$Html$a,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$href('ep')
+				_elm_lang$html$Html_Attributes$href('/ep')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -23964,7 +24039,7 @@ var _user$project$Header$midday = function (model) {
 		_elm_lang$html$Html$a,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$href('midday')
+				_elm_lang$html$Html_Attributes$href('/midday')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -23983,7 +24058,7 @@ var _user$project$Header$morning = function (model) {
 		_elm_lang$html$Html$a,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$href('mp')
+				_elm_lang$html$Html_Attributes$href('/morningPrayer')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -24002,7 +24077,7 @@ var _user$project$Header$currentOffice = function (model) {
 		_elm_lang$html$Html$a,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$href('office')
+				_elm_lang$html$Html_Attributes$href('/office')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -24097,6 +24172,46 @@ var _user$project$Header$offices = function (model) {
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_user$project$Header$compline(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$family(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$reconciliation(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$tothesick(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$timeofdeath(model)
 							]))
 					]))
 			]));

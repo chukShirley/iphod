@@ -29,7 +29,6 @@ $(document).on('input', 'textarea', function () {
 
 
 $("button.more-options").click( function() {
-  console.log("MORE OPTIONS")
   $("ul#header-options").toggleClass("responsive");
 })
 
