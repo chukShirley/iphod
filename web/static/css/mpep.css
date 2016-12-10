@@ -4,6 +4,52 @@
 body {
   width: 35em;
 }
+@media screen and (width: 800px) { 
+  body { 
+    width: 31em; 
+    font-size: 24px;
+  } 
+}
+@media screen and (width: 768px) { body { width: 30em; } }
+@media screen and (width: 414px) { 
+  body { 
+    font-size: 14px;
+    width: 29em; 
+  } 
+}
+@media screen and (width: 412px) { 
+  body { 
+    width: 30em;
+    font-size: 14px;
+  } 
+}
+@media screen and (width: 375px) { 
+  body { 
+    width: 27em;
+    font-size: 14px;
+  } 
+}
+@media screen and (width: 360px) { 
+  body { 
+    width: 26em;
+    font-size: 14px;
+  } 
+}
+@media screen and (width: 320px) { 
+  body { 
+    width: 23em;
+    font-size: 14px;
+  } 
+}
+#header     { 
+  position: relative;
+  width: 100%; 
+}
+#container  { 
+  position: relative;
+  width: 100%;
+}
+ 
 h3 {
   margin-bottom: 0.2em;
 }
@@ -11,21 +57,8 @@ h3 {
   font-family: "Georgia, Times New Roman, Times, serif";
   font-size: 1em;
   margin-left: 2em;
-  width: 35em;
+  width: 93%;
 }
-
-/*
-@media screen and (min-width: 768px) { 
-  .mpep { width: 30em; } 
-  #header-elm-container {
-    display: block;
-  }
-}
-@media screen and (min-width: 940px) { 
-  .mpep { width: 32em; } 
-  #header-elm-container: block;
-}
-*/
 
 div#chat-container {
   width: 36%;
@@ -295,7 +328,7 @@ div.text {
   display: none;
   position: relative;
   line-height: 1.2em;
-  width: 30em;
+  width: 90%;
   margin: 1em 0;
   }
 
@@ -412,15 +445,12 @@ p.family_section_title{
 */
 
 /* MOBILE WITH 320PX MAX ------------------------ */
-@media screen and (max-width: 320px) { 
+@media screen and (max-width: 414px) { 
   .home_link span {
     display: block;
   }
-  body { width: 20em; }
-  #header { width: 20em; }
-  #container { width: 20em; }
   .mpep {
-    width: 100%;
+    width: 93%;
     margin-left: 0.5em;
   }
   .pb_vs_indent { padding: 0 0 0 1em;}
@@ -433,13 +463,24 @@ p.family_section_title{
   }
   .invitatory-init {padding-right: 1em;}
   .offices {padding-bottom: 0;}
-  .mpep { width: 17em; } 
   button.more-options{
     display: block;
     position: absolute;
-    top: 5px;
+    top: -1.5em;
     right: 5%;
 }
+  @media screen and (width: 375px) {
+    button.more-options{ top: -0.2em;}
+  }
+  @media screen and (width: 414px) {
+    button.more-options{ top: -0.5em;}
+  }
+  @media screen and (width: 412px) {
+    button.more-options{ top: -0.2em;}
+  }
+  @media screen and (width: 360px) {
+    button.more-options{ top: 0em;}
+  }
   div#chat-container {
     margin-left: 5%;
     width: 90%;
