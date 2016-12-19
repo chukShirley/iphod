@@ -1798,6 +1798,7 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
       });
 
       $("#next-sunday-button").click(function () {
+        console.log("NEX SUNDAY 258");
         channel.push("get_text", ["NextSunday", new Date().toDateString()]);
       });
 
@@ -1897,6 +1898,7 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
     });
 
     $("#next-sunday-button").click(function () {
+      console.log("NEX SUNDAY 383");
       channel.push("get_text", ["NextSunday", new Date().toDateString()]);
     });
 

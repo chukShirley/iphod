@@ -5,9 +5,7 @@
  */
 @import "menu_styles.css"
 @import "print.css"
-@import "aural.css"
 @import "mpep.css"
-@import "mobile.css"
 
 /* Space out content a bit */
 body, form, ul, table {
@@ -17,8 +15,25 @@ body, form, ul, table {
   margin-left: 10px;
   margin-right: 10px;
 }
+body.calendar { width: 55em; }
 
-.home_link span { display: none; }
+@media screen and (max-width: 800px){ 
+  body.calendar { 
+    width: 98%; 
+    font-size: 0.8em;
+  } 
+}
+@media screen and (max-width: 600px) {
+  body.calendar {
+    font-size: 0.6em;
+  }
+}
+
+.home_link span { 
+  position: relative;
+  top: 1em;
+  left: -9999px;
+}
 
 /* Phoenix flash messages */
 .alert:empty { display: none; }
@@ -86,12 +101,6 @@ li.offices-item {
   background-color: #3e8e41;
 }
 
-/* Customize container */
- @media (min-width: 768px) {
-   .container {
-     max-width: 730px;
-   }
- }
 .container-narrow > hr {
   margin: 30px 0;
 }
@@ -107,9 +116,17 @@ li.offices-item {
   margin: 35px 0;
 }
 
-  #header-options {
+  #header-elm-container{
     position: relative;
-    margin-top: -1em;
+    top: -2em;
+    text-align: center;
+  }
+   {
+    #header-elm-container { display: none; }
+  }
+
+  #header-options {
+    position: relative;@media screen and (max-width: 500px)
     margin-bottom: 0;
     padding-bottom: 0.5em;
 
@@ -130,15 +147,6 @@ li.offices-item {
   }
 
 /* Responsive: Portrait tablets and up */
-@media screen and (min-width:768px) {
-  /* Remove the padding we set earlier */
-  #calendar {
-    border-collapse: collapse;
-    border: 4px solid darkblue;
-    border-radius: 8px;
-    font-size: 0.8em;
-    width: 100%;
-  }
   
   .header,
   .marketing {
@@ -163,7 +171,6 @@ li.offices-item {
   }
   
   #header {
-    /* background-image: url("/images/header.png"); */
     background-size: 17%;
     background-repeat: no-repeat;
     background-position: 0em 0em;
@@ -172,6 +179,7 @@ li.offices-item {
   }
     
   .home_link {
+    position: relative;
     background-image: url("/images/legereme.jpg");
     background-repeat: no-repeat;
     background-position: 0em 1em;
@@ -181,7 +189,13 @@ li.offices-item {
     text-indent: 100%;
     margin-top: -1em;
   }
+  @media screen and (max-width: 500px) { 
+    .home_link { background-image: none; }
+    .home_link span {
+      left: -100%;
+    }
   }
+
   #menu1 {
     z-index: 201;
   }
@@ -501,6 +515,14 @@ li.offices-item {
   
   #calendar th.mpep_link {
     border: none;
+  }
+
+  main div table#calendar{
+    margin-left: 2em;
+    width: 90%;
+  }
+  div.td_link {
+    padding-bottom: 50%;
   }
   
   
@@ -908,8 +930,6 @@ li.offices-item {
   sup {
     color: darkred;
   }
-
-@import "mobile.css"
 
 /*!
 * aural.css
@@ -5983,301 +6003,22 @@ html .ui-popup .ui-field-contain > label + .ui-flipswitch {
   }
 }
 
-/* mobile.css
-*
-*/
-@media screen and (max-width: 320px) { 
-  .mpep { width: 17em; } 
-  button.more-options{
-    display: block;
-    position: absolute;
-    top: 5px;
-    right: 5%;
-}
-  div#chat-container {
-    margin-left: 5%;
-    width: 90%;
-  }
-  #header-options {
-    margin-top: 1em;
-    display: none;
-  }
-  li.option-item { visibility: hidden; }
-  li.option-item { 
-    float: right;
-    display: inline-block;
-  }
-
-  ul#header-options.responsive { 
-    position: fixed; 
-    display: block;
-    margin-left: 55%;
-    z-index: 9;
-  }
-  ul#header-options.responsive li.option-item {
-    top: 0;
-    display: block;
-  }
-  ul#header-options.responsive li {
-    float: none;
-    display: inline;
-    visibility: visible;
-    z-index: 9;
-  }
-  ul#header-options.responsive li a {
-    display: block;
-  }
-
-  body {
-    -webkit-text-size-adjust:none;
-    font-family: "Georgia, Times New Roman, Times, serif";
-    padding: 2px;
-    color: black;
-    margin-left: 0;
-    width: 100%;
-  }
-
-  .container {
-    margin-left: 0;
-    padding-left: 0;
-    width: 100%;
-  }
-  #m-reading-container {
-    position: absolute;
-    z-index: 99;
-  }
-  .panel-header {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-  }
-  .panel-paragraph {
-    margin-bottom: -9%;
-    padding: 0;
-  }
-  .service-name {
-    margin-bottom: -2%;
-  }
-
-  .section-title {
-    font-size: 90%;
-    margin-bottom: -8%;
-  }
-
-  #reading-panel {
-    margin-left: 0.1em;
-    background-color: wheat;
-    border: 2px solid blueviolet;
-  }
-  #reading-menu {
-    padding-left: 4%;
-    width: 300px;
-  }
-  #reading-menu li {
-    list-style: none;
-  }
-
-  .service-readings{
-    margin-top: -2%;
-  }
-
-  .passage-section {
-    margin-top: -2%;
-  }
-
-  .reading-li {
-    margin-top: -1%;
-    margin-left: 12%;
-  }
-  .m-options1 ul, .m-seasons ul{
-    text-align: center;
-  }
-  .m-options1 ul li, .m-seasons ul li{
-    display: inline;
-    text-decoration: none;
-    padding: 0 3%;
-  }
-
-  #calendar {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
-  }
-  #calendar td {
-    border: 1px solid black;
-  }
-  #calendar li, #seasons li, #days_of_week li {
-    display: inline;
-    text-decoration: none;
-  }
-  #month li {
-    display: inline;
-    text-decoration: none;
-  }
-  .td_link {
-    height: 2em;
-    width: 100%;
-  }
-
-  .home_link {
-    /* background-image: url("/images/legereme.jpg"); */
-    background-repeat: no-repeat;
-    color: darkred;
-  }
-  br {
-    display: none;
-  }
-  p {
-    margin: 2%;
-  }
-  .italic {
-    font-style: italic;
-  }
-h3 {
-  margin-top: 2%;
-  margin-bottom: -1%;
-}
-
-.today {
-  border: 2px solid black;
-}
-  .day_white, .day_gold {
-  /* Permalink - use to edit and share this gradient: 
-    http://colorzilla.com/gradient-editor/#fefcea+0,f1da36+100;Gold+3D */
-    background: #fefcea; /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #fefcea 0%, #f1da36 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #fefcea 0%,#f1da36 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #fefcea 0%,#f1da36 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefcea', endColorstr='#f1da36',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-  }
-  
-  .day_green {
-  /* Permalink - use to edit and share this gradient: 
-    http://colorzilla.com/gradient-editor/#f6f9ea+0,8ab66b+50,398235+100 */
-    background: #f6f9ea; /* Old browsers */
-    background: -moz-linear-gradient(-45deg,  #f6f9ea 0%, #8ab66b 50%, #398235 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg,  #f6f9ea 0%,#8ab66b 50%,#398235 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg,  #f6f9ea 0%,#8ab66b 50%,#398235 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f9ea', endColorstr='#398235',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-  }
-  
-  .day_blue {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#87e0fd+1,87e0fd+1,e8f7fc+1,53cbf1+69,53cbf1+69,05abe0+100 */
-  background: #87e0fd; /* Old browsers */
-  background: -moz-linear-gradient(-45deg,  #87e0fd 1%, #87e0fd 1%, #e8f7fc 1%, #53cbf1 69%, #53cbf1 69%, #05abe0 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg,  #87e0fd 1%,#87e0fd 1%,#e8f7fc 1%,#53cbf1 69%,#53cbf1 69%,#05abe0 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg,  #87e0fd 1%,#87e0fd 1%,#e8f7fc 1%,#53cbf1 69%,#53cbf1 69%,#05abe0 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#87e0fd', endColorstr='#05abe0',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-  }
-  
-  .day_violet {
-  /* Permalink - use to edit and share this gradient: 
-    http://colorzilla.com/gradient-editor/#f2f2f2+0,c85ec7+54,a849a3+100 */
-    background: #f2f2f2; /* Old browsers */
-    background: -moz-linear-gradient(-45deg,  #f2f2f2 0%, #c85ec7 54%, #a849a3 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg,  #f2f2f2 0%,#c85ec7 54%,#a849a3 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg,  #f2f2f2 0%,#c85ec7 54%,#a849a3 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2f2f2', endColorstr='#a849a3',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-  }
-  
-  .day_rose {
-  /* Permalink - use to edit and share this gradient: 
-    http://colorzilla.com/gradient-editor/#ffd1e8+0,ef017c+100 */
-    background: #ffd1e8; /* Old browsers */
-    background: -moz-linear-gradient(-45deg,  #ffd1e8 0%, #ef017c 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg,  #ffd1e8 0%,#ef017c 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg,  #ffd1e8 0%,#ef017c 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffd1e8', endColorstr='#ef017c',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-  }
-  
-  .day_red {
-  /* Permalink - use to edit and share this gradient: 
-    http://colorzilla.com/gradient-editor/#ffecea+0,cf0404+100 */
-    background: #ffecea; /* Old browsers */
-    background: -moz-linear-gradient(-45deg,  #ffecea 0%, #cf0404 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg,  #ffecea 0%,#cf0404 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg,  #ffecea 0%,#cf0404 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    /* filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffecea', endColorstr='#cf0404',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-  }
-
-  #table-rollup {
-    text-align: center;
-  }
-  
-} /* end of @media screen and (min-device-width: 320px) and (max-device-width: 568) */
-
-/* TABLET COMPUTERS -------------------------------- */
-@media screen and (min-width: 641px) {
-  #calendar {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
-  }
-  .td_link {
-    height: 3em;
-    width: 100%;
-  }
-}
-@media screen and (min-width: 961px) {
-  #calendar {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    border-collapse: collapse;
-  }
-  .td_link {
-    height: 3em;
-    width: 100%;
-  }
-}
 /*!
  * styles for morning and evening prayer
 */
 body {
   width: 35em;
+  font-size: 14px;
 }
-@media screen and (width: 800px) { 
-  body { 
-    width: 31em; 
-    font-size: 24px;
-  } 
+@media screen and (max-width: 550px) { 
+  body { width: 92%; } 
 }
-@media screen and (width: 768px) { body { width: 30em; } }
-@media screen and (width: 414px) { 
-  body { 
-    font-size: 14px;
-    width: 29em; 
-  } 
-}
-@media screen and (width: 412px) { 
-  body { 
-    width: 30em;
-    font-size: 14px;
-  } 
-}
-@media screen and (width: 375px) { 
-  body { 
-    width: 27em;
-    font-size: 14px;
-  } 
-}
-@media screen and (width: 360px) { 
-  body { 
-    width: 26em;
-    font-size: 14px;
-  } 
-}
-@media screen and (width: 320px) { 
-  body { 
-    width: 23em;
-    font-size: 14px;
-  } 
-}
+
 #header     { 
   position: relative;
   width: 100%; 
+  top: -1em;
+  padding-bottom: 1em;
 }
 #container  { 
   position: relative;
@@ -6288,6 +6029,8 @@ h3 {
   margin-bottom: 0.2em;
 }
 .mpep {
+  position: relative;
+  top: -3em;
   font-family: "Georgia, Times New Roman, Times, serif";
   font-size: 1em;
   margin-left: 2em;
@@ -6421,6 +6164,7 @@ li.ps_second_cont {
   font-style: italic;
   padding: 0 2em 0 0;
 }
+
 .vspeaker_says {
   position: absolute;
   left: 10em;
@@ -6524,25 +6268,29 @@ ul.versicals {
   padding-left: 0em;
   margin-top: 0em;
 }
+
 li.speaker {
   float: left;
   line-height: 1.2em;
   display: inline;
-  width: 18%;
+  width: 25%;
   font-style: italic;  
 }
+
 .says {
   float: left;
   line-height: 1.2em;
   display: inline;
-  width: 82%;
+  width: 75%;
 }
+
 li.ref-button {
   float: left;
   line-height: 1.2em;
   display: inline;
   width: 10em;
 }
+
 button.text_button {
   font-size: 0.9em;
   cursor: pointer;
@@ -6553,11 +6301,13 @@ button.text_button {
   color: honeydew;
   margin: 0.2em;
 }
+
 li.ref-desc {
   float: left;
   line-height: 1.2em;
   display: inline;
 }
+
 div.text {
   display: none;
   position: relative;
@@ -6571,6 +6321,7 @@ li.litany1 {
   margin: 0.8em 0;
   line-height: 0.5em;
 }
+
 li.litany2 {
   position: relative;
   top: -0.2em;
@@ -6579,12 +6330,14 @@ li.litany2 {
   padding-bottom: 0.5em;
   line-height: 1em;
 }
+
 .extra_indent {
   float: left;
   line-height: 1.2em;
   display: inline;
   width: 30%;
 }
+
 .extra_indent_says {
   float: left;
   line-height: 1.2em;
@@ -6601,12 +6354,15 @@ li.litany2 {
    padding-top: 1em;
    font-style: italic;
 }
+
 .comp_scripture {
   padding-bottom: 1em;
 }
+
 .comp_collect {
   padding-bottom: 1em;
 }
+
 .recon-scripture {
   padding-top: 0.5em;
   width: 100%;
@@ -6621,10 +6377,12 @@ ul.appro_readings{
   display: inline-block;
   padding-bottom: 1em;
 }
+
 .alt_readings p {
   display: none;
   padding-top: 1em;
 }
+
 .alt_readings-button{ /* dropbtn */
   padding: 0.5em;
   font-size: 0.8em;
@@ -6633,6 +6391,7 @@ ul.appro_readings{
   background-color: white;
   border: solid 1px black;
 }
+
 .alt_readings-options { /* dropdown-content */
   position: absolute;
   display: none;
@@ -6644,6 +6403,7 @@ ul.appro_readings{
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   cursor: pointer;
 }
+
 .alt_readings-options li{ /* dropdown-content a */
   color: black;
   padding: 0.5em 1em;
@@ -6656,16 +6416,19 @@ p.song_sim_1{
   text-indent: -2em;
   width: 100%;
 }
+
 p.song_sim_2{
   margin-left: 2em;
   text-indent: -2em;
   width: 100%;
 }
+
 p.family_section_title{
   padding-top: 1em;
   font-size: 1.2em;
   font-style: italic;
 }
+
 /*
 .alt_readings-options li:hover { 
   background-color: #f1f1f1 
@@ -6678,150 +6441,158 @@ p.family_section_title{
 }
 */
 
-/* MOBILE WITH 320PX MAX ------------------------ */
-@media screen and (max-width: 414px) { 
-  .home_link span {
-    display: block;
-  }
+/*
   .mpep {
     width: 93%;
     margin-left: 0.5em;
   }
-  .pb_vs_indent { padding: 0 0 0 1em;}
-  h3 { 
-    font-size: 1em;
-  }
-  div.text {
-    width: 18em;
-    margin-left: -1em;
-  }
-  .invitatory-init {padding-right: 1em;}
-  .offices {padding-bottom: 0;}
-  button.more-options{
-    display: block;
-    position: absolute;
-    top: -1.5em;
-    right: 5%;
-}
-  @media screen and (width: 375px) {
-    button.more-options{ top: -0.2em;}
-  }
-  @media screen and (width: 414px) {
-    button.more-options{ top: -0.5em;}
-  }
-  @media screen and (width: 412px) {
-    button.more-options{ top: -0.2em;}
-  }
-  @media screen and (width: 360px) {
-    button.more-options{ top: 0em;}
-  }
-  div#chat-container {
-    margin-left: 5%;
-    width: 90%;
-  }
-  li.option-item { visibility: hidden; }
-  li.option-item { 
-    float: right;
-    display: inline-block;
-    margin-bottom: 0.5em;
+*/
+  @media screen and (max-width: 500px) {
+    .mpep { margin-top: 1em;}
+    .pb_vs_indent { padding: 0 0 0 1em;}
+    h3 { 
+      font-size: 1em;
+    }
+    div.text {
+      width: 18em;
+      margin-left: -1em;
+    }
+    .invitatory-init {padding-right: 1em;}
+    .offices {padding-bottom: 0;}
+    
+    div.m-options1 {
+      position: relative;
+      top: -5em;
+    }
+    button.more-options {
+      display: block;
+      position: relative;
+      float: right;
+      right: 2%;
+      margin-top: -4.5em;
+      text-align: center;
+    }
+    div#chat-container {
+      margin-left: 5%;
+      width: 90%;
+    }
+    li.option-item { visibility: hidden; }
+    li.option-item { 
+      float: right;
+      display: inline-block;
+      margin-bottom: 0.5em;
+    }
+  
+    .offices-options {
+      position: absolute;
+      top: -3em;
+      left: 7em;
+      padding-left: 1em;
+      min-width: 9em;
+      background-color: floralwhite;
+    }
+  
+    ul#header-offices-options li { 
+      position: fixed; 
+      display: block;
+      margin-left: 0;
+      top: 0.8em;
+      z-index: 9;
+      padding-left: 1em;
+      min-width: 7.5em;
+      background-color: #f9f9f9;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+  
+    ul#header-options.responsive {
+      margin-left: 0;
+      position: fixed;
+      display: block;
+      margin-left: 0;
+      top: 0.8em;
+      z-index: 9;
+      padding-left: 1em;
+      min-width: 7.5em;
+      background-color: floralwhite;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+  
+    ul#header-options.responsive li.option-item {
+      margin-top: 1em;
+      display: block;
+      line-height: 1em;
+    }
+    ul#header-options.responsive li.offices-item {
+      top: 0;
+      display: block;
+      margin-top: 0em;
+    }
+    ul#header-options.responsive li {
+      float: none;
+      display: inline;
+      visibility: visible;
+      z-index: 9;
+      line-height: 1em;
+    }
+    ul#header-options.responsive li a {
+      display: block;
+    }
+    li.offices-item button{
+      line-height: 1em;
+      padding: 0;
+    }
+    ul.versicals {
+      width: 100%;
+    }
+    li.litany1 {
+      position: relative;
+      padding-left: 2em;
+      text-indent: -1.5em;
+      line-height: 1em;
+      margin-top: 0;
+      margin-bottom: 0.2em;
+    }
+    li.litany2 {
+      position: relative;
+      padding-left: 2em;
+      padding-top: 0em; 
+      text-indent: -1.5em;
+      line-height: 1em;
+      margin-top: 0;
+      margin-bottom: 0.2em;
+    }
+  
+  /*
+    li.speaker {width: 25%;}
+    li.says {width: 75%;}
+  */
+  
+    .canticle { padding-bottom: 0;}
+    ul.psalm { 
+      width: 100%;
+      margin-top: 0;
+    }
+    .ps_first {
+      width: 92%;
+    }
+    .ps_second {
+      padding-left: 1em;
+      text-indent: -0.5em;
+      width: 90%;
+    }
+    li.ps_second_cont { padding-left: 1.5em; }
+
+    @media screen and (max-width: 320) {
+      .mpep { margin-top: 2em;}
+    }
+    @media screen and (max-width: 320px) {
+      .mpep { margin-top: 2.5em;}
+      button.more-options { top: -0.5em;}
+    }
   }
 
-  .offices-options {
-    position: absolute;
-    top: -3em;
-    left: 7em;
-    padding-left: 1em;
-    min-width: 9em;
-    background-color: floralwhite;
-  }
-
-  ul#header-offices-options li { 
-    position: fixed; 
-    display: block;
-    margin-left: 0;
-    top: 0.8em;
-    z-index: 9;
-    padding-left: 1em;
-    min-width: 7.5em;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    cursor: pointer;
-  }
-
-  ul#header-options.responsive {
-    margin-left: 0;
-    position: fixed;
-    display: block;
-    margin-left: 0;
-    top: 0.8em;
-    z-index: 9;
-    padding-left: 1em;
-    min-width: 7.5em;
-    background-color: floralwhite;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    cursor: pointer;
-  }
-
-  ul#header-options.responsive li.option-item {
-    margin-top: 1em;
-    display: block;
-    line-height: 1em;
-  }
-  ul#header-options.responsive li.offices-item {
-    top: 0;
-    display: block;
-    margin-top: 0em;
-  }
-  ul#header-options.responsive li {
-    float: none;
-    display: inline;
-    visibility: visible;
-    z-index: 9;
-    line-height: 1em;
-  }
-  ul#header-options.responsive li a {
-    display: block;
-  }
-  li.offices-item button{
-    line-height: 1em;
-    padding: 0;
-  }
-  ul.versicals {
-    width: 100%;
-  }
-  li.litany1 {
-    position: relative;
-    padding-left: 2em;
-    text-indent: -1.5em;
-    line-height: 1em;
-    margin-top: 0;
-    margin-bottom: 0.2em;
-  }
-  li.litany2 {
-    position: relative;
-    padding-left: 2em;
-    padding-top: 0em; 
-    text-indent: -1.5em;
-    line-height: 1em;
-    margin-top: 0;
-    margin-bottom: 0.2em;
-  }
-  li.speaker {width: 25%;}
-  li.says {width: 75%;}
-  .canticle { padding-bottom: 0;}
-  ul.psalm { 
-    width: 100%;
-    margin-top: 0;
-  }
-  .ps_first {
-    width: 92%;
-  }
-  .ps_second {
-    padding-left: 1em;
-    text-indent: -0.5em;
-    width: 90%;
-  }
-  li.ps_second_cont { padding-left: 1.5em; }
 }
 
 /*!

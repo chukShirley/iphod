@@ -3,7 +3,7 @@ defmodule Iphod.BibleVersionsController do
 
   def index(conn, _params) do
     # IEx.pry
-    render conn, "index.html"
+    render conn, "index.html", page_controller: "bible_versions"
   end
 
 #   def index(conn, params) do

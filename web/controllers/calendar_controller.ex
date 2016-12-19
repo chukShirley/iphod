@@ -68,16 +68,17 @@ defmodule Iphod.CalendarController do
     {layout, view} = if min, do: {"app.html", "mindex.html"}, else: {"desktop_app.html", "index.html"}
     conn
       |> put_layout(layout)
-      |> render(view, model: model)
+      |> render(view, model: model, page_controller: "calendar")
   end
 
   def get_month(date, service \\ "nil", this_date \\ "nil") do
     days = list_of_weeks_from begin_month(date), end_month(date)
-    %{  calendar: days,
-        month:    date |> Timex.format!("{Mfull}"),
-        year:     date |> Timex.format!("{YYYY}"),
-        service:  service,
-        date:     this_date
+    %{  calendar:   days,
+        month:      date |> Timex.format!("{Mfull}"),
+        year:       date |> Timex.format!("{YYYY}"),
+        service:    service,
+        date:       this_date,
+        controller: "calendar"
     }
   end
 

@@ -10,13 +10,13 @@ defmodule Iphod.PrayerController do
     {psalm, text} = translations(params)
     conn
       |> put_layout("app.html")
-      |> render( "mp.html", model: prayer_model("mp", psalm, text))
+      |> render( "mp.html", model: prayer_model("mp", psalm, text), page_controller: "prayer")
   end
 
   def midday(conn, _params) do
     conn
       |> put_layout("app.html")
-      |> render("midday.html")
+      |> render("midday.html", page_controller: "prayer")
   end
 
   def ep(conn, params) do
@@ -24,37 +24,37 @@ defmodule Iphod.PrayerController do
     {psalm, text} = translations(params)
     conn
       |> put_layout("app.html")
-      |> render( "ep.html", model: prayer_model("ep", psalm, text))
+      |> render( "ep.html", model: prayer_model("ep", psalm, text), page_controller: "prayer")
   end
 
   def compline(conn, _params) do
     conn
       |> put_layout("app.html")
-      |> render("compline.html")
+      |> render("compline.html", page_controller: "prayer")
   end
 
   def family(conn, _params) do
     conn
       |> put_layout("app.html")
-      |> render("family.html")
+      |> render("family.html", page_controller: "prayer")
   end
 
   def reconciliation(conn, _params) do
     conn
       |> put_layout("app.html")
-      |> render("reconciliation.html")
+      |> render("reconciliation.html", page_controller: "prayer")
   end
 
   def timeofdeath(conn, _params) do
     conn
       |> put_layout("app.html")
-      |> render("timeofdeath.html")
+      |> render("timeofdeath.html", page_controller: "prayer")
   end
 
   def tothesick(conn, _params) do
     conn
       |> put_layout("app.html")
-      |> render("tothesick.html")
+      |> render("tothesick.html", page_controller: "prayer")
   end
 
   def office(conn, params) do
@@ -70,7 +70,7 @@ defmodule Iphod.PrayerController do
       _ ->
         conn
           |> put_layout("local_office.html")
-          |> render
+          |> render(page_controller: "prayer")
     end
   end
 

@@ -27,7 +27,7 @@
     </script>
   </head>
 
-  <body>
+  <body class= <%= @page_controller %> >
     <div id="header">
       <a href= "/calendar" class="home_link">Legereme</a>
     </div>

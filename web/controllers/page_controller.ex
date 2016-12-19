@@ -2,6 +2,6 @@ defmodule Iphod.PageController do
   use Iphod.Web, :controller
 
   def index(conn, _params) do
-    render conn, "index.html"
+    render conn, "index.html", page_controller: "page"
   end
 end

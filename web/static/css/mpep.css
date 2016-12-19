@@ -3,47 +3,17 @@
 */
 body {
   width: 35em;
+  font-size: 14px;
 }
-@media screen and (width: 800px) { 
-  body { 
-    width: 31em; 
-    font-size: 24px;
-  } 
+@media screen and (max-width: 550px) { 
+  body { width: 92%; } 
 }
-@media screen and (width: 768px) { body { width: 30em; } }
-@media screen and (width: 414px) { 
-  body { 
-    font-size: 14px;
-    width: 29em; 
-  } 
-}
-@media screen and (width: 412px) { 
-  body { 
-    width: 30em;
-    font-size: 14px;
-  } 
-}
-@media screen and (width: 375px) { 
-  body { 
-    width: 27em;
-    font-size: 14px;
-  } 
-}
-@media screen and (width: 360px) { 
-  body { 
-    width: 26em;
-    font-size: 14px;
-  } 
-}
-@media screen and (width: 320px) { 
-  body { 
-    width: 23em;
-    font-size: 14px;
-  } 
-}
+
 #header     { 
   position: relative;
   width: 100%; 
+  top: -1em;
+  padding-bottom: 1em;
 }
 #container  { 
   position: relative;
@@ -54,6 +24,8 @@ h3 {
   margin-bottom: 0.2em;
 }
 .mpep {
+  position: relative;
+  top: -3em;
   font-family: "Georgia, Times New Roman, Times, serif";
   font-size: 1em;
   margin-left: 2em;
@@ -187,6 +159,7 @@ li.ps_second_cont {
   font-style: italic;
   padding: 0 2em 0 0;
 }
+
 .vspeaker_says {
   position: absolute;
   left: 10em;
@@ -290,25 +263,29 @@ ul.versicals {
   padding-left: 0em;
   margin-top: 0em;
 }
+
 li.speaker {
   float: left;
   line-height: 1.2em;
   display: inline;
-  width: 18%;
+  width: 25%;
   font-style: italic;  
 }
+
 .says {
   float: left;
   line-height: 1.2em;
   display: inline;
-  width: 82%;
+  width: 75%;
 }
+
 li.ref-button {
   float: left;
   line-height: 1.2em;
   display: inline;
   width: 10em;
 }
+
 button.text_button {
   font-size: 0.9em;
   cursor: pointer;
@@ -319,11 +296,13 @@ button.text_button {
   color: honeydew;
   margin: 0.2em;
 }
+
 li.ref-desc {
   float: left;
   line-height: 1.2em;
   display: inline;
 }
+
 div.text {
   display: none;
   position: relative;
@@ -337,6 +316,7 @@ li.litany1 {
   margin: 0.8em 0;
   line-height: 0.5em;
 }
+
 li.litany2 {
   position: relative;
   top: -0.2em;
@@ -345,12 +325,14 @@ li.litany2 {
   padding-bottom: 0.5em;
   line-height: 1em;
 }
+
 .extra_indent {
   float: left;
   line-height: 1.2em;
   display: inline;
   width: 30%;
 }
+
 .extra_indent_says {
   float: left;
   line-height: 1.2em;
@@ -367,12 +349,15 @@ li.litany2 {
    padding-top: 1em;
    font-style: italic;
 }
+
 .comp_scripture {
   padding-bottom: 1em;
 }
+
 .comp_collect {
   padding-bottom: 1em;
 }
+
 .recon-scripture {
   padding-top: 0.5em;
   width: 100%;
@@ -387,10 +372,12 @@ ul.appro_readings{
   display: inline-block;
   padding-bottom: 1em;
 }
+
 .alt_readings p {
   display: none;
   padding-top: 1em;
 }
+
 .alt_readings-button{ /* dropbtn */
   padding: 0.5em;
   font-size: 0.8em;
@@ -399,6 +386,7 @@ ul.appro_readings{
   background-color: white;
   border: solid 1px black;
 }
+
 .alt_readings-options { /* dropdown-content */
   position: absolute;
   display: none;
@@ -410,6 +398,7 @@ ul.appro_readings{
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   cursor: pointer;
 }
+
 .alt_readings-options li{ /* dropdown-content a */
   color: black;
   padding: 0.5em 1em;
@@ -422,16 +411,19 @@ p.song_sim_1{
   text-indent: -2em;
   width: 100%;
 }
+
 p.song_sim_2{
   margin-left: 2em;
   text-indent: -2em;
   width: 100%;
 }
+
 p.family_section_title{
   padding-top: 1em;
   font-size: 1.2em;
   font-style: italic;
 }
+
 /*
 .alt_readings-options li:hover { 
   background-color: #f1f1f1 
@@ -444,148 +436,156 @@ p.family_section_title{
 }
 */
 
-/* MOBILE WITH 320PX MAX ------------------------ */
-@media screen and (max-width: 414px) { 
-  .home_link span {
-    display: block;
-  }
+/*
   .mpep {
     width: 93%;
     margin-left: 0.5em;
   }
-  .pb_vs_indent { padding: 0 0 0 1em;}
-  h3 { 
-    font-size: 1em;
-  }
-  div.text {
-    width: 18em;
-    margin-left: -1em;
-  }
-  .invitatory-init {padding-right: 1em;}
-  .offices {padding-bottom: 0;}
-  button.more-options{
-    display: block;
-    position: absolute;
-    top: -1.5em;
-    right: 5%;
-}
-  @media screen and (width: 375px) {
-    button.more-options{ top: -0.2em;}
-  }
-  @media screen and (width: 414px) {
-    button.more-options{ top: -0.5em;}
-  }
-  @media screen and (width: 412px) {
-    button.more-options{ top: -0.2em;}
-  }
-  @media screen and (width: 360px) {
-    button.more-options{ top: 0em;}
-  }
-  div#chat-container {
-    margin-left: 5%;
-    width: 90%;
-  }
-  li.option-item { visibility: hidden; }
-  li.option-item { 
-    float: right;
-    display: inline-block;
-    margin-bottom: 0.5em;
+*/
+  @media screen and (max-width: 500px) {
+    .mpep { margin-top: 1em;}
+    .pb_vs_indent { padding: 0 0 0 1em;}
+    h3 { 
+      font-size: 1em;
+    }
+    div.text {
+      width: 18em;
+      margin-left: -1em;
+    }
+    .invitatory-init {padding-right: 1em;}
+    .offices {padding-bottom: 0;}
+    
+    div.m-options1 {
+      position: relative;
+      top: -5em;
+    }
+    button.more-options {
+      display: block;
+      position: relative;
+      float: right;
+      right: 2%;
+      margin-top: -4.5em;
+      text-align: center;
+    }
+    div#chat-container {
+      margin-left: 5%;
+      width: 90%;
+    }
+    li.option-item { visibility: hidden; }
+    li.option-item { 
+      float: right;
+      display: inline-block;
+      margin-bottom: 0.5em;
+    }
+  
+    .offices-options {
+      position: absolute;
+      top: -3em;
+      left: 7em;
+      padding-left: 1em;
+      min-width: 9em;
+      background-color: floralwhite;
+    }
+  
+    ul#header-offices-options li { 
+      position: fixed; 
+      display: block;
+      margin-left: 0;
+      top: 0.8em;
+      z-index: 9;
+      padding-left: 1em;
+      min-width: 7.5em;
+      background-color: #f9f9f9;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+  
+    ul#header-options.responsive {
+      margin-left: 0;
+      position: fixed;
+      display: block;
+      margin-left: 0;
+      top: 0.8em;
+      z-index: 9;
+      padding-left: 1em;
+      min-width: 7.5em;
+      background-color: floralwhite;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+  
+    ul#header-options.responsive li.option-item {
+      margin-top: 1em;
+      display: block;
+      line-height: 1em;
+    }
+    ul#header-options.responsive li.offices-item {
+      top: 0;
+      display: block;
+      margin-top: 0em;
+    }
+    ul#header-options.responsive li {
+      float: none;
+      display: inline;
+      visibility: visible;
+      z-index: 9;
+      line-height: 1em;
+    }
+    ul#header-options.responsive li a {
+      display: block;
+    }
+    li.offices-item button{
+      line-height: 1em;
+      padding: 0;
+    }
+    ul.versicals {
+      width: 100%;
+    }
+    li.litany1 {
+      position: relative;
+      padding-left: 2em;
+      text-indent: -1.5em;
+      line-height: 1em;
+      margin-top: 0;
+      margin-bottom: 0.2em;
+    }
+    li.litany2 {
+      position: relative;
+      padding-left: 2em;
+      padding-top: 0em; 
+      text-indent: -1.5em;
+      line-height: 1em;
+      margin-top: 0;
+      margin-bottom: 0.2em;
+    }
+  
+  /*
+    li.speaker {width: 25%;}
+    li.says {width: 75%;}
+  */
+  
+    .canticle { padding-bottom: 0;}
+    ul.psalm { 
+      width: 100%;
+      margin-top: 0;
+    }
+    .ps_first {
+      width: 92%;
+    }
+    .ps_second {
+      padding-left: 1em;
+      text-indent: -0.5em;
+      width: 90%;
+    }
+    li.ps_second_cont { padding-left: 1.5em; }
+
+    @media screen and (max-width: 320) {
+      .mpep { margin-top: 2em;}
+    }
+    @media screen and (max-width: 320px) {
+      .mpep { margin-top: 2.5em;}
+      button.more-options { top: -0.5em;}
+    }
   }
 
-  .offices-options {
-    position: absolute;
-    top: -3em;
-    left: 7em;
-    padding-left: 1em;
-    min-width: 9em;
-    background-color: floralwhite;
-  }
-
-  ul#header-offices-options li { 
-    position: fixed; 
-    display: block;
-    margin-left: 0;
-    top: 0.8em;
-    z-index: 9;
-    padding-left: 1em;
-    min-width: 7.5em;
-    background-color: #f9f9f9;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    cursor: pointer;
-  }
-
-  ul#header-options.responsive {
-    margin-left: 0;
-    position: fixed;
-    display: block;
-    margin-left: 0;
-    top: 0.8em;
-    z-index: 9;
-    padding-left: 1em;
-    min-width: 7.5em;
-    background-color: floralwhite;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    cursor: pointer;
-  }
-
-  ul#header-options.responsive li.option-item {
-    margin-top: 1em;
-    display: block;
-    line-height: 1em;
-  }
-  ul#header-options.responsive li.offices-item {
-    top: 0;
-    display: block;
-    margin-top: 0em;
-  }
-  ul#header-options.responsive li {
-    float: none;
-    display: inline;
-    visibility: visible;
-    z-index: 9;
-    line-height: 1em;
-  }
-  ul#header-options.responsive li a {
-    display: block;
-  }
-  li.offices-item button{
-    line-height: 1em;
-    padding: 0;
-  }
-  ul.versicals {
-    width: 100%;
-  }
-  li.litany1 {
-    position: relative;
-    padding-left: 2em;
-    text-indent: -1.5em;
-    line-height: 1em;
-    margin-top: 0;
-    margin-bottom: 0.2em;
-  }
-  li.litany2 {
-    position: relative;
-    padding-left: 2em;
-    padding-top: 0em; 
-    text-indent: -1.5em;
-    line-height: 1em;
-    margin-top: 0;
-    margin-bottom: 0.2em;
-  }
-  li.speaker {width: 25%;}
-  li.says {width: 75%;}
-  .canticle { padding-bottom: 0;}
-  ul.psalm { 
-    width: 100%;
-    margin-top: 0;
-  }
-  .ps_first {
-    width: 92%;
-  }
-  .ps_second {
-    padding-left: 1em;
-    text-indent: -0.5em;
-    width: 90%;
-  }
-  li.ps_second_cont { padding-left: 1.5em; }
 }
