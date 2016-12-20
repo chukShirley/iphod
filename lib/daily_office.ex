@@ -635,7 +635,7 @@ defmodule DailyReading do
                               },
               "Tuesday" =>    %{title: "Tuesday",
                               colors: ["violet", "blue"],
-                              mp1: [%{style: "req", read: "Isa 52:13-end 53"}],
+                              mp1: [%{style: "req", read: "Isa 52:13-end, 53"}],
                               mp2: [%{style: "req", read: "Mark 11:1-26"}],
                               ep1: [%{style: "req", read: "Isa 54"}],
                               ep2: [%{style: "req", read: "Jude 17-end"}]
