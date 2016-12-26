@@ -116,6 +116,7 @@ defmodule Iphod.PrayerController do
 
   def prayer_model("mp", psalm_translation, text_translation) do
     day = Date.now(@tz)
+    day_of_week = day |> Timex.weekday |> Timex.day_name
     {sent, ref} = DailyReading.opening_sentence("mp", day)
     dreading = DailyReading.readings(day)
     dreading
@@ -126,12 +127,14 @@ defmodule Iphod.PrayerController do
       |> Map.put(:mpp, lesson_with_body(dreading[:mpp], psalm_translation))
       |> Map.put(:mp1, lesson_with_body(dreading[:mp1], text_translation))
       |> Map.put(:mp2, lesson_with_body(dreading[:mp2], text_translation))
-      |> Map.put(:ot_canticle, put_canticle("mp", "ot", dreading.season, dreading.day))
-      |> Map.put(:nt_canticle, put_canticle("mp", "nt", dreading.season, dreading.day))
+      |> Map.put(:ot_canticle, put_canticle("mp", "ot", dreading.season, day_of_week))
+      |> Map.put(:nt_canticle, put_canticle("mp", "nt", dreading.season, day_of_week))
       |> Map.put(:collect_of_week, put_collect_of_week(dreading))
+      |> Map.put(:day, day_of_week)
   end
   def prayer_model("ep", psalm_translation, text_translation) do
     day = Date.now(@tz)
+    day_of_week = day |> Timex.weekday |> Timex.day_name
     {sent, ref} = DailyReading.opening_sentence("ep", day)
     dreading = DailyReading.readings(day)
     dreading
@@ -142,9 +145,10 @@ defmodule Iphod.PrayerController do
       |> Map.put(:epp, lesson_with_body(dreading[:epp], psalm_translation))
       |> Map.put(:ep1, lesson_with_body(dreading[:ep1], text_translation))
       |> Map.put(:ep2, lesson_with_body(dreading[:ep2], text_translation))
-      |> Map.put(:ot_canticle, put_canticle("ep", "ot", dreading.season, dreading.day))
-      |> Map.put(:nt_canticle, put_canticle("ep", "nt", dreading.season, dreading.day))
+      |> Map.put(:ot_canticle, put_canticle("ep", "ot", dreading.season, day_of_week))
+      |> Map.put(:nt_canticle, put_canticle("ep", "nt", dreading.season, day_of_week))
       |> Map.put(:collect_of_week, put_collect_of_week(dreading))
+      |> Map.put(:day, day_of_week)
   end
 
   def invitatory_canticle(dreading) do
