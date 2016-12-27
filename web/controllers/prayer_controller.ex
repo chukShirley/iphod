@@ -4,6 +4,7 @@ defmodule Iphod.PrayerController do
   use Timex
   import BibleText, only: [lesson_with_body: 2]
   @tz "America/Los_Angeles"
+  @dayNames ~w(Monday Tuesday Wednesday Thursday Friday Saturday Sunday)
 
   def mp(conn, params) do
     select_language params
@@ -205,7 +206,11 @@ defmodule Iphod.PrayerController do
 
   def put_collect_of_week(dreading) do
     c = 
-      Collects.get(dreading.season, dreading.week).collects
+      if @dayNames |> Enum.member?(dreading.title) do
+        Collects.get(dreading.season, dreading.week).collects
+      else
+        Collects.get("redLetter", dreading.day).collects
+      end
       |> Enum.random
     c.collect
   end
