@@ -62,7 +62,8 @@
 
   <p class= "rubric"><%= dgettext "ep", "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."%></p>
   <br/>
-  <%= render "_#{@model.ot_canticle}.html" %>
+  <%# <%= render "_#{@model.ot_canticle}.html" %> 
+  <%= render "_nunc_dimittis.html" %>
   <br/>
 
   <p><%= dgettext "ep", "The Second Lesson from"%>
@@ -75,7 +76,8 @@
   </p>
   <p id="reading2" class= "reading"> <%= @model.ep2 |> text_list_to_html %></p>
   <br/>
-  <%= render "_#{@model.nt_canticle}.html" %>
+  <%# <%= render "_#{@model.nt_canticle}.html" %>
+  <%= render "_magnificat.html" %>
   <br/>
   <p class= "rubric"><%= dgettext "ep", "If desired, a sermon on the Evening Lessons may be preached."%></p>
   <%= render "_apostles_creed.html" %>
