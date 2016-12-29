@@ -95,7 +95,7 @@
   <br/>
   <p class= "section"><%= dgettext "ep", "The Collect of the Day"%></p>
   <p><%= @model.collect_of_week %></p>
-  <%= render "_mp_#{@model.day}.html" %> <%# collect for this day %>
+  <%= render "_ep_#{@model.day}.html" %> <%# collect for this day %>
   <%= render "_ep_for_mission.html" %>
   <%= render "_general_thanksgiving.html" %>
   <%= render "_chrysostom.html" %>
