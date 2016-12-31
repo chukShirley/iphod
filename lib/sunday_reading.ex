@@ -95,6 +95,8 @@ defmodule SundayReading do
     |> Map.put_new(:section, section)
     |> Map.put_new(:body, "")
     |> Map.put_new(:show, false)
+    |> Map.put_new(:show_fn, true)
+    |> Map.put_new(:show_vn, true)
     |> Map.put_new(:version, "")
   end
 

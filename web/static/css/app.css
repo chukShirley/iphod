@@ -242,7 +242,14 @@ li.offices-item {
     font-size: 0.8em;
     cursor: pointer;
   }
+  button.quick-options {
+    box-shadow: -2px 3px 8px #888888;
+    border-radius: 5px;
+    border: solid 2px darkred;
+    background-color: darkred;
+    color: honeydew;
 
+  }
   .collect-button {
     position: relative;
     top: -1em;
@@ -485,20 +492,11 @@ li.offices-item {
     margin-bottom: 0;
   }
   
-  .mpep_link, .season_link{
-    text-decoration: none;
-    font-size: 1.3em;
-  }
   
   .reading_group {
     display: inline;
   }
   
-  #calendar th {
-    border: 1px solid black;
-    vertical-align: top;
-    width: 14%;
-  }
   #calendar td {
     border: 1px solid black;
     text-align: left;
@@ -513,18 +511,43 @@ li.offices-item {
   
   #calendar td.today {border: 3px solid black;}
   
+  #calendar td ul {
+    padding-left: 0;
+    text-align: center;
+  }
+
+  #calendar th {
+    border: 1px solid black;
+    vertical-align: top;
+    width: 14%;
+  }
+
   #calendar th.mpep_link {
+    text-decoration: none;
+    font-size: 1em;
     border: none;
   }
 
+  th.cal_move_month a {
+    width: 100%;
+    display: block;
+  }
+  
+  #calendar th.season_link{
+    text-decoration: none;
+    font-size: 1em;
+    border-style: none;
+  }
   main div table#calendar{
+    position: relative;
+    top: -4em;
     margin-left: 2em;
     width: 90%;
   }
+
   div.td_link {
     padding-bottom: 50%;
   }
-  
   
   .td-top, .td-bottom { position: relative; }
   .td-top { 
@@ -533,18 +556,9 @@ li.offices-item {
   }
   .td-bottom { bottom: 0; }
   
-  #calendar td ul {
-    padding-left: 0;
-    text-align: center;
-  }
   
   td#table-rollup {
     text-align: center;
-  }
-  
-  th.cal_move_month a {
-    width: 100%;
-    display: block;
   }
   
   .cal_day_title {

@@ -7948,6 +7948,8 @@ var _user$project$Iphod_Models$initProper = {title: '', text: ''};
 var _user$project$Iphod_Models$initLesson = {
 	style: '',
 	show: false,
+	show_fn: true,
+	show_vn: true,
 	read: '',
 	body: '',
 	id: '',
@@ -8072,7 +8074,11 @@ var _user$project$Iphod_Models$Lesson = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {style: a, show: b, read: c, body: d, id: e, section: f, version: g, altRead: h, notes: i, cmd: j};
+										return function (k) {
+											return function (l) {
+												return {style: a, show: b, show_fn: c, show_vn: d, read: e, body: f, id: g, section: h, version: i, altRead: j, notes: k, cmd: l};
+											};
+										};
 									};
 								};
 							};

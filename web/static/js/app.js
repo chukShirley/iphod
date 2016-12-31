@@ -32,6 +32,14 @@ $("button.more-options").click( function() {
   $("ul#header-options").toggleClass("responsive");
 })
 
+$("input[name='footnote_show']").click(function() {
+  $(this).val() == "show" ? $('.footnote, .footnotes').show() : $('.footnote, .footnotes').hide();
+})
+
+$("input[name='vss_show']").click(function() {
+  $(this).val() == "show" ? $('.verse-num, .chapter-num').show() : $('.verse-num, .chapter-num').hide();
+})
+
 // LOCAL STORAGE ------------------------
 
 function storageAvailable(of_type) {
@@ -256,7 +264,6 @@ if ( path.match(/mindex/) ) {
   });
 
   $("#next-sunday-button").click( function() {
-    console.log("NEX SUNDAY 258")
     channel.push("get_text", ["NextSunday", (new Date).toDateString() ] )
   })
 
@@ -324,12 +331,6 @@ if ( path.match(/mindex/) ) {
     $("#reading-panel").effect("slide", "fast")
   })
 
-
-  elmMPanelApp.ports.requestReading.subscribe( function(request) {
-    var [vss, ver, service] = request
-    channel.push("get_single_reading", [vss, get_version(ver), service, ver])
-  })
-
   elmMPanelApp.ports.requestService.subscribe( function(request) {
     channel.push("get_text", request)
   })
@@ -380,8 +381,11 @@ if ( path.match(/mindex/) ) {
     window.location = "/" + prayer_type + "/" + ps + "/" + ver
   })
 
+  $("#reflection-today-button").click( function() {
+    channel.push("get_text", ["Reflection", (new Date).toDateString()])
+  });
+
   $("#next-sunday-button").click( function() {
-    console.log("NEX SUNDAY 383")
     channel.push("get_text", ["NextSunday", (new Date).toDateString() ] )
   })
 
@@ -447,6 +451,7 @@ if ( path.match(/mindex/) ) {
     channel.push("get_text", [this_service, this_date]);
     $(window).scrollTop(0);
   }
+
   elmCalApp.ports.requestReading.subscribe(function(request) {
     channel.push("get_lesson", request)
   })

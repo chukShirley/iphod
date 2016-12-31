@@ -75,10 +75,21 @@ defmodule Psalms do
   end
 
   def vs_to_html({key, val}) when key |> is_integer do
-    ~s( <p class="ps_first">
-          <sup class="ps_vs_num">#{key}</sup>
-          #{val.first}</p>
-        <p class="ps_second">#{val.second}</p>
+#    ~s( <p class="ps_first">
+#          <sup class="verse-num">#{key}</sup>
+#          #{val.first}</p>
+#        <p class="ps_second">#{val.second}</p>
+#    )
+    ~s( <p>
+          <span class="ps_first">
+            <sup class="verse-num">#{key}</sup>
+            #{val.first}
+          </span>
+          <br>
+          <span class="ps_second">
+            #{val.second}
+          </span>
+        </p>
     ) 
   end
   def vs_to_html(_), do: ""

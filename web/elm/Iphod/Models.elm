@@ -79,6 +79,8 @@ emailInit =
 type alias Lesson =
   { style:    String
   , show:     Bool
+  , show_fn:  Bool -- show footnotes
+  , show_vn:  Bool -- show verse numbers
   , read:     String
   , body:     String
   , id:       String
@@ -93,6 +95,8 @@ initLesson: Lesson
 initLesson =
   { style =   ""
   , show =    False
+  , show_fn = True
+  , show_vn = True
   , read =    ""
   , body =    ""
   , id =      ""

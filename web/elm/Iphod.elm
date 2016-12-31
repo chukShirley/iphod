@@ -86,6 +86,8 @@ subscriptions model =
 
 -- UPDATE
 
+type ShowHide = Show | Hide
+
 type Msg
   = NoOp
   | InitCalendar Model
@@ -327,7 +329,6 @@ view model =
     , epDiv model
     , reflectionDiv model
     ]
-
 
 euDiv: Model -> Html Msg
 euDiv model =

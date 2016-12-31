@@ -2,38 +2,43 @@
 <div>
   <table id= "calendar">
     <tr>
-      <th class= "mpep_link" colspan= "7" style= "border-bottom: none;">Today</th>
+      <th class= "mpep_link" colspan= "7">Today</th>
     <tr>
-      <th class= "mpep_link" colspan= "2"><button class= "prayer-button" data-prayer="morningPrayer">Morning Prayer</button></th>
+      <th class= "mpep_link" colspan= "2">
+        <button class= "prayer-button quick-options" data-prayer="morningPrayer">Morning Prayer</button>
+      </th>
       <th class= "mpep_link" colspan="3">
-        <button id= "next-sunday-button">Next Sunday</button>
-        <button class= "reading_button" data-type= "Reflection">Reflection</button></th>
-      <th class= "mpep_link" colspan= "2"><button class= "prayer-button" data-prayer="eveningPrayer">Evening Prayer</button></th>
+        <button id ="next-sunday-button" class= "quick-options">Next Sunday</button>
+        <button id ="reflection-today-button" class= "quick-options" data-type= "Reflection">Reflection</button>
+      </th>
+      <th class= "mpep_link" colspan= "2">
+        <button class= "prayer-button quick-options" data-prayer="eveningPrayer">Evening Prayer</button>
+      </th>
     </tr>
     <tr>
       <th class= "season_link" colspan= "2">
         <a href= "<%="/calendar/next/advent"%>" >
-          <button class= "season_button" data-season= "Advent">Advent</button>
+          <button class= "quick-options" data-season= "Advent">Advent</button>
         </a>
       </th>
       <th class= "season_link">
         <a href= "<%="/calendar/next/epiphany"%>" >
-          <button class= "season_button" data-season= "Epiphany">Epiphany</button>
+          <button class= "quick-options" data-season= "Epiphany">Epiphany</button>
         </a>
       </th>
       <th class= "season_link">
         <a href= "<%="/calendar/next/lent"%>" >
-          <button class= "season_button" data-season= "Lent">Lent</button>
+          <button class= "quick-options" data-season= "Lent">Lent</button>
         </a>
       </th>
       <th class= "season_link">
         <a href= "<%="/calendar/next/easter"%>" >
-          <button class= "season_button" data-season= "Easter">Easter</button>
+          <button class= "quick-options" data-season= "Easter">Easter</button>
         </a>
       </th>
       <th class= "season_link" colspan= "2">
         <a href= "<%="/calendar/next/pentecost"%>" >
-          <button class= "season_button" data-season= "Pentecost">Pentecost</button>
+          <button class= "quick-options" data-season= "Pentecost">Pentecost</button>
           </a>
       </th>
     </tr>
@@ -96,8 +101,26 @@
       </tr>
     <% end %>
     <tr>
-      <td id="table-rollup" colspan= "7">
+      <td id="footnotes" colspan="2">
+        <fieldset>
+          <legend>Footnotes</legend>
+          <input type="radio" name="footnote_show" id="footnote_show" value="show" checked="checked">
+          <label for="footnote_show">show</label>
+          <input type="radio" name="footnote_show" id="footnote_hide" value="hide">
+          <label for="footnote_hide">hide</label>
+        </fieldset>
+      </td>
+      <td id="table-rollup" colspan= "3">
         <button id= "rollup">Roll Up</button>
+      </td>
+      <td id="line_numbers" colspan="2">
+        <fieldset>
+          <legend>Vs Numbers</legend>
+          <input type="radio" name="vss_show" id="vss_show" value="show" checked="checked">
+          <label for="vss_show">show</label>
+          <input type="radio" name="vss_show" id="vss_hide" value="hide">
+          <label for="vss_hide">hide</label>
+        </fieldset>
       </td>
     </tr>
   </table>
