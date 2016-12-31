@@ -112,7 +112,7 @@ defmodule Collects do
             }
           ]
         },
-      "holyName" =>
+      "holyName1" =>
         { "",
           "The Holy Name of Our Lord Jesus Christ [January 1]",
           [ { "Almighty God, whose blessed Son was circumcised for our sake in obedience to the Covenant of

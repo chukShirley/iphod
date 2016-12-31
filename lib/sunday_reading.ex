@@ -13,11 +13,20 @@ defmodule SundayReading do
   def readings(season, wk, yr), do: identity[season][wk][yr]
   def readings(date) do
     # should check for red letter day first
+    doy = date |> Timex.format!("%m%d", :strftime)
+    {_season, _week, lityear, _date} = date |> Lityear.to_season
     {hd, title} = Lityear.next_holy_day date
-    if hd == date do
-      holy_day title, date
-    else
-      if date |> Lityear.is_sunday?, do: this_sunday(date), else: last_sunday(date)
+    cond do
+      doy == "0101" ->
+        _sunday {"holyName", "1", lityear, date}
+      doy == "1225" ->
+        _sunday {"christmasDay", "1", lityear, date}
+      hd == date ->
+        holy_day title, date
+      date |> Lityear.is_sunday? ->
+        this_sunday(date)
+      true ->
+        last_sunday(date)
     end
   end
 
@@ -40,7 +49,7 @@ defmodule SundayReading do
   def holy_day_title("christmasDay"),   do: "Christmas Day"
   def holy_day_title(title),        do: identity["redLetter"][title]["title"]
 
-  defp _sunday({season, wk, yr, sunday}), do: eu_map {season, wk, yr, sunday}
+  def _sunday({season, wk, yr, sunday}), do: eu_map {season, wk, yr, sunday}
 
   defp eu_map(nil, _date), do: IEx.pry
   defp eu_map({season, wk, yr, sunday}) do
@@ -73,7 +82,7 @@ defmodule SundayReading do
         })
   end
 
-  defp add_ids( map ) do
+  def add_ids( map ) do
     map
       |> Map.update(:ot, [], fn(el)-> _add_ids_for("ot", el) end)
       |> Map.update(:ps, [], fn(el)-> _add_ids_for("ps", el) end)

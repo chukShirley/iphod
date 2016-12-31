@@ -295,6 +295,8 @@ defmodule  Lityear do
     if n > @leap_day, do: n - 1, else: n
   end
 
+  def namedDayDate("christmasDay", _wk), do: Timex.date {Date.now(@tz).year, 12, 25}
+  def namedDayDate("holyName", _wk), do: Timex.date {Date.now(@tz).year, 1, 1}
   def namedDayDate("palmSundayPalms", _wk), do: palm_sunday
   def namedDayDate("palmSunday", _wk), do: palm_sunday
   def namedDayDate("holyWeek", wk) when wk |> is_bitstring, do: namedDayDate("holyWeek", wk |> String.to_integer)
