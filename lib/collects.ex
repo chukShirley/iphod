@@ -1,3 +1,4 @@
+require IEx
 defmodule Collects do
   @default_show true
   def start_link do
@@ -12,9 +13,7 @@ defmodule Collects do
       end)
     %{ instruction: instruction, title: title, collects: cmap, show: @default_show }
   end
-  def get({season, week, _lityear, _date}) do
-    season <> week |> get
-  end
+  def get({season, week, _lityear, _date}), do: season <> week |> get
   def get("redLetter", week), do: week |> get
   def get(season, week), do: season <> week |> get
 

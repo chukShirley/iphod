@@ -208,9 +208,11 @@ defmodule Iphod.PrayerController do
   def put_collect_of_week(dreading) do
     c = 
       cond do
+        @christmasDays |> Enum.member?(dreading.day) ->
+          Collects.get(dreading.season, dreading.week).collects
         @dayNames |> Enum.member?(dreading.title) ->
           Collects.get(dreading.season, dreading.week).collects
-        @christmasDays |> Enum.member?(dreading.day) ->
+        @dayNames |> Enum.member?(dreading.day) ->
           Collects.get(dreading.season, dreading.week).collects
         true ->
           Collects.get("redLetter", dreading.day).collects
