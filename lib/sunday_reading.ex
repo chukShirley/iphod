@@ -31,12 +31,12 @@ defmodule SundayReading do
   end
 
   def holy_day(title, date),    do:  eu_map {"redLetter", title, "a", date}
-  def next_sunday,        do: Date.now(@tz) |> next_sunday
+  def next_sunday,        do: Timex.now(@tz) |> next_sunday
   def next_sunday(date),  do: date |> Lityear.next_sunday |> _sunday
   def this_sunday(date),  do: date |> Lityear.to_season |> _sunday
-  def last_sunday(),      do: Date.now(@tz) |> last_sunday
+  def last_sunday(),      do: Timex.now(@tz) |> last_sunday
   def last_sunday(date),  do: date |> Lityear.last_sunday |> _sunday
-  def from_now,           do: Date.now(@tz) |> this_sunday
+  def from_now,           do: Timex.now(@tz) |> this_sunday
 
   def holy_day_color("epiphany"),   do: identity["theEpiphany"]["1"]["colors"]
   def holy_day_color("christmas"),  do: identity["christmasDay"]["1"]["colors"]
@@ -51,7 +51,7 @@ defmodule SundayReading do
 
   def _sunday({season, wk, yr, sunday}), do: eu_map {season, wk, yr, sunday}
 
-  defp eu_map(nil, _date), do: IEx.pry
+#  defp eu_map(nil, _date), do: IEx.pry
   defp eu_map({season, wk, yr, sunday}) do
     if identity[season][wk]["colors"] == nil, do: IEx.pry
     identity[season][wk][yr]
@@ -109,7 +109,7 @@ defmodule SundayReading do
     |> Map.put_new(:version, "")
   end
 
-#   def next_holy_day(), do: next_holy_day(Date.now(@tz))
+#   def next_holy_day(), do: next_holy_day(Timex.now(@tz))
 #   def next_holy_day(date) do
 #     {st_date, festival} = Lityear.next_holy_day(date)
 #     _sunday({"redLetter", festival, "a", st_date})
@@ -122,7 +122,7 @@ defmodule SundayReading do
     # but if date is sunday, use those sunday readings
     # otherwise use last_sunday 
     r = readings(date)
-    eu =     %{  
+    %{  
       ofType:   "sunday", # but it could be redletter
       date:     r.date,
       season:   r.season,
@@ -153,7 +153,6 @@ defmodule SundayReading do
   end
 
   def eu_body(date) do
-    footnotes = false # will have to get real value from config
     eu = eu_today(date)
     [:ot, :ps, :nt, :gs] |> Enum.reduce(eu, fn(r, acc)-> 
       acc |> Map.put(r, BibleText.lesson_with_body(eu[r]) )

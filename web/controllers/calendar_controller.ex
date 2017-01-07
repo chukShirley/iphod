@@ -6,37 +6,32 @@ defmodule Iphod.CalendarController do
 
   def index(conn, params) do
     select_language params
-    # render_calendar conn, Date.now, nil
-    render_calendar conn, get_month(Date.now), nil
+    render_calendar conn, get_month(Timex.today), nil
   end
 
   def mindex(conn, params) do
     select_language params
-    # render_calendar conn, Date.now, "min"
-    render_calendar conn, get_month(Date.now), "min"
+    render_calendar conn, get_month(Timex.today), "min"
   end
 
   def prev(conn, params) do
     select_language params
     date = params_to_date(params, -1)
-    # render_calendar conn, date, params["min"]
     render_calendar conn, get_month(date), params["min"]
   end
 
   def next(conn, params) do
     select_language params
     date = params_to_date(params, 1)
-    # render_calendar conn, date, params["min"]
     render_calendar conn, get_month(date), params["min"]
   end
 
   def season(conn, params) do
-    # something like `get_month next_season("advent", Date.now)`
+    # something like `get_month next_season("advent", Timex.today)`
     # and get the calendar month for the beginning of advent
-    # this_month = get_month(Lityear.next_season(params["season"], Date.now))
+    # this_month = get_month(Lityear.next_season(params["season"], Timex.today))
     select_language params
-    this_month = Lityear.next_season(params["season"], Date.now)
-    # render_calendar conn, this_month, params["min"]
+    this_month = Lityear.next_season(params["season"], Timex.today)
     render_calendar conn, get_month(this_month), params["min"]
   end
 
@@ -46,8 +41,7 @@ defmodule Iphod.CalendarController do
 
   def readings_for(conn, params, service) do
     this_date = params["month"] <> "/" <> params["day"] <> "/" <> params["year"]
-    # render_calendar_readings conn, Date.now, this_date, params["service"], nil
-    render_calendar conn, get_month(Date.now, service, this_date), params["min"]    
+    render_calendar conn, get_month(Timex.today, service, this_date), params["min"]    
   end
 
 # HELPERS
@@ -57,11 +51,11 @@ defmodule Iphod.CalendarController do
   end
 
   def params_to_date(params, shift) do
-    Date.from(
+    Timex.to_date(
       { params["year"] |>String.to_integer, 
         params["month"] |> Timex.month_to_num,
         1
-      }) |> Date.shift(months: shift)
+      }) |> Timex.shift(months: shift)
   end
 
   def render_calendar(conn, model, min \\ nil) do
@@ -117,7 +111,7 @@ defmodule Iphod.CalendarController do
               mp_reading: DailyReading.reading_map("mp", start_date),
               ep_reading: DailyReading.reading_map("ep", start_date),
               eu_reading: SundayReading.reading_map(start_date),
-              today: start_date == Date.now
+              today: start_date == Timex.today
           }
     new_head = [day | head]
     new_date = start_date |> Timex.shift(days: 1)

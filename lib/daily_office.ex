@@ -46,16 +46,9 @@ defmodule DailyReading do
     at = rem Timex.day(date), len
     Enum.at list, at
   end
-  # def readings("christmas", wk, "Sunday", _date) do
-  #   identity["christmas"][wk]["Sunday"]
-  # end
-  # def readings("christmas", wk, day, date) do
-  #   identity["christmas"][wk][date |> Timex.format!("{Mshort}{0D}")]
-  # end
+
   def readings(season, wk, day, _date), do: identity[season][wk][day]
   def readings({season, wk, litYr, date}) do
-    # dow = date |> Timex.format!("{WDfull}")
-    # day_of_week - special to handle Christmas, a real mess
     {season, wk, dow, date} = day_of_week({season, wk, litYr, date})
     if readings(season, wk, dow, date) |> is_nil, do: IEx.pry
     readings(season, wk, dow, date)
@@ -69,6 +62,7 @@ defmodule DailyReading do
                 date:   date |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
             })
   end
+
   # readings(d) is last otherwise there will be confusion between
   # Timex.Date tuple of {season, wk, _litYr, date}
   def readings(date) do
@@ -126,15 +120,19 @@ defmodule DailyReading do
 
   def select_season(date) do
     # if date == Timex.date({2016, 12, 25}), do: IEx.pry
-    {season, wk, lityr, _sundayDate} = if date |> Lityear.is_sunday? do
-      date |> Lityear.to_season
-    else
-      date |> Lityear.last_sunday
-    end
-    # IMPORTANT - send the real date, not the sundayDate
-    {season, wk, lityr, date}
+    {season, wk, lityr, _sundayDate} = 
+      cond do
+        date |> Lityear.is_sunday?              -> date |> Lityear.to_season
+        date |> Lityear.epiphany_before_sunday  -> date |> Lityear.to_season
+        true                                    -> date |> Lityear.last_sunday
+      end
+    {check_christmas(season), wk, lityr, date}
   end
 
+  def check_christmas("christmasDay"), do: "christmas"
+  def check_christmas("holyName"), do: "christmas"
+  def check_christmas(season), do: season
+    
   def add_psalms(map, day) do
     map
       |> Map.put(:mpp, Psalms.morning(day) |> psalm_map )

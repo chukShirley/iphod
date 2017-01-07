@@ -6,9 +6,6 @@ config :iphod, Iphod.Endpoint,
   http: [port: 4001],
   server: false
 
-config :phoenix_integration,
-  endpoint: Iphod.Endpoint
-
 # Print only warnings and errors during test
 config :logger, level: :warn
 

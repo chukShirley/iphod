@@ -45,14 +45,16 @@ defmodule Iphod.Mixfile do
       {:gettext, "~> 0.9"},
       {:cowboy, "~> 1.0"},
       {:exrm, "~> 1.0.8", only: :prod},
-      {:timex, github: "frpaulas/timex"},
-      # {:mock, github: "jjh42/mock", only: :dev},
+      # {:timex, github: "frpaulas/timex"},
+      {:timex, "~> 3.0"},
       {:httpoison, "~> 0.8.2"},
       {:mailgun, "~> 0.1.2"},
       {:earmark, "~> 1.0.1"},
-      {:mix_test_watch, "~> 0.2", only: :dev},
       {:phoenix_integration, "~> 0.1"},
-      {:mix_test_watch, "~> 0.2", only: :dev}
+      # {:mock, github: "~> 0.2.0", only: :dev},
+      {:mix_test_watch, "~> 0.2", only: :dev},
+      {:dogma, "~> 0.1", only: :dev},
+      {:mix_test_watch, "~> 0.2.6", only: :dev}
 
      # {:exometer_core, "~> 1.4.0"},
      # {:exometer, "~> 1.2.1"},
@@ -68,7 +70,8 @@ defmodule Iphod.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]
+     "ecto.reset": ["ecto.drop", "ecto.setup"],
+     "test": ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
 end

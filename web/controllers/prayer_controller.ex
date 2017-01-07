@@ -117,7 +117,7 @@ defmodule Iphod.PrayerController do
   end
 
   def prayer_model("mp", psalm_translation, text_translation) do
-    day = Date.now(@tz)
+    day = Timex.now(@tz) |> Timex.to_date
     day_of_week = day |> Timex.weekday |> Timex.day_name
     {sent, ref} = DailyReading.opening_sentence("mp", day)
     dreading = DailyReading.readings(day)
@@ -135,7 +135,7 @@ defmodule Iphod.PrayerController do
       |> Map.put(:day, day_of_week)
   end
   def prayer_model("ep", psalm_translation, text_translation) do
-    day = Date.now(@tz)
+    day = Timex.now(@tz) |> Timex.to_date
     day_of_week = day |> Timex.weekday |> Timex.day_name
     {sent, ref} = DailyReading.opening_sentence("ep", day)
     dreading = DailyReading.readings(day)
@@ -221,3 +221,12 @@ defmodule Iphod.PrayerController do
     c.collect
   end
 end
+
+###
+#  1) CofD id Christmas until next Sunday
+#  2) CofD is Christmas 1 until Holy Name
+#  3) if Christmas is on Sunday, there is no Christmas 1
+#  4) CofD is Holy Name until following Sunday or Epiphany; which ever comes first
+#  5) CofD is Christmas 2 between Christmas 2 and Epiphany (if there is a Christmas 2)
+#  6) CofD is Epiphany until 1st Sunday after Epiphany
+###

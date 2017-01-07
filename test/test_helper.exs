@@ -1,6 +1,3 @@
 ExUnit.start
 
-Mix.Task.run "ecto.create", ~w(-r Iphod.Repo --quiet)
-Mix.Task.run "ecto.migrate", ~w(-r Iphod.Repo --quiet)
-Ecto.Adapters.SQL.begin_test_transaction(Iphod.Repo)
-
+Ecto.Adapters.SQL.Sandbox.mode(Iphod.Repo, :manual)

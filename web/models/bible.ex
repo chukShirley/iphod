@@ -21,7 +21,8 @@ defmodule Iphod.Bible do
 
   def changeset(model, params \\ :empty) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, [@required_fields, @optional_fields, :bible])
+    |> unique_constraint(:bible, name: :bible_trans_book_chapter_index)
   end
 
   def load(map) do

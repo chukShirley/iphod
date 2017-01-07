@@ -14,7 +14,7 @@ defmodule Iphod.CalendarChannel do
   end
 
   def handle_info(:after_join, socket) do
-    push socket, "this_month", get_month(Date.now)
+    push socket, "this_month", get_month(Timex.now)
     {:noreply, socket}
   end
 
@@ -39,7 +39,7 @@ defmodule Iphod.CalendarChannel do
     imonth = Timex.month_to_num(month)
     iyr = String.to_integer(year)
     IO.puts "IMONTH: #{imonth}, IYEAR: #{iyr}"
-    Timex.date({iyr, imonth, 1}) 
+    Timex.to_date({iyr, imonth, 1}) 
     |> Timex.shift(months: n)
     |> get_month    
   end
@@ -84,7 +84,7 @@ defmodule Iphod.CalendarChannel do
               colors: DailyReading.color_for(start_date),
               daily: DailyReading.readings(start_date),
               sunday: SundayReading.readings(start_date),
-              today: start_date == Date.now
+              today: start_date == Timex.now
           }
     new_head = [day | head]
     new_date = start_date |> Timex.shift(days: 1)
