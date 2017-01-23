@@ -116,10 +116,17 @@ defmodule Iphod.IphodChannel do
     {:noreply, socket}  
   end
 
-  def handle_in("get_text", args, socket) do
-    # something bad happened
-    {:noreply, socket}
+  def handle_in("get_text", date, socket) do
+    handle_in("get_text", ["Reflection", date], socket)
+    handle_in("get_text", ["EU", date], socket)
+    handle_in("get_text", ["MP", date], socket)
+    handle_in("get_text", ["EP", date], socket)
   end
+
+#  def handle_in("get_text", args, socket) do
+#    # something bad happened
+#    {:noreply, socket}
+#  end
   
   def handle_in("lessons_now", args, socket) do
     # IEx.pry
@@ -150,13 +157,6 @@ defmodule Iphod.IphodChannel do
     {:noreply, socket}
   end
 
-
-  def handle_in("get_text", date, socket) do
-    handle_in("get_text", ["Reflection", date], socket)
-    handle_in("get_text", ["EU", date], socket)
-    handle_in("get_text", ["MP", date], socket)
-    handle_in("get_text", ["EP", date], socket)
-  end
 
 
 def handle_in("get_chat", _bool, socket) do
