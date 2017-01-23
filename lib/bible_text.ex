@@ -4,7 +4,7 @@ defmodule BibleText do
   def selection(vss, ver, section) do
     lesson_with_body(
       [ %{ body: "",
-        id: Regex.replace(~r/[\s\.]/, vss, "_"),
+        id: Regex.replace(~r/[\s\.\:\,]/, vss, "_"),
         read: vss,
         section: section,
         show: true,
@@ -32,7 +32,8 @@ defmodule BibleText do
   def lesson_with_body(list, "ESV") do
     list |> Enum.map(fn(lesson)->
       lesson 
-        |> Map.put(:body, EsvText.request(lesson.read) )
+        |> body_div(EsvText.request(lesson.read))
+        |> Map.put(:version, "ESV")
         |> other_init_values
     end)
   end
@@ -44,7 +45,8 @@ defmodule BibleText do
   def lesson_with_body(list, ver, "Coverdale") do
     list |> Enum.map(fn(lesson)->
       lesson
-        |> Map.put(:body, Psalms.to_html(lesson.read, "Coverdale"))
+        |> body_div(Psalms.to_html(lesson.read, "Coverdale"))
+        |> Map.put(:version, "Coverdale")
         |> other_init_values
     end)
   end
@@ -52,7 +54,8 @@ defmodule BibleText do
   def lesson_with_body(list, ver, "BCP") do
     list |> Enum.map(fn(lesson)->
       lesson
-        |> Map.put(:body, Psalms.to_html(lesson.read, "BCP"))
+        |> body_div(Psalms.to_html(lesson.read, "BCP"))
+        |> Map.put(:version, "BCP")
         |> other_init_values
     end)
   end
@@ -60,7 +63,8 @@ defmodule BibleText do
   def lesson_with_body(list, ver, "bibles.org") do
     list |> Enum.map(fn(lesson)->
       lesson 
-      |> Map.put(:body, BibleComText.request(ver, lesson.read) )
+      |> body_div(BibleComText.request(ver, lesson.read))
+      |> Map.put(:version, ver)
       |> other_init_values
     end)
   end
@@ -68,7 +72,8 @@ defmodule BibleText do
   def lesson_with_body(list, ver, "getbible.net") do
     list |> Enum.map(fn(lesson)->
       lesson 
-      |> Map.put(:body, GetBibleText.request(ver, lesson.read) )
+      |> body_div( GetBibleText.request(ver, lesson.read) )
+      |> Map.put(:version, ver)
       |> other_init_values
     end)
   end
@@ -76,7 +81,8 @@ defmodule BibleText do
   def lesson_with_body(list, ver, "local") do
     list |> Enum.map(fn(lesson)->
       lesson 
-      |> Map.put(:body, LocalText.request(ver, lesson.read) )
+      |> body_div( LocalText.request(ver, lesson.read) )
+      |> Map.put(:version, ver)
       |> other_init_values
     end)
   end
@@ -89,4 +95,7 @@ defmodule BibleText do
       |> Map.put(:notes, [])
   end
 
+  def body_div(lesson, body) do
+    lesson |> Map.put(:body, "<div id='#{lesson.id}'>#{body}</div>")
+  end
 end

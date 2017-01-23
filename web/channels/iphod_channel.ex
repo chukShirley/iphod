@@ -37,7 +37,10 @@ defmodule Iphod.IphodChannel do
     end
   end
 
-
+  def handle_in("ping", arg, socket) do
+    IO.puts ">>>>>PING: #{inspect arg}"
+    {:noreply, socket}
+  end
 
   def handle_in("init_calendar", _, socket) do
     # date = Date.now(@tz)
@@ -46,6 +49,20 @@ defmodule Iphod.IphodChannel do
     # push socket, "ep_today", DailyReading.ep_today(date)
     push socket, "init_email", @email
     {:noreply, socket}  
+  end
+
+  def handle_in("get_prayer_reading", [_section, _version, ""], socket) do
+    {:noreply, socket}
+  end
+
+  def handle_in("get_prayer_reading", [section, version, vss], socket) do
+    vss 
+      |> String.split(", ")
+      |> Enum.map( fn(lesson) ->
+        resp = BibleText.selection(lesson, version, section)
+        push socket, "alt_lesson", %{resp: resp}
+      end)
+    {:noreply, socket}
   end
 
   def handle_in("get_alt_reading", [section, version, vss], socket) do
@@ -63,7 +80,7 @@ defmodule Iphod.IphodChannel do
     {:noreply, socket}
   end
 
-  def handle_in("get_text", ["Reflection", date], socket) do
+  def handle_in("get_text", ["Reflection", date, _versions], socket) do
     day = date |> String.split(" ", [parts: 2, trim: 2]) |> List.last
     resp = Repo.one(from r in Iphod.Reflection, where: [date: ^day, published: true], select: {r.author, r.markdown})
     {author, markdown} = if resp, do: resp, else: {"", "Sorry, nothing today"}
@@ -71,37 +88,43 @@ defmodule Iphod.IphodChannel do
     {:noreply, socket}
   end
 
-  def handle_in("get_text", ["NextSunday", date], socket) do
+  def handle_in("get_text", ["NextSunday", date, versions], socket) do
     nextSunday = text_to_date(date) |> Lityear.date_next_sunday
-    push socket, "eu_today", SundayReading.eu_body(nextSunday)
+    push socket, "eu_today", SundayReading.eu_body(nextSunday, versions_map(:eu, versions))
     {:noreply, socket}  
   end
 
-  def handle_in("get_text", ["EU", date], socket) do
+  def handle_in("get_text", ["EU", date, versions], socket) do
     # a couple things need to be done here
     # 1) is the date a redletter day or not
     # 2) are footnotes to be displayed or not
     day = text_to_date date
     # IO.puts inspect(SundayReading.eu_body(day))
-    push socket, "eu_today", SundayReading.eu_body(day)
+    push socket, "eu_today", SundayReading.eu_body(day, versions_map(:eu, versions))
     {:noreply, socket}  
   end
 
-  def handle_in("lessons_now", args, socket) do
-    # IEx.pry
+  def handle_in("get_text", ["MP", date, versions], socket) do
+    day = text_to_date date
+    push socket, "mp_today", DailyReading.mp_body(day, versions_map(:mp, versions))
+    {:noreply, socket}  
+  end
+  
+  def handle_in("get_text", ["EP", date, versions], socket) do
+    day = text_to_date date
+    push socket, "ep_today", DailyReading.ep_body(day, versions_map(:ep, versions))
+    {:noreply, socket}  
+  end
+
+  def handle_in("get_text", args, socket) do
+    # something bad happened
+    raise ArguementError, message: "HANDLE IN GET_TEXT args: #{inspect args}"
     {:noreply, socket}
   end
   
-  def handle_in("get_text", ["MP", date], socket) do
-    day = text_to_date date
-    push socket, "mp_today", DailyReading.mp_body(day)
-    {:noreply, socket}  
-  end
-  
-  def handle_in("get_text", ["EP", date], socket) do
-    day = text_to_date date
-    push socket, "ep_today", DailyReading.ep_body(day)
-    {:noreply, socket}  
+  def handle_in("lessons_now", args, socket) do
+    # IEx.pry
+    {:noreply, socket}
   end
   
   def handle_in("get_lesson", [section, version, date], socket) when section in ~w(mp1 mp2 mpp ep1 ep2 epp) do
@@ -179,6 +202,9 @@ end
     {:noreply, socket}
   end
 
+  def versions_map(:eu, [ps, ot, nt, gs]), do: %{ps: ps, ot: ot, nt: nt, gs: gs}
+  def versions_map(:mp, [ps, ot, nt, gs]), do: %{mpp: ps, mp1: ot, mp2: nt}
+  def versions_map(:ep, [ps, ot, nt, gs]), do: %{epp: ps, ep1: nt, ep2: gs}
 
   # Add authorization logic here as required.
   defp authorized?(_payload) do

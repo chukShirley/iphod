@@ -161,83 +161,109 @@ update msg model =
     ModEU msg ->
       let
         newModel = {model | eu = Sunday.update msg model.eu}
-        sunday = newModel.eu
-        newCmd =
-          let 
-            otVer = (List.head sunday.ot |> Maybe.withDefault Models.initLesson).version
-            psVer = (List.head sunday.ps |> Maybe.withDefault Models.initLesson).version
-            ntVer = (List.head sunday.nt |> Maybe.withDefault Models.initLesson).version
-            gsVer = (List.head sunday.gs |> Maybe.withDefault Models.initLesson).version
-            otAlt = (List.head sunday.ot |> Maybe.withDefault Models.initLesson).altRead
-            ntAlt = (List.head sunday.nt |> Maybe.withDefault Models.initLesson).altRead
-            gsAlt = (List.head sunday.gs |> Maybe.withDefault Models.initLesson).altRead
-            otCmd = (List.head sunday.ot |> Maybe.withDefault Models.initLesson).cmd
-            ntCmd = (List.head sunday.nt |> Maybe.withDefault Models.initLesson).cmd
-            gsCmd = (List.head sunday.gs |> Maybe.withDefault Models.initLesson).cmd
-
-          in
-            if otVer /= "" then
-              requestReading ["ot", otVer, sunday.date]
-            else if psVer /= "" then 
-              requestReading ["ps", psVer, sunday.date]
-            else if ntVer /= "" then
-              requestReading ["nt", ntVer, sunday.date]
-            else if gsVer /= "" then
-              requestReading ["gs", gsVer, sunday.date]
-            else if otCmd /= "" then
-              requestAltReading ["ot", otVer, otAlt]
-            else if ntCmd /= "" then
-              requestAltReading ["ot", ntVer, ntAlt]
-            else if gsCmd /= "" then
-              requestAltReading ["gs", gsVer, gsAlt]
-            else
-              Cmd.none
-
+        newCmd = changeEuLesson model.eu newModel.eu
       in 
         (newModel, newCmd)
 
     ModMP msg ->
       let
         newModel = {model | mp = MPReading.update msg model.mp}
-        newCmd =
-          let 
-            mp1Ver = (List.head newModel.mp.mp1 |> Maybe.withDefault Models.initLesson).version
-            mp2Ver = (List.head newModel.mp.mp2 |> Maybe.withDefault Models.initLesson).version
-            mppVer = (List.head newModel.mp.mpp |> Maybe.withDefault Models.initLesson).version
-          in
-            if mp1Ver /= "" then
-              requestReading ["mp1", mp1Ver, model.mp.date]
-            else if mp2Ver /= "" then 
-              requestReading ["mp2", mp2Ver, model.mp.date]
-            else if mppVer /= "" then
-              requestReading ["mpp", mppVer, model.mp.date]
-            else
-              Cmd.none
+        newCmd = changeMpLesson model.mp newModel.mp
       in 
         (newModel, newCmd)
 
     ModEP msg ->
       let
         newModel = {model | ep = EPReading.update msg model.ep}
-        newCmd =
-          let 
-            ep1Ver = (List.head newModel.ep.ep1 |> Maybe.withDefault Models.initLesson).version
-            ep2Ver = (List.head newModel.ep.ep2 |> Maybe.withDefault Models.initLesson).version
-            eppVer = (List.head newModel.ep.epp |> Maybe.withDefault Models.initLesson).version
-          in
-            if ep1Ver /= "" then
-              requestReading ["ep1", ep1Ver, model.ep.date]
-            else if ep2Ver /= "" then 
-              requestReading ["ep2", ep2Ver, model.ep.date]
-            else if eppVer /= "" then
-              requestReading ["epp", eppVer, model.ep.date]
-            else
-              Cmd.none
+        newCmd = changeEpLesson model.ep newModel.ep
       in 
         (newModel, newCmd)
 
 
 -- HELPERS
+
+changeMpLesson: Models.DailyMP -> Models.DailyMP -> Cmd Msg
+changeMpLesson daily newDaily =
+  let 
+    newMp1Ver = (List.head newDaily.mp1 |> Maybe.withDefault Models.initLesson).version
+    newMp2Ver = (List.head newDaily.mp2 |> Maybe.withDefault Models.initLesson).version
+    newMppVer = (List.head newDaily.mpp |> Maybe.withDefault Models.initLesson).version
+    mp1Ver = (List.head daily.mp1 |> Maybe.withDefault Models.initLesson).version
+    mp2Ver = (List.head daily.mp2 |> Maybe.withDefault Models.initLesson).version
+    mppVer = (List.head daily.mpp |> Maybe.withDefault Models.initLesson).version
+  in
+    if mp1Ver /= newMp1Ver then
+      requestReading ["mp1", newMp1Ver, daily.date]
+    else if mp2Ver /= newMp2Ver then 
+      requestReading ["mp2", newMp2Ver, daily.date]
+    else if mppVer /= newMppVer then
+      requestReading ["mpp", newMppVer, daily.date]
+    else
+      Cmd.none
+
+changeEpLesson: Models.DailyEP -> Models.DailyEP -> Cmd Msg
+changeEpLesson daily newDaily =
+  let 
+    newEp1Ver = (List.head newDaily.ep1 |> Maybe.withDefault Models.initLesson).version
+    newEp2Ver = (List.head newDaily.ep2 |> Maybe.withDefault Models.initLesson).version
+    newEppVer = (List.head newDaily.epp |> Maybe.withDefault Models.initLesson).version
+    ep1Ver = (List.head daily.ep1 |> Maybe.withDefault Models.initLesson).version
+    ep2Ver = (List.head daily.ep2 |> Maybe.withDefault Models.initLesson).version
+    eppVer = (List.head daily.epp |> Maybe.withDefault Models.initLesson).version
+  in
+    if ep1Ver /= newEp1Ver then
+      requestReading ["ep1", newEp1Ver, daily.date]
+    else if ep2Ver /= newEp2Ver then 
+      requestReading ["ep2", newEp2Ver, daily.date]
+    else if eppVer /= newEppVer then
+      requestReading ["epp", newEppVer, daily.date]
+    else
+      Cmd.none
+
+changeEuLesson: Models.Sunday -> Models.Sunday -> Cmd Msg
+changeEuLesson sunday newSunday =
+  let 
+    newOtVer = (List.head newSunday.ot |> Maybe.withDefault Models.initLesson).version
+    newPsVer = (List.head newSunday.ps |> Maybe.withDefault Models.initLesson).version
+    newNtVer = (List.head newSunday.nt |> Maybe.withDefault Models.initLesson).version
+    newGsVer = (List.head newSunday.gs |> Maybe.withDefault Models.initLesson).version
+    newOtAlt = (List.head newSunday.ot |> Maybe.withDefault Models.initLesson).altRead
+    newNtAlt = (List.head newSunday.nt |> Maybe.withDefault Models.initLesson).altRead
+    newGsAlt = (List.head newSunday.gs |> Maybe.withDefault Models.initLesson).altRead
+    newOtCmd = (List.head newSunday.ot |> Maybe.withDefault Models.initLesson).cmd
+    newNtCmd = (List.head newSunday.nt |> Maybe.withDefault Models.initLesson).cmd
+    newGsCmd = (List.head newSunday.gs |> Maybe.withDefault Models.initLesson).cmd
+
+    otVer = (List.head sunday.ot |> Maybe.withDefault Models.initLesson).version
+    psVer = (List.head sunday.ps |> Maybe.withDefault Models.initLesson).version
+    ntVer = (List.head sunday.nt |> Maybe.withDefault Models.initLesson).version
+    gsVer = (List.head sunday.gs |> Maybe.withDefault Models.initLesson).version
+    otAlt = (List.head sunday.ot |> Maybe.withDefault Models.initLesson).altRead
+    ntAlt = (List.head sunday.nt |> Maybe.withDefault Models.initLesson).altRead
+    gsAlt = (List.head sunday.gs |> Maybe.withDefault Models.initLesson).altRead
+    otCmd = (List.head sunday.ot |> Maybe.withDefault Models.initLesson).cmd
+    ntCmd = (List.head sunday.nt |> Maybe.withDefault Models.initLesson).cmd
+    gsCmd = (List.head sunday.gs |> Maybe.withDefault Models.initLesson).cmd
+
+  in
+    if otVer /= newOtVer then
+      requestReading ["ot", newOtVer, sunday.date]
+    else if psVer /= newPsVer then 
+      requestReading ["ps", newPsVer, sunday.date]
+    else if ntVer /= newNtVer then
+      requestReading ["nt", newNtVer, sunday.date]
+    else if gsVer /= newGsVer then
+      requestReading ["gs", newGsVer, sunday.date]
+    else if otCmd /= newOtCmd then
+      requestAltReading ["ot", newOtVer, otAlt]
+    else if ntCmd /= newNtCmd then
+      requestAltReading ["ot", newNtVer, ntAlt]
+    else if gsCmd /= newGsCmd then
+      requestAltReading ["gs", newGsVer, gsAlt]
+    else
+      Cmd.none
+
+
 
 setLesson: Model -> String -> List Models.Lesson -> Model
 setLesson model section lesson =
@@ -332,17 +358,17 @@ view model =
 
 euDiv: Model -> Html Msg
 euDiv model =
-  div [] [ App.map ModEU (Sunday.view model.eu) ]
+  div [ id "eu" ] [ App.map ModEU (Sunday.view model.eu) ]
 
 mpDiv: Model -> Html Msg
 mpDiv model =
-  div []
+  div [ id "mp" ]
   [ App.map ModMP (MPReading.view model.mp)
   ]
 
 epDiv: Model -> Html Msg
 epDiv model =
-  div []
+  div [ id "ep" ]
   [ App.map ModEP (EPReading.view model.ep)
   ]
 

@@ -66,7 +66,11 @@ defmodule Psalms do
   def _to_html(ps, ver), do: ps # BibleComText comes ready to go
 
   def _to_local_html(ps) do
-    s = ~s(<h3>#{ps["name"]} <span class="ps_title">#{ps["title"]}</span></h3></br>)
+    psalm_id = ps["name"] |> String.slice(0..-2) |> String.replace(" ", "_")
+    s = ~s( <h3>#{ps["name"]} 
+            <span class="ps_title">#{ps["title"]}</span>
+            </h3>
+            </br>)
     ps 
       |> Enum.to_list
       |> Enum.sort

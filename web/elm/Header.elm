@@ -35,12 +35,14 @@ main =
 type alias  Model =
   { email:  Models.Email
   , config: Models.Config
+  , reading: Models.CurrentReadings
   }
 
 initModel: Model
 initModel = 
   { email   = Models.emailInit
   , config  = Models.configInit
+  , reading = Models.currentReadingsInit
   }
 
 init: (Model, Cmd Msg)
@@ -101,7 +103,7 @@ update msg model =
         (newModel, Cmd.none)
 
     UpdateConfig this_config -> 
-      ({model | config = this_config}, saveConfig this_config)
+      ({model | config = this_config}, Cmd.none)
 
     EmailAddress s ->
       let 
@@ -142,7 +144,18 @@ update msg model =
 
 view: Model -> Html Msg
 view model =
-  div []
+  div 
+    [ id "readings"
+    , attribute "data-psalms" model.reading.ps
+    , attribute "data-psalms_ver" model.reading.ps_ver
+    , attribute "data-reading1" model.reading.reading1
+    , attribute "data-reading1_ver" model.reading.reading1_ver
+    , attribute "data-reading2" model.reading.reading2
+    , attribute "data-reading2_ver" model.reading.reading2_ver
+    , attribute "data-reading3" model.reading.reading3
+    , attribute "data-reading3_ver" model.reading.reading3_ver
+    , attribute "data-reading_date" model.reading.reading_date
+    ]
     [ ul [id "header-options"]
 --      [ li [class "option-item"] [ calendar model]
 --      , li [class "option-item"] [ aboutModal ]

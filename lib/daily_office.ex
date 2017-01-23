@@ -7,23 +7,23 @@ defmodule DailyReading do
   def start_link, do: Agent.start_link fn -> build end, name: __MODULE__
   def identity(), do: Agent.get(__MODULE__, &(&1))
 
-  def mp_body(date) do
+  def mp_body(date, versions_map \\ %{mpp: "BCP", mp1: "ESV", mp2: "ESV"}) do
     footnotes = false # will have to get real value from config
     mp = mp_today(date)
     [:mp1, :mp2, :mpp] 
       |> Enum.reduce(mp, fn(r, acc)-> 
-        acc |> Map.put(r, BibleText.lesson_with_body(mp[r]) )
+        acc |> Map.put(r, BibleText.lesson_with_body(mp[r], versions_map[r]) )
       end)
     |> Map.put(:show, true)
     |> Map.put(:collect, collect_today(date))
   end
 
-  def ep_body(date) do
+  def ep_body(date, versions_map \\ %{epp: "BCP", ep1: "ESV", ep2: "ESV"}) do
     footnotes = false # will have to get real value from config
     ep = ep_today(date)
     [:ep1, :ep2, :epp] 
       |> Enum.reduce(ep, fn(r, acc)-> 
-        acc |> Map.put(r, BibleText.lesson_with_body(ep[r]) )
+        acc |> Map.put(r, BibleText.lesson_with_body(ep[r], versions_map[r]) )
       end)
     |> Map.put(:show, true)
     |> Map.put(:collect, collect_today(date))
@@ -164,7 +164,7 @@ defmodule DailyReading do
   end
   defp _add_keys_for(section, map) do
     if map |> Map.has_key?(:read) do
-      map |> Map.put_new(:id, Regex.replace(~r/[\s\.]/, map.read, "_") )
+      map |> Map.put_new(:id, Regex.replace(~r/[\s\.\:\,]/, map.read, "_") )
     else
       map
     end

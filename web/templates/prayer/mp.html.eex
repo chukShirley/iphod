@@ -39,7 +39,15 @@
   <%= render "_#{@model.invitatory_canticle}.html" %>
   <p class= "rubric"><%= dgettext "mp", "Then follows"%></p>
   <p class= "section"><%= dgettext "mp", "The Psalm or Psalms Appointed"%></p>
-  <p class= "reading"><%= @model.mpp |> text_list_to_html %></p> 
+
+  <p  id= "psalms" 
+      class= "reading" 
+      data-psalms= '<%= @model.mpp_names %>' 
+      data-psalms_ver= '<%= (@model.mpp |> hd).version %>'
+  >
+    <%= @model.mpp |> text_list_to_html %>
+  </p> 
+
   <p class= "rubric"><%= dgettext "mp", "At the end of the Psalms is sung or said"%></p>
 
   <p class= "pb_vs"><%= dgettext "mp", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
@@ -57,7 +65,13 @@
             data-reading_target="reading1" 
             placeholder="<%= dgettext "mp", "Alt Reading"%>">   
   </p>
-  <p id="reading1" class= "reading"> <%= @model.mp1 |> text_list_to_html %></p>
+  <p  id="reading1" 
+      class= "reading" 
+      data-reading1= '<%= @model.mp1_names %>' 
+      data-reading1_ver= '<%= (@model.mp1 |> hd).version %>'
+  > 
+    <%= @model.mp1 |> text_list_to_html %>
+  </p>
 
   <p class= "rubric"><%= dgettext "mp", "A citation giving chapter and verse may be added."%></p>
   <p class= "rubric"><%= dgettext "mp", "After each Lesson the Reader may say"%></p>
@@ -81,7 +95,15 @@
             data-reading_target="reading2" 
             placeholder="<%= dgettext "mp", "Alt Reading"%>"> 
   </p>
-  <p id="reading2" class= "reading"> <%= @model.mp2 |> text_list_to_html %></p>
+  
+  <p  id="reading2" 
+      class= "reading" 
+      data-reading2= '<%= @model.mp2_names %>' 
+      data-reading2_ver= '<%= (@model.mp2 |> hd).version %>'
+  > 
+    <%= @model.mp2 |> text_list_to_html %>
+  </p>
+  
   <br/>
   <%= render "_#{@model.nt_canticle}.html" %>
   <br/>

@@ -33,7 +33,15 @@
   <br/>
   <p class= "rubric"><%= dgettext "ep", "Then follows"%></p>
   <p class= "section"><%= dgettext "ep", "The Psalm or Psalms Appointed"%></p>
-  <p class= "reading"><%= @model.epp |> text_list_to_html %></p> 
+
+  <p  id= "psalms" 
+      class= "reading" 
+      data-psalms= '<%= @model.epp_names %>' 
+      data-psalms_ver= '<%= (@model.epp |> hd).version %>'
+  >
+    <%= @model.epp |> text_list_to_html %>
+  </p> 
+
   <p class= "rubric"><%= dgettext "ep", "At the end of the Psalms is sung or said"%></p>
   <p class= "pb_vs"><%= dgettext "ep", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
   <p class= "pb_vs_indent"><%= dgettext "ep", "as it was in the beginning, is now, and ever shall be,"%></p>
@@ -49,7 +57,14 @@
             data-reading_target="reading1" 
             placeholder="<%= dgettext "ep", "Alt Reading"%>">    
   </p>
-  <p id="reading1" class= "reading"> <%= @model.ep1 |> text_list_to_html %></p>
+
+  <p  id="reading1" 
+      class= "reading" 
+      data-reading1= '<%= @model.ep1_names %>' 
+      data-reading1_ver= '<%= (@model.ep1 |> hd).version %>'
+  > 
+    <%= @model.ep1 |> text_list_to_html %>
+  </p>
 
   <p class= "rubric"><%= dgettext "ep", "A citation giving chapter and verse may be added."%></p>
   <p class= "rubric"><%= dgettext "ep", "After each Lesson the Reader may say"%></p>
@@ -74,7 +89,15 @@
             data-reading_target="reading2" 
             placeholder="<%= dgettext "ep", "Alt Reading"%>"> 
   </p>
-  <p id="reading2" class= "reading"> <%= @model.ep2 |> text_list_to_html %></p>
+
+  <p  id="reading2" 
+      class= "reading" 
+      data-reading2= '<%= @model.ep2_names %>' 
+      data-reading2_ver= '<%= (@model.ep2 |> hd).version %>'
+  > 
+    <%= @model.ep2 |> text_list_to_html %>
+  </p>
+
   <br/>
   <%# <%= render "_#{@model.nt_canticle}.html" %>
   <%= render "_nunc_dimittis.html" %>

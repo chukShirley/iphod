@@ -4,6 +4,7 @@ module Iphod.Models exposing
   , Email, Collect, SundayCollect, Proper
   , DailyMP, DailyEP, Reflection
   , configInit, initLesson, sundayInit, initDaily
+  , CurrentReadings, currentReadingsInit
   , emailInit, initCollect, initSundayCollect
   , initProper, initDay
   , initDailyMP, initDailyEP, initReflection
@@ -61,6 +62,31 @@ configInit =
   , fnotes = "True"
   , vers = ["ESV"]
   , current = "ESV"
+  }
+
+type alias CurrentReadings =
+  { ps:           String
+  , ps_ver:       String
+  , reading1:     String
+  , reading1_ver: String
+  , reading2:     String
+  , reading2_ver: String
+  , reading3:     String
+  , reading3_ver: String
+  , reading_date: String
+  }
+
+currentReadingsInit: CurrentReadings
+currentReadingsInit =
+  { ps            = ""
+  , ps_ver        = ""
+  , reading1      = ""
+  , reading1_ver  = ""
+  , reading2      = ""
+  , reading2_ver  = ""
+  , reading3      = ""
+  , reading3_ver  = ""
+  , reading_date  = ""
   }
 
 type alias Email =

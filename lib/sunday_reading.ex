@@ -97,7 +97,7 @@ defmodule SundayReading do
 
   defp _add_this_id(section, map) do
     if map |> Map.has_key?(:read) do
-      map |> Map.put_new(:id, Regex.replace(~r/[\s\.]/, map.read, "_") )
+      map |> Map.put_new(:id, Regex.replace(~r/[\s\.\:\,]/, map.read, "_") )
     else
       map
     end
@@ -152,10 +152,10 @@ defmodule SundayReading do
     }
   end
 
-  def eu_body(date) do
+  def eu_body(date, versions_map \\ %{ps: "BCP", ot: "ESV", nt: "ESV", gs: "ESV"}) do
     eu = eu_today(date)
     [:ot, :ps, :nt, :gs] |> Enum.reduce(eu, fn(r, acc)-> 
-      acc |> Map.put(r, BibleText.lesson_with_body(eu[r]) )
+      acc |> Map.put(r, BibleText.lesson_with_body(eu[r], versions_map[r]) )
     end)
   end
 

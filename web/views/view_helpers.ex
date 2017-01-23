@@ -9,7 +9,7 @@ defmodule ViewHelpers do
     s = model
       |> Enum.reduce("", fn(el, acc)-> acc <> el.body end)
   # remove newlines, they screw up the html
-    Regex.replace(~r/\n/, "<div>" <> s <> "</div>", "")
+    Regex.replace(~r/\n/, "<div id=\"model.id\">" <> s <> "</div>", "")
       |> Earmark.to_html
       |> raw
   end
