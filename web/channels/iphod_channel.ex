@@ -118,7 +118,6 @@ defmodule Iphod.IphodChannel do
 
   def handle_in("get_text", args, socket) do
     # something bad happened
-    raise ArguementError, message: "HANDLE IN GET_TEXT args: #{inspect args}"
     {:noreply, socket}
   end
   
