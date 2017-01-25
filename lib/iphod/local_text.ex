@@ -56,6 +56,7 @@ defmodule LocalText do
     end
   end
 
+  def titlize([false], ref_list),                    do: _titlize ref_list, 1
   def titlize([true, false | _], ref_list),          do: _titlize ref_list, 2
   def titlize([false, true | _], ref_list),          do: _titlize ref_list, 1
   def titlize([false, false, false | _], ref_list),  do: _titlize ref_list, 3
