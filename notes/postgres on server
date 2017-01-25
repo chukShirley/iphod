@@ -1,0 +1,13 @@
+postgres on server
+
+/usr/lib/postgresql/9.6/bin/ where the code is
+/usr/lib/postgresql/9.5/bin/ where the code is
+
+/var/lib/postgresql/9.6/main - where the datafiles are
+(except 9.6 doesn't have any data there)
+/var/lib/postgresql/9.5/main - where the datafiles are
+
+to start postgres 9.5 for use by legereme.com
+1) su postgres
+2) /usr/lib/postgresql/9.5/bin/postgres "-D" "/var/lib/postgresql/9.5/main" "-c" "config_file=/etc/postgresql/9.5/main/postgresql.conf"
+3) go ahead and close the window

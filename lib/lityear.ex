@@ -40,7 +40,7 @@ defmodule  Lityear do
   def next_sunday(d),       do: date_next_sunday(d)           |> to_season
   def from_now(), do: to_season Timex.now(@tz)
   def to_season(day) do
-    sunday = if day |> is_sunday?, do: day, else: day |> date_next_sunday
+    sunday = if day |> is_sunday?, do: day, else: day |> date_last_sunday
     y = lityear sunday
     yrABC = abc sunday
     dOfMon = "#{day.month}/#{day.day}"
@@ -69,7 +69,7 @@ defmodule  Lityear do
       day == christmas(y-1)   -> {"christmas", "1", yrABC, day}
       is_christmas2           -> {"christmas", "2", yrABC, day} 
       # till_epiphany == 5      -> {"holyName", "1", yrABC, day}
-      till_epiphany in 5..11  -> {"christmas", "1", yrABC, day}
+      till_epiphany in 6..11  -> {"christmas", "1", yrABC, day}
       from_easter in -2..-6   -> {"lent", to_string(7 + from_easter), yrABC, day}
       from_easter == -1       -> {"palmSunday", "1", yrABC, day}
       from_easter == -7       -> {"epiphany", "9", yrABC, day}
