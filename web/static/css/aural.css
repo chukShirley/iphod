@@ -1,0 +1,25 @@
+/*!
+* aural.css
+* for printing stuff from iphod
+*/
+
+@media aural {
+  .audio { display: none; }
+  #date_nav { display: none; }
+  .cssmenu { display: none; }
+  .about { display: none; }
+  .list_dates { display: none; }
+  .translationButton { display: none;}
+  .readings_table { display: none; }
+  .config { display: none; }
+  .collect_hide { display: none; }
+  #calendar { display: none; }
+  #header { display: none; }
+  #header-elm-container { display: none; }
+  .rubric { display: none; }
+  .esv_text { 
+    page-break-after: always; 
+    display: block;
+    font-size: 16px;
+  }
+}
