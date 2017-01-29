@@ -1674,15 +1674,10 @@ if (path.match(/office/)) {
       till_midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 24) - now;
 
   history.pushState(path, "Legereme", "/office");
-  if (till_midday > 0) {
-    setTimeout(np, till_midday);
-  } else if (till_evening > 0) {
-    setTimeout(ep, till_evening);
-  } else if (till_late > 0) {
-    setTimeout(compline, till_late);
-  } else {
-    setTimeout(mp, till_midnight);
-  }
+  //  if (till_midday > 0) { setTimeout(np, till_midday) }
+  //  else if (till_evening > 0) { setTimeout(ep, till_evening)}  
+  //  else if (till_late > 0) { setTimeout(compline, till_late)}
+  //  else { setTimeout(mp, till_midnight) }
 }
 
 // HEADER ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
