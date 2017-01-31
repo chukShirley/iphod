@@ -64,16 +64,10 @@ update msg model =
     GetLesson list -> (model, requestReading list)
 
     GetAllLessons list -> 
-      let
-        foo = Debug.log "GET ALL LESSONS" list
-      in
-        (model, requestService list)
+      (model, requestService list)
 
     GetReflection date -> 
-      let
-        foo = Debug.log "GET REFLECTION" date
-      in
-        (model, requestReflection date)
+      (model, requestReflection date)
 
 
 -- VIEW

@@ -283,7 +283,6 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     })
     
     channel.on('eu_today', data => {
-      console.log("EU TODAY @ 286")
       data.config = init_config_model();
       elmMindexApp.ports.portEU.send(data);
       rollup();
@@ -406,7 +405,6 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
   })
   
   channel.on('eu_today', data => {
-    console.log("EU TODAY @ 407")
     data.config = init_config_model();
     $("#readings")
       .data("psalms",       readingList(data.ps) )
@@ -464,17 +462,18 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
   })
 
   $(".reading_button").click( function() {
-    let date = $(this).attr("data-date")
+    var date = $(this).attr("data-date")
       , of_type = $(this).attr("data-type");
     if (date == null) {
-      let d = new Date()
+      var d = new Date()
         , days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
         , mons = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
         , dow = days[d.getDay()]
         , mon = mons[d.getMonth()]
       date = dow + " " + mon + " " + d.getDate() + ", " + d.getFullYear();
     }
-    channel.push("get_text", [of_type, date, version_list()]);
+    var request = [of_type, date].push(version_list())
+    channel.push("get_text", request);
   });
   
   var elmCalDiv = document.getElementById('cal-elm-container')
@@ -484,8 +483,8 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     // where the problem was
     var this_service = $("#these_readings").data("service")
       , this_date = $("#these_readings").data("date")
-        
-    channel.push("get_text", [this_service, this_date, version_list()]);
+      , request = [this_service, this_date].push( version_list() )
+    channel.push("get_text", request);
     $(window).scrollTop(0);
   }
 
