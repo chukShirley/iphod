@@ -163,6 +163,7 @@ if ( path.match(/office/) ) {
     , till_late = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 21, 30) - now
     , till_midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 24) - now;
 
+
   function mp() { window.location.href = "/office/mp/" + vers }
   function np() { window.location.href = "/office/midday" }
   function ep() { window.location.href = "/office/ep/" + vers }
@@ -339,6 +340,7 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     })
   
   } // end of mindex
+
   
   function rollup() {
     $(".calendar-week").hide();
@@ -473,7 +475,8 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
   var elmCalDiv = document.getElementById('cal-elm-container')
     , elmCalApp = Elm.Iphod.embed(elmCalDiv)
 
-  if ( $("#these_readings").data("service") != "nil" ) {
+  if ( !!$("#these_readings").data("service") ) {
+    // where the problem was
     var this_service = $("#these_readings").data("service")
       , this_date = $("#these_readings").data("date")
         
