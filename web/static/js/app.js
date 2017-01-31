@@ -283,6 +283,7 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     })
     
     channel.on('eu_today', data => {
+      console.log("EU TODAY @ 286")
       data.config = init_config_model();
       elmMindexApp.ports.portEU.send(data);
       rollup();
@@ -332,11 +333,14 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     })
   
     elmMPanelApp.ports.requestService.subscribe( function(request) {
-      channel.push("get_text", [request, version_list()])
+      request.push( version_list() );
+      channel.push("get_text", request )
     })
   
     elmMPanelApp.ports.requestReflection.subscribe( function(date) {
-      channel.push("get_text", ["Reflection", date, version_list()])
+      var ref = ["Reflection", date];
+      ref.push( version_list() )
+      channel.push("get_text", ref);
     })
   
   } // end of mindex
@@ -402,6 +406,7 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
   })
   
   channel.on('eu_today', data => {
+    console.log("EU TODAY @ 407")
     data.config = init_config_model();
     $("#readings")
       .data("psalms",       readingList(data.ps) )
