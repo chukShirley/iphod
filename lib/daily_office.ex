@@ -1013,7 +1013,7 @@ defmodule DailyReading do
             "Wednesday" => %{title: "Wednesday",
                             colors: ["green"],
                             mp1: [%{style: "req", read: "Jer 5:20-end"}],
-                            mp2: [%{style: "req", read: "2 Cor 5:20-7:1"}],
+                            mp2: [%{style: "req", read: "2 Cor 5:20-end, 6:1-end, 7:1"}],
                             ep1: [%{style: "req", read: "Jer 6:1-21"},%{style: "opt", read: "Jer 6:22-30"}],
                             ep2: [%{style: "req", read: "2 Cor 7:2-end"}]
                             },
