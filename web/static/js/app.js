@@ -342,6 +342,11 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
       channel.push("get_text", ref);
     })
   
+    elmMPanelApp.ports.requestReading.subscribe(function(request) {
+      request.push( version_list() )
+      channel.push("get_lesson", request)
+    })
+  
   } // end of mindex
 
   
@@ -382,7 +387,7 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
   })
 
   $("#reflection-today-button").click( function() {
-    channel.push("get_text", ["Reflection", (new Date).toDateString(), version_list()])
+    channel.push("get_text", ["Reflection", (new Date).toDateString(), version_list() ])
   });
 
   $("#next-sunday-button").click( function() {
@@ -472,7 +477,8 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
         , mon = mons[d.getMonth()]
       date = dow + " " + mon + " " + d.getDate() + ", " + d.getFullYear();
     }
-    var request = [of_type, date].push(version_list())
+    var request = [of_type, date];
+    request.push( version_list() );
     channel.push("get_text", request);
   });
   
@@ -483,7 +489,9 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     // where the problem was
     var this_service = $("#these_readings").data("service")
       , this_date = $("#these_readings").data("date")
-      , request = [this_service, this_date].push( version_list() )
+      , request = [this_service, this_date];
+
+    request.push( version_list() );
     channel.push("get_text", request);
     $(window).scrollTop(0);
   }

@@ -87,8 +87,13 @@ defmodule Iphod.IphodChannel do
     {:noreply, socket}
   end
 
+  def handle_request("get_text", ["nil" | _t], socket) do
+    # IO.puts ">>>>> NIL REQUEST"
+    {:noreply, socket}
+  end
+
   def handle_request("get_text", ["Reflection", tail], socket) do
-    IO.puts ">>>>> BAD GET REFLECTION"
+    # IO.puts ">>>>> BAD GET REFLECTION"
     {:noreply, socket}
   end
 
@@ -131,7 +136,7 @@ defmodule Iphod.IphodChannel do
   def handle_request("get_text", date, socket) do
     IO.puts ">>>>> GETTEXT ON DATE: #{inspect date}"
     IEx.pry
-    # handle_request("get_text", ["Reflection", date], socket)
+    handle_request("get_text", ["Reflection", date], socket)
     handle_request("get_text", ["EU", date], socket)
     handle_request("get_text", ["MP", date], socket)
     handle_request("get_text", ["EP", date], socket)
@@ -147,16 +152,19 @@ defmodule Iphod.IphodChannel do
     {:noreply, socket}
   end
   
-  def handle_request("get_lesson", [section, version, date], socket) when section in ~w(mp1 mp2 mpp ep1 ep2 epp) do
+  def handle_request("get_lesson", [section, date, versions], socket) when section in ~w(mp1 mp2 mpp ep1 ep2 epp) do
     day = text_to_date date
-    lesson = DailyReading.lesson(day, section, version)
+    ver = use_version(section, versions)
+    IO.puts ">>>>> GET MPEP LESSON: #{section}, #{inspect date}, #{inspect ver}"
+    lesson = DailyReading.lesson(day, section, ver)
     push socket, "update_lesson", %{lesson: lesson}
     {:noreply, socket}
   end
 
-  def handle_request("get_lesson", [section, version, date], socket) when section in ~w(ot ps nt gs) do
+  def handle_request("get_lesson", [section, date, versions], socket) when section in ~w(ot ps nt gs) do
     day = text_to_date date
-    lesson = SundayReading.lesson(day, section, version)
+    IO.puts ">>>>> GET EU LESSON: #{section}, #{inspect date}, #{inspect versions}"
+    lesson = SundayReading.lesson(day, section, versions)
     push socket, "update_lesson", %{lesson: lesson}
     {:noreply, socket}
   end
@@ -219,6 +227,21 @@ end
   def versions_map(:mp, [ps, ot, nt, gs]), do: %{mpp: ps, mp1: ot, mp2: nt}
   def versions_map(:ep, [ps, ot, nt, gs]), do: %{epp: ps, ep1: nt, ep2: gs}
 
+  def use_version(section, versions) do
+    case section do
+      "ot"  -> versions_map(:eu, versions).ot
+      "ps"  -> versions_map(:eu, versions).ps
+      "nt"  -> versions_map(:eu, versions).nt
+      "gs"  -> versions_map(:eu, versions).gs
+      "mpp" -> versions_map(:eu, versions).ps
+      "mp1" -> versions_map(:eu, versions).ot
+      "mp2" -> versions_map(:eu, versions).nt
+      "epp" -> versions_map(:eu, versions).ps
+      "ep1" -> versions_map(:eu, versions).nt
+      "ep2" -> versions_map(:eu, versions).gs
+      _  -> "ESV"
+    end
+  end
   # Add authorization logic here as required.
   defp authorized?(_payload) do
     true

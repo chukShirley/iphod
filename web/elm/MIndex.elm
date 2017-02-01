@@ -132,7 +132,6 @@ update msg model =
 
     UpdateReflection reflection -> 
       let
-        foo = Debug.log "UPDATE REFLECTION" ()
         newModel = 
           {model  | reflection = reflection }
       in

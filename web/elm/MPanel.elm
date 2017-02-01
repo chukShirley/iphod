@@ -63,11 +63,9 @@ update msg model =
 
     GetLesson list -> (model, requestReading list)
 
-    GetAllLessons list -> 
-      (model, requestService list)
+    GetAllLessons list -> (model, requestService list)
 
-    GetReflection date -> 
-      (model, requestReflection date)
+    GetReflection date -> (model, requestReflection date)
 
 
 -- VIEW
@@ -94,10 +92,10 @@ euchReadings model =
   div []
   [ p [ class "panel-paragraph service-name" ] [ button [onClick (GetAllLessons ["EU", model.date] )] [text "Eucharist"] ]
   , ul [ class "service-readings" ]
-    [ li [class "passage-section"] [ passageList "OT" "eu" "ot" model.ot ]
-    , li [class "passage-section"] [ passageList "PS" "eu" "ps" model.ps ]
-    , li [class "passage-section"] [ passageList "NT" "eu" "nt" model.nt ]
-    , li [class "passage-section"] [ passageList "GS" "eu" "gs" model.gs ]
+    [ li [class "passage-section"] [ passageList model "OT" "eu" "ot" model.ot ]
+    , li [class "passage-section"] [ passageList model "PS" "eu" "ps" model.ps ]
+    , li [class "passage-section"] [ passageList model "NT" "eu" "nt" model.nt ]
+    , li [class "passage-section"] [ passageList model "GS" "eu" "gs" model.gs ]
     ]
   ]
 
@@ -106,9 +104,9 @@ mpReadings model =
   div []
   [ p [ class "panel-paragraph service-name" ] [ button [onClick (GetAllLessons ["MP", model.date] )] [text "Morning Prayer"] ]
   , ul [ class "service-readings" ]
-    [ li [class "passage-section"] [ passageList "First"  "mp" "ot" model.mp1 ]
-    , li [class "passage-section"] [ passageList "Second" "mp" "nt" model.mp2 ]
-    , li [class "passage-section"] [ passageList "Psalms" "mp" "ps" model.mpp ]
+    [ li [class "passage-section"] [ passageList model "First"  "mp" "mp1" model.mp1 ]
+    , li [class "passage-section"] [ passageList model "Second" "mp" "mp2" model.mp2 ]
+    , li [class "passage-section"] [ passageList model "Psalms" "mp" "mpp" model.mpp ]
     ]
   ]
 
@@ -117,17 +115,17 @@ epReadings model =
   div []
   [ p [ class "panel-paragraph service-name" ] [ button [onClick (GetAllLessons ["EP", model.date] )] [text "Evening Prayer"] ]
   , ul [ class "service-readings" ]
-    [ li [class "passage-section"] [ passageList "First"  "ep" "ot" model.ep1 ]
-    , li [class "passage-section"] [ passageList "Second" "ep" "nt" model.ep2 ]
-    , li [class "passage-section"] [ passageList "Psalms" "ep" "ps" model.epp ]
+    [ li [class "passage-section"] [ passageList model "First"  "ep" "ep1" model.ep1 ]
+    , li [class "passage-section"] [ passageList model "Second" "ep" "ep2" model.ep2 ]
+    , li [class "passage-section"] [ passageList model "Psalms" "ep" "epp" model.epp ]
     ]
   ]
 
 
-passageList: String -> String -> String -> List String -> Html Msg
-passageList title service section vss =
+passageList: Model -> String -> String -> String -> List String -> Html Msg
+passageList model title service section vss =
   let 
-    liVss vs = li [class "reading-li"] [ button [onClick (GetLesson [vs, section, service])] [text vs] ]
+    liVss vs = li [class "reading-li"] [ button [onClick (GetLesson [section, model.date])] [text vs] ]
   in
     div []
     [ p [ class "section-title" ] [ text title ]
