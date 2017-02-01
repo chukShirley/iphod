@@ -12,7 +12,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Legereme Desk</title>
+    <title>Legereme</title>
     <link rel="apple-touch-icon-precomposed" href="/priv/apple-touch-icon-precomposed.png" />
     <link rel="apple-touch-icon" href="/priv/apple-touch-icon.png" />
     <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>"  />
