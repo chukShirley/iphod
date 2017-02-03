@@ -1,14 +1,13 @@
 APP="iphod"
 
 BUILD_HOST="legereme.com"
-BUILD_USER="frpaulas"
+BUILD_USER="elixir_builder"
 BUILD_AT="/home/frpaulas/iphod_build"
 
 STAGING_HOST="legereme.com"
-STAGING_USER="frpaulas"
+STAGING_USER="elixir_builder"
 TEST_AT="/home/frpaulas/iphod_stage"
 
 PRODUCTION_HOSTS="legereme.com"
-PRODUCTION_USER="frpaulas"
+PRODUCTION_USER="elixir_builder"
 DELIVER_TO="/home/frpaulas/iphod"
-
