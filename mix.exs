@@ -22,8 +22,8 @@ defmodule Iphod.Mixfile do
      applications: [:phoenix, :phoenix_html, :phoenix_pubsub,
                     :phoenix_live_reload, :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :timex, :httpoison,
-                    :mailgun, :earmark
-#                    :edeliver # keep at end!
+                    :mailgun, :earmark,
+                    :edeliver # keep at end!
                   ]
     ]
   end
@@ -55,9 +55,9 @@ defmodule Iphod.Mixfile do
       # {:mock, github: "~> 0.2.0", only: :dev},
       {:mix_test_watch, "~> 0.2", only: :dev},
       {:dogma, "~> 0.1", only: :dev},
-      {:mix_test_watch, "~> 0.2.6", only: :dev}
-#      {:edeliver, "~> 1.4.0"},
-#      {:distillery, ">= 0.8.0", warn_missing: false}
+      {:mix_test_watch, "~> 0.2.6", only: :dev},
+      {:edeliver, "~> 1.4.0"},
+      {:distillery, ">= 0.8.0", warn_missing: false}
 
      # {:exometer_core, "~> 1.4.0"},
      # {:exometer, "~> 1.2.1"},

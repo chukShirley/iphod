@@ -303,6 +303,12 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     channel.on("single_lesson", data => {
       elmMindexApp.ports.portOneLesson.send(data.resp)
     })
+
+    channel.on('update_lesson', data => {
+      data.config = init_config_model();
+      elmMindexApp.ports.portLesson.send(data.lesson);
+    })
+
     
   
     // calendar 

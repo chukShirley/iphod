@@ -12,6 +12,7 @@ config :iphod, Iphod.Endpoint,
   code_reloader: true,
   cache_static_lookup: false,
   check_origin: false,
+  secret_key_base: "${SECRET_KEYBASE}",
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin", cd: Path.expand("../", __DIR__)]]
   # url: [host: "localhost"],
   # root: ".",
@@ -45,10 +46,11 @@ config :phoenix, :stacktrace_depth, 20
 # config :phoenix, :serve_end_points, true
 
 # Configure your database
-config :iphod, Iphod.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: "frpaulas",
-  password: "Barafundle1570",
-  database: "legereme",
-  hostname: "legereme.com",
-  pool_size: 10
+config :iphod,    Iphod.Repo,
+       adapter:   Ecto.Adapters.Postgres,
+       hostname:  System.get_env("DB_HOSTNAME"),
+       username:  System.get_env("DB_USER"),
+       password:  System.get_env("DB_PASSWORD"),
+       database:  System.get_env("DB_NAME"),
+       pool_size: 10
+

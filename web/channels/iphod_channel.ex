@@ -38,9 +38,9 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_in(request, params, socket) do
-    IO.puts ">>>>> #{request}, #{inspect params}"
+    # IO.puts ">>>>> #{request}, #{inspect params}"
     response = handle_request(request, params, socket)
-    if params |> hd == "Reflection", do: raise "BAD REQUEST: #{request}, #{inspect params}"
+    # if params |> hd == "Reflection", do: raise "BAD REQUEST: #{request}, #{inspect params}"
     response
   end
 
@@ -134,8 +134,8 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_request("get_text", date, socket) do
-    IO.puts ">>>>> GETTEXT ON DATE: #{inspect date}"
-    IEx.pry
+#    IO.puts ">>>>> GETTEXT ON DATE: #{inspect date}"
+#    IEx.pry
     handle_request("get_text", ["Reflection", date], socket)
     handle_request("get_text", ["EU", date], socket)
     handle_request("get_text", ["MP", date], socket)
@@ -163,8 +163,7 @@ defmodule Iphod.IphodChannel do
 
   def handle_request("get_lesson", [section, date, versions], socket) when section in ~w(ot ps nt gs) do
     day = text_to_date date
-    IO.puts ">>>>> GET EU LESSON: #{section}, #{inspect date}, #{inspect versions}"
-    lesson = SundayReading.lesson(day, section, versions)
+    lesson = SundayReading.lesson(day, section, use_version(section, versions))
     push socket, "update_lesson", %{lesson: lesson}
     {:noreply, socket}
   end
@@ -210,7 +209,6 @@ end
       {:ok, user} -> 
         broadcast socket, "shout", payload
       {:error, changeset} ->
-        # broadcast socket, "shout", payload
         push socket, "submitted", %{resp: "error"}
     end
     {:noreply, socket}

@@ -13,12 +13,18 @@ config :iphod, Iphod.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  url: [host: "localhost"],
+  http: [port: {:system, "PORT"}],
+  url: [host: "localhost",
+        scheme: "http",
+        port: {:system, "PORT"}
+      ],
   root: Path.dirname(__DIR__),
-  secret_key_base: "aSNEmJnAzMWTMqeNpHIZaQV5z1aNX6/fYT/OLyaJIXAWXzZe8ZllE180Tf3Iz/Ll",
+  server: true,
   render_errors: [accepts: ~w(html json)],
   pubsub: [name: Iphod.PubSub,
            adapter: Phoenix.PubSub.PG2]
+
+import_config "#{Mix.env}.exs"
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -33,11 +39,6 @@ if Mix.env == :dev do
     clear: true,
     tasks: ~w(test dogma)
 end
-
-# Import environment specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
-import_config "config.secret.exs"
 
 # Configure phoenix generators
 config :phoenix, :generators,

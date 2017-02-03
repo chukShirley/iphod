@@ -68,7 +68,7 @@ port portMP: (Models.DailyMP -> msg) -> Sub msg
 
 port portEP: (Models.DailyEP -> msg) -> Sub msg
 
-port portOneLesson: (List Models.Lesson -> msg) -> Sub msg
+port portLesson: (List Models.Lesson -> msg) -> Sub msg
 
 port portReflection: (Models.Reflection -> msg) -> Sub msg
 
@@ -82,7 +82,7 @@ subscriptions model =
   [ portEU UpdateEU
   , portMP UpdateMP
   , portEP UpdateEP
-  , portOneLesson UpdateOneLesson
+  , portLesson UpdateLesson
   , portReflection UpdateReflection
   ]
 
@@ -95,7 +95,7 @@ type Msg
   | UpdateMP Models.DailyMP
   | UpdateEP Models.DailyEP
   | UpdateReflection Models.Reflection
-  | UpdateOneLesson (List Models.Lesson)
+  | UpdateLesson (List Models.Lesson)
   | ModEU Sunday.Msg
   | ModMP MPReading.Msg
   | ModEP EPReading.Msg
@@ -137,7 +137,7 @@ update msg model =
       in
         (newModel, Cmd.none)
 
-    UpdateOneLesson lesson ->
+    UpdateLesson lesson ->
       let
         tModel = initModel
         newModel = {tModel | oneLesson = lesson}
