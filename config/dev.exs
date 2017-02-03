@@ -12,7 +12,7 @@ config :iphod, Iphod.Endpoint,
   code_reloader: true,
   cache_static_lookup: false,
   check_origin: false,
-  secret_key_base: "${SECRET_KEYBASE}",
+  secret_key_base: System.get_env("SECRET_KEYBASE"),
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin", cd: Path.expand("../", __DIR__)]]
   # url: [host: "localhost"],
   # root: ".",

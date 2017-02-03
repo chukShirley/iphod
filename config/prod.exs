@@ -19,7 +19,7 @@ config :iphod, Iphod.Endpoint,
        ],
 # #  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/manifest.json",
-  secret_key_base: ${"SECRET_KEY_BASE"},
+  secret_key_base: System.get_env("SECRET_KEYBASE"),
   server: true
 # 
 # # Do not print debug messages in production
@@ -30,14 +30,22 @@ config :iphod, Iphod.Endpoint,
 # # To get SSL working, you will need to add the `https` key
 # # to the previous section and set your `:url` port to 443:
 # #
-config :iphod, Iphod.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  username: ${"DB_USER"},
-  password: ${"DB_PASSWORD"},
-  database: ${"DB_NAME"},
-  hostname: ${"DB_HOSTNAME"},
-#  url: System.get_env("DB_URL")[host: "example.com", port: 443],
-  pool_size: 10
+# config :iphod, Iphod.Repo,
+#   adapter: Ecto.Adapters.Postgres,
+#   username: ${"DB_USER"},
+#   password: ${"DB_PASSWORD"},
+#   database: ${"DB_NAME"},
+#   hostname: ${"DB_HOSTNAME"},
+#   url: System.get_env("DB_URL")[host: "example.com", port: 443],
+#   pool_size: 10
+
+config :iphod,    Iphod.Repo,
+       adapter:   Ecto.Adapters.Postgres,
+       hostname:  System.get_env("DB_HOSTNAME"),
+       username:  System.get_env("DB_USER"),
+       password:  System.get_env("DB_PASSWORD"),
+       database:  System.get_env("DB_NAME"),
+       pool_size: 10
 # 
 #
 # Where those two env variables return an absolute path to
