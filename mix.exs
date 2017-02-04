@@ -45,7 +45,7 @@ defmodule Iphod.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.9"},
       {:cowboy, "~> 1.0"},
-      {:exrm, "~> 1.0.8", only: :prod},
+      # {:exrm, "~> 1.0.8", only: :prod},
       # {:timex, github: "frpaulas/timex"},
       {:timex, "~> 3.1.8"},
       {:httpoison, "~> 0.11.0"},
