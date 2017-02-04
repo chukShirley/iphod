@@ -4,7 +4,7 @@ BUILD_HOST="legereme.com"
 BUILD_USER="elixir_builder"
 BUILD_AT="/home/frpaulas/iphod_build"
 
-STAGING_HOST="legereme.com"
+STAGING_HOSTS="legereme.com"
 STAGING_USER="elixir_builder"
 TEST_AT="/home/frpaulas/iphod_stage"
 
