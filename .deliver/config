@@ -10,4 +10,4 @@ TEST_AT="/home/frpaulas/iphod_stage"
 
 PRODUCTION_HOSTS="legereme.com"
 PRODUCTION_USER="elixir_builder"
-DELIVER_TO="/home/frpaulas/iphod"
+DELIVER_TO="/home/frpaulas/legereme"
