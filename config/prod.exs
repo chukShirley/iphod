@@ -16,7 +16,7 @@ config :iphod, Iphod.Endpoint,
   http: [port: 8888],
   url: [  scheme: "http",
           host: "legereme.com", 
-          port: 80
+          port: 8888
        ],
 # #  force_ssl: [rewrite_on: [:x_forwarded_proto]],
   cache_static_manifest: "priv/static/manifest.json",
