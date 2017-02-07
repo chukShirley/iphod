@@ -8,16 +8,16 @@ use Mix.Config
 # with brunch.io to recompile .js and .css sources.
 config :iphod, Iphod.Endpoint,
   http: [port: 4000],
+  url: [host: "localhost", port: 4000],
+  root: ".",
+  server: true,
+  version: "0.0.1", #Mix.Project.config[:version],
   debug_errors: true,
   code_reloader: true,
   cache_static_lookup: false,
   check_origin: false,
   secret_key_base: System.get_env("SECRET_KEYBASE"),
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin", cd: Path.expand("../", __DIR__)]]
-  # url: [host: "localhost"],
-  # root: ".",
-  # version: "0.0.1", #Mix.Project.config[:version],
-  # server: true,
 
 # Watch static and templates for browser reloading.
 config :iphod, Iphod.Endpoint,

@@ -9,9 +9,8 @@ defmodule Iphod.Mixfile do
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     aliases: aliases,
-     timex: "~> 0.13.4",
-     deps: deps]
+     aliases: aliases(),
+     deps: deps()]
   end
 
   # Configuration for the OTP application.
@@ -19,11 +18,12 @@ defmodule Iphod.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {Iphod, []},
-     applications: [:phoenix, :phoenix_html, :phoenix_pubsub,
-                    :phoenix_live_reload, :cowboy, :logger, :gettext,
+     applications: [:mix, :phoenix, :phoenix_html, :phoenix_pubsub, :phoenix_integration,
+                    # :phoenix_live_reload, 
+                    :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :timex, :httpoison,
-                    :mailgun, :earmark,
-                    :edeliver # keep at end!
+                    :mailgun, :earmark, :floki
+                    # :edeliver # keep at end!
                   ]
     ]
   end
@@ -41,11 +41,12 @@ defmodule Iphod.Mixfile do
       {:ecto, "~> 2.0.4"},
       {:phoenix_ecto, "~> 3.0.1"},
       {:phoenix_html, ">= 2.6.2"},
-      {:phoenix_live_reload, "~> 1.0"},
+      # {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_integration, "~> 0.1"},
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.9"},
       {:cowboy, "~> 1.0"},
-      # {:exrm, "~> 1.0.8", only: :prod},
+      # {:exrm, "~> 1.0"},
       # {:timex, github: "frpaulas/timex"},
       {:timex, "~> 3.1.8"},
       {:httpoison, "~> 0.11.0"},
@@ -56,9 +57,8 @@ defmodule Iphod.Mixfile do
       {:mix_test_watch, "~> 0.2", only: :dev},
       {:dogma, "~> 0.1", only: :dev},
       {:mix_test_watch, "~> 0.2.6", only: :dev},
-      {:edeliver, "~> 1.4.0"},
-      {:distillery, ">= 0.8.0", warn_missing: false}
-
+      # {:edeliver, "~> 1.4.0"},
+      {:distillery, "~> 1.1"}
      # {:exometer_core, "~> 1.4.0"},
      # {:exometer, "~> 1.2.1"},
      # {:edown, github: "uwiger/edown", tag: "0.7", override: true}
