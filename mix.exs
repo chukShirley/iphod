@@ -22,8 +22,8 @@ defmodule Iphod.Mixfile do
                     # :phoenix_live_reload, 
                     :cowboy, :logger, :gettext,
                     :phoenix_ecto, :postgrex, :timex, :httpoison,
-                    :mailgun, :earmark, :floki
-                    # :edeliver # keep at end!
+                    :mailgun, :earmark, :floki,
+                    :edeliver # keep at end!
                   ]
     ]
   end
@@ -57,7 +57,7 @@ defmodule Iphod.Mixfile do
       {:mix_test_watch, "~> 0.2", only: :dev},
       {:dogma, "~> 0.1", only: :dev},
       {:mix_test_watch, "~> 0.2.6", only: :dev},
-      # {:edeliver, "~> 1.4.0"},
+      {:edeliver, "~> 1.4.0"},
       {:distillery, "~> 1.1"}
      # {:exometer_core, "~> 1.4.0"},
      # {:exometer, "~> 1.2.1"},
