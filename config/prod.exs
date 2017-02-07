@@ -21,7 +21,6 @@ config :iphod, Iphod.Endpoint,
   cache_static_manifest: "priv/static/manifest.json",
   # secret_key_base: System.get_env("SECRET_KEYBASE"),
   secret_key_base:  "!jy!R95NwKCk&=kXD_h9+_sUdgY2P_Iu9Db$MM6KdDmsWEV!QS#1Emguzxt#hCrL",
-,
   server: true,
   version: Mix.Project.config[:version]
 
