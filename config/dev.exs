@@ -48,9 +48,9 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :iphod,    Iphod.Repo,
        adapter:   Ecto.Adapters.Postgres,
-       hostname:  System.get_env("DB_HOSTNAME"),
-       username:  System.get_env("DB_USER"),
-       password:  System.get_env("DB_PASSWORD"),
-       database:  System.get_env("DB_NAME"),
+       hostname:  "legereme.com",
+       username:  "frpaulas",
+       password:  "Barafundle1570",
+       database:  "legereme",
        pool_size: 10
 

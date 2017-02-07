@@ -1,3 +1,4 @@
+require IEx
 defmodule BibleVersions do
   @url "https://bibles.org/v2/versions.js"
   @username "P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT" 
@@ -18,8 +19,15 @@ defmodule BibleVersions do
 
   def build do
     auth = [basic_auth: {@username, @password}]
-    case HTTPoison.get(@url, [{"Accept", "application/jsonrequest"}], [hackney: auth, follow_redirect: true]) do
-      {:ok, resp} -> 
+    {ok, resp} = try do
+      HTTPoison.get(@url, [{"Accept", "application/jsonrequest"}], [hackney: auth, follow_redirect: true])
+    rescue
+      e in RuntimeError -> 
+        {:error, %{status_code: 500}} # call it `internal server error`
+    end
+
+    map = case resp.status_code do
+      200 ->
         body = 
           resp.body
           |> Poison.decode!
@@ -28,19 +36,19 @@ defmodule BibleVersions do
           |> Enum.reduce(%{}, fn(ver, acc)-> 
             new_ver = ver |> Map.put("source", "bibles.org")
             acc = acc |> Map.put_new(ver["abbreviation"], new_ver) end)
-        map2 = 
-          get_bible_translations
-          |> Enum.reduce(map, fn(ver, acc)->
-            acc = acc |> Map.put_new(ver["abbreviation"], ver)
-          end)
-        local_bible_translations
-          |> Enum.reduce(map2, fn(ver, acc)->
-            acc = acc |> Map.put_new(ver["abbreviation"], ver)
-          end)
-
-      {:error, _reason} ->
-        "ESV List of Versions failed badly"
+      _ ->
+        IO.puts ">>>>> Bibles.org failed with status code: #{inspect resp.status_code}"
+        %{}
     end
+    map2 = 
+      get_bible_translations
+      |> Enum.reduce(map, fn(ver, acc)->
+        acc = acc |> Map.put_new(ver["abbreviation"], ver)
+      end)
+    local_bible_translations
+      |> Enum.reduce(map2, fn(ver, acc)->
+        acc = acc |> Map.put_new(ver["abbreviation"], ver)
+      end)
   end
 
 ###
@@ -66,7 +74,7 @@ defmodule BibleVersions do
       %{"lang_name_eng" =>"English", "name" => "Darby", "abbreviation" => "darby", "source" => "getbible.net"},
       %{"lang_name_eng" =>"English", "name" => "New American Standard", "abbreviation" => "nasb", "source" => "getbible.net"},
       %{"lang_name_eng" =>"English", "name" => "Young's Literal Translation", "abbreviation" => "ylt", "source" => "getbible.net"},
-#      %{"lang_name_eng" =>"English", "name" => "World English Bible", "abbreviation" => "web", "source" => "local"},
+      %{"lang_name_eng" =>"English", "name" => "English Standard Version", "abbreviation" => "ESV", "source" => "esvapi.org"},
       %{"lang_name_eng" =>"Esperanto", "name" => "Esperanto", "abbreviation" => "esperanto", "source" => "getbible.net"},
       %{"lang_name_eng" =>"Estonian", "name" => "Estonian", "abbreviation" => "estonian", "source" => "getbible.net"},
       %{"lang_name_eng" =>"Finnish", "name" => "Finnish Bible (1776)", "abbreviation" => "finnish1776", "source" => "getbible.net"},
