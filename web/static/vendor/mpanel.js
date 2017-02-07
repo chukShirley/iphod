@@ -8474,8 +8474,8 @@ var _user$project$MPanel$GetAllLessons = function (a) {
 var _user$project$MPanel$GetLesson = function (a) {
 	return {ctor: 'GetLesson', _0: a};
 };
-var _user$project$MPanel$passageList = F4(
-	function (title, service, section, vss) {
+var _user$project$MPanel$passageList = F5(
+	function (model, title, service, section, vss) {
 		var liVss = function (vs) {
 			return A2(
 				_elm_lang$html$Html$li,
@@ -8492,7 +8492,7 @@ var _user$project$MPanel$passageList = F4(
 								_elm_lang$html$Html_Events$onClick(
 								_user$project$MPanel$GetLesson(
 									_elm_lang$core$Native_List.fromArray(
-										[vs, section, service])))
+										[section, model.date])))
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
@@ -8568,7 +8568,7 @@ var _user$project$MPanel$euchReadings = function (model) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A4(_user$project$MPanel$passageList, 'OT', 'eu', 'ot', model.ot)
+								A5(_user$project$MPanel$passageList, model, 'OT', 'eu', 'ot', model.ot)
 							])),
 						A2(
 						_elm_lang$html$Html$li,
@@ -8578,7 +8578,7 @@ var _user$project$MPanel$euchReadings = function (model) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A4(_user$project$MPanel$passageList, 'PS', 'eu', 'ps', model.ps)
+								A5(_user$project$MPanel$passageList, model, 'PS', 'eu', 'ps', model.ps)
 							])),
 						A2(
 						_elm_lang$html$Html$li,
@@ -8588,7 +8588,7 @@ var _user$project$MPanel$euchReadings = function (model) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A4(_user$project$MPanel$passageList, 'NT', 'eu', 'nt', model.nt)
+								A5(_user$project$MPanel$passageList, model, 'NT', 'eu', 'nt', model.nt)
 							])),
 						A2(
 						_elm_lang$html$Html$li,
@@ -8598,7 +8598,7 @@ var _user$project$MPanel$euchReadings = function (model) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A4(_user$project$MPanel$passageList, 'GS', 'eu', 'gs', model.gs)
+								A5(_user$project$MPanel$passageList, model, 'GS', 'eu', 'gs', model.gs)
 							]))
 					]))
 			]));
@@ -8648,7 +8648,7 @@ var _user$project$MPanel$mpReadings = function (model) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A4(_user$project$MPanel$passageList, 'First', 'mp', 'ot', model.mp1)
+								A5(_user$project$MPanel$passageList, model, 'First', 'mp', 'mp1', model.mp1)
 							])),
 						A2(
 						_elm_lang$html$Html$li,
@@ -8658,7 +8658,7 @@ var _user$project$MPanel$mpReadings = function (model) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A4(_user$project$MPanel$passageList, 'Second', 'mp', 'nt', model.mp2)
+								A5(_user$project$MPanel$passageList, model, 'Second', 'mp', 'mp2', model.mp2)
 							])),
 						A2(
 						_elm_lang$html$Html$li,
@@ -8668,7 +8668,7 @@ var _user$project$MPanel$mpReadings = function (model) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A4(_user$project$MPanel$passageList, 'Psalms', 'mp', 'ps', model.mpp)
+								A5(_user$project$MPanel$passageList, model, 'Psalms', 'mp', 'mpp', model.mpp)
 							]))
 					]))
 			]));
@@ -8718,7 +8718,7 @@ var _user$project$MPanel$epReadings = function (model) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A4(_user$project$MPanel$passageList, 'First', 'ep', 'ot', model.ep1)
+								A5(_user$project$MPanel$passageList, model, 'First', 'ep', 'ep1', model.ep1)
 							])),
 						A2(
 						_elm_lang$html$Html$li,
@@ -8728,7 +8728,7 @@ var _user$project$MPanel$epReadings = function (model) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A4(_user$project$MPanel$passageList, 'Second', 'ep', 'nt', model.ep2)
+								A5(_user$project$MPanel$passageList, model, 'Second', 'ep', 'ep2', model.ep2)
 							])),
 						A2(
 						_elm_lang$html$Html$li,
@@ -8738,7 +8738,7 @@ var _user$project$MPanel$epReadings = function (model) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								A4(_user$project$MPanel$passageList, 'Psalms', 'ep', 'ps', model.epp)
+								A5(_user$project$MPanel$passageList, model, 'Psalms', 'ep', 'epp', model.epp)
 							]))
 					]))
 			]));

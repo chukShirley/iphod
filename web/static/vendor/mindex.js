@@ -11943,7 +11943,7 @@ var _user$project$MIndex$update = F2(
 					model,
 					{reflection: _p0._0});
 				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'UpdateOneLesson':
+			case 'UpdateLesson':
 				var tModel = _user$project$MIndex$initModel;
 				var newModel = _elm_lang$core$Native_Utils.update(
 					tModel,
@@ -12170,162 +12170,12 @@ var _user$project$MIndex$portEU = _elm_lang$core$Native_Platform.incomingPort(
 																									function (show) {
 																										return A2(
 																											_elm_lang$core$Json_Decode$andThen,
-																											A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
-																											function (read) {
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'show_fn', _elm_lang$core$Json_Decode$bool),
+																											function (show_fn) {
 																												return A2(
 																													_elm_lang$core$Json_Decode$andThen,
-																													A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
-																													function (body) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
-																															function (id) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
-																																	function (section) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
-																																			function (version) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
-																																					function (altRead) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							A2(
-																																								_elm_lang$core$Json_Decode_ops[':='],
-																																								'notes',
-																																								_elm_lang$core$Json_Decode$list(
-																																									A2(
-																																										_elm_lang$core$Json_Decode$andThen,
-																																										A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
-																																										function (reading) {
-																																											return A2(
-																																												_elm_lang$core$Json_Decode$andThen,
-																																												A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
-																																												function (text) {
-																																													return A2(
-																																														_elm_lang$core$Json_Decode$andThen,
-																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
-																																														function (time) {
-																																															return _elm_lang$core$Json_Decode$succeed(
-																																																{reading: reading, text: text, time: time});
-																																														});
-																																												});
-																																										}))),
-																																							function (notes) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
-																																									function (cmd) {
-																																										return _elm_lang$core$Json_Decode$succeed(
-																																											{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																									});
-																																							});
-																																					});
-																																			});
-																																	});
-																															});
-																													});
-																											});
-																									});
-																							}))),
-																				function (ot) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						A2(
-																							_elm_lang$core$Json_Decode_ops[':='],
-																							'ps',
-																							_elm_lang$core$Json_Decode$list(
-																								A2(
-																									_elm_lang$core$Json_Decode$andThen,
-																									A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
-																									function (style) {
-																										return A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
-																											function (show) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
-																													function (read) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
-																															function (body) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
-																																	function (id) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
-																																			function (section) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
-																																					function (version) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
-																																							function (altRead) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									A2(
-																																										_elm_lang$core$Json_Decode_ops[':='],
-																																										'notes',
-																																										_elm_lang$core$Json_Decode$list(
-																																											A2(
-																																												_elm_lang$core$Json_Decode$andThen,
-																																												A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
-																																												function (reading) {
-																																													return A2(
-																																														_elm_lang$core$Json_Decode$andThen,
-																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
-																																														function (text) {
-																																															return A2(
-																																																_elm_lang$core$Json_Decode$andThen,
-																																																A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
-																																																function (time) {
-																																																	return _elm_lang$core$Json_Decode$succeed(
-																																																		{reading: reading, text: text, time: time});
-																																																});
-																																														});
-																																												}))),
-																																									function (notes) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
-																																											function (cmd) {
-																																												return _elm_lang$core$Json_Decode$succeed(
-																																													{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																											});
-																																									});
-																																							});
-																																					});
-																																			});
-																																	});
-																															});
-																													});
-																											});
-																									}))),
-																						function (ps) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								A2(
-																									_elm_lang$core$Json_Decode_ops[':='],
-																									'nt',
-																									_elm_lang$core$Json_Decode$list(
-																										A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
-																											function (style) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
-																													function (show) {
+																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show_vn', _elm_lang$core$Json_Decode$bool),
+																													function (show_vn) {
 																														return A2(
 																															_elm_lang$core$Json_Decode$andThen,
 																															A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
@@ -12379,7 +12229,7 @@ var _user$project$MIndex$portEU = _elm_lang$core$Native_Platform.incomingPort(
 																																													A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
 																																													function (cmd) {
 																																														return _elm_lang$core$Json_Decode$succeed(
-																																															{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																															{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
 																																													});
 																																											});
 																																									});
@@ -12389,22 +12239,32 @@ var _user$project$MIndex$portEU = _elm_lang$core$Native_Platform.incomingPort(
 																																	});
 																															});
 																													});
-																											}))),
-																								function (nt) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										A2(
-																											_elm_lang$core$Json_Decode_ops[':='],
-																											'gs',
-																											_elm_lang$core$Json_Decode$list(
-																												A2(
+																											});
+																									});
+																							}))),
+																				function (ot) {
+																					return A2(
+																						_elm_lang$core$Json_Decode$andThen,
+																						A2(
+																							_elm_lang$core$Json_Decode_ops[':='],
+																							'ps',
+																							_elm_lang$core$Json_Decode$list(
+																								A2(
+																									_elm_lang$core$Json_Decode$andThen,
+																									A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
+																									function (style) {
+																										return A2(
+																											_elm_lang$core$Json_Decode$andThen,
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																											function (show) {
+																												return A2(
 																													_elm_lang$core$Json_Decode$andThen,
-																													A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
-																													function (style) {
+																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show_fn', _elm_lang$core$Json_Decode$bool),
+																													function (show_fn) {
 																														return A2(
 																															_elm_lang$core$Json_Decode$andThen,
-																															A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
-																															function (show) {
+																															A2(_elm_lang$core$Json_Decode_ops[':='], 'show_vn', _elm_lang$core$Json_Decode$bool),
+																															function (show_vn) {
 																																return A2(
 																																	_elm_lang$core$Json_Decode$andThen,
 																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
@@ -12458,7 +12318,187 @@ var _user$project$MIndex$portEU = _elm_lang$core$Native_Platform.incomingPort(
 																																															A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
 																																															function (cmd) {
 																																																return _elm_lang$core$Json_Decode$succeed(
-																																																	{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																																	{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																															});
+																																													});
+																																											});
+																																									});
+																																							});
+																																					});
+																																			});
+																																	});
+																															});
+																													});
+																											});
+																									}))),
+																						function (ps) {
+																							return A2(
+																								_elm_lang$core$Json_Decode$andThen,
+																								A2(
+																									_elm_lang$core$Json_Decode_ops[':='],
+																									'nt',
+																									_elm_lang$core$Json_Decode$list(
+																										A2(
+																											_elm_lang$core$Json_Decode$andThen,
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
+																											function (style) {
+																												return A2(
+																													_elm_lang$core$Json_Decode$andThen,
+																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																													function (show) {
+																														return A2(
+																															_elm_lang$core$Json_Decode$andThen,
+																															A2(_elm_lang$core$Json_Decode_ops[':='], 'show_fn', _elm_lang$core$Json_Decode$bool),
+																															function (show_fn) {
+																																return A2(
+																																	_elm_lang$core$Json_Decode$andThen,
+																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'show_vn', _elm_lang$core$Json_Decode$bool),
+																																	function (show_vn) {
+																																		return A2(
+																																			_elm_lang$core$Json_Decode$andThen,
+																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
+																																			function (read) {
+																																				return A2(
+																																					_elm_lang$core$Json_Decode$andThen,
+																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
+																																					function (body) {
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
+																																							function (id) {
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																																									function (section) {
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																																											function (version) {
+																																												return A2(
+																																													_elm_lang$core$Json_Decode$andThen,
+																																													A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																													function (altRead) {
+																																														return A2(
+																																															_elm_lang$core$Json_Decode$andThen,
+																																															A2(
+																																																_elm_lang$core$Json_Decode_ops[':='],
+																																																'notes',
+																																																_elm_lang$core$Json_Decode$list(
+																																																	A2(
+																																																		_elm_lang$core$Json_Decode$andThen,
+																																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																																		function (reading) {
+																																																			return A2(
+																																																				_elm_lang$core$Json_Decode$andThen,
+																																																				A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																																				function (text) {
+																																																					return A2(
+																																																						_elm_lang$core$Json_Decode$andThen,
+																																																						A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																						function (time) {
+																																																							return _elm_lang$core$Json_Decode$succeed(
+																																																								{reading: reading, text: text, time: time});
+																																																						});
+																																																				});
+																																																		}))),
+																																															function (notes) {
+																																																return A2(
+																																																	_elm_lang$core$Json_Decode$andThen,
+																																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																																	function (cmd) {
+																																																		return _elm_lang$core$Json_Decode$succeed(
+																																																			{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																																	});
+																																															});
+																																													});
+																																											});
+																																									});
+																																							});
+																																					});
+																																			});
+																																	});
+																															});
+																													});
+																											}))),
+																								function (nt) {
+																									return A2(
+																										_elm_lang$core$Json_Decode$andThen,
+																										A2(
+																											_elm_lang$core$Json_Decode_ops[':='],
+																											'gs',
+																											_elm_lang$core$Json_Decode$list(
+																												A2(
+																													_elm_lang$core$Json_Decode$andThen,
+																													A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
+																													function (style) {
+																														return A2(
+																															_elm_lang$core$Json_Decode$andThen,
+																															A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																															function (show) {
+																																return A2(
+																																	_elm_lang$core$Json_Decode$andThen,
+																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'show_fn', _elm_lang$core$Json_Decode$bool),
+																																	function (show_fn) {
+																																		return A2(
+																																			_elm_lang$core$Json_Decode$andThen,
+																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'show_vn', _elm_lang$core$Json_Decode$bool),
+																																			function (show_vn) {
+																																				return A2(
+																																					_elm_lang$core$Json_Decode$andThen,
+																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
+																																					function (read) {
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
+																																							function (body) {
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
+																																									function (id) {
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																																											function (section) {
+																																												return A2(
+																																													_elm_lang$core$Json_Decode$andThen,
+																																													A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																																													function (version) {
+																																														return A2(
+																																															_elm_lang$core$Json_Decode$andThen,
+																																															A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																															function (altRead) {
+																																																return A2(
+																																																	_elm_lang$core$Json_Decode$andThen,
+																																																	A2(
+																																																		_elm_lang$core$Json_Decode_ops[':='],
+																																																		'notes',
+																																																		_elm_lang$core$Json_Decode$list(
+																																																			A2(
+																																																				_elm_lang$core$Json_Decode$andThen,
+																																																				A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																																				function (reading) {
+																																																					return A2(
+																																																						_elm_lang$core$Json_Decode$andThen,
+																																																						A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																																						function (text) {
+																																																							return A2(
+																																																								_elm_lang$core$Json_Decode$andThen,
+																																																								A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																								function (time) {
+																																																									return _elm_lang$core$Json_Decode$succeed(
+																																																										{reading: reading, text: text, time: time});
+																																																								});
+																																																						});
+																																																				}))),
+																																																	function (notes) {
+																																																		return A2(
+																																																			_elm_lang$core$Json_Decode$andThen,
+																																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																																			function (cmd) {
+																																																				return _elm_lang$core$Json_Decode$succeed(
+																																																					{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																																			});
+																																																	});
 																																															});
 																																													});
 																																											});
@@ -12638,162 +12678,12 @@ var _user$project$MIndex$portMP = _elm_lang$core$Native_Platform.incomingPort(
 																									function (show) {
 																										return A2(
 																											_elm_lang$core$Json_Decode$andThen,
-																											A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
-																											function (read) {
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'show_fn', _elm_lang$core$Json_Decode$bool),
+																											function (show_fn) {
 																												return A2(
 																													_elm_lang$core$Json_Decode$andThen,
-																													A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
-																													function (body) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
-																															function (id) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
-																																	function (section) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
-																																			function (version) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
-																																					function (altRead) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							A2(
-																																								_elm_lang$core$Json_Decode_ops[':='],
-																																								'notes',
-																																								_elm_lang$core$Json_Decode$list(
-																																									A2(
-																																										_elm_lang$core$Json_Decode$andThen,
-																																										A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
-																																										function (reading) {
-																																											return A2(
-																																												_elm_lang$core$Json_Decode$andThen,
-																																												A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
-																																												function (text) {
-																																													return A2(
-																																														_elm_lang$core$Json_Decode$andThen,
-																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
-																																														function (time) {
-																																															return _elm_lang$core$Json_Decode$succeed(
-																																																{reading: reading, text: text, time: time});
-																																														});
-																																												});
-																																										}))),
-																																							function (notes) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
-																																									function (cmd) {
-																																										return _elm_lang$core$Json_Decode$succeed(
-																																											{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																									});
-																																							});
-																																					});
-																																			});
-																																	});
-																															});
-																													});
-																											});
-																									});
-																							}))),
-																				function (mp1) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						A2(
-																							_elm_lang$core$Json_Decode_ops[':='],
-																							'mp2',
-																							_elm_lang$core$Json_Decode$list(
-																								A2(
-																									_elm_lang$core$Json_Decode$andThen,
-																									A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
-																									function (style) {
-																										return A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
-																											function (show) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
-																													function (read) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
-																															function (body) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
-																																	function (id) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
-																																			function (section) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
-																																					function (version) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
-																																							function (altRead) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									A2(
-																																										_elm_lang$core$Json_Decode_ops[':='],
-																																										'notes',
-																																										_elm_lang$core$Json_Decode$list(
-																																											A2(
-																																												_elm_lang$core$Json_Decode$andThen,
-																																												A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
-																																												function (reading) {
-																																													return A2(
-																																														_elm_lang$core$Json_Decode$andThen,
-																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
-																																														function (text) {
-																																															return A2(
-																																																_elm_lang$core$Json_Decode$andThen,
-																																																A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
-																																																function (time) {
-																																																	return _elm_lang$core$Json_Decode$succeed(
-																																																		{reading: reading, text: text, time: time});
-																																																});
-																																														});
-																																												}))),
-																																									function (notes) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
-																																											function (cmd) {
-																																												return _elm_lang$core$Json_Decode$succeed(
-																																													{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																											});
-																																									});
-																																							});
-																																					});
-																																			});
-																																	});
-																															});
-																													});
-																											});
-																									}))),
-																						function (mp2) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								A2(
-																									_elm_lang$core$Json_Decode_ops[':='],
-																									'mpp',
-																									_elm_lang$core$Json_Decode$list(
-																										A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
-																											function (style) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
-																													function (show) {
+																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show_vn', _elm_lang$core$Json_Decode$bool),
+																													function (show_vn) {
 																														return A2(
 																															_elm_lang$core$Json_Decode$andThen,
 																															A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
@@ -12847,7 +12737,187 @@ var _user$project$MIndex$portMP = _elm_lang$core$Native_Platform.incomingPort(
 																																													A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
 																																													function (cmd) {
 																																														return _elm_lang$core$Json_Decode$succeed(
-																																															{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																															{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																													});
+																																											});
+																																									});
+																																							});
+																																					});
+																																			});
+																																	});
+																															});
+																													});
+																											});
+																									});
+																							}))),
+																				function (mp1) {
+																					return A2(
+																						_elm_lang$core$Json_Decode$andThen,
+																						A2(
+																							_elm_lang$core$Json_Decode_ops[':='],
+																							'mp2',
+																							_elm_lang$core$Json_Decode$list(
+																								A2(
+																									_elm_lang$core$Json_Decode$andThen,
+																									A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
+																									function (style) {
+																										return A2(
+																											_elm_lang$core$Json_Decode$andThen,
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																											function (show) {
+																												return A2(
+																													_elm_lang$core$Json_Decode$andThen,
+																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show_fn', _elm_lang$core$Json_Decode$bool),
+																													function (show_fn) {
+																														return A2(
+																															_elm_lang$core$Json_Decode$andThen,
+																															A2(_elm_lang$core$Json_Decode_ops[':='], 'show_vn', _elm_lang$core$Json_Decode$bool),
+																															function (show_vn) {
+																																return A2(
+																																	_elm_lang$core$Json_Decode$andThen,
+																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
+																																	function (read) {
+																																		return A2(
+																																			_elm_lang$core$Json_Decode$andThen,
+																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
+																																			function (body) {
+																																				return A2(
+																																					_elm_lang$core$Json_Decode$andThen,
+																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
+																																					function (id) {
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																																							function (section) {
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																																									function (version) {
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																											function (altRead) {
+																																												return A2(
+																																													_elm_lang$core$Json_Decode$andThen,
+																																													A2(
+																																														_elm_lang$core$Json_Decode_ops[':='],
+																																														'notes',
+																																														_elm_lang$core$Json_Decode$list(
+																																															A2(
+																																																_elm_lang$core$Json_Decode$andThen,
+																																																A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																																function (reading) {
+																																																	return A2(
+																																																		_elm_lang$core$Json_Decode$andThen,
+																																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																																		function (text) {
+																																																			return A2(
+																																																				_elm_lang$core$Json_Decode$andThen,
+																																																				A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																				function (time) {
+																																																					return _elm_lang$core$Json_Decode$succeed(
+																																																						{reading: reading, text: text, time: time});
+																																																				});
+																																																		});
+																																																}))),
+																																													function (notes) {
+																																														return A2(
+																																															_elm_lang$core$Json_Decode$andThen,
+																																															A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																															function (cmd) {
+																																																return _elm_lang$core$Json_Decode$succeed(
+																																																	{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																															});
+																																													});
+																																											});
+																																									});
+																																							});
+																																					});
+																																			});
+																																	});
+																															});
+																													});
+																											});
+																									}))),
+																						function (mp2) {
+																							return A2(
+																								_elm_lang$core$Json_Decode$andThen,
+																								A2(
+																									_elm_lang$core$Json_Decode_ops[':='],
+																									'mpp',
+																									_elm_lang$core$Json_Decode$list(
+																										A2(
+																											_elm_lang$core$Json_Decode$andThen,
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
+																											function (style) {
+																												return A2(
+																													_elm_lang$core$Json_Decode$andThen,
+																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																													function (show) {
+																														return A2(
+																															_elm_lang$core$Json_Decode$andThen,
+																															A2(_elm_lang$core$Json_Decode_ops[':='], 'show_fn', _elm_lang$core$Json_Decode$bool),
+																															function (show_fn) {
+																																return A2(
+																																	_elm_lang$core$Json_Decode$andThen,
+																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'show_vn', _elm_lang$core$Json_Decode$bool),
+																																	function (show_vn) {
+																																		return A2(
+																																			_elm_lang$core$Json_Decode$andThen,
+																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
+																																			function (read) {
+																																				return A2(
+																																					_elm_lang$core$Json_Decode$andThen,
+																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
+																																					function (body) {
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
+																																							function (id) {
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																																									function (section) {
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																																											function (version) {
+																																												return A2(
+																																													_elm_lang$core$Json_Decode$andThen,
+																																													A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																													function (altRead) {
+																																														return A2(
+																																															_elm_lang$core$Json_Decode$andThen,
+																																															A2(
+																																																_elm_lang$core$Json_Decode_ops[':='],
+																																																'notes',
+																																																_elm_lang$core$Json_Decode$list(
+																																																	A2(
+																																																		_elm_lang$core$Json_Decode$andThen,
+																																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																																		function (reading) {
+																																																			return A2(
+																																																				_elm_lang$core$Json_Decode$andThen,
+																																																				A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																																				function (text) {
+																																																					return A2(
+																																																						_elm_lang$core$Json_Decode$andThen,
+																																																						A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																						function (time) {
+																																																							return _elm_lang$core$Json_Decode$succeed(
+																																																								{reading: reading, text: text, time: time});
+																																																						});
+																																																				});
+																																																		}))),
+																																															function (notes) {
+																																																return A2(
+																																																	_elm_lang$core$Json_Decode$andThen,
+																																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																																	function (cmd) {
+																																																		return _elm_lang$core$Json_Decode$succeed(
+																																																			{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																																	});
+																																															});
 																																													});
 																																											});
 																																									});
@@ -13026,162 +13096,12 @@ var _user$project$MIndex$portEP = _elm_lang$core$Native_Platform.incomingPort(
 																									function (show) {
 																										return A2(
 																											_elm_lang$core$Json_Decode$andThen,
-																											A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
-																											function (read) {
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'show_fn', _elm_lang$core$Json_Decode$bool),
+																											function (show_fn) {
 																												return A2(
 																													_elm_lang$core$Json_Decode$andThen,
-																													A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
-																													function (body) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
-																															function (id) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
-																																	function (section) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
-																																			function (version) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
-																																					function (altRead) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							A2(
-																																								_elm_lang$core$Json_Decode_ops[':='],
-																																								'notes',
-																																								_elm_lang$core$Json_Decode$list(
-																																									A2(
-																																										_elm_lang$core$Json_Decode$andThen,
-																																										A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
-																																										function (reading) {
-																																											return A2(
-																																												_elm_lang$core$Json_Decode$andThen,
-																																												A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
-																																												function (text) {
-																																													return A2(
-																																														_elm_lang$core$Json_Decode$andThen,
-																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
-																																														function (time) {
-																																															return _elm_lang$core$Json_Decode$succeed(
-																																																{reading: reading, text: text, time: time});
-																																														});
-																																												});
-																																										}))),
-																																							function (notes) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
-																																									function (cmd) {
-																																										return _elm_lang$core$Json_Decode$succeed(
-																																											{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																									});
-																																							});
-																																					});
-																																			});
-																																	});
-																															});
-																													});
-																											});
-																									});
-																							}))),
-																				function (ep1) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						A2(
-																							_elm_lang$core$Json_Decode_ops[':='],
-																							'ep2',
-																							_elm_lang$core$Json_Decode$list(
-																								A2(
-																									_elm_lang$core$Json_Decode$andThen,
-																									A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
-																									function (style) {
-																										return A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
-																											function (show) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
-																													function (read) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
-																															function (body) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
-																																	function (id) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
-																																			function (section) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
-																																					function (version) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
-																																							function (altRead) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									A2(
-																																										_elm_lang$core$Json_Decode_ops[':='],
-																																										'notes',
-																																										_elm_lang$core$Json_Decode$list(
-																																											A2(
-																																												_elm_lang$core$Json_Decode$andThen,
-																																												A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
-																																												function (reading) {
-																																													return A2(
-																																														_elm_lang$core$Json_Decode$andThen,
-																																														A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
-																																														function (text) {
-																																															return A2(
-																																																_elm_lang$core$Json_Decode$andThen,
-																																																A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
-																																																function (time) {
-																																																	return _elm_lang$core$Json_Decode$succeed(
-																																																		{reading: reading, text: text, time: time});
-																																																});
-																																														});
-																																												}))),
-																																									function (notes) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
-																																											function (cmd) {
-																																												return _elm_lang$core$Json_Decode$succeed(
-																																													{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																											});
-																																									});
-																																							});
-																																					});
-																																			});
-																																	});
-																															});
-																													});
-																											});
-																									}))),
-																						function (ep2) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								A2(
-																									_elm_lang$core$Json_Decode_ops[':='],
-																									'epp',
-																									_elm_lang$core$Json_Decode$list(
-																										A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
-																											function (style) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
-																													function (show) {
+																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show_vn', _elm_lang$core$Json_Decode$bool),
+																													function (show_vn) {
 																														return A2(
 																															_elm_lang$core$Json_Decode$andThen,
 																															A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
@@ -13235,7 +13155,187 @@ var _user$project$MIndex$portEP = _elm_lang$core$Native_Platform.incomingPort(
 																																													A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
 																																													function (cmd) {
 																																														return _elm_lang$core$Json_Decode$succeed(
-																																															{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																															{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																													});
+																																											});
+																																									});
+																																							});
+																																					});
+																																			});
+																																	});
+																															});
+																													});
+																											});
+																									});
+																							}))),
+																				function (ep1) {
+																					return A2(
+																						_elm_lang$core$Json_Decode$andThen,
+																						A2(
+																							_elm_lang$core$Json_Decode_ops[':='],
+																							'ep2',
+																							_elm_lang$core$Json_Decode$list(
+																								A2(
+																									_elm_lang$core$Json_Decode$andThen,
+																									A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
+																									function (style) {
+																										return A2(
+																											_elm_lang$core$Json_Decode$andThen,
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																											function (show) {
+																												return A2(
+																													_elm_lang$core$Json_Decode$andThen,
+																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show_fn', _elm_lang$core$Json_Decode$bool),
+																													function (show_fn) {
+																														return A2(
+																															_elm_lang$core$Json_Decode$andThen,
+																															A2(_elm_lang$core$Json_Decode_ops[':='], 'show_vn', _elm_lang$core$Json_Decode$bool),
+																															function (show_vn) {
+																																return A2(
+																																	_elm_lang$core$Json_Decode$andThen,
+																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
+																																	function (read) {
+																																		return A2(
+																																			_elm_lang$core$Json_Decode$andThen,
+																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
+																																			function (body) {
+																																				return A2(
+																																					_elm_lang$core$Json_Decode$andThen,
+																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
+																																					function (id) {
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																																							function (section) {
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																																									function (version) {
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																											function (altRead) {
+																																												return A2(
+																																													_elm_lang$core$Json_Decode$andThen,
+																																													A2(
+																																														_elm_lang$core$Json_Decode_ops[':='],
+																																														'notes',
+																																														_elm_lang$core$Json_Decode$list(
+																																															A2(
+																																																_elm_lang$core$Json_Decode$andThen,
+																																																A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																																function (reading) {
+																																																	return A2(
+																																																		_elm_lang$core$Json_Decode$andThen,
+																																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																																		function (text) {
+																																																			return A2(
+																																																				_elm_lang$core$Json_Decode$andThen,
+																																																				A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																				function (time) {
+																																																					return _elm_lang$core$Json_Decode$succeed(
+																																																						{reading: reading, text: text, time: time});
+																																																				});
+																																																		});
+																																																}))),
+																																													function (notes) {
+																																														return A2(
+																																															_elm_lang$core$Json_Decode$andThen,
+																																															A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																															function (cmd) {
+																																																return _elm_lang$core$Json_Decode$succeed(
+																																																	{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																															});
+																																													});
+																																											});
+																																									});
+																																							});
+																																					});
+																																			});
+																																	});
+																															});
+																													});
+																											});
+																									}))),
+																						function (ep2) {
+																							return A2(
+																								_elm_lang$core$Json_Decode$andThen,
+																								A2(
+																									_elm_lang$core$Json_Decode_ops[':='],
+																									'epp',
+																									_elm_lang$core$Json_Decode$list(
+																										A2(
+																											_elm_lang$core$Json_Decode$andThen,
+																											A2(_elm_lang$core$Json_Decode_ops[':='], 'style', _elm_lang$core$Json_Decode$string),
+																											function (style) {
+																												return A2(
+																													_elm_lang$core$Json_Decode$andThen,
+																													A2(_elm_lang$core$Json_Decode_ops[':='], 'show', _elm_lang$core$Json_Decode$bool),
+																													function (show) {
+																														return A2(
+																															_elm_lang$core$Json_Decode$andThen,
+																															A2(_elm_lang$core$Json_Decode_ops[':='], 'show_fn', _elm_lang$core$Json_Decode$bool),
+																															function (show_fn) {
+																																return A2(
+																																	_elm_lang$core$Json_Decode$andThen,
+																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'show_vn', _elm_lang$core$Json_Decode$bool),
+																																	function (show_vn) {
+																																		return A2(
+																																			_elm_lang$core$Json_Decode$andThen,
+																																			A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
+																																			function (read) {
+																																				return A2(
+																																					_elm_lang$core$Json_Decode$andThen,
+																																					A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
+																																					function (body) {
+																																						return A2(
+																																							_elm_lang$core$Json_Decode$andThen,
+																																							A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
+																																							function (id) {
+																																								return A2(
+																																									_elm_lang$core$Json_Decode$andThen,
+																																									A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																																									function (section) {
+																																										return A2(
+																																											_elm_lang$core$Json_Decode$andThen,
+																																											A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																																											function (version) {
+																																												return A2(
+																																													_elm_lang$core$Json_Decode$andThen,
+																																													A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																																													function (altRead) {
+																																														return A2(
+																																															_elm_lang$core$Json_Decode$andThen,
+																																															A2(
+																																																_elm_lang$core$Json_Decode_ops[':='],
+																																																'notes',
+																																																_elm_lang$core$Json_Decode$list(
+																																																	A2(
+																																																		_elm_lang$core$Json_Decode$andThen,
+																																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																																																		function (reading) {
+																																																			return A2(
+																																																				_elm_lang$core$Json_Decode$andThen,
+																																																				A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																																																				function (text) {
+																																																					return A2(
+																																																						_elm_lang$core$Json_Decode$andThen,
+																																																						A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																																																						function (time) {
+																																																							return _elm_lang$core$Json_Decode$succeed(
+																																																								{reading: reading, text: text, time: time});
+																																																						});
+																																																				});
+																																																		}))),
+																																															function (notes) {
+																																																return A2(
+																																																	_elm_lang$core$Json_Decode$andThen,
+																																																	A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																																																	function (cmd) {
+																																																		return _elm_lang$core$Json_Decode$succeed(
+																																																			{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																																																	});
+																																															});
 																																													});
 																																											});
 																																									});
@@ -13261,8 +13361,8 @@ var _user$project$MIndex$portEP = _elm_lang$core$Native_Platform.incomingPort(
 						});
 				});
 		}));
-var _user$project$MIndex$portOneLesson = _elm_lang$core$Native_Platform.incomingPort(
-	'portOneLesson',
+var _user$project$MIndex$portLesson = _elm_lang$core$Native_Platform.incomingPort(
+	'portLesson',
 	_elm_lang$core$Json_Decode$list(
 		A2(
 			_elm_lang$core$Json_Decode$andThen,
@@ -13274,58 +13374,68 @@ var _user$project$MIndex$portOneLesson = _elm_lang$core$Native_Platform.incoming
 					function (show) {
 						return A2(
 							_elm_lang$core$Json_Decode$andThen,
-							A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
-							function (read) {
+							A2(_elm_lang$core$Json_Decode_ops[':='], 'show_fn', _elm_lang$core$Json_Decode$bool),
+							function (show_fn) {
 								return A2(
 									_elm_lang$core$Json_Decode$andThen,
-									A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
-									function (body) {
+									A2(_elm_lang$core$Json_Decode_ops[':='], 'show_vn', _elm_lang$core$Json_Decode$bool),
+									function (show_vn) {
 										return A2(
 											_elm_lang$core$Json_Decode$andThen,
-											A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
-											function (id) {
+											A2(_elm_lang$core$Json_Decode_ops[':='], 'read', _elm_lang$core$Json_Decode$string),
+											function (read) {
 												return A2(
 													_elm_lang$core$Json_Decode$andThen,
-													A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
-													function (section) {
+													A2(_elm_lang$core$Json_Decode_ops[':='], 'body', _elm_lang$core$Json_Decode$string),
+													function (body) {
 														return A2(
 															_elm_lang$core$Json_Decode$andThen,
-															A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
-															function (version) {
+															A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$string),
+															function (id) {
 																return A2(
 																	_elm_lang$core$Json_Decode$andThen,
-																	A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
-																	function (altRead) {
+																	A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																	function (section) {
 																		return A2(
 																			_elm_lang$core$Json_Decode$andThen,
-																			A2(
-																				_elm_lang$core$Json_Decode_ops[':='],
-																				'notes',
-																				_elm_lang$core$Json_Decode$list(
-																					A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
-																						function (reading) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
-																								function (text) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
-																										function (time) {
-																											return _elm_lang$core$Json_Decode$succeed(
-																												{reading: reading, text: text, time: time});
-																										});
-																								});
-																						}))),
-																			function (notes) {
+																			A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																			function (version) {
 																				return A2(
 																					_elm_lang$core$Json_Decode$andThen,
-																					A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
-																					function (cmd) {
-																						return _elm_lang$core$Json_Decode$succeed(
-																							{style: style, show: show, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																					A2(_elm_lang$core$Json_Decode_ops[':='], 'altRead', _elm_lang$core$Json_Decode$string),
+																					function (altRead) {
+																						return A2(
+																							_elm_lang$core$Json_Decode$andThen,
+																							A2(
+																								_elm_lang$core$Json_Decode_ops[':='],
+																								'notes',
+																								_elm_lang$core$Json_Decode$list(
+																									A2(
+																										_elm_lang$core$Json_Decode$andThen,
+																										A2(_elm_lang$core$Json_Decode_ops[':='], 'reading', _elm_lang$core$Json_Decode$string),
+																										function (reading) {
+																											return A2(
+																												_elm_lang$core$Json_Decode$andThen,
+																												A2(_elm_lang$core$Json_Decode_ops[':='], 'text', _elm_lang$core$Json_Decode$string),
+																												function (text) {
+																													return A2(
+																														_elm_lang$core$Json_Decode$andThen,
+																														A2(_elm_lang$core$Json_Decode_ops[':='], 'time', _elm_lang$core$Json_Decode$string),
+																														function (time) {
+																															return _elm_lang$core$Json_Decode$succeed(
+																																{reading: reading, text: text, time: time});
+																														});
+																												});
+																										}))),
+																							function (notes) {
+																								return A2(
+																									_elm_lang$core$Json_Decode$andThen,
+																									A2(_elm_lang$core$Json_Decode_ops[':='], 'cmd', _elm_lang$core$Json_Decode$string),
+																									function (cmd) {
+																										return _elm_lang$core$Json_Decode$succeed(
+																											{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
+																									});
+																							});
 																					});
 																			});
 																	});
@@ -13574,8 +13684,8 @@ var _user$project$MIndex$view = function (model) {
 				_user$project$MIndex$oneLessonDiv(model)
 			]));
 };
-var _user$project$MIndex$UpdateOneLesson = function (a) {
-	return {ctor: 'UpdateOneLesson', _0: a};
+var _user$project$MIndex$UpdateLesson = function (a) {
+	return {ctor: 'UpdateLesson', _0: a};
 };
 var _user$project$MIndex$UpdateReflection = function (a) {
 	return {ctor: 'UpdateReflection', _0: a};
@@ -13596,7 +13706,7 @@ var _user$project$MIndex$subscriptions = function (model) {
 				_user$project$MIndex$portEU(_user$project$MIndex$UpdateEU),
 				_user$project$MIndex$portMP(_user$project$MIndex$UpdateMP),
 				_user$project$MIndex$portEP(_user$project$MIndex$UpdateEP),
-				_user$project$MIndex$portOneLesson(_user$project$MIndex$UpdateOneLesson),
+				_user$project$MIndex$portLesson(_user$project$MIndex$UpdateLesson),
 				_user$project$MIndex$portReflection(_user$project$MIndex$UpdateReflection)
 			]));
 };
