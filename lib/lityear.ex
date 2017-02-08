@@ -88,7 +88,15 @@ defmodule  Lityear do
     end
    end
 
-   def epiphany_before_sunday(date), do: date >= epiphany(date.year) && epiphany(1, date.year) > date
+  def epiphany_before_sunday(date) do
+    before_epiphany = Date.compare(date, epiphany(date.year) )   == :lt
+    after_epiphany1 = Date.compare(epiphany(1, date.year), date) == :gt
+    cond do
+      before_epiphany -> false
+      after_epiphany1 -> true
+      true            -> false # between epiphany & 1st Sunday Epiphany
+    end
+  end
 
    def next_season("advent", date) do
       if Timex.before?( advent, date), do: advent(1, date.year + 1), else: advent
@@ -199,6 +207,7 @@ defmodule  Lityear do
         18  => "confessionOfStPeter",
         382 => "confessionOfStPeter", # for dates at end of dec
         25  => "conversionOfStPaul",
+        33  => "presentation",
         55  => "stMatthias",
         78  => "stJoseph",
         84  => "annunciation",
@@ -234,8 +243,8 @@ defmodule  Lityear do
   end
   def hd_doy() do # Holy Day, Day of Year
     [ 0, # zero indexed
-      18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,25,25,25,25,25,25,25,55,55,55,55,55,55,  # jan
-      55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,78,78,78,78,           # feb
+      18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,18,25,25,25,25,25,25,25,33,33,33,33,33,33,  # jan
+      33,33,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,55,78,78,78,78,           # feb
       78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,78,84,84,84,84,84,84,115,115,115,115,115,115,  # mar
       115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,115,121,121,121,121,121,     # apr
       121,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151,151, # may
@@ -254,8 +263,20 @@ defmodule  Lityear do
     # if yesterday was sunday and and holy day
     # this should probably handle christmas & epiphany
     # since they float around like a holy day
-    d = leap_year_correction(date)
-    if hd_index[d] |> is_nil, do: {false, ""}, else: {true, hd_index[d]}
+    d = leap_year_correction(date) # d is numerical day of year; 1-365 or 1-366
+    cond do
+      hd_index[d] == "presentation" -> {true, "presentation"} # don't translate The Presentation
+      date |> is_sunday? -> {false, ""} # potential problem for feast of Our Lord
+
+      date |> is_monday? ->
+        # go back a day and check
+        holy_day = hd_index[d - 1]
+        if holy_day |> is_nil, do: {false, ""}, else: {true, holy_day}
+
+      hd_index[d] |> is_nil -> {false, ""}
+
+      true -> {true, hd_index[d]}        
+    end
   end
 
   def next_holy_day(date) do # {date_of_holy_day, name_of_holy_day}
@@ -320,65 +341,67 @@ defmodule  Lityear do
   def namedDayDate("easterWeek", wk), do: easter |> date_shift(days: wk)  
 
   def stAndrew(), do: stAndrew(Timex.now(@tz).year)
-  def stAndrew(year), do: Timex.to_date {year, 11, 30} |> translate_from_sunday
+  def stAndrew(year), do: Timex.to_date( {year, 11, 30} )|> translate_from_sunday
   def stThomas(), do: stThomas(Timex.now(@tz).year)
-  def stThomas(year), do: Timex.to_date {year, 12, 21 } |> translate_from_sunday
+  def stThomas(year), do: Timex.to_date( {year, 12, 21 }) |> translate_from_sunday
   def stStephen(), do: stStephen(Timex.now(@tz).year)
-  def stStephen(year), do: Timex.to_date {year, 12, 26 } |> translate_from_sunday
+  def stStephen(year), do: Timex.to_date( {year, 12, 26 }) |> translate_from_sunday
   def stJohn(), do: stJohn(Timex.now(@tz).year)
-  def stJohn(year), do: Timex.to_date {year, 12, 27 } |> translate_from_sunday
+  def stJohn(year), do: Timex.to_date( {year, 12, 27 }) |> translate_from_sunday
   def holyInnocents(), do: holyInnocents(Timex.now(@tz).year)
-  def holyInnocents(year), do: Timex.to_date {year, 12, 28 } |> translate_from_sunday
+  def holyInnocents(year), do: Timex.to_date( {year, 12, 28 }) |> translate_from_sunday
   def confessionOfStPeter(), do: confessionOfStPeter(Timex.now(@tz).year)
-  def confessionOfStPeter(year), do: Timex.to_date {year, 1, 18 } |> translate_from_sunday
+  def confessionOfStPeter(year), do: Timex.to_date( {year, 1, 18 }) |> translate_from_sunday
   def conversionOfStPaul(), do: conversionOfStPaul(Timex.now(@tz).year)
-  def conversionOfStPaul(year), do: Timex.to_date {year, 1, 25 } |> translate_from_sunday
+  def conversionOfStPaul(year), do: Timex.to_date( {year, 1, 25 }) |> translate_from_sunday
+  def presentation(), do: presentation(Timex.now(@tz).year)
+  def presentation(year), do: Timex.to_date( {year, 2, 2} )|> translate_from_sunday
   def stMatthias(), do: stMatthias(Timex.now(@tz).year)
-  def stMatthias(year), do: Timex.to_date {year, 2, 24 } |> translate_from_sunday
+  def stMatthias(year), do: Timex.to_date( {year, 2, 24 }) |> translate_from_sunday
   def stJoseph(), do: stJoseph(Timex.now(@tz).year)
-  def stJoseph(year), do: Timex.to_date {year, 3, 19 } |> translate_from_sunday
+  def stJoseph(year), do: Timex.to_date( {year, 3, 19 }) |> translate_from_sunday
   def annunciation(), do: annunciation(Timex.now(@tz).year)
-  def annunciation(year), do: Timex.to_date {year, 3, 25 } |> translate_from_sunday
+  def annunciation(year), do: Timex.to_date( {year, 3, 25 }) |> translate_from_sunday
   def stMark(), do: stMark(Timex.now(@tz).year)
-  def stMark(year), do: Timex.to_date {year, 4, 25 } |> translate_from_sunday
+  def stMark(year), do: Timex.to_date( {year, 4, 25 }) |> translate_from_sunday
   def stsPhilipAndJames(), do: stsPhilipAndJames(Timex.now(@tz).year)
-  def stsPhilipAndJames(year), do: Timex.to_date {year, 5, 1 } |> translate_from_sunday
+  def stsPhilipAndJames(year), do: Timex.to_date( {year, 5, 1 }) |> translate_from_sunday
   def visitation(), do: visitation(Timex.now(@tz).year)
-  def visitation(year), do: Timex.to_date {year, 5, 31 } |> translate_from_sunday
+  def visitation(year), do: Timex.to_date( {year, 5, 31 }) |> translate_from_sunday
   def stBarnabas(), do: stBarnabas(Timex.now(@tz).year)
-  def stBarnabas(year), do: Timex.to_date {year, 6, 11 } |> translate_from_sunday
+  def stBarnabas(year), do: Timex.to_date( {year, 6, 11 }) |> translate_from_sunday
   def nativityOfJohnTheBaptist(), do: nativityOfJohnTheBaptist(Timex.now(@tz).year)
-  def nativityOfJohnTheBaptist(year), do: Timex.to_date {year, 6, 24 } |> translate_from_sunday
+  def nativityOfJohnTheBaptist(year), do: Timex.to_date( {year, 6, 24 }) |> translate_from_sunday
   def stPeterAndPaul(), do: stPeterAndPaul(Timex.now(@tz).year)
-  def stPeterAndPaul(year), do: Timex.to_date {year, 6, 29 } |> translate_from_sunday
+  def stPeterAndPaul(year), do: Timex.to_date( {year, 6, 29 }) |> translate_from_sunday
   def dominion(), do: dominion(Timex.now(@tz).year)
-  def dominion(year), do: Timex.to_date {year, 7, 1 } |> translate_from_sunday
+  def dominion(year), do: Timex.to_date( {year, 7, 1 }) |> translate_from_sunday
   def independence(), do: independence(Timex.now(@tz).year)
-  def independence(year), do: Timex.to_date {year, 7, 4 } |> translate_from_sunday
+  def independence(year), do: Timex.to_date( {year, 7, 4 }) |> translate_from_sunday
   def stMaryMagdalene(), do: stMaryMagdalene(Timex.now(@tz).year)
-  def stMaryMagdalene(year), do: Timex.to_date {year, 7, 22 } |> translate_from_sunday
+  def stMaryMagdalene(year), do: Timex.to_date( {year, 7, 22 }) |> translate_from_sunday
   def stJames(), do: stJames(Timex.now(@tz).year)
-  def stJames(year), do: Timex.to_date {year, 7, 25 } |> translate_from_sunday
+  def stJames(year), do: Timex.to_date( {year, 7, 25 }) |> translate_from_sunday
   def transfiguration(), do: transfiguration(Timex.now(@tz).year)
-  def transfiguration(year), do: Timex.to_date {year, 8, 6 } |> translate_from_sunday
+  def transfiguration(year), do: Timex.to_date( {year, 8, 6 }) |> translate_from_sunday
   def bvm(), do: bvm(Timex.now(@tz).year)
-  def bvm(year), do: Timex.to_date {year, 8, 15 } |> translate_from_sunday
+  def bvm(year), do: Timex.to_date( {year, 8, 15 }) |> translate_from_sunday
   def stBartholomew(), do: stBartholomew(Timex.now(@tz).year)
-  def stBartholomew(year), do: Timex.to_date {year, 8, 24 } |> translate_from_sunday
+  def stBartholomew(year), do: Timex.to_date( {year, 8, 24 }) |> translate_from_sunday
   def holyCross(), do: holyCross(Timex.now(@tz).year)
-  def holyCross(year), do: Timex.to_date {year, 9, 14} |> translate_from_sunday
+  def holyCross(year), do: Timex.to_date( {year, 9, 14} )|> translate_from_sunday
   def stMatthew(), do: stMatthew(Timex.now(@tz).year)
-  def stMatthew(year), do: Timex.to_date {year, 9, 21 } |> translate_from_sunday
+  def stMatthew(year), do: Timex.to_date( {year, 9, 21 }) |> translate_from_sunday
   def michaelAllAngels(), do: michaelAllAngels(Timex.now(@tz).year)
-  def michaelAllAngels(year), do: Timex.to_date {year, 9, 29 } |> translate_from_sunday
-  def stLuke(year), do: Timex.to_date {year, 10, 18 } |> translate_from_sunday
+  def michaelAllAngels(year), do: Timex.to_date( {year, 9, 29 }) |> translate_from_sunday
+  def stLuke(year), do: Timex.to_date( {year, 10, 18 }) |> translate_from_sunday
   def stLuke(), do: stLuke(Timex.now(@tz).year)
-  def stJamesOfJerusalem(year), do: Timex.to_date {year, 10, 23 } |> translate_from_sunday
+  def stJamesOfJerusalem(year), do: Timex.to_date( {year, 10, 23 }) |> translate_from_sunday
   def stJamesOfJerusalem(), do: stJames(Timex.now(@tz).year)
   def stsSimonAndJude(), do: stsSimonAndJude(Timex.now(@tz).year)
-  def stsSimonAndJude(year), do: Timex.to_date {year, 10, 28 } |> translate_from_sunday
+  def stsSimonAndJude(year), do: Timex.to_date( {year, 10, 28 }) |> translate_from_sunday
   def remembrance(), do: remembrance(Timex.now(@tz).year)
-  def remembrance(year), do: Timex.to_date {year, 11, 11 } |> translate_from_sunday
+  def remembrance(year), do: Timex.to_date( {year, 11, 11 }) |> translate_from_sunday
 
   def translate_from_sunday(date) do
     if date |> is_sunday?, do: date |> Timex.shift(days: 1), else: date

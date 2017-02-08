@@ -41,7 +41,7 @@ defmodule Iphod.Mixfile do
       {:ecto, "~> 2.0.4"},
       {:phoenix_ecto, "~> 3.0.1"},
       {:phoenix_html, ">= 2.6.2"},
-      # {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:phoenix_integration, "~> 0.1"},
       {:postgrex, ">= 0.0.0"},
       {:gettext, "~> 0.9"},

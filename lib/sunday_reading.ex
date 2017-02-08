@@ -2030,6 +2030,25 @@ defmodule SundayReading do
                           gs: [%{style: "req", read: "Mt 10:16-25"}]
                         }
             },
+          "presentation" =>
+            %{  "title" => "The Presentation of Christ in the Temple (February 2)",
+                "colors" => ["white"],
+                "a" => %{ ot: [%{style: "req", read: "Mal 3:1-4"}],
+                          ps: [%{style: "req", read: "Psalm 84"}],
+                          nt: [%{style: "req", read: "Heb 2:14-18"}],
+                          gs: [%{style: "req", read: "Lk 2:22-40"}]
+                          },
+                "b" => %{ ot: [%{style: "req", read: "Mal 3:1-4"}],
+                          ps: [%{style: "req", read: "Psalm 84"}],
+                          nt: [%{style: "req", read: "Heb 2:14-18"}],
+                          gs: [%{style: "req", read: "Lk 2:22-40"}]
+                          },
+                "c" => %{ ot: [%{style: "req", read: "Mal 3:1-4"}],
+                          ps: [%{style: "req", read: "Psalm 84"}],
+                          nt: [%{style: "req", read: "Heb 2:14-18"}],
+                          gs: [%{style: "req", read: "Lk 2:22-40"}]
+                        }
+            },
           "stMatthias" =>
             %{  "title" => "St. Matthias (February 24)",
                 "colors" => ["red"],

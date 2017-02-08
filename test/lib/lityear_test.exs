@@ -34,6 +34,28 @@ defmodule Iphod.LitYearTest do
     assert days_till_sunday(sunday) == 7
   end
 
+  test "translate_from_sunday - if date is a Sunday, should return date for Monday" do
+    assert translate_from_sunday(~D[2017-03-19]) == ~D[2017-03-20]
+  end
+
+  test "translate_from_sunday - if date is not a Sunday, should return self" do
+    assert translate_from_sunday(~D[2017-03-20]) == ~D[2017-03-20]
+  end
+
+  test "translate RLD from Sunday to Monday" do
+    # St. Joseph falls on Sunday & should holy_day? should be false
+    assert holy_day?(~D[2017-03-19]) == {false, ""}
+    # the following day should show as St. Joseph
+    assert holy_day?(~D[2017-03-20]) == {true, "stJoseph"}
+  end
+
+  test "The Presentation should not be translated" do
+    day = ~D[2020-02-02]
+    assert Timex.weekday(day) == 7 # it's a Sunday
+    assert holy_day?(day) == {true, "presentation"}
+  end
+
+
   test "lityear returns the proper liturgical year" do
     today       = ~D[2015-03-17]
     christmas   = ~D[2015-12-25]
@@ -132,6 +154,19 @@ defmodule Iphod.LitYearTest do
     assert next_sunday(~D[2018-01-20]) == {"epiphany", "3", "b", ~D[2018-01-21]}
     assert next_sunday(~D[2018-02-03])  == {"epiphany", "8", "b", ~D[2018-02-04]}
     assert next_sunday(~D[2018-02-10]) == {"epiphany", "9", "b", ~D[2018-02-11]}
+  end
+
+  test "epiphany_before_sunday" do
+    assert epiphany_before_sunday(~D[2017-01-07])
+    assert epiphany_before_sunday(~D[2017-01-06])
+    refute epiphany_before_sunday(~D[2017-01-08]) # sunday
+    refute epiphany_before_sunday(~D[2018-01-07]) # sunday, epiphany is on saturday
+    refute epiphany_before_sunday(~D[2017-02-06])
+  end
+
+  test "mondays in epiphany" do
+    day = ~D[2017-02-06]
+    assert( to_season(day) == {"epiphany", "5", "a", day})
   end
 
   test "lityear returns sundays" do
@@ -247,13 +282,6 @@ defmodule Iphod.LitYearTest do
     assert memorial(2021) == ~D[2021-05-31]
     assert memorial(2025) == ~D[2025-05-26]
     assert memorial(2026) == ~D[2026-05-25]
-  end
-
-  test "epiphany_before_sunday" do
-    assert epiphany_before_sunday(~D[2017-01-07])
-    assert epiphany_before_sunday(~D[2017-01-06])
-    refute epiphany_before_sunday(~D[2017-01-08]) # sunday
-    refute epiphany_before_sunday(~D[2018-01-07]) # sunday, epiphany is on saturday
   end
 
   test "to_season returns proper season" do
