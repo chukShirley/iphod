@@ -301,7 +301,10 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     })
     
     channel.on("single_lesson", data => {
-      elmMindexApp.ports.portOneLesson.send(data.resp)
+      let resp = data.resp[0];
+      resp.show_fn = true;
+      resp.show_vn = true;
+      elmMindexApp.ports.portLesson.send([resp])
     })
 
     channel.on('update_lesson', data => {
@@ -309,6 +312,12 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
       elmMindexApp.ports.portLesson.send(data.lesson);
     })
 
+    elmMindexApp.ports.requestReading.subscribe(function(request) {
+      let request_list = [request.section, request.version, request.ref]
+      channel.push("get_lesson", request_list)
+      // request.push( version_list() )
+      // channel.push("get_lesson", request)
+    })
     
   
     // calendar 
@@ -349,8 +358,9 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     })
   
     elmMPanelApp.ports.requestReading.subscribe(function(request) {
-      request.push( version_list() )
-      channel.push("get_lesson", request)
+      console.log("MPANEL REQUEST READING: ", request)
+      // request.push( version_list() )
+      // channel.push("get_lesson", request)
     })
   
   } // end of mindex
@@ -410,6 +420,13 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     elmCalApp.ports.portLesson.send(data.resp);
   })  
 
+  channel.on('single_lesson', data => {
+    let resp = data.resp[0];
+    resp.show_fn = true;
+    resp.show_vn = true;
+    elmCalApp.ports.portLesson.send([resp]);
+  })
+
   channel.on('reflection_today', data => {
     elmCalApp.ports.portReflection.send(data);
     rollup();
@@ -427,6 +444,7 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
       .data("reading3",     readingList(data.gs) )
       .data("reading3_ver", data.gs[0].version)
       .data("reading_date", data.date)
+
     elmCalApp.ports.portEU.send(data);
     rollup();
   })
@@ -503,7 +521,8 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
   }
 
   elmCalApp.ports.requestReading.subscribe(function(request) {
-    channel.push("get_lesson", request)
+    let request_list = [request.section, request.version, request.ref]
+    channel.push("get_lesson", request_list)
   })
   
   elmCalApp.ports.requestAltReading.subscribe(function(request) {

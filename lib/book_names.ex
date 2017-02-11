@@ -264,15 +264,24 @@ defmodule BookNames do
     "zephaniah" => "Zephaniah",
   }
 
+  @spec book_name(Nil) :: String.t
+  def book_name(nil), do: "Name missing"
+
   @spec book_name(String.t) :: String.t
-  def book_name(s), do: @book_names[s] 
+  def book_name(s), do: (name = @book_names[s]) |> is_nil |> if(do: s, else: name ) 
+
+  @spec web_name(Nil) :: String.t
+  def web_name(nil), do: "Name missing"
 
   @spec web_name(String.t) :: String.t
   def web_name(s) do 
-    @web_names[s |> String.downcase |> book_name]
+    (name = @web_names[s |> String.downcase |> book_name]) |> is_nil |> if(do: s, else: name)
   end
 
   @spec book_title(String.t) :: String.t
-  def book_title(s), do: @book_title[s |> String.downcase |> book_name]
+  def book_title(nil), do: "Name missing"
+
+  @spec book_title(String.t) :: String.t
+  def book_title(s), do: (name = @book_title[s |> String.downcase |> book_name]) |> is_nil |> if(do: s, else: name)
 
 end

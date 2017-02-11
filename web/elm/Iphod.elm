@@ -53,7 +53,7 @@ init =  (initModel, Cmd.none)
 
 -- REQUEST PORTS
 
-port requestReading: List String -> Cmd msg
+port requestReading: Models.SectionUpdate -> Cmd msg
 port requestAltReading: List String -> Cmd msg
 port requestScrollTop: String -> Cmd msg
 
@@ -161,108 +161,38 @@ update msg model =
     ModEU msg ->
       let
         newModel = {model | eu = Sunday.update msg model.eu}
-        newCmd = changeEuLesson model.eu newModel.eu
+        newCmd = if newModel.eu.sectionUpdate.ref |> String.isEmpty 
+          then
+            Cmd.none
+          else
+            requestReading newModel.eu.sectionUpdate
       in 
         (newModel, newCmd)
 
     ModMP msg ->
       let
         newModel = {model | mp = MPReading.update msg model.mp}
-        newCmd = changeMpLesson model.mp newModel.mp
+        newCmd = if newModel.mp.sectionUpdate.ref |> String.isEmpty 
+          then
+            Cmd.none
+          else
+            requestReading newModel.mp.sectionUpdate
       in 
         (newModel, newCmd)
 
     ModEP msg ->
       let
         newModel = {model | ep = EPReading.update msg model.ep}
-        newCmd = changeEpLesson model.ep newModel.ep
+        newCmd = if newModel.ep.sectionUpdate.ref |> String.isEmpty 
+          then
+            Cmd.none
+          else
+            requestReading newModel.ep.sectionUpdate
       in 
         (newModel, newCmd)
 
 
 -- HELPERS
-
-changeMpLesson: Models.DailyMP -> Models.DailyMP -> Cmd Msg
-changeMpLesson daily newDaily =
-  let 
-    newMp1Ver = (List.head newDaily.mp1 |> Maybe.withDefault Models.initLesson).version
-    newMp2Ver = (List.head newDaily.mp2 |> Maybe.withDefault Models.initLesson).version
-    newMppVer = (List.head newDaily.mpp |> Maybe.withDefault Models.initLesson).version
-    mp1Ver = (List.head daily.mp1 |> Maybe.withDefault Models.initLesson).version
-    mp2Ver = (List.head daily.mp2 |> Maybe.withDefault Models.initLesson).version
-    mppVer = (List.head daily.mpp |> Maybe.withDefault Models.initLesson).version
-  in
-    if mp1Ver /= newMp1Ver then
-      requestReading ["mp1", newMp1Ver, daily.date]
-    else if mp2Ver /= newMp2Ver then 
-      requestReading ["mp2", newMp2Ver, daily.date]
-    else if mppVer /= newMppVer then
-      requestReading ["mpp", newMppVer, daily.date]
-    else
-      Cmd.none
-
-changeEpLesson: Models.DailyEP -> Models.DailyEP -> Cmd Msg
-changeEpLesson daily newDaily =
-  let 
-    newEp1Ver = (List.head newDaily.ep1 |> Maybe.withDefault Models.initLesson).version
-    newEp2Ver = (List.head newDaily.ep2 |> Maybe.withDefault Models.initLesson).version
-    newEppVer = (List.head newDaily.epp |> Maybe.withDefault Models.initLesson).version
-    ep1Ver = (List.head daily.ep1 |> Maybe.withDefault Models.initLesson).version
-    ep2Ver = (List.head daily.ep2 |> Maybe.withDefault Models.initLesson).version
-    eppVer = (List.head daily.epp |> Maybe.withDefault Models.initLesson).version
-  in
-    if ep1Ver /= newEp1Ver then
-      requestReading ["ep1", newEp1Ver, daily.date]
-    else if ep2Ver /= newEp2Ver then 
-      requestReading ["ep2", newEp2Ver, daily.date]
-    else if eppVer /= newEppVer then
-      requestReading ["epp", newEppVer, daily.date]
-    else
-      Cmd.none
-
-changeEuLesson: Models.Sunday -> Models.Sunday -> Cmd Msg
-changeEuLesson sunday newSunday =
-  let 
-    newOtVer = (List.head newSunday.ot |> Maybe.withDefault Models.initLesson).version
-    newPsVer = (List.head newSunday.ps |> Maybe.withDefault Models.initLesson).version
-    newNtVer = (List.head newSunday.nt |> Maybe.withDefault Models.initLesson).version
-    newGsVer = (List.head newSunday.gs |> Maybe.withDefault Models.initLesson).version
-    newOtAlt = (List.head newSunday.ot |> Maybe.withDefault Models.initLesson).altRead
-    newNtAlt = (List.head newSunday.nt |> Maybe.withDefault Models.initLesson).altRead
-    newGsAlt = (List.head newSunday.gs |> Maybe.withDefault Models.initLesson).altRead
-    newOtCmd = (List.head newSunday.ot |> Maybe.withDefault Models.initLesson).cmd
-    newNtCmd = (List.head newSunday.nt |> Maybe.withDefault Models.initLesson).cmd
-    newGsCmd = (List.head newSunday.gs |> Maybe.withDefault Models.initLesson).cmd
-
-    otVer = (List.head sunday.ot |> Maybe.withDefault Models.initLesson).version
-    psVer = (List.head sunday.ps |> Maybe.withDefault Models.initLesson).version
-    ntVer = (List.head sunday.nt |> Maybe.withDefault Models.initLesson).version
-    gsVer = (List.head sunday.gs |> Maybe.withDefault Models.initLesson).version
-    otAlt = (List.head sunday.ot |> Maybe.withDefault Models.initLesson).altRead
-    ntAlt = (List.head sunday.nt |> Maybe.withDefault Models.initLesson).altRead
-    gsAlt = (List.head sunday.gs |> Maybe.withDefault Models.initLesson).altRead
-    otCmd = (List.head sunday.ot |> Maybe.withDefault Models.initLesson).cmd
-    ntCmd = (List.head sunday.nt |> Maybe.withDefault Models.initLesson).cmd
-    gsCmd = (List.head sunday.gs |> Maybe.withDefault Models.initLesson).cmd
-
-  in
-    if otVer /= newOtVer then
-      requestReading ["ot", newOtVer, sunday.date]
-    else if psVer /= newPsVer then 
-      requestReading ["ps", newPsVer, sunday.date]
-    else if ntVer /= newNtVer then
-      requestReading ["nt", newNtVer, sunday.date]
-    else if gsVer /= newGsVer then
-      requestReading ["gs", newGsVer, sunday.date]
-    else if otCmd /= newOtCmd then
-      requestAltReading ["ot", newOtVer, otAlt]
-    else if ntCmd /= newNtCmd then
-      requestAltReading ["ot", newNtVer, ntAlt]
-    else if gsCmd /= newGsCmd then
-      requestAltReading ["gs", newGsVer, gsAlt]
-    else
-      Cmd.none
-
 
 
 setLesson: Model -> String -> List Models.Lesson -> Model

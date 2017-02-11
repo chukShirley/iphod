@@ -40,7 +40,6 @@ defmodule Iphod.IphodChannel do
   def handle_in(request, params, socket) do
     # IO.puts ">>>>> #{request}, #{inspect params}"
     response = handle_request(request, params, socket)
-    # if params |> hd == "Reflection", do: raise "BAD REQUEST: #{request}, #{inspect params}"
     response
   end
 
@@ -50,10 +49,6 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_request("init_calendar", _, socket) do
-    # date = Date.now(@tz)
-    # push socket, "eu_today", SundayReading.eu_today(date)
-    # push socket, "mp_today", DailyReading.mp_today(date)
-    # push socket, "ep_today", DailyReading.ep_today(date)
     push socket, "init_email", @email
     {:noreply, socket}  
   end
@@ -134,41 +129,32 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_request("get_text", date, socket) do
-#    IO.puts ">>>>> GETTEXT ON DATE: #{inspect date}"
-#    IEx.pry
     handle_request("get_text", ["Reflection", date], socket)
     handle_request("get_text", ["EU", date], socket)
     handle_request("get_text", ["MP", date], socket)
     handle_request("get_text", ["EP", date], socket)
   end
 
-#  def handle_request("get_text", args, socket) do
-#    # something bad happened
-#    {:noreply, socket}
-#  end
-  
   def handle_request("lessons_now", args, socket) do
     # IEx.pry
     {:noreply, socket}
   end
   
-  def handle_request("get_lesson", [section, date, versions], socket) when section in ~w(mp1 mp2 mpp ep1 ep2 epp) do
-    day = text_to_date date
+  def handle_request("get_lesson", [section, versions, vss], socket) when section in ~w(mp1 mp2 mpp ep1 ep2 epp) do
     ver = use_version(section, versions)
-    IO.puts ">>>>> GET MPEP LESSON: #{section}, #{inspect date}, #{inspect ver}"
-    lesson = DailyReading.lesson(day, section, ver)
-    push socket, "update_lesson", %{lesson: lesson}
+    resp = BibleText.selection( vss, ver, section)
+    push socket, "single_lesson", %{resp: resp}
     {:noreply, socket}
   end
 
-  def handle_request("get_lesson", [section, date, versions], socket) when section in ~w(ot ps nt gs) do
-    day = text_to_date date
-    lesson = SundayReading.lesson(day, section, use_version(section, versions))
-    push socket, "update_lesson", %{lesson: lesson}
+  def handle_request("get_lesson", [section, versions, vss], socket) when section in ~w(ot ps nt gs) do
+    ver = use_version(section, versions)
+    resp = BibleText.selection( vss, ver, section)
+    push socket, "single_lesson", %{resp: resp}
     {:noreply, socket}
   end
 
-  def handle_request("get_lesson", [_section, _version, _date], socket) do
+  def handle_request("get_lesson", [_section, _versions, _date], socket) do
     {:noreply, socket}
   end
 
@@ -225,7 +211,7 @@ end
   def versions_map(:mp, [ps, ot, nt, gs]), do: %{mpp: ps, mp1: ot, mp2: nt}
   def versions_map(:ep, [ps, ot, nt, gs]), do: %{epp: ps, ep1: nt, ep2: gs}
 
-  def use_version(section, versions) do
+  def use_version(section, versions) when versions |> is_list do
     case section do
       "ot"  -> versions_map(:eu, versions).ot
       "ps"  -> versions_map(:eu, versions).ps
@@ -240,6 +226,9 @@ end
       _  -> "ESV"
     end
   end
+
+  def use_version(section, version), do: version
+
   # Add authorization logic here as required.
   defp authorized?(_payload) do
     true

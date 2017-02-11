@@ -135,6 +135,7 @@ defmodule SundayReading do
       ps:       r.ps,
       nt:       r.nt,
       gs:       r.gs,
+      sectionUpdate:   %{section: "", version: "", ref: ""}
       }
     # now load up the text bodies
 
@@ -466,7 +467,7 @@ defmodule SundayReading do
         "5" =>
           %{  "title" => "The Fifth Sunday of Epiphany ",
               "colors" => ["green"],
-              "a" => %{ ot: [%{style: "opt", read: "Hab 3:1"}, %{style: "req", read: "Hab 3:2-15"}, %{style: "opt", read: "Hab 3:16-19}]"}],
+              "a" => %{ ot: [%{style: "opt", read: "Hab 3:1"}, %{style: "req", read: "Hab 3:2-15"}, %{style: "opt", read: "Hab 3:16-19"}],
                         ps: [%{style: "req", read: "Psalm 27"}],
                         nt: [%{style: "req", read: "1 Cor 2:1-16"}],
                         gs: [%{style: "req", read: "Mt 5:13-20"}]

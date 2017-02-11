@@ -56,7 +56,7 @@ init = (initModel, Cmd.none)
 
 
 -- REQUEST PORTS
-port requestReading: List String -> Cmd msg
+port requestReading: Models.SectionUpdate -> Cmd msg
 port requestAltReading: List String -> Cmd msg
 
 -- SUBSCRIPTIONS
@@ -139,59 +139,128 @@ update msg model =
 
     UpdateLesson lesson ->
       let
-        tModel = initModel
-        newModel = {tModel | oneLesson = lesson}
+        section = (List.head lesson |> Maybe.withDefault Models.initLesson).section
+        newModel = setLesson model section lesson
       in
         (newModel, Cmd.none)
 
     ModEU msg ->
       let
         newModel = {model | eu = Sunday.update msg model.eu}
-      -- in 
-      --   (newModel, Cmd.none)
-        newCmd =
-          let 
-            otVer = (List.head newModel.eu.ot |> Maybe.withDefault Models.initLesson).version
-            psVer = (List.head newModel.eu.ps |> Maybe.withDefault Models.initLesson).version
-            ntVer = (List.head newModel.eu.nt |> Maybe.withDefault Models.initLesson).version
-            gsVer = (List.head newModel.eu.gs |> Maybe.withDefault Models.initLesson).version
-            otAlt = (List.head newModel.eu.ot |> Maybe.withDefault Models.initLesson).altRead
-            ntAlt = (List.head newModel.eu.nt |> Maybe.withDefault Models.initLesson).altRead
-            gsAlt = (List.head newModel.eu.gs |> Maybe.withDefault Models.initLesson).altRead
-          in
-            if otVer /= "" then
-              requestReading ["ot", otVer, model.eu.date]
-            else if psVer /= "" then 
-              requestReading ["ps", psVer, model.eu.date]
-            else if ntVer /= "" then
-              requestReading ["nt", ntVer, model.eu.date]
-            else if gsVer /= "" then
-              requestReading ["gs", gsVer, model.eu.date]
-            else if otAlt /= "" then
-              requestAltReading ["ot", otVer, otAlt]
-            else if ntAlt /= "" then
-              requestAltReading ["ot", ntVer, ntAlt]
-            else if gsAlt /= "" then
-              requestAltReading ["gs", gsVer, gsAlt]
-            else
-              Cmd.none
+        newCmd = if newModel.eu.sectionUpdate.ref |> String.isEmpty 
+          then
+            Cmd.none
+          else
+            requestReading newModel.eu.sectionUpdate
       in 
         (newModel, newCmd)
-      
+
 
     ModMP msg ->
       let
         newModel = {model | mp = MPReading.update msg model.mp}
+        newCmd = if newModel.mp.sectionUpdate.ref |> String.isEmpty 
+          then
+            Cmd.none
+          else
+            requestReading newModel.mp.sectionUpdate
       in 
-        (newModel, Cmd.none)
+        (newModel, newCmd)
 
     ModEP msg ->
       let
         newModel = {model | ep = EPReading.update msg model.ep}
+        newCmd = if newModel.ep.sectionUpdate.ref |> String.isEmpty 
+          then
+            Cmd.none
+          else
+            requestReading newModel.ep.sectionUpdate
       in 
-        (newModel, Cmd.none)
+        (newModel, newCmd)
+
 
 -- HELPERS
+
+
+setLesson: Model -> String -> List Models.Lesson -> Model
+setLesson model section lesson =
+ let
+    newModel = case section of
+      "mp1" -> 
+        let
+          thisMP = model.mp
+          newMP = {thisMP | mp1 = lesson}
+          newModel = {model | mp = newMP}
+        in
+          newModel
+      "mp2" -> 
+        let
+          thisMP = model.mp
+          newMP = {thisMP | mp2 = lesson}
+          newModel = {model | mp = newMP}
+        in
+          newModel
+      "mpp" -> 
+        let
+          thisMP = model.mp
+          newMP = {thisMP | mpp = lesson}
+          newModel = {model | mp = newMP}
+        in
+          newModel
+      "ep1" -> 
+        let
+          thisEP = model.ep
+          newEP = {thisEP | ep1 = lesson}
+          newModel = {model | ep = newEP}
+        in
+          newModel
+      "ep2" -> 
+        let
+          thisEP = model.ep
+          newEP = {thisEP | ep2 = lesson}
+          newModel = {model | ep = newEP}
+        in
+          newModel
+      "epp" -> 
+        let
+          thisEP = model.ep
+          newEP = {thisEP | epp = lesson}
+          newModel = {model | ep = newEP}
+        in
+          newModel
+      "ot" -> 
+        let
+          thisEU = model.eu
+          newEU = {thisEU | ot = lesson}
+          newModel = {model | eu = newEU}
+        in
+          newModel
+      "ps"  -> 
+         let
+           thisEU = model.eu
+           newEU = {thisEU | ps = lesson}
+           newModel = {model | eu = newEU}
+         in
+           newModel
+      "nt"  -> 
+         let
+           thisEU = model.eu
+           newEU = {thisEU | nt = lesson}
+           newModel = {model | eu = newEU}
+         in
+           newModel
+      "gs"  -> 
+         let
+           thisEU = model.eu
+           newEU = {thisEU | gs = lesson}
+           newModel = {model | eu = newEU}
+         in
+           newModel
+           
+      _   -> model
+ in
+   newModel
+
 
 
 -- VIEW

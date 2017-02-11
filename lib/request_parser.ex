@@ -67,7 +67,9 @@ defmodule RequestParser do
     all_vss t, [{chap, String.to_integer(first), String.to_integer(last)}] ++ list
   end
   def all_vss([h|t], list) when is_list(h) do
-    all_vss t, [chapter_vss(h)] ++ list
+    # first make sure the book ref is not part of vss ref
+    this_head = if h |> hd |> String.match?(~r/[a-zA-Z]+/), do: h |> tl, else: h
+    all_vss t, [chapter_vss(this_head)] ++ list
   end
 
   def reference(s) do

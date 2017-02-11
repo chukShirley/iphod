@@ -8987,6 +8987,11 @@ var _user$project$Iphod_Helper$hideable = F2(
 var _user$project$Iphod_Models$initBiblesOrg = {url: 'https://bibles.org/v2/passages.js?q[]=', key: 'P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT', foot_notes: true};
 var _user$project$Iphod_Models$initESV = {url: 'www.esvapi.org/v2/rest/passageQuery?', key: '10b28dac7c57fd96', foot_notes: true};
 var _user$project$Iphod_Models$initReflection = {author: '', markdown: ''};
+var _user$project$Iphod_Models$setSectionUpdate = F3(
+	function (this_section, this_version, thisRef) {
+		return {section: this_section, version: this_version, ref: thisRef};
+	});
+var _user$project$Iphod_Models$initSectionUpdate = {section: '', version: '', ref: ''};
 var _user$project$Iphod_Models$initSundayCollect = {
 	instruction: '',
 	title: '',
@@ -9018,7 +9023,8 @@ var _user$project$Iphod_Models$initDaily = {
 		[]),
 	gs: _elm_lang$core$Native_List.fromArray(
 		[]),
-	show: false
+	show: false,
+	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
 };
 var _user$project$Iphod_Models$initCollect = {
 	collect: '',
@@ -9071,7 +9077,8 @@ var _user$project$Iphod_Models$sundayInit = {
 	nt: _elm_lang$core$Native_List.fromArray(
 		[]),
 	gs: _elm_lang$core$Native_List.fromArray(
-		[])
+		[]),
+	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
 };
 var _user$project$Iphod_Models$initDay = {
 	name: '',
@@ -9099,7 +9106,8 @@ var _user$project$Iphod_Models$initDailyMP = {
 	mp2: _elm_lang$core$Native_List.fromArray(
 		[]),
 	mpp: _elm_lang$core$Native_List.fromArray(
-		[])
+		[]),
+	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
 };
 var _user$project$Iphod_Models$initDailyEP = {
 	colors: _elm_lang$core$Native_List.fromArray(
@@ -9117,7 +9125,8 @@ var _user$project$Iphod_Models$initDailyEP = {
 	ep2: _elm_lang$core$Native_List.fromArray(
 		[]),
 	epp: _elm_lang$core$Native_List.fromArray(
-		[])
+		[]),
+	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
 };
 var _user$project$Iphod_Models$initShout = {
 	section: '',
@@ -9187,6 +9196,10 @@ var _user$project$Iphod_Models$SundayCollect = F4(
 	function (a, b, c, d) {
 		return {instruction: a, title: b, collects: c, show: d};
 	});
+var _user$project$Iphod_Models$SectionUpdate = F3(
+	function (a, b, c) {
+		return {section: a, version: b, ref: c};
+	});
 var _user$project$Iphod_Models$Sunday = function (a) {
 	return function (b) {
 		return function (c) {
@@ -9200,7 +9213,9 @@ var _user$project$Iphod_Models$Sunday = function (a) {
 										return function (k) {
 											return function (l) {
 												return function (m) {
-													return {ofType: a, date: b, season: c, week: d, title: e, show: f, config: g, colors: h, collect: i, ot: j, ps: k, nt: l, gs: m};
+													return function (n) {
+														return {ofType: a, date: b, season: c, week: d, title: e, show: f, config: g, colors: h, collect: i, ot: j, ps: k, nt: l, gs: m, sectionUpdate: n};
+													};
 												};
 											};
 										};
@@ -9228,7 +9243,9 @@ var _user$project$Iphod_Models$Daily = function (a) {
 											return function (l) {
 												return function (m) {
 													return function (n) {
-														return {date: a, title: b, collect: c, mp1: d, mp2: e, mpp: f, ep1: g, ep2: h, epp: i, ot: j, ps: k, nt: l, gs: m, show: n};
+														return function (o) {
+															return {date: a, title: b, collect: c, mp1: d, mp2: e, mpp: f, ep1: g, ep2: h, epp: i, ot: j, ps: k, nt: l, gs: m, show: n, sectionUpdate: o};
+														};
 													};
 												};
 											};
@@ -9255,7 +9272,9 @@ var _user$project$Iphod_Models$DailyMP = function (a) {
 									return function (j) {
 										return function (k) {
 											return function (l) {
-												return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, mp1: j, mp2: k, mpp: l};
+												return function (m) {
+													return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, mp1: j, mp2: k, mpp: l, sectionUpdate: m};
+												};
 											};
 										};
 									};
@@ -9280,7 +9299,9 @@ var _user$project$Iphod_Models$DailyEP = function (a) {
 									return function (j) {
 										return function (k) {
 											return function (l) {
-												return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, ep1: j, ep2: k, epp: l};
+												return function (m) {
+													return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, ep1: j, ep2: k, epp: l, sectionUpdate: m};
+												};
 											};
 										};
 									};
@@ -9532,6 +9553,15 @@ var _user$project$Iphod_Sunday$changeText = F3(
 		};
 		return A2(_elm_lang$core$List$map, changeText, lessons);
 	});
+var _user$project$Iphod_Sunday$getRef = function (lessons) {
+	var justRefs = function (l) {
+		return l.read;
+	};
+	return A2(
+		_elm_lang$core$String$join,
+		',',
+		A2(_elm_lang$core$List$map, justRefs, lessons));
+};
 var _user$project$Iphod_Sunday$update = F2(
 	function (msg, model) {
 		var _p4 = msg;
@@ -9539,132 +9569,154 @@ var _user$project$Iphod_Sunday$update = F2(
 			case 'NoOp':
 				return model;
 			case 'ToggleModelShow':
-				return _elm_lang$core$Native_Utils.update(
+				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
 					{
 						show: _elm_lang$core$Basics$not(model.show)
 					});
+				return newModel;
 			case 'SetReading':
 				return _p4._0;
 			case 'ChangeText':
-				var _p8 = _p4._1;
-				var _p7 = _p4._0;
+				var _p9 = _p4._1;
+				var _p8 = _p4._0;
+				var thisRef = function () {
+					var _p5 = _p8;
+					switch (_p5) {
+						case 'ot':
+							return _user$project$Iphod_Sunday$getRef(model.ot);
+						case 'ps':
+							return _user$project$Iphod_Sunday$getRef(model.ps);
+						case 'nt':
+							return _user$project$Iphod_Sunday$getRef(model.nt);
+						case 'gs':
+							return _user$project$Iphod_Sunday$getRef(model.gs);
+						default:
+							return '';
+					}
+				}();
+				var thisUpdate = A3(_user$project$Iphod_Models$setSectionUpdate, _p8, _p9, thisRef);
 				var thisConfig = model.config;
 				var newConfig = function () {
-					var _p5 = _p7;
-					switch (_p5) {
+					var _p6 = _p8;
+					switch (_p6) {
 						case 'ot':
 							return _elm_lang$core$Native_Utils.update(
 								thisConfig,
-								{ot: _p8});
+								{ot: _p9});
 						case 'ps':
 							return _elm_lang$core$Native_Utils.update(
 								thisConfig,
-								{ps: _p8});
+								{ps: _p9});
 						case 'nt':
 							return _elm_lang$core$Native_Utils.update(
 								thisConfig,
-								{nt: _p8});
+								{nt: _p9});
 						case 'gs':
 							return _elm_lang$core$Native_Utils.update(
 								thisConfig,
-								{gs: _p8});
+								{gs: _p9});
 						default:
 							return thisConfig;
 					}
 				}();
 				var newModel = function () {
-					var _p6 = _p7;
-					switch (_p6) {
+					var _p7 = _p8;
+					switch (_p7) {
 						case 'ot':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									ot: A3(_user$project$Iphod_Sunday$changeText, model, _p8, model.ot),
+									ot: A3(_user$project$Iphod_Sunday$changeText, model, _p9, model.ot),
+									sectionUpdate: thisUpdate,
 									config: newConfig
 								});
 						case 'ps':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									ps: A3(_user$project$Iphod_Sunday$changeText, model, _p8, model.ps),
+									ps: A3(_user$project$Iphod_Sunday$changeText, model, _p9, model.ps),
+									sectionUpdate: thisUpdate,
 									config: newConfig
 								});
 						case 'nt':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									nt: A3(_user$project$Iphod_Sunday$changeText, model, _p8, model.nt),
+									nt: A3(_user$project$Iphod_Sunday$changeText, model, _p9, model.nt),
+									sectionUpdate: thisUpdate,
 									config: newConfig
 								});
 						default:
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									gs: A3(_user$project$Iphod_Sunday$changeText, model, _p8, model.gs),
+									gs: A3(_user$project$Iphod_Sunday$changeText, model, _p9, model.gs),
+									sectionUpdate: thisUpdate,
 									config: newConfig
 								});
 					}
 				}();
 				return newModel;
 			case 'UpdateAltReading':
-				var _p9 = _p4._0;
+				var _p10 = _p4._0;
 				var update_altReading = function (this_lesson) {
-					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p9.id) ? _elm_lang$core$Native_Utils.update(
+					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p10.id) ? _elm_lang$core$Native_Utils.update(
 						this_lesson,
 						{altRead: _p4._1}) : this_lesson;
 				};
-				var this_section = A2(_user$project$Iphod_Sunday$thisSection, model, _p9);
+				var this_section = A2(_user$project$Iphod_Sunday$thisSection, model, _p10);
 				var newSection = A2(_elm_lang$core$List$map, update_altReading, this_section);
-				var newModel = A3(_user$project$Iphod_Sunday$updateModel, model, _p9, newSection);
+				var newModel = A3(_user$project$Iphod_Sunday$updateModel, model, _p10, newSection);
 				return newModel;
 			case 'RequestAltReading':
-				var _p11 = _p4._0;
+				var _p12 = _p4._0;
 				var newLesson = _elm_lang$core$Native_List.fromArray(
 					[
 						_elm_lang$core$Native_Utils.update(
-						_p11,
+						_p12,
 						{
 							cmd: A2(
 								_elm_lang$core$Basics_ops['++'],
 								'alt',
-								_elm_lang$core$String$toUpper(_p11.section))
+								_elm_lang$core$String$toUpper(_p12.section))
 						})
 					]);
+				var thisUpdate = A3(_user$project$Iphod_Models$setSectionUpdate, _p12.section, _p12.version, _p12.altRead);
 				var newModel = function () {
-					var _p10 = _p11.section;
-					switch (_p10) {
+					var _p11 = _p12.section;
+					switch (_p11) {
 						case 'ot':
 							return _elm_lang$core$Native_Utils.update(
 								model,
-								{ot: newLesson});
+								{ot: newLesson, sectionUpdate: thisUpdate});
 						case 'ps':
 							return _elm_lang$core$Native_Utils.update(
 								model,
-								{ps: newLesson});
+								{ps: newLesson, sectionUpdate: thisUpdate});
 						case 'nt':
 							return _elm_lang$core$Native_Utils.update(
 								model,
-								{nt: newLesson});
+								{nt: newLesson, sectionUpdate: thisUpdate});
 						default:
 							return _elm_lang$core$Native_Utils.update(
 								model,
-								{gs: newLesson});
+								{gs: newLesson, sectionUpdate: thisUpdate});
 					}
 				}();
 				return newModel;
 			case 'ToggleShow':
-				var _p12 = _p4._0;
+				var _p13 = _p4._0;
 				var update_text = function (this_lesson) {
-					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p12.id) ? _elm_lang$core$Native_Utils.update(
+					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p13.id) ? _elm_lang$core$Native_Utils.update(
 						this_lesson,
 						{
 							show: _elm_lang$core$Basics$not(this_lesson.show)
 						}) : this_lesson;
 				};
-				var this_section = A2(_user$project$Iphod_Sunday$thisSection, model, _p12);
+				var this_section = A2(_user$project$Iphod_Sunday$thisSection, model, _p13);
 				var newSection = A2(_elm_lang$core$List$map, update_text, this_section);
-				var newModel = A3(_user$project$Iphod_Sunday$updateModel, model, _p12, newSection);
+				var newModel = A3(_user$project$Iphod_Sunday$updateModel, model, _p13, newSection);
 				return newModel;
 			default:
 				var collect = model.collect;
@@ -9699,8 +9751,8 @@ var _user$project$Iphod_Sunday$ChangeText = F2(
 var _user$project$Iphod_Sunday$thisReading = F2(
 	function (model, section) {
 		var ver = function () {
-			var _p13 = section;
-			switch (_p13.ctor) {
+			var _p14 = section;
+			switch (_p14.ctor) {
 				case 'OT':
 					return model.config.ot;
 				case 'PS':
@@ -9741,8 +9793,8 @@ var _user$project$Iphod_Sunday$thisReading = F2(
 					]));
 		};
 		var lessons = function () {
-			var _p14 = section;
-			switch (_p14.ctor) {
+			var _p15 = section;
+			switch (_p15.ctor) {
 				case 'OT':
 					return model.ot;
 				case 'PS':
@@ -10491,6 +10543,36 @@ var _user$project$Iphod_MPReading$thisProper = function (proper) {
 					]))
 			]));
 };
+var _user$project$Iphod_MPReading$updateModel = F3(
+	function (model, lesson, newSection) {
+		var _p1 = lesson.section;
+		switch (_p1) {
+			case 'mp1':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{mp1: newSection});
+			case 'mp2':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{mp2: newSection});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{mpp: newSection});
+		}
+	});
+var _user$project$Iphod_MPReading$thisSection = F2(
+	function (model, lesson) {
+		var _p2 = lesson.section;
+		switch (_p2) {
+			case 'mp1':
+				return model.mp1;
+			case 'mp2':
+				return model.mp2;
+			default:
+				return model.mpp;
+		}
+	});
 var _user$project$Iphod_MPReading$changeText = F3(
 	function (model, ver, lessons) {
 		var changeText = function (lesson) {
@@ -10500,10 +10582,19 @@ var _user$project$Iphod_MPReading$changeText = F3(
 		};
 		return A2(_elm_lang$core$List$map, changeText, lessons);
 	});
+var _user$project$Iphod_MPReading$getRef = function (lessons) {
+	var justRefs = function (l) {
+		return l.read;
+	};
+	return A2(
+		_elm_lang$core$String$join,
+		',',
+		A2(_elm_lang$core$List$map, justRefs, lessons));
+};
 var _user$project$Iphod_MPReading$update = F2(
 	function (msg, model) {
-		var _p1 = msg;
-		switch (_p1.ctor) {
+		var _p3 = msg;
+		switch (_p3.ctor) {
 			case 'NoOp':
 				return model;
 			case 'ToggleModelShow':
@@ -10515,45 +10606,61 @@ var _user$project$Iphod_MPReading$update = F2(
 			case 'GetText':
 				return model;
 			case 'ChangeText':
-				var _p3 = _p1._1;
+				var _p7 = _p3._1;
+				var _p6 = _p3._0;
+				var thisRef = function () {
+					var _p4 = _p6;
+					switch (_p4) {
+						case 'mp1':
+							return _user$project$Iphod_MPReading$getRef(model.mp1);
+						case 'mp2':
+							return _user$project$Iphod_MPReading$getRef(model.mp2);
+						default:
+							return '';
+					}
+				}();
+				var thisUpdate = A3(_user$project$Iphod_Models$setSectionUpdate, _p6, _p7, thisRef);
 				var newModel = function () {
-					var _p2 = _p1._0;
-					switch (_p2) {
+					var _p5 = _p6;
+					switch (_p5) {
 						case 'mp1':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									mp1: A3(_user$project$Iphod_MPReading$changeText, model, _p3, model.mp1)
+									mp1: A3(_user$project$Iphod_MPReading$changeText, model, _p7, model.mp1),
+									sectionUpdate: thisUpdate
 								});
 						case 'mp2':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									mp2: A3(_user$project$Iphod_MPReading$changeText, model, _p3, model.mp2)
+									mp2: A3(_user$project$Iphod_MPReading$changeText, model, _p7, model.mp2),
+									sectionUpdate: thisUpdate
 								});
 						default:
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									mpp: A3(_user$project$Iphod_MPReading$changeText, model, _p3, model.mpp)
+									mpp: A3(_user$project$Iphod_MPReading$changeText, model, _p7, model.mpp),
+									sectionUpdate: thisUpdate
 								});
 					}
 				}();
 				return newModel;
 			case 'SetReading':
-				return _p1._0;
+				return _p3._0;
 			case 'ToggleShow':
-				var _p6 = _p1._0;
+				var _p10 = _p3._0;
 				var update_text = function (this_lesson) {
-					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p6.id) ? _elm_lang$core$Native_Utils.update(
+					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p10.id) ? _elm_lang$core$Native_Utils.update(
 						this_lesson,
 						{
 							show: _elm_lang$core$Basics$not(this_lesson.show)
 						}) : this_lesson;
 				};
 				var this_section = function () {
-					var _p4 = _p6.section;
-					switch (_p4) {
+					var _p8 = _p10.section;
+					switch (_p8) {
 						case 'mp1':
 							return model.mp1;
 						case 'mp2':
@@ -10564,8 +10671,8 @@ var _user$project$Iphod_MPReading$update = F2(
 				}();
 				var newSection = A2(_elm_lang$core$List$map, update_text, this_section);
 				var newModel = function () {
-					var _p5 = _p6.section;
-					switch (_p5) {
+					var _p9 = _p10.section;
+					switch (_p9) {
 						case 'mp1':
 							return _elm_lang$core$Native_Utils.update(
 								model,
@@ -10581,7 +10688,7 @@ var _user$project$Iphod_MPReading$update = F2(
 					}
 				}();
 				return newModel;
-			default:
+			case 'ToggleCollect':
 				var collect = model.collect;
 				var newCollect = _elm_lang$core$Native_Utils.update(
 					collect,
@@ -10592,12 +10699,64 @@ var _user$project$Iphod_MPReading$update = F2(
 					model,
 					{collect: newCollect});
 				return newModel;
+			case 'UpdateAltReading':
+				var _p11 = _p3._0;
+				var update_altReading = function (this_lesson) {
+					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p11.id) ? _elm_lang$core$Native_Utils.update(
+						this_lesson,
+						{altRead: _p3._1}) : this_lesson;
+				};
+				var this_section = A2(_user$project$Iphod_MPReading$thisSection, model, _p11);
+				var newSection = A2(_elm_lang$core$List$map, update_altReading, this_section);
+				var newModel = A3(_user$project$Iphod_MPReading$updateModel, model, _p11, newSection);
+				return newModel;
+			default:
+				var _p13 = _p3._0;
+				var newLesson = _elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$core$Native_Utils.update(
+						_p13,
+						{
+							cmd: A2(
+								_elm_lang$core$Basics_ops['++'],
+								'alt',
+								_elm_lang$core$String$toUpper(_p13.section))
+						})
+					]);
+				var thisUpdate = A3(_user$project$Iphod_Models$setSectionUpdate, _p13.section, _p13.version, _p13.altRead);
+				var newModel = function () {
+					var _p12 = _p13.section;
+					switch (_p12) {
+						case 'mp1':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{mp1: newLesson, sectionUpdate: thisUpdate});
+						case 'mp2':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{mp2: newLesson, sectionUpdate: thisUpdate});
+						case 'mpp':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{mpp: newLesson, sectionUpdate: thisUpdate});
+						default:
+							return model;
+					}
+				}();
+				return newModel;
 		}
 	});
 var _user$project$Iphod_MPReading$init = _user$project$Iphod_Models$initDailyMP;
 var _user$project$Iphod_MPReading$MPP = {ctor: 'MPP'};
 var _user$project$Iphod_MPReading$MP2 = {ctor: 'MP2'};
 var _user$project$Iphod_MPReading$MP1 = {ctor: 'MP1'};
+var _user$project$Iphod_MPReading$RequestAltReading = function (a) {
+	return {ctor: 'RequestAltReading', _0: a};
+};
+var _user$project$Iphod_MPReading$UpdateAltReading = F2(
+	function (a, b) {
+		return {ctor: 'UpdateAltReading', _0: a, _1: b};
+	});
 var _user$project$Iphod_MPReading$SetReading = function (a) {
 	return {ctor: 'SetReading', _0: a};
 };
@@ -10699,6 +10858,114 @@ var _user$project$Iphod_MPReading$versionSelect = F2(
 var _user$project$Iphod_MPReading$GetText = function (a) {
 	return {ctor: 'GetText', _0: a};
 };
+var _user$project$Iphod_MPReading$thisReading = F2(
+	function (model, section) {
+		var req = function (l) {
+			var _p14 = section;
+			switch (_p14.ctor) {
+				case 'MP1':
+					return _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
+							{ctor: '_Tuple2', _0: 'section', _1: l.section},
+							{ctor: '_Tuple2', _0: 'id', _1: l.id},
+							{ctor: '_Tuple2', _0: 'read', _1: l.read},
+							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ot},
+							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
+						]);
+				case 'MP2':
+					return _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
+							{ctor: '_Tuple2', _0: 'section', _1: l.section},
+							{ctor: '_Tuple2', _0: 'id', _1: l.id},
+							{ctor: '_Tuple2', _0: 'read', _1: l.read},
+							{ctor: '_Tuple2', _0: 'ver', _1: model.config.nt},
+							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
+						]);
+				default:
+					return _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
+							{ctor: '_Tuple2', _0: 'section', _1: l.section},
+							{ctor: '_Tuple2', _0: 'id', _1: l.id},
+							{ctor: '_Tuple2', _0: 'read', _1: l.read},
+							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ps},
+							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
+						]);
+			}
+		};
+		var this_lesson = function (l) {
+			return _elm_lang$core$Native_Utils.eq(
+				_elm_lang$core$String$length(l.body),
+				0) ? A2(
+				_elm_lang$html$Html$li,
+				_user$project$Iphod_MPReading$hoverable(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_user$project$Iphod_MPReading$this_style(l),
+							_elm_lang$html$Html_Events$onClick(
+							_user$project$Iphod_MPReading$GetText(
+								req(l)))
+						])),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(l.read)
+					])) : A2(
+				_elm_lang$html$Html$li,
+				_user$project$Iphod_MPReading$hoverable(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_user$project$Iphod_MPReading$this_style(l),
+							_elm_lang$html$Html_Events$onClick(
+							_user$project$Iphod_MPReading$ToggleShow(l))
+						])),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(l.read)
+					]));
+		};
+		var lessons = function () {
+			var _p15 = section;
+			switch (_p15.ctor) {
+				case 'MP1':
+					return model.mp1;
+				case 'MP2':
+					return model.mp2;
+				default:
+					return model.mpp;
+			}
+		}();
+		return A2(_elm_lang$core$List$map, this_lesson, lessons);
+	});
+var _user$project$Iphod_MPReading$NoOp = {ctor: 'NoOp'};
+var _user$project$Iphod_MPReading$onEnter = function (msg) {
+	var tagger = function (code) {
+		return _elm_lang$core$Native_Utils.eq(code, 13) ? msg : _user$project$Iphod_MPReading$NoOp;
+	};
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'keydown',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$keyCode));
+};
+var _user$project$Iphod_MPReading$altReading = F2(
+	function (model, lesson) {
+		return A2(
+			_elm_lang$html$Html$input,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$placeholder('Alt Reading'),
+					_elm_lang$html$Html_Attributes$autofocus(true),
+					_elm_lang$html$Html_Attributes$value(lesson.altRead),
+					_elm_lang$html$Html_Attributes$name('altReading'),
+					_elm_lang$html$Html_Events$onInput(
+					_user$project$Iphod_MPReading$UpdateAltReading(lesson)),
+					_user$project$Iphod_MPReading$onEnter(
+					_user$project$Iphod_MPReading$RequestAltReading(lesson))
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[]));
+	});
 var _user$project$Iphod_MPReading$thisText = F2(
 	function (model, lessons) {
 		var this_text = function (l) {
@@ -10772,7 +11039,8 @@ var _user$project$Iphod_MPReading$thisText = F2(
 									[
 										_elm_lang$html$Html$text('BCP')
 									])),
-								A2(_user$project$Iphod_MPReading$versionSelect, model, l)
+								A2(_user$project$Iphod_MPReading$versionSelect, model, l),
+								A2(_user$project$Iphod_MPReading$altReading, model, l)
 							])),
 						A2(
 						_evancz$elm_markdown$Markdown$toHtml,
@@ -10814,7 +11082,8 @@ var _user$project$Iphod_MPReading$thisText = F2(
 									[
 										_elm_lang$html$Html$text('Hide')
 									])),
-								A2(_user$project$Iphod_MPReading$versionSelect, model, l)
+								A2(_user$project$Iphod_MPReading$versionSelect, model, l),
+								A2(_user$project$Iphod_MPReading$altReading, model, l)
 							])),
 						A2(
 						_evancz$elm_markdown$Markdown$toHtml,
@@ -10824,86 +11093,6 @@ var _user$project$Iphod_MPReading$thisText = F2(
 					]));
 		};
 		return A2(_elm_lang$core$List$map, this_text, lessons);
-	});
-var _user$project$Iphod_MPReading$thisReading = F2(
-	function (model, section) {
-		var req = function (l) {
-			var _p7 = section;
-			switch (_p7.ctor) {
-				case 'MP1':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ot},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				case 'MP2':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.nt},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				default:
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ps},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-			}
-		};
-		var this_lesson = function (l) {
-			return _elm_lang$core$Native_Utils.eq(
-				_elm_lang$core$String$length(l.body),
-				0) ? A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_MPReading$hoverable(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_user$project$Iphod_MPReading$this_style(l),
-							_elm_lang$html$Html_Events$onClick(
-							_user$project$Iphod_MPReading$GetText(
-								req(l)))
-						])),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(l.read)
-					])) : A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_MPReading$hoverable(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_user$project$Iphod_MPReading$this_style(l),
-							_elm_lang$html$Html_Events$onClick(
-							_user$project$Iphod_MPReading$ToggleShow(l))
-						])),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(l.read)
-					]));
-		};
-		var lessons = function () {
-			var _p8 = section;
-			switch (_p8.ctor) {
-				case 'MP1':
-					return model.mp1;
-				case 'MP2':
-					return model.mp2;
-				default:
-					return model.mpp;
-			}
-		}();
-		return A2(_elm_lang$core$List$map, this_lesson, lessons);
 	});
 var _user$project$Iphod_MPReading$view = function (model) {
 	return A2(
@@ -11092,7 +11281,6 @@ var _user$project$Iphod_MPReading$view = function (model) {
 				_user$project$Iphod_MPReading$thisCollect(model.collect))
 			]));
 };
-var _user$project$Iphod_MPReading$NoOp = {ctor: 'NoOp'};
 
 var _user$project$Iphod_EPReading$collectStyle = function (model) {
 	return A2(
@@ -11198,6 +11386,36 @@ var _user$project$Iphod_EPReading$thisProper = function (proper) {
 					]))
 			]));
 };
+var _user$project$Iphod_EPReading$updateModel = F3(
+	function (model, lesson, newSection) {
+		var _p1 = lesson.section;
+		switch (_p1) {
+			case 'ep1':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{ep1: newSection});
+			case 'ep2':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{ep2: newSection});
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{epp: newSection});
+		}
+	});
+var _user$project$Iphod_EPReading$thisSection = F2(
+	function (model, lesson) {
+		var _p2 = lesson.section;
+		switch (_p2) {
+			case 'ep1':
+				return model.ep1;
+			case 'ep2':
+				return model.ep2;
+			default:
+				return model.epp;
+		}
+	});
 var _user$project$Iphod_EPReading$changeText = F3(
 	function (model, ver, lessons) {
 		var changeText = function (lesson) {
@@ -11207,60 +11425,86 @@ var _user$project$Iphod_EPReading$changeText = F3(
 		};
 		return A2(_elm_lang$core$List$map, changeText, lessons);
 	});
+var _user$project$Iphod_EPReading$getRef = function (lessons) {
+	var justRefs = function (l) {
+		return l.read;
+	};
+	return A2(
+		_elm_lang$core$String$join,
+		',',
+		A2(_elm_lang$core$List$map, justRefs, lessons));
+};
 var _user$project$Iphod_EPReading$update = F2(
 	function (msg, model) {
-		var _p1 = msg;
-		switch (_p1.ctor) {
+		var _p3 = msg;
+		switch (_p3.ctor) {
 			case 'NoOp':
 				return model;
 			case 'GetText':
 				return model;
 			case 'ChangeText':
-				var _p3 = _p1._1;
+				var _p7 = _p3._1;
+				var _p6 = _p3._0;
+				var thisRef = function () {
+					var _p4 = _p6;
+					switch (_p4) {
+						case 'ep1':
+							return _user$project$Iphod_EPReading$getRef(model.ep1);
+						case 'ep2':
+							return _user$project$Iphod_EPReading$getRef(model.ep2);
+						default:
+							return '';
+					}
+				}();
+				var thisUpdate = A3(_user$project$Iphod_Models$setSectionUpdate, _p6, _p7, thisRef);
 				var newModel = function () {
-					var _p2 = _p1._0;
-					switch (_p2) {
+					var _p5 = _p6;
+					switch (_p5) {
 						case 'ep1':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									ep1: A3(_user$project$Iphod_EPReading$changeText, model, _p3, model.ep1)
+									ep1: A3(_user$project$Iphod_EPReading$changeText, model, _p7, model.ep1),
+									sectionUpdate: thisUpdate
 								});
 						case 'ep2':
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									ep2: A3(_user$project$Iphod_EPReading$changeText, model, _p3, model.ep2)
+									ep2: A3(_user$project$Iphod_EPReading$changeText, model, _p7, model.ep2),
+									sectionUpdate: thisUpdate
 								});
 						default:
 							return _elm_lang$core$Native_Utils.update(
 								model,
 								{
-									epp: A3(_user$project$Iphod_EPReading$changeText, model, _p3, model.epp)
+									epp: A3(_user$project$Iphod_EPReading$changeText, model, _p7, model.epp),
+									sectionUpdate: thisUpdate
 								});
 					}
 				}();
 				return newModel;
 			case 'ToggleModelShow':
-				return _elm_lang$core$Native_Utils.update(
+				var newModel = _elm_lang$core$Native_Utils.update(
 					model,
 					{
 						show: _elm_lang$core$Basics$not(model.show)
 					});
+				return newModel;
 			case 'SetReading':
-				return _p1._0;
+				return _p3._0;
 			case 'ToggleShow':
-				var _p6 = _p1._0;
+				var _p10 = _p3._0;
 				var update_text = function (this_lesson) {
-					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p6.id) ? _elm_lang$core$Native_Utils.update(
+					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p10.id) ? _elm_lang$core$Native_Utils.update(
 						this_lesson,
 						{
 							show: _elm_lang$core$Basics$not(this_lesson.show)
 						}) : this_lesson;
 				};
 				var this_section = function () {
-					var _p4 = _p6.section;
-					switch (_p4) {
+					var _p8 = _p10.section;
+					switch (_p8) {
 						case 'ep1':
 							return model.ep1;
 						case 'ep2':
@@ -11271,8 +11515,8 @@ var _user$project$Iphod_EPReading$update = F2(
 				}();
 				var newSection = A2(_elm_lang$core$List$map, update_text, this_section);
 				var newModel = function () {
-					var _p5 = _p6.section;
-					switch (_p5) {
+					var _p9 = _p10.section;
+					switch (_p9) {
 						case 'ep1':
 							return _elm_lang$core$Native_Utils.update(
 								model,
@@ -11288,7 +11532,7 @@ var _user$project$Iphod_EPReading$update = F2(
 					}
 				}();
 				return newModel;
-			default:
+			case 'ToggleCollect':
 				var collect = model.collect;
 				var newCollect = _elm_lang$core$Native_Utils.update(
 					collect,
@@ -11299,12 +11543,64 @@ var _user$project$Iphod_EPReading$update = F2(
 					model,
 					{collect: newCollect});
 				return newModel;
+			case 'UpdateAltReading':
+				var _p11 = _p3._0;
+				var update_altReading = function (this_lesson) {
+					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p11.id) ? _elm_lang$core$Native_Utils.update(
+						this_lesson,
+						{altRead: _p3._1}) : this_lesson;
+				};
+				var this_section = A2(_user$project$Iphod_EPReading$thisSection, model, _p11);
+				var newSection = A2(_elm_lang$core$List$map, update_altReading, this_section);
+				var newModel = A3(_user$project$Iphod_EPReading$updateModel, model, _p11, newSection);
+				return newModel;
+			default:
+				var _p13 = _p3._0;
+				var newLesson = _elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$core$Native_Utils.update(
+						_p13,
+						{
+							cmd: A2(
+								_elm_lang$core$Basics_ops['++'],
+								'alt',
+								_elm_lang$core$String$toUpper(_p13.section))
+						})
+					]);
+				var thisUpdate = A3(_user$project$Iphod_Models$setSectionUpdate, _p13.section, _p13.version, _p13.altRead);
+				var newModel = function () {
+					var _p12 = _p13.section;
+					switch (_p12) {
+						case 'ep1':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{ep1: newLesson, sectionUpdate: thisUpdate});
+						case 'ep2':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{ep2: newLesson, sectionUpdate: thisUpdate});
+						case 'epp':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{epp: newLesson, sectionUpdate: thisUpdate});
+						default:
+							return model;
+					}
+				}();
+				return newModel;
 		}
 	});
 var _user$project$Iphod_EPReading$init = _user$project$Iphod_Models$initDailyEP;
 var _user$project$Iphod_EPReading$EPP = {ctor: 'EPP'};
 var _user$project$Iphod_EPReading$EP2 = {ctor: 'EP2'};
 var _user$project$Iphod_EPReading$EP1 = {ctor: 'EP1'};
+var _user$project$Iphod_EPReading$RequestAltReading = function (a) {
+	return {ctor: 'RequestAltReading', _0: a};
+};
+var _user$project$Iphod_EPReading$UpdateAltReading = F2(
+	function (a, b) {
+		return {ctor: 'UpdateAltReading', _0: a, _1: b};
+	});
 var _user$project$Iphod_EPReading$SetReading = function (a) {
 	return {ctor: 'SetReading', _0: a};
 };
@@ -11406,6 +11702,114 @@ var _user$project$Iphod_EPReading$versionSelect = F2(
 var _user$project$Iphod_EPReading$GetText = function (a) {
 	return {ctor: 'GetText', _0: a};
 };
+var _user$project$Iphod_EPReading$thisReading = F2(
+	function (model, section) {
+		var req = function (l) {
+			var _p14 = section;
+			switch (_p14.ctor) {
+				case 'EP1':
+					return _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
+							{ctor: '_Tuple2', _0: 'section', _1: l.section},
+							{ctor: '_Tuple2', _0: 'id', _1: l.id},
+							{ctor: '_Tuple2', _0: 'read', _1: l.read},
+							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ot},
+							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
+						]);
+				case 'EP2':
+					return _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
+							{ctor: '_Tuple2', _0: 'section', _1: l.section},
+							{ctor: '_Tuple2', _0: 'id', _1: l.id},
+							{ctor: '_Tuple2', _0: 'read', _1: l.read},
+							{ctor: '_Tuple2', _0: 'ver', _1: model.config.nt},
+							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
+						]);
+				default:
+					return _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
+							{ctor: '_Tuple2', _0: 'section', _1: l.section},
+							{ctor: '_Tuple2', _0: 'id', _1: l.id},
+							{ctor: '_Tuple2', _0: 'read', _1: l.read},
+							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ps},
+							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
+						]);
+			}
+		};
+		var this_lesson = function (l) {
+			return _elm_lang$core$Native_Utils.eq(
+				_elm_lang$core$String$length(l.body),
+				0) ? A2(
+				_elm_lang$html$Html$li,
+				_user$project$Iphod_EPReading$hoverable(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_user$project$Iphod_EPReading$this_style(l),
+							_elm_lang$html$Html_Events$onClick(
+							_user$project$Iphod_EPReading$GetText(
+								req(l)))
+						])),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(l.read)
+					])) : A2(
+				_elm_lang$html$Html$li,
+				_user$project$Iphod_EPReading$hoverable(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_user$project$Iphod_EPReading$this_style(l),
+							_elm_lang$html$Html_Events$onClick(
+							_user$project$Iphod_EPReading$ToggleShow(l))
+						])),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(l.read)
+					]));
+		};
+		var lessons = function () {
+			var _p15 = section;
+			switch (_p15.ctor) {
+				case 'EP1':
+					return model.ep1;
+				case 'EP2':
+					return model.ep2;
+				default:
+					return model.epp;
+			}
+		}();
+		return A2(_elm_lang$core$List$map, this_lesson, lessons);
+	});
+var _user$project$Iphod_EPReading$NoOp = {ctor: 'NoOp'};
+var _user$project$Iphod_EPReading$onEnter = function (msg) {
+	var tagger = function (code) {
+		return _elm_lang$core$Native_Utils.eq(code, 13) ? msg : _user$project$Iphod_EPReading$NoOp;
+	};
+	return A2(
+		_elm_lang$html$Html_Events$on,
+		'keydown',
+		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$keyCode));
+};
+var _user$project$Iphod_EPReading$altReading = F2(
+	function (model, lesson) {
+		return A2(
+			_elm_lang$html$Html$input,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$placeholder('Alt Reading'),
+					_elm_lang$html$Html_Attributes$autofocus(true),
+					_elm_lang$html$Html_Attributes$value(lesson.altRead),
+					_elm_lang$html$Html_Attributes$name('altReading'),
+					_elm_lang$html$Html_Events$onInput(
+					_user$project$Iphod_EPReading$UpdateAltReading(lesson)),
+					_user$project$Iphod_EPReading$onEnter(
+					_user$project$Iphod_EPReading$RequestAltReading(lesson))
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[]));
+	});
 var _user$project$Iphod_EPReading$thisText = F2(
 	function (model, lessons) {
 		var this_text = function (l) {
@@ -11479,7 +11883,8 @@ var _user$project$Iphod_EPReading$thisText = F2(
 									[
 										_elm_lang$html$Html$text('BCP')
 									])),
-								A2(_user$project$Iphod_EPReading$versionSelect, model, l)
+								A2(_user$project$Iphod_EPReading$versionSelect, model, l),
+								A2(_user$project$Iphod_EPReading$altReading, model, l)
 							])),
 						A2(
 						_evancz$elm_markdown$Markdown$toHtml,
@@ -11521,7 +11926,8 @@ var _user$project$Iphod_EPReading$thisText = F2(
 									[
 										_elm_lang$html$Html$text('Hide')
 									])),
-								A2(_user$project$Iphod_EPReading$versionSelect, model, l)
+								A2(_user$project$Iphod_EPReading$versionSelect, model, l),
+								A2(_user$project$Iphod_EPReading$altReading, model, l)
 							])),
 						A2(
 						_evancz$elm_markdown$Markdown$toHtml,
@@ -11531,86 +11937,6 @@ var _user$project$Iphod_EPReading$thisText = F2(
 					]));
 		};
 		return A2(_elm_lang$core$List$map, this_text, lessons);
-	});
-var _user$project$Iphod_EPReading$thisReading = F2(
-	function (model, section) {
-		var req = function (l) {
-			var _p7 = section;
-			switch (_p7.ctor) {
-				case 'EP1':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ot},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				case 'EP2':
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.nt},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-				default:
-					return _elm_lang$core$Native_List.fromArray(
-						[
-							{ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-							{ctor: '_Tuple2', _0: 'section', _1: l.section},
-							{ctor: '_Tuple2', _0: 'id', _1: l.id},
-							{ctor: '_Tuple2', _0: 'read', _1: l.read},
-							{ctor: '_Tuple2', _0: 'ver', _1: model.config.ps},
-							{ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes}
-						]);
-			}
-		};
-		var this_lesson = function (l) {
-			return _elm_lang$core$Native_Utils.eq(
-				_elm_lang$core$String$length(l.body),
-				0) ? A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_EPReading$hoverable(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_user$project$Iphod_EPReading$this_style(l),
-							_elm_lang$html$Html_Events$onClick(
-							_user$project$Iphod_EPReading$GetText(
-								req(l)))
-						])),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(l.read)
-					])) : A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_EPReading$hoverable(
-					_elm_lang$core$Native_List.fromArray(
-						[
-							_user$project$Iphod_EPReading$this_style(l),
-							_elm_lang$html$Html_Events$onClick(
-							_user$project$Iphod_EPReading$ToggleShow(l))
-						])),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text(l.read)
-					]));
-		};
-		var lessons = function () {
-			var _p8 = section;
-			switch (_p8.ctor) {
-				case 'EP1':
-					return model.ep1;
-				case 'EP2':
-					return model.ep2;
-				default:
-					return model.epp;
-			}
-		}();
-		return A2(_elm_lang$core$List$map, this_lesson, lessons);
 	});
 var _user$project$Iphod_EPReading$view = function (model) {
 	return A2(
@@ -11799,7 +12125,6 @@ var _user$project$Iphod_EPReading$view = function (model) {
 				_user$project$Iphod_EPReading$thisCollect(model.collect))
 			]));
 };
-var _user$project$Iphod_EPReading$NoOp = {ctor: 'NoOp'};
 
 var _user$project$Iphod$reflectionDiv = function (model) {
 	var author = (_elm_lang$core$Native_Utils.cmp(
@@ -11943,78 +12268,7 @@ var _user$project$Iphod$init = {ctor: '_Tuple2', _0: _user$project$Iphod$initMod
 var _user$project$Iphod$requestReading = _elm_lang$core$Native_Platform.outgoingPort(
 	'requestReading',
 	function (v) {
-		return _elm_lang$core$Native_List.toArray(v).map(
-			function (v) {
-				return v;
-			});
-	});
-var _user$project$Iphod$changeMpLesson = F2(
-	function (daily, newDaily) {
-		var mppVer = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(daily.mpp)).version;
-		var mp2Ver = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(daily.mp2)).version;
-		var mp1Ver = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(daily.mp1)).version;
-		var newMppVer = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newDaily.mpp)).version;
-		var newMp2Ver = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newDaily.mp2)).version;
-		var newMp1Ver = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newDaily.mp1)).version;
-		return (!_elm_lang$core$Native_Utils.eq(mp1Ver, newMp1Ver)) ? _user$project$Iphod$requestReading(
-			_elm_lang$core$Native_List.fromArray(
-				['mp1', newMp1Ver, daily.date])) : ((!_elm_lang$core$Native_Utils.eq(mp2Ver, newMp2Ver)) ? _user$project$Iphod$requestReading(
-			_elm_lang$core$Native_List.fromArray(
-				['mp2', newMp2Ver, daily.date])) : ((!_elm_lang$core$Native_Utils.eq(mppVer, newMppVer)) ? _user$project$Iphod$requestReading(
-			_elm_lang$core$Native_List.fromArray(
-				['mpp', newMppVer, daily.date])) : _elm_lang$core$Platform_Cmd$none));
-	});
-var _user$project$Iphod$changeEpLesson = F2(
-	function (daily, newDaily) {
-		var eppVer = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(daily.epp)).version;
-		var ep2Ver = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(daily.ep2)).version;
-		var ep1Ver = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(daily.ep1)).version;
-		var newEppVer = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newDaily.epp)).version;
-		var newEp2Ver = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newDaily.ep2)).version;
-		var newEp1Ver = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newDaily.ep1)).version;
-		return (!_elm_lang$core$Native_Utils.eq(ep1Ver, newEp1Ver)) ? _user$project$Iphod$requestReading(
-			_elm_lang$core$Native_List.fromArray(
-				['ep1', newEp1Ver, daily.date])) : ((!_elm_lang$core$Native_Utils.eq(ep2Ver, newEp2Ver)) ? _user$project$Iphod$requestReading(
-			_elm_lang$core$Native_List.fromArray(
-				['ep2', newEp2Ver, daily.date])) : ((!_elm_lang$core$Native_Utils.eq(eppVer, newEppVer)) ? _user$project$Iphod$requestReading(
-			_elm_lang$core$Native_List.fromArray(
-				['epp', newEppVer, daily.date])) : _elm_lang$core$Platform_Cmd$none));
+		return {section: v.section, version: v.version, ref: v.ref};
 	});
 var _user$project$Iphod$requestAltReading = _elm_lang$core$Native_Platform.outgoingPort(
 	'requestAltReading',
@@ -12023,104 +12277,6 @@ var _user$project$Iphod$requestAltReading = _elm_lang$core$Native_Platform.outgo
 			function (v) {
 				return v;
 			});
-	});
-var _user$project$Iphod$changeEuLesson = F2(
-	function (sunday, newSunday) {
-		var gsCmd = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(sunday.gs)).cmd;
-		var ntCmd = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(sunday.nt)).cmd;
-		var otCmd = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(sunday.ot)).cmd;
-		var gsAlt = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(sunday.gs)).altRead;
-		var ntAlt = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(sunday.nt)).altRead;
-		var otAlt = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(sunday.ot)).altRead;
-		var gsVer = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(sunday.gs)).version;
-		var ntVer = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(sunday.nt)).version;
-		var psVer = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(sunday.ps)).version;
-		var otVer = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(sunday.ot)).version;
-		var newGsCmd = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newSunday.gs)).cmd;
-		var newNtCmd = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newSunday.nt)).cmd;
-		var newOtCmd = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newSunday.ot)).cmd;
-		var newGsAlt = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newSunday.gs)).altRead;
-		var newNtAlt = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newSunday.nt)).altRead;
-		var newOtAlt = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newSunday.ot)).altRead;
-		var newGsVer = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newSunday.gs)).version;
-		var newNtVer = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newSunday.nt)).version;
-		var newPsVer = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newSunday.ps)).version;
-		var newOtVer = A2(
-			_elm_lang$core$Maybe$withDefault,
-			_user$project$Iphod_Models$initLesson,
-			_elm_lang$core$List$head(newSunday.ot)).version;
-		return (!_elm_lang$core$Native_Utils.eq(otVer, newOtVer)) ? _user$project$Iphod$requestReading(
-			_elm_lang$core$Native_List.fromArray(
-				['ot', newOtVer, sunday.date])) : ((!_elm_lang$core$Native_Utils.eq(psVer, newPsVer)) ? _user$project$Iphod$requestReading(
-			_elm_lang$core$Native_List.fromArray(
-				['ps', newPsVer, sunday.date])) : ((!_elm_lang$core$Native_Utils.eq(ntVer, newNtVer)) ? _user$project$Iphod$requestReading(
-			_elm_lang$core$Native_List.fromArray(
-				['nt', newNtVer, sunday.date])) : ((!_elm_lang$core$Native_Utils.eq(gsVer, newGsVer)) ? _user$project$Iphod$requestReading(
-			_elm_lang$core$Native_List.fromArray(
-				['gs', newGsVer, sunday.date])) : ((!_elm_lang$core$Native_Utils.eq(otCmd, newOtCmd)) ? _user$project$Iphod$requestAltReading(
-			_elm_lang$core$Native_List.fromArray(
-				['ot', newOtVer, otAlt])) : ((!_elm_lang$core$Native_Utils.eq(ntCmd, newNtCmd)) ? _user$project$Iphod$requestAltReading(
-			_elm_lang$core$Native_List.fromArray(
-				['ot', newNtVer, ntAlt])) : ((!_elm_lang$core$Native_Utils.eq(gsCmd, newGsCmd)) ? _user$project$Iphod$requestAltReading(
-			_elm_lang$core$Native_List.fromArray(
-				['gs', newGsVer, gsAlt])) : _elm_lang$core$Platform_Cmd$none))))));
 	});
 var _user$project$Iphod$requestScrollTop = _elm_lang$core$Native_Platform.outgoingPort(
 	'requestScrollTop',
@@ -12173,7 +12329,7 @@ var _user$project$Iphod$update = F2(
 					{
 						eu: A2(_user$project$Iphod_Sunday$update, _p1._0, model.eu)
 					});
-				var newCmd = A2(_user$project$Iphod$changeEuLesson, model.eu, newModel.eu);
+				var newCmd = _elm_lang$core$String$isEmpty(newModel.eu.sectionUpdate.ref) ? _elm_lang$core$Platform_Cmd$none : _user$project$Iphod$requestReading(newModel.eu.sectionUpdate);
 				return {ctor: '_Tuple2', _0: newModel, _1: newCmd};
 			case 'ModMP':
 				var newModel = _elm_lang$core$Native_Utils.update(
@@ -12181,7 +12337,7 @@ var _user$project$Iphod$update = F2(
 					{
 						mp: A2(_user$project$Iphod_MPReading$update, _p1._0, model.mp)
 					});
-				var newCmd = A2(_user$project$Iphod$changeMpLesson, model.mp, newModel.mp);
+				var newCmd = _elm_lang$core$String$isEmpty(newModel.mp.sectionUpdate.ref) ? _elm_lang$core$Platform_Cmd$none : _user$project$Iphod$requestReading(newModel.mp.sectionUpdate);
 				return {ctor: '_Tuple2', _0: newModel, _1: newCmd};
 			default:
 				var newModel = _elm_lang$core$Native_Utils.update(
@@ -12189,7 +12345,7 @@ var _user$project$Iphod$update = F2(
 					{
 						ep: A2(_user$project$Iphod_EPReading$update, _p1._0, model.ep)
 					});
-				var newCmd = A2(_user$project$Iphod$changeEpLesson, model.ep, newModel.ep);
+				var newCmd = _elm_lang$core$String$isEmpty(newModel.ep.sectionUpdate.ref) ? _elm_lang$core$Platform_Cmd$none : _user$project$Iphod$requestReading(newModel.ep.sectionUpdate);
 				return {ctor: '_Tuple2', _0: newModel, _1: newCmd};
 		}
 	});
@@ -12691,8 +12847,32 @@ var _user$project$Iphod$portCalendar = _elm_lang$core$Native_Platform.incomingPo
 																																	});
 																															}))),
 																												function (gs) {
-																													return _elm_lang$core$Json_Decode$succeed(
-																														{ofType: ofType, date: date, season: season, week: week, title: title, show: show, config: config, colors: colors, collect: collect, ot: ot, ps: ps, nt: nt, gs: gs});
+																													return A2(
+																														_elm_lang$core$Json_Decode$andThen,
+																														A2(
+																															_elm_lang$core$Json_Decode_ops[':='],
+																															'sectionUpdate',
+																															A2(
+																																_elm_lang$core$Json_Decode$andThen,
+																																A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																																function (section) {
+																																	return A2(
+																																		_elm_lang$core$Json_Decode$andThen,
+																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																																		function (version) {
+																																			return A2(
+																																				_elm_lang$core$Json_Decode$andThen,
+																																				A2(_elm_lang$core$Json_Decode_ops[':='], 'ref', _elm_lang$core$Json_Decode$string),
+																																				function (ref) {
+																																					return _elm_lang$core$Json_Decode$succeed(
+																																						{section: section, version: version, ref: ref});
+																																				});
+																																		});
+																																})),
+																														function (sectionUpdate) {
+																															return _elm_lang$core$Json_Decode$succeed(
+																																{ofType: ofType, date: date, season: season, week: week, title: title, show: show, config: config, colors: colors, collect: collect, ot: ot, ps: ps, nt: nt, gs: gs, sectionUpdate: sectionUpdate});
+																														});
 																												});
 																										});
 																								});
@@ -13114,8 +13294,32 @@ var _user$project$Iphod$portCalendar = _elm_lang$core$Native_Platform.incomingPo
 																																	});
 																															}))),
 																												function (mpp) {
-																													return _elm_lang$core$Json_Decode$succeed(
-																														{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, mp1: mp1, mp2: mp2, mpp: mpp});
+																													return A2(
+																														_elm_lang$core$Json_Decode$andThen,
+																														A2(
+																															_elm_lang$core$Json_Decode_ops[':='],
+																															'sectionUpdate',
+																															A2(
+																																_elm_lang$core$Json_Decode$andThen,
+																																A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																																function (section) {
+																																	return A2(
+																																		_elm_lang$core$Json_Decode$andThen,
+																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																																		function (version) {
+																																			return A2(
+																																				_elm_lang$core$Json_Decode$andThen,
+																																				A2(_elm_lang$core$Json_Decode_ops[':='], 'ref', _elm_lang$core$Json_Decode$string),
+																																				function (ref) {
+																																					return _elm_lang$core$Json_Decode$succeed(
+																																						{section: section, version: version, ref: ref});
+																																				});
+																																		});
+																																})),
+																														function (sectionUpdate) {
+																															return _elm_lang$core$Json_Decode$succeed(
+																																{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, mp1: mp1, mp2: mp2, mpp: mpp, sectionUpdate: sectionUpdate});
+																														});
 																												});
 																										});
 																								});
@@ -13536,8 +13740,32 @@ var _user$project$Iphod$portCalendar = _elm_lang$core$Native_Platform.incomingPo
 																																			});
 																																	}))),
 																														function (epp) {
-																															return _elm_lang$core$Json_Decode$succeed(
-																																{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, ep1: ep1, ep2: ep2, epp: epp});
+																															return A2(
+																																_elm_lang$core$Json_Decode$andThen,
+																																A2(
+																																	_elm_lang$core$Json_Decode_ops[':='],
+																																	'sectionUpdate',
+																																	A2(
+																																		_elm_lang$core$Json_Decode$andThen,
+																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																																		function (section) {
+																																			return A2(
+																																				_elm_lang$core$Json_Decode$andThen,
+																																				A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																																				function (version) {
+																																					return A2(
+																																						_elm_lang$core$Json_Decode$andThen,
+																																						A2(_elm_lang$core$Json_Decode_ops[':='], 'ref', _elm_lang$core$Json_Decode$string),
+																																						function (ref) {
+																																							return _elm_lang$core$Json_Decode$succeed(
+																																								{section: section, version: version, ref: ref});
+																																						});
+																																				});
+																																		})),
+																																function (sectionUpdate) {
+																																	return _elm_lang$core$Json_Decode$succeed(
+																																		{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, ep1: ep1, ep2: ep2, epp: epp, sectionUpdate: sectionUpdate});
+																																});
 																														});
 																												});
 																										});
@@ -14068,8 +14296,32 @@ var _user$project$Iphod$portEU = _elm_lang$core$Native_Platform.incomingPort(
 																															});
 																													}))),
 																										function (gs) {
-																											return _elm_lang$core$Json_Decode$succeed(
-																												{ofType: ofType, date: date, season: season, week: week, title: title, show: show, config: config, colors: colors, collect: collect, ot: ot, ps: ps, nt: nt, gs: gs});
+																											return A2(
+																												_elm_lang$core$Json_Decode$andThen,
+																												A2(
+																													_elm_lang$core$Json_Decode_ops[':='],
+																													'sectionUpdate',
+																													A2(
+																														_elm_lang$core$Json_Decode$andThen,
+																														A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																														function (section) {
+																															return A2(
+																																_elm_lang$core$Json_Decode$andThen,
+																																A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																																function (version) {
+																																	return A2(
+																																		_elm_lang$core$Json_Decode$andThen,
+																																		A2(_elm_lang$core$Json_Decode_ops[':='], 'ref', _elm_lang$core$Json_Decode$string),
+																																		function (ref) {
+																																			return _elm_lang$core$Json_Decode$succeed(
+																																				{section: section, version: version, ref: ref});
+																																		});
+																																});
+																														})),
+																												function (sectionUpdate) {
+																													return _elm_lang$core$Json_Decode$succeed(
+																														{ofType: ofType, date: date, season: season, week: week, title: title, show: show, config: config, colors: colors, collect: collect, ot: ot, ps: ps, nt: nt, gs: gs, sectionUpdate: sectionUpdate});
+																												});
 																										});
 																								});
 																						});
@@ -14487,8 +14739,32 @@ var _user$project$Iphod$portMP = _elm_lang$core$Native_Platform.incomingPort(
 																													});
 																											}))),
 																								function (mpp) {
-																									return _elm_lang$core$Json_Decode$succeed(
-																										{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, mp1: mp1, mp2: mp2, mpp: mpp});
+																									return A2(
+																										_elm_lang$core$Json_Decode$andThen,
+																										A2(
+																											_elm_lang$core$Json_Decode_ops[':='],
+																											'sectionUpdate',
+																											A2(
+																												_elm_lang$core$Json_Decode$andThen,
+																												A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																												function (section) {
+																													return A2(
+																														_elm_lang$core$Json_Decode$andThen,
+																														A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																														function (version) {
+																															return A2(
+																																_elm_lang$core$Json_Decode$andThen,
+																																A2(_elm_lang$core$Json_Decode_ops[':='], 'ref', _elm_lang$core$Json_Decode$string),
+																																function (ref) {
+																																	return _elm_lang$core$Json_Decode$succeed(
+																																		{section: section, version: version, ref: ref});
+																																});
+																														});
+																												})),
+																										function (sectionUpdate) {
+																											return _elm_lang$core$Json_Decode$succeed(
+																												{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, mp1: mp1, mp2: mp2, mpp: mpp, sectionUpdate: sectionUpdate});
+																										});
 																								});
 																						});
 																				});
@@ -14905,8 +15181,32 @@ var _user$project$Iphod$portEP = _elm_lang$core$Native_Platform.incomingPort(
 																													});
 																											}))),
 																								function (epp) {
-																									return _elm_lang$core$Json_Decode$succeed(
-																										{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, ep1: ep1, ep2: ep2, epp: epp});
+																									return A2(
+																										_elm_lang$core$Json_Decode$andThen,
+																										A2(
+																											_elm_lang$core$Json_Decode_ops[':='],
+																											'sectionUpdate',
+																											A2(
+																												_elm_lang$core$Json_Decode$andThen,
+																												A2(_elm_lang$core$Json_Decode_ops[':='], 'section', _elm_lang$core$Json_Decode$string),
+																												function (section) {
+																													return A2(
+																														_elm_lang$core$Json_Decode$andThen,
+																														A2(_elm_lang$core$Json_Decode_ops[':='], 'version', _elm_lang$core$Json_Decode$string),
+																														function (version) {
+																															return A2(
+																																_elm_lang$core$Json_Decode$andThen,
+																																A2(_elm_lang$core$Json_Decode_ops[':='], 'ref', _elm_lang$core$Json_Decode$string),
+																																function (ref) {
+																																	return _elm_lang$core$Json_Decode$succeed(
+																																		{section: section, version: version, ref: ref});
+																																});
+																														});
+																												})),
+																										function (sectionUpdate) {
+																											return _elm_lang$core$Json_Decode$succeed(
+																												{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, ep1: ep1, ep2: ep2, epp: epp, sectionUpdate: sectionUpdate});
+																										});
 																								});
 																						});
 																				});

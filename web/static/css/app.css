@@ -22,6 +22,11 @@ body.calendar { width: 55em; }
     width: 98%; 
     font-size: 0.8em;
   } 
+  div.m-options1 {
+    position: relative;
+    top: -5em;
+  }
+
 }
 @media screen and (max-width: 600px) {
   body.calendar {

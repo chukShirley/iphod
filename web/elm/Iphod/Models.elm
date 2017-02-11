@@ -1,5 +1,6 @@
 module Iphod.Models exposing
   ( Config, Lesson, Sunday, Daily, Day
+  , SectionUpdate, initSectionUpdate, setSectionUpdate
   , Shout, initShout
   , Email, Collect, SundayCollect, Proper
   , DailyMP, DailyEP, Reflection
@@ -170,6 +171,26 @@ initSundayCollect =
   , show = True
   }
 
+type alias SectionUpdate =
+  { section:  String
+  , version:  String
+  , ref:     String
+  }
+
+initSectionUpdate: SectionUpdate
+initSectionUpdate =
+  { section = ""
+  , version = ""
+  , ref     = ""
+  }
+
+setSectionUpdate: String -> String -> String -> SectionUpdate
+setSectionUpdate this_section this_version thisRef =
+  { section = this_section
+  , version = this_version
+  , ref     = thisRef
+  }
+
 type alias Sunday =
   { ofType:   String
   , date:     String
@@ -184,6 +205,7 @@ type alias Sunday =
   , ps:       List Lesson
   , nt:       List Lesson
   , gs:       List Lesson
+  , sectionUpdate:   SectionUpdate
 }
 
 sundayInit: Sunday
@@ -201,6 +223,7 @@ sundayInit =
   , ps      = []
   , nt      = []
   , gs      = []
+  , sectionUpdate  = initSectionUpdate
   }
 
 type alias Daily =
@@ -218,6 +241,8 @@ type alias Daily =
   , nt: List String
   , gs: List String
   , show:     Bool
+  , sectionUpdate:   SectionUpdate
+
   }
 
 initDaily: Daily
@@ -236,6 +261,7 @@ initDaily =
   , nt   = []
   , gs   = []
   , show = False
+  , sectionUpdate = initSectionUpdate
   }
 
 -- type alias DailyEU = Sunday
@@ -258,6 +284,7 @@ type alias DailyMP =
   , mp1:    List Lesson
   , mp2:    List Lesson
   , mpp:    List Lesson
+  , sectionUpdate: SectionUpdate
   }
 
 initDailyMP: DailyMP
@@ -274,6 +301,7 @@ initDailyMP =
   , mp1     = []
   , mp2     = []
   , mpp     = []
+  , sectionUpdate  = initSectionUpdate
   }
 
 type alias DailyEP =
@@ -289,6 +317,7 @@ type alias DailyEP =
   , ep1:    List Lesson
   , ep2:    List Lesson
   , epp:    List Lesson
+  , sectionUpdate: SectionUpdate
   }
 
 initDailyEP: DailyEP
@@ -305,6 +334,7 @@ initDailyEP =
   , ep1     = []
   , ep2     = []
   , epp     = []
+  , sectionUpdate  = initSectionUpdate
   }
 
 type alias Reflection =

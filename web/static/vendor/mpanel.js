@@ -7906,6 +7906,11 @@ var _user$project$Iphod_Helper$hideable = F2(
 var _user$project$Iphod_Models$initBiblesOrg = {url: 'https://bibles.org/v2/passages.js?q[]=', key: 'P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT', foot_notes: true};
 var _user$project$Iphod_Models$initESV = {url: 'www.esvapi.org/v2/rest/passageQuery?', key: '10b28dac7c57fd96', foot_notes: true};
 var _user$project$Iphod_Models$initReflection = {author: '', markdown: ''};
+var _user$project$Iphod_Models$setSectionUpdate = F3(
+	function (this_section, this_version, thisRef) {
+		return {section: this_section, version: this_version, ref: thisRef};
+	});
+var _user$project$Iphod_Models$initSectionUpdate = {section: '', version: '', ref: ''};
 var _user$project$Iphod_Models$initSundayCollect = {
 	instruction: '',
 	title: '',
@@ -7937,7 +7942,8 @@ var _user$project$Iphod_Models$initDaily = {
 		[]),
 	gs: _elm_lang$core$Native_List.fromArray(
 		[]),
-	show: false
+	show: false,
+	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
 };
 var _user$project$Iphod_Models$initCollect = {
 	collect: '',
@@ -7990,7 +7996,8 @@ var _user$project$Iphod_Models$sundayInit = {
 	nt: _elm_lang$core$Native_List.fromArray(
 		[]),
 	gs: _elm_lang$core$Native_List.fromArray(
-		[])
+		[]),
+	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
 };
 var _user$project$Iphod_Models$initDay = {
 	name: '',
@@ -8018,7 +8025,8 @@ var _user$project$Iphod_Models$initDailyMP = {
 	mp2: _elm_lang$core$Native_List.fromArray(
 		[]),
 	mpp: _elm_lang$core$Native_List.fromArray(
-		[])
+		[]),
+	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
 };
 var _user$project$Iphod_Models$initDailyEP = {
 	colors: _elm_lang$core$Native_List.fromArray(
@@ -8036,7 +8044,8 @@ var _user$project$Iphod_Models$initDailyEP = {
 	ep2: _elm_lang$core$Native_List.fromArray(
 		[]),
 	epp: _elm_lang$core$Native_List.fromArray(
-		[])
+		[]),
+	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
 };
 var _user$project$Iphod_Models$initShout = {
 	section: '',
@@ -8106,6 +8115,10 @@ var _user$project$Iphod_Models$SundayCollect = F4(
 	function (a, b, c, d) {
 		return {instruction: a, title: b, collects: c, show: d};
 	});
+var _user$project$Iphod_Models$SectionUpdate = F3(
+	function (a, b, c) {
+		return {section: a, version: b, ref: c};
+	});
 var _user$project$Iphod_Models$Sunday = function (a) {
 	return function (b) {
 		return function (c) {
@@ -8119,7 +8132,9 @@ var _user$project$Iphod_Models$Sunday = function (a) {
 										return function (k) {
 											return function (l) {
 												return function (m) {
-													return {ofType: a, date: b, season: c, week: d, title: e, show: f, config: g, colors: h, collect: i, ot: j, ps: k, nt: l, gs: m};
+													return function (n) {
+														return {ofType: a, date: b, season: c, week: d, title: e, show: f, config: g, colors: h, collect: i, ot: j, ps: k, nt: l, gs: m, sectionUpdate: n};
+													};
 												};
 											};
 										};
@@ -8147,7 +8162,9 @@ var _user$project$Iphod_Models$Daily = function (a) {
 											return function (l) {
 												return function (m) {
 													return function (n) {
-														return {date: a, title: b, collect: c, mp1: d, mp2: e, mpp: f, ep1: g, ep2: h, epp: i, ot: j, ps: k, nt: l, gs: m, show: n};
+														return function (o) {
+															return {date: a, title: b, collect: c, mp1: d, mp2: e, mpp: f, ep1: g, ep2: h, epp: i, ot: j, ps: k, nt: l, gs: m, show: n, sectionUpdate: o};
+														};
 													};
 												};
 											};
@@ -8174,7 +8191,9 @@ var _user$project$Iphod_Models$DailyMP = function (a) {
 									return function (j) {
 										return function (k) {
 											return function (l) {
-												return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, mp1: j, mp2: k, mpp: l};
+												return function (m) {
+													return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, mp1: j, mp2: k, mpp: l, sectionUpdate: m};
+												};
 											};
 										};
 									};
@@ -8199,7 +8218,9 @@ var _user$project$Iphod_Models$DailyEP = function (a) {
 									return function (j) {
 										return function (k) {
 											return function (l) {
-												return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, ep1: j, ep2: k, epp: l};
+												return function (m) {
+													return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, ep1: j, ep2: k, epp: l, sectionUpdate: m};
+												};
 											};
 										};
 									};

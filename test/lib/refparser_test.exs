@@ -68,6 +68,11 @@ defmodule RefParser do
     assert {"psalms", [{119, 33, 72}]} == reference("Psalm 119 33-72")
   end
 
+  test "references with book mentioned multiple times" do
+    ref = "Hab 3:1,Hab 3:2-15,Hab 3:16-19"
+    assert reference(ref) == {"habakkuk", [{3,1,1}, {3,2,15}, {3,16,19}]}
+  end
+
   test "problematic readings" do
     assert reference("Isaiah 61:10-end, 62:1-5") == {"isaiah", [{61,10,999}, {62,1,5}]}
     assert reference("Jer 3:19-4:4") == {"jeremiah", [{3,19,999},{4,1,4}]}

@@ -4,7 +4,7 @@ module Iphod.EPReading exposing (Model, init, Msg, update, view, textStyle)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Events exposing (on, onClick, targetValue)
+import Html.Events exposing (..)
 import Json.Decode as Json
 import Http
 import String
@@ -37,6 +37,8 @@ type Msg
   | ToggleShow Models.Lesson
   | ToggleCollect
   | SetReading Model
+  | UpdateAltReading Models.Lesson String
+  | RequestAltReading Models.Lesson
 
 update: Msg -> Model -> Model
 update msg model =
@@ -47,15 +49,24 @@ update msg model =
 
     ChangeText section ver ->
       let
+        thisRef = case section of
+          "ep1" -> getRef model.ep1
+          "ep2" -> getRef model.ep2
+          _     -> ""
+        thisUpdate = Models.setSectionUpdate section ver thisRef
         newModel = case section of 
-          "ep1" -> {model | ep1 = changeText model ver model.ep1}
-          "ep2" -> {model | ep2 = changeText model ver model.ep2}
-          _     -> {model | epp = changeText model ver model.epp}
+          "ep1" -> {model | ep1 = changeText model ver model.ep1, sectionUpdate = thisUpdate}
+          "ep2" -> {model | ep2 = changeText model ver model.ep2, sectionUpdate = thisUpdate}
+          _     -> {model | epp = changeText model ver model.epp, sectionUpdate = thisUpdate}
       in
         newModel
 
 
-    ToggleModelShow -> {model | show = not model.show}
+    ToggleModelShow -> 
+      let
+        newModel = {model | show = not model.show}
+      in
+        newModel
 
     SetReading newModel -> newModel
 
@@ -87,8 +98,41 @@ update msg model =
       in
         newModel
 
+    UpdateAltReading lesson str ->
+      let
+        this_section = thisSection model lesson
+        update_altReading this_lesson =
+          if this_lesson.id == lesson.id 
+            then 
+              {this_lesson | altRead = str}
+            else 
+              this_lesson
+        newSection = List.map update_altReading this_section
+        newModel = updateModel model lesson newSection
+      in
+        newModel
+
+    RequestAltReading lesson ->
+      let 
+        thisUpdate = Models.setSectionUpdate lesson.section lesson.version lesson.altRead
+        newLesson = [{lesson | cmd = "alt" ++ String.toUpper(lesson.section)}]
+        newModel = case lesson.section of 
+          "ep1" -> {model | ep1 = newLesson, sectionUpdate = thisUpdate}
+          "ep2" -> {model | ep2 = newLesson, sectionUpdate = thisUpdate}
+          "epp" -> {model | epp = newLesson, sectionUpdate = thisUpdate}
+          _     -> model
+      in
+        newModel
+
 
 -- HELPERS
+
+getRef: List Models.Lesson -> String
+getRef lessons =
+  let 
+    justRefs l = l.read
+  in
+    List.map justRefs lessons |> String.join ","
 
 changeText: Model -> String -> List Models.Lesson -> List Models.Lesson
 changeText model ver lessons =
@@ -96,6 +140,22 @@ changeText model ver lessons =
     changeText lesson = {lesson | version = ver}
   in
     List.map changeText lessons
+
+thisSection: Model -> Models.Lesson -> List Models.Lesson
+thisSection model lesson =
+  case lesson.section of
+    "ep1" -> model.ep1
+    "ep2" -> model.ep2
+    _     -> model.epp
+
+updateModel: Model -> Models.Lesson -> List Models.Lesson -> Model
+updateModel model lesson newSection =
+  case lesson.section of
+    "ep1" -> {model | ep1 = newSection}
+    "ep2" -> {model | ep2 = newSection}
+    _     -> {model | epp = newSection}
+
+
 
 
 -- VIEW
@@ -193,6 +253,7 @@ thisText model lessons =
                      [ class "translationButton", getTranslation "BCP"]
                      [ text "BCP"]
                   , versionSelect model l
+                  , altReading model l
                   ]
                , Markdown.toHtml [] l.body
                ]
@@ -201,6 +262,7 @@ thisText model lessons =
             [ span [style [("position", "relative"), ("top", "1em")]]
                 [ button [class "translationButton", onClick (ToggleShow l)] [text "Hide"]
                 , versionSelect model l
+                , altReading model l
                 ]
             , Markdown.toHtml [] l.body
             ]
@@ -264,6 +326,27 @@ hoverable attrs =
   -- hover [("background-color", "white", "skyblue")] ++ attrs
   attrs
   
+altReading: Model -> Models.Lesson -> Html Msg
+altReading model lesson =
+  input [ placeholder "Alt Reading"
+        , autofocus True
+        , value lesson.altRead
+        , name "altReading"
+        , onInput (UpdateAltReading lesson)
+        , onEnter (RequestAltReading lesson)
+        ] 
+        []
+
+onEnter : Msg -> Attribute Msg
+onEnter msg =
+  let
+    tagger code =
+      if code == 13 then
+        msg
+      else
+        NoOp
+  in
+    on "keydown" (Json.map tagger keyCode)
 
 
 

@@ -4,10 +4,10 @@
 <div id= "m-reading-container"></div> 
 <div class='m-options1'>
   <ul>
-    <li><button class='prayer-button' data-prayer='morningPrayer' type="button">Morning Prayer</button></li>
-    <li><button class='prayer-button' data-prayer='eveningPrayer' type="button">Evening Prayer</button></li>
-    <li><button id='reflection-today-button' type="button">Reflection</button></li>
-    <li><button id='next-sunday-button' type="button">Next Sunday</button></li>
+    <li class="option-item"><button class='prayer-button' data-prayer='morningPrayer' type="button">Morning Prayer</button></li>
+    <li class="option-item"><button class='prayer-button' data-prayer='eveningPrayer' type="button">Evening Prayer</button></li>
+    <li class="option-item"><button id='reflection-today-button' type="button">Reflection</button></li>
+    <li class="option-item"><button id='next-sunday-button' type="button">Next Sunday</button></li>
 
     <!-- <li class='config-button' data-prayer='config'>Config</li> -->
   </ul>

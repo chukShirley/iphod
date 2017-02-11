@@ -188,7 +188,8 @@ defmodule DailyReading do
       mp1:    r.mp1,
       mp2:    r.mp2,
       mpp:    r.mpp,
-      show:   false
+      show:   false,
+      sectionUpdate: %{section: "", version: "", ref: ""}
     }
     # get the ESV text, put it the body for mp1, mp2, mpp
   end
@@ -205,7 +206,8 @@ defmodule DailyReading do
       ep1:    r.ep1,
       ep2:    r.ep2,
       epp:    r.epp,
-      show:   false
+      show:   false,
+      sectionUpdate: %{section: "", version: "", ref: ""}
     }
     # get the ESV text, put it the body for ep1, ep2, epp
   end

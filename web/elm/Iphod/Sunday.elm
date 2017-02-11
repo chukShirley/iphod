@@ -43,13 +43,25 @@ update msg model =
   case msg of
     NoOp -> model
 
-    ToggleModelShow -> {model | show = not model.show}
+    ToggleModelShow -> 
+      let 
+        newModel = {model | show = not model.show}
+      in
+        newModel
 
     SetReading newModel -> newModel
 
     ChangeText section ver ->
       let
         thisConfig = model.config
+        thisRef = case section of
+          "ot" -> getRef model.ot
+          "ps" -> getRef model.ps
+          "nt" -> getRef model.nt
+          "gs" -> getRef model.gs
+          _    -> ""
+          
+        thisUpdate = Models.setSectionUpdate section ver thisRef
         newConfig = case section of
           "ot" -> {thisConfig | ot = ver}
           "ps" -> {thisConfig | ps = ver}
@@ -58,10 +70,10 @@ update msg model =
           _    -> thisConfig
 
         newModel = case section of 
-          "ot" -> {model | ot = changeText model ver model.ot, config = newConfig}
-          "ps" -> {model | ps = changeText model ver model.ps, config = newConfig}
-          "nt" -> {model | nt = changeText model ver model.nt, config = newConfig}
-          _    -> {model | gs = changeText model ver model.gs, config = newConfig}
+          "ot" -> {model | ot = changeText model ver model.ot, sectionUpdate = thisUpdate, config = newConfig}
+          "ps" -> {model | ps = changeText model ver model.ps, sectionUpdate = thisUpdate, config = newConfig}
+          "nt" -> {model | nt = changeText model ver model.nt, sectionUpdate = thisUpdate, config = newConfig}
+          _    -> {model | gs = changeText model ver model.gs, sectionUpdate = thisUpdate, config = newConfig}
       in
         newModel
 
@@ -81,12 +93,13 @@ update msg model =
 
     RequestAltReading lesson ->
       let 
+        thisUpdate = Models.setSectionUpdate lesson.section lesson.version lesson.altRead
         newLesson = [{lesson | cmd = "alt" ++ String.toUpper(lesson.section)}]
         newModel = case lesson.section of 
-          "ot" -> {model | ot = newLesson}
-          "ps" -> {model | ps = newLesson}
-          "nt" -> {model | nt = newLesson}
-          _    -> {model | gs = newLesson}
+          "ot" -> {model | ot = newLesson, sectionUpdate = thisUpdate}
+          "ps" -> {model | ps = newLesson, sectionUpdate = thisUpdate}
+          "nt" -> {model | nt = newLesson, sectionUpdate = thisUpdate}
+          _    -> {model | gs = newLesson, sectionUpdate = thisUpdate}
       in
         newModel
 
@@ -114,6 +127,13 @@ update msg model =
         newModel
 
 -- HELPERS
+
+getRef: List Models.Lesson -> String
+getRef lessons =
+  let 
+    justRefs l = l.read
+  in
+    List.map justRefs lessons |> String.join ","
 
 changeText: Model -> String -> List Models.Lesson -> List Models.Lesson
 changeText model ver lessons =
