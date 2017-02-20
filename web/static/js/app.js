@@ -573,6 +573,36 @@ if ( path.match(/versions/) ) {
   })
 }
 
+// resources
+if ( path.match(/resources|humor/) ) {
+  let resc_channel = socket.channel("resources")
+    , of_type = path.split("/").pop();
+  resc_channel.join()
+    .receive("ok", resp => { 
+      // console.log("Joined Resources successfully");
+    })
+    .receive("error", resp => { console.log("Unable to join Resources", resp) });
+  
+  let elmRescDiv = document.getElementById("resources-container")
+    , elmRescApp = Elm.Resources.embed(elmRescDiv);
+
+  resc_channel.push(of_type, "");
+
+  resc_channel.on("all_resources", data => {
+    elmRescApp.ports.allResources.send(data.list)
+  });
+
+  $("#insult_me").click( function() {
+    resc_channel.push("insult", "");
+  })
+
+  resc_channel.on("give_offence", data => {
+    $("#insult").text(data.insult)
+  })
+
+  
+}
+
 // reflections
 
 if ( path.match(/reflections.+[new|edit]/) ) {

@@ -49,6 +49,7 @@ exports.config = {
       "test/static",
       "web/elm/Iphod.elm",
       "web/elm/Translations.elm",
+      "web/elm/Resources.elm",
       "web/elm/Header.elm",
       "web/elm/MIndex.elm",
       "web/elm/MPanel.elm",
@@ -69,6 +70,7 @@ exports.config = {
       mainModules: [
         'Iphod.elm', 
         'Translations.elm', 
+        'Resources.elm',
         'Header.elm',
         'MIndex.elm',
         'MPanel.elm',

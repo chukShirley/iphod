@@ -1,0 +1,6 @@
+<h2>New resources</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: resources_path(@conn, :create) %>
+
+<%= link "Back", to: resources_path(@conn, :index) %>

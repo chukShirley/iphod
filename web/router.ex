@@ -73,6 +73,20 @@ defmodule Iphod.Router do
 
     get "/mindex", CalendarController, :mindex
 
+    get "/resources/index", ResourcesController, :index
+    get "/resources/show/:id", ResourcesController, :show
+    get "/resources/new", ResourcesController, :new
+    get "/resources/send/:filename", ResourcesController, :send
+    get "/printresources", ResourcesController, :printresources
+    get "/linkresources", ResourcesController, :linkresources
+    get "/humor", ResourcesController, :humor
+    # get "/resources/create/:resources", ResourcesController, :create
+    resources "/resources", ResourcesController
+    # get "/printresources", ResourceController, :printresources
+    # get "/linkresources", ResourceController, :linkresources
+    # get "/humor", ResourceController, :humor
+    # get "/uploadresource", ResourceController, :uploadresource
+
     resources "/reflections", ReflectionController
 
   end

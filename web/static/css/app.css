@@ -3,9 +3,11 @@
  * Copyright 2011-2014 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+@import "pure.css"
 @import "menu_styles.css"
 @import "print.css"
 @import "mpep.css"
+@import "resource.css"
 
 /* Space out content a bit */
 body, form, ul, table {
@@ -73,6 +75,7 @@ form.link, form.button {
   background-color: white;
   border: solid 1px black;
 }
+
 .offices-options { /* dropdown-content */
   position: absolute;
   display: none;
@@ -794,7 +797,7 @@ li.offices-item {
       display: inline-block;
   }
   
-  .modalDialog, .emailModalDialog, .configModalDialog {
+  .modalDialog, .emailModalDialog, .configModalDialog, .humorModalDialog {
     position: fixed;
     top: 0;
     right: 0;
@@ -809,12 +812,12 @@ li.offices-item {
     pointer-events: none;
   }
   
-  .modalDialog:target, .emailModalDialog:target, .configModalDialog:target {
+  .modalDialog:target, .emailModalDialog:target, .configModalDialog:target, .humorModalDialog:target {
     opacity:1;
     pointer-events: auto;
   }
   
-  .configModalDialog > div, .modalDialog > div, .emailModalDialog > div {
+  .configModalDialog > div, .modalDialog > div, .emailModalDialog > div, .humorModalDialog > div {
     width: 25em;
     height: auto;
     position: relative;
@@ -950,7 +953,58 @@ li.offices-item {
   #md-text code {
     font-family: inherit;
   }
-  
+
+  table.resources { 
+    width: 100%;
+    font-size: 0.8em;
+  }
+  th.resource_name { 
+    position: relative;
+    width: 25%;
+    vertical-align: text-top;
+  }
+  th.resource_description { 
+    position: relative;
+    width: 25%;
+    vertical-align: text-top;
+  }
+  th.resource_keys { 
+    position: relative;
+    width: 25%;
+    vertical-align: text-top;
+  }
+  th.resource_info { 
+    position: relative;
+    font-style: 0.8em;
+  }
+  th.resource_get { 
+    position: relative;
+    width: 12.5%;
+  }
+
+  .tooltip {
+    position: relative;
+    /* display: inline-block; */
+    transition-delay: 0s background-color;
+  }
+
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    /* width: 120px; */
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    position: absolute;
+    z-index: 9;
+  }
+
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+    transition-delay: 0.5s;
+  }
+
   blockquote p{
     margin: -1em;
   }

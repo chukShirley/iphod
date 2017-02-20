@@ -9139,6 +9139,11 @@ var _user$project$Iphod_Models$initShout = {
 	comment: ''
 };
 var _user$project$Iphod_Models$initNote = {reading: '', text: '', time: ''};
+var _user$project$Iphod_Models$initResource = {id: '', url: '', name: '', of_type: '', keys: '', description: '', show: true};
+var _user$project$Iphod_Models$Resource = F7(
+	function (a, b, c, d, e, f, g) {
+		return {id: a, url: b, name: c, of_type: d, keys: e, description: f, show: g};
+	});
 var _user$project$Iphod_Models$Note = F3(
 	function (a, b, c) {
 		return {reading: a, text: b, time: c};

@@ -1,5 +1,6 @@
 module Iphod.Models exposing
-  ( Config, Lesson, Sunday, Daily, Day
+  ( Resource, initResource
+  , Config, Lesson, Sunday, Daily, Day
   , SectionUpdate, initSectionUpdate, setSectionUpdate
   , Shout, initShout
   , Email, Collect, SundayCollect, Proper
@@ -10,6 +11,29 @@ module Iphod.Models exposing
   , initProper, initDay
   , initDailyMP, initDailyEP, initReflection
   ) 
+
+
+type alias Resource =
+  { id:           String
+  , url:          String
+  , name:         String
+  , of_type:      String
+  , keys:         String
+  , description:  String
+  , show:         Bool
+  }
+
+initResource: Resource
+initResource =
+  { id =          ""
+  , url =         ""
+  , name =        ""
+  , of_type =     ""
+  , keys =        ""
+  , description = ""
+  , show =        True
+  }
+
 
 type alias Note =
   { reading: String

@@ -1,0 +1,10 @@
+<div id= "header-elm-container"></div>
+<div class="resources">
+  <h2 style="text-align: center;">Nothing funny here. Move along!</h2>
+  <h3>
+    <button id="insult_me">Insult Me</button>
+    <span id="insult"></span>
+  </h3>
+
+  <div id= "resources-container"></div>
+</div>

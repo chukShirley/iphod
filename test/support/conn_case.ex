@@ -32,10 +32,12 @@ defmodule Iphod.ConnCase do
   end
 
   setup tags do
-    unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(Iphod.Repo, [])
-    end
+   :ok = Ecto.Adapters.SQL.Sandbox.checkout(MyApp.Repo)
 
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
+   unless tags[:async] do
+     Ecto.Adapters.SQL.Sandbox.mode(MyApp.Repo, {:shared, self()})
+   end
+   
+   {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

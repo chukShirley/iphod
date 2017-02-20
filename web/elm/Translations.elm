@@ -49,21 +49,6 @@ init: (Model, Cmd Msg)
 init = ([], Cmd.none)
 
 
--- Subscriptions
--- SIGNALS
-
--- dbSaveVersion: Signal.Mailbox (String, Version)
--- dbSaveVersion = 
---   Signal.mailbox ("", initVersion)
-
-
--- PORTS
-
--- port allVersions: Signal Model
--- port requestSaveVersion: Signal (String, Version)
--- port requestSaveVersion =
---   dbSaveVersion.signal
-
 port updateVersions: Version -> Cmd msg
 
 

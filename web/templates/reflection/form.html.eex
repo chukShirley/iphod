@@ -1,21 +1,25 @@
-<%= form_for @changeset, @action, fn f -> %>
+<%= form_for @changeset, @action, [class: "pure-form pure-form-aligned"], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">
       <p>Oops, something went wrong! Please check the errors below.</p>
     </div>
   <% end %>
-
-  <div class="form-group">
-    <%= text_input f, :date, placeholder: "For Date", class: "form-control" %>
-  </div>
-  <div class="form-group">
-    <%= text_input f, :author, placeholder: "Author", class: "form-control" %>
-  </div>
-  <div class="form-group">
-  <%= textarea f, :markdown, placeholder: "Reflection Markdown", class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <%= submit "Submit", class: "btn btn-primary" %>
-  </div>
+  <fieldset>
+    <div class="pure-control-group">
+      <%= label f, :date %>
+      <%= text_input f, :date, placeholder: "For Date", class: "form-control" %>
+    </div>
+    <div class="pure-control-group">
+      <%= label f, :author %>
+      <%= text_input f, :author, placeholder: "Author", class: "form-control" %>
+    </div>
+    <div class="pure-control-group">
+      <%= label f, :markdown %>
+      <%= textarea f, :markdown, placeholder: "Reflection Markdown", class: "form-control" %>
+    </div>
+  
+    <div class="pure-control-group">
+      <%= submit "Submit", class: "btn btn-primary" %>
+    </div>
+  </fieldset>
 <% end %>

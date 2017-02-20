@@ -1,0 +1,33 @@
+<h2>Show resources</h2>
+
+<ul>
+
+  <li>
+    <strong>Of Type:</strong>
+    <%= @resources.of_type %>
+  </li>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @resources.name %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @resources.url %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @resources.description %>
+  </li>
+
+  <li>
+    <strong>Keys:</strong>
+    <%= @resources.keys %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: resources_path(@conn, :edit, @resources) %>
+<%= link "Back", to: resources_path(@conn, :index) %>

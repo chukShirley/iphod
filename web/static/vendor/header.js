@@ -8332,6 +8332,11 @@ var _user$project$Iphod_Models$initShout = {
 	comment: ''
 };
 var _user$project$Iphod_Models$initNote = {reading: '', text: '', time: ''};
+var _user$project$Iphod_Models$initResource = {id: '', url: '', name: '', of_type: '', keys: '', description: '', show: true};
+var _user$project$Iphod_Models$Resource = F7(
+	function (a, b, c, d, e, f, g) {
+		return {id: a, url: b, name: c, of_type: d, keys: e, description: f, show: g};
+	});
 var _user$project$Iphod_Models$Note = F3(
 	function (a, b, c) {
 		return {reading: a, text: b, time: c};
@@ -8934,6 +8939,63 @@ var _user$project$Header$translations = function (model) {
 					]))
 			]));
 };
+var _user$project$Header$humor = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/humor')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Humor')
+					]))
+			]));
+};
+var _user$project$Header$linkResource = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/linkresources')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Link Resources')
+					]))
+			]));
+};
+var _user$project$Header$printresources = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/printresources')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Print Resources')
+					]))
+			]));
+};
 var _user$project$Header$timeofdeath = function (model) {
 	return A2(
 		_elm_lang$html$Html$a,
@@ -9110,6 +9172,66 @@ var _user$project$Header$innerHtmlDecoder = A2(
 	_elm_lang$core$Native_List.fromArray(
 		['target', 'innerHTML']),
 	_elm_lang$core$Json_Decode$string);
+var _user$project$Header$resources = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('offices')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('button')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Resources')
+					])),
+				A2(
+				_elm_lang$html$Html$ul,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('offices-options')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$printresources(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$linkResource(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$humor(model)
+							]))
+					]))
+			]));
+};
 var _user$project$Header$offices = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -9794,6 +9916,16 @@ var _user$project$Header$view = function (model) {
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_user$project$Header$offices(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('option-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$resources(model)
 							])),
 						A2(
 						_elm_lang$html$Html$li,

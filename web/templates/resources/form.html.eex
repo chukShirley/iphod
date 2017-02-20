@@ -1,0 +1,51 @@
+<% import Iphod.ErrorHelpers, only: [error_tag: 2] %>
+<%= form_for @changeset, @action, [multipart: true, class: "pure-form pure-form-aligned"], fn f -> %>
+  <fieldset>
+    
+    <%= if @changeset.action do %>
+      <div class="alert alert-danger">
+        <p>Oops, something went wrong! Please check the errors below.</p>
+      </div>
+    <% end %>
+  
+    <div class="pure-control-group">
+      <%= label f, :of_type %>
+      <%= text_input f, :of_type, class: "form-control", placeholder: "Type" %>
+      <%= error_tag f, :of_type %>
+    </div>
+  
+    <div class="pure-control-group">
+      <%= label f, :name %>
+      <%= text_input f, :name, class: "form-control", placeholder: "Name resource" %>
+      <%= error_tag f, :name %>
+    </div>
+  
+    <div class="pure-control-group">
+      <%= label f, :url %>
+      <%= text_input f, :url, class: "form-control", placeholder: "URL or Filename" %>
+      <%= error_tag f, :url %>
+    </div>
+  
+    <div class="pure-control-group">
+      <%= label f, :description %>
+      <%= textarea f, :description, class: "form-control", placeholder: "Description" %>
+      <%= error_tag f, :description %>
+    </div>
+  
+    <div class="pure-control-group">
+      <%= label f, :key_string %>
+      <%= text_input f, :key_string, class: "form-control", placeholder: "Keys, comma separated" %>
+      <%= error_tag f, :key_string %>
+    </div>
+  
+    <div class="pure-control-group">
+      <label>File Name: </label>
+      <%= file_input f, :file, class: "form-control" %>
+    </div>
+  
+    <div class="pure-control-group">
+      <%= submit "Submit", class: "pure-button pure-button-primary" %>
+    </div>
+
+  </fieldset>
+<% end %>

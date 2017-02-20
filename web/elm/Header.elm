@@ -166,6 +166,7 @@ view model =
 --      ]
       [ li [ class "option-item" ] [ calendar model ]
       , li [ class "option-item" ] [ offices model ]
+      , li [ class "option-item" ] [ resources model ]
       , li [ class "option-item" ] [ configModal model ]
       , li [ class "option-item" ] [ translations model ]
       , li [ class "option-item" ] [ aboutOptions model ]
@@ -196,6 +197,19 @@ offices model =
       , li [class "offices-item" ] [ reconciliation model]
       , li [class "offices-item" ] [ tothesick model]
       , li [class "offices-item" ] [ timeofdeath model]
+      ]
+    ]
+
+resources: Model -> Html Msg
+resources model =
+  div
+    [ class "offices"]
+    [ button [ class "button"] [text "Resources" ]
+    , ul
+      [ class "offices-options"]
+      [ li [ class "offices-item" ] [ printresources model ]
+      , li [ class "offices-item" ] [ linkResource model ]
+      , li [ class "offices-item" ] [ humor model ]
       ]
     ]
 
@@ -260,6 +274,24 @@ timeofdeath: Model -> Html Msg
 timeofdeath model =
   a [href "/timeofdeath"] 
     [ button [] [ text "Time of Death" ]]
+
+printresources: Model -> Html Msg
+printresources model =
+  a [ href "/printresources"]
+    [ button [] [ text "Print Resources"]]
+
+linkResource: Model -> Html Msg
+linkResource model = 
+  a [ href "/linkresources"]
+    [ button [] [ text "Link Resources"]]
+
+
+humor: Model -> Html Msg
+humor model =
+  a [ href "/humor"]
+    [ button [] [ text "Humor"]]
+
+
 
 translations: Model -> Html Msg
 translations model =

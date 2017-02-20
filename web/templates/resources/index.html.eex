@@ -1,0 +1,52 @@
+<h2>Listing resources</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Name</th>
+      <th>Url</th>
+      <th>Description</th>
+      <th>Keys</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for resources <- @resources do %>
+    <tr>
+      <td><%= resources.of_type %></td>
+      <td><%= resources.name %></td>
+      <%= if resources.of_type == "link" do %>
+        <td>
+          <a href= "<%=resources.url%>" target= "_blank">
+            <button class= "quick-options"><%= resources.url %></button>
+          </a>
+        </td>
+
+      <% else %>
+        <td>
+          <a href="/resources/send/<%= resources.url %>" target= "_blank">
+            <button class= "quick-options"><%= resources.url %></button>
+          </a>
+        </td>
+      <% end %>
+
+      <td><%= resources.description %></td>
+      <%= if resources.keys |> is_nil do %>
+        <td></td>
+      <% else %>
+        <td><%= resources.keys |> Enum.join(", ") %></td>
+      <% end %>
+
+      <td class="text-right">
+        <%= link "Show", to: resources_path(@conn, :show, resources), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: resources_path(@conn, :edit, resources), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: resources_path(@conn, :delete, resources), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New resources", to: resources_path(@conn, :new) %>

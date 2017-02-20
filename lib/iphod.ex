@@ -18,7 +18,8 @@ defmodule Iphod do
       worker(Psalms, []),
       worker(Collects, []),
       worker(Printable, []),
-      worker(BibleVersions, [])
+      worker(BibleVersions, []),
+      worker(Insult, [])
       # worker(LocalText, [])
     ]
 
