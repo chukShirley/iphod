@@ -314,6 +314,8 @@ defmodule  Lityear do
     holy_doy = hd_doy |> Enum.at(this_doy)
     new_date = Timex.from_iso_day(1, date) |> Timex.shift(days: (holy_doy - 1))
     new_date = if holy_doy > 365, do: new_date |> Timex.shift(days: 1), else: new_date
+    # if it's a sunday, shift to monday
+    new_date = new_date |> translate_from_sunday()
     {new_date, hd_index[holy_doy]}
   end
 

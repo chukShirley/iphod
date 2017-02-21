@@ -4,7 +4,9 @@ use Mix.Config
 # you can enable the server option below.
 config :iphod, Iphod.Endpoint,
   http: [port: 4001],
-  server: false
+  server: false,
+  secret_key_base:  "kN&nt59`>K[fF[z'(:DqUxhmmzdnT'%dVDC!bKKGS%D>hUxQX2GV^8e@cZ>>82=U<9U"
+
 
 # Print only warnings and errors during test
 config :logger, level: :warn

@@ -5,6 +5,13 @@ defmodule Iphod.ResourcesControllerTest do
   @valid_attrs %{ description: "some content", 
                   name: "some content",  
                   url: "some content", 
+                  keys: [],
+                  of_type: "print",
+                  key_string: "key1, key2"
+                }
+  @valid_query %{ description: "some content", 
+                  name: "some content",  
+                  url: "some content", 
                   keys: ["key1", "key2"],
                   of_type: "print"
                 }
@@ -23,7 +30,7 @@ defmodule Iphod.ResourcesControllerTest do
   test "creates resource and redirects when data is valid", %{conn: conn} do
     conn = post conn, resources_path(conn, :create), resources: @valid_attrs
     assert redirected_to(conn) == resources_path(conn, :index)
-    assert Repo.get_by(Resources, @valid_attrs)
+    assert Repo.get_by(Resources, @valid_query)
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do
@@ -53,7 +60,7 @@ defmodule Iphod.ResourcesControllerTest do
     resources = Repo.insert! %Resources{}
     conn = put conn, resources_path(conn, :update, resources), resources: @valid_attrs
     assert redirected_to(conn) == resources_path(conn, :show, resources)
-    assert Repo.get_by(Resources, @valid_attrs)
+    assert Repo.get_by(Resources, @valid_query)
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do

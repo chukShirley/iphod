@@ -49,6 +49,11 @@ defmodule Iphod.LitYearTest do
     assert holy_day?(~D[2017-03-20]) == {true, "stJoseph"}
   end
 
+  test "checking The Transfiguration for 2017 (on a Sunday)" do
+    assert holy_day?(~D[2017-08-06]) == {false, ""}
+    assert holy_day?(~D[2017-08-07]) == {true, "transfiguration"}
+  end
+
   test "The Presentation should not be translated" do
     day = ~D[2020-02-02]
     assert Timex.weekday(day) == 7 # it's a Sunday
@@ -189,6 +194,13 @@ defmodule Iphod.LitYearTest do
     assert next_holy_day(~D[2017-09-15]) == {stMatthew(2017), "stMatthew"}
     assert next_holy_day(~D[2016-12-30]) == {confessionOfStPeter(2017), "confessionOfStPeter"}
     assert next_holy_day(~D[2017-12-30]) == {confessionOfStPeter(2018), "confessionOfStPeter"}
+
+    assert next_holy_day(~D[2017-01-18]) == {confessionOfStPeter(2017), "confessionOfStPeter"}
+  end
+
+  test "Transfiguration on Sunday gets moved to Monday" do
+    assert transfiguration(2017) == ~D[2017-08-07]
+    assert next_holy_day(~D[2017-08-07]) == {transfiguration(2017), "transfiguration"}
   end
 
   test "next_holy_day returns next day when holy_day is on sunday" do

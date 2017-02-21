@@ -58,7 +58,7 @@ defmodule Iphod.ResourcesController do
 
   def edit(conn, %{"id" => id}) do
     r = Repo.get!(Resources, id) 
-    resources = Map.put(r, :key_string, r.keys |> Enum.join(", ") )
+    resources = Map.put(r, :key_string, r.keys |> make_key_string )
     changeset = Resources.changeset(resources)
     render(conn, "edit.html", resources: resources, changeset: changeset, page_controller: "resources")
   end
@@ -79,25 +79,39 @@ defmodule Iphod.ResourcesController do
 
   def delete(conn, %{"id" => id}) do
     resources = Repo.get!(Resources, id)
-    filename = "./printresources/#{resources.url}"
-    resp = File.rm filename
+    resources |> remove_resource_file
 
     # Here we use delete! (with a bang) because we expect
     # it to always work (and if it does not, it will raise).
-    if resp == :ok do
-      Repo.delete!(resources)
+    Repo.delete!(resources)
 
-      conn
-      |> put_flash(:info, "Resources deleted successfully.")
-      |> redirect(to: resources_path(conn, :index))
-    end
+    conn
+    |> put_flash(:info, "Resources deleted successfully.")
+    |> redirect(to: resources_path(conn, :index))
+    
   end
 
   def send(conn, %{"filename" => basename}) do
-    IO.puts ">>>>> SEND: #{basename}"
     filename = "./printresources/#{basename}"
     conn
     |> put_resp_header("content-disposition", ~s(attachment; filename="#{filename |> Path.basename}"))
     |> send_file(200, filename)
   end
+
+# HELPERS
+
+  defp make_key_string(nil), do: ""
+  defp make_key_string(list), do: list |> Enum.join(", ")
+
+  defp remove_resource_file(%{url: nil}), do: :ok
+  defp remove_resource_file(r) do
+    filename = "./printresources/#{r.url}"
+    if filename |> File.exists? do
+      File.rm filename
+    else
+      # the file isn't there - carry on
+      :ok
+    end
+  end
+
 end
