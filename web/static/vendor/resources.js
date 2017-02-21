@@ -8553,6 +8553,8 @@ var _user$project$Resources$printOrLink = function (resource) {
 			return 'New tab';
 		case 'print':
 			return 'Download';
+		case 'insert':
+			return 'Download';
 		default:
 			return 'View';
 	}
@@ -8581,6 +8583,27 @@ var _user$project$Resources$getResource = function (resource) {
 							]))
 					]));
 		case 'print':
+			return A2(
+				_elm_lang$html$Html$a,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$href(
+						A2(_elm_lang$core$Basics_ops['++'], '/resources/send/', resource.url)),
+						_elm_lang$html$Html_Attributes$target('_blank')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$button,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(
+								_user$project$Resources$printOrLink(resource))
+							]))
+					]));
+		case 'insert':
 			return A2(
 				_elm_lang$html$Html$a,
 				_elm_lang$core$Native_List.fromArray(

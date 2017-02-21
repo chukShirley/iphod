@@ -80,6 +80,7 @@ defmodule Iphod.Router do
     get "/printresources", ResourcesController, :printresources
     get "/linkresources", ResourcesController, :linkresources
     get "/humor", ResourcesController, :humor
+    get "/inserts", ResourcesController, :inserts
     # get "/resources/create/:resources", ResourcesController, :create
     resources "/resources", ResourcesController
     # get "/printresources", ResourceController, :printresources

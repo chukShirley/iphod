@@ -209,6 +209,7 @@ resources model =
       [ class "offices-options"]
       [ li [ class "offices-item" ] [ printresources model ]
       , li [ class "offices-item" ] [ linkResource model ]
+      , li [ class "offices-item" ] [ inserts model ]
       , li [ class "offices-item" ] [ humor model ]
       ]
     ]
@@ -279,6 +280,11 @@ printresources: Model -> Html Msg
 printresources model =
   a [ href "/printresources"]
     [ button [] [ text "Print Resources"]]
+
+inserts: Model -> Html Msg
+inserts model =
+  a [ href "/inserts"]
+    [ button [] [ text "Bulletin Inserts"]]
 
 linkResource: Model -> Html Msg
 linkResource model = 

@@ -5,7 +5,6 @@ defmodule Iphod.ResourcesChannel do
   import Ecto.Query
   alias Iphod.Resources
   alias Iphod.Repo
-  import Insult
 
   def join("resources", payload, socket) do
     if authorized?(payload) do
@@ -30,6 +29,15 @@ defmodule Iphod.ResourcesChannel do
   def handle_request("printresources", _, socket) do
     resource_list = Resources
     |> where(of_type: "print")
+    |> Repo.all
+    |> for_elm()
+    push socket, "all_resources", %{list: resource_list}  
+    {:noreply, socket}
+  end
+
+  def handle_request("inserts", _, socket) do
+    resource_list = Resources
+    |> where(of_type: "insert")
     |> Repo.all
     |> for_elm()
     push socket, "all_resources", %{list: resource_list}  

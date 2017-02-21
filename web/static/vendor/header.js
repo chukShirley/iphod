@@ -8977,6 +8977,25 @@ var _user$project$Header$linkResource = function (model) {
 					]))
 			]));
 };
+var _user$project$Header$inserts = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/inserts')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Bulletin Inserts')
+					]))
+			]));
+};
 var _user$project$Header$printresources = function (model) {
 	return A2(
 		_elm_lang$html$Html$a,
@@ -9218,6 +9237,16 @@ var _user$project$Header$resources = function (model) {
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_user$project$Header$linkResource(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$inserts(model)
 							])),
 						A2(
 						_elm_lang$html$Html$li,

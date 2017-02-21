@@ -574,7 +574,7 @@ if ( path.match(/versions/) ) {
 }
 
 // resources
-if ( path.match(/resources|humor/) ) {
+if ( path.match(/resources|humor|inserts/) ) {
   let resc_channel = socket.channel("resources")
     , of_type = path.split("/").pop();
   resc_channel.join()
@@ -589,6 +589,7 @@ if ( path.match(/resources|humor/) ) {
   resc_channel.push(of_type, "");
 
   resc_channel.on("all_resources", data => {
+    console.log("RESOURCES: ", data)
     elmRescApp.ports.allResources.send(data.list)
   });
 

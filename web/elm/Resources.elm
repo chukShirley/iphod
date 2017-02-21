@@ -144,6 +144,10 @@ getResource resource =
     a [ href ("/resources/send/" ++ resource.url), target "_blank"]
       [ button [] [ text (printOrLink resource) ] 
       ]
+  "insert" ->
+    a [ href ("/resources/send/" ++ resource.url), target "_blank"]
+      [ button [] [ text (printOrLink resource) ] 
+      ]
   _       ->
       span []
       [ a [ href "#humor-text" ] [ button [] [text "View"] ]
@@ -161,9 +165,10 @@ getResource resource =
 printOrLink: Models.Resource -> String
 printOrLink resource =
   case resource.of_type of
-    "link"  -> "New tab"
-    "print" -> "Download"
-    _       -> "View"
+    "link"   -> "New tab"
+    "print"  -> "Download"
+    "insert" -> "Download"
+    _        -> "View"
 
 add_elipse: Int -> String -> String
 add_elipse n s =

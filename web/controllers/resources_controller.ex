@@ -8,6 +8,10 @@ defmodule Iphod.ResourcesController do
     render(conn, "printresources.html", page_controller: "resources")
   end
 
+  def inserts(conn, _params) do
+    render(conn, "inserts.html", page_controller: "resources")
+  end
+
   def linkresources(conn, _params) do
     render(conn, "linkresources.html", page_controller: "resources")
   end
@@ -53,7 +57,8 @@ defmodule Iphod.ResourcesController do
   end
 
   def edit(conn, %{"id" => id}) do
-    resources = Repo.get!(Resources, id)
+    r = Repo.get!(Resources, id) 
+    resources = Map.put(r, :key_string, r.keys |> Enum.join(", ") )
     changeset = Resources.changeset(resources)
     render(conn, "edit.html", resources: resources, changeset: changeset, page_controller: "resources")
   end

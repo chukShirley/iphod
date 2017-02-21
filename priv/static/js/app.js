@@ -2087,7 +2087,7 @@ if (path.match(/versions/)) {
 }
 
 // resources
-if (path.match(/resources|humor/)) {
+if (path.match(/resources|humor|inserts/)) {
   (function () {
     var resc_channel = _socket2.default.channel("resources"),
         of_type = path.split("/").pop();
@@ -2103,6 +2103,7 @@ if (path.match(/resources|humor/)) {
     resc_channel.push(of_type, "");
 
     resc_channel.on("all_resources", function (data) {
+      console.log("RESOURCES: ", data);
       elmRescApp.ports.allResources.send(data.list);
     });
 
@@ -24075,6 +24076,25 @@ var _user$project$Header$linkResource = function (model) {
 					]))
 			]));
 };
+var _user$project$Header$inserts = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/inserts')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Bulletin Inserts')
+					]))
+			]));
+};
 var _user$project$Header$printresources = function (model) {
 	return A2(
 		_elm_lang$html$Html$a,
@@ -24316,6 +24336,16 @@ var _user$project$Header$resources = function (model) {
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_user$project$Header$linkResource(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$inserts(model)
 							])),
 						A2(
 						_elm_lang$html$Html$li,
@@ -80836,6 +80866,8 @@ var _user$project$Resources$printOrLink = function (resource) {
 			return 'New tab';
 		case 'print':
 			return 'Download';
+		case 'insert':
+			return 'Download';
 		default:
 			return 'View';
 	}
@@ -80864,6 +80896,27 @@ var _user$project$Resources$getResource = function (resource) {
 							]))
 					]));
 		case 'print':
+			return A2(
+				_elm_lang$html$Html$a,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$href(
+						A2(_elm_lang$core$Basics_ops['++'], '/resources/send/', resource.url)),
+						_elm_lang$html$Html_Attributes$target('_blank')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$button,
+						_elm_lang$core$Native_List.fromArray(
+							[]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(
+								_user$project$Resources$printOrLink(resource))
+							]))
+					]));
+		case 'insert':
 			return A2(
 				_elm_lang$html$Html$a,
 				_elm_lang$core$Native_List.fromArray(
