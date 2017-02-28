@@ -36,10 +36,18 @@ body.calendar { width: 55em; }
   }
 }
 
-.home_link span { 
+div.login ul{
+  float: right;
   position: relative;
-  top: 1em;
-  left: -9999px;
+  top: -6em;
+  right: 3em;
+  height: 1em;
+  font-size: 1em;
+}
+
+.help-block, .alert-danger {
+  color: darkred;
+  margin-left: 2em;
 }
 
 /* Phoenix flash messages */
@@ -195,7 +203,12 @@ li.offices-item {
     display: block;
     height:4.5em;
     text-indent: 100%;
-    margin-top: -1em;
+    margin-top: 1em;
+  }
+
+  .home_link span {
+    position: absolute;
+    left: -999em;
   }
   @media screen and (max-width: 500px) { 
     .home_link { background-image: none; }

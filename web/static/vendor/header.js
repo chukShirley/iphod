@@ -9034,6 +9034,25 @@ var _user$project$Header$timeofdeath = function (model) {
 					]))
 			]));
 };
+var _user$project$Header$communiontosick = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/communiontosick')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Communion to Sick')
+					]))
+			]));
+};
 var _user$project$Header$tothesick = function (model) {
 	return A2(
 		_elm_lang$html$Html$a,
@@ -9367,6 +9386,16 @@ var _user$project$Header$offices = function (model) {
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_user$project$Header$tothesick(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$communiontosick(model)
 							])),
 						A2(
 						_elm_lang$html$Html$li,

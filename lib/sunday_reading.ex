@@ -1,7 +1,7 @@
 require IEx
 
 defmodule SundayReading do
-  import Lityear, only: [namedDayDate: 2, is_sunday?: 1, next_holy_day: 1]
+  import Lityear, only: [namedDayDate: 2, is_sunday?: 1, next_holy_day: 1, right_after_ash_wednesday?: 1]
   use Timex
   @tz "America/Los_Angeles"
 
@@ -21,6 +21,8 @@ defmodule SundayReading do
         _sunday {"holyName", "1", lityear, date}
       doy == "1225" ->
         _sunday {"christmasDay", "1", lityear, date}
+      date |> right_after_ash_wednesday? ->
+        _sunday {"ashWednesday", "1", lityear, date}
       hd == date ->
         holy_day title, date
       date |> Lityear.is_sunday? ->

@@ -155,6 +155,21 @@ li.ps_second_cont {
   padding: 0;
 }
 
+.versical-speaker {
+  font-style: italic;
+  width: 4em;
+}
+.versical-speaker-says {
+  position: absolute;
+  left: 5em;
+}
+
+.agnus-dei-resp{
+  padding-left: 3em;
+  font-style: italic;
+  font-size: 1.02em;
+}
+
 .vspeaker {
   font-style: italic;
   padding: 0 2em 0 0;

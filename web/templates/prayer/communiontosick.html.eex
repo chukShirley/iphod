@@ -1,0 +1,198 @@
+<button class="more-options" type="button">Options</button>
+<div id= "header-elm-container"></div>
+<br>
+<div class= "mpep">
+  <p class= "midday"><%= dgettext "np", "Communion of the Sick"%></p>
+  <p class="rubric-office"><%= dgettext "sick", "The Minister begins"%></p>
+  <p class="office"><%= dgettext "sick", """
+    Grace to you and peace from God our Father and the Lord Jesus Christ. 
+    """%>
+  </p>
+  <p class= "rubric_black"><%= dgettext "sick", "Philippians 1:2"%></p>
+  <p class="rubric-office"><%= dgettext "sick", "The Minister continues"%></p>
+  <p class="office"><%= dgettext "sick", """
+    Almighty God, to you all hearts are open, all desires known, and from you 
+    no secrets are hid: Cleanse the thoughts of our hearts by the inspiration 
+    of your Holy Spirit, that we may perfectly love you, and worthily magnify 
+    your holy Name; through Christ our Lord.
+    """%>
+    <span class="italic"><%= dgettext "sick", "Amen." %></span>
+  </p>
+  <p class="rubric-office"><%= dgettext "sick", "A Psalm may be prayed. Psalms"%>
+    <button class="psalm-button" data-psalm="23">23</button>, 
+    <button class="psalm-button" data-psalm="62">62</button>, 
+    <button class="psalm-button" data-psalm="103">103</button>
+    <%= dgettext "sick", "and" %>
+    <button class="psalm-button" data-psalm="145">145</button>
+    <%= dgettext "sick", "are particularly appropriate. "%>
+  </p>
+  <div id="sick-communion-psalm"></div>
+  <p class="rubric-office"><%= dgettext "sick", """
+    One of the following Gospel lessons is read, or the readings appropriate to the day
+    """%>
+  </p>
+  <p class="office"><%= dgettext "sick", """
+    For God so loved the world, that he gave his only Son, that whoever believes in 
+    him should not perish but have eternal life.
+    """%>
+  </p>
+  <p class="rubric_black"><%= dgettext "sick", "John 3:16"%></p>
+  <br>
+  <p class="office"><%= dgettext "sick", """
+    Jesus said, “I am the living bread that came down from heaven. If anyone 
+    eats of this bread, he will live forever. And the bread that I will give 
+    for the life of the world is my flesh.” For my flesh is true food, and my 
+    blood is true drink. Whoever feeds on my flesh and drinks my blood abides 
+    in me, and I in him. 
+    """%>
+  </p>
+  <p class="rubric_black"><%= dgettext "sick", "John 6:51, 55-56"%></p>
+
+  <p class="rubric-office"><%= dgettext "sick", """
+    Reflection on the lessons may follow.
+    """%>
+  </p>
+  <p class="rubric-office"><%= dgettext "sick", """
+    The minister may say the confession and the sick person joins in as able.
+    """%>
+  </p>
+
+  <p class= "alt_confession pb_vs"><%= dgettext "sick", "Most merciful God,"%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "sick", "we confess that we have sinned against you"%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "sick", "in thought, word and deed,"%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "sick", "by what we have done, and by what we have left undone."%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "sick", "We have not loved you with our whole heart;"%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "sick", "we have not loved our neighbors as ourselves."%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "sick", "We are truly sorry and we humbly repent."%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "sick", "For the sake of your Son Jesus Christ,"%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "sick", "have mercy on us and forgive us;"%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "sick", "that we may delight in your will, and walk in your ways,"%></p>
+  <p class= "alt_confession pb_vs"><%= dgettext "sick", "to the glory of your Name. Amen."%></p>
+    
+  <p class="rubric-office"><%= dgettext "sick", """
+    A Priest, if present, says
+    """%>
+  </p>
+  <p class="office"><%= dgettext "sick", """
+    Almighty God, our heavenly Father, who in his great mercy has promised forgiveness 
+    of sins to all those who sincerely repent and with true faith turn to him, have 
+    mercy upon you, pardon and deliver you from all your sins, confirm and strengthen 
+    you in all goodness, and bring you to everlasting life;
+    through Jesus Christ our Lord. 
+    """%>
+    <span class="italic"><%= dgettext "sick", "Amen." %></span>
+  </p>
+    
+  <p class="rubric-office"><%= dgettext "sick", """
+    A Deacon or lay person prays
+    """%>
+  </p>
+  <p class="office"><%= dgettext "sick", """
+    Grant your faithful people, merciful Lord, pardon and peace; that we may 
+    be cleansed from all our sins, and serve you with a quiet mind; through 
+    Jesus Christ our Lord.
+    """%>
+    <span class="italic"><%= dgettext "sick", "Amen." %></span>
+  </p>
+  <br>
+
+  <p class="office">
+    <span class="versical-speaker"><%= dgettext "sick", "Minister"%></span>
+    <span class="versical-speaker-says"><%= dgettext "sick", "The peace of the Lord be always with you."%></span>
+  </p>
+  <p class="office">
+    <span class="versical-speaker"><%= dgettext "sick", "People"%></span>
+    <span class="versical-speaker-says"><%= dgettext "sick", "And with your spirit. "%></span>
+  </p>
+  <p class="office">
+    <span class="versical-speaker"><%= dgettext "sick", "Minister"%></span>
+    <span class="versical-speaker-says"><%= dgettext "sick", "Let us pray."%></span>
+  </p>
+  <p class="rubric-office"><%= dgettext "sick", """
+    Minister and People
+    """%>
+  </p>
+  <%= render "_lords_prayer_trad.html" %>
+  <p class="rubric-office"><%= dgettext "sick", """
+    Then may be said
+    """%>
+  </p>
+  <%= render "_agnus_dei.html" %>
+
+  <p class="rubric-office"><%= dgettext "sick", """
+    The minister may say
+    """%>
+  </p>
+
+  <p class="office"><%= dgettext "sick", """
+    The body of our Lord Jesus Christ, which was given for you, 
+    preserve your body and soul to everlasting life. 
+    """%>
+  </p>
+
+  <p class="office"><%= dgettext "sick", """
+    The blood of our Lord Jesus Christ, which was shed for you, 
+    preserve your body and soul to everlasting life.
+    """%>
+  </p>
+
+  <p class="rubric-office"><%= dgettext "sick", """
+    After Communion, the minister says
+    """%>
+  </p>
+
+  <p class= "pb_vs"><%= dgettext "sick", "Almighty and ever-living God,"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "we thank you for feeding us, in these holy mysteries,"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "with the spiritual food of the most precious Body and Blood"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "of your Son our Savior Jesus Christ;"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "and for assuring us, through this Sacrament, of your favor and goodness towards us;"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "and that we are true members of the mystical body of your Son,"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "the blessed company of all faithful people;"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "and are also heirs, through hope, of your everlasting kingdom."%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "And we humbly ask you, heavenly Father,"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "to assist us with your grace,"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "that we may continue in that holy fellowship,"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "and do all such good works as you have prepared for us to walk in;"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "through Jesus Christ our Lord,"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "to whom with you and the Holy Spirit,"%></p>
+  <p class= "pb_vs"><%= dgettext "sick", "be all honor and glory, now and forever. Amen."%></p>
+
+  <p class="rubric-office"><%= dgettext "sick", """
+    A Priest gives this blessing
+    """%>
+  </p>
+
+  <p class= "office"><%= dgettext "sick", """
+    The peace of God which passes all understanding keep your hearts and minds in the 
+    knowledge and love of God, and of his Son Jesus Christ our Lord; and the blessing 
+    of God Almighty, the Father, the Son, and the Holy Spirit, be among you, and remain 
+    with you always. 
+    """%>
+    <span class="italic"><%= dgettext "sick", "Amen." %></span>    
+  </p>
+
+  <p class="rubric-office"><%= dgettext "sick", """
+    A Deacon or lay person says the following
+    """%>
+  </p>
+
+  <p class= "office"><%= dgettext "sick", """
+    The grace of our Lord Jesus Christ, and the love of God, and the fellowship of the 
+    Holy Spirit, be with us all evermore.  
+    """%>
+    <span class="italic"><%= dgettext "sick", "Amen." %></span>
+  </p>
+  <p class="rubric_black"><%= dgettext "sick", "2 Corinthians 13:14"%></p>
+  <br>
+
+  <p class="office">
+    <span class="versical-speaker"><%= dgettext "sick", "Minister"%></span>
+    <span class="versical-speaker-says"><%= dgettext "sick", "Let us bless the Lord."%></span>
+  </p>
+  <p class="office">
+    <span class="versical-speaker"><%= dgettext "sick", "People"%></span>
+    <span class="versical-speaker-says"><%= dgettext "sick", "Thanks be to God."%></span>
+  </p>
+
+
+</div>

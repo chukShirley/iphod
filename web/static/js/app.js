@@ -15,6 +15,7 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 var path = window.location.pathname
   , isOffice = !!(path == "/" || path.match(/office|midday|^\/mp\/|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|^\/ep\/|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/))
 
+
 // Import local files
 //
 // Local files can be imported directly using relative
@@ -539,6 +540,27 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
 
 }
 
+if ( path.match(/communiontosick/) ) {
+  let communiontosick_channel = socket.channel("iphod:readings")
+  communiontosick_channel.join()
+    .receive("ok", resp => { 
+      // console.log("Joined Versions successfully", resp);
+    })
+    .receive("error", resp => { console.log("Unable to join Iphod", resp) })
+  
+  $(".psalm-button").click( function() {
+    let psalm = "psalm " + $(this).data("psalm")
+      , section = "ps"
+      , version = get_version(section);
+    communiontosick_channel.push("get_alt_reading", [section, version, psalm]);
+  })
+
+  communiontosick_channel.on("alt_lesson", data => {
+    let psalm = data.resp[0].body
+    $("#sick-communion-psalm").html(psalm)
+  })
+}
+
 
 // translations
 if ( path.match(/versions/) ) {
@@ -589,7 +611,6 @@ if ( path.match(/resources|humor|inserts/) ) {
   resc_channel.push(of_type, "");
 
   resc_channel.on("all_resources", data => {
-    console.log("RESOURCES: ", data)
     elmRescApp.ports.allResources.send(data.list)
   });
 

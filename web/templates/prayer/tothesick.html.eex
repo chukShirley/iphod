@@ -2,656 +2,86 @@
 <div id= "header-elm-container"></div>
 <br>
 <div class= "mpep">
-  <p class= "midday"><%= dgettext "np", "Ministration to the Sick (BCP)"%></p>
+  <p class= "midday"><%= dgettext "np", "Ministration to the Sick"%></p>
   <p class="rubric-office"><%= dgettext "sick", """
-    In case of illness, the Minister of the Congregation is to be notified.
+    The Officiant begins
     """%>
   </p>
-  <p class="rubric-office"><%= dgettext "sick", """
-    At the Ministration, one or more parts of the following service are used,
-    as appropriate; but when two or more are used together, they are used in
-    the order indicated. The Lord’s Prayer is always included.
-    """%>
-  </p>
-  <p class="rubric-office"><%= dgettext "sick", """
-    Part One of this service may always be led by a deacon or lay person.
+  <p class="office"><%= dgettext "sick", """
+    Savior of the world, by your cross and precious blood you have redeemed 
+    us; Save us, and help us, we humbly beseech you, O Lord.
     """%>
   </p>
   <p class="rubric-office"><%= dgettext "sick", """
-    When the Laying on of Hands or Anointing takes place at a public
-    celebration of the Eucharist, it is desirable that it precede the distribution of
-    Holy Communion, and it is recommended that it take place immediately
-    before the exchange of the Peace.
+    The Priest (or other authorized person) dips a thumb in the holy oil, 
+    and makes the sign of the cross on the sick person’s forehead, and,
+    if appropriate, that part of the body which suffers from sickness or 
+    injury. Others may join in the laying on of hands. The Officiant says
     """%>
+  </p>
+  <p class="office"><%= dgettext "sick", "N., I anoint you with oil and "%>
+    <span class="italic"><%= dgettext "sick", "I/we" %></span>
+    <%= dgettext "sick", "lay" %>
+    <span class="italic"><%= dgettext "sick", "my/our" %></span>
+    <%= dgettext "sick", """
+      hands upon you in the Name of the Father, and of the
+      Son, and of the Holy Spirit. Amen.
+    """%>
+    <span class="italic"><%= dgettext "sick", "Amen." %></span>
+  </p>
+  <br>
+  <p class="office"><%= dgettext "sick", """
+    Lord Jesus Christ, heal this your servant, sustain him with your 
+    presence, drive away all sickness of body, mind and spirit, and give 
+    to him that victory of life and peace which will enable him to serve
+    you both now and evermore.     
+    """%>
+    <span class="italic"><%= dgettext "sick", "Amen." %></span>
   </p>
   <p class="rubric-office"><%= dgettext "sick", """
-    The Celebrant begins the service with the following or some other greeting
+    The Officiant may add the following prayer
     """%>
   </p>
   <p class="office"><%= dgettext "sick", """
-    Peace be to this house (place), and to all who dwell in it.
+    Gracious heavenly Father, as this your servant has been outwardly anointed 
+    with holy oil and received the laying on of hands, so grant him the inward 
+    anointing of your Holy Spirit. Of your great mercy, forgive him his sins, 
+    release him from suffering, and restore him to wholeness and strength.
+    Deliver him from all evil, preserve him in all goodness, and bring him to 
+    everlasting life; through Jesus Christ our Lord.
     """%>
-  </p>
-  <h3>Part I. Ministry of the Word</h3>
+    <span class="italic"><%= dgettext "sick", "Amen." %></span>
+  </p>  
+  
   <p class="rubric-office"><%= dgettext "sick", """
-    One or more of the following or other passages of Scripture are read
+    Additional prayers or intercessions may be said.
     """%>
   </p>
-  <p class="italic"><%= dgettext "sick", "General"%></p>
-    <div class="ref-button">
-      <button class="text_button">2 Corinthians 1:3-5</button>
-      (God comforts us in affliction)
-    </div>
-    <div class="text"><%= dgettext "sick", """
-        Blessed be the God and Father of our Lord Jesus Christ, the Father of mercies and God of all 
-        comfort, 4 who comforts us in all our affliction, so that we may be able to comfort those who are 
-        in any affliction, with the comfort with which we ourselves are comforted by God. For as we 
-        share abundantly in Christ's sufferings, so through Christ we share abundantly in comfort too.
-        """%>
-    </div>
-    <div class="ref-button">
-      <button class="text_button">Psalm 91</button>
-      (He will give his angels charge over you)
-    </div>
-    <div class="text">
-      <p class="ps_first"> <%= dgettext "sick", "He who dwells in the shelter of the Most High, *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "abides under the shadow of the Almighty."%></p>
-      <p class="ps_first"> <%= dgettext "sick", "He shall say to the Lord, “You are my refuge and my stronghold, *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "my God in whom I put my trust.”"%></p>
-      <p class="ps_first"> <%= dgettext "sick", "He shall deliver you from the snare of the hunter *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "and from the deadly pestilence."%></p>
-      <p class="ps_first"> <%= dgettext "sick", "He shall cover you with his pinions, and you shall find refuge under his wings; *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "his faithfulness shall be a shield and buckler."%></p>
-      <p class="ps_first"> <%= dgettext "sick", "You shall not be afraid of any terror by night, *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "nor of the arrow that flies by day;"%></p>
-      <p class="ps_first"> <%= dgettext "sick", "Of the plague that stalks in the darkness, *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "nor of the sickness that lays waste at mid-day."%></p>
-      <p class="ps_first"> <%= dgettext "sick", "A thousand shall fall at your side and ten thousand at your right hand, *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "but it shall not come near you."%></p>
-      <p class="ps_first"> <%= dgettext "sick", "Your eyes have only to behold *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "to see the reward of the wicked."%></p>
-      <p class="ps_first"> <%= dgettext "sick", "Because you have made the Lord your refuge, *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "and the Most High your habitation,"%></p>
-      <p class="ps_first"> <%= dgettext "sick", "There shall no evil happen to you, *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "neither shall any plague come near your dwelling."%></p>
-      <p class="ps_first"> <%= dgettext "sick", "For he shall give his angels charge over you, *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "to keep you in all your ways."%></p>
-      <p class="ps_first"> <%= dgettext "sick", "They shall bear you in their hands, *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "lest you dash your foot against a stone."%></p>
-      <p class="ps_first"> <%= dgettext "sick", "You shall tread upon the lion and adder; *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "you shall trample the young lion and the serpent under your feet."%></p>
-      <p class="ps_first"> <%= dgettext "sick", "Because he is bound to me in love, therefore will I deliver him; *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "I will protect him, because he knows my Name."%></p>
-      <p class="ps_first"> <%= dgettext "sick", "He shall call upon me, and I will answer him; *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "I am with him in trouble; I will rescue him and bring him to honor."%></p>
-      <p class="ps_first"> <%= dgettext "sick", "With long life will I satisfy him, *"%></p>
-      <p class="ps_second"><%= dgettext "sick", "and show him my salvation."%></p>
-    </div>
-    <div class="ref-button">
-      <button class="text_button">Luke 17:11-19</button>
-      (Your faith has made you well)
-    </div>
-    <div class="text">
-      <p class="office"><%= dgettext "pen", """
-        On the way to Jerusalem he was passing along between Samaria and Galilee. 
-        And as he entered a village, he was met by ten lepers, who stood at a 
-        distance and lifted up their voices, saying, “Jesus, Master, have mercy on us.”
-        When he saw them he said to them, “Go and show yourselves to the priests.” 
-        And as they went they were cleansed. Then one of them, when he saw that he 
-        was healed, turned back, praising God with a loud voice; and he fell on his 
-        face at Jesus' feet, giving him thanks. Now he was a Samaritan. Then Jesus 
-        answered, “Were not ten cleansed? Where are the nine? Was no one found to 
-        return and give praise to God except this foreigner?” And he said to him, 
-        “Rise and go your way; your faith has made you well.”
-        """%>
-      </p>
-    </div>
-  <p class="italic"><%= dgettext "sick", "Penitence"%></p>
-    <div class="ref-button">
-      <button class="text_button">Hebrews 12:1-2</button>
-      (Looking to Jesus, the perfecter of our faith)
-    </div>
-    <div class="text">
-      <p class="office"><%= dgettext "sick", """
-        Therefore, since we are surrounded by so great a cloud of witnesses, let us 
-        also lay aside every weight, and sin which clings so closely, and let us run 
-        with endurance the race that is set before us, looking to Jesus, the founder 
-        and perfecter of our faith, who for the joy that was set before him endured 
-        the cross, despising the shame, and is seated at the right hand of the throne 
-        of God.
-      """%>
-      </p>
-    </div>
-    <div class="ref-button">
-      <button class="text_button">Psalm 103</button>
-      (He forgives all your sins)
-    </div>
-    <div class="text">
-      <p class="office"><%= dgettext "sick", """
 
-      """%>
-      </p>
-    </div>
-    <div class="ref-button">
-      <button class="text_button">Matthew 9:2-8</button>
-      (Your sins are forgiven)
-    </div>
-    <div class="text">
-      <p class="office"><%= dgettext "sick", """
-        And behold, some people brought to him a paralytic, lying on a bed. And when 
-        Jesus saw their faith, he said to the paralytic, “Take heart, my son; your sins
-        are forgiven.” And behold, some of the scribes said to themselves, “This man is 
-        blaspheming.” But Jesus, knowing[a] their thoughts, said, “Why do you think evil 
-        in your hearts? For which is easier, to say, ‘Your sins are forgiven,’ or to say, 
-        ‘Rise and walk’? But that you may know that the Son of Man has authority on earth 
-        to forgive sins” — he then said to the paralytic — “Rise, pick up your bed and go 
-        home.” And he rose and went home. When the crowds saw it, they were afraid, and 
-        they glorified God, who had given such authority to men.
-      """%>
-      </p>
-    </div>
+  <p class="rubric-office"><%= dgettext "sick", """
+    The Lord’s Prayer is said.
+    """%>
+  </p>
 
-  <p class="italic"><%= dgettext "sick", "When Anointing is to follow"%></p>
-    <div class="ref-button">
-      <button class="text_button">James 5:14-16</button>
-      (Is any among you sick?)
-    </div>
-    <div class="text">
-      <p class="office"><%= dgettext "sick", """
-        Is anyone among you sick? Let him call for the elders of the church, and let 
-        them pray over him, anointing him with oil in the name of the Lord. And the 
-        prayer of faith will save the one who is sick, and the Lord will raise him up. 
-        And if he has committed sins, he will be forgiven. Therefore, confess your sins 
-        to one another and pray for one another, that you may be healed. The prayer of 
-        a righteous person has great power as it is working.
-      """%>
-      </p>
-    </div>
-    <div class="ref-button">
-      <button class="text_button">Psalm 23</button>
-      (You have anointed my head with oil)
-    </div>
-    <div class="text">
-      <p class="office"><%= dgettext "sick", """
+  <%= render "_lords_prayer_trad.html" %>
 
-      """%>
-      </p>
-    </div>
-    <div class="ref-button">
-      <button class="text_button">Mark 6:7, 12-13</button>
-      (They anointed with oil many that were sick)
-    </div>
-    <div class="text">
-      <p class="office"><%= dgettext "sick", """
-        And he called the twelve and began to send them out two by two, and gave them 
-        authority over the unclean spirits. So they went out and proclaimed that people 
-        should repent. And they cast out many demons and anointed with oil many who were 
-        sick and healed them.
-      """%>
-      </p>
-    </div>
+  <p class="rubric-office"><%= dgettext "sick", """
+    The Officiant then prays
+    """%>
+  </p>
 
-  <p class="italic"><%= dgettext "sick", "When Communion is to follow"%></p>
-    <div class="ref-button">
-      <button class="text_button">1 John 5:13-15</button>
-      (That you may know that you have eternal life)
-    </div>
-    <div class="text">
-      <p class="office"><%= dgettext "sick", """
-        I write these things to you who believe in the name of the Son of God, that you 
-        may know that you have eternal life. And this is the confidence that we have 
-        toward him, that if we ask anything according to his will he hears us. And if we 
-        know that he hears us in whatever we ask, we know that we have the requests that 
-        we have asked of him.
-      """%>
-      </p>
-    </div>
-    <div class="ref-button">
-      <button class="text_button">Psalm 145:14-22</button>
-      (The eyes of all wait upon you, O Lord)
-    </div>
-    <div class="text">
-      <p class="office"><%= dgettext "sick", """
-
-      """%>
-      </p>
-    </div>
-    <div class="ref-button">
-      <button class="text_button">John 6:47-51</button>
-      (I am the bread of life)
-    </div>
-    <div class="text">
-      <p class="office"><%= dgettext "sick", """
-        Truly, truly, I say to you, whoever believes has eternal life. I am the bread 
-        of life. Your fathers ate the manna in the wilderness, and they died. This is 
-        the bread that comes down from heaven, so that one may eat of it and not die. 
-        I am the living bread that came down from heaven. If anyone eats of this bread, 
-        he will live forever. And the bread that I will give for the life of the world 
-        is my flesh.”
-      """%>
-      </p>
-    </div>
-
-
-  <p class= "rubric-office"><%= dgettext "sick", "After any Reading, the Celebrant may comment on it briefly."%></p>
-  <p class= "rubric-office"><%= dgettext "sick", "Prayers may be offered according to the occasion."%></p>
-  <p class= "rubric-office"><%= dgettext "sick", """
-    The Priest may suggest the making of a special confession, if the sick
-    person’s conscience is troubled, and use the form for the Reconciliation
-    of a Penitent.
-    """%>
-  </p>
-  <p class= "rubric-office"><%= dgettext "sick", "Or else the following general confession may be said"%></p>
-  <ul class="versicals" style="margin-top: 1em;">
-    <li class="litany1">Most merciful God,</li>
-    <li class="litany1">we confess that we have sinned against you</li>
-    <li class="litany1">in thought, word, and deed,</li>
-    <li class="litany1">by what we have done,</li>
-    <li class="litany1">and by what we have left undone.</li>
-    <li class="litany1">We have not loved you with our whole heart;</li>
-    <li class="litany1">we have not loved our neighbors as ourselves.</li>
-    <li class="litany1">We are truly sorry and we humbly repent.</li>
-    <li class="litany1">For the sake of your Son Jesus Christ,</li>
-    <li class="litany1">have mercy on us and forgive us;</li>
-    <li class="litany1">that we may delight in your will,</li>
-    <li class="litany1">and walk in your ways,</li>
-    <li class="litany1">to the glory of your Name. Amen.</li>
-  </ul>
-  <p class= "rubric-office"><%= dgettext "sick", "The Priest alone says"%></p>
   <p class="office"><%= dgettext "sick", """
-      Almighty God have mercy on you, forgive you all your sins
-    through our Lord Jesus Christ, strengthen you in all goodness,
-    and by the power of the Holy Spirit keep you in eternal life.
-    """%>
-    <span class="italic"> Amen.</span>
-  </p>
-  <p class= "rubric-office"><%= dgettext "sick", """
-    A deacon or lay person using the preceding form substitutes “us” for
-    “you” and “our” for “your.”
-    """%>
-  </p>
-  <h3>Part II. Laying on of Hands and Anointing</h3>
-  <p class= "rubric-office"><%= dgettext "sick", """
-    If oil for the Anointing of the Sick is to be blessed, the Priest says
-    """%>
-  </p>
-  <p class="office"><%= dgettext "sick", """
-      O Lord, holy Father, giver of health and salvation: Send your
-    Holy Spirit to sanctify this oil; that, as your holy apostles
-    anointed many that were sick and healed them, so may those
-    who in faith and repentance receive this holy unction be
-    made whole; through Jesus Christ our Lord, who lives and
-    reigns with you and the Holy Spirit, one God, for ever and
-    ever.
-    """%>
-    <span class="italic"> Amen.</span>
-  </p>
-  <p class= "rubric-office"><%= dgettext "sick", "The following anthem is said"%></p>
-  <p class="office"><%= dgettext "sick", """
-    Savior of the world, by your cross and precious blood you
-    have redeemed us;
-    """%>
-  <p class="office">
-  <p class="italic"><%= dgettext "sick", "Save us, and help us, we humbly beseech you, O Lord."%></p>
-  <p class= "rubric-office"><%= dgettext "sick", """
-    The Priest then lays hands upon the sick person, and says one of the following
-    """%>
-  </p>
-  <p class="office"><%= dgettext "sick", """
-      N., I lay my hands upon you in the Name of the Father, and
-    of the Son, and of the Holy Spirit, beseeching our Lord Jesus
-    Christ to sustain you with his presence, to drive away all
-    sickness of body and spirit, and to give you that victory of life
-    and peace which will enable you to serve him both now and
-    evermore.
-    """%>
-    <span class="italic"> Amen.</span>
-  </p>
-  <p class= "rubric-office"><%= dgettext "sick", "or this"%></p>
-  <p class="office"><%= dgettext "sick", """
-        N., I lay my hands upon you in the Name of our Lord and
-      Savior Jesus Christ, beseeching him to uphold you and fill
-      you with his grace, that you may know the healing power of
-      his love.
-    """%>
-    <span class="italic"> Amen.</span>
-  </p>
-  <p class= "rubric-office"><%= dgettext "sick", """
-    If the person is to be anointed, the Priest dips a thumb in the holy oil,
-    and makes the sign of the cross on the sick person’s forehead, saying
-    """%>
-  </p>
-  <p class="office"><%= dgettext "sick", """
-      N., I anoint you with oil in the Name of the Father, and of
-    the Son, and of the Holy Spirit.
-    """%>
-    <span class="italic"> Amen.</span>
-  </p>
-  <p class= "rubric-office"><%= dgettext "sick", "The Priest may add"%></p>
-  <p class="office"><%= dgettext "sick", """
-      As you are outwardly anointed with this holy oil, so may our
-    heavenly Father grant you the inward anointing of the Holy
-    Spirit. Of his great mercy, may he forgive you your sins,
-    release you from suffering, and restore you to wholeness and
-    strength. May he deliver you from all evil, preserve you in all
-    goodness, and bring you to everlasting life; through Jesus
-    Christ our Lord.
-    """%>
-    <span class="italic"> Amen.</span>
-  </p>
-  <p class= "rubric-office"><%= dgettext "sick", """
-    In cases of necessity, a deacon or lay person may perform the anointing,
-    using oil blessed by a bishop or priest.
-    """%>
-  </p>
-  <p class= "rubric-office"><%= dgettext "sick", """
-    If Communion is not to follow, the Lord’s Prayer is now said.
-    """%>
-  </p>
-  <p class= "rubric-office"><%= dgettext "sick", "The Priest concludes"%></p>
-  <p class="office"><%= dgettext "sick", """
-      The Almighty Lord, who is a strong tower to all who put their
-    trust in him, to whom all things in heaven, on earth, and under
-    the earth bow and obey: Be now and evermore your defense,
-    and make you know and feel that the only Name under
-    heaven given for health and salvation is the Name of our Lord
+    The Almighty Lord, who is a strong tower to all who put their trust in him, 
+    to whom all things in heaven, on earth, and under the earth bow and obey: 
+    Be now and evermore your defense, and make you know and feel that the only 
+    Name under heaven given for health and salvation is the Name of our Lord 
     Jesus Christ.
     """%>
-    <span class="italic"> Amen.</span>
+    <span class="italic"><%= dgettext "sick", "Amen." %></span>
+  </p>  
+  <p class="rubric-office"><%= dgettext "sick", """
+    A priest may conclude the above prayer with a blessing.
+    """%>
   </p>
-  <div class="ref-button">
-    <button class="text_button">Part III. Holy Communion</button>
-    (hidden rubrics)
-  </div>
-  <div class="text">
-    <p class= "rubric-office"><%= dgettext "sick", """
-      If the Eucharist is to be celebrated, the Priest begins with the [Peace and] Offertory.
-      """%>
-    </p>
-    <p class= "rubric-office"><%= dgettext "sick", """
-      If Communion is to be administered from the reserved Sacrament, the
-      form for Communion under Special Circumstances is used, beginning
-      with the [Peace and] Lord’s Prayer on page 398.
-      """%>
-    </p>
-    <p class= "rubric-office"><%= dgettext "sick", """
-      If the sick person cannot receive either the consecrated Bread or the
-      Wine, it is suitable to administer the Sacrament in one kind only.
-      """%>
-    </p>
-    <p class= "rubric-office"><%= dgettext "sick", """
-      One of the usual postcommunion prayers is said, or the following
-      """%>
-    </p>
-    <p class="office"><%= dgettext "sick", """
-        Gracious Father, we give you praise and thanks for this Holy
-      Communion of the Body and Blood of your beloved Son
-      Jesus Christ, the pledge of our redemption; and we pray that
-      it may bring us forgiveness of our sins, strength in our
-      weakness, and everlasting salvation; through Jesus Christ
-      our Lord.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-    <p class= "rubric-office"><%= dgettext "sick", """
-      The service concludes with a blessing or with a dismissal
-      """%>
-    </p>
-    <p class="bless_the_lord"><%= dgettext "sick", "Let us bless the Lord."%></p>
-    <p class="italic"><%= dgettext "sick", "Thanks be to God."%></p>
-  
-    <p class= "rubric-office"><%= dgettext "sick", """
-      If a person desires to receive the Sacrament, but, by reason of extreme
-      sickness or physical disability, is unable to eat and drink the Bread and
-      Wine, the Celebrant is to assure that person that all the benefits of
-      Communion are received, even though the Sacrament is not received
-      with the mouth.
-      """%>
-    </p>
-  </div>
 
-  <h3><%= dgettext "sick", "Prayers for the Sick"%></h3>
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "For a Sick Person"%></h3></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-        O Father of mercies and God of all comfort, our only help in
-      time of need: We humbly beseech thee to behold, visit, and
-      relieve thy sick servant N. for whom our prayers are desired.
-      Look upon him with the eyes of thy mercy; comfort him with
-      a sense of thy goodness; preserve him from the temptations
-      of the enemy; and give him patience under his affliction. In
-      thy good time, restore him to health, and enable him to lead
-      the residue of his life in thy fear, and to thy glory; and grant
-      that finally he may dwell with thee in life everlasting; through
-      Jesus Christ our Lord.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-  </div>
-
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "For Recovery from Sickness"%></h3></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-      O God, the strength of the weak and the comfort of sufferers:
-      Mercifully accept our prayers, and grant to your servant N.
-      the help of your power, that his sickness may be turned into
-      health, and our sorrow into joy; through Jesus Christ our
-      Lord.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-    <p class= "rubric-office"><%= dgettext "sick", "or this"%></p>
-    <p class="office"><%= dgettext "sick", """
-      O God of heavenly powers, by the might of your command
-      you drive away from our bodies all sickness and all infirmity:
-      Be present in your goodness with your servant N., that his
-      weakness may be banished and his strength restored; and that,
-      his health being renewed, he may bless your holy Name;
-      through Jesus Christ our Lord.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-  </div>
-
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "For a Sick Child"%></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-        Heavenly Father, watch with us over your child N., and grant
-      that he may be restored to that perfect health which it is
-      yours alone to give; through Jesus Christ our Lord.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-    <p class= "rubric-office"><%= dgettext "sick", "or this"%></p>
-    <p class="office"><%= dgettext "sick", """
-        Lord Jesus Christ, Good Shepherd of the sheep, you gather
-      the lambs in your arms and carry them in your bosom: We
-      commend to your loving care this child N. Relieve his pain,
-      guard him from all danger, restore to him your gifts of
-      gladness and strength, and raise him up to a life of service to
-      you. Hear us, we pray, for your dear Name’s sake.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-  </div>
-
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "Before an Operation"%></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-        Almighty God our heavenly Father, graciously comfort your
-      servant N. in his suffering, and bless the means made use of
-      for his cure. Fill his heart with confidence that, though at times
-      he may be afraid, he yet may put his trust in you; through Jesus
-      Christ our Lord.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-    <p class= "rubric-office"><%= dgettext "sick", "or this"%></p>
-    <p class="office"><%= dgettext "sick", """
-        Strengthen your servant N., O God, to do what he has to do
-      and bear what he has to bear; that, accepting your healing
-      gifts through the skill of surgeons and nurses, he may be
-      restored to usefulness in your world with a thankful heart;
-      through Jesus Christ our Lord.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-  </div>
-
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "For Strength and Confidence"%></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-        Heavenly Father, giver of life and health: Comfort and
-      relieve your sick servant N., and give your power of healing to
-      those who minister to his needs, that he may be strengthened in
-      his weakness and have confidence in your loving care; through
-      Jesus Christ our Lord.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-  </div>
-
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "For the Sanctification of Illness"%></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-        Sanctify, O Lord, the sickness of your servant N., that the
-      sense of his weakness may add strength to his faith and
-      seriousness to his repentance; and grant that he may live with
-      you in everlasting life; through Jesus Christ our Lord.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-  </div>
-
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "For Health of Body and Soul"%></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-        May God the Father bless you, God the Son heal you, God
-      the Holy Spirit give you strength. May God the holy and
-      undivided Trinity guard your body, save your soul, and bring
-      you safely to his heavenly country; where he lives and reigns
-      for ever and ever.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-  </div>
-
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "For Doctors and Nurses"%></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-        Sanctify, O Lord, those whom you have called to the study
-      and practice of the arts of healing, and to the prevention of
-      disease and pain. Strengthen them by your life-giving Spirit,
-      that by their ministries the health of the community may be
-      promoted and your creation glorified; through Jesus Christ
-      our Lord.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-  </div>
-
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "Thanksgiving for a Beginning of Recovery"%></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-        O Lord, your compassions never fail and your mercies are
-      new every morning: We give you thanks for giving our
-      brother (sister) N. both relief from pain and hope of health
-      renewed. Continue in him, we pray, the good work you have
-      begun; that he, daily increasing in bodily strength, and
-      rejoicing in your goodness, may so order his life and conduct
-      that he may always think and do those things that please
-      you; through Jesus Christ our Lord.
-      """ %>
-      <span class="italic"> Amen.</span>
-    </p>
-  </div>
-
-  <h3>Prayers for use by a Sick Person</h3>
-
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "For Trust in God"%></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-        O God, the source of all health: So fill my heart with faith in
-      your love, that with calm expectancy I may make room for
-      your power to possess me, and gracefully accept your
-      healing; through Jesus Christ our Lord.
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-  </div>
-
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "In Pain"%></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-        Lord Jesus Christ, by your patience in suffering you hallowed
-      earthly pain and gave us the example of obedience to your
-      Father’s will: Be near me in my time of weakness and pain;
-      sustain me by your grace, that my strength and courage may
-      not fail; heal me according to your will; and help me always
-      to believe that what happens to me here is of little account if
-      you hold me in eternal life, my Lord and my God. 
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-    </div>
-
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "For Sleep"%></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-        O heavenly Father, you give your children sleep for the
-      refreshing of soul and body: Grant me this gift, I pray; keep
-      me in that perfect peace which you have promised to those
-      whose minds are fixed on you; and give me such a sense of
-      your presence, that in the hours of silence I may enjoy the
-      blessed assurance of your love; through Jesus Christ our
-      Savior. 
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
-  </div>
-
-  <div class="ref-button">
-    <button class="text_button"><%= dgettext "sick", "In the Morning"%></button>
-  </div>
-  <div class="text">
-    <p class="office"><%= dgettext "sick", """
-        This is another day, O Lord. I know not what it will bring
-      forth, but make me ready, Lord, for whatever it may be. If I
-      am to stand up, help me to stand bravely. If I am to sit still,
-      help me to sit quietly. If I am to lie low, help me to do it
-      patiently. And if I am to do nothing, let me do it gallantly.
-      Make these words more than words, and give me the Spirit
-      of Jesus.     
-      """%>
-      <span class="italic"> Amen.</span>
-    </p>
 </div>
-<script type="text/javascript">
-  $(".text_button").click(function() { 
-    $(this).closest('div').next().toggle();
-  })
-</script>

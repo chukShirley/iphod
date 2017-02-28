@@ -36,11 +36,8 @@ defmodule Iphod.ResourcesController do
     case Repo.insert(changeset) do
       {:ok, resources} ->
         if upload = resources_params["file"] do
-          extension = Path.extname(upload.filename)
-          rootname = Path.rootname(upload.filename)
-          filename = "./printresources/#{rootname}_#{resources.id}#{extension}"
-          File.cp(upload.path, filename)
-          new_changeset = Resources.changeset(resources, %{url: filename |> Path.basename})
+          filename = create_files(upload, resources.id)
+          new_changeset = Resources.changeset(resources, %{url: filename})
           Repo.update(new_changeset)
         end
         conn
@@ -99,6 +96,14 @@ defmodule Iphod.ResourcesController do
   end
 
 # HELPERS
+
+  def create_files(upload, id) do
+    extension = Path.extname(upload.filename)
+    rootname = Path.rootname(upload.filename)
+    filename = "./printresources/#{rootname}_#{id}#{extension}"
+    File.cp(upload.path, filename)
+    filename
+  end
 
   defp make_key_string(nil), do: ""
   defp make_key_string(list), do: list |> Enum.join(", ")

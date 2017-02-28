@@ -1,0 +1,17 @@
+<p class="agnus-dei"><%= dgettext "sick", """
+  Lamb of God, you take away the sin of the world,
+  """%>
+</p>
+<p class="agnus-dei-resp"><%= dgettext "sick", "have mercy on us"%></p>
+
+<p class="agnus-dei"><%= dgettext "sick", """
+  Lamb of God, you take away the sin of the world,
+  """%>
+</p>
+<p class="agnus-dei-resp"><%= dgettext "sick", "have mercy on us"%></p>
+
+<p class="agnus-dei"><%= dgettext "sick", """
+  Lamb of God, you take away the sin of the world,
+  """%>
+</p>
+<p class="agnus-dei-resp"><%= dgettext "sick", "grant us your peace"%></p>

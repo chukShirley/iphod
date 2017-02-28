@@ -1,4 +1,3 @@
-<% import Iphod.ErrorHelpers, only: [error_tag: 2] %>
 <%= form_for @changeset, @action, [multipart: true, class: "pure-form pure-form-aligned"], fn f -> %>
   <fieldset>
     

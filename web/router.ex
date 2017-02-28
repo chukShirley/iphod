@@ -8,6 +8,7 @@ defmodule Iphod.Router do
     plug :protect_from_forgery
     plug :put_secure_browser_headers
     plug Iphod.Locale
+    plug Iphod.Auth, repo: Iphod.Repo
   end
 
   pipeline :api do
@@ -53,6 +54,7 @@ defmodule Iphod.Router do
     get "/reconciliation", PrayerController, :reconciliation
     get "/timeofdeath", PrayerController, :timeofdeath
     get "/tothesick", PrayerController, :tothesick
+    get "/communiontosick", PrayerController, :communiontosick
 
     get "/readep", PrayerController, :readep
     get "/readep/:psalm", PrayerController, :readep
@@ -89,6 +91,14 @@ defmodule Iphod.Router do
     # get "/uploadresource", ResourceController, :uploadresource
 
     resources "/reflections", ReflectionController
+
+    resources "/users", UserController
+
+    resources "/registrations", RegistrationController, only: [:new, :create]
+
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    delete "/logout", SessionController, :delete
 
   end
 

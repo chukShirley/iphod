@@ -196,6 +196,7 @@ offices model =
       , li [class "offices-item" ] [ family model]
       , li [class "offices-item" ] [ reconciliation model]
       , li [class "offices-item" ] [ tothesick model]
+      , li [class "offices-item" ] [ communiontosick model]
       , li [class "offices-item" ] [ timeofdeath model]
       ]
     ]
@@ -271,6 +272,11 @@ tothesick model =
   a [href "/tothesick"] 
     [ button [] [ text "To The Sick" ]]
 
+communiontosick: Model -> Html Msg
+communiontosick model =
+  a [href "/communiontosick"]
+    [ button [] [text "Communion to Sick"]]
+    
 timeofdeath: Model -> Html Msg
 timeofdeath model =
   a [href "/timeofdeath"] 

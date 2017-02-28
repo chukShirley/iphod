@@ -146,6 +146,12 @@ defmodule  Lityear do
   def ash_wednesday(),                      do: date_shift(easter, days: -46)
   def ash_wednesday(y) when is_integer(y),  do: date_shift(_easter(y), days: -46)
   def ash_wednesday(d),   do: date_shift(_easter(d.year), days: -46)
+  def right_after_ash_wednesday?(d) do
+    aw = ash_wednesday(d)
+    lent? = Date.compare(d, aw) != :lt
+    before_lent1? = Date.compare(d, lent(1, d)) == :lt
+    lent? && before_lent1?
+  end
   def lent(),             do: ash_wednesday |> date_next_sunday
   def lent(n) when n < 6, do: lent(n, Timex.now(@tz).year)
   def lent(y),            do: ash_wednesday(y) |> date_next_sunday

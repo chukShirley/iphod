@@ -75,6 +75,12 @@ defmodule Iphod.PrayerController do
       |> render("tothesick.html", page_controller: "prayer")
   end
 
+  def communiontosick(conn, _params) do
+    conn
+      |> put_layout("app.html")
+      |> render("communiontosick.html", page_controller: "prayer")
+  end
+
   def office(conn, params) do
     case params["prayer"] do
       "mp"              -> mp(conn, params)

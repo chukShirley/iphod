@@ -2040,6 +2040,29 @@ if (path.match(/calendar/) || path.match(/mindex/)) {
   })();
 }
 
+if (path.match(/communiontosick/)) {
+  (function () {
+    var communiontosick_channel = _socket2.default.channel("iphod:readings");
+    communiontosick_channel.join().receive("ok", function (resp) {
+      // console.log("Joined Versions successfully", resp);
+    }).receive("error", function (resp) {
+      console.log("Unable to join Iphod", resp);
+    });
+
+    $(".psalm-button").click(function () {
+      var psalm = "psalm " + $(this).data("psalm"),
+          section = "ps",
+          version = get_version(section);
+      communiontosick_channel.push("get_alt_reading", [section, version, psalm]);
+    });
+
+    communiontosick_channel.on("alt_lesson", function (data) {
+      var psalm = data.resp[0].body;
+      $("#sick-communion-psalm").html(psalm);
+    });
+  })();
+}
+
 // translations
 if (path.match(/versions/)) {
   var trans_channel = _socket2.default.channel("versions");
@@ -2103,7 +2126,6 @@ if (path.match(/resources|humor|inserts/)) {
     resc_channel.push(of_type, "");
 
     resc_channel.on("all_resources", function (data) {
-      console.log("RESOURCES: ", data);
       elmRescApp.ports.allResources.send(data.list);
     });
 
@@ -24133,6 +24155,25 @@ var _user$project$Header$timeofdeath = function (model) {
 					]))
 			]));
 };
+var _user$project$Header$communiontosick = function (model) {
+	return A2(
+		_elm_lang$html$Html$a,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$href('/communiontosick')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Communion to Sick')
+					]))
+			]));
+};
 var _user$project$Header$tothesick = function (model) {
 	return A2(
 		_elm_lang$html$Html$a,
@@ -24466,6 +24507,16 @@ var _user$project$Header$offices = function (model) {
 						_elm_lang$core$Native_List.fromArray(
 							[
 								_user$project$Header$tothesick(model)
+							])),
+						A2(
+						_elm_lang$html$Html$li,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('offices-item')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_user$project$Header$communiontosick(model)
 							])),
 						A2(
 						_elm_lang$html$Html$li,
