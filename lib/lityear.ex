@@ -188,9 +188,19 @@ defmodule  Lityear do
   end
   def second_monday_after_easter(), do: second_monday_after_easter(lityear)
   def second_monday_after_easter(n), do: _easter(n) |> Timex.shift(days: 8)
+  def ascension(), do: lityear(Timex.now(@tz)) |> _easter |> date_shift(days: 39) # 39 days from east to ascension
+  def ascension(n), do: n |> _easter |> date_shift(days: 39) # 39 days from east to ascension
+  def sunday_after_ascension(), do: easter(7)
+  def sunday_after_ascension(year) when year >= 30, do: easter(7, year) # no easters before 30AD
   def pentecost(),    do: pentecost(1, lityear)
   def pentecost(n),   do: pentecost(n, lityear)
   def pentecost(n,y), do: easter(n+7, y)
+  def right_after_ascension?(d) do
+    a = ascension(d.year)
+    ascension? = Date.compare(d, a) != :lt
+    before_saad? = Date.compare(d, sunday_after_ascension(d.year)) == :lt # saad - sunday after ascension day
+    ascension? && before_saad?
+  end
   def trinity(),      do: pentecost(2, lityear)
   def trinity(y),     do: pentecost(2, y)
   def proper(n) when n < 30,            do: proper(n, lityear)

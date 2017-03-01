@@ -269,6 +269,14 @@ defmodule Iphod.LitYearTest do
     refute right_after_ash_wednesday?(~D[2017-03-05])
   end
 
+  test "right after ascension" do
+    assert right_after_ascension?(~D[2017-05-25])
+    assert right_after_ascension?(~D[2017-05-26])
+    assert right_after_ascension?(~D[2017-05-27])
+    refute right_after_ascension?(~D[2017-05-24])
+    refute right_after_ascension?(~D[2017-05-28])
+  end
+
   test "finding first sunday in lent" do
     assert lent(1, 2016) == ~D[2016-02-14]
     assert lent(1) == lent(1, Timex.now.year)

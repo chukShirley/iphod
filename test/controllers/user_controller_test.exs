@@ -32,10 +32,9 @@ defmodule Iphod.UserControllerTest do
     assert html_response(conn, 200) =~ "Show user"
   end
 
-  test "renders page not found when id is nonexistent", %{conn: conn} do
-    assert_error_sent 404, fn ->
-      get conn, user_path(conn, :show, -1)
-    end
+  test "redirects to calendar when id is nonexistent", %{conn: conn} do
+    conn = get conn, user_path(conn, :show, -1)
+    assert html_response(conn, 302) =~ "calendar"
   end
 
   test "renders form for editing chosen resource", %{conn: conn} do

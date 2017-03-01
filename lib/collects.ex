@@ -563,7 +563,7 @@ defmodule Collects do
             }
           ]
         },
-      "ascension" =>
+      "ascension1" =>
         { "",
           "Ascension Day",
           [ { "Grant, we pray, Almighty God, that as we believe your only-begotten Son our Lord Jesus Christ to

@@ -3,7 +3,14 @@ defmodule Iphod.UserTest do
 
   alias Iphod.User
 
-  @valid_attrs %{description: "some content", email: "some content", encrypted_password: "some content", username: "some content"}
+  @valid_attrs %{ username: "some content",
+                  realname: "some content",
+                  encrypted_password: "some content", 
+                  password: "some content",
+                  password_confirmation: "some content",
+                  email: "some@content", 
+                  description: "some content"
+                }
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

@@ -1,0 +1,17 @@
+<h2>Login</h2>
+
+<%= form_for @conn, session_path(@conn, :create), [name: :session, class: "pure-form pure-form-aligned"], fn f -> %>
+  <div class="pure-control-group">
+    <label>User Name</label>
+    <%= text_input f, :username, class: "form-control", placeholder: "User Name" %>
+  </div>
+
+  <div class="pure-control-group">
+    <label>Password</label>
+    <%= password_input f, :password, class: "form-control" %>
+  </div>
+
+  <div class="pure-control-group">
+    <%= submit "Login", class: "btn btn-primary" %>
+  </div>
+<% end %>

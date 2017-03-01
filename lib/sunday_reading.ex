@@ -1,7 +1,12 @@
 require IEx
 
 defmodule SundayReading do
-  import Lityear, only: [namedDayDate: 2, is_sunday?: 1, next_holy_day: 1, right_after_ash_wednesday?: 1]
+  import Lityear, only: [ namedDayDate: 2, 
+                          is_sunday?: 1, 
+                          next_holy_day: 1, 
+                          right_after_ash_wednesday?: 1, 
+                          right_after_ascension?: 1
+                        ]
   use Timex
   @tz "America/Los_Angeles"
 
@@ -23,6 +28,8 @@ defmodule SundayReading do
         _sunday {"christmasDay", "1", lityear, date}
       date |> right_after_ash_wednesday? ->
         _sunday {"ashWednesday", "1", lityear, date}
+      date |> right_after_ascension? ->
+        _sunday {"ascension", "1", lityear, date}
       hd == date ->
         holy_day title, date
       date |> Lityear.is_sunday? ->
@@ -110,14 +117,6 @@ defmodule SundayReading do
     |> Map.put_new(:show_vn, true)
     |> Map.put_new(:version, "")
   end
-
-#   def next_holy_day(), do: next_holy_day(Timex.now(@tz))
-#   def next_holy_day(date) do
-#     {st_date, festival} = Lityear.next_holy_day(date)
-#     _sunday({"redLetter", festival, "a", st_date})
-#     # Map.merge identity["redLetter"][festival][Lityear.abc_atom st_date],
-#     #   %{date: st_date, season: "", week: "", title: identity["redLetter"][festival]["title"]}
-#   end
 
   def eu_today(date) do
     # if date is redletter, use those readings
