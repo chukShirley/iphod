@@ -1,4 +1,3 @@
-<%= render "_lent_venite.html" %>
 <p class= "rubric"><%= dgettext "lent_ven", "In Lent, and on other penitential occasions, the following verses are added."%></p>
 <p class= "pb_vs"><%= dgettext "lent_ven", "Do not harden your hearts, as at Meribah,"%></p>
 <p class= "pb_vsIndent"><%= dgettext "lent_ven", "as on the day at Massah in the wilderness,"%></p>

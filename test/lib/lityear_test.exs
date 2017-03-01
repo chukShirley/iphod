@@ -259,6 +259,14 @@ defmodule Iphod.LitYearTest do
     assert ash_wednesday(~D[2017-02-02]) == ~D[2017-03-01]
   end
 
+  test "to_season should return season of lent on Ash Wednesday" do
+    assert to_season(~D[2017-03-01]) == {"lent", "1", "a", ~D[2017-03-01]}
+  end
+
+  test "to_season should return season of ascension on Ascension Day" do
+    assert to_season(~D[2017-05-25]) == {"ascension", "1", "a", ~D[2017-05-25]}
+  end
+
   test "right after ash wednesday" do
     # returns true if Wed - Sat following Ash Wednesday
     assert right_after_ash_wednesday?(~D[2017-03-01])

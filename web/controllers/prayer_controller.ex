@@ -3,6 +3,7 @@ defmodule Iphod.PrayerController do
   use Iphod.Web, :controller
   use Timex
   import BibleText, only: [lesson_with_body: 2]
+  import Lityear, only: [right_after_ash_wednesday?: 1, right_after_ascension?: 1]
   @tz "America/Los_Angeles"
   @dayNames ~w( Monday Tuesday Wednesday Thursday Friday Saturday Sunday)
   @christmasDays ~w( Dec29 Dec30 Dec31 Jan02 Jan03 Jan04 Jan05 )
@@ -13,9 +14,10 @@ defmodule Iphod.PrayerController do
     else
       select_language params
       {psalm, text} = translations(params)
+      model = prayer_model("mp", psalm, text)
       conn
         |> put_layout("app.html")
-        |> render( "mp.html", model: prayer_model("mp", psalm, text), page_controller: "prayer")
+        |> render( "mp.html", model: model, page_controller: "prayer")
     end
   end
 
@@ -153,7 +155,7 @@ defmodule Iphod.PrayerController do
       |> put_reading(dreading[:mp2], text_translation)
       |> Map.put(:ot_canticle, put_canticle("mp", "ot", dreading.season, day_of_week))
       |> Map.put(:nt_canticle, put_canticle("mp", "nt", dreading.season, day_of_week))
-      |> Map.put(:collect_of_week, put_collect_of_week(dreading))
+      |> Map.put(:collect_of_week, put_collect_of_week(dreading, day))
       |> Map.put(:day, day_of_week)
   end
   
@@ -172,7 +174,7 @@ defmodule Iphod.PrayerController do
       |> put_reading(dreading[:ep2], text_translation)
       |> Map.put(:ot_canticle, put_canticle("ep", "ot", dreading.season, day_of_week))
       |> Map.put(:nt_canticle, put_canticle("ep", "nt", dreading.season, day_of_week))
-      |> Map.put(:collect_of_week, put_collect_of_week(dreading))
+      |> Map.put(:collect_of_week, put_collect_of_week(dreading, day))
       |> Map.put(:day, day_of_week)
   end
 
@@ -228,15 +230,24 @@ defmodule Iphod.PrayerController do
 
   def put_canticle1("ep", _), do: "" # stub
 
-  def put_collect_of_week(dreading) do
+  def put_collect_of_week(dreading, date) do
     c = 
       cond do
+        date |> right_after_ash_wednesday? ->
+          Collects.get("ashWednesday", "1").collects
+
+        date |> right_after_ascension? ->
+          Collects.get("ascension", "1").collects
+
         @christmasDays |> Enum.member?(dreading.day) ->
           Collects.get(dreading.season, dreading.week).collects
+
         @dayNames |> Enum.member?(dreading.title) ->
           Collects.get(dreading.season, dreading.week).collects
+
         @dayNames |> Enum.member?(dreading.day) ->
           Collects.get(dreading.season, dreading.week).collects
+
         true ->
           Collects.get("redLetter", dreading.day).collects
       end

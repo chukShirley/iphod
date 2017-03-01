@@ -34,9 +34,11 @@
   <br/>
   <p class= "rubric"><%= dgettext "mp", "Then follows the Venite. Alternatively, the Jubilate may be used."%></p>
   <p class= "rubric-newline"><%= dgettext "mp", "These seasonal antiphons may be sung or said before and after the Invitatory Psalm."%></p>
-  <p class= "rubric_black"><%= Gettext.dgettext Iphod.Gettext, "antiphon", @model.season |> String.capitalize%></p>
+  <p class= "rubric_black"><%= Gettext.dgettext Iphod.Gettext, "antiphon", @model.season |> String.capitalize %></p>
+
   <p class= "default"><%= Gettext.dgettext Iphod.Gettext, "antiphon", @model.antiphon%></p>
   <%= render "_#{@model.invitatory_canticle}.html" %>
+
   <p class= "rubric"><%= dgettext "mp", "Then follows"%></p>
   <p class= "section"><%= dgettext "mp", "The Psalm or Psalms Appointed"%></p>
 

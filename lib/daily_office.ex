@@ -3,6 +3,7 @@ defmodule DailyReading do
   import Iphod.Gettext, only: [dgettext: 2]
   # import Psalms, only: [morning: 1, evening: 1]
   import SundayReading, only: [collect_today: 1]
+  import Lityear, only: [right_after_ascension?: 1, right_after_ash_wednesday?: 1]
   use Timex
   def start_link, do: Agent.start_link fn -> build end, name: __MODULE__
   def identity(), do: Agent.get(__MODULE__, &(&1))
@@ -31,15 +32,20 @@ defmodule DailyReading do
 
   def opening_sentence(mpep, date) do
     {season, _wk, _lityr, _date} = select_season(date)
-    identity["#{mpep}_opening"][season]
-    |> pick_one(date)
+    _opening_sentence(mpep, season) |> pick_one(date)
   end
+  def _opening_sentence(mpep, "ashWednesday"),  do: identity["#{mpep}_opening"]["lent"]
+  def _opening_sentence(mpep, "ascension"),     do: identity["#{mpep}_opening"]["easter"]
+  def _opening_sentence(mpep, season),          do: identity["#{mpep}_opening"][season]
     
   def antiphon(date) do
     {season, _wk, _lityr, _date} = select_season(date)
-    identity["antiphon"][season]
-    |> pick_one(date)
+    _antiphon(season) |> pick_one(date)
   end
+  def _antiphon("ashWednesday"),  do: identity["antiphon"]["lent"]
+  def _antiphon("ascension"),     do: identity["antiphon"]["easter"]
+  def _antiphon(season),          do: identity["antiphon"][season]
+
 
   def pick_one(list, date) do
     len = length list
@@ -48,14 +54,18 @@ defmodule DailyReading do
   end
 
   def readings(season, wk, day, _date), do: identity[season][wk][day]
-  def readings({season, wk, litYr, date}) do
+
+  def readings({"ashWednesday", wk, litYr, date}), do: _readings({"epiphany", "9", litYr, date})
+  def readings({"ascension", wk, litYr, date}), do: _readings({"easter", "6", litYr, date})
+  def readings({season, wk, litYr, date}), do: _readings({season, wk, litYr, date})
+  def _readings({season, wk, litYr, date}) do
     {season, wk, dow, date} = day_of_week({season, wk, litYr, date})
     if readings(season, wk, dow, date) |> is_nil, do: IEx.pry
     readings(season, wk, dow, date)
       |> add_psalms(date.day)
       |> to_lessons
       |> Map.merge( %{  
-                season: season, 
+                season: date_to_season(date, season),
                 week:   wk, 
                 day:    dow,
                 title:  update_title(date, identity[season][wk][dow].title), 
@@ -123,7 +133,9 @@ defmodule DailyReading do
     {season, wk, lityr, _sundayDate} = 
       cond do
         date |> Lityear.is_sunday?              -> date |> Lityear.to_season
-        date |> Lityear.epiphany_before_sunday  -> date |> Lityear.to_season
+        date |> Lityear.epiphany_before_sunday? -> date |> Lityear.to_season
+        date |> right_after_ash_wednesday?      -> date |> Lityear.to_season
+        date |> right_after_ascension?          -> date |> Lityear.to_season
         true                                    -> date |> Lityear.last_sunday
       end
     {check_christmas(season), wk, lityr, date}
@@ -182,7 +194,7 @@ defmodule DailyReading do
       colors: r.colors,
       date:   r.date,
       day:    r.day,
-      season: r.season,
+      season: date_to_season(date, r.season),
       title:  r.title,
       week:   r.week,
       mp1:    r.mp1,
@@ -194,13 +206,21 @@ defmodule DailyReading do
     # get the ESV text, put it the body for mp1, mp2, mpp
   end
 
+  def date_to_season(date, season) do
+    cond do
+      date |> right_after_ascension?      -> "easter"
+      date |> right_after_ash_wednesday?  -> "lent"
+      true                                -> season
+    end
+  end
+
   def ep_today(date) do
     r = readings(date)
     mp = %{
       colors: r.colors,
       date:   r.date,
       day:    r.day,
-      season: r.season,
+      season: date_to_season(date, r.season),
       title:  r.title,
       week:   r.week,
       ep1:    r.ep1,

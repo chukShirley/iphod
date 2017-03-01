@@ -64,11 +64,12 @@ defmodule  Lityear do
     cond do
       # to whom it may concern...
       # changes the order of these conditions at your peril
+      day |> right_after_ash_wednesday? -> {"ashWednesday", "1", yrABC, day}
+      day |> right_after_ascension?     -> {"ascension", "1", yrABC, day}
       is_christmas            -> {"christmasDay", "1", yrABC, day}
       is_holy_name            -> {"holyName", "1", yrABC, day}
       day == christmas(y-1)   -> {"christmas", "1", yrABC, day}
       is_christmas2           -> {"christmas", "2", yrABC, day} 
-      # till_epiphany == 5      -> {"holyName", "1", yrABC, day}
       till_epiphany in 6..11  -> {"christmas", "1", yrABC, day}
       from_easter in -2..-6   -> {"lent", to_string(7 + from_easter), yrABC, day}
       from_easter == -1       -> {"palmSunday", "1", yrABC, day}
@@ -82,13 +83,13 @@ defmodule  Lityear do
       till_advent in 0..-3    -> {"advent", to_string(1 - till_advent), yrABC, day}
       from_christmas in 0..1  -> {"christmas", to_string(from_christmas + 1), day}
 
-      epiphany_before_sunday(day) -> {"epiphany", "0", yrABC, day}
+      epiphany_before_sunday?(day) -> {"epiphany", "0", yrABC, day}
       from_epiphany in 0..8   -> {"epiphany", to_string(from_epiphany + 1), yrABC, day}
       true -> {"unknown", "unknown", :unknown, day}
     end
    end
 
-  def epiphany_before_sunday(date) do
+  def epiphany_before_sunday?(date) do
     before_epiphany = Date.compare(date, epiphany(date.year) )   == :lt
     after_epiphany1 = Date.compare(epiphany(1, date.year), date) == :gt
     cond do
