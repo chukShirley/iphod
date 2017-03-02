@@ -609,7 +609,7 @@ defmodule SundayReading do
               "colors" => ["violet"],
               "a" => %{ ot: [%{style: "req", read: "Gen 2:4-9, 2:15-17, 2:25-end, 3:1-7"}],
                         ps: [%{style: "req", read: "Psalm 51"}, %{style: "alt", read: "Psalm 51:1-13"}],
-                        nt: [%{style: "req", read: "Rom 5:12-19"},%{style: "opt", read: "Rom 5:21-22"}],
+                        nt: [%{style: "req", read: "Rom 5:12-19"},%{style: "opt", read: "Rom 5:20-21"}],
                         gs: [%{style: "req", read: "Mt 4:1-11"}]
                         },
               "b" => %{ ot: [%{style: "req", read: "Gen 9:8-17"}],
