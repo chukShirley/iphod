@@ -1386,7 +1386,7 @@ defmodule DailyReading do
                             },
            "Tuesday" =>  %{title: "Tuesday",
                           colors: ["violet"],
-                            mp1: [%{style: "req", read: "Exod 4:27-6:1"}],
+                            mp1: [%{style: "req", read: "Exod 4:27-end, 5, 6:1"}],
                             mp2: [%{style: "req", read: "John 1:29-end"}],
                             ep1: [%{style: "req", read: "Exod 6:2-13"},%{style: "opt", read: "Exod 6:14-30"},%{style: "req", read: "Gen 7:1-7"}],
                             ep2: [%{style: "req", read: "Col 3:12-4:1"}]
