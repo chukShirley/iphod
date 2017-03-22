@@ -60,28 +60,30 @@ defmodule  Lityear do
     end
 
     from_easter = Timex.diff(sunday, easter_day(y), :weeks)
-
+    days_till_easter = Timex.diff(easter_day(y), day, :days)
     cond do
       # to whom it may concern...
       # changes the order of these conditions at your peril
       day |> right_after_ash_wednesday? -> {"ashWednesday", "1", yrABC, day}
       day |> right_after_ascension?     -> {"ascension", "1", yrABC, day}
-      is_christmas            -> {"christmasDay", "1", yrABC, day}
-      is_holy_name            -> {"holyName", "1", yrABC, day}
-      day == christmas(y-1)   -> {"christmas", "1", yrABC, day}
-      is_christmas2           -> {"christmas", "2", yrABC, day} 
-      till_epiphany in 6..11  -> {"christmas", "1", yrABC, day}
-      from_easter in -2..-6   -> {"lent", to_string(7 + from_easter), yrABC, day}
-      from_easter == -1       -> {"palmSunday", "1", yrABC, day}
-      from_easter == -7       -> {"epiphany", "9", yrABC, day}
-      from_easter == -8       -> {"epiphany", "8", yrABC, day}
-      from_easter == 0        -> {"easterDay", "1", yrABC, day}
-      from_easter in 0..6     -> {"easter", to_string(1 + from_easter), yrABC, day}
-      from_easter == 7        -> {"pentecost", "1", yrABC, day}
-      from_easter == 8        -> {"trinity", "1", yrABC, day}
-      till_advent in 1..27    -> {"proper", to_string(30 - till_advent), yrABC, day}
-      till_advent in 0..-3    -> {"advent", to_string(1 - till_advent), yrABC, day}
-      from_christmas in 0..1  -> {"christmas", to_string(from_christmas + 1), day}
+      is_christmas             -> {"christmasDay", "1", yrABC, day}
+      is_holy_name             -> {"holyName", "1", yrABC, day}
+      day == christmas(y-1)    -> {"christmas", "1", yrABC, day}
+      is_christmas2            -> {"christmas", "2", yrABC, day} 
+      till_epiphany in 6..11   -> {"christmas", "1", yrABC, day}
+      days_till_easter in 1..6 -> {"holyWeek", to_string(7 - days_till_easter), yrABC, day}
+      days_till_easter in -1..-6 -> {"easterWeek", to_string(0 - days_till_easter), yrABC, day}
+      from_easter in -2..-6    -> {"lent", to_string(7 + from_easter), yrABC, day}
+      from_easter == -1        -> {"palmSunday", "1", yrABC, day}
+      from_easter == -7        -> {"epiphany", "9", yrABC, day}
+      from_easter == -8        -> {"epiphany", "8", yrABC, day}
+      from_easter == 0         -> {"easterDay", "1", yrABC, day}
+      from_easter in 0..6      -> {"easter", to_string(1 + from_easter), yrABC, day}
+      from_easter == 7         -> {"pentecost", "1", yrABC, day}
+      from_easter == 8         -> {"trinity", "1", yrABC, day}
+      till_advent in 1..27     -> {"proper", to_string(30 - till_advent), yrABC, day}
+      till_advent in 0..-3     -> {"advent", to_string(1 - till_advent), yrABC, day}
+      from_christmas in 0..1   -> {"christmas", to_string(from_christmas + 1), day}
 
       epiphany_before_sunday?(day) -> {"epiphany", "0", yrABC, day}
       from_epiphany in 0..8   -> {"epiphany", to_string(from_epiphany + 1), yrABC, day}

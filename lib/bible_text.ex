@@ -27,8 +27,11 @@ defmodule BibleText do
 #    lesson_with_body [vss], "ESV"
 #  end
 
+
   def lesson_with_body(list), do: lesson_with_body(list, "ESV")
   
+  def lesson_with_body([], _ver), do: no_lesson()
+
   def lesson_with_body(list, "ESV") do
     list |> Enum.map(fn(lesson)->
       lesson 
@@ -87,15 +90,30 @@ defmodule BibleText do
     end)
   end
 
-  def other_init_values(map) do
+  def other_init_values(map, show \\ true) do
     map
       |> Map.put(:altRead, "")
       |> Map.put(:cmd, "")
-      |> Map.put(:show, true)
+      |> Map.put(:show, show)
       |> Map.put(:notes, [])
   end
 
   def body_div(lesson, body) do
     lesson |> Map.put(:body, "<div id='#{lesson.id}'>#{body}</div>")
+  end
+
+  def no_lesson() do
+    # return value must be a list to conform to values of real lessons
+    [ %{  body: "<div class='no_lesson'></div>", 
+          version: "",
+          id: "no_lesson", # living with the possibility of multiple elements w/ id='no_lesson' 
+          style: "no_lesson",
+          show_fn: false,
+          show_vn: false,
+          read: "",
+          section: ""
+      }
+      |> other_init_values(false)
+    ]
   end
 end

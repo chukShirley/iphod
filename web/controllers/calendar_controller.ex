@@ -2,7 +2,6 @@ require IEx
 defmodule Iphod.CalendarController do
   use Iphod.Web, :controller
   use Timex
-  import Iphod.IphodChannel
 
   def index(conn, params) do
     select_language params

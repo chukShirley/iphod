@@ -6,7 +6,10 @@ import Html exposing (..)
 import Html.App as Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Json.Decode as Json exposing (..)
+import Http
+import Task exposing (Task)
+import Json.Decode as Decode exposing (..)
+import Json.Encode as Encode exposing (..)
 import Platform.Sub as Sub exposing (batch, none)
 import Platform.Cmd as Cmd exposing (Cmd)
 import String exposing (join)
@@ -17,6 +20,7 @@ import Regex
 import Iphod.Helper exposing (hideable)
 import Iphod.Models as Models
 import Iphod.Config as Config
+import Iphod.Login as Login
 
 
 -- MAIN
@@ -33,20 +37,24 @@ main =
 -- MODEL
 
 type alias  Model =
-  { email:  Models.Email
-  , config: Models.Config
-  , reading: Models.CurrentReadings
+  { email:      Models.Email
+  , config:     Models.Config
+  , reading:    Models.CurrentReadings
+  , user:       Models.User
+  , csrf_token: String
   }
 
 initModel: Model
 initModel = 
-  { email   = Models.emailInit
-  , config  = Models.configInit
-  , reading = Models.currentReadingsInit
+  { email   =    Models.emailInit
+  , config  =    Models.configInit
+  , reading =    Models.currentReadingsInit
+  , user    =    Models.userInit
+  , csrf_token = ""
   }
 
 init: (Model, Cmd Msg)
-init = (initModel, Cmd.none)
+init = (initModel, currentUser Models.userInit)
 
 -- REQUEST PORTS
 
@@ -56,14 +64,22 @@ port saveConfig: Models.Config -> Cmd msg
 
 port getConfig: Models.Config -> Cmd msg
 
+port saveLogin: Models.User -> Cmd msg
+
+port currentUser: Models.User -> Cmd msg
+
 -- SUBSCRIPTIONS
 
 port portConfig: (Models.Config -> msg) -> Sub msg
+port portCSRFToken: (String -> msg) -> Sub msg
+port portUser: (Models.User -> msg) -> Sub msg
 
 subscriptions : Model -> Sub Msg
 subscriptions model = 
   Sub.batch
   [ portConfig UpdateConfig
+  , portCSRFToken GetCSRFToken
+  , portUser GetUser
   ]
 
 
@@ -79,11 +95,56 @@ type Msg
   | Topic String
   | Message String
   | ModConfig Config.Msg
+  | ModLogin  Login.Msg
+  | ModRegister  Login.Msg
+  | SetRegisterPassword String
+  | SetRegisterPasswordConfirmation String
+  | SetRegisterUserName String
+  | SetRegisterRealName String
+  | SetRegisterEmail String
+  | SetRegisterDescription String
+  | Login
+  | Logout
+  | GetTokenSuccess Models.User
+  | GetCSRFToken String
+  | GetUser Models.User
+  | AuthError Http.Error
 
 update: Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     NoOp -> (model, Cmd.none)
+
+    Login -> 
+      (model, authUserCmd model)
+
+    Logout ->
+      let
+        newModel = { model | user = Models.userInit}
+      in
+        (newModel, saveLogin newModel.user)
+        -- (newModel, Cmd.none)
+
+    GetTokenSuccess user ->
+      let
+        foo = Debug.log "GET TOKEN SUCCESS" (user)
+        newModel = { model | user = user }
+        cmdMsg = if String.isEmpty user.token
+          then
+            Cmd.none
+          else
+            saveLogin user
+      in
+        (newModel, cmdMsg)
+
+    AuthError error ->
+      let 
+        foo = Debug.log "AUTH ERROR" error
+        user = model.user
+        newUser = { user | error_msg = (toString error) }
+        newModel = { model | user = newUser }
+      in
+        (newModel, Cmd.none)
 
     Send -> 
       (model, sendEmail model.email)
@@ -136,9 +197,124 @@ update msg model =
       in
         (newModel, saveConfig newConfig)
 
+    ModLogin msg ->
+      let
+        foo = Debug.log "MODLOGIN" msg
+        newUser = Login.update msg model.user
+        newModel = {model | user = newUser}
+      in
+        (newModel, Cmd.none)
+
+    ModRegister msg ->
+      let
+        foo = Debug.log "MODREGISTER" msg
+        newUser = Login.update msg model.user
+        newModel = {model | user = newUser}
+      in
+        (newModel, Cmd.none)
+
+    SetRegisterPassword s ->
+      let
+        user = model.user
+        newUser = { user | password = s}
+        newModel = { model | user = newUser }
+      in
+        (newModel, Cmd.none)
+
+    SetRegisterPasswordConfirmation s ->
+      let
+        user = model.user
+        newUser = { user | password_confirmation = s}
+        newModel = { model | user = newUser }
+      in
+        (newModel, Cmd.none)
+
+    SetRegisterUserName s -> 
+      let
+        user = model.user
+        newUser = { user | username = s}
+        newModel = { model | user = newUser }
+      in
+        (newModel, Cmd.none)
+        
+    SetRegisterRealName s ->
+      let
+        user = model.user
+        newUser = { user | realname = s}
+        newModel = { model | user = newUser }
+      in
+        (newModel, Cmd.none)
+        
+    SetRegisterEmail s ->
+      let
+        user = model.user
+        newUser = { user | email = s}
+        newModel = { model | user = newUser }
+      in
+        (newModel, Cmd.none)
+
+    GetCSRFToken token ->
+      ({ model | csrf_token = token}, Cmd.none)
+
+    GetUser user ->
+      let 
+        newModel = { model | user = user}
+        foo = Debug.log "GET USER" user
+      in
+        (newModel, Cmd.none)
+        
+    SetRegisterDescription s ->
+      let
+        user = model.user
+        newUser = { user | description = s}
+        newModel = { model | user = newUser }
+      in
+        (newModel, Cmd.none)
+
 
 -- HELPERS
 
+loginEncoder: Models.User -> Encode.Value
+loginEncoder user =
+  Encode.object
+    [ ("username", Encode.string user.username)
+    , ("password", Encode.string user.password)
+    ]
+
+-- Decode POST response to get token
+
+-- tokenDecoder: Decoder String
+-- tokenDecoder = "token" := Decode.string
+userDecoder: Decoder Models.User
+userDecoder =
+  Decode.object8 Models.User
+    ("username" := Decode.string)
+    ("realname" := Decode.string)
+    ("password" := Decode.string)
+    ("password_confirmation" := Decode.string)
+    ("email" := Decode.string)
+    ("description" := Decode.string)
+    ("error_msg" := Decode.string)
+    ("token" := Decode.string)
+
+
+authUser: Model ->  Task Http.Error Models.User
+authUser model =
+  let 
+    foo = Debug.log "AUTH USER" (model.user, model.csrf_token)
+  in
+    { verb = "POST"
+    , headers = [ ("Content-Type", "application/json" ), ("x-csrf-token", model.csrf_token) ]
+    , url = "/login"
+    , body = Http.string <| Encode.encode 0 <| loginEncoder model.user
+    }
+    |> Http.send Http.defaultSettings
+    -- |> Http.fromJson tokenDecoder
+    |> Http.fromJson userDecoder
+
+authUserCmd: Model -> Cmd Msg
+authUserCmd model =
+  Task.perform AuthError GetTokenSuccess <| authUser model
 
 -- VIEW
 
@@ -156,14 +332,8 @@ view model =
     , attribute "data-reading3_ver" model.reading.reading3_ver
     , attribute "data-reading_date" model.reading.reading_date
     ]
-    [ ul [id "header-options"]
---      [ li [class "option-item"] [ calendar model]
---      , li [class "option-item"] [ aboutModal ]
---      , li [class "option-item"] [ emailMe model ]
---      , li [class "option-item"] [ howToModal ]
---      , li [class "option-item"] [ configModal model ]
---      , li [class "option-item"] [ translations model ]
---      ]
+    [ userLogin model
+    , ul [id "header-options"]
       [ li [ class "option-item" ] [ calendar model ]
       , li [ class "option-item" ] [ offices model ]
       , li [ class "option-item" ] [ resources model ]
@@ -175,6 +345,38 @@ view model =
 
 
 -- HELPERS
+
+-- <div class="pure-menu pure-menu-horizontal login" >
+--   <ul class="pure-menu-list">
+--     <%= if logged_in?(@conn) do %>
+--       <li  class="pure-menu-item"><%= current_user(@conn).username %></li>
+--       <li  class="pure-menu-item"><%= link "Logout", class: "pure-menu-link", to: session_path(@conn, :delete), method: :delete %></li>
+--     <% else %>
+--       <li  class="pure-menu-item"><%= link "Login", class: "pure-menu-link", to: "/login" %></li>
+--       <li  class="pure-menu-item"><%= link "Register", class: "pure-menu-link", to: registration_path(@conn, :new) %></li>
+--     <% end %>
+--   </ul>
+-- </div>
+
+userLogin: Model -> Html Msg
+userLogin model =
+  let
+    these_options = if model.user.token |> String.isEmpty 
+      then
+        [ li [ class "pure-menu-item"] [ login model.user ]
+        , li [ class "pure-menu-item"] [ register model.user]
+        ]
+      else
+        [ li [ class "pure-menu-item"] [ text model.user.username]
+        , li [ class "pure-menu-item"] 
+             [ a [ href "/logout", onClick Logout]
+                 [ button [] [text "Logout" ] ]
+             ]
+        ]     
+  in
+    div 
+      [ class "pure-menu pure-menu-horizontal login"]
+    [ ul [ class "pure-menu-list" ] these_options ]
 
 calendar: Model -> Html Msg
 calendar model = 
@@ -227,10 +429,6 @@ aboutOptions model =
       , li [class "offices-item" ] [ howToModal ]
       ]
     ]
-
-
-innerHtmlDecoder =
-  Json.at ["target", "innerHTML"] Json.string
 
 currentOffice: Model -> Html Msg
 currentOffice model =
@@ -375,6 +573,46 @@ howToModal =
         ]
     ]
 
+login: Models.User -> Html Msg
+login user =
+  span []
+  [ a [ href "#login-text" ] [ button [] [text "Login"] ]
+    , div 
+        [ id "login-text", class "loginModalDialog" ]
+        [ div []
+            [ a [href "#closelogin-text", title "Close", class "close"] [text "X"] 
+            , h2 [class "modal_header"] [ text "Login" ]
+            , (registerUserName user)
+            , (registerPassword user)
+            , p [class "login-error"] [ text user.error_msg ]
+            -- , Html.map ModLogin (Login.view user)
+            ]
+        ]
+    ]
+
+register: Models.User -> Html Msg
+register user =
+  span []
+  [ a [ href "#register-text" ] [ button [] [text "Register"] ]
+    , div 
+        [ id "register-text", class "registerModalDialog" ]
+        [ div []
+            [ a [href "#closeregister-text", title "Close", class "close"] [text "X"] 
+            , h2 [class "modal_header"] [ text "Register" ]
+            , Html.map ModRegister (Login.view user)
+            , (registerUserName user)
+            , (registerRealName user)
+            , (registerEmailAddress user)
+            , (registerDescription user)
+            , (registerPassword user)
+            , (registerPasswordConfirmation user)
+            --, (Config.view (Signal.forwardTo (ModConfig model.config)) model.config)
+            ]
+        ]
+    ]
+
+
+
 inputEmailAddress: Models.Email -> Html Msg
 inputEmailAddress model =
   p []
@@ -421,6 +659,135 @@ inputMessage model =
         ]
         []
     ]
+
+registerUserName: Models.User -> Html Msg
+registerUserName user =
+  p []
+    [ input 
+        [ id "username"
+        , type' "text"
+        , placeholder "User ID"
+        , autofocus True
+        , name "username"
+        , onInput SetRegisterUserName
+        -- , onClickLimited NoOp
+        , onWithOptions "click" 
+          { stopPropagation = True, preventDefault = True }
+          (Decode.succeed NoOp)
+        , Html.Attributes.value user.username
+        , class "user-username"
+        ]
+        []
+    ]
+
+registerRealName: Models.User -> Html Msg
+registerRealName user =
+  p []
+    [ input 
+        [ id "realname"
+        , type' "text"
+        , placeholder "Your Real Name"
+        , autofocus True
+        , name "realname"
+        , onInput SetRegisterRealName
+        -- , onClickLimited NoOp
+        , onWithOptions "click" 
+          { stopPropagation = True, preventDefault = True }
+          (Decode.succeed NoOp)
+        , Html.Attributes.value user.realname
+        , class "user-realname"
+        ]
+        []
+    ]
+
+registerPassword: Models.User -> Html Msg
+registerPassword user =
+  p []
+    [ input 
+        [ id "password"
+        , type' "password"
+        , placeholder "Password"
+        , autofocus True
+        , name "password"
+        , onInput SetRegisterPassword
+        , onEnter Login
+        , onWithOptions "click" 
+          { stopPropagation = True, preventDefault = True }
+          (Decode.succeed NoOp)
+        , Html.Attributes.value user.password
+        , class "user-password"
+        ]
+        []
+    ]
+
+registerPasswordConfirmation: Models.User -> Html Msg
+registerPasswordConfirmation user =
+  p []
+    [ input 
+        [ id "password_confirmation"
+        , type' "password"
+        , placeholder "Confirm Password"
+        , autofocus True
+        , name "password_confirmation"
+        , onInput SetRegisterPasswordConfirmation
+        -- , onClickLimited NoOp
+        , onWithOptions "click" 
+          { stopPropagation = True, preventDefault = True }
+          (Decode.succeed NoOp)
+        , Html.Attributes.value user.password_confirmation
+        , class "user-password"
+        ]
+        []
+    ]
+
+registerEmailAddress: Models.User -> Html Msg
+registerEmailAddress user =
+  p []
+    [ input 
+        [ id "register_email"
+        , type' "text"
+        , placeholder "Email Address"
+        , autofocus True
+        , name "register_email"
+        , onInput SetRegisterEmail
+        -- , onClickLimited NoOp
+        , onWithOptions "click" 
+          { stopPropagation = True, preventDefault = True }
+          (Decode.succeed NoOp)
+        , Html.Attributes.value user.email
+        , class "user-email"
+        ]
+        []
+    ]
+
+registerDescription: Models.User -> Html Msg
+registerDescription user =
+  p []
+    [ textarea 
+        [ id "register_description"
+        , class "user-desciption"
+        , name "register_description"
+        , placeholder "Tell us about yourself - required"
+        , Html.Attributes.value user.description
+        , onInput SetRegisterDescription
+        , autofocus True
+        ]
+        []
+    ]
+
+onEnter : Msg -> Attribute Msg
+onEnter msg =
+  let
+    tagger code =
+      if code == 13 then
+        msg
+      else
+        NoOp
+  in
+    on "keydown" (Decode.map tagger keyCode)
+
+
+
 howToUse = """
 
 * In General...

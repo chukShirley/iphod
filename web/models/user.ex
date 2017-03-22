@@ -31,6 +31,18 @@ defmodule Iphod.User do
     |> validate_confirmation(:password)
   end
 
+  def init_user do
+    %{  username:               "",
+        realname:               "",
+        password:               "",
+        password_confirmation:  "",
+        email:                  "",
+        description:            ""
+    }
+  end
+
+  def get(id), do: Iphod.Repo.get(User, id)
+
   # def validate_confirmation(changeset, field) do
   #   value = get_field(changeset, field)
   #   confirmation_value = get_field(changeset, :"#{field}_confirmation")

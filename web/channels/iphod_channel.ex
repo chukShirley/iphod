@@ -43,6 +43,52 @@ defmodule Iphod.IphodChannel do
     response
   end
 
+  def handle_request("request_user", [username, token], socket) do
+    # if the token is valid get the user, else blork
+    # max_age: in seconds, 1209600 = seconds in 2 weeks
+    resp = Phoenix.Token.verify( socket, "user", token, max_age: 1209600)
+    # IO.puts ">>>>> LOGIN: #{inspect resp}\n>>>>> #{username}, #{token}\n>>>>> #{inspect socket}"
+    confirm_user( resp, token, socket)
+    {:noreply, socket}    
+  end
+
+  def confirm_user({:error, reason}, token, socket) do
+    push socket, "current_user", invalid_user(reason)
+  end
+
+  def confirm_user({:ok, id}, token, socket) do
+    #get the user
+    # IEx.pry
+    user = Iphod.User.get(id)
+    push socket, "current_user", valid_user(user, token)
+  end
+
+  def valid_user(user, token) do
+    %{ username: user.username,
+       realname: user.realname,
+       email: user.email,
+       description: user.description,
+       password: "",
+       password_confirmation: "",
+       error_msg: "",
+       token: token
+     }
+    
+  end
+
+  def invalid_user(reason) do
+    %{ username: "",
+       realname: "",
+       email: "",
+       description: "",
+       password: "",
+       password_confirmation: "",
+       error_msg: "ERROR: Invalid User Credentials (#{reason})",
+       token: ""
+     }
+    
+  end
+
   def handle_request("ping", arg, socket) do
     IO.puts ">>>>>PING: #{inspect arg}"
     {:noreply, socket}

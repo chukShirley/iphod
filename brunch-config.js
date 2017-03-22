@@ -55,7 +55,8 @@ exports.config = {
       "web/elm/MPanel.elm",
       "web/elm/NewReflection.elm",
       "web/elm/Iphod/Sunday.elm",
-      "web/elm/Iphod/Models.elm"
+      "web/elm/Iphod/Models.elm",
+      "web/elm/Iphod/Login.elm"
 
     ],
 

@@ -19,9 +19,9 @@
   <br/>
   <p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
   <p class= "default">
-    <%=@model.opening_sentence%>
+    <%= Gettext.dgettext Iphod.Gettext, "ep_opening", @model.opening_sentence %>
     <br/>
-    <span class= "bible_ref"><%= Gettext.dgettext Iphod.Gettext, "ep_opening", @model.opening_sentence %></span>
+    <span class= "bible_ref"><%= Gettext.dgettext Iphod.Gettext, "ep_opening", @model.opening_sentence_ref %></span>
   </p>
   <br/>
   <%= render "_confession.html" %>

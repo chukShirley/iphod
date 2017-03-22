@@ -161,12 +161,12 @@ defmodule Iphod.LitYearTest do
     assert next_sunday(~D[2018-02-10]) == {"epiphany", "9", "b", ~D[2018-02-11]}
   end
 
-  test "epiphany_before_sunday" do
-    assert epiphany_before_sunday(~D[2017-01-07])
-    assert epiphany_before_sunday(~D[2017-01-06])
-    refute epiphany_before_sunday(~D[2017-01-08]) # sunday
-    refute epiphany_before_sunday(~D[2018-01-07]) # sunday, epiphany is on saturday
-    refute epiphany_before_sunday(~D[2017-02-06])
+  test "epiphany_before_sunday?" do
+    assert epiphany_before_sunday?(~D[2017-01-07])
+    assert epiphany_before_sunday?(~D[2017-01-06])
+    refute epiphany_before_sunday?(~D[2017-01-08]) # sunday
+    refute epiphany_before_sunday?(~D[2018-01-07]) # sunday, epiphany is on saturday
+    refute epiphany_before_sunday?(~D[2017-02-06])
   end
 
   test "mondays in epiphany" do
@@ -260,7 +260,7 @@ defmodule Iphod.LitYearTest do
   end
 
   test "to_season should return season of lent on Ash Wednesday" do
-    assert to_season(~D[2017-03-01]) == {"lent", "1", "a", ~D[2017-03-01]}
+    assert to_season(~D[2017-03-01]) == {"ashWednesday", "1", "a", ~D[2017-03-01]}
   end
 
   test "to_season should return season of ascension on Ascension Day" do
@@ -275,6 +275,54 @@ defmodule Iphod.LitYearTest do
     assert right_after_ash_wednesday?(~D[2017-03-04])
     refute right_after_ash_wednesday?(~D[2017-02-28])
     refute right_after_ash_wednesday?(~D[2017-03-05])
+  end
+
+  test "to_season should return holyWeek 1 on Monday of HolyWeek" do
+    assert to_season(~D[2017-04-10]) == {"holyWeek", "1", "a", ~D[2017-04-10]}
+  end
+
+  test "to_season should return holyWeek 2 on Tuesday of HolyWeek" do
+    assert to_season(~D[2017-04-11]) == {"holyWeek", "2", "a", ~D[2017-04-11]}
+  end
+
+  test "to_season should return holyWeek 3 on Wednesday of Holy Week" do
+    assert to_season(~D[2017-04-12]) == {"holyWeek", "3", "a", ~D[2017-04-12]}
+  end
+
+  test "to_season should return holyWeek 4 on Maunday THursday" do
+    assert to_season(~D[2017-04-13]) == {"holyWeek", "4", "a", ~D[2017-04-13]}
+  end
+
+  test "to_season should return holyWeek 5 on Good Friday" do
+    assert to_season(~D[2017-04-14]) == {"holyWeek", "5", "a", ~D[2017-04-14]}
+  end
+
+  test "to_season should return holyWeek 6 on Holy Saturday" do
+    assert to_season(~D[2017-04-15]) == {"holyWeek", "6", "a", ~D[2017-04-15]}
+  end
+
+  test "to_season should return easterWeek 1 on Monday of Easter Week" do
+    assert to_season(~D[2017-04-17]) == {"easterWeek", "1", "a", ~D[2017-04-17]}
+  end
+
+  test "to_season should return easterWeek 2 on Tuesday of Easter Week" do
+    assert to_season(~D[2017-04-18]) == {"easterWeek", "2", "a", ~D[2017-04-18]}
+  end
+
+  test "to_season should return easterWeek 3 on Wednesday of Easter Week" do
+    assert to_season(~D[2017-04-19]) == {"easterWeek", "3", "a", ~D[2017-04-19]}
+  end
+
+  test "to_season should return easterWeek 4 on Thursday of Easter Week" do
+    assert to_season(~D[2017-04-20]) == {"easterWeek", "4", "a", ~D[2017-04-20]}
+  end
+
+  test "to_season should return easterWeek 5 on Friday of Easter Week" do
+    assert to_season(~D[2017-04-21]) == {"easterWeek", "5", "a", ~D[2017-04-21]}
+  end
+
+  test "to_season should return easterWeek 6 on Saturday of Easter Week" do
+    assert to_season(~D[2017-04-22]) == {"easterWeek", "6", "a", ~D[2017-04-22]}
   end
 
   test "right after ascension" do

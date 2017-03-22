@@ -37,12 +37,15 @@ body.calendar { width: 55em; }
 }
 
 div.login ul{
+  position: absolute;
   float: right;
-  position: relative;
   top: -6em;
-  right: 3em;
+  right: 0%;
   height: 1em;
   font-size: 1em;
+}
+div.login ul li {
+  padding: 1em;
 }
 
 .help-block, .alert-danger {
@@ -809,8 +812,20 @@ li.offices-item {
       font-size: 0.8em;
       display: inline-block;
   }
+
+  .user-username, 
+  .user-password {
+    width: 90%;
+    margin-left: 1em;
+    padding-left: 1em;
+  }
   
-  .modalDialog, .emailModalDialog, .configModalDialog, .humorModalDialog {
+  .modalDialog, 
+  .emailModalDialog, 
+  .configModalDialog, 
+  .humorModalDialog, 
+  .loginModalDialog,
+  .registerModalDialog {
     position: fixed;
     top: 0;
     right: 0;
@@ -825,12 +840,22 @@ li.offices-item {
     pointer-events: none;
   }
   
-  .modalDialog:target, .emailModalDialog:target, .configModalDialog:target, .humorModalDialog:target {
+  .modalDialog:target, 
+  .emailModalDialog:target, 
+  .configModalDialog:target, 
+  .humorModalDialog:target, 
+  .loginModalDialog:target,
+  .registerModalDialog:target {
     opacity:1;
     pointer-events: auto;
   }
   
-  .configModalDialog > div, .modalDialog > div, .emailModalDialog > div, .humorModalDialog > div {
+  .configModalDialog > div, 
+  .modalDialog > div, 
+  .emailModalDialog > div, 
+  .humorModalDialog > div, 
+  .loginModalDialog > div,
+  .registerModalDialog > div {
     width: 25em;
     height: auto;
     position: relative;
@@ -908,7 +933,9 @@ li.offices-item {
   
   .close:hover { background: #00d9ff; }
   
-  #calendar li, #seasons li, #days_of_week li {
+  #calendar li, 
+  #seasons li, 
+  #days_of_week li {
     display: inline;
     text-decoration: none;
   }
@@ -917,10 +944,12 @@ li.offices-item {
     text-decoration: none;
   }
   
-  .m-options1 ul, .m-seasons ul{
+  .m-options1 ul, 
+  .m-seasons ul{
     text-align: center;
   }
-  .m-options1 ul li, .m-seasons ul li{
+  .m-options1 ul li, 
+  .m-seasons ul li{
     display: inline;
     text-decoration: none;
     padding: 0 5px;

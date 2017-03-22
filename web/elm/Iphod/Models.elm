@@ -1,15 +1,21 @@
 module Iphod.Models exposing
   ( Resource, initResource
-  , Config, Lesson, Sunday, Daily, Day
+  , Config, configInit
+  , Lesson, initLesson
+  , Sunday, sundayInit
+  , Daily, initDaily
+  , Day, initDay
   , SectionUpdate, initSectionUpdate, setSectionUpdate
   , Shout, initShout
-  , Email, Collect, SundayCollect, Proper
-  , DailyMP, DailyEP, Reflection
-  , configInit, initLesson, sundayInit, initDaily
+  , Email, emailInit
+  , User, userInit
+  , Collect, initCollect
+  , SundayCollect, initSundayCollect
+  , Proper, initProper
+  , DailyMP, initDailyMP
+  , DailyEP, initDailyEP
+  , Reflection, initReflection
   , CurrentReadings, currentReadingsInit
-  , emailInit, initCollect, initSundayCollect
-  , initProper, initDay
-  , initDailyMP, initDailyEP, initReflection
   ) 
 
 
@@ -127,6 +133,29 @@ emailInit =
   , text = ""
   }
 
+type alias User =
+  { username:     String
+  , realname:     String
+  , email:        String
+  , description:  String
+  , error_msg:    String
+  , token:        String
+  , password:     String
+  , password_confirmation: String
+  }
+
+userInit: User
+userInit =
+  { username =    ""
+  , realname =    ""
+  , email =       ""
+  , description = ""
+  , error_msg =   ""
+  , token =       ""
+  , password =    ""
+  , password_confirmation = ""
+  }
+
 type alias Lesson =
   { style:    String
   , show:     Bool
@@ -138,7 +167,7 @@ type alias Lesson =
   , section:  String
   , version:  String
   , altRead:  String
-  , notes: List Note
+  , notes:    List Note
   , cmd:      String
   }
 

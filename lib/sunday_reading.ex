@@ -19,7 +19,7 @@ defmodule SundayReading do
   def readings(date) do
     # should check for red letter day first
     doy = date |> Timex.format!("%m%d", :strftime)
-    {_season, _week, lityear, _date} = date |> Lityear.to_season
+    {season, week, lityear, _date} = date |> Lityear.to_season
     {hd, title} = Lityear.next_holy_day date
     cond do
       doy == "0101" ->
@@ -28,6 +28,10 @@ defmodule SundayReading do
         _sunday {"christmasDay", "1", lityear, date}
       date |> right_after_ash_wednesday? ->
         _sunday {"ashWednesday", "1", lityear, date}
+      season == "holyWeek" ->
+        _sunday {season, week, lityear, date}
+      season == "easterWeek" ->
+        _sunday {season, week, lityear, date}
       date |> right_after_ascension? ->
         _sunday {"ascension", "1", lityear, date}
       hd == date ->
@@ -785,17 +789,17 @@ defmodule SundayReading do
             %{  "title" => "Wednesday in Holy Week",
                 "colors" => ["violet"],
                 "a" => %{ ot: [%{style: "req", read: "Isaiah 50:4-9"}],
-                          ps: [%{style: "req", read: "Psalm 69:7-15, 69:22-23"}],
+                          ps: [%{style: "req", read: "Psalm 69:7-15"}, %{style: "req", read: "Psalm 69:22-23"}],
                           nt: [%{style: "req", read: "Heb 9:11-28"}],
                           gs: [%{style: "req", read: "Mt 26:1-5, 26:14-25"}]
                           },
                 "b" => %{ ot: [%{style: "req", read: "Isaiah 50:4-9"}],
-                          ps: [%{style: "req", read: "Psalm 69:7-15, 69:22-23"}],
+                          ps: [%{style: "req", read: "Psalm 69:7-15"}, %{style: "req", read: "Psalm 69:22-23"}],
                           nt: [%{style: "req", read: "Heb 9:11-28"}],
                           gs: [%{style: "req", read: "Mt 26:1-5, 26:14-25"}]
                           },
                 "c" => %{ ot: [%{style: "req", read: "Isaiah 50:4-9"}],
-                          ps: [%{style: "req", read: "Psalm 69:7-15, 69:22-23"}],
+                          ps: [%{style: "req", read: "Psalm 69:7-15"}, %{style: "req", read: "Psalm 69:22-23"}],
                           nt: [%{style: "req", read: "Heb 9:11-28"}],
                           gs: [%{style: "req", read: "Mt 26:1-5, 26:14-25"}]
                         }
@@ -823,17 +827,17 @@ defmodule SundayReading do
             %{  "title" => "Good Friday ",
                 "colors" => ["red"],
                 "a" => %{ ot: [%{style: "req", read: "Gen 22:1-18"}],
-                          ps: [%{style: "req", read: "Psalm 22:1-11"}, %{style: "opt", read: "Psalm 22:12-21"}, %{style: "alt", read: "Psalm 40:1-14"}, %{style: "alt", read: "69:1-23"}],
+                          ps: [%{style: "req", read: "Psalm 22:1-11"}, %{style: "opt", read: "Psalm 22:12-21"}, %{style: "alt", read: "Psalm 40:1-14"}, %{style: "alt", read: "Psalm 69:1-23"}],
                           nt: [%{style: "req", read: "Heb 10:1-25"}],
                           gs: [%{style: "opt", read: "Jn 18:1-40"}, %{style: "req", read: "Jn 19:1-37"}]
                           },
                 "b" => %{ ot: [%{style: "req", read: "Gen 22:1-18"}],
-                          ps: [%{style: "req", read: "Psalm 22:1-11"}, %{style: "opt", read: "Psalm 22:12-21"}, %{style: "alt", read: "Psalm 40:1-14"}, %{style: "alt", read: "69:1-23"}],
+                          ps: [%{style: "req", read: "Psalm 22:1-11"}, %{style: "opt", read: "Psalm 22:12-21"}, %{style: "alt", read: "Psalm 40:1-14"}, %{style: "alt", read: "Psalm 69:1-23"}],
                           nt: [%{style: "req", read: "Heb 10:1-25"}],
                           gs: [%{style: "opt", read: "Jn 18:1-40"}, %{style: "req", read: "Jn 19:1-37"}]
                           },
                 "c" => %{ ot: [%{style: "req", read: "Gen 22:1-18"}],
-                          ps: [%{style: "req", read: "Psalm 22:1-11"}, %{style: "opt", read: "Psalm 22:12-21"}, %{style: "alt", read: "Psalm 40:1-14"}, %{style: "alt", read: "69:1-23"}],
+                          ps: [%{style: "req", read: "Psalm 22:1-11"}, %{style: "opt", read: "Psalm 22:12-21"}, %{style: "alt", read: "Psalm 40:1-14"}, %{style: "alt", read: "Psalm 69:1-23"}],
                           nt: [%{style: "req", read: "Heb 10:1-25"}],
                           gs: [%{style: "opt", read: "Jn 18:1-40"}, %{style: "req", read: "Jn 19:1-37"}]
                         }
@@ -842,17 +846,17 @@ defmodule SundayReading do
             %{  "title" => "Holy Saturday",
                 "colors" => ["violet"],
                 "a" => %{ ot: [%{style: "req", read: "Job 14:1-17"}],
-                          ps: [%{style: "req", read: "Psalm 130"}, %{style: "alt", read: "Psalm 31:1-5}]"}],
+                          ps: [%{style: "req", read: "Psalm 130"}, %{style: "alt", read: "Psalm 31:1-5"}],
                           nt: [%{style: "req", read: "1 Pet 4:1-8"}],
                           gs: [%{style: "req", read: "Mt 27:57-66"},%{style: "alt", read: "Jn 19:38-42"}]
                         },
                 "b" => %{ ot: [%{style: "req", read: "Job 14:1-17"}],
-                          ps: [%{style: "req", read: "Psalm 130"}, %{style: "alt", read: "Psalm 31:1-5}]"}],
+                          ps: [%{style: "req", read: "Psalm 130"}, %{style: "alt", read: "Psalm 31:1-5"}],
                           nt: [%{style: "req", read: "1 Pet 4:1-8"}],
                           gs: [%{style: "req", read: "Mt 27:57-66"},%{style: "alt", read: "Jn 19:38-42"}]
                         },
                 "c" => %{ ot: [%{style: "req", read: "Job 14:1-17"}],
-                          ps: [%{style: "req", read: "Psalm 130"}, %{style: "alt", read: "Psalm 31:1-5}]"}],
+                          ps: [%{style: "req", read: "Psalm 130"}, %{style: "alt", read: "Psalm 31:1-5"}],
                           nt: [%{style: "req", read: "1 Pet 4:1-8"}],
                           gs: [%{style: "req", read: "Mt 27:57-66"},%{style: "alt", read: "Jn 19:38-42"}]
                         }
@@ -954,17 +958,17 @@ defmodule SundayReading do
         %{  "title" => "Easter Day: Principal Service",
             "colors" => ["white"],
             "a" => %{ ot: [%{style: "req", read: "Acts 10:34-43"},%{style: "alt", read: "Ex 14:10-14, 14:21-31"}],
-                      ps: [%{style: "req", read: "Psalm 118:14-17, 118:22-24"}],
+                      ps: [%{style: "req", read: "Psalm 118:14-17"},%{style: "req", read: "Psalm 118:22-24"}],
                       nt: [%{style: "req", read: "Col 3:1-4"},%{style: "alt", read: "Acts 10:34-43"}],
                       gs: [%{style: "req", read: "Jn 20:1-10"},%{style: "opt", read: "Jn 20:11-18"},%{style: "alt", read: "Mt 28:1-10"}]
                       },
             "b" => %{ ot: [%{style: "req", read: "Acts 10:34-43"},%{style: "alt", read: "Is 25:6-9"}],
-                      ps: [%{style: "req", read: "Psalm 118:14-17, 118:22-24"}],
+                      ps: [%{style: "req", read: "Psalm 118:14-17"},%{style: "req", read: "Psalm 118:22-24"}],
                       nt: [%{style: "req", read: "Col 3:1-4"},%{style: "alt", read: "Acts 10:34-43"}],
                       gs: [%{style: "req", read: "Mk 16:1-8"}]
                       },
             "c" => %{ ot: [%{style: "req", read: "Acts 10:34-43"},%{style: "alt", read: "Is 51:9-11"}],
-                      ps: [%{style: "req", read: "Psalm 118:14-17, 118:22-24"}],
+                      ps: [%{style: "req", read: "Psalm 118:14-17"},%{style: "req", read: "Psalm 118:22-24"}],
                       nt: [%{style: "req", read: "Col 3:1-4"},%{style: "alt", read: "Acts 10:34-43"}],
                       gs: [%{style: "req", read: "Lk 24:1-10"}]
                     }

@@ -15,6 +15,7 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 var path = window.location.pathname
   , isOffice = !!(path == "/" || path.match(/office|midday|^\/mp\/|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|^\/ep\/|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/))
 
+// console.log("APP.JS CSRF TOKEN: ", $("#csrf_token").val())
 
 // Import local files
 //
@@ -194,6 +195,23 @@ elmHeaderApp.ports.portConfig.send(init_config_model());
 elmHeaderApp.ports.sendEmail.subscribe( function(email) {
   channel.push("request_send_email", email)
 })
+
+elmHeaderApp.ports.saveLogin.subscribe( function(user) {
+  // console.log("APP JS: ", user)
+  let ls = window.localStorage
+  ls.setItem("user", user.username)
+  ls.setItem("token", user.token)
+})
+
+elmHeaderApp.ports.currentUser.subscribe( function() {
+  let ls = window.localStorage
+  channel.push("request_user", [ls.getItem("user"), ls.getItem("token")])
+})
+
+channel.on("current_user", data => {
+  // console.log("CURRENT USER: ", data)
+  elmHeaderApp.ports.portUser.send(data)
+})
   
 elmHeaderApp.ports.saveConfig.subscribe( function(config) {
   if (isOffice) {
@@ -257,6 +275,8 @@ if (isOffice) {
 if ( path.match(/calendar/) || path.match(/mindex/)) {
   elmHeaderApp.ports.portConfig.send(init_config_model());
   history.pushState(path, "Legereme", "/calendar");
+
+  elmHeaderApp.ports.portCSRFToken.send($("#csrf_token").val())
   
 
   // mindex
@@ -277,6 +297,7 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
     $("#m-reading-container").click( function() {
       $("#reading-panel").effect("drop", "fast");
     });
+
   
     channel.on('reflection_today', data => {
       elmMindexApp.ports.portReflection.send(data);

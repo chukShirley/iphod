@@ -8240,6 +8240,7 @@ var _user$project$Iphod_Models$initLesson = {
 		[]),
 	cmd: ''
 };
+var _user$project$Iphod_Models$userInit = {username: '', realname: '', email: '', description: '', error_msg: '', token: '', password: '', password_confirmation: ''};
 var _user$project$Iphod_Models$emailInit = {from: '', topic: '', text: ''};
 var _user$project$Iphod_Models$currentReadingsInit = {ps: '', ps_ver: '', reading1: '', reading1_ver: '', reading2: '', reading2_ver: '', reading3: '', reading3_ver: '', reading_date: ''};
 var _user$project$Iphod_Models$configInit = {
@@ -8356,6 +8357,10 @@ var _user$project$Iphod_Models$CurrentReadings = F9(
 var _user$project$Iphod_Models$Email = F3(
 	function (a, b, c) {
 		return {from: a, topic: b, text: c};
+	});
+var _user$project$Iphod_Models$User = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {username: a, realname: b, email: c, description: d, error_msg: e, token: f, password: g, password_confirmation: h};
 	});
 var _user$project$Iphod_Models$Lesson = function (a) {
 	return function (b) {

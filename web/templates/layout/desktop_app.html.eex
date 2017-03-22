@@ -32,19 +32,9 @@
   </head>
 
   <body class= <%= @page_controller %> >
+    <input id="csrf_token" type="hidden" name="csrf-token" value="<%= get_csrf_token() %>" >
     <div id="header">
       <a href= "/calendar" class="home_link"><span>Legereme</span></a>
-      <div class="pure-menu pure-menu-horizontal login" >
-        <ul class="pure-menu-list">
-          <%= if logged_in?(@conn) do %>
-            <li  class="pure-menu-item"><%= current_user(@conn).username %></li>
-            <li  class="pure-menu-item"><%= link "Logout", class: "pure-menu-link", to: session_path(@conn, :delete), method: :delete %></li>
-          <% else %>
-            <li  class="pure-menu-item"><%= link "Login", class: "pure-menu-link", to: "/login" %></li>
-            <li  class="pure-menu-item"><%= link "Register", class: "pure-menu-link", to: registration_path(@conn, :new) %></li>
-          <% end %>
-        </ul>
-      </div>
     </div>
     <div id="container">
       <main role="main">

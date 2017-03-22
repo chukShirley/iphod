@@ -55,6 +55,10 @@ defmodule Iphod.Web do
       import Iphod.Gettext
 
       import Iphod.Session, only: [current_user: 1, logged_in?: 1]
+
+      def csrf_token(conn), do: Plug.Conn.get_session(conn, :_csrf_token)
+      def csrf_token2(conn), do: Plug.Conn.get_session(conn, :csrf_token)
+
     end
   end
 
@@ -81,4 +85,5 @@ defmodule Iphod.Web do
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])
   end
+
 end
