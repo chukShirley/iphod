@@ -1474,7 +1474,7 @@ defmodule DailyReading do
         "4" =>
           %{"Sunday" =>   %{title: "Fourth Sunday in Lent",
                           colors: ["rose", "violet"],
-                            mp1: [%{style: "req", read: "Exod 1:8-14, 22-2:10"}],
+                            mp1: [%{style: "req", read: "Exod 1:8-14, 22-end, 2:1-2:10"}],
                             mp2: [%{style: "req", read: "Luke 18:35-19:10"}],
                             ep1: [%{style: "req", read: "Gen 24:29-end"}],
                             ep2: [%{style: "req", read: "Mark 15:1-21"}]
