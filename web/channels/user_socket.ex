@@ -7,6 +7,7 @@ defmodule Iphod.UserSocket do
   channel "calendar", Iphod.CalendarChannel
   channel "reflection", Iphod.ReflectionChannel
   channel "resources", Iphod.ResourcesChannel
+  channel "stations", Iphod.StationsChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

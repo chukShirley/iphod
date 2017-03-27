@@ -8,6 +8,7 @@
 @import "print.css"
 @import "mpep.css"
 @import "resource.css"
+@import "stations.css"
 
 /* Space out content a bit */
 body, form, ul, table {
@@ -16,6 +17,7 @@ body, form, ul, table {
   width: auto;
   margin-left: 10px;
   margin-right: 10px;
+  font-family:  Arial, Helvetica, sans-serif;
 }
 body.calendar { width: 55em; }
 
@@ -8339,5 +8341,46 @@ th.resource_get {
   transition-delay: 0.5s;
 }
 
+/*!
+ * stations.css
+ */
+
+body.stations {
+  width: 98%;
+}
+
+#stations-container {
+  margin-left: 0.5em;
+  width: 100%;
+}
+
+button.stn-button {
+  margin-right: 1.0em;
+  box-shadow: -2px 3px 8px #888888;
+  border-radius: 5px;
+  border: solid 2px darkred;
+  color: honeydew;
+  background-color: darkred;
+}
+
+p#art {
+  width: 98%;
+  margin-left: 1em;
+}
+
+.art-image {
+  margin: 1em;
+  width: 55%;
+}
+
+.art-reading {
+  margin-left: 1em;
+}
+
+p.reflection, p.prayer {
+  margin-left: 1.0em;
+  float:  left;
+  font-family: inherit;
+}
 
 /*# sourceMappingURL=app.css.map*/

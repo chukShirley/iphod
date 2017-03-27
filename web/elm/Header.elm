@@ -337,6 +337,7 @@ view model =
       [ li [ class "option-item" ] [ calendar model ]
       , li [ class "option-item" ] [ offices model ]
       , li [ class "option-item" ] [ resources model ]
+      , li [ class "option-item" ] [ stations model ]
       , li [ class "option-item" ] [ configModal model ]
       , li [ class "option-item" ] [ translations model ]
       , li [ class "option-item" ] [ aboutOptions model ]
@@ -346,17 +347,6 @@ view model =
 
 -- HELPERS
 
--- <div class="pure-menu pure-menu-horizontal login" >
---   <ul class="pure-menu-list">
---     <%= if logged_in?(@conn) do %>
---       <li  class="pure-menu-item"><%= current_user(@conn).username %></li>
---       <li  class="pure-menu-item"><%= link "Logout", class: "pure-menu-link", to: session_path(@conn, :delete), method: :delete %></li>
---     <% else %>
---       <li  class="pure-menu-item"><%= link "Login", class: "pure-menu-link", to: "/login" %></li>
---       <li  class="pure-menu-item"><%= link "Register", class: "pure-menu-link", to: registration_path(@conn, :new) %></li>
---     <% end %>
---   </ul>
--- </div>
 
 userLogin: Model -> Html Msg
 userLogin model =
@@ -382,6 +372,11 @@ calendar: Model -> Html Msg
 calendar model = 
   a [href "/calendar"]
     [ button [] [text "Calendar"] ]
+
+stations: Model -> Html Msg
+stations model =
+  a [ href "/stations" ]
+    [ button [] [ text "Stations" ] ]
 
 offices: Model -> Html Msg
 offices model = 

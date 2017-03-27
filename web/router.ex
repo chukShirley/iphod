@@ -100,6 +100,8 @@ defmodule Iphod.Router do
     post "/login", SessionController, :create
     get "/logout", SessionController, :delete
 
+    resources "/stations", StationsController
+
   end
 
   # Other scopes may use custom stacks.

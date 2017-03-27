@@ -53,6 +53,7 @@ exports.config = {
       "web/elm/Header.elm",
       "web/elm/MIndex.elm",
       "web/elm/MPanel.elm",
+      "web/elm/Stations.elm",
       "web/elm/NewReflection.elm",
       "web/elm/Iphod/Sunday.elm",
       "web/elm/Iphod/Models.elm",
@@ -75,7 +76,8 @@ exports.config = {
         'Header.elm',
         'MIndex.elm',
         'MPanel.elm',
-        'NewReflection.elm'
+        'NewReflection.elm',
+        'Stations.elm'
       ],
       outputFolder: '../static/vendor'
     },

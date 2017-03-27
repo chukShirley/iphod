@@ -158,6 +158,28 @@ var now = new Date()
   , tz = now.toString().split("GMT")[1].split(" (")[0] // timezone, i.e. -0700
   , am = now.toString().split(" ")[4] < "12";
 
+if ( path.match(/stations/) ) {
+  var elmStationsDiv = document.getElementById('stations-elm-container')
+    , elmStationsApp = Elm.Stations.embed(elmStationsDiv)
+    , stationsChannel = socket.channel("stations")
+
+  stationsChannel.join()
+    .receive("ok", resp => {
+    })
+    .receive("error", resp => {
+      console.log("Unabld to join Stations", resp)
+    })
+
+  elmStationsApp.ports.requestStation.subscribe(function(request) {
+      stationsChannel.push("get_station", request)
+    })
+
+  stationsChannel.on("single_station", resp => {
+    elmStationsApp.ports.portStation.send(resp)
+  })
+
+}
+
 if ( path.match(/office/) ) {
   var vers = get_version("ps") + "/" + get_version("ot")
     , till_midday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 30) - now
