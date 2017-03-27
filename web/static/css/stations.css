@@ -21,13 +21,20 @@ button.stn-button {
 }
 
 p#art {
-  width: 98%;
   margin-left: 1em;
 }
 
-.art-image {
+
+img.art-image {
   margin: 1em;
-  width: 55%;
+  width:  95%;
+}
+
+div.art-figure {
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
 }
 
 .art-reading {

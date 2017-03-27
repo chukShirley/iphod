@@ -8483,16 +8483,32 @@ var _user$project$Stations$view = function (model) {
 				_elm_lang$core$Native_List.fromArray(
 					[
 						A2(
-						_elm_lang$html$Html$img,
+						_elm_lang$html$Html$div,
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html_Attributes$class('art-image'),
-								_elm_lang$html$Html_Attributes$align('left'),
-								_elm_lang$html$Html_Attributes$src(
-								A2(_elm_lang$core$Basics_ops['++'], 'images/', model.images))
+								_elm_lang$html$Html_Attributes$class('art-figure')
 							]),
 						_elm_lang$core$Native_List.fromArray(
-							[])),
+							[
+								A2(
+								_elm_lang$html$Html$img,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('art-image'),
+										_elm_lang$html$Html_Attributes$src(
+										A2(_elm_lang$core$Basics_ops['++'], 'images/', model.images)),
+										_elm_lang$html$Html_Attributes$alt(model.aboutImage)
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[])),
+								A2(
+								_elm_lang$html$Html$br,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[])),
+								_elm_lang$html$Html$text(model.aboutImage)
+							])),
 						A2(
 						_evancz$elm_markdown$Markdown$toHtml,
 						_elm_lang$core$Native_List.fromArray(

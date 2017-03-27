@@ -112,7 +112,11 @@ view model =
   [ aboutStations
   , navigationButtons model
   , p [ id "art"]
-    [ img [ class "art-image", align "left", src ("images/" ++ model.images)] []
+    [ div [ class "art-figure" ] 
+      [ img [ class "art-image", src ("images/" ++ model.images), alt model.aboutImage] []
+      , br [] []
+      , text model.aboutImage
+      ]
     , Markdown.toHtml [] model.reading
     ]
   , reflections model
