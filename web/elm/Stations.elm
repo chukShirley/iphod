@@ -173,5 +173,10 @@ aboutStations =
     version many times at the Colosseum in Rome on Good Fridays during his reign. The
     scriptural version was not intended to invalidate the traditional version, rather it was
     meant to add nuance to an understanding of the Passion. _Wikipedia_"
+
+  , Markdown.toHtml [] "**Also:** If you have suggestions for art and/or content, 
+    please do send me an email (Use 'Contact' in the 'About' option ) 
+    or join the Iphod Facebook group (to make suggests, report bugs, read about updates to the site)"
+  , br [] []
   ]
   

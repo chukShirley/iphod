@@ -97,8 +97,8 @@ defmodule Stations do
           ],
           "title" => "Jesus is betrayed by Judas and arrested",
           "reading" => "Mark 14:43-46",
-          "images" => "Copy_of_el_beso_de_Judas.jpg",
-          "aboutImage" => "The Kiss of Judas (El Beso de Judas), Francisco Salzillo, 1754",
+          "images" => "Giotto-KissofJudas.jpg",
+          "aboutImage" => "The Arrest of Christ / Kiss of Judas, Giotto, 1304",
           "reflections" => """
             It is one of his trusted friends that betrays Jesus, and with a kiss. The way Jesus confronted
             violence has a message for our times. Violence is suicidal, he tells Peter: it is not defeated
