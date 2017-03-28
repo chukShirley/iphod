@@ -404,7 +404,7 @@ defmodule DailyReading do
               {( dgettext "ep_opening", "For I know my transgressions, and my sin is ever before me."),
                 dgettext( "ep_opening", "Psalm 51:3")
               },
-              {( dgettext "ep_opening", "To the Lord our God belong mercy and forgiveness, for we have against him."),
+              {( dgettext "ep_opening", "To the Lord our God belong mercy and forgiveness, for we have rebelled against him."),
                 dgettext( "ep_opening", "Daniel 9:9")
               }],
             "goodFriday" => [{
