@@ -36,7 +36,7 @@ defmodule Iphod.ResourcesController do
     case Repo.insert(changeset) do
       {:ok, resources} ->
         if upload = resources_params["file"] do
-          filename = create_files(upload, resources.id)
+          filename = create_files(upload, resources.id) |> String.replace(" ", "")
           new_changeset = Resources.changeset(resources, %{url: filename})
           Repo.update(new_changeset)
         end
@@ -89,7 +89,8 @@ defmodule Iphod.ResourcesController do
   end
 
   def send(conn, %{"filename" => basename}) do
-    filename = "./printresources/#{basename}"
+    filename = "./printresources/#{basename}" |> String.replace(" ", "")
+    IEx.pry
     conn
     |> put_resp_header("content-disposition", ~s(attachment; filename="#{filename |> Path.basename}"))
     |> send_file(200, filename)
