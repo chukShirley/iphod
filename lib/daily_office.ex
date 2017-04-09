@@ -35,6 +35,7 @@ defmodule DailyReading do
     _opening_sentence(mpep, season) |> pick_one(date)
   end
   def _opening_sentence(mpep, "ashWednesday"),  do: identity["#{mpep}_opening"]["lent"]
+  def _opening_sentence(mpep, "palmSunday"),    do: identity["#{mpep}_opening"]["lent"]
   def _opening_sentence(mpep, "ascension"),     do: identity["#{mpep}_opening"]["easter"]
   def _opening_sentence(mpep, season),          do: identity["#{mpep}_opening"][season]
     
