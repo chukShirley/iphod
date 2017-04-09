@@ -8051,7 +8051,18 @@ var _user$project$Stations$aboutStations = A2(
 			_evancz$elm_markdown$Markdown$toHtml,
 			_elm_lang$core$Native_List.fromArray(
 				[]),
-			'The Scriptural Way of the Cross or Scriptural Stations of the Cross is a version of the\n    traditional Stations of the Cross inaugurated as a Roman Catholic devotion by Pope\n    John Paul II on Good Friday 1991. Thereafter John Paul II performed the scriptural\n    version many times at the Colosseum in Rome on Good Fridays during his reign. The\n    scriptural version was not intended to invalidate the traditional version, rather it was\n    meant to add nuance to an understanding of the Passion. _Wikipedia_')
+			'The Scriptural Way of the Cross or Scriptural Stations of the Cross is a version of the\n    traditional Stations of the Cross inaugurated as a Roman Catholic devotion by Pope\n    John Paul II on Good Friday 1991. Thereafter John Paul II performed the scriptural\n    version many times at the Colosseum in Rome on Good Fridays during his reign. The\n    scriptural version was not intended to invalidate the traditional version, rather it was\n    meant to add nuance to an understanding of the Passion. _Wikipedia_'),
+			A2(
+			_evancz$elm_markdown$Markdown$toHtml,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			'**Also:** If you have suggestions for art and/or content, \n    please do send me an email (Use \'Contact\' in the \'About\' option ) \n    or join the Iphod Facebook group (to make suggests, report bugs, read about updates to the site)'),
+			A2(
+			_elm_lang$html$Html$br,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[]))
 		]));
 var _user$project$Stations$prayer = function (model) {
 	return A2(
