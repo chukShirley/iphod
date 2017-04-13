@@ -3,7 +3,7 @@ defmodule DailyReading do
   import Iphod.Gettext, only: [dgettext: 2]
   # import Psalms, only: [morning: 1, evening: 1]
   import SundayReading, only: [collect_today: 1]
-  import Lityear, only: [right_after_ascension?: 1, right_after_ash_wednesday?: 1]
+  import Lityear, only: [right_after_ascension?: 1, right_after_ash_wednesday?: 1, good_friday?: 1]
   use Timex
   def start_link, do: Agent.start_link fn -> build end, name: __MODULE__
   def identity(), do: Agent.get(__MODULE__, &(&1))
@@ -136,6 +136,7 @@ defmodule DailyReading do
         date |> Lityear.is_sunday?              -> date |> Lityear.to_season
         date |> Lityear.epiphany_before_sunday? -> date |> Lityear.to_season
         date |> right_after_ash_wednesday?      -> date |> Lityear.to_season
+        date |> good_friday?                    -> date |> Lityear.to_season
         date |> right_after_ascension?          -> date |> Lityear.to_season
         true                                    -> date |> Lityear.last_sunday
       end

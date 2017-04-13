@@ -71,6 +71,7 @@ defmodule  Lityear do
       day == christmas(y-1)    -> {"christmas", "1", yrABC, day}
       is_christmas2            -> {"christmas", "2", yrABC, day} 
       till_epiphany in 6..11   -> {"christmas", "1", yrABC, day}
+      days_till_easter == 2    -> {"goodFriday", "1", yrABC, day}
       days_till_easter in 1..6 -> {"holyWeek", to_string(7 - days_till_easter), yrABC, day}
       days_till_easter in -1..-6 -> {"easterWeek", to_string(0 - days_till_easter), yrABC, day}
       from_easter in -2..-6    -> {"lent", to_string(7 + from_easter), yrABC, day}
@@ -162,6 +163,10 @@ defmodule  Lityear do
 
   def palm_sunday(),        do: easter |> date_shift( weeks: -1)
   def palm_sunday(year),    do: easter(year) |> date_shift( weeks: -1)
+
+  def good_friday(),        do: easter |> date_shift( days: -2)
+  def good_friday(year),    do: easter(year) |> date_shift( days: -2)
+  def good_friday?(d),      do: d.year |> good_friday == d
 
   def easter(),                 do: lityear(Timex.now(@tz)) |> _easter
   def easter(n) when n >= 30,   do: _easter(n)
