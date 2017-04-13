@@ -56,8 +56,9 @@ defmodule DailyReading do
 
   def readings(season, wk, day, _date), do: identity[season][wk][day]
 
-  def readings({"ashWednesday", wk, litYr, date}), do: _readings({"epiphany", "9", litYr, date})
-  def readings({"ascension", wk, litYr, date}), do: _readings({"easter", "6", litYr, date})
+  def readings({"ashWednesday", wk, litYr, date}),  do: _readings({"epiphany", "9", litYr, date})
+  def readings({"goodFriday", wk, litYr, date}),    do: _readings({"palmSunday", "1", litYr, date})
+  def readings({"ascension", wk, litYr, date}),     do: _readings({"easter", "6", litYr, date})
   def readings({season, wk, litYr, date}), do: _readings({season, wk, litYr, date})
   def _readings({season, wk, litYr, date}) do
     {season, wk, dow, date} = day_of_week({season, wk, litYr, date})
