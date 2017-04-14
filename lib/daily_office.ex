@@ -44,6 +44,7 @@ defmodule DailyReading do
     _antiphon(season) |> pick_one(date)
   end
   def _antiphon("ashWednesday"),  do: identity["antiphon"]["lent"]
+  def _antiphon("goodFriday"),  do: identity["antiphon"]["lent"]
   def _antiphon("ascension"),     do: identity["antiphon"]["easter"]
   def _antiphon(season),          do: identity["antiphon"][season]
 
