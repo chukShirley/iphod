@@ -181,7 +181,8 @@ defmodule Iphod.PrayerController do
   def invitatory_canticle(dreading) do
     cond do
       dreading.season == "lent" -> "lent_venite"
-      dreading.season == "easter" && dreading.week == "1" -> "pascha_nostrum"
+      dreading.season == "easterDay" && dreading.week == "1" -> "pascha_nostrum"
+      dreading.season == "easter" -> ["venite", "jubilate", "pascha_nostrum"] |> Enum.random
       true -> ["venite", "jubilate"] |> Enum.random
     end
   end
@@ -237,23 +238,24 @@ defmodule Iphod.PrayerController do
   def put_collect_of_week(dreading, date) do
     c = 
       cond do
-        date |> right_after_ash_wednesday? ->
-          Collects.get("ashWednesday", "1").collects
+        dreading.title == "Monday of Easter Week"     -> Collects.get("easterWeek", "1").collects
+        dreading.title == "Tuesday of Easter Week"    -> Collects.get("easterWeek", "2").collects
+        dreading.title == "Wednesday of Easter Week"  -> Collects.get("easterWeek", "3").collects
+        dreading.title == "Thursday of Easter Week"   -> Collects.get("easterWeek", "4").collects
+        dreading.title == "Friday of Easter Week"     -> Collects.get("easterWeek", "5").collects
+        dreading.title == "Saturday of Easter Week"   -> Collects.get("easterWeek", "6").collects
 
-        date |> right_after_ascension? ->
-          Collects.get("ascension", "1").collects
+        date |> right_after_ash_wednesday?            -> Collects.get("ashWednesday", "1").collects
 
-        @christmasDays |> Enum.member?(dreading.day) ->
-          Collects.get(dreading.season, dreading.week).collects
+        date |> right_after_ascension?                -> Collects.get("ascension", "1").collects
 
-        @dayNames |> Enum.member?(dreading.title) ->
-          Collects.get(dreading.season, dreading.week).collects
+        @christmasDays |> Enum.member?(dreading.day)  -> Collects.get(dreading.season, dreading.week).collects
 
-        @dayNames |> Enum.member?(dreading.day) ->
-          Collects.get(dreading.season, dreading.week).collects
+        @dayNames |> Enum.member?(dreading.title)     -> Collects.get(dreading.season, dreading.week).collects
 
-        true ->
-          Collects.get("redLetter", dreading.day).collects
+        @dayNames |> Enum.member?(dreading.day)       -> Collects.get(dreading.season, dreading.week).collects
+
+        true                                          -> Collects.get("redLetter", dreading.day).collects
       end
       |> Enum.random
     c.collect
