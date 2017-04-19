@@ -1658,14 +1658,14 @@ defmodule DailyReading do
                             colors: ["white"],
                             mp1: [%{style: "req", read: "Isa 61"}],
                             mp2: [%{style: "req", read: "1 Pet 1:13-end"}],
-                            ep1: [%{style: "req", read: "Song of Solomon 3:1-4:16a"}],
+                            ep1: [%{style: "req", read: "Song of Solomon 3:1-4:16"}],
                             ep2: [%{style: "req", read: "John 21:1-14"}]
                             },
             "Thursday" => %{title: "Thursday of Easter Week",
                             colors: ["white"],
                             mp1: [%{style: "req", read: "Job 14:1-15"}],
                             mp2: [%{style: "req", read: "1 Thess 4:13-end"}],
-                            ep1: [%{style: "req", read: "Song of Solomon 4:16b-end, 5"}],
+                            ep1: [%{style: "req", read: "Song of Solomon 4:16-end, 5"}],
                             ep2: [%{style: "req", read: "Mark 5:21-end"}]
                             },
             "Friday" =>   %{title: "Friday of Easter Week",
