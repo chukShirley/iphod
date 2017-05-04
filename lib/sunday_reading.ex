@@ -1171,12 +1171,12 @@ defmodule SundayReading do
             %{  "title" => "The Fifth Sunday of Easter",
                 "colors" => ["white"],
                 "a" => %{ ot: [%{style: "req", read: "Acts 17:1-15"},%{style: "alt", read: "Deut 6:20-25"}],
-                          ps: [%{style: "req", read: "Psalm 66:1-11"},%{style: "alt", read: "66:1-8"}],
+                          ps: [%{style: "req", read: "Psalm 66:1-11"},%{style: "alt", read: "Psalm 66:1-8"}],
                           nt: [%{style: "req", read: "1 Pet 2:1-12"}],
                           gs: [%{style: "req", read: "Jn 14:1-14"}]
                           },
                 "b" => %{ ot: [%{style: "req", read: "Acts 8:26-40"},%{style: "alt", read: "Deut 4:32-40"}],
-                          ps: [%{style: "req", read: "Psalm 66:1-11"},%{style: "alt", read: "66:1-8"}],
+                          ps: [%{style: "req", read: "Psalm 66:1-11"},%{style: "alt", read: "Psalm 66:1-8"}],
                           nt: [%{style: "opt", read: "1 Jn 3:11-17"},%{style: "req", read: "1 Jn 3:18-24"}],
                           gs: [%{style: "req", read: "Jn 14:15-21"}]
                           },
