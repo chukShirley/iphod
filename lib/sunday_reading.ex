@@ -1151,7 +1151,7 @@ defmodule SundayReading do
         "4" =>
             %{  "title" => "The Fourth Sunday of Easter [Good Shepherd]",
                 "colors" => ["white"],
-                "a" => %{ ot: [%{style: "req", read: "Acts 6:1-9, 7:2a, 7:51-60"},%{style: "opt", read: "Neh 9:1-3"},%{style: "req", read: "Neh, 9:6-15"}],
+                "a" => %{ ot: [%{style: "req", read: "Acts 6:1-9, 7:2a, 7:51-60"},%{style: "opt", read: "Neh 9:1-3"},%{style: "req", read: "Neh 9:6-15"}],
                           ps: [%{style: "req", read: "Psalm 23"}],
                           nt: [%{style: "req", read: "1 Pet 2:13-25"}],
                           gs: [%{style: "req", read: "Jn 10:1-10"}]

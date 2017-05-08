@@ -1799,7 +1799,7 @@ defmodule DailyReading do
                             colors: ["white"],
                             mp1: [%{style: "opt", read: "Deut 21:1-21"},%{style: "req", read: "Deut 21:22-22:8"},%{style: "opt", read: "Deut 22:9-30"}],
                             mp2: [%{style: "req", read: "Acts 15:1-21"}],
-                            ep1: [%{style: "opt", read: "Deut 23"},%{style: "opt", read: " 24:1-4"},%{style: "req", read: "Deut 24:5-end"}],
+                            ep1: [%{style: "opt", read: "Deut 23"},%{style: "opt", read: "Deut 24:1-4"},%{style: "req", read: "Deut 24:5-end"}],
                             ep2: [%{style: "req", read: "Acts 15:22-35"}]
                             },
             "Tuesday" =>  %{title: "Tuesday",
