@@ -79,6 +79,7 @@ defmodule Iphod.Router do
     get "/resources/show/:id", ResourcesController, :show
     get "/resources/new", ResourcesController, :new
     get "/resources/send/:filename", ResourcesController, :send
+    get "/resources/send/printresources/:filename", ResourcesController, :send
     get "/printresources", ResourcesController, :printresources
     get "/linkresources", ResourcesController, :linkresources
     get "/humor", ResourcesController, :humor

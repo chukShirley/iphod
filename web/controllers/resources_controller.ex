@@ -90,7 +90,6 @@ defmodule Iphod.ResourcesController do
 
   def send(conn, %{"filename" => basename}) do
     filename = "./printresources/#{basename}" |> String.replace(" ", "")
-    IEx.pry
     conn
     |> put_resp_header("content-disposition", ~s(attachment; filename="#{filename |> Path.basename}"))
     |> send_file(200, filename)
