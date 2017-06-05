@@ -2,11 +2,9 @@ require IEx
 defmodule Iphod.PrayerController do
   use Iphod.Web, :controller
   use Timex
+  import Iphod.DailyOptions, only: [get_daily_options: 2]
   import BibleText, only: [lesson_with_body: 2]
-  import Lityear, only: [right_after_ash_wednesday?: 1, right_after_ascension?: 1]
   @tz "America/Los_Angeles"
-  @dayNames ~w( Monday Tuesday Wednesday Thursday Friday Saturday Sunday)
-  @christmasDays ~w( Dec29 Dec30 Dec31 Jan02 Jan03 Jan04 Jan05 )
 
   def mp(conn, params) do
     if params["text"] |> is_nil do
@@ -145,17 +143,18 @@ defmodule Iphod.PrayerController do
     day_of_week = day |> Timex.weekday |> Timex.day_name
     {sent, ref} = DailyReading.opening_sentence("mp", day)
     dreading = DailyReading.readings(day)
+    {invitatory, collect} = get_daily_options(day, dreading)
     dreading
       |> Map.put(:opening_sentence, sent)
       |> Map.put(:opening_sentence_ref, ref)
       |> Map.put(:antiphon, DailyReading.antiphon(day))
-      |> Map.put(:invitatory_canticle, invitatory_canticle(dreading) )
+      |> Map.put(:invitatory_canticle, invitatory )
       |> put_reading(dreading[:mpp], psalm_translation)
       |> put_reading(dreading[:mp1], text_translation)
       |> put_reading(dreading[:mp2], text_translation)
       |> Map.put(:ot_canticle, put_canticle("mp", "ot", dreading.season, day_of_week))
       |> Map.put(:nt_canticle, put_canticle("mp", "nt", dreading.season, day_of_week))
-      |> Map.put(:collect_of_week, put_collect_of_week(dreading, day))
+      |> Map.put(:collect_of_week, collect)
       |> Map.put(:day, day_of_week)
   end
   
@@ -164,31 +163,26 @@ defmodule Iphod.PrayerController do
     day_of_week = day |> Timex.weekday |> Timex.day_name
     {sent, ref} = DailyReading.opening_sentence("ep", day)
     dreading = DailyReading.readings(day)
+    {invitatory, collect} = get_daily_options(day, dreading)
     dreading
       |> Map.put(:opening_sentence, sent)
       |> Map.put(:opening_sentence_ref, ref)
       |> Map.put(:antiphon, DailyReading.antiphon(day))
-      |> Map.put(:invitatory_canticle, invitatory_canticle(dreading) )
+      |> Map.put(:invitatory_canticle, invitatory )
       |> put_reading(dreading[:epp], psalm_translation)
       |> put_reading(dreading[:ep1], text_translation)
       |> put_reading(dreading[:ep2], text_translation)
       |> Map.put(:ot_canticle, put_canticle("ep", "ot", dreading.season, day_of_week))
       |> Map.put(:nt_canticle, put_canticle("ep", "nt", dreading.season, day_of_week))
-      |> Map.put(:collect_of_week, put_collect_of_week(dreading, day))
+      |> Map.put(:collect_of_week, collect)
       |> Map.put(:day, day_of_week)
-  end
-
-  def invitatory_canticle(dreading) do
-    cond do
-      dreading.season == "lent" -> "lent_venite"
-      dreading.season == "easterDay" && dreading.week == "1" -> "pascha_nostrum"
-      dreading.season == "easter" -> ["venite", "jubilate", "pascha_nostrum"] |> Enum.random
-      true -> ["venite", "jubilate"] |> Enum.random
-    end
   end
 
   def put_canticle("mp", "ot", season,  "Sunday")    when season == "advent",  do: "surge_illuminare"
   def put_canticle("mp", "ot", season,  "Sunday")    when season == "easter",  do: "cantemus_domino"
+  def put_canticle("mp", "ot", season,  "Friday")    when season == "easter",  do: "te_deum"
+  def put_canticle("mp", "ot", season,  "Friday")    when season == "easterWeek",  do: "te_deum"
+
   def put_canticle("mp", "ot", season,  "Sunday")    when season == "lent",    do: "kyrie_pantokrator"
   def put_canticle("mp", "ot", season,  "Monday")    when season == "lent",    do: "quaerite_dominum"
   def put_canticle("mp", "ot", season,  "Tuesday")   when season == "lent",    do: "quaerite_dominum"
@@ -234,32 +228,6 @@ defmodule Iphod.PrayerController do
   def put_canticle("ep", "nt", _season, "Saturday"),  do: "magnificat"
 
   def put_canticle1("ep", _), do: "" # stub
-
-  def put_collect_of_week(dreading, date) do
-    c = 
-      cond do
-        dreading.title == "Monday of Easter Week"     -> Collects.get("easterWeek", "1").collects
-        dreading.title == "Tuesday of Easter Week"    -> Collects.get("easterWeek", "2").collects
-        dreading.title == "Wednesday of Easter Week"  -> Collects.get("easterWeek", "3").collects
-        dreading.title == "Thursday of Easter Week"   -> Collects.get("easterWeek", "4").collects
-        dreading.title == "Friday of Easter Week"     -> Collects.get("easterWeek", "5").collects
-        dreading.title == "Saturday of Easter Week"   -> Collects.get("easterWeek", "6").collects
-
-        date |> right_after_ash_wednesday?            -> Collects.get("ashWednesday", "1").collects
-
-        date |> right_after_ascension?                -> Collects.get("ascension", "1").collects
-
-        @christmasDays |> Enum.member?(dreading.day)  -> Collects.get(dreading.season, dreading.week).collects
-
-        @dayNames |> Enum.member?(dreading.title)     -> Collects.get(dreading.season, dreading.week).collects
-
-        @dayNames |> Enum.member?(dreading.day)       -> Collects.get(dreading.season, dreading.week).collects
-
-        true                                          -> Collects.get("redLetter", dreading.day).collects
-      end
-      |> Enum.random
-    c.collect
-  end
 
   def reading_names(reading) do
     reading |> Enum.map(&(&1.read)) |> Enum.join(", ")
