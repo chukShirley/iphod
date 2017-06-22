@@ -244,7 +244,7 @@ defmodule SundayReading do
                       nt: [%{style: "req", read: "Rom 16:25-27"}],
                       gs: [%{style: "req", read: "Lk 1:26-38"}] 
                     },
-            "b" => %{ ot: [%{style: "req", read: "Mic 5:2-5a"}],
+            "c" => %{ ot: [%{style: "req", read: "Mic 5:2-5a"}],
                       ps: [%{style: "req", read: "Psalm 80:1-7"}],
                       nt: [%{style: "req", read: "Heb 10:1-10"}],
                       gs: [%{style: "req", read: "Lk 1:39-56"}] 
@@ -1447,7 +1447,7 @@ defmodule SundayReading do
             %{  "title" => "Sunday Closest to June 22",
                 "colors" => ["green"],
                 "a" => %{ ot: [%{style: "req", read: "Jer 20:7-13"}],
-                          ps: [%{style: "req", read: "Psalm 69:1-16"},%{style: "opt", read: "Psalm 69:17-19}"}],
+                          ps: [%{style: "req", read: "Psalm 69:1-16"},%{style: "opt", read: "Psalm 69:17-19"}],
                           nt: [%{style: "req", read: "Rom 5:15b-19"}],
                           gs: [%{style: "req", read: "Mt 10:16-33"}]
                         },
@@ -1964,7 +1964,7 @@ defmodule SundayReading do
             %{  "title" => "St. John (December 27)",
                 "colors" => ["white"],
                 "a" => %{ ot: [%{style: "req", read: "Ex 33:18-23"}],
-                          ps: [%{style: "req", read: "Psalm 92:1-("},%{style: "opt", read: "Psalm 92:5-10"},%{style: "req", read: "Psalm 92:1-14"}],
+                          ps: [%{style: "req", read: "Psalm 92:1-4"},%{style: "opt", read: "Psalm 92:5-10"},%{style: "req", read: "Psalm 92:1-14"}],
                           nt: [%{style: "req", read: "1 Jn 1"}],
                           gs: [%{style: "req", read: "Jn 21:9-25"},%{style: "alt", read: "Jn 1:1-18"}]
                         },
