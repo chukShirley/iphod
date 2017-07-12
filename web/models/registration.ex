@@ -1,5 +1,3 @@
-# web/models/registration.ex
-
 defmodule Iphod.Registration do
   import Ecto.Changeset, only: [put_change: 3]
 
@@ -12,5 +10,4 @@ defmodule Iphod.Registration do
   defp hashed_password(password) do
     Comeonin.Bcrypt.hashpwsalt(password)
   end
-
 end
