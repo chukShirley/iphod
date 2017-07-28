@@ -2,7 +2,7 @@ port module MPanel exposing (..) -- where
 import Debug
 
 import Html exposing (..)
-import Html.App as App
+import Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
@@ -12,7 +12,7 @@ import Iphod.Helper exposing (hideable)
 -- MAIN
 
 main =
-  App.program
+  Html.program
     { init = init
     , update = update
     , view = view

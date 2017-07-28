@@ -72,7 +72,7 @@ inputEmailAddress model =
   p []
     [ input 
         [ id "from"
-        , type' "text"
+        , type_ "text"
         , placeholder "Your Email Address - required"
         , autofocus True
         , name "from"
@@ -92,7 +92,7 @@ inputSubject model =
   p []
     [ input 
         [ id "topic"
-        , type' "text"
+        , type_ "text"
         , placeholder "Subject - required"
         , autofocus True
         , name "topic"
@@ -112,7 +112,7 @@ inputMessage model =
   p []
     [ textarea 
         [ id "text"
-        , type' "text"
+        , type_ "text"
         , placeholder "Enter Message - required"
         , autofocus True
         , name "text"

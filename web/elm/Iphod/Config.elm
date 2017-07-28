@@ -110,7 +110,7 @@ psRadio model key val =
   in
     span [class "radio_button"]
     [ input 
-      [ type' "radio"
+      [ type_ "radio"
       , checked isSelected 
       , onCheck (\_ -> Checked key val)
       , name "psalm"
@@ -127,7 +127,7 @@ ftnoteCheck model val =
   in
     span [class "config_checkbox"]
     [ input 
-      [ type' "checkbox"
+      [ type_ "checkbox"
       , id val
       , checked isChecked, onCheck ChangeFootnote 
       , name val

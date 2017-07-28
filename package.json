@@ -10,8 +10,11 @@
     "brunch": "^2.0.0",
     "clean-css-brunch": ">= 1.0 < 1.8",
     "css-brunch": ">= 1.0 < 1.8",
+    "elm": "^0.18.0",
     "elm-brunch": "^0.4.4",
     "javascript-brunch": ">= 1.0 < 1.8",
+    "node-sass": "^4.5.3",
+    "sass": "^1.0.0-beta.1",
     "sass-brunch": "^2.6.3",
     "uglify-js-brunch": ">= 1.0 < 1.8"
   },

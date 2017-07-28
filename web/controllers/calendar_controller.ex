@@ -101,6 +101,11 @@ defmodule Iphod.CalendarController do
   end
 
   def _list_of_weeks_from(start_date, end_date, n, [head|list]) do
+    leaflets = Leaflets.for_this_date(start_date)
+    reflDate = start_date |> Timex.format!("{Mfull} {D}, {YYYY}")
+    resp = Repo.one(from r in Iphod.Reflection, where: [date: ^reflDate, published: true], select: {r.id})
+    {reflID} = if resp, do: resp, else: {0}
+
     day = %{  date: start_date |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"),
               id: start_date |> Timex.format!("{WDfull}{Mfull}{D}_{YYYY}"),
               name: start_date |> Timex.format!("{WDfull}"),
@@ -110,6 +115,9 @@ defmodule Iphod.CalendarController do
               mp_reading: DailyReading.reading_map("mp", start_date),
               ep_reading: DailyReading.reading_map("ep", start_date),
               eu_reading: SundayReading.reading_map(start_date),
+              reflID: reflID,
+              leaflet: leaflets.reg,
+              leafletLP: leaflets.lp,
               today: start_date == Timex.today
           }
     new_head = [day | head]

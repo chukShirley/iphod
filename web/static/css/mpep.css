@@ -2,7 +2,8 @@
  * styles for morning and evening prayer
 */
 body {
-  width: 35em;
+  min-width: 35em;
+  max-width: 100%;
   font-size: 14px;
 }
 @media screen and (max-width: 550px) { 

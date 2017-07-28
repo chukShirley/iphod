@@ -83,18 +83,32 @@
               <p><%= day.title %></p>
             </div>
             <%# render "_reading_table.html", day: day %>
-            <div class= "td-bottom">
+            <div class= "td-bottom flyoutmenu">
             <ul class= "day_options">
-              <li class= "reading_group">
-                <button class= "reading_button" data-date= "<%=day.date%>" data-type= "Reflection">Reflection</button>
-                <br/>
+              <li class="active has-sub"><a href="#"><span>Readings</span></a>
+                <ul>
+                  <li><a href="#"><span class="reading_menu" data-type="MP" data-date="<%=day.date%>" >Morning Prayer</span></a></li>
+                  <li><a href="#"><span class="reading_menu" data-type="EP" data-date="<%=day.date%>" >Evening Prayer</span></a></li>
+                  <li><a href="#"><span class="reading_menu" data-type="EU" data-date="<%=day.date%>" >Eucharist</span></a></li>
+                  <%= if day.reflID > 0 do %>
+                    <li><a href="#"><span class="reflection"   data-reflID="<%=day.reflID%>" >Reflection</span></a></li>
+                  <% else %>
+                    <li><a href="#"><span class="reflection"   data-reflID="<%=day.reflID%>" >No Reflection</span></a></li>
+                  <% end %>
+                  <%= if String.length(day.leaflet) > 0 || String.length(day.leafletLP) > 0 do %>
+                    <li class="has-sub last"><a href="#"><span>Leaflets</span></a>
+                      <ul>
+                        <%= if String.length(day.leaflet) > 0 do %>
+                          <li><a href="#"><span class="leaflet" data-type="RG" data-leafletUrl="<%=day.leaflet%>" >Regular</span></a></li>
+                        <% end %>
+                        <%= if String.length(day.leafletLP) > 0 do %>
+                          <li class="last"><a href="#"><span class="leaflet" data-type="LP" data-leafletUrl="<%=day.leafletLP%>" >Large Print</span></a></li>
+                        <% end %>
+                      </ul>
+                    </li>
+                  <% end %>
+                </ul>
               </li>
-              <li class= "reading_group">
-                <button class= "reading_button" data-date= "<%=day.date%>" data-type= "MP">MP</button></li>
-              <li class= "reading_group">
-                <button class= "reading_button" data-date= "<%=day.date%>" data-type= "EP" >EP</button></li>
-              <li class= "reading_group">
-                <button class= "reading_button" data-date= "<%=day.date%>" data-type= "EU" >EU</button></li>
             </ul>
             </div>
           </td>

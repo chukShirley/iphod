@@ -79,6 +79,8 @@
                 <button class= "reading_button" data-date= "<%=day.date%>" data-type= "EP" >EP</button></li>
               <li class= "reading_group">
                 <button class= "reading_button" data-date= "<%=day.date%>" data-type= "EU" >EU</button></li>
+              <li class= "reading_group">
+                <button class= "reading_button" data-date= "<%=day.date%>" data-type= "LF" >LF</button></li>
             </ul>
           </td>
         <% end %>

@@ -7,7 +7,6 @@ defmodule Iphod.SessionController do
   end
 
   def create(conn, params) do
-    # IO.puts ">>>>> CREATE SESSION: #{inspect params}"
     case Iphod.Session.login(params, Iphod.Repo) do
        {:ok, user} ->
          conn
@@ -40,7 +39,6 @@ defmodule Iphod.SessionController do
       password_confirmation: "blork2",
       error_msg: "no error"
       }
-    # IO.puts ">>>>> LOGGED IN: #{inspect user}\n>>>>> #{inspect package}"
     conn |> json( package )
   end
 

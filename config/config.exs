@@ -18,11 +18,15 @@ config :iphod, Iphod.Endpoint,
         scheme: "http",
         port: {:system, "PORT"}
       ],
+  # secret_key_base: "supersecretlongkey",
+  # to generate a super secret long key: `mix phoenix.gen.secret`
+  secret_key_base: {:system, "KEY"},
   root: Path.dirname(__DIR__),
   server: true,
   render_errors: [accepts: ~w(html json)],
   pubsub: [name: Iphod.PubSub,
-           adapter: Phoenix.PubSub.PG2]
+           adapter: Phoenix.PubSub.PG2
+          ]
 
 import_config "#{Mix.env}.exs"
 

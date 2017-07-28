@@ -3,7 +3,7 @@ port module Translations exposing (..) -- where
 import Debug
 
 import Html exposing (..)
-import Html.App as Html
+import Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Regex exposing (regex, contains, caseInsensitive)
@@ -163,7 +163,7 @@ findVersion  =
   th []
     [ input 
         [ id "find_version"
-        , type' "text"
+        , type_ "text"
         , placeholder "Version"
         , autofocus True
         , name "find_version"
@@ -180,7 +180,7 @@ findName =
   th []
     [ input 
         [ id "find_name"
-        , type' "text"
+        , type_ "text"
         , placeholder "Version Name"
         , autofocus True
         , name "find_name"
@@ -197,7 +197,7 @@ findLanguage =
   th []
     [ input 
         [ id "find_lang"
-        , type' "text"
+        , type_ "text"
         , placeholder "Language"
         , autofocus True
         , name "find_lang"

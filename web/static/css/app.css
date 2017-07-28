@@ -5,6 +5,7 @@
  */
 @import "pure.css"
 @import "menu_styles.css"
+@import "flyoutmenu.css"
 @import "print.css"
 @import "mpep.css"
 @import "resource.css"
@@ -49,6 +50,25 @@ div.login ul{
 div.login ul li {
   padding: 1em;
 }
+
+/* jquery-ui */
+
+.ui-menu .ui-menu-item { 
+  padding: 0px;
+  margin: 0px;
+  width: 100%; 
+}
+
+.ui-menu .ui-menu-item .ui-menu { width: 150px;}
+.ui-widget { font-size: 0.8em; }
+
+.ui-menu .ui-icon { 
+  margin: 0;
+  position: absolute;
+}
+
+.readings-list { width: 90%; }
+/* end of jquery-ui */
 
 .help-block, .alert-danger {
   color: darkred;
@@ -532,14 +552,14 @@ li.offices-item {
   #calendar td a {
     vertical-align: top;
     margin-top: 0;
-    padding-top: 0;
+    padding-top: 2px;
   }
   
   #calendar td.today {border: 3px solid black;}
   
   #calendar td ul {
     padding-left: 0;
-    text-align: center;
+    top: -3px;
   }
 
   #calendar th {
@@ -580,7 +600,11 @@ li.offices-item {
     top: 0;
     min-height: 5em;
   }
-  .td-bottom { bottom: 0; }
+  .td-bottom { 
+    /* display: none; */
+    text-align: left;
+    bottom: 0; 
+  }
   
   
   td#table-rollup {
@@ -736,10 +760,6 @@ li.offices-item {
 
   li.reading {
     position: relative;
-    display: inline;
-    width: 75%;
-    float: left;
-    left: -2em;
   }
 
   li.comments {
@@ -748,6 +768,10 @@ li.offices-item {
     background-color: lightgrey;
     top: 5em;
     margin-left: 0em;
+  }
+
+  #reading-container {
+    margin-left:  2em;
   }
   
   .reading-group{
@@ -938,14 +962,13 @@ li.offices-item {
   #calendar li, 
   #seasons li, 
   #days_of_week li {
-    display: inline;
     text-decoration: none;
   }
   #month li {
     display: inline;
     text-decoration: none;
   }
-  
+
   .m-options1 ul, 
   .m-seasons ul{
     text-align: center;
@@ -996,6 +1019,11 @@ li.offices-item {
   
   #md-text code {
     font-family: inherit;
+  }
+
+  #resources-container {
+    min-width: 35em;
+    max-width: 80%;
   }
 
   table.resources { 

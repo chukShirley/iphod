@@ -5,8 +5,10 @@ defmodule SundayReading do
                           is_sunday?: 1, 
                           next_holy_day: 1, 
                           right_after_ash_wednesday?: 1, 
-                          right_after_ascension?: 1
+                          right_after_ascension?: 1,
+                          to_season: 1
                         ]
+  import Leaflets, only: [for_this_date: 1, for_this_sunday: 3]
   use Timex
   @tz "America/Los_Angeles"
 
@@ -17,30 +19,45 @@ defmodule SundayReading do
   def identity(), do: Agent.get(__MODULE__, &(&1))
   def readings(season, wk, yr), do: identity[season][wk][yr]
   def readings(date) do
+    {season, wk, yr, _} = Lityear.to_season(date)
+    # readings(season, wk, yr)
+    r = identity[season][wk]
+    if r |> is_nil, do: IEx.pry
+    %{  gs:       r[yr].gs,
+        ot:       r[yr].ot,
+        ps:       r[yr].ps,
+        nt:       r[yr].nt,
+        season:   season,
+        week:     wk,
+        title:    r["title"],
+        colors:   r["colors"],
+        collect:  Collects.get(season, wk),
+        leaflet:  Leaflets.for_this_sunday(season, wk, yr)
+    }
     # should check for red letter day first
-    doy = date |> Timex.format!("%m%d", :strftime)
-    {season, week, lityear, _date} = date |> Lityear.to_season
-    {hd, title} = Lityear.next_holy_day date
-    cond do
-      doy == "0101" ->
-        _sunday {"holyName", "1", lityear, date}
-      doy == "1225" ->
-        _sunday {"christmasDay", "1", lityear, date}
-      date |> right_after_ash_wednesday? ->
-        _sunday {"ashWednesday", "1", lityear, date}
-      season == "holyWeek" ->
-        _sunday {season, week, lityear, date}
-      season == "easterWeek" ->
-        _sunday {season, week, lityear, date}
-      date |> right_after_ascension? ->
-        _sunday {"ascension", "1", lityear, date}
-      hd == date ->
-        holy_day title, date
-      date |> Lityear.is_sunday? ->
-        this_sunday(date)
-      true ->
-        last_sunday(date)
-    end
+    # doy = date |> Timex.format!("%m%d", :strftime)
+    # {season, week, lityear, _date} = date |> Lityear.to_season
+    # {hd, title} = Lityear.next_holy_day date
+    # cond do
+      # doy == "0101" ->
+      #   _sunday {"holyName", "1", lityear, date}
+      # doy == "1225" ->
+      #   _sunday {"christmasDay", "1", lityear, date}
+      # date |> right_after_ash_wednesday? ->
+      #   _sunday {"ashWednesday", "1", lityear, date}
+      # season == "holyWeek" ->
+      #   _sunday {season, week, lityear, date}
+      # season == "easterWeek" ->
+      #   _sunday {season, week, lityear, date}
+      # date |> right_after_ascension? ->
+      #   _sunday {"ascension", "1", lityear, date}
+      # hd == date ->
+      #   holy_day title, date
+      # date |> Lityear.is_sunday? ->
+      #   this_sunday(date)
+      # true ->
+      #   last_sunday(date)
+    # end
   end
 
   def holy_day(title, date),    do:  eu_map {"redLetter", title, "a", date}
@@ -75,7 +92,8 @@ defmodule SundayReading do
                 week:     wk, 
                 title:    identity[season][wk]["title"],
                 colors:   identity[season][wk]["colors"],
-                collect:  Collects.get(season, wk)
+                collect:  Collects.get(season, wk),
+                leaflet:  Leaflets.for_this_sunday(season, wk, yr)
               })
   end
 
@@ -129,7 +147,7 @@ defmodule SundayReading do
     r = readings(date)
     %{  
       ofType:   "sunday", # but it could be redletter
-      date:     r.date,
+      date:     date |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"), # was r.date - huh?
       season:   r.season,
       week:     r.week,
       title:    r.title,
@@ -140,6 +158,7 @@ defmodule SundayReading do
       ps:       r.ps,
       nt:       r.nt,
       gs:       r.gs,
+      leaflet:  r.leaflet,
       sectionUpdate:   %{section: "", version: "", ref: ""}
       }
     # now load up the text bodies
@@ -154,7 +173,8 @@ defmodule SundayReading do
         ot:     r.ot |> Enum.map(&(&1.read)),
         ps:     r.ps |> Enum.map(&(&1.read)),
         nt:     r.nt |> Enum.map(&(&1.read)),
-        gs:     r.gs |> Enum.map(&(&1.read))
+        gs:     r.gs |> Enum.map(&(&1.read)),
+        leaflet: Leaflets.for_this_date(date)
     }
   end
 

@@ -15,10 +15,8 @@
     <title>Legereme</title>
     <link rel="apple-touch-icon-precomposed" href="/priv/apple-touch-icon-precomposed.png" />
     <link rel="apple-touch-icon" href="/priv/apple-touch-icon.png" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>"  />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-2.2.3.min.js"></script>
-    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script>
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

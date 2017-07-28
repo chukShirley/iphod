@@ -3,7 +3,7 @@ port module NewReflection exposing (..) -- where
 import Debug
 
 import Html exposing (..)
-import Html.App as Html
+import Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Regex exposing (regex, contains, caseInsensitive)
@@ -126,7 +126,7 @@ inputDate model =
     [ input
         [ id "reflection-date"
         , name "reflection-date"
-        , type' "text"
+        , type_ "text"
         , placeholder "Reflection Date"
         , Html.Attributes.value model.date
         , onInput ReflectionDate
@@ -141,7 +141,7 @@ inputAuthor model =
     [ input
         [ id "reflection-author"
         , name "reflection-author"
-        , type' "text"
+        , type_ "text"
         , placeholder "Your name"
         , Html.Attributes.value model.author
         , onInput ReflectionAuthor
@@ -170,7 +170,7 @@ showText model =
   [ h3 [] 
     [ text "Preview  "
     , span [ style [("font-weight", "normal"), ("font-size", "0.7em")] ] [ text "( published" ]
-    , input [ type' "checkbox"
+    , input [ type_ "checkbox"
             , checked model.published
             , onCheck Published
             ]

@@ -20,7 +20,8 @@ defmodule Iphod do
       worker(Printable, []),
       worker(BibleVersions, []),
       worker(Insult, []),
-      worker(Stations, [])
+      worker(Stations, []),
+      worker(Leaflets, [])
       # worker(LocalText, [])
     ]
 

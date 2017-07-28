@@ -3,7 +3,7 @@ port module Resources exposing (..) -- where
 import Debug
 
 import Html exposing (..)
-import Html.App as Html
+import Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Regex exposing (regex, contains, caseInsensitive)
@@ -183,10 +183,10 @@ add_elipse n s =
 
 findName: Html Msg
 findName =
-  th []
+  th [ class "th_finders" ]
     [ input 
         [ id "find_name"
-        , type' "text"
+        , type_ "text"
         , placeholder "Resource Name"
         , autofocus True
         , name "find_name"
@@ -200,10 +200,10 @@ findName =
 
 findDescription: Html Msg
 findDescription =
-  th []
+  th [ class "th_finders" ]
     [ input 
         [ id "find_desc"
-        , type' "text"
+        , type_ "text"
         , placeholder "Description"
         , autofocus True
         , name "find_desc"
@@ -216,10 +216,10 @@ findDescription =
 
 findKeys: Html Msg
 findKeys =
-  th []
+  th [ class "th_finders" ]
     [ input 
         [ id "find_keys"
-        , type' "text"
+        , type_ "text"
         , placeholder "Key Words"
         , autofocus True
         , name "find_keys"

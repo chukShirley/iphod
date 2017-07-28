@@ -22,6 +22,10 @@ table.resources {
   width: 100%;
   font-size: 0.8em;
 }
+th.th_finders {
+  position: relative;
+  left: -1%;
+}
 th.resource_name { 
   position: relative;
   width: 25%;

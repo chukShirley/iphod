@@ -41,6 +41,8 @@ defmodule  Lityear do
   def from_now(), do: to_season Timex.now(@tz)
   def to_season(day) do
     sunday = if day |> is_sunday?, do: day, else: day |> date_last_sunday
+    doy = day |> Timex.format!("%m%d", :strftime)
+    {hd, hd_title} = next_holy_day(day)
     y = lityear sunday
     yrABC = abc sunday
     dOfMon = "#{day.month}/#{day.day}"
@@ -51,8 +53,8 @@ defmodule  Lityear do
     from_epiphany = Timex.diff(sunday, epiphany(1, y), :weeks)
 
     from_christmas = Timex.diff(christmas(1, y), sunday, :weeks)
-    is_christmas = (day |> is_sunday?) && (dOfMon == "12/25")
-    is_holy_name = (day |> is_sunday?) && (dOfMon == "1/1")
+    # is_christmas = (day |> is_sunday?) && (dOfMon == "12/25")
+    # is_holy_name = (day |> is_sunday?) && (dOfMon == "1/1")
     is_christmas2 = cond do
       dOfMon in ~w(1/2 1/3 1/4 1/5) -> true
       till_epiphany in 1..4         -> true
@@ -64,10 +66,13 @@ defmodule  Lityear do
     cond do
       # to whom it may concern...
       # changes the order of these conditions at your peril
-      day |> right_after_ash_wednesday? -> {"ashWednesday", "1", yrABC, day}
-      day |> right_after_ascension?     -> {"ascension", "1", yrABC, day}
-      is_christmas             -> {"christmasDay", "1", yrABC, day}
-      is_holy_name             -> {"holyName", "1", yrABC, day}
+      hd == day                -> {"redLetter", hd_title, yrABC, day}
+      day |> right_after_ash_wednesday? -> 
+                                  {"ashWednesday", "1", yrABC, day}
+      day |> right_after_ascension?     -> 
+                                  {"ascension", "1", yrABC, day}
+      doy == "1225"            -> {"christmasDay", "1", yrABC, day}
+      doy == "0101"            -> {"holyName", "1", yrABC, day}
       day == christmas(y-1)    -> {"christmas", "1", yrABC, day}
       is_christmas2            -> {"christmas", "2", yrABC, day} 
       till_epiphany in 6..11   -> {"christmas", "1", yrABC, day}

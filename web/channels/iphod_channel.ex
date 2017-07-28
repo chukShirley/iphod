@@ -9,23 +9,9 @@ alias Iphod.Chat
 defmodule Iphod.IphodChannel do
   import Iphod.Mailer
   use Iphod.Web, :channel
-  # import SundayReading
-  # import DailyReading
-  # import Psalms
-  # import Lityear
-  # import EsvText
   use Timex
   @tz "America/Los_Angeles"
   @email %{ from: "", topic: "", text: ""}
-#  @config %{ ot: "ESV",
-#             ps: "Coverdale",
-#             nt: "ESV",
-#             gs: "ESV",
-#             fnotes: "fnotes"
-#            }
-
-
-#  alias Saints.Donor
 
 
   def join("iphod:readings", payload, socket) do
@@ -38,18 +24,8 @@ defmodule Iphod.IphodChannel do
   end
 
   def handle_in(request, params, socket) do
-    # IO.puts ">>>>> #{request}, #{inspect params}"
     response = handle_request(request, params, socket)
     response
-  end
-
-  def handle_request("request_user", [username, token], socket) do
-    # if the token is valid get the user, else blork
-    # max_age: in seconds, 1209600 = seconds in 2 weeks
-    resp = Phoenix.Token.verify( socket, "user", token, max_age: 1209600)
-    # IO.puts ">>>>> LOGIN: #{inspect resp}\n>>>>> #{username}, #{token}\n>>>>> #{inspect socket}"
-    confirm_user( resp, token, socket)
-    {:noreply, socket}    
   end
 
   def confirm_user({:error, reason}, token, socket) do
@@ -87,6 +63,15 @@ defmodule Iphod.IphodChannel do
        token: ""
      }
     
+  end
+
+  def handle_request("request_user", [username, token], socket) do
+    # if the token is valid get the user, else blork
+    # max_age: in seconds, 1209600 = seconds in 2 weeks
+    resp = Phoenix.Token.verify( socket, "user", token, max_age: 1209600)
+    # IO.puts ">>>>> LOGIN: #{inspect resp}\n>>>>> #{username}, #{token}\n>>>>> #{inspect socket}"
+    confirm_user( resp, token, socket)
+    {:noreply, socket}    
   end
 
   def handle_request("ping", arg, socket) do
@@ -133,14 +118,13 @@ defmodule Iphod.IphodChannel do
     {:noreply, socket}
   end
 
-  def handle_request("get_text", ["Reflection", tail], socket) do
-    # IO.puts ">>>>> BAD GET REFLECTION"
-    {:noreply, socket}
-  end
+#   def handle_request("get_text", ["Reflection", tail], socket) do
+#     # IO.puts ">>>>> BAD GET REFLECTION"
+#     {:noreply, socket}
+#   end
 
-  def handle_request("get_text", ["Reflection", date, _versions], socket) do
-    day = date |> String.split(" ", [parts: 2, trim: 2]) |> List.last
-    resp = Repo.one(from r in Iphod.Reflection, where: [date: ^day, published: true], select: {r.author, r.markdown})
+  def handle_request("get_text", ["Reflection", reflID], socket) do
+    resp = Repo.one(from r in Iphod.Reflection, where: [id: ^reflID], select: {r.author, r.markdown})
     {author, markdown} = if resp, do: resp, else: {"", "Sorry, nothing today"}
     push socket, "reflection_today", %{author: author, markdown: markdown}
     {:noreply, socket}
@@ -157,7 +141,6 @@ defmodule Iphod.IphodChannel do
     # 1) is the date a redletter day or not
     # 2) are footnotes to be displayed or not
     day = text_to_date date
-    # IO.puts inspect(SundayReading.eu_body(day))
     push socket, "eu_today", SundayReading.eu_body(day, versions_map(:eu, versions))
     {:noreply, socket}  
   end

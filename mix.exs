@@ -43,7 +43,7 @@ defmodule Iphod.Mixfile do
       {:phoenix_html, ">= 2.6.2"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:phoenix_integration, "~> 0.1"},
-      {:postgrex, ">= 0.0.0"},
+      {:postgrex, ">= 0.12.1"},
       {:gettext, "~> 0.9"},
       {:cowboy, "~> 1.0"},
       # {:exrm, "~> 1.0"},
@@ -52,14 +52,13 @@ defmodule Iphod.Mixfile do
       {:httpoison, "~> 0.11.0"},
       {:mailgun, "~> 0.1.2"},
       {:earmark, "~> 1.0.1"},
-      {:phoenix_integration, "~> 0.1"},
       # {:mock, github: "~> 0.2.0", only: :dev},
-      {:mix_test_watch, "~> 0.2", only: :dev},
       {:dogma, "~> 0.1", only: :dev},
       {:mix_test_watch, "~> 0.2.6", only: :dev},
       {:edeliver, "~> 1.4.0"},
       {:distillery, "~> 1.1"},
-      {:comeonin, "~> 3.0"}
+      {:comeonin, "~> 3.0"},
+      {:credo, "~> 0.8", only: [:dev, :test], runtime: false}
      # {:exometer_core, "~> 1.4.0"},
      # {:exometer, "~> 1.2.1"},
      # {:edown, github: "uwiger/edown", tag: "0.7", override: true}

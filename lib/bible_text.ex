@@ -35,6 +35,7 @@ defmodule BibleText do
   def lesson_with_body(list, "ESV") do
     list |> Enum.map(fn(lesson)->
       lesson 
+        |> Map.put(:id, Regex.replace(~r/[\s\.\:\,]/, lesson.read, "_") )
         |> body_div(EsvText.request(lesson.read))
         |> Map.put(:version, "ESV")
         |> other_init_values
@@ -48,6 +49,7 @@ defmodule BibleText do
   def lesson_with_body(list, ver, "Coverdale") do
     list |> Enum.map(fn(lesson)->
       lesson
+        |> Map.put(:id, Regex.replace(~r/[\s\.\:\,]/, lesson.read, "_") )
         |> body_div(Psalms.to_html(lesson.read, "Coverdale"))
         |> Map.put(:version, "Coverdale")
         |> other_init_values
@@ -57,6 +59,7 @@ defmodule BibleText do
   def lesson_with_body(list, ver, "BCP") do
     list |> Enum.map(fn(lesson)->
       lesson
+        |> Map.put(:id, Regex.replace(~r/[\s\.\:\,]/, lesson.read, "_") )
         |> body_div(Psalms.to_html(lesson.read, "BCP"))
         |> Map.put(:version, "BCP")
         |> other_init_values
@@ -66,27 +69,30 @@ defmodule BibleText do
   def lesson_with_body(list, ver, "bibles.org") do
     list |> Enum.map(fn(lesson)->
       lesson 
-      |> body_div(BibleComText.request(ver, lesson.read))
-      |> Map.put(:version, ver)
-      |> other_init_values
+        |> Map.put(:id, Regex.replace(~r/[\s\.\:\,]/, lesson.read, "_") )
+        |> body_div(BibleComText.request(ver, lesson.read))
+        |> Map.put(:version, ver)
+        |> other_init_values
     end)
   end
 
   def lesson_with_body(list, ver, "getbible.net") do
     list |> Enum.map(fn(lesson)->
       lesson 
-      |> body_div( GetBibleText.request(ver, lesson.read) )
-      |> Map.put(:version, ver)
-      |> other_init_values
+        |> Map.put(:id, Regex.replace(~r/[\s\.\:\,]/, lesson.read, "_") )
+        |> body_div( GetBibleText.request(ver, lesson.read) )
+        |> Map.put(:version, ver)
+        |> other_init_values
     end)
   end
 
   def lesson_with_body(list, ver, "local") do
     list |> Enum.map(fn(lesson)->
       lesson 
-      |> body_div( LocalText.request(ver, lesson.read) )
-      |> Map.put(:version, ver)
-      |> other_init_values
+        |> Map.put(:id, Regex.replace(~r/[\s\.\:\,]/, lesson.read, "_") )
+        |> body_div( LocalText.request(ver, lesson.read) )
+        |> Map.put(:version, ver)
+        |> other_init_values
     end)
   end
 
@@ -96,10 +102,14 @@ defmodule BibleText do
       |> Map.put(:cmd, "")
       |> Map.put(:show, show)
       |> Map.put(:notes, [])
+      |> Map.put(:show_fn, true)
+      |> Map.put(:show_vn, true)
+      |> Map.put(:section, "") # can this be set here?   
   end
 
   def body_div(lesson, body) do
-    lesson |> Map.put(:body, "<div id='#{lesson.id}'>#{body}</div>")
+    lesson 
+      |> Map.put(:body, "<div id='#{lesson.id}'>#{body}</div>")
   end
 
   def no_lesson() do

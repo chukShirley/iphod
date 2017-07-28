@@ -293,8 +293,8 @@ defmodule Iphod.LitYearTest do
     assert to_season(~D[2017-04-13]) == {"holyWeek", "4", "a", ~D[2017-04-13]}
   end
 
-  test "to_season should return holyWeek 5 on Good Friday" do
-    assert to_season(~D[2017-04-14]) == {"holyWeek", "5", "a", ~D[2017-04-14]}
+  test "to_season should return goodFriday 1 on Good Friday" do
+    assert to_season(~D[2017-04-14]) == {"goodFriday", "1", "a", ~D[2017-04-14]}
   end
 
   test "to_season should return holyWeek 6 on Holy Saturday" do
