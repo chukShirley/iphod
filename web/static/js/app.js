@@ -563,7 +563,6 @@ if ( path.match(/calendar/) || path.match(/mindex/)) {
 
   $(".reflection").click( function() {
     var reflID = $(this).attr("data-reflID").toString();
-    console.log("REFLECTION ID: ", reflID)
     if (reflID > 0) { channel.push("get_text", ["Reflection", reflID]) }
   })
 

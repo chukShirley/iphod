@@ -48,7 +48,7 @@ defmodule Iphod.Mixfile do
       {:cowboy, "~> 1.0"},
       # {:exrm, "~> 1.0"},
       # {:timex, github: "frpaulas/timex"},
-      {:timex, "~> 3.1.8"},
+      {:timex, "~> 3.1.22"},
       {:httpoison, "~> 0.11.0"},
       {:mailgun, "~> 0.1.2"},
       {:earmark, "~> 1.0.1"},
