@@ -256,9 +256,6 @@ update msg model =
 
         ModLogin msg ->
             let
-                foo =
-                    Debug.log "MODLOGIN" msg
-
                 newUser =
                     Login.update msg model.user
 
@@ -269,9 +266,6 @@ update msg model =
 
         ModRegister msg ->
             let
-                foo =
-                    Debug.log "MODREGISTER" msg
-
                 newUser =
                     Login.update msg model.user
 
@@ -356,20 +350,13 @@ update msg model =
                 
 
         GetCSRFToken token ->
-          let
-            foo = Debug.log "TOKEN" token
-              
-          in
-              
-            ( { model | csrf_token = token }, Cmd.none )
+          ( { model | csrf_token = token }, Cmd.none )
 
         GetUser user ->
             let
                 newModel =
                     { model | user = user }
 
-                foo =
-                    Debug.log "GET USER" user
             in
                 ( newModel, Cmd.none )
 
@@ -380,15 +367,10 @@ update msg model =
 
 loginEncoder : Models.User -> Encode.Value
 loginEncoder user =
-  let
-    foo = Debug.log "LOGIN ENCODER"
-      
-  in
-      
-    Encode.object
-        [ ( "username", Encode.string user.username )
-        , ( "password", Encode.string user.password )
-        ]
+  Encode.object
+    [ ( "username", Encode.string user.username )
+    , ( "password", Encode.string user.password )
+    ]
 
 
 userDecoder : Decoder Models.User
@@ -410,7 +392,7 @@ authUser model apiUrl =
       { method = "POST"
       , headers = [ Http.header "X-Csrf-Token" model.csrf_token ]
       , url = apiUrl
-      , body = Debug.log "BODY" (model.user |> loginEncoder |> Http.jsonBody)
+      , body = (model.user |> loginEncoder |> Http.jsonBody)
       , expect = Http.expectJson userDecoder
       , timeout = Nothing
       , withCredentials = True
