@@ -2663,7 +2663,7 @@ defmodule DailyReading do
         "12" =>
           %{"Sunday" =>     %{title: "Sunday closest to July 27",
                           colors: ["green"],
-                            mp1: [%{style: "req", read: "1 Sam 3:1-4:1 a"}],
+                            mp1: [%{style: "req", read: "1 Sam 3:1-4:1"}],
                             mp2: [%{style: "req", read: "Mark 12:18-end"}],
                             ep1: [%{style: "req", read: "Ezek 37:15-end"}],
                             ep2: [%{style: "req", read: "Acts 15:1-31"}]
