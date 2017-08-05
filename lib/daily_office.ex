@@ -45,7 +45,7 @@ defmodule DailyReading do
     _antiphon(season) |> pick_one(date)
   end
   def _antiphon("ashWednesday"),  do: identity["antiphon"]["lent"]
-  def _antiphon("goodFriday"),  do: identity["antiphon"]["lent"]
+  def _antiphon("goodFriday"),    do: identity["antiphon"]["lent"]
   def _antiphon("ascension"),     do: identity["antiphon"]["easter"]
   def _antiphon(season),          do: identity["antiphon"][season]
 
@@ -61,7 +61,8 @@ defmodule DailyReading do
   def readings({"ashWednesday", wk, litYr, date}),  do: _readings({"epiphany", "9", litYr, date})
   def readings({"goodFriday", wk, litYr, date}),    do: _readings({"palmSunday", "1", litYr, date})
   def readings({"ascension", wk, litYr, date}),     do: _readings({"easter", "6", litYr, date})
-  def readings({season, wk, litYr, date}), do: _readings({season, wk, litYr, date})
+  def readings({season, wk, litYr, date}),          do: _readings({season, wk, litYr, date})
+
   def _readings({season, wk, litYr, date}) do
     {season, wk, dow, date} = day_of_week({season, wk, litYr, date})
     if readings(season, wk, dow, date) |> is_nil, do: IEx.pry
@@ -103,6 +104,7 @@ defmodule DailyReading do
       true -> dow
     end
   end
+
   def day_of_week({"christmas", "2", litYr, date}) do
     dow = date |> Timex.format!("{WDfull}")
     jan_n =  date |> Timex.format!("{D}")
@@ -122,6 +124,7 @@ defmodule DailyReading do
       true -> dow
     end
   end
+
   def day_of_week({season, wk, litYr, date}) do
     dow = date |> Timex.format!("{WDfull}")
     {season, wk, dow, date}
@@ -155,6 +158,7 @@ defmodule DailyReading do
       |> Map.put(:mpp, Psalms.morning(day) |> psalm_map )
       |> Map.put(:epp, Psalms.evening(day) |> psalm_map )
   end
+
   def psalm_map(list) when list |> is_list do
     list
       |> Enum.map(fn(p)-> 
@@ -166,6 +170,7 @@ defmodule DailyReading do
           end
         end)
   end
+
   defp to_lessons(map) do
     map
       |> Map.update(:mp1, [], fn(el)-> _to_lessons_for("mp1", el) end)
@@ -175,10 +180,12 @@ defmodule DailyReading do
       |> Map.update(:ep2, [], fn(el)-> _to_lessons_for("ep2", el) end)
       |> Map.update(:epp, [], fn(el)-> _to_lessons_for("epp", el) end)
   end
+
   defp _to_lessons_for(_section, []), do: []
   defp _to_lessons_for(section, list) do
     list |> Enum.map(fn(el)-> _add_keys_for(section, el) end)
   end
+
   defp _add_keys_for(section, map) do
     if map |> Map.has_key?(:read) do
       map |> Map.put_new(:id, Regex.replace(~r/[\s\.\:\,]/, map.read, "_") )

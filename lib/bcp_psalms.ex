@@ -1,5 +1,58 @@
+require IEx
 defmodule BCPPsalms do
       
+  def get("Canticle 3"), do: bcp_text_list("Canticle 3", 1, 9) |> no_vs_numbers
+
+  def get("Canticle 9"), do: bcp_text_list("Canticle 9", 1, 8) |> no_vs_numbers
+
+  def no_vs_numbers(l) do
+    l |> Enum.map( &(&1 |> String.replace(~r/\d+ /, "")))
+  end
+
+  def get(s) do
+    s |> String.split(",")
+      |> Enum.map( &( String.replace &1, ~r/^[Pp]salm/, ""))
+      |> Enum.map( &(String.trim &1) )
+      |> Enum.map( &(RequestParser.tokenize &1) )
+      |> Enum.reduce( [], fn(ref, acc)-> 
+          [psString | t] = ref
+          ps = psString |> String.to_integer
+          
+          if t |> length == 0 do
+            vsFrom = 1
+            vsTo = bcp[ps] 
+                      |> Map.keys 
+                      |> Enum.filter( &( !is_bitstring &1)) 
+                      |> Enum.max
+          else
+            [_colon, vsFromString, _dash, vsToString] = t
+            vsFrom = vsFromString |> String.to_integer
+            vsTo = vsToString |> String.to_integer
+          end
+          [bcp_text_list(ps, vsFrom, vsTo) | acc]
+        end)
+      |> Enum.reverse
+      |> List.flatten
+
+  end
+
+  def bcp_text_list(ps_num, vsFrom, vsTo) do
+    ps = bcp[ps_num]
+    vsFrom..vsTo
+      |>  Enum.reduce( [  ps["name"] <> " " <>  ps["title"] ], fn(vs, acc) ->
+            if Map.has_key?(ps, vs) do
+              newList = if Map.has_key?(ps[vs], :title), do: [ ps[vs].title | acc], else: acc
+              [ ps[vs][:second],
+                (vs |> Integer.to_string) <> " " <> ps[vs][:first] |> String.replace("&#42;", "*")
+                | newList 
+              ]
+            else
+              acc
+            end
+          end)
+      |> Enum.reverse
+  end
+
   def bcp() do 
     %{
     1 => 
@@ -5497,6 +5550,50 @@ defmodule BCPPsalms do
                 second: "praise him with loud-clanging cymbals."},
         6 => %{ first: "Let everything that has breath &#42; ",
                 second: "praise the Lord. Hallelujah!"}
+      },
+    "Canticle 3" =>
+      %{ "name" => "The Song of Mary", "title" => "Magnificat",
+        1 => %{ title: "Luke 1:46-55",
+                first: "My soul magnifies the Lord,",
+                second: "and my spirit rejoices in God my Savior."},
+        2 => %{ first: "For he has regarded",
+                second: "the lowliness of his handmaiden."},
+        3 => %{ first: "For behold, from now on,",
+                second: "all generations will call me blessed."},
+        4 => %{ first: "For he that is mighty has magnified me,",
+                second: "and holy is his Name."},
+        5 => %{ first: "And his mercy is on those who fear him,",
+                second: "throughout all generations."},
+        6 => %{ first: "He has shown the strength of his arm;",
+                second: "he has scattered the proud in the imagination of their hearts."},
+        7 => %{ first: "He has brought down the mighty from their thrones,",
+                second: "and has exalted the humble and meek."},
+        8 => %{ first: "He has filled the hungry with good things,",
+                second: "and the rich he has sent empty away."},
+        9 => %{ first: "He, remembering his mercy, has helped his servant Israel,",
+                second: "as he promised to our fathers, Abraham and his seed forever."},
+        10 => %{ first: "Glory to the Father, and to the Son, and to the Holy Spirit;",
+                second: "as it was in the beginning, is now, and ever shall be, world without end. Amen."}
+      },
+    "Canticle 9" =>
+      %{ "name" => "Surely, it is God who saves me", "title" => "Ecce, Deus",
+        1 => %{ title: "Isaiah 12:2-6",
+                first: "Surely, it is God who saves me;",
+                second: "I will trust in him and not be afraid."},
+        2 => %{ first: "For the Lord is my stronghold and my sure defense,",
+                second: "and he will be my Savior."},
+        3 => %{ first: "Therefore you shall draw water with rejoicing",
+                second: "from the springs of salvation."},
+        4 => %{ first: "And on that day you shall say,",
+                second: "Give thanks to the Lord and call upon his Name;"},
+        5 => %{ first: "Make his deeds known among the peoples;",
+                second: "see that they remember that his Name is exalted."},
+        6 => %{ first: "Sing the praises of the Lord, for he has done great things,",
+                second: "and this is known in all the world."},
+        7 => %{ first: "Cry aloud, inhabitants of Zion, ring out your joy,",
+                second: "for the great one in the midst of you is the Holy One of Israel."},
+        8 => %{ first: "Glory to the Father, and to the Son, and to the Holy Spirit;",
+                second: "as it was in the beginning, is now, and ever shall be, world without end. Amen."}
       }
   } # eo BCP
   end

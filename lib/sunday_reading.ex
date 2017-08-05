@@ -12,11 +12,97 @@ defmodule SundayReading do
   use Timex
   @tz "America/Los_Angeles"
 
+
   def start_link do
     Agent.start_link fn -> build end, name: __MODULE__
   end
 
   def identity(), do: Agent.get(__MODULE__, &(&1))
+  def seasons(), do: identity |> Map.keys
+  def weeks_for(season), do: identity[season] |> Map.keys
+
+  def all_lessons() do
+    {:ok, file} = File.open("sr.text", [:write, :utf8])
+    readingList()
+      |> Enum.each( fn({season, week, year}) -> 
+            titlesAndColors = identity[season][week]
+            IO.puts file, "#{season}, #{week} #{year} - #{titlesAndColors["title"]}; #{ titlesAndColors["colors"] |> Enum.join(", ")}"
+            this_week = identity[season][week][year]
+            # putText(file, :ot, this_week.ot)
+            # putText(file, :ps, this_week.ps)
+            # putText(file, :nt, this_week.nt)
+            putText(file, :gs, this_week.gs)
+            IO.puts file, "-----"
+            # IO.puts file, "OT: #{inspect this_week.ot}"
+            # IO.puts file, "PS: #{inspect this_week.ps}"
+            # IO.puts file, "NT: #{inspect this_week.nt}"
+            # IO.puts file, "GS: #{inspect this_week.gs}"
+            :timer.sleep(200)
+        end)
+    file |> File.close
+  end
+
+  def putText(file, lessonType, list) do
+    lesson = [ot: "First Lesson", ps: "Psalm", nt: "Second Lesson", gs: "The Gospel"]
+    trans = [ot: "ESV", ps: "BCP", nt: "ESV", gs: "ESV"]
+    IO.puts file, "\t" <> lesson[lessonType]
+    _putText(file, lessonType |> Atom.to_string, trans[lessonType], list)
+  end
+
+  def _putText(file, "ps", _trans, []), do: IO.puts file, "\n"
+  def _putText(file, _lessonType, _trans, []), do: IO.puts file, "\t\t\tThe Word of the Lord\n"
+
+  def _putText(file, "ps", trans, [h|t]) do
+    lesson = BCPPsalms.get(h.read) |> Enum.join("\n")
+    case h.style do
+      "opt" -> IO.puts file, "\t\t[ " <> lesson <> " ]"
+      "alt" -> IO.puts file, "\t\t~~~ OR ~~~\n\t\t" <> lesson
+      "alt-opt" -> "\t\t~~~ OR ~~~\n\t\t[ " <> lesson <> " ]"
+      "alt-req" -> "\t\t~~~ OR ~~~\n\t\t[ " <> lesson <> " ]"
+      "req" -> IO.puts file, "\t\t" <> lesson
+      _     -> IO.puts file, "\t\t??? " <> h.style <> "\n\t\t" <> lesson # shouldn't happen
+    end
+    _putText(file, "ps", trans, t)
+  end
+
+  def _putText(file, lessonType, trans, [h|t]) do
+    passage = h.read |> String.replace(":", ".")
+    keywords = [  include_footnotes: "false", 
+                  output_format: "plain-text", 
+                  passage: passage,
+                  include_headings: "false",
+                  include_subheadings: "false",
+                  include_audio_link: "false",
+                  include_heading_horizontal_lines: false
+                ]
+    lesson = EsvText.request_raw keywords
+    # lesson = h.read
+    case h.style do
+      "opt" -> IO.puts file, "\t\t[ " <> lesson <> " ]"
+      "alt" -> IO.puts file, "\t\t~~~ OR ~~~\n\t\t" <> lesson
+      "alt-opt" -> "\t\t~~~ OR ~~~\n\t\t[ " <> lesson <> " ]"
+      "alt-req" -> "\t\t~~~ OR ~~~\n\t\t[ " <> lesson <> " ]"
+      "req" -> IO.puts file, "\t\t" <> lesson
+      _     -> IO.puts file, "\t\t??? " <> h.style <> "\n\t\t" <> lesson # shouldn't happen
+    end
+    _putText(file, lessonType, trans, t)
+  end
+
+  # EsvText.request_raw [include_footnotes: "false", output_format: "plain-text", passage: "john 3:1-16"]
+  def list_seasons() do
+    {:ok, file} = File.open("sr.text", [:write, :utf8])
+    identity 
+      |> Map.to_list 
+      |> Enum.each( fn({season, weeks}) -> 
+        weeks
+          |> Map.to_list
+          |> Enum.each( fn({week, map}) -> 
+            IO.puts file, "#{season} #{week} - #{map["title"]}, #{inspect map["colors"]}"
+          end)
+      end)
+    file |> File.close
+  end
+
   def readings(season, wk, yr), do: identity[season][wk][yr]
   def readings(date) do
     {season, wk, yr, _} = Lityear.to_season(date)
@@ -693,7 +779,7 @@ defmodule SundayReading do
                           nt: [%{style: "req", read: "Eph 5:1-14"}],
                           gs: [%{style: "req", read: "Jn 9:1-13, 9:28-38"},%{style: "opt", read: "Jn 9:39-41"}]
                           },
-                "b" => %{ ot: [%{style: "req", read: "2 Chr 36:14-23"}],
+                "b" => %{ ot: [%{style: "req", read: "2 Chronicles 36:14-23"}],
                           ps: [%{style: "req", read: "Psalm 122"}],
                           nt: [%{style: "req", read: "Eph 2:4-10"}],
                           gs: [%{style: "req", read: "Jn 6:1-15"}]
@@ -757,7 +843,7 @@ defmodule SundayReading do
               "b" => %{ ot: [%{style: "req", read: "Isaiah 52:13-end, 53:1-12"}],
                         ps: [%{style: "req", read: "Psalm 22:1-11"},%{style: "alt", read: "Psalm 22:1-21"}],
                         nt: [%{style: "req", read: "Phil 2:5-11"}],
-                        gs: [%{style: "opt", read: "Mk 14:32-72"},%{style: "req", read: "Mt 15:1-39"}, %{style: "opt", read: "Mt 15:40-47"}]
+                        gs: [%{style: "opt", read: "Mk 14:32-72"},%{style: "req", read: "Mk 15:1-39"}, %{style: "opt", read: "Mk 15:40-47"}]
                         },
               "c" => %{ ot: [%{style: "req", read: "Isaiah 52:13-end, 53:1-12"}],
                         ps: [%{style: "req", read: "Psalm 22:1-11"},%{style: "alt", read: "Psalm 22:1-21"}],
@@ -890,8 +976,8 @@ defmodule SundayReading do
                               %{style: "req", read: "Genesis 7:1-5, 7:11-18, 8:8-18, 9:8-13"},
                               %{style: "req", read: "Genesis 22:1-18"},
                               %{style: "req", read: "Exodus 14:10-end, 15:1"},
-                              %{style: "req", read: "Isiah 4:2-6"},
-                              %{style: "req", read: "Isiah 55:1-11"},
+                              %{style: "req", read: "Isaiah 4:2-6"},
+                              %{style: "req", read: "Isaiah 55:1-11"},
                               %{style: "req", read: "Ezekiel 36:24-28"},
                               %{style: "req", read: "Ezekiel 37:1-14"},
                               %{style: "req", read: "Zephaniah 3:12-20"}
@@ -904,8 +990,8 @@ defmodule SundayReading do
                               %{style: "req", read: "Genesis 7:1-5, 7:11-18, 8:8-18, 9:8-13"},
                               %{style: "req", read: "Genesis 22:1-18"},
                               %{style: "req", read: "Exodus 14:10-end, 15:1"},
-                              %{style: "req", read: "Isiah 4:2-6"},
-                              %{style: "req", read: "Isiah 55:1-11"},
+                              %{style: "req", read: "Isaiah 4:2-6"},
+                              %{style: "req", read: "Isaiah 55:1-11"},
                               %{style: "req", read: "Ezekiel 36:24-28"},
                               %{style: "req", read: "Ezekiel 37:1-14"},
                               %{style: "req", read: "Zephaniah 3:12-20"}
@@ -918,8 +1004,8 @@ defmodule SundayReading do
                               %{style: "req", read: "Genesis 7:1-5, 7:11-18, 8:8-18, 9:8-13"},
                               %{style: "req", read: "Genesis 22:1-18"},
                               %{style: "req", read: "Exodus 14:10-end, 15:1"},
-                              %{style: "req", read: "Isiah 4:2-6"},
-                              %{style: "req", read: "Isiah 55:1-11"},
+                              %{style: "req", read: "Isaiah 4:2-6"},
+                              %{style: "req", read: "Isaiah 55:1-11"},
                               %{style: "req", read: "Ezekiel 36:24-28"},
                               %{style: "req", read: "Ezekiel 37:1-14"},
                               %{style: "req", read: "Zephaniah 3:12-20"}
@@ -938,8 +1024,8 @@ defmodule SundayReading do
                           %{style: "alt", read: "Genesis 7:1-5, 7:11-18, 8:8-18, 9:8-13"},
                           %{style: "alt", read: "Genesis 22:1-18"},
                           %{style: "alt", read: "Exodus 14:10-end, 15:1"},
-                          %{style: "alt", read: "Isiah 4:2-6"},
-                          %{style: "alt", read: "Isiah 55:1-11"},
+                          %{style: "alt", read: "Isaiah 4:2-6"},
+                          %{style: "alt", read: "Isaiah 55:1-11"},
                           %{style: "alt", read: "Ezekiel 36:24-28"},
                           %{style: "alt", read: "Ezekiel 37:1-14"},
                           %{style: "alt", read: "Zephaniah 3:12-20"}],
@@ -951,8 +1037,8 @@ defmodule SundayReading do
                           %{style: "alt", read: "Genesis 7:1-5, 7:11-18, 8:8-18, 9:8-13"},
                           %{style: "alt", read: "Genesis 22:1-18"},
                           %{style: "alt", read: "Exodus 14:10-end, 15:1"},
-                          %{style: "alt", read: "Isiah 4:2-6"},
-                          %{style: "alt", read: "Isiah 55:1-11"},
+                          %{style: "alt", read: "Isaiah 4:2-6"},
+                          %{style: "alt", read: "Isaiah 55:1-11"},
                           %{style: "alt", read: "Ezekiel 36:24-28"},
                           %{style: "alt", read: "Ezekiel 37:1-14"},
                           %{style: "alt", read: "Zephaniah 3:12-20"}],
@@ -964,8 +1050,8 @@ defmodule SundayReading do
                           %{style: "alt", read: "Genesis 7:1-5, 7:11-18, 8:8-18, 9:8-13"},
                           %{style: "alt", read: "Genesis 22:1-18"},
                           %{style: "alt", read: "Exodus 14:10-end, 15:1"},
-                          %{style: "alt", read: "Isiah 4:2-6"},
-                          %{style: "alt", read: "Isiah 55:1-11"},
+                          %{style: "alt", read: "Isaiah 4:2-6"},
+                          %{style: "alt", read: "Isaiah 55:1-11"},
                           %{style: "alt", read: "Ezekiel 36:24-28"},
                           %{style: "alt", read: "Ezekiel 37:1-14"},
                           %{style: "alt", read: "Zephaniah 3:12-20"}],
@@ -1133,7 +1219,7 @@ defmodule SundayReading do
       %{"2" =>
           %{  "title" => "The Second Sunday of Easter",
               "colors" => ["white"],
-              "a" => %{ ot: [%{style: "req", read: "Acts 3:12a, 3:13-15, 3:17-26"},%{style: "alt", read: "Is 26:1-9, 26:19"}],
+              "a" => %{ ot: [%{style: "req", read: "Acts 3:12a, 3:13-15, 3:17-26"},%{style: "alt", read: "Gen 8:6-16, 9:8-16"}],
                         ps: [%{style: "req", read: "Psalm 111"}],
                         nt: [%{style: "req", read: "1 Jn 5:1-5"}],
                         gs: [%{style: "req", read: "Jn 20:19-31"}]
@@ -1515,7 +1601,7 @@ defmodule SundayReading do
                           gs: [%{style: "req", read: "Mk 6:1-6"}]
                         },
                 "c" => %{ ot: [%{style: "req", read: "Isaiah 66:10-16"}],
-                          ps: [%{style: "req", read: "Psalm 66"},%{style: "opt", read: "Psalm 66:1-8"}],
+                          ps: [%{style: "req", read: "Psalm 66"},%{style: "alt", read: "Psalm 66:1-8"}],
                           nt: [%{style: "opt", read: "Gal 6:1-5"},%{style: "req", read: "Gal 6:6-18"}],
                           gs: [%{style: "req", read: "Lk 10:1-20"}]
                         }
@@ -1534,7 +1620,7 @@ defmodule SundayReading do
                           gs: [%{style: "req", read: "Mark 6:7-13"}]
                         },
                 "c" => %{ ot: [%{style: "req", read: "Deut 30:9-14"}],
-                          ps: [%{style: "req", read: "Psalm 25:1-14"},%{style: "opt", read: "Psalm 25:15-21}]"}],
+                          ps: [%{style: "req", read: "Psalm 25:1-14"},%{style: "opt", read: "Psalm 25:15-21"}],
                           nt: [%{style: "req", read: "Col 1:1-14"}],
                           gs: [%{style: "req", read: "Lk 10:25-37"}]
                         }
@@ -1718,7 +1804,7 @@ defmodule SundayReading do
                           nt: [%{style: "req", read: "Phil 1:21-27"}],
                           gs: [%{style: "req", read: "Mt 20:1-16"}]
                         },
-                "b" => %{ ot: [%{style: "req", read: "Wis 1:16-2:1, 1:12-22"}],
+                "b" => %{ ot: [%{style: "req", read: "Wis 1:16-2:1, 2:12-22"}],
                           ps: [%{style: "req", read: "Psalm 54"}],
                           nt: [%{style: "req", read: "James 3:16-end, 4:1-6"}],
                           gs: [%{style: "req", read: "Mk 9:30-37"}]
@@ -2116,18 +2202,19 @@ defmodule SundayReading do
           "annunciation" =>
             %{  "title" => "The Annunciation (March 25)",
                 "colors" => ["white", "blue"],
+                # canticle 3 & 15 are the same aren't they?
                 "a" => %{ ot: [%{style: "req", read: "Isaiah 7:10-14"}],
-                          ps: [%{style: "req", read: "Psalm 40:1-11"},%{style: "opt", read: "Canticle 3"},%{style: "opt", read: "Canticle 15"}],
+                          ps: [%{style: "req", read: "Psalm 40:1-11"},%{style: "alt", read: "Canticle 3"}], #,%{style: "opt", read: "Canticle 15"}],
                           nt: [%{style: "req", read: "Heb 10:5-10"}],
                           gs: [%{style: "req", read: "Lk 1:26-38"}]
                         },
                 "b" => %{ ot: [%{style: "req", read: "Isaiah 7:10-14"}],
-                          ps: [%{style: "req", read: "Psalm 40:1-11"},%{style: "opt", read: "Canticle 3"},%{style: "opt", read: "Canticle 15"}],
+                          ps: [%{style: "req", read: "Psalm 40:1-11"},%{style: "alt", read: "Canticle 3"}], #,%{style: "opt", read: "Canticle 15"}],
                           nt: [%{style: "req", read: "Heb 10:5-10"}],
                           gs: [%{style: "req", read: "Lk 1:26-38"}]
                         },
                 "c" => %{ ot: [%{style: "req", read: "Isaiah 7:10-14"}],
-                          ps: [%{style: "req", read: "Psalm 40:1-11"},%{style: "opt", read: "Canticle 3"},%{style: "opt", read: "Canticle 15"}],
+                          ps: [%{style: "req", read: "Psalm 40:1-11"},%{style: "alt", read: "Canticle 3"}], #,%{style: "opt", read: "Canticle 15"}],
                           nt: [%{style: "req", read: "Heb 10:5-10"}],
                           gs: [%{style: "req", read: "Lk 1:26-38"}]
                         }
@@ -2573,4 +2660,302 @@ defmodule SundayReading do
   }
 
   end
+
+  def readingList() do
+    [ 
+      {"advent", "1", "a"},
+      {"advent", "2", "a"},
+      {"advent", "3", "a"},
+      {"advent", "4", "a"},
+      {"christmasDay", "1", "a"},
+      {"christmasDay", "2", "a"},
+      {"christmasDay", "3", "a"},
+      {"christmas", "1", "a"},
+      {"holyName", "1", "a"},
+      {"christmas", "2", "a"},
+      {"theEpiphany", "1", "a"},
+      {"epiphany", "1", "a"},
+      {"epiphany", "2", "a"},
+      {"epiphany", "3", "a"},
+      {"epiphany", "4", "a"},
+      {"epiphany", "5", "a"},
+      {"epiphany", "6", "a"},
+      {"presentation", "1", "a"},
+      {"epiphany", "7", "a"},
+      {"epiphany", "8", "a"},
+      {"epiphany", "9", "a"},
+      {"ashWednesday", "1", "a"},
+      {"lent", "1", "a"},
+      {"lent", "2", "a"},
+      {"lent", "3", "a"},
+      {"lent", "4", "a"},
+      {"lent", "5", "a"},
+      {"palmSundayPalms", "1", "a"},
+      {"palmSunday", "1", "a"},
+      {"holyWeek", "1", "a"},
+      {"holyWeek", "2", "a"},
+      {"holyWeek", "3", "a"},
+      {"holyWeek", "4", "a"},
+      {"holyWeek", "5", "a"},
+      {"holyWeek", "6", "a"},
+      {"easterDayVigil", "1", "a"},
+      {"easterDay", "1", "a"},
+      {"easterDay", "2", "a"},
+      {"easterDay", "3", "a"},
+      {"easterWeek", "1", "a"},
+      {"easterWeek", "2", "a"},
+      {"easterWeek", "3", "a"},
+      {"easterWeek", "4", "a"},
+      {"easterWeek", "5", "a"},
+      {"easterWeek", "6", "a"},
+      {"easter", "2", "a"},
+      {"easter", "3", "a"},
+      {"easter", "4", "a"},
+      {"easter", "5", "a"},
+      {"easter", "6", "a"},
+      {"easter", "7", "a"},
+      {"ascension", "1", "a"},
+      {"pentecost", "1", "a"},
+      {"pentecostWeekday", "1", "a"},
+      {"pentecostWeekday", "2", "a"},
+      {"trinity", "1", "a"},
+      {"proper", "1", "a"},
+      {"proper", "2", "a"},
+      {"proper", "3", "a"},
+      {"proper", "4", "a"},
+      {"proper", "5", "a"},
+      {"proper", "6", "a"},
+      {"proper", "7", "a"},
+      {"proper", "8", "a"},
+      {"proper", "9", "a"},
+      {"proper", "10", "a"},
+      {"proper", "11", "a"},
+      {"proper", "12", "a"},
+      {"proper", "13", "a"},
+      {"proper", "14", "a"},
+      {"proper", "15", "a"},
+      {"proper", "16", "a"},
+      {"proper", "17", "a"},
+      {"proper", "18", "a"},
+      {"proper", "19", "a"},
+      {"proper", "20", "a"},
+      {"proper", "21", "a"},
+      {"proper", "22", "a"},
+      {"proper", "23", "a"},
+      {"proper", "24", "a"},
+      {"proper", "25", "a"},
+      {"proper", "26", "a"},
+      {"proper", "27", "a"},
+      {"proper", "28", "a"},
+      {"proper", "29", "a"},
+      {"allSaints", "1", "a"},
+      {"advent", "1", "b"},
+      {"advent", "2", "b"},
+      {"advent", "3", "b"},
+      {"advent", "4", "b"},
+      {"christmasDay", "1", "b"},
+      {"christmasDay", "2", "b"},
+      {"christmasDay", "3", "b"},
+      {"christmas", "1", "b"},
+      {"holyName", "1", "b"},
+      {"christmas", "2", "b"},
+      {"theEpiphany", "1", "b"},
+      {"epiphany", "1", "b"},
+      {"epiphany", "2", "b"},
+      {"epiphany", "3", "b"},
+      {"epiphany", "4", "b"},
+      {"epiphany", "5", "b"},
+      {"epiphany", "6", "b"},
+      {"presentation", "1", "b"},
+      {"epiphany", "7", "b"},
+      {"epiphany", "8", "b"},
+      {"epiphany", "9", "b"},
+      {"ashWednesday", "1", "b"},
+      {"lent", "1", "b"},
+      {"lent", "2", "b"},
+      {"lent", "3", "b"},
+      {"lent", "4", "b"},
+      {"lent", "5", "b"},
+      {"palmSundayPalms", "1", "b"},
+      {"palmSunday", "1", "b"},
+      {"holyWeek", "1", "b"},
+      {"holyWeek", "2", "b"},
+      {"holyWeek", "3", "b"},
+      {"holyWeek", "4", "b"},
+      {"holyWeek", "5", "b"},
+      {"holyWeek", "6", "b"},
+      {"easterDayVigil", "1", "b"},
+      {"easterDay", "1", "b"},
+      {"easterDay", "2", "b"},
+      {"easterDay", "3", "b"},
+      {"easterWeek", "1", "b"},
+      {"easterWeek", "2", "b"},
+      {"easterWeek", "3", "b"},
+      {"easterWeek", "4", "b"},
+      {"easterWeek", "5", "b"},
+      {"easterWeek", "6", "b"},
+      {"easter", "2", "b"},
+      {"easter", "3", "b"},
+      {"easter", "4", "b"},
+      {"easter", "5", "b"},
+      {"easter", "6", "b"},
+      {"easter", "7", "b"},
+      {"ascension", "1", "b"},
+      {"pentecost", "1", "b"},
+      {"pentecostWeekday", "1", "b"},
+      {"pentecostWeekday", "2", "b"},
+      {"trinity", "1", "b"},
+      {"proper", "1", "b"},
+      {"proper", "2", "b"},
+      {"proper", "3", "b"},
+      {"proper", "4", "b"},
+      {"proper", "5", "b"},
+      {"proper", "6", "b"},
+      {"proper", "7", "b"},
+      {"proper", "8", "b"},
+      {"proper", "9", "b"},
+      {"proper", "10", "b"},
+      {"proper", "11", "b"},
+      {"proper", "12", "b"},
+      {"proper", "13", "b"},
+      {"proper", "14", "b"},
+      {"proper", "15", "b"},
+      {"proper", "16", "b"},
+      {"proper", "17", "b"},
+      {"proper", "18", "b"},
+      {"proper", "19", "b"},
+      {"proper", "20", "b"},
+      {"proper", "21", "b"},
+      {"proper", "22", "b"},
+      {"proper", "23", "b"},
+      {"proper", "24", "b"},
+      {"proper", "25", "b"},
+      {"proper", "26", "b"},
+      {"proper", "27", "b"},
+      {"proper", "28", "b"},
+      {"proper", "29", "b"},
+      {"allSaints", "1", "b"},
+      {"advent", "1", "c"},
+      {"advent", "2", "c"},
+      {"advent", "3", "c"},
+      {"advent", "4", "c"},
+      {"christmasDay", "1", "c"},
+      {"christmasDay", "2", "c"},
+      {"christmasDay", "3", "c"},
+      {"christmas", "1", "c"},
+      {"holyName", "1", "c"},
+      {"christmas", "2", "c"},
+      {"theEpiphany", "1", "c"},
+      {"epiphany", "1", "c"},
+      {"epiphany", "2", "c"},
+      {"epiphany", "3", "c"},
+      {"epiphany", "4", "c"},
+      {"epiphany", "5", "c"},
+      {"epiphany", "6", "c"},
+      {"presentation", "1", "c"},
+      {"epiphany", "7", "c"},
+      {"epiphany", "8", "c"},
+      {"epiphany", "9", "c"},
+      {"ashWednesday", "1", "c"},
+      {"lent", "1", "c"},
+      {"lent", "2", "c"},
+      {"lent", "3", "c"},
+      {"lent", "4", "c"},
+      {"lent", "5", "c"},
+      {"palmSundayPalms", "1", "c"},
+      {"palmSunday", "1", "c"},
+      {"holyWeek", "1", "c"},
+      {"holyWeek", "2", "c"},
+      {"holyWeek", "3", "c"},
+      {"holyWeek", "4", "c"},
+      {"holyWeek", "5", "c"},
+      {"holyWeek", "6", "c"},
+      {"easterDayVigil", "1", "c"},
+      {"easterDay", "1", "c"},
+      {"easterDay", "2", "c"},
+      {"easterDay", "3", "c"},
+      {"easterWeek", "1", "c"},
+      {"easterWeek", "2", "c"},
+      {"easterWeek", "3", "c"},
+      {"easterWeek", "4", "c"},
+      {"easterWeek", "5", "c"},
+      {"easterWeek", "6", "c"},
+      {"easter", "2", "c"},
+      {"easter", "3", "c"},
+      {"easter", "4", "c"},
+      {"easter", "5", "c"},
+      {"easter", "6", "c"},
+      {"easter", "7", "c"},
+      {"ascension", "1", "c"},
+      {"pentecost", "1", "c"},
+      {"pentecostWeekday", "1", "c"},
+      {"pentecostWeekday", "2", "c"},
+      {"trinity", "1", "c"},
+      {"proper", "1", "c"},
+      {"proper", "2", "c"},
+      {"proper", "3", "c"},
+      {"proper", "4", "c"},
+      {"proper", "5", "c"},
+      {"proper", "6", "c"},
+      {"proper", "7", "c"},
+      {"proper", "8", "c"},
+      {"proper", "9", "c"},
+      {"proper", "10", "c"},
+      {"proper", "11", "c"},
+      {"proper", "12", "c"},
+      {"proper", "13", "c"},
+      {"proper", "14", "c"},
+      {"proper", "15", "c"},
+      {"proper", "16", "c"},
+      {"proper", "17", "c"},
+      {"proper", "18", "c"},
+      {"proper", "19", "c"},
+      {"proper", "20", "c"},
+      {"proper", "21", "c"},
+      {"proper", "22", "c"},
+      {"proper", "23", "c"},
+      {"proper", "24", "c"},
+      {"proper", "25", "c"},
+      {"proper", "26", "c"},
+      {"proper", "27", "c"},
+      {"proper", "28", "c"},
+      {"proper", "29", "c"},
+      {"allSaints", "1", "c"},
+      {"redLetter", "transfiguration", "c"},
+      {"redLetter", "stJamesOfJerusalem", "c"},
+      {"redLetter", "stJohn", "c"},
+      {"redLetter", "confessionOfStPeter", "c"},
+      {"redLetter", "annunciation", "c"},
+      {"redLetter", "holyInnocents", "c"},
+      {"redLetter", "conversionOfStPaul", "c"},
+      {"redLetter", "stsPhilipAndJames", "c"},
+      {"redLetter", "bvm", "c"},
+      {"redLetter", "stPeterAndPaul", "c"},
+      {"redLetter", "visitation", "c"},
+      {"redLetter", "michaelAllAngels", "c"},
+      {"redLetter", "stBarnabas", "c"},
+      {"redLetter", "memorial", "c"},
+      {"redLetter", "thanksgiving", "c"},
+      {"redLetter", "presentation", "c"},
+      {"redLetter", "allSaints", "c"},
+      {"redLetter", "stLuke", "c"},
+      {"redLetter", "independence", "c"},
+      {"redLetter", "stThomas", "c"},
+      {"redLetter", "stJames", "c"},
+      {"redLetter", "nativityOfJohnTheBaptist", "c"},
+      {"redLetter", "stMaryMagdalene", "c"},
+      {"redLetter", "stMatthew", "c"},
+      {"redLetter", "remembrance", "c"},
+      {"redLetter", "stBartholomew", "c"},
+      {"redLetter", "stsSimonAndJude", "c"},
+      {"redLetter", "holyCross", "c"},
+      {"redLetter", "stStephen", "c"},
+      {"redLetter", "dominion", "c"},
+      {"redLetter", "stMatthias", "c"},
+      {"redLetter", "stJoseph", "c"},
+      {"redLetter", "stMark", "c"},
+      {"redLetter", "stAndrew", "c"}
+    ]
+  end
+
 end
