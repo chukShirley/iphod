@@ -2736,7 +2736,7 @@ defmodule DailyReading do
             "Tuesday" =>    %{title: "Tuesday",
                             colors: ["green"],
                             mp1: [%{style: "opt", read: "1 Kings 15"},%{style: "opt", read: "1 Kings 16:1-14"},%{style: "req", read: "1 Kings 16:15-end"}],
-                            mp2: [%{style: "req", read: "2 Cor 5:20-7:1"}],
+                            mp2: [%{style: "req", read: "2 Cor 5:20-end, 6:1-end, 7:1"}],
                             ep1: [%{style: "req", read: "1 Kings 17"}],
                             ep2: [%{style: "req", read: "Luke 21:5-end"}]
                             },
