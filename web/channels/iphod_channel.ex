@@ -10,9 +10,11 @@ defmodule Iphod.IphodChannel do
   import Iphod.Mailer
   use Iphod.Web, :channel
   use Timex
+  use Appsignal.Instrumentation.Decorators
   @tz "America/Los_Angeles"
   @email %{ from: "", topic: "", text: ""}
 
+  @decorate channel_action()
 
   def join("iphod:readings", payload, socket) do
     if authorized?(payload) do
@@ -22,6 +24,7 @@ defmodule Iphod.IphodChannel do
       {:error, %{reason: "unauthorized"}}
     end
   end
+
 
   def handle_in(request, params, socket) do
     response = handle_request(request, params, socket)

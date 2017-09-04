@@ -37,5 +37,6 @@ defmodule Iphod.Endpoint do
     key: "_iphod_key",
     signing_salt: "tFK8XVUK"
 
+  use Appsignal.Phoenix
   plug Iphod.Router
 end

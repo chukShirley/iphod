@@ -1,6 +1,9 @@
 require IEx
 defmodule Iphod.StationsChannel do
   use Iphod.Web, :channel
+  use Appsignal.Instrumentation.Decorators
+  @decorate channel_action()
+  
   alias Stations
 
   def join("stations", payload, socket) do

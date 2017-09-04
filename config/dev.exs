@@ -54,3 +54,5 @@ config :iphod,    Iphod.Repo,
        database:  "legereme",
        pool_size: 10
 
+
+config :appsignal, :config, active: true

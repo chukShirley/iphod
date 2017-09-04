@@ -10,6 +10,7 @@ config :iphod,
 
 # Configures the endpoint
 config :iphod, Iphod.Endpoint,
+  instrumenters: [Appsignal.Phoenix.Instrumenter],
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -46,7 +47,11 @@ end
 
 # Configure phoenix generators
 config :phoenix, :generators,
+  eex: Appsignal.Phoenix.Template.EExEngine,
+  exs: Appsignal.Phoenix.Template.ExsEngine,
   migration: true,
   binary_id: false
 
 config :iphod, Iphod.Gettext, default_locale: "en"
+
+import_config "appsignal.exs"

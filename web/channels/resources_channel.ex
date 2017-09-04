@@ -2,6 +2,9 @@ require IEx
 require Poison
 defmodule Iphod.ResourcesChannel do
   use Iphod.Web, :channel
+  use Appsignal.Instrumentation.Decorators
+  @decorate channel_action()
+  
   import Ecto.Query
   alias Iphod.Resources
   alias Iphod.Repo

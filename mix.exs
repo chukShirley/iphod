@@ -19,7 +19,7 @@ defmodule Iphod.Mixfile do
   def application do
     [mod: {Iphod, []},
      applications: [:mix, :phoenix, :phoenix_html, :phoenix_pubsub, :phoenix_integration,
-                    # :phoenix_live_reload, 
+                    :appsignal, # :phoenix_live_reload, 
                     :cowboy, :logger, :gettext, :comeonin,
                     :phoenix_ecto, :postgrex, :timex, :httpoison,
                     :mailgun, :earmark, :floki,
@@ -58,7 +58,8 @@ defmodule Iphod.Mixfile do
       {:edeliver, "~> 1.4.0"},
       {:distillery, "~> 1.1"},
       {:comeonin, "~> 3.0"},
-      {:credo, "~> 0.8", only: [:dev, :test], runtime: false}
+      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:appsignal, "~> 1.0"}
      # {:exometer_core, "~> 1.4.0"},
      # {:exometer, "~> 1.2.1"},
      # {:edown, github: "uwiger/edown", tag: "0.7", override: true}

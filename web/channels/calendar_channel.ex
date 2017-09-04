@@ -3,7 +3,9 @@ require Poison
 defmodule Iphod.CalendarChannel do
   use Iphod.Web, :channel
   use Timex
-
+  use Appsignal.Instrumentation.Decorators
+  @decorate channel_action()
+  
   def join("calendar", payload, socket) do
     if authorized?(payload) do
       # send self(), :after_join
