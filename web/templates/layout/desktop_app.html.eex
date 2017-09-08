@@ -42,7 +42,7 @@
           text-align: center;
           width: 80%;
           margin-left: 10%;
-          background-image: url("/images/irma.jpg");
+          background-image: url("/images/irma.png");
         }
       </style>
 
