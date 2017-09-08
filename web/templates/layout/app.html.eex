@@ -28,12 +28,29 @@
   <body class= <%= @page_controller %> >
     <input id="csrf_token" type="hidden" name="csrf-token" value="<%= get_csrf_token() %>" >
     <div id="ardf-donation">
-      <p style="background-color: lightblue; border-style: solid;border-width: 4pt; border-color: darkblue; border-radius: 5px;text-align: center; width: 80%;margin-left: 10%;">
+      <style>
+        p.banner {
+          color: white;
+          border-style: solid;
+          border-width: 4pt;
+          border-color: darkblue;
+          border-radius: 5px;
+          text-align: center;
+          width: 80%;
+          margin-left: 10%;
+          background-image: url("/images/irma.png");
+          background-repeat: repeat-x;
+          background-color: lightblue;
+        }
+      </style>
+      <p class="banner">
         <span style="font-size: 2em;">Donate to Anglican Relief and Development Fund</span>
         <br />
-        <span style="font-size: 1.5em;">For Hurricane Harvey Relief</span>
+        <span style="font-size: 1.5em;">For Hurricane Harvey Relief: </span>
+        <a href="https://interland3.donorperfect.net/weblink/weblink.aspx?name=E92060&id=93&utm_source=Diocesan+Newsletter&utm_campaign=4b2e7da041-EMAIL_CAMPAIGN_2017_08_18&utm_medium=email&utm_term=0_16cfed5f45-4b2e7da041-711084417" style="font-size: 1.2em;color:wheat;">Click Here</a>
         <br />
-        <a href="https://interland3.donorperfect.net/weblink/weblink.aspx?name=E92060&id=93&utm_source=Diocesan+Newsletter&utm_campaign=4b2e7da041-EMAIL_CAMPAIGN_2017_08_18&utm_medium=email&utm_term=0_16cfed5f45-4b2e7da041-711084417" style="font-size: 1.2em;">Click Here</a>
+        <span style="font-size: 1.5em;">For Hurricane Irma Relief: </span>
+        <a href="https://interland3.donorperfect.net/weblink/weblink.aspx?name=E92060&id=94" style="font-size: 1.2em; color:white;">Click Here</a>
       </p>
     </div>
     <div id="header">
