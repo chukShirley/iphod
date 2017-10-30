@@ -1,0 +1,336 @@
+var _user$project$Iphod_Models$initLeaflet = {reg: '', largePrint: ''};
+var _user$project$Iphod_Models$initBiblesOrg = {url: 'https://bibles.org/v2/passages.js?q[]=', key: 'P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT', foot_notes: true};
+var _user$project$Iphod_Models$initESV = {url: 'www.esvapi.org/v2/rest/passageQuery?', key: '10b28dac7c57fd96', foot_notes: true};
+var _user$project$Iphod_Models$initReflection = {author: '', markdown: ''};
+var _user$project$Iphod_Models$setSectionUpdate = F3(
+	function (this_section, this_version, thisRef) {
+		return {section: this_section, version: this_version, ref: thisRef};
+	});
+var _user$project$Iphod_Models$initSectionUpdate = {section: '', version: '', ref: ''};
+var _user$project$Iphod_Models$initSundayCollect = {
+	instruction: '',
+	title: '',
+	collects: {ctor: '[]'},
+	show: true
+};
+var _user$project$Iphod_Models$initDaily = {
+	date: '',
+	title: '',
+	collect: _user$project$Iphod_Models$initSundayCollect,
+	mp1: {ctor: '[]'},
+	mp2: {ctor: '[]'},
+	mpp: {ctor: '[]'},
+	ep1: {ctor: '[]'},
+	ep2: {ctor: '[]'},
+	epp: {ctor: '[]'},
+	ot: {ctor: '[]'},
+	ps: {ctor: '[]'},
+	nt: {ctor: '[]'},
+	gs: {ctor: '[]'},
+	show: false,
+	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
+};
+var _user$project$Iphod_Models$initCollect = {
+	collect: '',
+	propers: {ctor: '[]'}
+};
+var _user$project$Iphod_Models$initProper = {title: '', text: ''};
+var _user$project$Iphod_Models$initLesson = {
+	style: '',
+	show: false,
+	show_fn: true,
+	show_vn: true,
+	read: '',
+	body: '',
+	id: '',
+	section: '',
+	version: '',
+	altRead: '',
+	notes: {ctor: '[]'},
+	cmd: ''
+};
+var _user$project$Iphod_Models$userInit = {username: '', realname: '', email: '', description: '', error_msg: '', token: '', password: '', password_confirmation: ''};
+var _user$project$Iphod_Models$emailInit = {from: '', topic: '', text: ''};
+var _user$project$Iphod_Models$currentReadingsInit = {ps: '', ps_ver: '', reading1: '', reading1_ver: '', reading2: '', reading2_ver: '', reading3: '', reading3_ver: '', reading_date: ''};
+var _user$project$Iphod_Models$configInit = {
+	ot: 'ESV',
+	ps: 'Coverdale',
+	nt: 'ESV',
+	gs: 'ESV',
+	fnotes: 'True',
+	vers: {
+		ctor: '::',
+		_0: 'ESV',
+		_1: {ctor: '[]'}
+	},
+	current: 'ESV'
+};
+var _user$project$Iphod_Models$sundayInit = {
+	ofType: '',
+	date: '',
+	season: '',
+	week: '',
+	title: '',
+	show: false,
+	config: _user$project$Iphod_Models$configInit,
+	colors: {ctor: '[]'},
+	collect: _user$project$Iphod_Models$initSundayCollect,
+	ot: {ctor: '[]'},
+	ps: {ctor: '[]'},
+	nt: {ctor: '[]'},
+	gs: {ctor: '[]'},
+	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
+};
+var _user$project$Iphod_Models$initDay = {
+	name: '',
+	colors: {ctor: '[]'},
+	dayOfMonth: '',
+	date: '',
+	daily: _user$project$Iphod_Models$initDaily,
+	sunday: _user$project$Iphod_Models$sundayInit,
+	today: false
+};
+var _user$project$Iphod_Models$initDailyMP = {
+	colors: {ctor: '[]'},
+	date: '',
+	day: '',
+	season: '',
+	title: '',
+	week: '',
+	config: _user$project$Iphod_Models$configInit,
+	show: false,
+	collect: _user$project$Iphod_Models$initSundayCollect,
+	mp1: {ctor: '[]'},
+	mp2: {ctor: '[]'},
+	mpp: {ctor: '[]'},
+	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
+};
+var _user$project$Iphod_Models$initDailyEP = {
+	colors: {ctor: '[]'},
+	date: '',
+	day: '',
+	season: '',
+	title: '',
+	week: '',
+	config: _user$project$Iphod_Models$configInit,
+	show: false,
+	collect: _user$project$Iphod_Models$initSundayCollect,
+	ep1: {ctor: '[]'},
+	ep2: {ctor: '[]'},
+	epp: {ctor: '[]'},
+	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
+};
+var _user$project$Iphod_Models$initShout = {
+	section: '',
+	text: '',
+	time: '',
+	user: '',
+	showChat: false,
+	chat: {ctor: '[]'},
+	comment: ''
+};
+var _user$project$Iphod_Models$initNote = {reading: '', text: '', time: ''};
+var _user$project$Iphod_Models$initResource = {id: '', url: '', name: '', of_type: '', keys: '', description: '', show: true};
+var _user$project$Iphod_Models$Resource = F7(
+	function (a, b, c, d, e, f, g) {
+		return {id: a, url: b, name: c, of_type: d, keys: e, description: f, show: g};
+	});
+var _user$project$Iphod_Models$Note = F3(
+	function (a, b, c) {
+		return {reading: a, text: b, time: c};
+	});
+var _user$project$Iphod_Models$Shout = F7(
+	function (a, b, c, d, e, f, g) {
+		return {section: a, text: b, time: c, user: d, showChat: e, chat: f, comment: g};
+	});
+var _user$project$Iphod_Models$Config = F7(
+	function (a, b, c, d, e, f, g) {
+		return {ot: a, ps: b, nt: c, gs: d, fnotes: e, vers: f, current: g};
+	});
+var _user$project$Iphod_Models$CurrentReadings = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {ps: a, ps_ver: b, reading1: c, reading1_ver: d, reading2: e, reading2_ver: f, reading3: g, reading3_ver: h, reading_date: i};
+	});
+var _user$project$Iphod_Models$Email = F3(
+	function (a, b, c) {
+		return {from: a, topic: b, text: c};
+	});
+var _user$project$Iphod_Models$User = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {username: a, realname: b, email: c, description: d, error_msg: e, token: f, password: g, password_confirmation: h};
+	});
+var _user$project$Iphod_Models$Lesson = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return {style: a, show: b, show_fn: c, show_vn: d, read: e, body: f, id: g, section: h, version: i, altRead: j, notes: k, cmd: l};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Iphod_Models$Proper = F2(
+	function (a, b) {
+		return {title: a, text: b};
+	});
+var _user$project$Iphod_Models$Collect = F2(
+	function (a, b) {
+		return {collect: a, propers: b};
+	});
+var _user$project$Iphod_Models$SundayCollect = F4(
+	function (a, b, c, d) {
+		return {instruction: a, title: b, collects: c, show: d};
+	});
+var _user$project$Iphod_Models$SectionUpdate = F3(
+	function (a, b, c) {
+		return {section: a, version: b, ref: c};
+	});
+var _user$project$Iphod_Models$Sunday = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return {ofType: a, date: b, season: c, week: d, title: e, show: f, config: g, colors: h, collect: i, ot: j, ps: k, nt: l, gs: m, sectionUpdate: n};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Iphod_Models$Daily = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return function (o) {
+															return {date: a, title: b, collect: c, mp1: d, mp2: e, mpp: f, ep1: g, ep2: h, epp: i, ot: j, ps: k, nt: l, gs: m, show: n, sectionUpdate: o};
+														};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Iphod_Models$DailyMP = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, mp1: j, mp2: k, mpp: l, sectionUpdate: m};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Iphod_Models$DailyEP = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, ep1: j, ep2: k, epp: l, sectionUpdate: m};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _user$project$Iphod_Models$Reflection = F2(
+	function (a, b) {
+		return {author: a, markdown: b};
+	});
+var _user$project$Iphod_Models$ESV = F3(
+	function (a, b, c) {
+		return {url: a, key: b, foot_notes: c};
+	});
+var _user$project$Iphod_Models$BiblesOrg = F3(
+	function (a, b, c) {
+		return {url: a, key: b, foot_notes: c};
+	});
+var _user$project$Iphod_Models$Day = F7(
+	function (a, b, c, d, e, f, g) {
+		return {name: a, colors: b, dayOfMonth: c, date: d, daily: e, sunday: f, today: g};
+	});
+var _user$project$Iphod_Models$Leaflet = F2(
+	function (a, b) {
+		return {reg: a, largePrint: b};
+	});

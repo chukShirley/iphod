@@ -1,5 +1,5 @@
 defmodule Iphod.ResourcesControllerTest do
-  use Iphod.ConnCase
+  use IphodWeb.ChannelCase
 
   alias Iphod.Resources
   @valid_attrs %{ description: "some content", 

@@ -1,3 +1,3 @@
 defmodule Iphod.LayoutViewTest do
-  use Iphod.ConnCase, async: true
+  use IphodWeb.ChannelCase, async: true
 end

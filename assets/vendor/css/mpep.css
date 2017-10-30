@@ -1,0 +1,605 @@
+/*!
+ * styles for morning and evening prayer
+*/
+body {
+  min-width: 35em;
+  max-width: 100%;
+  font-size: 14px;
+}
+@media screen and (max-width: 550px) { 
+  body { width: 92%; } 
+}
+
+#header     { 
+  position: relative;
+  width: 100%; 
+  top: -1em;
+  padding-bottom: 1em;
+}
+#container  { 
+  position: relative;
+  width: 100%;
+}
+ 
+h3 {
+  margin-bottom: 0.2em;
+}
+.mpep {
+  position: relative;
+  top: -3em;
+  font-family: "Georgia, Times New Roman, Times, serif";
+  font-size: 1em;
+  margin-left: 2em;
+  width: 93%;
+}
+
+div#chat-container {
+  width: 36%;
+  margin-left: 62%;
+}
+
+button.more-options{
+  display: none;
+}
+
+.mpep p{
+  position: relative;
+  margin: 0;
+}
+
+p.office {
+  position: relative;
+  width: 100%;
+}
+p.np_scripture {
+  margin-top: 1em;
+}
+ol.fam_ol{
+  list-style-type: lower-alpha;
+}
+
+.title1 {
+  font-size: 1.2em;
+  text-align: center;
+}
+
+.title2 {
+  font-size: 1.1em;
+  text-align: center;
+}
+
+.midday {
+  position: relative;
+  top: 0em;
+  font-size: 2em;
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+.italic { 
+  font-style: italic;
+  font-size: 1.1em; 
+}
+
+.rubric {
+  padding: 0.5em 0;
+  font-size: 0.8em;
+  font-style: italic;
+  color: red;
+  width: 100%;
+}
+p.rubric-office {
+  padding: 0.5em 0;
+  font-size: 0.8em;
+  font-style: italic;
+  color: red;
+  width: 100%;  
+}
+.rubric-newline {
+  top: -0.6em;
+  padding: 0 0 0.5em 0;
+  font-size: 0.8em;
+  font-style: italic;
+  color: red;
+}
+
+.rubric_black {
+  font-siz: 0.8em;
+  font-style: italic;
+  color: black;
+}
+
+.bible_ref {
+  font-size: 0.8em;
+  font-style: italic;
+  margin: -1em 0 1em 0;
+  padding: 0;
+}
+
+.section {
+  padding-top: 0.5em;
+  font-size: 1.0em;
+  font-weight: bold;
+}
+
+.default {
+  font-size: 1.0em;
+}
+
+ul.psalm {
+  list-style: none;
+  position: relative;
+}
+ul.psalm li{
+  position: relative;
+  left: -2em;
+}
+li.ps_first_cont {
+  margin-left: 0.7em;
+  top: -0.1em;
+}
+li.ps_second_cont {
+  margin-left: 2.5em;
+  top: -0.4em;
+}
+
+.reading { font-size: 1.0em }
+.alt_reading {
+  margin-left: 2em;
+  background-color: lightgrey;
+}
+
+.indent_italic {
+  font-size: 1.0em;
+  font-style: italic;
+  margin: 0 0 0 2em;
+  padding: 0;
+}
+
+.versical-speaker {
+  font-style: italic;
+  width: 4em;
+}
+.versical-speaker-says {
+  position: absolute;
+  left: 5em;
+}
+
+.agnus-dei-resp{
+  padding-left: 3em;
+  font-style: italic;
+  font-size: 1.02em;
+}
+
+.vspeaker {
+  font-style: italic;
+  padding: 0 2em 0 0;
+}
+
+.vspeaker_says {
+  position: absolute;
+  left: 10em;
+}
+
+.vs {
+  position: relative;
+  top: -0.3em;
+  padding-right: 0.3em;
+  font-size: 0.8em;
+  color: darkred;
+}
+
+.pb_vs {
+  text-indent: -2em;
+  font-size: 1em;
+  margin: 0;
+  padding: 0 0 0 2em;
+
+}
+
+.pb_vs_indent {
+  font-size: 1em;
+  margin: 0;
+  padding: 0 0 0 2em;
+}
+
+.canticle {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.canticle_title {
+  font-size: 1em;
+  margin: 0;
+  font-weight: bold;
+  padding: 0 2em 0 0;
+}
+
+.canticle_name {
+  font-size: 1em;
+  margin: 0;
+  font-style: italic;
+  padding: 0;
+}
+
+.mercy {
+  margin: 0;
+  padding: 0;
+}
+
+.mercy_italic {
+  margin: 0;
+  padding: 0;
+  font-style: italic;
+}
+
+.invitatory tr td {
+  vertical-align: top;
+}
+.invitatory-init {
+  font-style: italic;
+  padding-right: 2em;
+}
+.invitatory-speaker {
+  font-style: italic;
+}
+
+/*
+.prayer_table td {
+  padding: 0;
+}
+*/
+
+.ps_vs_num {
+  color: blue;
+  width: 2em;
+}
+
+.ps_first {
+    position: relative;
+    padding-left: 1.5em;
+    padding-bottom: 0.8;
+    text-indent: -1.5em;
+}
+
+.ps_second {
+    position: relative;
+    top: -0.2em;
+    padding-left: 4em;
+    text-indent: -1.5em;
+}
+
+.np_collect {
+  padding-bottom: 1.5em;
+}
+
+ul.versicals {
+  width: 70%;
+  overflow: hidden;
+  padding-left: 0em;
+  margin-top: 0em;
+}
+
+li.speaker {
+  float: left;
+  line-height: 1.2em;
+  display: inline;
+  width: 25%;
+  font-style: italic;  
+}
+
+.says {
+  float: left;
+  line-height: 1.2em;
+  display: inline;
+  width: 75%;
+}
+
+li.ref-button {
+  float: left;
+  line-height: 1.2em;
+  display: inline;
+  width: 10em;
+}
+
+button.text_button {
+  font-size: 0.9em;
+  cursor: pointer;
+  box-shadow: -2px 3px 8px #888888;
+  border-radius: 5px;
+  border: solid 2px darkred;
+  background-color: darkred;
+  color: honeydew;
+  margin: 0.2em;
+}
+
+li.ref-desc {
+  float: left;
+  line-height: 1.2em;
+  display: inline;
+}
+
+div.text {
+  display: none;
+  position: relative;
+  line-height: 1.2em;
+  width: 90%;
+  margin: 1em 0;
+  }
+
+li.litany1 {
+  position: relative;
+  margin: 0.8em 0;
+  line-height: 0.5em;
+}
+
+li.litany2 {
+  position: relative;
+  top: -0.2em;
+  font-style: italic;
+  font-size: 1.1em;
+  padding-bottom: 0.5em;
+  line-height: 1em;
+}
+
+.extra_indent {
+  float: left;
+  line-height: 1.2em;
+  display: inline;
+  width: 30%;
+}
+
+.extra_indent_says {
+  float: left;
+  line-height: 1.2em;
+  display: inline;
+  width: 70%;
+}
+
+.s_ref {
+  font-style: italic;
+  font-size: 0.8em;
+}
+
+.prayer-type {
+   padding-top: 1em;
+   font-style: italic;
+}
+
+.comp_scripture {
+  padding-bottom: 1em;
+}
+
+.comp_collect {
+  padding-bottom: 1em;
+}
+
+.recon-scripture {
+  padding-top: 0.5em;
+  width: 100%;
+}
+
+ul.appro_readings{
+  list-style: none;
+}
+
+.alt_readings { /* dropdown */
+  position: relative;
+  display: inline-block;
+  padding-bottom: 1em;
+}
+
+.alt_readings p {
+  display: none;
+  padding-top: 1em;
+}
+
+.alt_readings-button{ /* dropbtn */
+  padding: 0.5em;
+  font-size: 0.8em;
+  border: none;
+  cursor: pointer;
+  background-color: white;
+  border: solid 1px black;
+}
+
+.alt_readings-options { /* dropdown-content */
+  position: absolute;
+  display: none;
+  top: 0.8em;
+  z-index: 9;
+  padding-left: 1em;
+  min-width: 12em;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+
+.alt_readings-options li{ /* dropdown-content a */
+  color: black;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  display: block;
+}
+
+p.song_sim_1{
+  margin-left: 2em;
+  text-indent: -2em;
+  width: 100%;
+}
+
+p.song_sim_2{
+  margin-left: 2em;
+  text-indent: -2em;
+  width: 100%;
+}
+
+p.family_section_title{
+  padding-top: 1em;
+  font-size: 1.2em;
+  font-style: italic;
+}
+
+/*
+.alt_readings-options li:hover { 
+  background-color: #f1f1f1 
+}
+.alt_readings:hover .alt_readings-options {
+  display: block;
+}
+.alt_readings-options:hover .alt_readings-button {
+  background-color: #3e8e41;
+}
+*/
+
+/*
+  .mpep {
+    width: 93%;
+    margin-left: 0.5em;
+  }
+*/
+  @media screen and (max-width: 500px) {
+    .mpep { margin-top: 1em;}
+    .pb_vs_indent { padding: 0 0 0 1em;}
+    h3 { 
+      font-size: 1em;
+    }
+    div.text {
+      width: 18em;
+      margin-left: -1em;
+    }
+    .invitatory-init {padding-right: 1em;}
+    .offices {padding-bottom: 0;}
+    
+    div.m-options1 {
+      position: relative;
+      top: -5em;
+    }
+    button.more-options {
+      display: block;
+      position: relative;
+      float: right;
+      right: 2%;
+      margin-top: -4.5em;
+      text-align: center;
+    }
+    div#chat-container {
+      margin-left: 5%;
+      width: 90%;
+    }
+    li.option-item { visibility: hidden; }
+    li.option-item { 
+      float: right;
+      display: inline-block;
+      margin-bottom: 0.5em;
+    }
+  
+    .offices-options {
+      position: absolute;
+      top: -3em;
+      left: 7em;
+      padding-left: 1em;
+      min-width: 9em;
+      background-color: floralwhite;
+    }
+  
+    ul#header-offices-options li { 
+      position: fixed; 
+      display: block;
+      margin-left: 0;
+      top: 0.8em;
+      z-index: 9;
+      padding-left: 1em;
+      min-width: 7.5em;
+      background-color: #f9f9f9;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+  
+    ul#header-options.responsive {
+      margin-left: 0;
+      position: fixed;
+      display: block;
+      margin-left: 0;
+      top: 0.8em;
+      z-index: 9;
+      padding-left: 1em;
+      min-width: 7.5em;
+      background-color: floralwhite;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+  
+    ul#header-options.responsive li.option-item {
+      margin-top: 1em;
+      display: block;
+      line-height: 1em;
+    }
+    ul#header-options.responsive li.offices-item {
+      top: 0;
+      display: block;
+      margin-top: 0em;
+    }
+    ul#header-options.responsive li {
+      float: none;
+      display: inline;
+      visibility: visible;
+      z-index: 9;
+      line-height: 1em;
+    }
+    ul#header-options.responsive li a {
+      display: block;
+    }
+    li.offices-item button{
+      line-height: 1em;
+      padding: 0;
+    }
+    ul.versicals {
+      width: 100%;
+    }
+    li.litany1 {
+      position: relative;
+      padding-left: 2em;
+      text-indent: -1.5em;
+      line-height: 1em;
+      margin-top: 0;
+      margin-bottom: 0.2em;
+    }
+    li.litany2 {
+      position: relative;
+      padding-left: 2em;
+      padding-top: 0em; 
+      text-indent: -1.5em;
+      line-height: 1em;
+      margin-top: 0;
+      margin-bottom: 0.2em;
+    }
+  
+  /*
+    li.speaker {width: 25%;}
+    li.says {width: 75%;}
+  */
+  
+    .canticle { padding-bottom: 0;}
+    ul.psalm { 
+      width: 100%;
+      margin-top: 0;
+    }
+    .ps_first {
+      width: 92%;
+    }
+    .ps_second {
+      padding-left: 1em;
+      text-indent: -0.5em;
+      width: 90%;
+    }
+    li.ps_second_cont { padding-left: 1.5em; }
+
+    @media screen and (max-width: 320) {
+      .mpep { margin-top: 2em;}
+    }
+    @media screen and (max-width: 320px) {
+      .mpep { margin-top: 2.5em;}
+      button.more-options { top: -0.5em;}
+    }
+  }

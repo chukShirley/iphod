@@ -1,6 +1,6 @@
 require IEx
 defmodule DailyReading do
-  import Iphod.Gettext, only: [dgettext: 2]
+  import IphodWeb.Gettext, only: [dgettext: 2]
   # import Psalms, only: [morning: 1, evening: 1]
   import SundayReading, only: [collect_today: 1]
   import Lityear, only: [right_after_ascension?: 1, right_after_ash_wednesday?: 1, good_friday?: 1]

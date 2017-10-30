@@ -1,0 +1,48 @@
+/*!
+ * stations.css
+ */
+
+body.stations {
+  width: 98%;
+}
+
+#stations-container {
+  margin-left: 0.5em;
+  width: 100%;
+}
+
+button.stn-button {
+  margin-right: 1.0em;
+  box-shadow: -2px 3px 8px #888888;
+  border-radius: 5px;
+  border: solid 2px darkred;
+  color: honeydew;
+  background-color: darkred;
+}
+
+p#art {
+  margin-left: 1em;
+}
+
+
+img.art-image {
+  margin: 1em;
+  width:  95%;
+}
+
+div.art-figure {
+  float: left;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.art-reading {
+  margin-left: 1em;
+}
+
+p.reflection, p.prayer {
+  margin-left: 1.0em;
+  float:  left;
+  font-family: inherit;
+}

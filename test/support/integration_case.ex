@@ -3,7 +3,7 @@ defmodule Iphod.IntegrationCase do
 
   using do
     quote do
-      use Iphod.ConnCase
+      use IphodWeb.ConnCase
       use PhoenixIntegration
     end
   end

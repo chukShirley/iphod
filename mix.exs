@@ -4,7 +4,7 @@ defmodule Iphod.Mixfile do
   def project do
     [app: :iphod,
      version: "0.0.1",
-     elixir: ">= 1.4.0",
+     elixir: ">= 1.5.0",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
@@ -17,9 +17,9 @@ defmodule Iphod.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {Iphod, []},
+    [mod: {Iphod.Application, []},
      applications: [:mix, :phoenix, :phoenix_html, :phoenix_pubsub, :phoenix_integration,
-                    :appsignal, # :phoenix_live_reload, 
+                    # :phoenix_live_reload, 
                     :cowboy, :logger, :gettext, :comeonin,
                     :phoenix_ecto, :postgrex, :timex, :httpoison,
                     :mailgun, :earmark, :floki,
@@ -29,40 +29,34 @@ defmodule Iphod.Mixfile do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "web", "test/support"]
-  defp elixirc_paths(_),     do: ["lib", "web"]
+  defp elixirc_paths(:test), do: ["lib", "test/support"]
+  defp elixirc_paths(_),     do: ["lib"]
 
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
   defp deps do
-    [ {:phoenix, ">= 1.2.0"},
-      {:phoenix_pubsub, "~> 1.0"},
-      {:ecto, "~> 2.0.4"},
-      {:phoenix_ecto, "~> 3.0.1"},
+    [ {:phoenix, ">= 1.3.0"},
+      {:phoenix_pubsub, "~> 1.0.2"},
+      {:ecto, "~> 2.2.6"},
+      {:phoenix_ecto, "~> 3.3.0"},
       {:phoenix_html, ">= 2.6.2"},
-      {:phoenix_live_reload, "~> 1.0", only: :dev},
-      {:phoenix_integration, "~> 0.1"},
-      {:postgrex, ">= 0.12.1"},
-      {:gettext, "~> 0.9"},
+      {:phoenix_live_reload, "~> 1.1.3", only: :dev},
+      {:phoenix_integration, "~> 0.3.0"},
+      {:postgrex, ">= 0.13.3"},
+      {:gettext, "~> 0.13.1"},
       {:cowboy, "~> 1.0"},
-      # {:exrm, "~> 1.0"},
-      # {:timex, github: "frpaulas/timex"},
       {:timex, "~> 3.1.22"},
+      {:poison, "~> 2.1", override: true},
       {:httpoison, "~> 0.11.0"},
       {:mailgun, "~> 0.1.2"},
       {:earmark, "~> 1.0.1"},
-      # {:mock, github: "~> 0.2.0", only: :dev},
       {:dogma, "~> 0.1", only: :dev},
       {:mix_test_watch, "~> 0.2.6", only: :dev},
       {:edeliver, "~> 1.4.0"},
       {:distillery, "~> 1.1"},
       {:comeonin, "~> 3.0"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
-      {:appsignal, "~> 1.0"}
-     # {:exometer_core, "~> 1.4.0"},
-     # {:exometer, "~> 1.2.1"},
-     # {:edown, github: "uwiger/edown", tag: "0.7", override: true}
     ]
   end
 

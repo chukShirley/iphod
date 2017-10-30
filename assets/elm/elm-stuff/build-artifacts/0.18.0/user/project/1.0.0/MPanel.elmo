@@ -1,0 +1,764 @@
+var _user$project$MPanel$panelStyle = function (model) {
+	return A2(
+		_user$project$Iphod_Helper$hideable,
+		model.show,
+		{ctor: '[]'});
+};
+var _user$project$MPanel$initModel = _user$project$Iphod_Models$initDaily;
+var _user$project$MPanel$init = {ctor: '_Tuple2', _0: _user$project$MPanel$initModel, _1: _elm_lang$core$Platform_Cmd$none};
+var _user$project$MPanel$requestReading = _elm_lang$core$Native_Platform.outgoingPort(
+	'requestReading',
+	function (v) {
+		return _elm_lang$core$Native_List.toArray(v).map(
+			function (v) {
+				return v;
+			});
+	});
+var _user$project$MPanel$requestService = _elm_lang$core$Native_Platform.outgoingPort(
+	'requestService',
+	function (v) {
+		return _elm_lang$core$Native_List.toArray(v).map(
+			function (v) {
+				return v;
+			});
+	});
+var _user$project$MPanel$requestReflection = _elm_lang$core$Native_Platform.outgoingPort(
+	'requestReflection',
+	function (v) {
+		return v;
+	});
+var _user$project$MPanel$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'NoOp':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'UpdateMenu':
+				return {ctor: '_Tuple2', _0: _p0._0, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'GetLesson':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$MPanel$requestReading(_p0._0)
+				};
+			case 'GetAllLessons':
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$MPanel$requestService(_p0._0)
+				};
+			default:
+				return {
+					ctor: '_Tuple2',
+					_0: model,
+					_1: _user$project$MPanel$requestReflection(_p0._0)
+				};
+		}
+	});
+var _user$project$MPanel$portReadings = _elm_lang$core$Native_Platform.incomingPort(
+	'portReadings',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (date) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (title) {
+					return A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (collect) {
+							return A2(
+								_elm_lang$core$Json_Decode$andThen,
+								function (mp1) {
+									return A2(
+										_elm_lang$core$Json_Decode$andThen,
+										function (mp2) {
+											return A2(
+												_elm_lang$core$Json_Decode$andThen,
+												function (mpp) {
+													return A2(
+														_elm_lang$core$Json_Decode$andThen,
+														function (ep1) {
+															return A2(
+																_elm_lang$core$Json_Decode$andThen,
+																function (ep2) {
+																	return A2(
+																		_elm_lang$core$Json_Decode$andThen,
+																		function (epp) {
+																			return A2(
+																				_elm_lang$core$Json_Decode$andThen,
+																				function (ot) {
+																					return A2(
+																						_elm_lang$core$Json_Decode$andThen,
+																						function (ps) {
+																							return A2(
+																								_elm_lang$core$Json_Decode$andThen,
+																								function (nt) {
+																									return A2(
+																										_elm_lang$core$Json_Decode$andThen,
+																										function (gs) {
+																											return A2(
+																												_elm_lang$core$Json_Decode$andThen,
+																												function (show) {
+																													return A2(
+																														_elm_lang$core$Json_Decode$andThen,
+																														function (sectionUpdate) {
+																															return _elm_lang$core$Json_Decode$succeed(
+																																{date: date, title: title, collect: collect, mp1: mp1, mp2: mp2, mpp: mpp, ep1: ep1, ep2: ep2, epp: epp, ot: ot, ps: ps, nt: nt, gs: gs, show: show, sectionUpdate: sectionUpdate});
+																														},
+																														A2(
+																															_elm_lang$core$Json_Decode$field,
+																															'sectionUpdate',
+																															A2(
+																																_elm_lang$core$Json_Decode$andThen,
+																																function (section) {
+																																	return A2(
+																																		_elm_lang$core$Json_Decode$andThen,
+																																		function (version) {
+																																			return A2(
+																																				_elm_lang$core$Json_Decode$andThen,
+																																				function (ref) {
+																																					return _elm_lang$core$Json_Decode$succeed(
+																																						{section: section, version: version, ref: ref});
+																																				},
+																																				A2(_elm_lang$core$Json_Decode$field, 'ref', _elm_lang$core$Json_Decode$string));
+																																		},
+																																		A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
+																																},
+																																A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string))));
+																												},
+																												A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
+																										},
+																										A2(
+																											_elm_lang$core$Json_Decode$field,
+																											'gs',
+																											_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+																								},
+																								A2(
+																									_elm_lang$core$Json_Decode$field,
+																									'nt',
+																									_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+																						},
+																						A2(
+																							_elm_lang$core$Json_Decode$field,
+																							'ps',
+																							_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+																				},
+																				A2(
+																					_elm_lang$core$Json_Decode$field,
+																					'ot',
+																					_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+																		},
+																		A2(
+																			_elm_lang$core$Json_Decode$field,
+																			'epp',
+																			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+																},
+																A2(
+																	_elm_lang$core$Json_Decode$field,
+																	'ep2',
+																	_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+														},
+														A2(
+															_elm_lang$core$Json_Decode$field,
+															'ep1',
+															_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+												},
+												A2(
+													_elm_lang$core$Json_Decode$field,
+													'mpp',
+													_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+										},
+										A2(
+											_elm_lang$core$Json_Decode$field,
+											'mp2',
+											_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+								},
+								A2(
+									_elm_lang$core$Json_Decode$field,
+									'mp1',
+									_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+						},
+						A2(
+							_elm_lang$core$Json_Decode$field,
+							'collect',
+							A2(
+								_elm_lang$core$Json_Decode$andThen,
+								function (instruction) {
+									return A2(
+										_elm_lang$core$Json_Decode$andThen,
+										function (title) {
+											return A2(
+												_elm_lang$core$Json_Decode$andThen,
+												function (collects) {
+													return A2(
+														_elm_lang$core$Json_Decode$andThen,
+														function (show) {
+															return _elm_lang$core$Json_Decode$succeed(
+																{instruction: instruction, title: title, collects: collects, show: show});
+														},
+														A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
+												},
+												A2(
+													_elm_lang$core$Json_Decode$field,
+													'collects',
+													_elm_lang$core$Json_Decode$list(
+														A2(
+															_elm_lang$core$Json_Decode$andThen,
+															function (collect) {
+																return A2(
+																	_elm_lang$core$Json_Decode$andThen,
+																	function (propers) {
+																		return _elm_lang$core$Json_Decode$succeed(
+																			{collect: collect, propers: propers});
+																	},
+																	A2(
+																		_elm_lang$core$Json_Decode$field,
+																		'propers',
+																		_elm_lang$core$Json_Decode$list(
+																			A2(
+																				_elm_lang$core$Json_Decode$andThen,
+																				function (title) {
+																					return A2(
+																						_elm_lang$core$Json_Decode$andThen,
+																						function (text) {
+																							return _elm_lang$core$Json_Decode$succeed(
+																								{title: title, text: text});
+																						},
+																						A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
+																				},
+																				A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string)))));
+															},
+															A2(_elm_lang$core$Json_Decode$field, 'collect', _elm_lang$core$Json_Decode$string)))));
+										},
+										A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
+								},
+								A2(_elm_lang$core$Json_Decode$field, 'instruction', _elm_lang$core$Json_Decode$string))));
+				},
+				A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'date', _elm_lang$core$Json_Decode$string)));
+var _user$project$MPanel$GetReflection = function (a) {
+	return {ctor: 'GetReflection', _0: a};
+};
+var _user$project$MPanel$reflection = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_user$project$MPanel$GetReflection(model.date)),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Reflection'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$MPanel$GetAllLessons = function (a) {
+	return {ctor: 'GetAllLessons', _0: a};
+};
+var _user$project$MPanel$GetLesson = function (a) {
+	return {ctor: 'GetLesson', _0: a};
+};
+var _user$project$MPanel$passageList = F5(
+	function (model, title, service, section, vss) {
+		var liVss = function (vs) {
+			return A2(
+				_elm_lang$html$Html$li,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reading-li'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_user$project$MPanel$GetLesson(
+									{
+										ctor: '::',
+										_0: section,
+										_1: {
+											ctor: '::',
+											_0: vs,
+											_1: {ctor: '[]'}
+										}
+									})),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(vs),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				});
+		};
+		return A2(
+			_elm_lang$html$Html$div,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$p,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('section-title'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(title),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$ul,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('reading-ul'),
+							_1: {ctor: '[]'}
+						},
+						A2(_elm_lang$core$List$map, liVss, vss)),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$MPanel$euchReadings = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$p,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('panel-paragraph service-name'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_user$project$MPanel$GetAllLessons(
+									{
+										ctor: '::',
+										_0: 'EU',
+										_1: {
+											ctor: '::',
+											_0: model.date,
+											_1: {ctor: '[]'}
+										}
+									})),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Eucharist'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$ul,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('service-readings'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$li,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('passage-section'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A5(_user$project$MPanel$passageList, model, 'OT', 'eu', 'ot', model.ot),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$li,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('passage-section'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A5(_user$project$MPanel$passageList, model, 'PS', 'eu', 'ps', model.ps),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$li,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('passage-section'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A5(_user$project$MPanel$passageList, model, 'NT', 'eu', 'nt', model.nt),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$li,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('passage-section'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A5(_user$project$MPanel$passageList, model, 'GS', 'eu', 'gs', model.gs),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$MPanel$mpReadings = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$p,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('panel-paragraph service-name'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_user$project$MPanel$GetAllLessons(
+									{
+										ctor: '::',
+										_0: 'MP',
+										_1: {
+											ctor: '::',
+											_0: model.date,
+											_1: {ctor: '[]'}
+										}
+									})),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Morning Prayer'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$ul,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('service-readings'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$li,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('passage-section'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A5(_user$project$MPanel$passageList, model, 'First', 'mp', 'mp1', model.mp1),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$li,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('passage-section'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A5(_user$project$MPanel$passageList, model, 'Second', 'mp', 'mp2', model.mp2),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$li,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('passage-section'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A5(_user$project$MPanel$passageList, model, 'Psalms', 'mp', 'mpp', model.mpp),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$MPanel$epReadings = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$p,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('panel-paragraph service-name'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$button,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Events$onClick(
+								_user$project$MPanel$GetAllLessons(
+									{
+										ctor: '::',
+										_0: 'EP',
+										_1: {
+											ctor: '::',
+											_0: model.date,
+											_1: {ctor: '[]'}
+										}
+									})),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Evening Prayer'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$ul,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('service-readings'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$li,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('passage-section'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A5(_user$project$MPanel$passageList, model, 'First', 'ep', 'ep1', model.ep1),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$li,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('passage-section'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A5(_user$project$MPanel$passageList, model, 'Second', 'ep', 'ep2', model.ep2),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$li,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('passage-section'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A5(_user$project$MPanel$passageList, model, 'Psalms', 'ep', 'epp', model.epp),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};
+var _user$project$MPanel$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('reading-panel'),
+			_1: {
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('ui-widget-content ui-corner-all'),
+				_1: {
+					ctor: '::',
+					_0: _user$project$MPanel$panelStyle(model),
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$p,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('panel-header'),
+					_1: {ctor: '[]'}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text(model.date),
+					_1: {ctor: '[]'}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$p,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('panel-header'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text(model.title),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$ul,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$id('reading-menu'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$li,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _user$project$MPanel$reflection(model),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$li,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _user$project$MPanel$euchReadings(model),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$li,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _user$project$MPanel$mpReadings(model),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$li,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _user$project$MPanel$epReadings(model),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$MPanel$UpdateMenu = function (a) {
+	return {ctor: 'UpdateMenu', _0: a};
+};
+var _user$project$MPanel$subscriptions = function (model) {
+	return _elm_lang$core$Platform_Sub$batch(
+		{
+			ctor: '::',
+			_0: _user$project$MPanel$portReadings(_user$project$MPanel$UpdateMenu),
+			_1: {ctor: '[]'}
+		});
+};
+var _user$project$MPanel$main = _elm_lang$html$Html$program(
+	{init: _user$project$MPanel$init, update: _user$project$MPanel$update, view: _user$project$MPanel$view, subscriptions: _user$project$MPanel$subscriptions})();
+var _user$project$MPanel$NoOp = {ctor: 'NoOp'};

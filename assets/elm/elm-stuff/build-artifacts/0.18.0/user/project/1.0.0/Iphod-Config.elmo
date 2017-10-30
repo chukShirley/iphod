@@ -1,0 +1,305 @@
+var _user$project$Iphod_Config$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'NoOp':
+				return model;
+			case 'Checked':
+				var _p2 = _p0._1;
+				var newModel = function () {
+					var _p1 = _p0._0;
+					switch (_p1.ctor) {
+						case 'OT':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{ot: _p2});
+						case 'PS':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{ps: _p2});
+						case 'NT':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{nt: _p2});
+						case 'GS':
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{gs: _p2});
+						default:
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{current: _p2});
+					}
+				}();
+				return newModel;
+			case 'ChangeVersion':
+				var _p3 = _p0._0;
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{ot: _p3, ps: _p3, nt: _p3, gs: _p3, current: _p3});
+				return newModel;
+			default:
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						fnotes: _p0._0 ? 'True' : 'False'
+					});
+		}
+	});
+var _user$project$Iphod_Config$init = _user$project$Iphod_Models$configInit;
+var _user$project$Iphod_Config$Current = {ctor: 'Current'};
+var _user$project$Iphod_Config$GS = {ctor: 'GS'};
+var _user$project$Iphod_Config$NT = {ctor: 'NT'};
+var _user$project$Iphod_Config$PS = {ctor: 'PS'};
+var _user$project$Iphod_Config$OT = {ctor: 'OT'};
+var _user$project$Iphod_Config$ChangeFootnote = function (a) {
+	return {ctor: 'ChangeFootnote', _0: a};
+};
+var _user$project$Iphod_Config$ftnoteCheck = F2(
+	function (model, val) {
+		var isChecked = _elm_lang$core$Native_Utils.eq(model.fnotes, 'True');
+		return A2(
+			_elm_lang$html$Html$span,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('config_checkbox'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$type_('checkbox'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$id(val),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$checked(isChecked),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onCheck(_user$project$Iphod_Config$ChangeFootnote),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$name(val),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('config_checkbox'),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$label,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('checkbox_label'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$for(val),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Show'),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$Iphod_Config$ChangeVersion = function (a) {
+	return {ctor: 'ChangeVersion', _0: a};
+};
+var _user$project$Iphod_Config$versionSelect = function (model) {
+	var thisVersion = function (ver) {
+		return A2(
+			_elm_lang$html$Html$option,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$value(ver),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$selected(
+						_elm_lang$core$Native_Utils.eq(ver, model.current)),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text(ver),
+				_1: {ctor: '[]'}
+			});
+	};
+	return A2(
+		_elm_lang$html$Html$select,
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html_Events$on,
+				'change',
+				A2(_elm_lang$core$Json_Decode$map, _user$project$Iphod_Config$ChangeVersion, _elm_lang$html$Html_Events$targetValue)),
+			_1: {ctor: '[]'}
+		},
+		A2(_elm_lang$core$List$map, thisVersion, model.vers));
+};
+var _user$project$Iphod_Config$Checked = F2(
+	function (a, b) {
+		return {ctor: 'Checked', _0: a, _1: b};
+	});
+var _user$project$Iphod_Config$psRadio = F3(
+	function (model, key, val) {
+		var isSelected = _elm_lang$core$Native_Utils.eq(model.ps, val);
+		return A2(
+			_elm_lang$html$Html$span,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('radio_button'),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$input,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$type_('radio'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$checked(isSelected),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Events$onCheck(
+									function (_p4) {
+										return A2(_user$project$Iphod_Config$Checked, key, val);
+									}),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$name('psalm'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('radio_button'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$id(val),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					},
+					{ctor: '[]'}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$label,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('radio_label'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$for(val),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(val),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
+			});
+	});
+var _user$project$Iphod_Config$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$class('config'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$p,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Psalms in: '),
+					_1: {
+						ctor: '::',
+						_0: A3(_user$project$Iphod_Config$psRadio, model, _user$project$Iphod_Config$PS, 'Coverdale'),
+						_1: {
+							ctor: '::',
+							_0: A3(_user$project$Iphod_Config$psRadio, model, _user$project$Iphod_Config$PS, 'ESV'),
+							_1: {
+								ctor: '::',
+								_0: A3(_user$project$Iphod_Config$psRadio, model, _user$project$Iphod_Config$PS, 'BCP'),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$p,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$style(
+							{
+								ctor: '::',
+								_0: {ctor: '_Tuple2', _0: 'margin-left', _1: '2em'},
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('FootNotes: '),
+						_1: {
+							ctor: '::',
+							_0: A2(_user$project$Iphod_Config$ftnoteCheck, model, 'fnotes'),
+							_1: {ctor: '[]'}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$style(
+								{
+									ctor: '::',
+									_0: {ctor: '_Tuple2', _0: 'margin-left', _1: '2em'},
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Version: '),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Iphod_Config$versionSelect(model),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Iphod_Config$NoOp = {ctor: 'NoOp'};

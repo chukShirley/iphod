@@ -1,0 +1,449 @@
+moment = require('moment')
+leapDay = 60
+sunday = 0
+monday = 1
+thursday = 4
+oneDay = 60 * 60 * 24 * 1000
+oneWeek = oneDay * 7
+litYearNames = ["c", "a", "b"]
+[January, February, March, April, May, June, July, August, September, October, November, December] = [0..11]
+mdFormat = "MM-DD"
+
+thisYear = (moment_date) -> moment(moment_date).year()
+inRange = (n, min, max) -> n >= Math.min(min, max) && n <= Math.max(min, max)
+listContains = (list, obj) -> list.indexOf(obj) >= 0
+  # function advDays(d, days) { return new Date( d.valueOf() + oneDay * days ) }
+  # function advWeeks(d, weeks) { return advDays(d, weeks * 7) }
+daysTill = (d1, d2)  -> Math.floor( (d2 - d1)/oneDay )
+weeksTill = (d1, d2) -> Math.floor( (d2 - d1)/oneWeek )
+litYear = (moment_date) ->
+  yr = thisYear(moment_date)
+  moment_date.isSameOrAfter(advent(moment_date, 1)) ? yr + 1 : yr
+  
+litYearName = (moment_date) -> litYearNames[ litYear(moment_date) % 3 ]
+isSunday = (moment_date) -> moment_date.day() == sunday
+isMonday = (moment_date) -> moment_date.day() == monday
+daysTillSunday = (moment_date) -> 7 - moment_date.day()
+dateNextSunday = (moment_date) ->
+  moment_date.add( daysTillSunday(moment_date), 'days')
+  
+dateLastSunday = (moment_date) ->
+  day = moment_date.day()
+  day = if (day is 0) then -7 else -day
+  moment_date.add(day, 'days')
+  
+# algorithm from http://en.wikipedia.org/wiki/Computus#cite_note-otheralgs-47
+# presumes `d` is either int or date
+easter = (thisDate) ->
+  year = thisYear(thisDate) 
+  a = year % 19
+  b = Math.floor(year / 100)
+  c = year % 100
+  d = Math.floor(b / 4)
+  e = b % 4
+  f = Math.floor((b + 8) / 25)
+  g = Math.floor((b - f + 1) / 3)
+  h = (19 * a + b - d - g + 15) % 30
+  i = Math.floor(c / 4)
+  k = c % 4
+  l = (32 + 2 * e + 2 * i - h - k) % 7
+  m = Math.floor((a + 11 * h + 22 * l) / 451)
+  n0 = (h + l + 7 * m + 114)
+  n = Math.floor(n0 / 31) - 1
+  p = n0 % 31 + 1
+  date = moment({'year': year, 'month': n, 'day': p})
+  date
+
+sundayInEaster = (moment_date, n) -> easter(moment_date).add(n - 1, 'weeks')
+secondMondayAfterEaster = (moment_date) -> easter(moment_date).add(8, 'days')
+ascension = (moment_date) -> easter(moment_date).add(39, 'days')
+  
+rightAfterAscension = (moment_date) ->
+  a = ascension(moment_date)
+  ascen = moment_date.isSameOrAfter(a)
+  # saad - sunday after ascension day
+  beforeSaad = moment_date.isBefore(sundayAfterAscension(moment_date))
+  ascen && beforeSaad
+
+sundayAfterAscension = (moment_date) -> sundayInEaster(moment_date, 7)
+pentecost = (moment_date, n) -> easter(moment_date).add(n + 6, 'weeks') 
+trinity = (moment_date) -> pentecost(moment_date, 2)
+proper = (moment_date, n) -> advent(moment_date, n - 29)
+christmasDay = (moment_date) -> moment(thisYear(moment_date) + '-12-25')
+christmasSeason = (moment_date, n) ->
+  y = thisYear(moment_date)
+  sundayAfter = dateNextSunday( christmasDay(y) )
+  if (n is 2) then sundayAfter.add(1, 'weeks') else sundayAfter
+
+christmas = (moment = moment()) ->
+  if (Number.isInteger(moment_date))
+    if moment_date < 0 then return NaN
+    return switch moment_date
+      when 1, 2
+        ns = date_next_sunday(christmas())
+        ns.add(moment_date - 1, 'w')
+      else
+        moment([moment_date, 11, 25]) 
+  else
+    moment([moment_date.year(), 11, 25])
+#    switch
+#      when Number.isInteger(moment_date) and moment_date < 0 then NaN
+  
+#  christmas: (moment_date = moment()) ->
+#    switch (true) {
+#      case Number.isInteger(moment_date):
+#        switch (moment_date) {
+#          case moment_date < 0:
+#            console.log("There is no Christmas before year 0");
+#            return NaN;
+#            break;
+#          case moment_date == 1: // presume it's the week in Christmas Season
+#          case moment_date == 2: // presume it's the week in Christmas Season
+#            let ns = date_next_sunday(christmas());
+#            return ns.add(moment_date - 1, 'w');
+#            break;
+#          default:
+#            return moment([moment_date, 11, 25]); // try to remember, js months are 0 - 11
+#            break;
+#      }
+#      default: // presume it's a moment Object
+#        return moment([moment_date.year(), 11, 25]); // try to remember, js months are 0 - 11
+#    }
+#    
+#  }
+#  /*
+#    def christmas(),      do: Timex.to_date {Timex.now(@tz).year, 12, 25}
+#    def christmas(n) when n < 1, do: {:error, "There is no Christmas before year 0"}
+#    def christmas(n) when n > 2, do: Timex.to_date {n, 12, 25} # presume n is a year
+#    def christmas(n) do # n is 1 or 2, presume sunday after christmas
+#      christmas |> date_next_sunday |> date_shift( weeks: n - 1)
+#    end
+#  
+#  */
+advent = (moment_date, n) ->
+  sundayBefore = dateLastSunday(christmasDay(moment_date))
+  sundayBefore.add(n - 4, 'weeks')
+
+epiphanyDay = (moment_date) -> moment(thisYear(moment_date) + '-01-06')
+epiphanyBeforeSunday = (moment_date) -> 
+  moment_date.isSameOrAfter(epiphanyDay(moment_date)) and moment_date.isBefore(weekOfEpiphany(moment_date, 1))
+
+sundayAfterEpiphany = (moment_date) -> dateNextSunday( epiphanyDay(moment_date) )
+weekOfEpiphany = (moment_date, n) -> sundayAfterEpiphany(moment_date).add(n - 1, 'weeks')
+ashWednesday = (moment_date) -> easter(moment_date).add( -46, 'days')
+rightAfterAshWednesday = (moment_date) ->
+  moment_date.isSameOrAfter(ashWednesday(moment_date)) && moment_date.isBefore(lent(moment_date, 1))
+
+lent = (moment_date, n) -> easter(moment_date).add( n - 7, 'weeks') 
+palmSunday = (moment_date) -> easter(moment_date).add( -1, 'weeks')
+goodFriday = (moment_date) -> easter(moment_date).add( -2, 'days')
+isGoodFriday = (moment_date) -> moment_date.isSame(goodFriday(moment_date))
+toSeason = (moment_date) ->
+  sunday = isSunday(moment_date) ? date : dateLastSunday(moment(moment_date))
+  y = litYear(sunday)
+  yrABC = litYearName(sunday)
+  dOfMonth = (sunday.month() + 1) + "/" + sunday.date()
+  weeksTillAdvent = weeksTill(sunday, advent(sunday, 1))
+  daysTillEpiphany = daysTill(moment_date, epiphanyDay(moment_date))
+  weeksFromEpiphany = weeksTill(epiphanyDay(sunday), sunday)
+  weeksFromChristmas = weeksTill(sunday, christmasDay(moment_date))
+  isChristmas = isSunday(moment_date) && dOfMonth == "12/25"
+  isHolyName = isSunday(moment_date) && dOfMonth == "1/1"
+  isChristmas2 = (listContains(["1/1", "1/2", "1/3", "1/4", "1/5"], dOfMonth)  and (inRange(daysTillEpiphany, 1, 5)))
+  weeksFromEaster = weeksTill(easter(moment_date), sunday)
+  daysTillEaster = daysTill(moment_date, easter(moment_date))
+  switch
+    when rightAfterAshWednesday(moment_date) then {season: "ashWednesday", week: "1", year: yrABC, date: moment_date}
+    when rightAfterAscension(moment_date)    then {season: "ascension",    week: "1", year: yrABC, date: moment_date}
+    when isChristmas                         then {season: "christmasDay", week: "1", year: yrABC, date: moment_date}
+    when isHolyName                          then {season: "holyName",     week: "1", year: yrABC, date: moment_date}
+    when christmas(y-1) is moment_date       then {season: "christmas",    week: "1", year: yrABC, date: moment_date}
+    when isChristmas2                        then {season: "christmas",    week: "2", year: yrABC, date: moment_date}
+    when inRange(daysTillEpiphany, 6, 11)    then {season: "christmas",    week: "1", year: yrABC, date: moment_date}
+    when daysTillEaster is 2                 then {season: "goodFriday",   week: "1", year: yrABC, date: moment_date}
+    when inRange(daysTillEaster, 1, 6)       then {season: "holyWeek",     week: (7 - daysTillEaster).toString(), year: yrABC, date: moment_date}
+    when inRange(daysTillEaster, -1, -6)     then {season: "easterWeek",   week: (0 - daysTillEaster).toString(), year: yrABC, date: moment_date}
+    when inRange(weeksFromEaster, -2, -6)    then {season: "lent",         week: (7 + weeksFromEaster).toString(), year: yrABC, date: moment_date}
+    when weeksFromEaster is -1               then {season: "palmSunday",   week: "1", year: yrABC, date: moment_date}
+    when weeksFromEaster is -7               then {season: "epiphany",     week: "9", year: yrABC, date: moment_date}
+    when weeksFromEaster is -8               then {season: "epiphany",     week: "8", year: yrABC, date: moment_date}
+    when weeksFromEaster is 0                then {season: "easterDay",    week: "1", year: yrABC, date: moment_date}
+    when inRange(weeksFromEaster, 0, 6)      then {season: "easter",       week: (1 + weeksFromEaster).toString(), year: yrABC, date: moment_date}
+    when weeksFromEaster is 7                then {season: "pentecost",    week: "1", year: yrABC, date: moment_date}
+    when weeksFromEaster is 8                then {season: "trinity",      week: "1", year: yrABC, date: moment_date}
+    when inRange(weeksTillAdvent, 1, 27)     then {season: "proper",       week: (29 - weeksTillAdvent).toString(), year: yrABC, date: moment_date}
+    when inRange(weeksTillAdvent, 0, -3)     then {season: "advent",       week: (1 - weeksTillAdvent).toString(), year: yrABC, date: moment_date}
+    when inRange(weeksFromChristmas, 0, 1)   then {season: "christmas",    week: (weeksFromChristmas + 1).toString(), year: yrABC, date: moment_date}
+    when epiphanyBeforeSunday(moment_date)   then {season: "epiphany",     week: "0", year: yrABC, date: moment_date}
+    when inRange(weeksFromEpiphany, 0, 8)    then {season: "epiphany",     week: (weeksFromEpiphany + 1).toString(), year: yrABC, date: date}
+    else                                          {season: "unknown",      week: "unknown", year: "unknown",date: moment_date}
+    
+  
+getSeasonName = (season) ->
+  { advent: 'Advent'
+  , christmas: 'Christmas'
+  , christmasDay: 'Christmas Day'
+  , holyName: 'Holy Name'
+  , epiphany: 'Epiphany'
+  , ashWednesday: 'Ash Wednesday'
+  , lent: 'Lent'
+  , palmSunday: 'Palm Sunday'
+  , holyWeek: 'Holy Week'
+  , goodFriday: 'Good Friday'
+  , easter: 'Easter'
+  , easterDay: 'Easter Day'
+  , easterWeek: 'Easter Week'
+  , ascension: 'Ascension'
+  , pentecost: 'Pentecost'
+  , trinity: 'Trinity Sunday'
+  , proper: 'Season after Pentecost'
+  }[season]
+
+arrayMatch = (a, b) -> 
+  # '_' means don't care
+  (a.length is b.length) and a.every (elem, i) -> 
+    elem is '_' or elem is b[i]
+
+getCanticle = (office, season, day, reading) ->
+  arg1 = [office, reading, season, day]
+  # '_' means anything matches
+  switch
+    when arrayMatch(arg1, ['mp', 'ot', 'advent',    'Sunday'])    then 'surge_illuminare'
+    when arrayMatch(arg1, ['mp', 'ot', 'lent',      'Sunday'])    then 'kyrie_pantokrator'
+    when arrayMatch(arg1, ['mp', 'ot', 'lent',      'Monday'])    then 'quaerite_dominum'
+    when arrayMatch(arg1, ['mp', 'ot', 'lent',      'Tuesday'])   then 'quaerite_dominum'
+    when arrayMatch(arg1, ['mp', 'ot', 'lent',      'Wednesday']) then 'kyrie_pantokrator'
+    when arrayMatch(arg1, ['mp', 'ot', 'lent',      'Thursday'])  then 'quaerite_dominum'
+    when arrayMatch(arg1, ['mp', 'ot', 'lent',      'Friday'])    then 'kyrie_pantokrator'
+    when arrayMatch(arg1, ['mp', 'ot', 'lent',      'Saturday'])  then 'quaerite_dominum'
+    when arrayMatch(arg1, ['mp', 'ot', 'easter',    'Sunday'])    then "cantemus_domino"
+    when arrayMatch(arg1, ['mp', 'ot', 'easter',    'Friday'])    then 'te_deum'
+    when arrayMatch(arg1, ['mp', 'ot', 'easterWeek','Friday'])    then 'te_deum'
+    when arrayMatch(arg1, ['mp', 'ot', '_',         'Sunday'])    then 'benedictus'
+    when arrayMatch(arg1, ['mp', 'ot', '_',         'Monday'])    then 'ecce_deus'
+    when arrayMatch(arg1, ['mp', 'ot', '_',         'Tuesday'])   then 'benedictis_es_domine'
+    when arrayMatch(arg1, ['mp', 'ot', '_',         'Wednesday']) then 'surge_illuminare'
+    when arrayMatch(arg1, ['mp', 'ot', '_',         'Thursday'])  then 'cantemus_domino'
+    when arrayMatch(arg1, ['mp', 'ot', '_',         'Friday'])    then 'quaerite_dominum'
+    when arrayMatch(arg1, ['mp', 'ot', '_',         'Saturday'])  then 'benedicite_omnia_opera_domini'
+    when arrayMatch(arg1, ['mp', 'nt', 'advent',    'Sunday'])    then 'benedictus'
+    when arrayMatch(arg1, ['mp', 'nt', 'advent',    'Thursday'])  then 'magna_et_mirabilia'
+    when arrayMatch(arg1, ['mp', 'nt', 'lent',      'Sunday'])    then 'benedictus'
+    when arrayMatch(arg1, ['mp', 'nt', 'lent',      'Thursday'])  then 'magna_et_mirabilia'
+    when arrayMatch(arg1, ['mp', 'nt', 'easter',    'Sunday'])    then 'cantemus_domino'
+    when arrayMatch(arg1, ['mp', 'nt', '_',         'Sunday'])    then 'benedictus'
+    when arrayMatch(arg1, ['mp', 'nt', '_',         'Thursday'])  then 'cantemus_domino'
+    when arrayMatch(arg1, ['mp', 'nt', '_',         '_'])         then 'benedictus'
+    when arrayMatch(arg1, ['ep', 'ot', 'lent',      'Monday'])    then 'kyrie_pantokrator'
+    when arrayMatch(arg1, ['ep', 'ot', '_',         'Sunday'])    then 'magnificat'
+    when arrayMatch(arg1, ['ep', 'ot', '_',         'Monday'])    then 'cantemus_domino'
+    when arrayMatch(arg1, ['ep', 'ot', '_',         'Tuesday'])   then 'quaerite_dominum'
+    when arrayMatch(arg1, ['ep', 'ot', '_',         'Wednesday']) then 'benedicite_omnia_opera_domini'
+    when arrayMatch(arg1, ['ep', 'ot', '_',         'Thursday'])  then 'surge_illuminare'
+    when arrayMatch(arg1, ['ep', 'ot', '_',         'Friday'])    then 'benedictis_es_domine'
+    when arrayMatch(arg1, ['ep', 'ot', '_',         'Saturday'])  then 'ecce_deus'
+    when arrayMatch(arg1, ['ep', 'nt', '_',         'Sunday'])    then 'surge_illuminare'
+    when arrayMatch(arg1, ['ep', 'nt', '_',         'Monday'])    then 'surge_illuminare'
+    when arrayMatch(arg1, ['ep', 'nt', '_',         'Tuesday'])   then 'surge_illuminare'
+    when arrayMatch(arg1, ['ep', 'nt', '_',         'Wednesday']) then 'surge_illuminare'
+    when arrayMatch(arg1, ['ep', 'nt', '_',         'Thursday'])  then 'surge_illuminare'
+    when arrayMatch(arg1, ['ep', 'nt', '_',         'Friday'])    then 'surge_illuminare'
+    when arrayMatch(arg1, ['ep', 'nt', '_',         'Saturday'])  then 'surge_illuminare'
+    else # should never happen
+      'benedictus'
+# weak assumption: Object.keys(rlds) will return keys in the order below
+rlds =
+  { '01-18': 'confessionOfStPeter'
+  , '01-25': 'conversionOfStPaul'
+  , '02-02': 'presentation'
+  , '02-24': 'stMatthias'
+  , '03-19': 'stJoseph'
+  , '03-25': 'annunciation'
+  , '04-25': 'stMark'
+  , '05-01': 'stsPhilipAndJames'
+  , '05-31': 'visitation'
+  , '06-11': 'stBarnabas'
+  , '06-24': 'nativityOfJohnTheBaptist'
+  , '06-29': 'stPeterAndPaul'
+  , '07-01': 'dominion'
+  , '07-04': 'independence'
+  , '07-22': 'stMaryMagdalene'
+  , '07-25': 'stJames'
+  , '08-06': 'transfiguration'
+  , '08-15': 'bvm'
+  , '08-24': 'stBartholomew'
+  , '09-14': 'holyCross'
+  , '09-21': 'stMatthew'
+  , '09-29': 'michaelAllAngels'
+  , '10-18': 'stLuke'
+  , '10-23': 'stJamesOfJerusalem'
+  , '10-28': 'stsSimonAndJude'
+  , '11-11': 'remembrance'
+  , '11-30': 'stAndrew'
+  , '12-21': 'stThomas'
+  , '12-26': 'stStephen'
+  , '12-27': 'stJohn'
+  , '12-28': 'holyInnocents'
+  }
+  
+holyDay = (moment_date) ->
+  m_d = moment_date.format(mdFormat)
+  rld = rlds[m_d]
+  switch
+    when rld is 'presentation' then [true, rld]
+    when isSunday(moment_date) then [false, ""]
+    when isMonday(moment_date)  
+      m_d = moment_date.add(-1, 'days').format(mdFormat)
+      rld = rlds[m_d]
+    else
+      if (rld is undefined) then [false, ""] else [true, rld]
+        
+nextHolyDay = (moment_date) ->
+  keys = Object.keys(rlds)
+  last_key = keys[keys.length - 1]
+  yr = moment_date.year()
+  # month_day
+  m_d = moment_date.format(mdFormat)
+  if (m_d >= last_key) 
+    yr = yr + 1
+    m_d = last_key
+  for el in keys
+    if (m_d < el) then return [moment(yr + "-" + el), rlds[el]]
+  [moment_date, "unknown"] # this should'ought'a never happen
+  
+namedDayDate = (name, moment_date, wk) ->
+  yr = thisYear(moment_date)
+  switch name
+    when "christmasDay" then    moment(yr + '-12-25')
+    when "holyName" then        moment(yr + 1 + '-01-01')
+    when "palmSunday" then      palmSunday(moment_date)
+    when "holyWeek" then        palmSunday(moment_date).add( wk, 'days')
+    when "easterDayVigil" then  easter(moment_date).add( 1, 'days')
+    when "easterDay" then       easter(moment_date)
+    when "easterWeek" then      easter(moment_date).add( wk, 'days')
+    else                        moment_date
+  
+translateFromSunday = (moment_date) ->
+  if isSunday(moment_date) then moment_date.add( 1, 'days') else moment_date
+
+thanksgiving = (moment_date) ->
+  yr = thisYear(moment_date)
+  tgd = { 0: 26, 1: 25, 2: 24, 3: 23, 4: 22, 5: 28, 6: 27 }
+  # day() is 0 indexed on sunday
+  dow = moment(yr + '-11-01').day() 
+  moment({'year': yr, 'month': November, 'date': tgd[dow]})
+
+memorial = (moment_date) ->
+  yr = thisYear(moment_date)
+  md = { 0: 30, 1: 29, 2: 28, 3: 27, 4: 26, 5: 25, 6: 31 }
+  dow = moment(yr + '-05-01').day() # day() is 0 indexed on sunday
+  moment({'year': yr, 'month': May, 'date': md[dow]})
+  
+  
+# dear confused programmer - for reasons for ever to remain a mystery
+# javascript indexs months off 0 (jan = 0, dec = 11)
+# and indexs days off of 1 (the first of the month is lo (and behold) 1)
+stAndrew = (moment_date)                 -> (thisYear(moment_date) + '-11-30 ' )
+stThomas = (moment_date)                 -> (thisYear(moment_date) + '-12-21 ' )
+stStephen = (moment_date)                -> (thisYear(moment_date) + '-12-26 ' )
+stJohn = (moment_date)                   -> (thisYear(moment_date) + '-12-27 ' )
+holyInnocents = (moment_date)            -> (thisYear(moment_date) + '-12-28 ' )
+confessionOfStPeter = (moment_date)      -> (thisYear(moment_date) + '-01-18 ' )
+conversionOfStPaul = (moment_date)       -> (thisYear(moment_date) + '-01-25 ' )
+presentation = (moment_date)             -> (thisYear(moment_date) + '-02-2 ' )
+stMatthias = (moment_date)               -> (thisYear(moment_date) + '-02-24 ' )
+stJoseph = (moment_date)                 -> (thisYear(moment_date) + '-03-19 ' )
+annunciation = (moment_date)             -> (thisYear(moment_date) + '-03-25 ' )
+stMark = (moment_date)                   -> (thisYear(moment_date) + '-04-25 ' )
+stsPhilipAndJames = (moment_date)        -> (thisYear(moment_date) + '-05-1 ' )
+visitation = (moment_date)               -> (thisYear(moment_date) + '-05-31 ' )
+stBarnabas = (moment_date)               -> (thisYear(moment_date) + '-06-11 ' )
+nativityOfJohnTheBaptist = (moment_date) -> (thisYear(moment_date) + '-06-24 ' )
+stPeterAndPaul = (moment_date)           -> (thisYear(moment_date) + '-06-29 ' )
+dominion = (moment_date)                 -> (thisYear(moment_date) + '-07-1 ' )
+independence = (moment_date)             -> (thisYear(moment_date) + '-07-4 ' )
+stMaryMagdalene = (moment_date)          -> (thisYear(moment_date) + '-07-22 ' )
+stJames = (moment_date)                  -> (thisYear(moment_date) + '-07-25 ' )
+transfiguration = (moment_date)          -> (thisYear(moment_date) + '-08-6 ' )
+bvm = (moment_date)                      -> (thisYear(moment_date) + '-08-15 ' )
+stBartholomew = (moment_date)            -> (thisYear(moment_date) + '-08-24 ' )
+holyCross = (moment_date)                -> (thisYear(moment_date) + '-09-14 ' )
+stMatthew = (moment_date)                -> (thisYear(moment_date) + '-09-21 ' )
+michaelAllAngels = (moment_date)         -> (thisYear(moment_date) + '-09-29 ' )
+stLuke = (moment_date)                   -> (thisYear(moment_date) + '-10-18 ' )
+stJamesOfJerusalem = (moment_date)       -> (thisYear(moment_date) + '-10-23 ' )
+stsSimonAndJude = (moment_date)          -> (thisYear(moment_date) + '-10-28 ' )
+remembrance = (moment_date)              -> (thisYear(moment_date) + '-11-11 ' )
+  
+translateFromSunday = (moment_date) -> if isSunday(moment_date) then moment_date.add(1, 'day') else moment_date
+
+module.exports = { 
+    inRange: inRange
+  , thisYear: thisYear
+  , listContains: listContains
+  , daysTill: daysTill
+  , weeksTill: weeksTill
+  , litYear: litYear
+  , litYearName: litYearName
+  , dateLastSunday: dateLastSunday
+  , dateNextSunday: dateNextSunday
+  , easter: easter
+  , sundayInEaster: sundayInEaster
+  , secondMondayAfterEaster: secondMondayAfterEaster
+  , ascension: ascension
+  , rightAfterAscension: rightAfterAscension
+  , pentecost: pentecost
+  , trinity: trinity
+  , proper: proper
+  , advent: advent
+  , christmasDay: christmasDay
+  , christmas: christmas
+  , epiphanyDay: epiphanyDay
+  , epiphanyBeforeSunday: epiphanyBeforeSunday
+  , sundayAfterEpiphany: sundayAfterEpiphany
+  , weekOfEpiphany: weekOfEpiphany
+  , ashWednesday: ashWednesday
+  , rightAfterAshWednesday: rightAfterAshWednesday
+  , lent: lent
+  , palmSunday: palmSunday
+  , goodFriday: goodFriday
+  , isGoodFriday: isGoodFriday
+  , toSeason: toSeason
+  , getSeasonName: getSeasonName
+  , holyDay: holyDay
+  , stAndrew: stAndrew
+  , stThomas: stThomas
+  , stStephen: stStephen
+  , stJohn: stJohn
+  , holyInnocents: holyInnocents
+  , confessionOfStPeter: confessionOfStPeter
+  , conversionOfStPaul: conversionOfStPaul
+  , presentation: presentation
+  , stMatthias: stMatthias
+  , stJoseph: stJoseph
+  , annunciation: annunciation
+  , stMark: stMark
+  , stsPhilipAndJames: stsPhilipAndJames
+  , visitation: visitation
+  , stBarnabas: stBarnabas
+  , nativityOfJohnTheBaptist: nativityOfJohnTheBaptist
+  , stPeterAndPaul: stPeterAndPaul
+  , dominion: dominion
+  , independence: independence
+  , stMaryMagdalene: stMaryMagdalene
+  , stJames: stJames
+  , transfiguration: transfiguration
+  , bvm: bvm
+  , stBartholomew: stBartholomew
+  , holyCross: holyCross
+  , stMatthew: stMatthew
+  , michaelAllAngels: michaelAllAngels
+  , stLuke: stLuke
+  , stJamesOfJerusalem: stJamesOfJerusalem
+  , stsSimonAndJude: stsSimonAndJude
+  , translateFromSunday: translateFromSunday
+  , remembrance: remembrance
+  , thanksgiving: thanksgiving
+  , memorial: memorial
+}
+

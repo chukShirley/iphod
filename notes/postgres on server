@@ -1,3 +1,20 @@
+YOU HAVE FIREWALL SET UP (ufw)
+sudo ufw status...
+To                         Action      From
+--                         ------      ----
+22                         ALLOW       Anywhere
+5984                       ALLOW       Anywhere
+5986                       ALLOW       Anywhere
+6984                       ALLOW       Anywhere
+80                         ALLOW       Anywhere
+5432/tcp                   ALLOW       Anywhere
+22 (v6)                    ALLOW       Anywhere (v6)
+5984 (v6)                  ALLOW       Anywhere (v6)
+5986 (v6)                  ALLOW       Anywhere (v6)
+6984 (v6)                  ALLOW       Anywhere (v6)
+80 (v6)                    ALLOW       Anywhere (v6)
+5432/tcp (v6)              ALLOW       Anywhere (v6)
+
 postgres on server
 
 /usr/lib/postgresql/9.6/bin/ where the code is
@@ -11,3 +28,25 @@ to start postgres 9.5 for use by legereme.com
 1) su postgres
 2) /usr/lib/postgresql/9.5/bin/postgres "-D" "/var/lib/postgresql/9.5/main" "-c" "config_file=/etc/postgresql/9.5/main/postgresql.conf"
 3) go ahead and close the window
+
+sudo MIX_ENV=prod PORT=80 KEY=eI1yJowF9lFwygysQ/hV9pi9BbiRpcT+rsv5AK3HI0B84CHf3HCTJrmgmlqJxJ/0 elixir --detached -S mix do compile, phoenix.server
+
+restart couchdb...
+  sudo /etc/sv/couchdb/run restart
+
+#!/bin/bash
+sudo git stash clear
+sudo git stash
+sudo rm -rf web/elm/elm-stuff
+sudo git pull
+sudo mix deps.get
+sudo npm install
+sudo MIX_ENV=prod mix compile
+sudo MIX_ENV=prod mix ecto.migrate
+sudo MIX_ENV=prod mix phx.digest
+sudo MIX_ENV=prod mix release
+sudo # PORT=80 MIX_ENV=prod rel/iphod/bin/iphod start
+sudo mix phx.gen.secret
+sudo MIX_ENV=prod PORT=80 KEY=GOns2kJCQMpcNfuJz+4zCf5QWg9ahi44QtmEt+UEgcwH8v8imJGQVnGj8Ubq+EF2 elixir --detached -S mix do compile, phx.server
+frpaulas@iphod:~/iphod$
+

@@ -1,5 +1,5 @@
 defmodule Iphod.ErrorViewTest do
-  use Iphod.ConnCase, async: true
+  use IphodWeb.ChannelCase, async: true
 
   # Bring render/3 and render_to_string/3 for testing custom views
   import Phoenix.View

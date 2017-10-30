@@ -1,0 +1,74 @@
+/*!
+ * css for resouces files
+ */
+
+/* RESOURCE EDITOR */
+
+input.form-control {
+  width: 23em;
+}
+textarea.form-control {
+  width: 23em;
+  height: 10em;
+}
+
+/* DISPLAY RESOURCES */
+
+div.resources {
+  margin-left: 1em;
+}
+
+table.resources { 
+  width: 100%;
+  font-size: 0.8em;
+}
+th.th_finders {
+  position: relative;
+  left: -1%;
+}
+th.resource_name { 
+  position: relative;
+  width: 25%;
+  vertical-align: text-top;
+}
+th.resource_description { 
+  position: relative;
+  width: 25%;
+  vertical-align: text-top;
+}
+th.resource_keys { 
+  position: relative;
+  width: 25%;
+  vertical-align: text-top;
+}
+th.resource_info { 
+  position: relative;
+  font-style: 0.8em;
+}
+th.resource_get { 
+  position: relative;
+  width: 12.5%;
+}
+
+.tooltip {
+  position: relative;
+  /* display: inline-block; */
+  transition-delay: 0s background-color;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  /* width: 120px; */
+  background-color: black;
+  color: white;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 9;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  transition-delay: 0.5s;
+}

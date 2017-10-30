@@ -9,8 +9,7 @@ config :iphod,
   ecto_repos: [Iphod.Repo]
 
 # Configures the endpoint
-config :iphod, Iphod.Endpoint,
-  instrumenters: [Appsignal.Phoenix.Instrumenter],
+config :iphod, IphodWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
@@ -24,10 +23,13 @@ config :iphod, Iphod.Endpoint,
   secret_key_base: {:system, "KEY"},
   root: Path.dirname(__DIR__),
   server: true,
-  render_errors: [accepts: ~w(html json)],
-  pubsub: [name: Iphod.PubSub,
+  render_errors: [view: IphodWeb.ErrorView, accepts: ~w(html json)],
+  pubsub: [name: IphodWeb.PubSub,
            adapter: Phoenix.PubSub.PG2
-          ]
+          ],
+  watchers: [node: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
+#   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
+#                     cd: Path.expand("../assets", __DIR__)]]
 
 import_config "#{Mix.env}.exs"
 
@@ -47,11 +49,7 @@ end
 
 # Configure phoenix generators
 config :phoenix, :generators,
-  eex: Appsignal.Phoenix.Template.EExEngine,
-  exs: Appsignal.Phoenix.Template.ExsEngine,
   migration: true,
   binary_id: false
 
-config :iphod, Iphod.Gettext, default_locale: "en"
-
-import_config "appsignal.exs"
+config :iphod, IphodWeb.Gettext, default_locale: "en"

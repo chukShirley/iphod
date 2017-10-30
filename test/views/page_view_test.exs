@@ -1,3 +1,3 @@
 defmodule Iphod.PageViewTest do
-  use Iphod.ConnCase, async: true
+  use IphodWeb.ChannelCase, async: true
 end

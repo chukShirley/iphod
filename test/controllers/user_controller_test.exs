@@ -1,5 +1,5 @@
 defmodule Iphod.UserControllerTest do
-  use Iphod.ConnCase
+  use IphodWeb.ChannelCase
 
   alias Iphod.User
   @valid_attrs %{description: "some content", email: "some content", encrypted_password: "some content", username: "some content"}

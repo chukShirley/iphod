@@ -104,7 +104,7 @@ defmodule BibleText do
       |> Map.put(:notes, [])
       |> Map.put(:show_fn, true)
       |> Map.put(:show_vn, true)
-      |> Map.put(:section, "") # can this be set here?   
+      |> Map.put_new(:section, "")
   end
 
   def body_div(lesson, body) do

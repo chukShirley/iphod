@@ -1,0 +1,624 @@
+# Brunch automatically concatenates all files in your
+# watched paths. Those paths can be configured at
+# config.paths.watched in "brunch-config.js".
+#
+# However, those files will only be executed if
+# explicitly imported. The only exception are files
+# in vendor, which are never wrapped in imports and
+# therefore are always executed.
+# Import dependencies
+#
+# If you no longer want to use a dependency, remember
+# to also remove its path from "config.paths.watched".
+import "deps/phoenix_html/priv/static/phoenix_html"
+moment = require('moment');
+path = window.location.pathname
+isOffice = !!(path == "/" || path.match(/office|midday|^\/mp\/|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|^\/ep\/|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/))
+
+# PouchDB ..................................
+PouchDB = require('pouchdb')
+  localDB = new PouchDB('preferences')
+  db = new PouchDB('iphod') # to be synced with main couchDB
+  remoteCouch = 'http:#127.0.0.1:5984/iphod'
+  dbOpts = {live: true, retry: true}
+  default_prefs = {
+      _id: 'preferences'
+    , ot: 'ESV'
+    , ps: 'BCP'
+    , nt: 'ESV'
+    , gs: 'ESV'
+    , fnotes: "True"
+    , vers: ["ESV"]
+    , current: "ESV"
+  };
+
+sync = () ->
+  console.log("TRYING TO SYNC");
+  # syncDom.setAttribute('data-sync-state', 'syncing');
+  db.replicate.to(remoteCouch, dbOpts, syncError)
+  db.replicate.from(remoteCouch, dbOpts, syncError)
+
+
+syncError = () -> console.log("SYNC ERROR")
+
+sync()
+
+console.log("LIT YEAR: ", litYearName(new moment()) )
+
+db.get("bcp1")
+.then (resp) ->
+  console.log("BCP 1: ", resp);
+.catch (err) ->
+  console.log("IPHOD ERROR BCP1: ", err);
+
+get_preferences = (do_this_too) ->
+  localDB.get('preferences')
+  .then (resp) ->
+    console.log("preferences---: ", resp)
+    do_this_too(resp)
+  .catch  (err) ->
+    console.log("GET PREFERENCE ERR: ", err)
+    do_this_too(initialize_translations());
+
+initialize_translations = () ->
+  localDB.put( default_prefs )
+  .then (resp) ->
+    console.log("INITIALIZED TRANSLATIONS: ", resp)
+    resp
+  .catch (err) -> prefs;
+
+save_preferences = (prefs) ->
+  prefs._id = "preferences"
+  localDB.put(prefs)
+  .then (resp) -> resp;
+  .catch (err) -> prefs;
+
+preference_list = () ->
+  console.log("PERFERENCE LIST...")
+  get_preferences (resp) -> [resp.ot, resp.ps, resp.nt, resp.gs];
+
+preference_for = (key) ->
+  console.log("PERFERENCE FOR...")
+  get_preferences (resp) -> resp[key]
+
+initElmHeader = () ->
+  console.log("INIT ELM HEADER...")
+  get_preferences (resp) -> elmHeaderApp.ports.portConfig.send(resp)
+
+# end of PouchDB......................
+
+# $(".day_options").menu();
+# $(".td-bottom").show();
+
+# console.log("APP.JS CSRF TOKEN: ", $("#csrf_token").val())
+
+# Import local files
+#
+# Local files can be imported directly using relative
+# paths "./socket" or full ones "web/static/js/socket".
+$(".alt_readings-select").click () ->
+  show_this = "#" + $(this).data("ref");
+  $(".this_alt_reading").hide();
+  $(show_this).show();
+
+$(document).on('input', 'textarea', () ->
+  $(this).outerHeight('1em').outerHeight(this.scrollHeight); # 38 or '1em' -min-height
+
+
+$("button.more-options").click () ->
+  $("ul#header-options").toggleClass("responsive");
+
+$("input[name='footnote_show']").click () ->
+  $(this).val() == "show" ? $('.footnote, .footnotes').show() : $('.footnote, .footnotes').hide();
+
+$("input[name='vss_show']").click () ->
+  $(this).val() == "show" ? $('.verse-num, .chapter-num').show() : $('.verse-num, .chapter-num').hide();
+
+
+# HELPERS ------------------------
+
+moment_today = () -> new moment().format("dddd MMMM D, YYYY")
+
+
+
+# SOCKETS ------------------------
+
+import "./menu"
+import socket from "./socket"
+
+now = new moment()
+tz = now.toString().split("GMT")[1].split(" (")[0] # timezone, i.e. -0700
+am = now.toString().split(" ")[4] < "12"
+
+if path.match(/stations/)
+  elmStationsDiv  = document.getElementById('stations-elm-container')
+  elmStationsApp  = Elm.Stations.embed(elmStationsDiv)
+  stationsChannel = socket.channel("stations")
+
+  stationsChannel.join()
+    .receive "ok", (resp) -> # do nothing, all OK
+    .receive "error", (resp) ->
+      console.log("Unabld to join Stations", resp)
+
+  elmStationsApp.ports.requestStation.subscribe (request) ->
+      stationsChannel.push("get_station", request)
+
+  stationsChannel.on "single_station", (resp) ->
+    elmStationsApp.ports.portStation.send(resp)
+
+
+if ( path.match(/office/) ) 
+  vers = preference_for("ps") + "/" + preference_for("ot")
+  till_midday   = new moment().hour(11).minute(30) - new moment()
+  till_evening  = new moment().hour(15).minute(0 ) - new moment()
+  till_late     = new moment().hour(21).minute(30) - new moment()
+  till_midnight = new moment().hour(24).minute(0 ) - new moment()
+  # till_midday = new moment(now.getFullYear(), now.getMonth(), now.getmoment(), 11, 30) - now
+  # till_evening = new moment(now.getFullYear(), now.getMonth(), now.getmoment(), 15) - now
+  # till_late = new moment(now.getFullYear(), now.getMonth(), now.getmoment(), 21, 30) - now
+  # till_midnight = new moment(now.getFullYear(), now.getMonth(), now.getmoment(), 24) - now;
+
+
+  mp = () -> window.location.href = "/office/mp/" + vers
+  np = () -> window.location.href = "/office/midday"
+  ep = () -> window.location.href = "/office/ep/" + vers
+  compline = () -> window.location.href = "/office/compline" + vers
+
+  history.pushState(path, "Legereme", "/office");
+#  if (till_midday > 0) { setTimeout(np, till_midday) }
+#  else if (till_evening > 0) { setTimeout(ep, till_evening)}
+#  else if (till_late > 0) { setTimeout(compline, till_late)}
+#  else { setTimeout(mp, till_midnight) }
+
+
+# HEADER ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+elmHeaderDiv = document.getElementById('header-elm-container')
+elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
+channel = socket.channel("iphod:readings")
+
+channel.join()
+  .receive("ok", (resp) ->
+    # elmHeaderApp.ports.portConfig.send(init_config_model());
+  .receive("error", (resp) -> console.log("Unable to join Iphod", resp) 
+
+elmHeaderApp.ports.portCSRFToken.send($("#csrf_token").val())
+
+# needs to be sent after preference_list completes.......
+# elmHeaderApp.ports.portConfig.send(preference_list());
+#........................................................
+
+initElmHeader();
+
+elmHeaderApp.ports.sendEmail.subscribe (email) ->
+  channel.push("request_send_email", email)
+
+elmHeaderApp.ports.saveLogin.subscribe (user) ->
+  # console.log("APP JS: ", user)
+  ls = window.localStorage
+  ls.setItem("user", user.username)
+  ls.setItem("token", user.token)
+
+elmHeaderApp.ports.currentUser.subscribe () ->
+  ls = window.localStorage
+  channel.push("request_user", [ls.getItem("user"), ls.getItem("token")])
+
+channel.on("current_user", (data) ->
+  # console.log("CURRENT USER: ", data)
+  elmHeaderApp.ports.portUser.send(data)
+
+elmHeaderApp.ports.saveConfig.subscribe (config) ->
+  if (isOffice)
+    if ( config.ps != preference_for("ps") ) 
+      channel.push("get_prayer_reading", ["psalms", config.ps, $("#psalms").data("psalms")])
+    if ( config.ot != preference_for("ot") )  # taking OT ver as version for all
+      channel.push("get_alt_reading", ["reading1", config.ot, $("#reading1").data("reading1")] )
+      channel.push("get_alt_reading", ["reading2", config.ot, $("#reading2").data("reading2")] )
+  
+  else  # is Calendar
+    if ( $("#eu .readings_table").is(":visible") ) 
+      channel.push("get_text", ["EU", $("#readings").data("reading_moment"), [config.ps, config.ot, config.nt, config.gs]])
+  
+    if ( $("#mp .readings_table").is(":visible") )
+      channel.push("get_text", ["MP", $("#readings").data("reading_moment"), [config.ps, config.ot, config.nt, config.gs]])
+    
+    if ( $("#ep .readings_table").is(":visible") )
+      channel.push("get_text", ["EP", $("#readings").data("reading_moment"), [config.ps, config.ot, config.nt, config.gs]])
+
+  save_preferences({
+      ot: config.ot
+    , ps: config.ps
+    , nt: config.nt
+    , gs: config.gs
+    , fnotes: config.fnotes
+    , vers: config.vers.join(",")
+    , current: config.current
+  })
+#  if ( storageAvailable('localStorage') ) {
+#    let s = window.localStorage;
+#    s.setItem("iphod_ot", config.ot)
+#    s.setItem("iphod_ps", config.ps)
+#    s.setItem("iphod_nt", config.nt)
+#    s.setItem("iphod_gs", config.gs)
+#    s.setItem("iphod_fnotes", config.fnotes)
+#    s.setItem("iphod_vers", config.vers.join(","))
+#    s.setItem("iphod_current", config.current)
+#  }
+
+
+
+if (isOffice)
+  # ALT READINGS...
+  channel.on 'single_lesson', (data) ->
+    resp = data.resp[0]
+    target = "#" + resp.section
+    $(target).next().replaceWith(resp.body)
+
+  channel.on 'alt_lesson', (data) ->
+    resp = data.resp[0]
+    $("#" + resp.id).replaceWith(resp.body)
+
+  $(".alt_reading").change () ->
+    vss = $(this).val()
+    $(this).val("")
+    # vss, version, service, section
+    channel.push("get_single_reading", [vss, "ESV", $(this).data("reading_target"), "mp"])
+
+
+# landing page, calendar
+
+if ( path.match(/calendar/) || path.match(/mindex/)) 
+  get_preferences (resp) ->
+    elmHeaderApp.ports.portConfig.send(resp);
+  history.pushState(path, "Legereme", "/calendar");
+
+  # mindex
+  if ( path.match(/mindex/) )
+    elmMindexDiv = document.getElementById('m-elm-container')
+    elmMindexApp = Elm.MIndex.embed(elmMindexDiv)
+    elmMPanelDiv = document.getElementById('m-reading-container')
+    elmMPanelApp = Elm.MPanel.embed(elmMPanelDiv)
+
+    $("#reflection-today-button").click () ->
+      channel.push("get_text", ["Reflection", (new moment).tomomentString(), preference_list()])
+
+    $("#next-sunday-button").click () ->
+      channel.push("get_text", ["NextSunday", (new moment).tomomentString(), preference_list() ] )
+
+    $("#m-reading-container").click () ->
+      $("#reading-panel").effect("drop", "fast");
+
+    channel.on 'reflection_today', (data) ->
+      elmMindexApp.ports.portReflection.send(data);
+      rollup();
+
+    channel.on 'eu_today', (data) ->
+      console.log("EU TODAY AT 333")
+      get_preferences (resp) -> elmMindexApp.ports.portEU.send(resp);
+      rollup();
+
+    channel.on 'mp_today', (data) ->
+      get_preferences (resp) -> elmMindexApp.ports.portMP.send(resp)
+      rollup();
+
+    channel.on 'ep_today', (data) ->
+      get_preferences (resp) -> elmMindexApp.ports.portEP.send(resp)
+      rollup();
+
+    channel.on 'lf_today', (data) ->
+      console.log("LF TODAY: ", data)
+      window.open(data.leaflet)
+
+    channel.on "single_lesson", (data) ->
+      resp = data.resp[0]
+      resp.show_fn = true
+      resp.show_vn = true
+      elmMindexApp.ports.portLesson.send([resp])
+
+    channel.on 'upmoment_lesson', (data) ->
+      get_preferences (resp) -> elmMindexApp.ports.portLesson.send(resp.lesson);
+
+    elmMindexApp.ports.requestReading.subscribe (request) ->
+      request_list = [request.section, request.version, request.ref]
+      channel.push("get_lesson", request_list)
+      # request.push( preference_list() )
+      # channel.push("get_lesson", request)
+
+    # calendar
+
+    # mobile calendar
+    $(".td_link").click () ->
+      r = $(this).find("readings").data()
+      readings =
+        { moment: $(this).attr("value")
+        , title: r.title
+        #, collect: r.collect
+        , collect: {instruction: "", title: "", collects: [], show: true} # required place holder
+        , mp1: r.mp1.split(",")
+        , mp2: r.mp2.split(",")
+        , mpp: r.mpp.split(",")
+        , ep1: r.ep1.split(",")
+        , ep2: r.ep2.split(",")
+        , epp: r.epp.split(",")
+        , ot: r.ot.split(",")
+        , ps: r.ps.split(",")
+        , nt: r.nt.split(",")
+        , gs: r.gs.split(",")
+        , show: true
+        }
+      elmMPanelApp.ports.portReadings.send(readings)
+      $("#reading-panel").effect("slide", "fast")
+
+    elmMPanelApp.ports.requestService.subscribe (request) ->
+      request.push( preference_list() )
+      channel.push("get_text", request )
+
+    elmMPanelApp.ports.requestReflection.subscribe (moment) ->
+      ref = ["Reflection", moment]
+      ref.push( preference_list() )
+      channel.push("get_text", ref)
+
+    elmMPanelApp.ports.requestReading.subscribe (request) ->
+      console.log("MPANEL REQUEST READING: ", request)
+      # request.push( preference_list() )
+      # channel.push("get_lesson", request)
+
+    # end of mindex
+
+
+  rollup = () ->
+    $(".calendar-week").hide();
+    $("#rollup").text("Roll Down");
+
+  rolldown = () ->
+    $(".calendar-week").show();
+    $("#rollup").text("Roll Up");
+  
+
+  $("#rollup").click () ->
+    $(".calendar-week").is(":visible") ? rollup() : rolldown()
+
+  showchat = () ->
+    $("#chat-container").show();
+    $(".toggle-chat").text("Hide Chat");
+    $("#reading-container").css("width", "59%")
+
+
+  hidechat = () ->
+    $("#chat-container").hide();
+    $(".toggle-chat").text("Show Chat");
+    $("#reading-container").css("width", "99%")
+
+  $(".toggle-chat").click () ->
+    $("#chat-container").is(":visible") ? hidechat() : showchat()
+  
+
+  $(".prayer-button").click () ->
+    prayer_type = $(this).attr("data-prayer")
+    ps = preference_for("ps")
+    ver = preference_for("current");
+    window.location = "/" + prayer_type + "/" + ps + "/" + ver
+
+  $("#reflection-today-button").click () ->
+    channel.push("get_text", ["Reflection", (new moment).tomomentString(), preference_list() ])
+
+  $("#next-sunday-button").click () ->
+    channel.push("get_text", ["NextSunday", (new moment).tomomentString(), preference_list() ] )
+
+  channel.on 'latest_chats', (data) ->
+    elmHeaderApp.ports.portInitShout.send( data)
+
+  channel.on 'alt_lesson', (data) ->
+    elmCalApp.ports.portLesson.send(data.resp);
+
+  channel.on 'single_lesson', (data) ->
+    resp = data.resp[0];
+    resp.show_fn = true;
+    resp.show_vn = true;
+    elmCalApp.ports.portLesson.send([resp]);
+
+  channel.on 'reflection_today', (data) ->
+    elmCalApp.ports.portReflection.send(data);
+    rollup();
+
+  channel.on 'eu_today', (data) ->
+    get_preferences (resp) ->
+      data.config = resp;
+      $("#readings")
+        .data("psalms",       readingList(data.ps) )
+        .data("psalms_ver",   data.ps[0].version)
+        .data("reading1",     readingList(data.ot) )
+        .data("reading1_ver", data.ot[0].version)
+        .data("reading2",     readingList(data.nt) )
+        .data("reading2_ver", data.nt[0].version)
+        .data("reading3",     readingList(data.gs) )
+        .data("reading3_ver", data.gs[0].version)
+        .data("reading_moment", data.moment)
+      elmCalApp.ports.portEU.send(data);
+      rollup();
+
+  channel.on 'mp_today', (data) ->
+    get_preferences (resp) ->
+      data.config = resp;
+      $("#readings")
+        .data("psalms",       readingList(data.mpp) )
+        .data("psalms_ver",   data.mpp[0].version)
+        .data("reading1",     readingList(data.mp1) )
+        .data("reading1_ver", data.mp1[0].version)
+        .data("reading2",     readingList(data.mp2) )
+        .data("reading2_ver", data.mp2[0].version)
+        .data("reading3",     "")
+        .data("reading3_ver", "")
+        .data("reading_moment", data.moment)
+      elmCalApp.ports.portMP.send(data)
+      rollup();
+
+  readingList = (readings) ->
+    return readings.map( (a) ->  a.read ).join(", ")
+
+  channel.on 'ep_today', (data) ->
+    get_preferences (resp) ->
+      data.config = resp;
+      $("#readings")
+        .data("psalms",       readingList(data.epp) )
+        .data("psalms_ver",   data.epp[0].version)
+        .data("reading1",     readingList(data.ep1) )
+        .data("reading1_ver", data.ep1[0].version)
+        .data("reading2",     readingList(data.ep2) )
+        .data("reading2_ver", data.ep2[0].version)
+        .data("reading3",     "")
+        .data("reading3_ver", "")
+        .data("reading_moment", data.moment)
+      elmCalApp.ports.portEP.send(data)
+      rollup();
+
+  channel.on 'lf_today', (data) -> window.open(data.leaflet)
+
+  channel.on 'upmoment_lesson', (data) ->
+    get_preferences (resp) ->
+      data.config = resp;
+      elmCalApp.ports.portLesson.send(data.lesson);
+
+  $(".leaflet").click () ->
+    window.open($(this).attr("data-leafletUrl"));
+
+  $(".reflection").click () ->
+    reflID = $(this).attr("data-reflID").toString();
+    if (reflID > 0) 
+      channel.push("get_text", ["Reflection", reflID])
+
+  $(".reading_menu").click () ->
+    moment = $(this).attr("data-moment")
+    of_type = $(this).attr("data-type");
+    if (moment == null) moment = moment_today()
+    request = [of_type, moment, preference_list()];
+    channel.push("get_text", request);
+
+  elmCalDiv = document.getElementById('cal-elm-container')
+  elmCalApp = Elm.Iphod.embed(elmCalDiv)
+
+  if ( !!$("#these_readings").data("service") )
+    # where the problem was
+    this_service = $("#these_readings").data("service")
+    this_moment = $("#these_readings").data("moment")
+    request = [this_service, this_moment];
+
+    request.push( preference_list() );
+    channel.push("get_text", request);
+    $(window).scrollTop(0);
+
+  elmCalApp.ports.requestReading.subscribe (request) ->
+    request_list = [request.section, request.version, request.ref]
+    channel.push("get_lesson", request_list)
+
+  elmCalApp.ports.requestAltReading.subscribe (request) ->
+    [section, ver, vss] = request;
+    ver = get_version(section)
+    channel.push("get_alt_reading", [section, ver, vss])
+
+  elmCalApp.ports.requestScrollTop.subscribe (request) ->
+    # if needs be, request to be used to scroll to a location from top
+    # use `setTimeout` to give page a chance to load
+    setTimeout("$(window).scrollTop(0)", 15);
+
+if ( path.match(/communiontosick/) ) 
+  communiontosick_channel = socket.channel("iphod:readings")
+  communiontosick_channel.join()
+    .receive "ok", (resp) ->
+      # console.log("Joined Versions successfully", resp);
+    .receive "error", (resp) -> console.log("Unable to join Iphod", resp)
+
+  $(".psalm-button").click () ->
+    psalm = "psalm " + $(this).data("psalm")
+    section = "ps"
+    version = get_version(section);
+    communiontosick_channel.push("get_alt_reading", [section, version, psalm]);
+
+  communiontosick_channel.on "alt_lesson", (data) ->
+    psalm = data.resp[0].body
+    $("#sick-communion-psalm").html(psalm)
+
+
+# translations
+if ( path.match(/versions/) )
+  trans_channel = socket.channel("versions")
+  trans_channel.join()
+    .receive "ok", resp ->
+      # console.log("Joined Versions successfully", resp);
+    .receive "error", (resp) -> console.log("Unable to join Iphod", resp)
+
+  elmTransDiv = document.getElementById("elm-versions")
+  elmTransApp = Elm.Translations.embed(elmTransDiv)
+
+  trans_channel.on "all_versions", (data) ->
+    get_preferences (resp) ->
+      saved_vers = resp.vers;
+      data.list.forEach (ver) ->
+        if (saved_vers.includes(ver.abbr)) ver.selected = true
+      data.list.sort (a,b) ->
+        return switch
+          when (a.selected && !b.selected) then -1
+          when (!a.selected && b.selected) then 1
+          when (a.abbr < b.abbr) then -1
+          when (a.abbr > b.abbr) then 1
+          else 0
+      elmTransApp.ports.allVersions.send(data.list);
+
+  elmTransApp.ports.upmomentVersions.subscribe (version) ->
+    if (version.selected) save_version(version.abbr)
+    else unsave_version(version.abbr)
+
+# resources
+if ( path.match(/resources|humor|inserts/) ) 
+  resc_channel = socket.channel("resources")
+  of_type = path.split("/").pop();
+  resc_channel.join()
+    .receive "ok", (resp) ->
+      # console.log("Joined Resources successfully");
+    .receive "error", (resp) -> console.log("Unable to join Resources", resp)
+
+  elmRescDiv = document.getElementById("resources-container")
+  elmRescApp = Elm.Resources.embed(elmRescDiv);
+
+  resc_channel.push(of_type, "");
+
+  resc_channel.on "all_resources", (data) ->
+    elmRescApp.ports.allResources.send(data.list)
+
+  $("#insult_me").click () -> resc_channel.push("insult", "");
+
+  resc_channel.on "give_offence", (data) ->
+    $("#insult").text(data.insult)
+
+# reflections
+
+if ( path.match(/reflections.+[new|edit]/) )
+  elmReflDiv = document.getElementById("reflection-elm-container")
+  elmReflApp = Elm.NewReflection.embed(elmReflDiv)
+  refl_channel = socket.channel("reflection")
+  refl_channel.join()
+    .receive "ok", (resp) ->
+      refl = {
+        id:     $("reflection").data("recno")
+        moment:   $("reflection").data("moment")
+        author: $("reflection").data("author")
+        text:   $("reflection").data("text")
+        published: $("reflection").data("published")
+      }
+      elmReflApp.ports.portReflection.send(refl);
+    .receive("error", resp => {console.log("Failed to join reflection")})
+
+  elmReflApp.ports.portSubmit.subscribe (d) ->
+    refl_channel.push("submit", [d.id, d.moment, d.text, d.author, d.published])
+
+  elmReflApp.ports.portReset.subscribe (data) ->
+    refl_channel.push("reset", data.id)
+
+  elmReflApp.ports.portBack.subscribe (data) ->
+    window.location = "/reflections"
+
+  refl_channel.on "reflection", (data) ->
+    elmReflApp.ports.portReflection.send(data)
+
+  refl_channel.on "submitted", (data) ->
+    console.log("SUBMITTED: ", data)
