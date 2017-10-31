@@ -1,10 +1,10 @@
 require IEx
 defmodule Psalms do
-  import Coverdale
-  import BCPPsalms
+  # import Coverdale
+  # import BCPPsalms
 
   def start_link do
-    Agent.start_link fn -> build end, name: __MODULE__
+    Agent.start_link fn -> build() end, name: __MODULE__
   end
 
   def identity(), do: Agent.get(__MODULE__, &(&1))
@@ -15,9 +15,9 @@ defmodule Psalms do
 
   def psalm(n, ver ) when n |> is_bitstring, do: psalm(String.to_integer(n), ver)
 
-  def psalm(n, "Coverdale"), do: identity.coverdale[n]
-  def psalm(n, "COVERDALE"), do: identity.coverdale[n]
-  def psalm(n, "BCP"), do: identity.bcp[n]
+  def psalm(n, "Coverdale"), do: identity().coverdale[n]
+  def psalm(n, "COVERDALE"), do: identity().coverdale[n]
+  def psalm(n, "BCP"), do: identity().bcp[n]
   def psalm(n, "ESV"), do: EsvText.request("Ps #{n}")
   def psalm(n, ver), do: BibleComText.request(ver, "Ps #{n}")
 
@@ -31,10 +31,10 @@ defmodule Psalms do
 
   def psalm(n,v1,v2, "COVERDALE"), do: psalm(n,v1,v2, "Coverdale")
   def psalm(n,v1,v2, "Coverdale") do
-    identity.coverdale[n] |> Map.take(list_of_vss(v1, v2))
+    identity().coverdale[n] |> Map.take(list_of_vss(v1, v2))
   end
   def psalm(n,v1,v2, "BCP") do
-    identity.bcp[n] |> Map.take(list_of_vss(v1, v2))
+    identity().bcp[n] |> Map.take(list_of_vss(v1, v2))
   end
   def psalm(n,v1,v2, "ESV"), do: EsvText.request("Ps #{n}.#{v1}-#{v2}")
 
@@ -43,8 +43,8 @@ defmodule Psalms do
     |> Enum.to_list
     |> List.flatten(["name", "title", "version"])
   end
-  def morning(n), do: identity.day[n].mp
-  def evening(n), do: identity.day[n].ep
+  def morning(n), do: identity().day[n].mp
+  def evening(n), do: identity().day[n].ep
 
   def morning_psalms(n, ver \\ "Coverdale"), do: morning(n) |> Enum.map(&(psalm &1, ver))
   def evening_psalms(n, ver \\ "Coverdale"), do: evening(n) |> Enum.map(&(psalm &1, ver))
@@ -63,10 +63,9 @@ defmodule Psalms do
   def _to_html(ps, "BCP"), do: _to_local_html(ps)
   def _to_html(ps, "Coverdale"), do: _to_local_html(ps)
   def _to_html(ps, "COVERDALE"), do: _to_local_html(ps)
-  def _to_html(ps, ver), do: ps # BibleComText comes ready to go
+  def _to_html(ps, _ver), do: ps # BibleComText comes ready to go
 
   def _to_local_html(ps) do
-    psalm_id = ps["name"] |> String.slice(0..-2) |> String.replace(" ", "_")
     s = ~s( <h3>#{ps["name"]} 
             <span class="ps_title">#{ps["title"]}</span>
             </h3>

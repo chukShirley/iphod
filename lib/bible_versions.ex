@@ -5,49 +5,46 @@ defmodule BibleVersions do
   @password "couldbeanything"
 
   def start_link do
-    Agent.start_link fn -> build end, name: __MODULE__
+    Agent.start_link fn -> build() end, name: __MODULE__
   end
 
   def identity(), do: Agent.get(__MODULE__, &(&1))
-  def source(ver), do: identity[ver]["source"]
-  def id(abbreviation), do: identity[abbreviation]["id"]
+  def source(ver), do: identity()[ver]["source"]
+  def id(abbreviation), do: identity()[abbreviation]["id"]
   def list_all() do
-    identity 
+    identity()
       |> Map.to_list
       |> Enum.map(fn({id, map})-> {id, map["abbreviation"], map["name"], map["lang_name_eng"]} end)
   end
 
   def build do
     auth = [basic_auth: {@username, @password}]
-    {ok, resp} = try do
+    {_ok, resp} = try do
       HTTPoison.get(@url, [{"Accept", "application/jsonrequest"}], [hackney: auth, follow_redirect: true])
     rescue
-      e in RuntimeError -> 
+      _e in RuntimeError -> 
         {:error, %{status_code: 500}} # call it `internal server error`
     end
 
     map = case resp.status_code do
       200 ->
-        body = 
-          resp.body
-          |> Poison.decode!
-        map = 
-          body["response"]["versions"]
+        body = resp.body |> Poison.decode!
+        body["response"]["versions"]
           |> Enum.reduce(%{}, fn(ver, acc)-> 
             new_ver = ver |> Map.put("source", "bibles.org")
-            acc = acc |> Map.put_new(ver["abbreviation"], new_ver) end)
+            acc |> Map.put_new(ver["abbreviation"], new_ver) end)
       _ ->
         IO.puts ">>>>> Bibles.org failed with status code: #{inspect resp.status_code}"
         %{}
     end
     map2 = 
-      get_bible_translations
+      get_bible_translations()
       |> Enum.reduce(map, fn(ver, acc)->
-        acc = acc |> Map.put_new(ver["abbreviation"], ver)
+        acc |> Map.put_new(ver["abbreviation"], ver)
       end)
-    local_bible_translations
+    local_bible_translations()
       |> Enum.reduce(map2, fn(ver, acc)->
-        acc = acc |> Map.put_new(ver["abbreviation"], ver)
+        acc |> Map.put_new(ver["abbreviation"], ver)
       end)
   end
 

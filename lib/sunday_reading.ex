@@ -1,33 +1,26 @@
 require IEx
 
 defmodule SundayReading do
-  import Lityear, only: [ namedDayDate: 2, 
-                          is_sunday?: 1, 
-                          next_holy_day: 1, 
-                          right_after_ash_wednesday?: 1, 
-                          right_after_ascension?: 1,
-                          to_season: 1
-                        ]
-  import Leaflets, only: [for_this_date: 1, for_this_sunday: 3]
+  import Lityear, only: [ namedDayDate: 2 ]
   use Timex
   @tz "America/Los_Angeles"
 
 
   def start_link do
-    Agent.start_link fn -> build end, name: __MODULE__
+    Agent.start_link fn -> build() end, name: __MODULE__
   end
 
   def identity(), do: Agent.get(__MODULE__, &(&1))
-  def seasons(), do: identity |> Map.keys
-  def weeks_for(season), do: identity[season] |> Map.keys
+  def seasons(), do: identity() |> Map.keys
+  def weeks_for(season), do: identity()[season] |> Map.keys
 
   def all_lessons() do
     {:ok, file} = File.open("sr.text", [:write, :utf8])
     readingList()
       |> Enum.each( fn({season, week, year}) -> 
-            titlesAndColors = identity[season][week]
+            titlesAndColors = identity()[season][week]
             IO.puts file, "#{season}, #{week} #{year} - #{titlesAndColors["title"]}; #{ titlesAndColors["colors"] |> Enum.join(", ")}"
-            this_week = identity[season][week][year]
+            this_week = identity()[season][week][year]
             # putText(file, :ot, this_week.ot)
             # putText(file, :ps, this_week.ps)
             # putText(file, :nt, this_week.nt)
@@ -91,7 +84,7 @@ defmodule SundayReading do
   # EsvText.request_raw [include_footnotes: "false", output_format: "plain-text", passage: "john 3:1-16"]
   def list_seasons() do
     {:ok, file} = File.open("sr.text", [:write, :utf8])
-    identity 
+    identity()
       |> Map.to_list 
       |> Enum.each( fn({season, weeks}) -> 
         weeks
@@ -103,11 +96,11 @@ defmodule SundayReading do
     file |> File.close
   end
 
-  def readings(season, wk, yr), do: identity[season][wk][yr]
+  def readings(season, wk, yr), do: identity()[season][wk][yr]
   def readings(date) do
     {season, wk, yr, _} = Lityear.to_season(date)
     # readings(season, wk, yr)
-    r = identity[season][wk]
+    r = identity()[season][wk]
     if r |> is_nil, do: IEx.pry
     %{  gs:       r[yr].gs,
         ot:       r[yr].ot,
@@ -154,30 +147,30 @@ defmodule SundayReading do
   def last_sunday(date),  do: date |> Lityear.last_sunday |> _sunday
   def from_now,           do: Timex.now(@tz) |> this_sunday
 
-  def holy_day_color("epiphany"),   do: identity["theEpiphany"]["1"]["colors"]
-  def holy_day_color("christmas"),  do: identity["christmasDay"]["1"]["colors"]
-  def holy_day_color("christmasEve"),  do: identity["christmasDay"]["1"]["colors"]
-  def holy_day_color("christmasDay"),  do: identity["christmasDay"]["1"]["colors"]
-  def holy_day_color(title),        do: identity["redLetter"][title]["colors"]
+  def holy_day_color("epiphany"),   do: identity()["theEpiphany"]["1"]["colors"]
+  def holy_day_color("christmas"),  do: identity()["christmasDay"]["1"]["colors"]
+  def holy_day_color("christmasEve"),  do: identity()["christmasDay"]["1"]["colors"]
+  def holy_day_color("christmasDay"),  do: identity()["christmasDay"]["1"]["colors"]
+  def holy_day_color(title),        do: identity()["redLetter"][title]["colors"]
 
-  def holy_day_title("epiphany"),   do: identity["theEpiphany"]["1"]["title"]
+  def holy_day_title("epiphany"),   do: identity()["theEpiphany"]["1"]["title"]
   def holy_day_title("christmasEve"),   do: "Christmas Eve"
   def holy_day_title("christmasDay"),   do: "Christmas Day"
-  def holy_day_title(title),        do: identity["redLetter"][title]["title"]
+  def holy_day_title(title),        do: identity()["redLetter"][title]["title"]
 
   def _sunday({season, wk, yr, sunday}), do: eu_map {season, wk, yr, sunday}
 
 #  defp eu_map(nil, _date), do: IEx.pry
   defp eu_map({season, wk, yr, sunday}) do
-    if identity[season][wk]["colors"] == nil, do: IEx.pry
-    identity[season][wk][yr]
+    if identity()[season][wk]["colors"] == nil, do: IEx.pry
+    identity()[season][wk][yr]
       |> add_ids
       |> Map.merge( %{
                 date:     sunday |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"), 
                 season:   season, 
                 week:     wk, 
-                title:    identity[season][wk]["title"],
-                colors:   identity[season][wk]["colors"],
+                title:    identity()[season][wk]["title"],
+                colors:   identity()[season][wk]["colors"],
                 collect:  Collects.get(season, wk),
                 leaflet:  Leaflets.for_this_sunday(season, wk, yr)
               })
@@ -189,13 +182,13 @@ defmodule SundayReading do
   end
 
   def namedReadings(season, wk) do
-    identity[season][wk]["a"]
+    identity()[season][wk]["a"]
     |> add_ids
     |> Map.merge( %{
             date: namedDayDate(season, wk) |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"),
             season: season,
             week: wk,
-            title: identity[season][wk]["title"]
+            title: identity()[season][wk]["title"]
         })
   end
 

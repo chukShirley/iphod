@@ -1,4 +1,3 @@
-alias Iphod.Repo
 defmodule Iphod.Chat do
   use IphodWeb, :model
 
@@ -8,7 +7,7 @@ defmodule Iphod.Chat do
     field :user,    :string, default: "anon"
     field :comment, :string, default: ""
     
-    timestamps 
+    timestamps()
   end
 
   @required_fields ~w(section, text, user, comment)

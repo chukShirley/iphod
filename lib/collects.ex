@@ -2,11 +2,11 @@ require IEx
 defmodule Collects do
   @default_show true
   def start_link do
-    Agent.start_link fn -> build end, name: __MODULE__
+    Agent.start_link fn -> build() end, name: __MODULE__
   end
   def identity(), do: Agent.get(__MODULE__, &(&1))
   def get(key) when key |> is_bitstring do
-    {instruction, title, collects} =  identity.collects[key]
+    {instruction, title, collects} =  identity().collects[key]
     cmap = collects
       |> Enum.map( fn({c, pkeys}) -> 
         %{ collect: c, propers: list_propers(pkeys)} 
@@ -17,7 +17,7 @@ defmodule Collects do
   def get("redLetter", week), do: week |> get
   def get(season, week), do: season <> week |> get
 
-  def proper(key), do: identity.propers[key]
+  def proper(key), do: identity().propers[key]
   def list_propers(pkeys) do
     pkeys
     |> Enum.map( fn(key)->

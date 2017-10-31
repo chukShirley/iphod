@@ -33,9 +33,9 @@ defmodule IphodWeb.ReflectionChannel do
     # refl = Repo.insert!(Reflection, id)
     # changeset = Reflection.changeset(refl, %{date: date, markdown: text, author: author, published: published})
     case Repo.insert( %Reflection{date: date, markdown: text, author: author, published: published}) do
-      {:ok, user} -> 
+      {:ok, _user} -> 
         push socket, "submitted", %{resp: "ok"}
-      {:error, changeset} ->
+      {:error, _changeset} ->
         push socket, "submitted", %{resp: "error"}
     end
     {:noreply, socket}
@@ -45,9 +45,9 @@ defmodule IphodWeb.ReflectionChannel do
     refl = Repo.get!(Reflection, id)
     changeset = Reflection.changeset(refl, %{id: id, date: date, markdown: text, author: author, published: published})
     case Repo.update(changeset) do
-      {:ok, user} -> 
+      {:ok, _user} -> 
         push socket, "submitted", %{resp: "ok"}
-      {:error, changeset} ->
+      {:error, _changeset} ->
         push socket, "submitted", %{resp: "error"}
     end
     {:noreply, socket}

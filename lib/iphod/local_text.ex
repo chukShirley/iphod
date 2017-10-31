@@ -5,7 +5,7 @@ alias Iphod.Bible
 
 defmodule LocalText do
   import RequestParser, only: [local_query: 1]
-  import BookNames, only: [book_name: 1, book_title: 1]
+  import BookNames, only: [book_title: 1]
   import Ecto.Query, only: [from: 2]
 
   def passage(ver, book, chapter) do
@@ -15,7 +15,7 @@ defmodule LocalText do
   end
 
   def respond_with(nil, "web", book, chapter), do: "ERROR: Could not find passage #{book} #{chapter}"
-  def respond_with(nil, ver, book, chapter), do: passage("web", book, chapter)
+  def respond_with(nil, _ver, book, chapter), do: passage("web", book, chapter)
   def respond_with(resp, _ver, _book, _chapter), do: resp.vss
 
   def passage(ver, book, chapter, from, to) do
@@ -27,7 +27,7 @@ defmodule LocalText do
   end
 
   def request(ver, ref) do
-    {ver, book, lists} = request(ver, local_query(ref), [])
+    {_ver, _book, lists} = request(ver, local_query(ref), [])
     lists_to_html(lists, "<h3>#{titlize(String.downcase ref)}</h3>")
   end
 

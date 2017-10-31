@@ -8,7 +8,7 @@ defmodule Iphod.Reflection do
         field :read_cnt, :integer, default: 0
         field :published, :boolean, default: false
 
-    timestamps
+    timestamps()
   end
 
   @required_fields ~w(date author markdown published)

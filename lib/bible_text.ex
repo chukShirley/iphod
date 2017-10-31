@@ -46,7 +46,7 @@ defmodule BibleText do
     lesson_with_body(list, ver, BibleVersions.source(ver))
   end
 
-  def lesson_with_body(list, ver, "Coverdale") do
+  def lesson_with_body(list, _ver, "Coverdale") do
     list |> Enum.map(fn(lesson)->
       lesson
         |> Map.put(:id, Regex.replace(~r/[\s\.\:\,]/, lesson.read, "_") )
@@ -56,7 +56,7 @@ defmodule BibleText do
     end)
   end
 
-  def lesson_with_body(list, ver, "BCP") do
+  def lesson_with_body(list, _ver, "BCP") do
     list |> Enum.map(fn(lesson)->
       lesson
         |> Map.put(:id, Regex.replace(~r/[\s\.\:\,]/, lesson.read, "_") )

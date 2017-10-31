@@ -5,7 +5,7 @@ defmodule IphodWeb.DisplayHelpers do
   
   use Phoenix.HTML
 
-  @moduledoc """
+  @doc """
   shorten string and add `...` at the end
   """
   def ellipsis(s, len), do: String.slice(s, 0, len) <> "..."

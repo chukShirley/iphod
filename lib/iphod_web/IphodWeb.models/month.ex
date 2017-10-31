@@ -5,7 +5,7 @@ defmodule Iphod.Month do
         field :name, :string
         field :year, :string
         field :code, :string
-    timestamps
+    timestamps()
   end
 
   @required_fields ~w(:name, :year, :code)

@@ -23,5 +23,5 @@ defmodule IphodWeb.StationsChannel do
     {:noreply, socket}
   end
 
-  def authorized?(payload), do: true
+  def authorized?(_payload), do: true
 end

@@ -9,15 +9,12 @@ defmodule Iphod.DailyOptions do
   @christmasDays ~w( Dec29 Dec30 Dec31 Jan02 Jan03 Jan04 Jan05 )
 
   schema "daily_options" do
-    field :date, Ecto.Date
+    field :date, :date
     field :collect, :string
     field :invitatory, :string
 
     timestamps()
   end
-
-  @required_fields ~w(date, collect, invitatory)
-  @optional_field ~w()
 
   @doc """
   Builds a changeset based on the `struct` and `params`.

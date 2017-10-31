@@ -5,7 +5,7 @@ defmodule  Lityear do
   @leap_day 60
   @sunday 7
   @monday 1
-  @thursday 4
+#  @thursday 4
   @tz "America/Los_Angeles"
 
   def bad_arg(), do: bad_arg('')
@@ -20,8 +20,8 @@ defmodule  Lityear do
       d.year
     end
   end
-  def abc(d), do: {"c", "a", "b"} |> elem(d|>lityear|>rem(3))
-  def abc_atom(d), do: {:c, :a, :b} |> elem(d|>lityear|>rem(3))
+  def abc(d), do: {"c", "a", "b"} |> elem(d|>lityear()|>rem(3))
+  def abc_atom(d), do: {:c, :a, :b} |> elem(d|>lityear()|>rem(3))
   def is_sunday?(), do: Timex.now(@tz) |> Timex.weekday == @sunday
   def is_sunday?(d), do: Timex.weekday(d) == @sunday
   def is_monday?(), do: Timex.now(@tz) |> Timex.weekday == @monday
@@ -34,13 +34,13 @@ defmodule  Lityear do
   def date_next_sunday(d),  do: date_shift(d, days: days_till_sunday(d))
   def date_last_sunday(),   do: date_last_sunday(Timex.now(@tz))
   def date_last_sunday(d),  do: date_shift(d, days: -Timex.weekday(d))
-  def last_sunday(),        do: date_last_sunday              |> to_season
+  def last_sunday(),        do: date_last_sunday()            |> to_season
   def last_sunday(d),       do: date_last_sunday(d)           |> to_season
   def next_sunday(),        do: date_next_sunday(Timex.now(@tz))  |> to_season
   def next_sunday(d),       do: date_next_sunday(d)           |> to_season
   def from_now(), do: to_season Timex.now(@tz)
   def to_season(day) do
-    sunday = if day |> is_sunday?, do: day, else: day |> date_last_sunday
+    sunday = if day |> is_sunday?, do: day, else: day |> date_last_sunday()
     doy = day |> Timex.format!("%m%d", :strftime)
     {hd, hd_title} = next_holy_day(day)
     y = lityear sunday
@@ -67,7 +67,7 @@ defmodule  Lityear do
       # to whom it may concern...
       # changes the order of these conditions at your peril
       hd == day                -> {"redLetter", hd_title, yrABC, day}
-      day |> right_after_ash_wednesday? -> 
+      day |> right_after_ash_wednesday?() -> 
                                   {"ashWednesday", "1", yrABC, day}
       day |> right_after_ascension?     -> 
                                   {"ascension", "1", yrABC, day}
@@ -108,39 +108,39 @@ defmodule  Lityear do
   end
 
    def next_season("advent", date) do
-      if Timex.before?( advent, date), do: advent(1, date.year + 1), else: advent
+      if Timex.before?( advent(), date), do: advent(1, date.year + 1), else: advent()
    end
 
    def next_season("epiphany", date) do
-      if Timex.before?( epiphany, date), do: epiphany(1, date.year + 1), else: epiphany
+      if Timex.before?( epiphany(), date), do: epiphany(1, date.year + 1), else: epiphany()
    end
 
    def next_season("lent", date) do
-      if Timex.before?( lent, date), do: lent(1, date.year + 1), else: lent
+      if Timex.before?( lent(), date), do: lent(1, date.year + 1), else: lent()
    end
 
    def next_season("easter", date) do
-      if Timex.before?( easter, date), do: easter(1, date.year + 1), else: easter
+      if Timex.before?( easter(), date), do: easter(1, date.year + 1), else: easter()
    end
 
    def next_season("pentecost", date) do
-      if Timex.before?( pentecost, date), do: pentecost(1, date.year + 1), else: pentecost
+      if Timex.before?( pentecost(), date), do: pentecost(1, date.year + 1), else: pentecost()
    end
 
 
   def advent(),         do: advent(1)
-  def advent(n),        do: christmas    |> date_last_sunday |> date_shift( weeks: n-4)
-  def advent(n, y),     do: christmas(y) |> date_last_sunday |> date_shift( weeks: n-4)
+  def advent(n),        do: christmas()  |> date_last_sunday() |> date_shift( weeks: n-4)
+  def advent(n, y),     do: christmas(y) |> date_last_sunday() |> date_shift( weeks: n-4)
 
   def christmas(),      do: Timex.to_date {Timex.now(@tz).year, 12, 25}
   def christmas(n) when n < 1, do: {:error, "There is no Christmas before year 0"}
   def christmas(n) when n > 2, do: Timex.to_date {n, 12, 25} # presume n is a year
   def christmas(n) do # n is 1 or 2, presume sunday after christmas
-    christmas |> date_next_sunday |> date_shift( weeks: n - 1)
+    christmas() |> date_next_sunday |> date_shift( weeks: n - 1)
   end
   def christmas(n,y),   do: christmas(y) |> date_shift( weeks: n)
   
-  def epiphany,   do: Timex.to_date({lityear, 1, 6})
+  def epiphany(),   do: Timex.to_date({lityear(), 1, 6})
   def epiphany(n) when n < 1,         do: {:error, "There is no Epiphany before year 0."}
   def epiphany(n) when n in (1..9),   do: epiphany n, Timex.now(@tz).year
   def epiphany(n) when is_integer(n), do: Timex.to_date {{n, 1, 6},{0,0,0}}
@@ -149,10 +149,10 @@ defmodule  Lityear do
     Timex.to_date( {{yr, 1, 6}, {0,0,0}}) |> date_next_sunday |> date_shift( weeks: n - 1)
   end
 
-  def epiphany_last(),      do: date_last_sunday ash_wednesday
+  def epiphany_last(),      do: date_last_sunday ash_wednesday()
   def epiphany_last(yr),    do: date_last_sunday ash_wednesday(yr)
     
-  def ash_wednesday(),                      do: date_shift(easter, days: -46)
+  def ash_wednesday(),                      do: date_shift(easter(), days: -46)
   def ash_wednesday(y) when is_integer(y),  do: date_shift(_easter(y), days: -46)
   def ash_wednesday(d),   do: date_shift(_easter(d.year), days: -46)
   def right_after_ash_wednesday?(d) do
@@ -161,21 +161,21 @@ defmodule  Lityear do
     before_lent1? = Date.compare(d, lent(1, d)) == :lt
     lent? && before_lent1?
   end
-  def lent(),             do: ash_wednesday |> date_next_sunday
+  def lent(),             do: ash_wednesday() |> date_next_sunday
   def lent(n) when n < 6, do: lent(n, Timex.now(@tz).year)
   def lent(y),            do: ash_wednesday(y) |> date_next_sunday
   def lent(n, yr),        do: lent(yr) |> date_shift( weeks: (n-1))
 
-  def palm_sunday(),        do: easter |> date_shift( weeks: -1)
+  def palm_sunday(),        do: easter() |> date_shift( weeks: -1)
   def palm_sunday(year),    do: easter(year) |> date_shift( weeks: -1)
 
-  def good_friday(),        do: easter |> date_shift( days: -2)
+  def good_friday(),        do: easter() |> date_shift( days: -2)
   def good_friday(year),    do: easter(year) |> date_shift( days: -2)
   def good_friday?(d),      do: d.year |> good_friday == d
 
-  def easter(),                 do: lityear(Timex.now(@tz)) |> _easter
+  def easter(),                 do: lityear(Timex.now(@tz)) |> _easter()
   def easter(n) when n >= 30,   do: _easter(n)
-  def easter(n) when n in 1..7, do: easter |> date_shift(weeks: (n - 1))
+  def easter(n) when n in 1..7, do: easter() |> date_shift(weeks: (n - 1))
   def easter(_n),               do: {:error, "Eh? There is no Easter before the Resurrection!"}
   def easter_day(year),         do: _easter(year)
   def easter(week, year),       do: date_shift(_easter(year), weeks: (week - 1))
@@ -199,14 +199,14 @@ defmodule  Lityear do
     day = rem(h + l - 7*m + 114, 31) + 1
     Timex.to_date({year, month, day})
   end
-  def second_monday_after_easter(), do: second_monday_after_easter(lityear)
+  def second_monday_after_easter(), do: second_monday_after_easter(lityear())
   def second_monday_after_easter(n), do: _easter(n) |> Timex.shift(days: 8)
-  def ascension(), do: lityear(Timex.now(@tz)) |> _easter |> date_shift(days: 39) # 39 days from east to ascension
-  def ascension(n), do: n |> _easter |> date_shift(days: 39) # 39 days from east to ascension
+  def ascension(), do: lityear(Timex.now(@tz)) |> _easter() |> date_shift(days: 39) # 39 days from east to ascension
+  def ascension(n), do: n |> _easter() |> date_shift(days: 39) # 39 days from east to ascension
   def sunday_after_ascension(), do: easter(7)
   def sunday_after_ascension(year) when year >= 30, do: easter(7, year) # no easters before 30AD
-  def pentecost(),    do: pentecost(1, lityear)
-  def pentecost(n),   do: pentecost(n, lityear)
+  def pentecost(),    do: pentecost(1, lityear())
+  def pentecost(n),   do: pentecost(n, lityear())
   def pentecost(n,y), do: easter(n+7, y)
   def right_after_ascension?(d) do
     a = ascension(d.year)
@@ -214,9 +214,9 @@ defmodule  Lityear do
     before_saad? = Date.compare(d, sunday_after_ascension(d.year)) == :lt # saad - sunday after ascension day
     ascension? && before_saad?
   end
-  def trinity(),      do: pentecost(2, lityear)
+  def trinity(),      do: pentecost(2, lityear())
   def trinity(y),     do: pentecost(2, y)
-  def proper(n) when n < 30,            do: proper(n, lityear)
+  def proper(n) when n < 30,            do: proper(n, lityear())
   def proper(d) do
     29 - Timex.diff(d, Lityear.advent(0, d.year), :weeks)
   end
@@ -265,7 +265,7 @@ defmodule  Lityear do
         355 => "stThomas",
         358 => "christmasEve",
         359 => "christmasDay",
-        361 => "stStephen",
+        360 => "stStephen",
         361 => "stJohn",
         362 => "holyInnocents"
     }
@@ -294,17 +294,17 @@ defmodule  Lityear do
     # since they float around like a holy day
     d = leap_year_correction(date) # d is numerical day of year; 1-365 or 1-366
     cond do
-      hd_index[d] == "presentation" -> {true, "presentation"} # don't translate The Presentation
+      hd_index()[d] == "presentation" -> {true, "presentation"} # don't translate The Presentation
       date |> is_sunday? -> {false, ""} # potential problem for feast of Our Lord
 
       date |> is_monday? ->
         # go back a day and check
-        holy_day = hd_index[d - 1]
+        holy_day = hd_index()[d - 1]
         if holy_day |> is_nil, do: {false, ""}, else: {true, holy_day}
 
-      hd_index[d] |> is_nil -> {false, ""}
+      hd_index()[d] |> is_nil -> {false, ""}
 
-      true -> {true, hd_index[d]}        
+      true -> {true, hd_index()[d]}        
     end
   end
 
@@ -313,7 +313,7 @@ defmodule  Lityear do
   end
 
   def _next_holy_day(date, @sunday) do
-    _next_holy_day(date, @sunday, 1)
+    _next_holy_day(date, @sunday)
   end
 
   def _next_holy_day(date, @monday) do
@@ -321,31 +321,27 @@ defmodule  Lityear do
   end
 
   def _next_holy_day(date, weekday) do
-    _next_holy_day(date, weekday, 0)
-  end
-
-  def _next_holy_day(date, weekday, n) do
-    _next_holy_day(date, weekday, n, leap_year_correction?(date) )
+    _next_holy_day(date, weekday, leap_year_correction?(date))
   end
 
   # correct for leap year
-  def _next_holy_day(date, _weekday, n, true) do
+  def _next_holy_day(date, _weekday, true) do
     this_doy = (date |> Timex.day) - 1
-    holy_doy = hd_doy |> Enum.at(this_doy)
+    holy_doy = hd_doy() |> Enum.at(this_doy)
     new_date = Timex.from_iso_day(1, date) |> Timex.shift(days: holy_doy)
     new_date = if holy_doy > 365, do: new_date |> Timex.shift(days: 1), else: new_date
-    {new_date, hd_index[holy_doy]}
+    {new_date, hd_index()[holy_doy]}
   end
 
   # no leap year correction required
-  def _next_holy_day(date, _weekday, n, false) do
+  def _next_holy_day(date, _weekday, false) do
     this_doy = date |> Timex.day
-    holy_doy = hd_doy |> Enum.at(this_doy)
+    holy_doy = hd_doy() |> Enum.at(this_doy)
     new_date = Timex.from_iso_day(1, date) |> Timex.shift(days: (holy_doy - 1))
     new_date = if holy_doy > 365, do: new_date |> Timex.shift(days: 1), else: new_date
     # if it's a sunday, shift to monday
     new_date = new_date |> translate_from_sunday()
-    {new_date, hd_index[holy_doy]}
+    {new_date, hd_index()[holy_doy]}
   end
 
   def leap_year_correction(date) do
@@ -361,15 +357,15 @@ defmodule  Lityear do
 
   def namedDayDate("christmasDay", _wk), do: Timex.to_date {Timex.now(@tz).year, 12, 25}
   def namedDayDate("holyName", _wk), do: Timex.to_date {Timex.now(@tz).year, 1, 1}
-  def namedDayDate("palmSundayPalms", _wk), do: palm_sunday
-  def namedDayDate("palmSunday", _wk), do: palm_sunday
+  def namedDayDate("palmSundayPalms", _wk), do: palm_sunday()
+  def namedDayDate("palmSunday", _wk), do: palm_sunday()
   def namedDayDate("holyWeek", wk) when wk |> is_bitstring, do: namedDayDate("holyWeek", wk |> String.to_integer)
-  def namedDayDate("holyWeek", wk), do: palm_sunday |> date_shift(days: wk)
-  def namedDayDate("easterDayVigil", _wk), do: easter |> date_shift(days: -1)
+  def namedDayDate("holyWeek", wk), do: palm_sunday() |> date_shift(days: wk)
+  def namedDayDate("easterDayVigil", _wk), do: easter() |> date_shift(days: -1)
 #  def namedDayDate("easterDay", wk) when wk |> is_bitstring, do: namedDayDate("easterDay", wk |> String.to_integer) 
-  def namedDayDate("easterDay", _wk), do: easter  
+  def namedDayDate("easterDay", _wk), do: easter() 
   def namedDayDate("easterWeek", wk) when wk |> is_bitstring, do: namedDayDate("easterWeek", wk |> String.to_integer) 
-  def namedDayDate("easterWeek", wk), do: easter |> date_shift(days: wk)  
+  def namedDayDate("easterWeek", wk), do: easter() |> date_shift(days: wk)  
 
   def stAndrew(), do: stAndrew(Timex.now(@tz).year)
   def stAndrew(year), do: Timex.to_date( {year, 11, 30} )|> translate_from_sunday

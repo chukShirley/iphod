@@ -5,10 +5,6 @@ defmodule BCPPsalms do
 
   def get("Canticle 9"), do: bcp_text_list("Canticle 9", 1, 8) |> no_vs_numbers
 
-  def no_vs_numbers(l) do
-    l |> Enum.map( &(&1 |> String.replace(~r/\d+ /, "")))
-  end
-
   def get(s) do
     s |> String.split(",")
       |> Enum.map( &( String.replace &1, ~r/^[Pp]salm/, ""))
@@ -18,16 +14,16 @@ defmodule BCPPsalms do
           [psString | t] = ref
           ps = psString |> String.to_integer
           
-          if t |> length == 0 do
-            vsFrom = 1
-            vsTo = bcp[ps] 
-                      |> Map.keys 
-                      |> Enum.filter( &( !is_bitstring &1)) 
-                      |> Enum.max
+          {vsFrom, vsTo} = if t |> length == 0 do
+            { 1, bcp()[ps]|> Map.keys 
+                          |> Enum.filter( &( !is_bitstring &1)) 
+                          |> Enum.max
+            }
           else
             [_colon, vsFromString, _dash, vsToString] = t
-            vsFrom = vsFromString |> String.to_integer
-            vsTo = vsToString |> String.to_integer
+            { vsFromString |> String.to_integer,
+              vsToString |> String.to_integer
+            }
           end
           [bcp_text_list(ps, vsFrom, vsTo) | acc]
         end)
@@ -36,8 +32,12 @@ defmodule BCPPsalms do
 
   end
 
+  def no_vs_numbers(l) do
+    l |> Enum.map( &(&1 |> String.replace(~r/\d+ /, "")))
+  end
+
   def bcp_text_list(ps_num, vsFrom, vsTo) do
-    ps = bcp[ps_num]
+    ps = bcp()[ps_num]
     vsFrom..vsTo
       |>  Enum.reduce( [  ps["name"] <> " " <>  ps["title"] ], fn(vs, acc) ->
             if Map.has_key?(ps, vs) do

@@ -10,7 +10,6 @@ defmodule IphodWeb.IphodChannel do
   import Iphod.Mailer
   use IphodWeb, :channel
   use Timex
-  @tz "America/Los_Angeles"
   @email %{ from: "", topic: "", text: ""}
 
   def join("iphod:readings", payload, socket) do
@@ -28,7 +27,7 @@ defmodule IphodWeb.IphodChannel do
     response
   end
 
-  def confirm_user({:error, reason}, token, socket) do
+  def confirm_user({:error, reason}, _token, socket) do
     push socket, "current_user", invalid_user(reason)
   end
 
@@ -65,7 +64,7 @@ defmodule IphodWeb.IphodChannel do
     
   end
 
-  def handle_request("request_user", [username, token], socket) do
+  def handle_request("request_user", [_username, token], socket) do
     # if the token is valid get the user, else blork
     # max_age: in seconds, 1209600 = seconds in 2 weeks
     resp = Phoenix.Token.verify( socket, "user", token, max_age: 1209600)
@@ -104,7 +103,7 @@ defmodule IphodWeb.IphodChannel do
     {:noreply, socket}
   end
 
-  def handle_request("get_single_reading", [vss, version, service, section], socket) do
+  def handle_request("get_single_reading", [vss, version, service, _section], socket) do
     # resp should contain 
     #  [:collect, :colors, :date, :gs, :nt, :ofType, :ot, :ps, :season, :show, :title,
     #  :week]
@@ -164,7 +163,7 @@ defmodule IphodWeb.IphodChannel do
     handle_request("get_text", ["EP", date], socket)
   end
 
-  def handle_request("lessons_now", args, socket) do
+  def handle_request("lessons_now", _args, socket) do
     # IEx.pry
     {:noreply, socket}
   end
@@ -212,18 +211,18 @@ def handle_request("get_chat", _bool, socket) do
 end
 
   def handle_request("shout", payload, socket) do
-    thisChat = %Chat{ section:  (if payload |> (Map.has_key? "section"), do: payload["section"], else: "lobby"),
-                  text:     payload["text"],
-                  user:     payload["user"]
-                }
+    # thisChat = %Chat{ section:  (if payload |> (Map.has_key? "section"), do: payload["section"], else: "lobby"),
+    #               text:     payload["text"],
+    #               user:     payload["user"]
+    #             }
     case Repo.insert( 
       %Chat{  section:  (if payload |> (Map.has_key? "section"), do: payload["section"], else: "lobby"),
               text:     payload["text"],
               user:     payload["user"]
             }) do
-      {:ok, user} -> 
+      {:ok, _user} -> 
         broadcast socket, "shout", payload
-      {:error, changeset} ->
+      {:error, _changeset} ->
         push socket, "submitted", %{resp: "error"}
     end
     {:noreply, socket}
@@ -237,8 +236,8 @@ end
   end
 
   def versions_map(:eu, [ps, ot, nt, gs]), do: %{ps: ps, ot: ot, nt: nt, gs: gs}
-  def versions_map(:mp, [ps, ot, nt, gs]), do: %{mpp: ps, mp1: ot, mp2: nt}
-  def versions_map(:ep, [ps, ot, nt, gs]), do: %{epp: ps, ep1: nt, ep2: gs}
+  def versions_map(:mp, [ps, ot, nt, _gs]), do: %{mpp: ps, mp1: ot, mp2: nt}
+  def versions_map(:ep, [ps, _ot, nt, gs]), do: %{epp: ps, ep1: nt, ep2: gs}
 
   def use_version(section, versions) when versions |> is_list do
     case section do
@@ -256,7 +255,7 @@ end
     end
   end
 
-  def use_version(section, version), do: version
+  def use_version(_section, version), do: version
 
   # Add authorization logic here as required.
   defp authorized?(_payload) do
@@ -268,7 +267,7 @@ end
     {ok, date} = if ok == :error, 
       do: Timex.parse(s, "{WDshort} {Mshort} {D} {YYYY}"), 
       else: {ok, date}
-    {ok, date} = if ok == :error,
+    {_ok, date} = if ok == :error,
       do: Timex.parse(s, "{0M}/{0D}/{YYYY}"),
       else: {ok, date}
     Timex.to_date date

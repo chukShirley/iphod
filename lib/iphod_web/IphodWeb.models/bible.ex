@@ -2,9 +2,9 @@ require IEx
 alias Iphod.Repo
 defmodule Iphod.Bible do
   use IphodWeb, :model
-  @trans "cu89s"
-  @name "Chinese Union Simplified"
-  @direction "LTR"
+  # @trans "cu89s"
+  # @name "Chinese Union Simplified"
+  # @direction "LTR"
 
 
   schema "bible" do
@@ -26,7 +26,6 @@ defmodule Iphod.Bible do
   end
 
   def load(map) do
-    chapter = 1
     name = map.translation
     type = map.type
     trans = map.version_ref

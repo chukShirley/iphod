@@ -1,9 +1,9 @@
 require IEx
 defmodule Leaflets do
-  import Lityear
+  # import Lityear
 
   def start_link do
-    Agent.start_link fn -> build end, name: __MODULE__
+    Agent.start_link fn -> build() end, name: __MODULE__
   end
 
   def identity(), do: Agent.get(__MODULE__, &(&1))

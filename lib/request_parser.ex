@@ -4,7 +4,7 @@ defmodule RequestParser do
   def tokenize(s) do
     Regex.split(~r/\d+|[a-z]+/, s |> String.downcase, include_captures: true)
     |> Enum.reduce([], fn(el, acc)-> 
-        acc = if String.strip(el) |> String.length == 0, do: acc, else: acc ++ [String.strip el]
+        if String.trim(el) |> String.length == 0, do: acc, else: acc ++ [String.trim el]
       end)
   end
 
@@ -86,7 +86,7 @@ defmodule RequestParser do
     {book, vs_list} = reference(s)
     vs_list 
       |> Enum.reduce("#{book}", fn({chap, first, last}, acc)->
-          acc = if chap, do: acc <> " #{chap}.#{first}-#{last}", else: acc <> " #{first}-#{last}"
+          if chap, do: acc <> " #{chap}.#{first}-#{last}", else: acc <> " #{first}-#{last}"
         end)
   end
 
@@ -99,7 +99,7 @@ defmodule RequestParser do
     book = Regex.replace ~r/\s/, book, "+"
     vs_list 
       |> Enum.reduce("#{book}", fn({chap, first, last}, acc)->
-          acc = acc <> "+#{chap}:#{first}-#{last}"
+          acc <> "+#{chap}:#{first}-#{last}"
         end)
   end
 end

@@ -18,7 +18,7 @@ defmodule GetBibleText do
 # http://getbible.net/json?scripture=Psa 119:4-16;23:1-6&v=amp
 # http://getbible.net/json?passage=Acts 15:1-5, 10, 15&version=aov
 
-  def request(ver, vss, fnotes \\ "") do
+  def request(ver, vss, _fnotes \\ "") do
     url = "http://getbible.net/json?p=#{get_bible_query(vss)}&v=#{ver}"
     case HTTPoison.get(url, [{"Accept", "application/jsonrequest"}], [follow_redirect: true]) do
       {:ok, resp} ->
@@ -52,8 +52,8 @@ defmodule GetBibleText do
 
   def passages_to_string([]), do: "Not Available"
   def passages_to_string(passages) do
-    text = passages
-      |> Enum.reduce( "", fn(passage, {text, fnotes}) -> 
+    passages
+      |> Enum.reduce( "", fn(passage, {text, _fnotes}) -> 
           passage_text = if passage["text"] |> String.length == 0, do: "Not Available", else: passage["text"]
           text = text <> passage["display"] <> "\n" <> passage_text
           text

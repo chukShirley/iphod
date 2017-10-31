@@ -30,7 +30,7 @@ defmodule Iphod.Resources do
       %Ecto.Changeset{valid?: true, changes: %{key_string: keys}} ->
         put_change( changeset, 
                     :keys, 
-                    keys |> String.split(",") |> Enum.map( &( String.strip(&1) ) )
+                    keys |> String.split(",") |> Enum.map( &( String.trim(&1) ) )
                   )
       _ ->
         changeset

@@ -5,11 +5,10 @@ defmodule DailyReading do
   import SundayReading, only: [collect_today: 1]
   import Lityear, only: [right_after_ascension?: 1, right_after_ash_wednesday?: 1, good_friday?: 1]
   use Timex
-  def start_link, do: Agent.start_link fn -> build end, name: __MODULE__
+  def start_link, do: Agent.start_link fn -> build() end, name: __MODULE__
   def identity(), do: Agent.get(__MODULE__, &(&1))
 
   def mp_body(date, versions_map \\ %{mpp: "BCP", mp1: "ESV", mp2: "ESV"}) do
-    footnotes = false # will have to get real value from config
     mp = mp_today(date)
     [:mp1, :mp2, :mpp] 
       |> Enum.reduce(mp, fn(r, acc)-> 
@@ -20,7 +19,6 @@ defmodule DailyReading do
   end
 
   def ep_body(date, versions_map \\ %{epp: "BCP", ep1: "ESV", ep2: "ESV"}) do
-    footnotes = false # will have to get real value from config
     ep = ep_today(date)
     [:ep1, :ep2, :epp] 
       |> Enum.reduce(ep, fn(r, acc)-> 
@@ -34,20 +32,20 @@ defmodule DailyReading do
     {season, _wk, _lityr, _date} = select_season(date)
     _opening_sentence(mpep, season) |> pick_one(date)
   end
-  def _opening_sentence(mpep, "ashWednesday"),  do: identity["#{mpep}_opening"]["lent"]
-  def _opening_sentence(mpep, "palmSunday"),    do: identity["#{mpep}_opening"]["lent"]
-  def _opening_sentence(mpep, "easterDay"),     do: identity["#{mpep}_opening"]["easter"]
-  def _opening_sentence(mpep, "ascension"),     do: identity["#{mpep}_opening"]["easter"]
-  def _opening_sentence(mpep, season),          do: identity["#{mpep}_opening"][season]
+  def _opening_sentence(mpep, "ashWednesday"),  do: identity()["#{mpep}_opening"]["lent"]
+  def _opening_sentence(mpep, "palmSunday"),    do: identity()["#{mpep}_opening"]["lent"]
+  def _opening_sentence(mpep, "easterDay"),     do: identity()["#{mpep}_opening"]["easter"]
+  def _opening_sentence(mpep, "ascension"),     do: identity()["#{mpep}_opening"]["easter"]
+  def _opening_sentence(mpep, season),          do: identity()["#{mpep}_opening"][season]
     
   def antiphon(date) do
     {season, _wk, _lityr, _date} = select_season(date)
     _antiphon(season) |> pick_one(date)
   end
-  def _antiphon("ashWednesday"),  do: identity["antiphon"]["lent"]
-  def _antiphon("goodFriday"),    do: identity["antiphon"]["lent"]
-  def _antiphon("ascension"),     do: identity["antiphon"]["easter"]
-  def _antiphon(season),          do: identity["antiphon"][season]
+  def _antiphon("ashWednesday"),  do: identity()["antiphon"]["lent"]
+  def _antiphon("goodFriday"),    do: identity()["antiphon"]["lent"]
+  def _antiphon("ascension"),     do: identity()["antiphon"]["easter"]
+  def _antiphon(season),          do: identity()["antiphon"][season]
 
 
   def pick_one(list, date) do
@@ -56,12 +54,18 @@ defmodule DailyReading do
     Enum.at list, at
   end
 
-  def readings(season, wk, day, _date), do: identity[season][wk][day]
+  def readings(season, wk, day, _date), do: identity()[season][wk][day]
 
-  def readings({"ashWednesday", wk, litYr, date}),  do: _readings({"epiphany", "9", litYr, date})
-  def readings({"goodFriday", wk, litYr, date}),    do: _readings({"palmSunday", "1", litYr, date})
-  def readings({"ascension", wk, litYr, date}),     do: _readings({"easter", "6", litYr, date})
+  def readings({"ashWednesday", _wk, litYr, date}),  do: _readings({"epiphany", "9", litYr, date})
+  def readings({"goodFriday", _wk, litYr, date}),    do: _readings({"palmSunday", "1", litYr, date})
+  def readings({"ascension", _wk, litYr, date}),     do: _readings({"easter", "6", litYr, date})
   def readings({season, wk, litYr, date}),          do: _readings({season, wk, litYr, date})
+
+  # readings(d) is last otherwise there will be confusion between
+  # Timex.Date tuple of {season, wk, _litYr, date}
+  def readings(date) do
+    readings select_season(date)
+  end
 
   def _readings({season, wk, litYr, date}) do
     {season, wk, dow, date} = day_of_week({season, wk, litYr, date})
@@ -73,15 +77,9 @@ defmodule DailyReading do
                 season: date_to_season(date, season),
                 week:   wk, 
                 day:    dow,
-                title:  update_title(date, identity[season][wk][dow].title), 
+                title:  update_title(date, identity()[season][wk][dow].title), 
                 date:   date |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
             })
-  end
-
-  # readings(d) is last otherwise there will be confusion between
-  # Timex.Date tuple of {season, wk, _litYr, date}
-  def readings(date) do
-    readings select_season(date)
   end
 
   def day_of_week({"christmas", "1", _litYr, date}) do
@@ -105,7 +103,7 @@ defmodule DailyReading do
     end
   end
 
-  def day_of_week({"christmas", "2", litYr, date}) do
+  def day_of_week({"christmas", "2", _litYr, date}) do
     dow = date |> Timex.format!("{WDfull}")
     jan_n =  date |> Timex.format!("{D}")
     cond do
@@ -125,7 +123,7 @@ defmodule DailyReading do
     end
   end
 
-  def day_of_week({season, wk, litYr, date}) do
+  def day_of_week({season, wk, _litYr, date}) do
     dow = date |> Timex.format!("{WDfull}")
     {season, wk, dow, date}
   end
@@ -202,7 +200,7 @@ defmodule DailyReading do
 
   def mp_today(date) do
     r = readings(date)
-    mp = %{
+    %{
       colors: r.colors,
       date:   r.date,
       day:    r.day,
@@ -228,7 +226,7 @@ defmodule DailyReading do
 
   def ep_today(date) do
     r = readings(date)
-    mp = %{
+    %{
       colors: r.colors,
       date:   r.date,
       day:    r.day,
@@ -263,7 +261,7 @@ defmodule DailyReading do
 
   def color_for(date) do
     {ok, holy_day} = Lityear.holy_day? date
-    colors = if ok do
+    if ok do
       SundayReading.holy_day_color(holy_day)
     else
       readings(date).colors
