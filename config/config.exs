@@ -27,9 +27,9 @@ config :iphod, IphodWeb.Endpoint,
   pubsub: [name: IphodWeb.PubSub,
            adapter: Phoenix.PubSub.PG2
           ],
-  watchers: [node: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
-#   watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
-#                     cd: Path.expand("../assets", __DIR__)]]
+  # watchers: [node: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
+  watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
+                    cd: Path.expand("../assets", __DIR__)]]
 
 import_config "#{Mix.env}.exs"
 

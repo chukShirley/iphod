@@ -20,8 +20,6 @@ var path = window.location.pathname
   , page = (path_parts.length > 0) ? path_parts[0] : 'office'
   , isOffice = ["mp", "morningPrayer", "midday", "ep", "eveningPrayer"].indexOf(path) >= 0;
 //  , isOffice = !!(path == "/" || path.match(/office|midday|^\/mp\/|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|^\/ep\/|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/))
-
-console.log("PATH: ", path_parts, page)
 if (page == "office") {
   // redirect to correct office based on local time
   var now = new moment().local()

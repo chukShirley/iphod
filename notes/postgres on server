@@ -45,8 +45,8 @@ sudo MIX_ENV=prod mix compile
 sudo MIX_ENV=prod mix ecto.migrate
 sudo MIX_ENV=prod mix phx.digest
 sudo MIX_ENV=prod mix release
-sudo # PORT=80 MIX_ENV=prod rel/iphod/bin/iphod start
+sudo # sudo PORT=4000 MIX_ENV=prod _build/prod/rel/iphod/bin/iphod console
 sudo mix phx.gen.secret
-sudo MIX_ENV=prod PORT=80 KEY=GOns2kJCQMpcNfuJz+4zCf5QWg9ahi44QtmEt+UEgcwH8v8imJGQVnGj8Ubq+EF2 elixir --detached -S mix do compile, phx.server
+sudo MIX_ENV=prod PORT=80 KEY=FDrYDbqcY2AUzCqIo8SFelXIM26iozCzASb1AsZM4IZUUSn6pz9TuB+GeGvRPEqJ elixir --detached -S mix do compile, phx.server
 frpaulas@iphod:~/iphod$
 
