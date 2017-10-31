@@ -308,23 +308,20 @@ defmodule  Lityear do
     end
   end
 
-  def next_holy_day(date) do # {date_of_holy_day, name_of_holy_day}
-    _next_holy_day(date, Timex.weekday(date))
+# next holy day is confusing because if today is sunday
+# you have to move the holy day to monday, which means
+# if the doy of week is a monday you have to see if yesterday (a sunday)
+# was a holy day. There is also the unusual case where both sunday and monday
+# are holy days necessitating a double translation
+# at which point, for the time being, I give up
+  def next_holy_day(date) do
+    case weekday = Timex.weekday(date) do
+      @monday -> date |> date_shift(days: -1) |> next_holy_day
+      _       -> _next_holy_day(date, weekday, leap_year_correction?(date) )
+    end
   end
 
-  def _next_holy_day(date, @sunday) do
-    _next_holy_day(date, @sunday)
-  end
-
-  def _next_holy_day(date, @monday) do
-    date |> date_shift(days: -1) |> next_holy_day
-  end
-
-  def _next_holy_day(date, weekday) do
-    _next_holy_day(date, weekday, leap_year_correction?(date))
-  end
-
-  # correct for leap year
+# correct for leap year
   def _next_holy_day(date, _weekday, true) do
     this_doy = (date |> Timex.day) - 1
     holy_doy = hd_doy() |> Enum.at(this_doy)
