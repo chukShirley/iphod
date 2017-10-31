@@ -336,7 +336,6 @@ if ( page == "calendar" || page == "mindex") {
     , elmMindexApp = Elm.MIndex.embed(elmMindexDiv)
     , elmMPanelDiv = document.getElementById('m-reading-container')
     , elmMPanelApp = Elm.MPanel.embed(elmMPanelDiv)
-    console.log("GOT MINDEX", elmMindexApp)
     $("#reflection-today-button").click( function() {
       channel.push("get_text", ["Reflection", (new Date).toDateString(), version_list()])
     });
@@ -356,7 +355,6 @@ if ( page == "calendar" || page == "mindex") {
     })
 
     channel.on('eu_today', data => {
-      console.log("EU TODAY AT 333")
       data.config = init_config_model();
       elmMindexApp.ports.portEU.send(data);
       rollup();
@@ -375,7 +373,6 @@ if ( page == "calendar" || page == "mindex") {
     })
 
     channel.on('lf_today', data => {
-      console.log("LF TODAY: ", data)
       window.open(data.leaflet);
     })
 
@@ -383,7 +380,6 @@ if ( page == "calendar" || page == "mindex") {
       let resp = data.resp[0];
       resp.show_fn = true;
       resp.show_vn = true;
-      console.log("SINGLE LESSON: ", resp, elmMindexApp)
       elmMindexApp.ports.portLesson.send([resp])
     })
 
@@ -423,9 +419,7 @@ if ( page == "calendar" || page == "mindex") {
             , show: true
             , sectionUpdate: { section : "", version : "", ref : "" }
             }
-      console.log("READINGS DATA: ", r)
       elmMPanelApp.ports.portReadings.send(readings);
-        console.log("READINGS: ", readings)
       $("#reading-panel").effect("slide", "fast")
     })
 
@@ -441,7 +435,6 @@ if ( page == "calendar" || page == "mindex") {
     })
 
     elmMPanelApp.ports.requestReading.subscribe(function(request) {
-      console.log("MPANEL REQUEST READING: ", request)
       request.push( version_list() )
       channel.push("get_lesson", [request[0], request[2], request[1]])
     })
