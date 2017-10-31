@@ -2,9 +2,9 @@
  * styles for morning and evening prayer
 */
 body {
-  min-width: 35em;
+  min-width: 21em;
   max-width: 100%;
-  font-size: 14px;
+  font-size: 0.9em;
 }
 button.more-options {
   border-color: lightblue;
@@ -23,6 +23,10 @@ button.more-options {
   padding-top: 0.4em;
 }
 @media screen and (max-width: 550px) { 
+  body { width: 92%; } 
+}
+
+@media screen and (max-width: 320px) { 
   body { width: 92%; } 
 }
 
@@ -544,6 +548,7 @@ p.family_section_title{
       background-color: floralwhite;
       box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
       cursor: pointer;
+      font-size: 1.2em;
     }
   
     ul#header-options.responsive li.option-item {
