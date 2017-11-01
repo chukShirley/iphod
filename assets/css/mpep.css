@@ -616,11 +616,9 @@ p.family_section_title{
     }
     li.ps_second_cont { padding-left: 1.5em; }
 
-    @media screen and (max-width: 320) {
-      .mpep { margin-top: 2em;}
-    }
     @media screen and (max-width: 320px) {
       .mpep { margin-top: 2.5em;}
       button.more-options { top: -0.5em;}
+      #config-text div { width: 85%; }
     }
   }

@@ -18,9 +18,11 @@ var moment = require('moment')
 var path = window.location.pathname
   , path_parts = path.split("/").filter( function(el) {return el.length > 0})
   , page = (path_parts.length > 0) ? path_parts[0] : 'office'
-  , isOffice = ["mp", "morningPrayer", "midday", "ep", "eveningPrayer"].indexOf(path) >= 0;
+  , isOffice = ["mp", "morningPrayer", "midday", "ep", "eveningPrayer"].indexOf(page) >= 0
+  ;
+
 //  , isOffice = !!(path == "/" || path.match(/office|midday|^\/mp\/|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|^\/ep\/|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/))
-if (page == "office") {
+if (page == "office") { 
   // redirect to correct office based on local time
   var now = new moment().local()
     , mid = new moment().local().hour(11).minute(30).second(0)
@@ -50,7 +52,6 @@ $(document).on('input', 'textarea', function () {
   $(this).outerHeight('1em').outerHeight(this.scrollHeight); // 38 or '1em' -min-height
 });
 
-
 $("button.more-options").click( function() {
   $("ul#header-options").toggleClass("responsive");
 })
@@ -68,7 +69,7 @@ $("input[name='vss_show']").click(function() {
 function storageAvailable(of_type) {
   try {
     var storage = window[of_type],
-        x = '__storage_test__';q
+        x = '__storage_test__';
         storage.setItem(x, x);
         storage.removeItem(x);
         return true;
@@ -270,7 +271,14 @@ elmHeaderApp.ports.saveConfig.subscribe( function(config) {
     }
   }
   if ( storageAvailable('localStorage') ) {
-    let s = window.localStorage;
+    let s = window.localStorage
+      , new_url = false
+      , vl = version_list();
+      ;
+    // if ot, ps, nt, or gs change, we should load a new url if office
+    if (isOffice) {
+      new_url = !(vl[0] == config.ps && vl[1] == config.ot && vl[2] == config.nt && vl[3] == config.gs)
+    }
     s.setItem("iphod_ot", config.ot)
     s.setItem("iphod_ps", config.ps)
     s.setItem("iphod_nt", config.nt)
@@ -278,6 +286,7 @@ elmHeaderApp.ports.saveConfig.subscribe( function(config) {
     s.setItem("iphod_fnotes", config.fnotes)
     s.setItem("iphod_vers", config.vers.join(","))
     s.setItem("iphod_current", config.current)
+    if (new_url) { window.location.replace("/" + page) }
   }
 })
 
