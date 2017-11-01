@@ -642,7 +642,7 @@ humor model =
 
 translations : Model -> Html Msg
 translations model =
-    a [ href "versions" ]
+    a [ href "/versions" ]
         [ button [] [ text "Translations" ] ]
 
 

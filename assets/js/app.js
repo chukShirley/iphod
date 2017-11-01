@@ -210,25 +210,6 @@ if ( page == "stations") {
 
 }
 
-// if ( path.match(/office/) ) {
-//   var vers = get_version("ps") + "/" + get_version("ot")
-//     , till_midday = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 11, 30) - now
-//     , till_evening = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 15) - now
-//     , till_late = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 21, 30) - now
-//     , till_midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 24) - now;
-// 
-// 
-//   function mp() { window.location.href = "/office/mp/" + vers }
-//   function np() { window.location.href = "/office/midday" }
-//   function ep() { window.location.href = "/office/ep/" + vers }
-//   function compline() { window.location.href = "/office/compline" + vers }
-// 
-//   history.pushState(path, "Legereme", "/office");
-//  if (till_midday > 0) { setTimeout(np, till_midday) }
-//  else if (till_evening > 0) { setTimeout(ep, till_evening)}
-//  else if (till_late > 0) { setTimeout(compline, till_late)}
-//  else { setTimeout(mp, till_midnight) }
-// }
 
 // HEADER ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

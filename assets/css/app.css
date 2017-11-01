@@ -525,6 +525,8 @@ li.offices-item {
   .versions {
     font-size: 0.8em;
     text-align: left;
+    width: 98%;
+    margin-left: 1em;
   }
   .ver_abbr { width: 5%; }
   .ver_name { width: 65%; }
