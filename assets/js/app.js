@@ -13,7 +13,8 @@
 // to also remove its path from "config.paths.watched".
 import "phoenix_html";
 import $ from 'jquery';
-var moment = require('moment')
+var moment = require('moment');
+var markdown = require('markdown').markdown;
 
 var path = window.location.pathname
   , path_parts = path.split("/").filter( function(el) {return el.length > 0})
@@ -309,6 +310,18 @@ if (isOffice) {
     $(this).val("");
     // vss, version, service, section
     channel.push("get_single_reading", [vss, "ESV", $(this).data("reading_target"), "mp"])
+  })
+
+  $(".get-reflection").click( function() {
+    console.log("REFL ID: ", $(this).data('id'))
+    $('div.reflection-markdown').toggle();
+    if ( $('div.reflection-markdown').text().length == 0) {
+      channel.push('get_text', ['Reflection', $(this).data('id')]);
+    }
+  })
+
+  channel.on('reflection_today', data => {
+    $('div.reflection-markdown').append(markdown.toHTML(data.markdown))
   })
 
 }

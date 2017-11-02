@@ -53,6 +53,23 @@ h3 {
   width: 93%;
 }
 
+div.reflection {
+  margin: 1em;
+}
+
+button.get-reflection {
+  background-color: lightgrey;
+  border: 2px solid lightblue;
+  border-radius: 3px;
+}
+
+div.reflection-markdown {
+  margin: 2em 1em 1em 1em;
+  padding: 1em;
+  border: 2px solid lightgrey;
+  display: none;
+}
+
 div#chat-container {
   width: 36%;
   margin-left: 62%;

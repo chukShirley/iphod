@@ -156,6 +156,7 @@ defmodule IphodWeb.PrayerController do
       |> Map.put(:nt_canticle, put_canticle("mp", "nt", dreading.season, day_of_week))
       |> Map.put(:collect_of_week, collect)
       |> Map.put(:day, day_of_week)
+      |> Map.put(:reflID, reflectionID(day))
   end
   
   def prayer_model("ep", psalm_translation, text_translation) do
@@ -176,6 +177,7 @@ defmodule IphodWeb.PrayerController do
       |> Map.put(:nt_canticle, put_canticle("ep", "nt", dreading.season, day_of_week))
       |> Map.put(:collect_of_week, collect)
       |> Map.put(:day, day_of_week)
+      |> Map.put(:reflID, reflectionID(day))
   end
 
   def put_canticle("mp", "ot", season,  "Sunday")    when season == "advent",  do: "surge_illuminare"
@@ -233,27 +235,33 @@ defmodule IphodWeb.PrayerController do
     reading |> Enum.map(&(&1.read)) |> Enum.join(", ")
   end
 
- def put_reading(map, lesson, translation) do
-   {section_names, section} = 
-      %{  "mpp" => {:mpp_names, :mpp}, 
-          "mp1" => {:mp1_names, :mp1}, 
-          "mp2" => {:mp2_names, :mp2},
-          "epp" => {:epp_names, :epp},
-          "ep1" => {:ep1_names, :ep1},
-          "ep2" => {:ep2_names, :ep2},
-      }[hd(lesson).section]
-   map
-   |> Map.put(section_names, reading_names(lesson))
-   |> Map.put(section, lesson_with_body(lesson, translation))
- end
+  def put_reading(map, lesson, translation) do
+    {section_names, section} = 
+       %{  "mpp" => {:mpp_names, :mpp}, 
+           "mp1" => {:mp1_names, :mp1}, 
+           "mp2" => {:mp2_names, :mp2},
+           "epp" => {:epp_names, :epp},
+           "ep1" => {:ep1_names, :ep1},
+           "ep2" => {:ep2_names, :ep2},
+       }[hd(lesson).section]
+    map
+    |> Map.put(section_names, reading_names(lesson))
+    |> Map.put(section, lesson_with_body(lesson, translation))
+  end
 
- def graces() do
-      [ {"The grace of our Lord Jesus Christ, and the love of God, and the fellowship of the Holy Spirit, be with us all evermore. Amen.", "2 Corinthians 13:14"},
-        {"May the God of hope fill us with all joy and peace in believing through the power of the Holy Spirit. Amen.", "Romans 15:13"},
-        {"Glory to God whose power, working in us, can do infinitely more than we can ask or imagine: Glory to him from generation to generation in the Church, and in Christ Jesus forever and ever. Amen.", "Ephesians 3:20-21"}
-      ]
+  def graces() do
+       [ {"The grace of our Lord Jesus Christ, and the love of God, and the fellowship of the Holy Spirit, be with us all evermore. Amen.", "2 Corinthians 13:14"},
+         {"May the God of hope fill us with all joy and peace in believing through the power of the Holy Spirit. Amen.", "Romans 15:13"},
+         {"Glory to God whose power, working in us, can do infinitely more than we can ask or imagine: Glory to him from generation to generation in the Church, and in Christ Jesus forever and ever. Amen.", "Ephesians 3:20-21"}
+       ]
+  end
 
- end
+  def reflectionID(date) do
+    reflDate = date |> Timex.format!("{Mfull} {D}, {YYYY}")
+    resp = Repo.one(from r in Iphod.Reflection, where: [date: ^reflDate, published: true], select: {r.id})
+    {reflID} = if resp, do: resp, else: {0}
+    reflID
+  end
 
 end
 

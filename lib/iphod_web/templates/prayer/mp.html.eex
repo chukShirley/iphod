@@ -105,7 +105,14 @@
   > 
     <%= @model.mp2 |> text_list_to_html %>
   </p>
-  
+
+  <%= if @model.reflID > 0 do %>
+    <div class= "reflection">
+      <button class= "get-reflection" data-id="<%= @model.reflID %>" >Reflection</button>
+      <div class='reflection-markdown'></div>
+    </div>  
+  <% end %>
+
   <br/>
   <%= render "_#{@model.nt_canticle}.html" %>
   <br/>
