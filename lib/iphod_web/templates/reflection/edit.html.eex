@@ -1,5 +1,5 @@
-<h2>Edit reflection</h2>
-
+<div id= "header-elm-container"></div>
+<h2 class="reflection-type">Edit reflection</h2>
 <reflection 
   id="refl"
   data-recno= "<%= @reflection.id %>"

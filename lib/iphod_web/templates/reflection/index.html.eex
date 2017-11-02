@@ -1,5 +1,7 @@
+<div id= "header-elm-container"></div>
 <h2>Listing reflections</h2>
 
+<h3><%= link "Add Reflection", to: reflection_path(@conn, :new) %></h3>
 <table class="table">
   <thead>
     <tr>
@@ -32,4 +34,3 @@
   </tbody>
 </table>
 
-<%= link "New reflection", to: reflection_path(@conn, :new) %>

@@ -1,3 +1,4 @@
+<div id= "header-elm-container"></div>
 <%= form_for @changeset, @action, [class: "pure-form pure-form-aligned"], fn f -> %>
   <%= if @changeset.action do %>
     <div class="alert alert-danger">

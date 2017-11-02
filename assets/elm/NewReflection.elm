@@ -167,7 +167,7 @@ inputText model =
 showText: Model -> Html Msg
 showText model =
   div [id "preview"]
-  [ h3 []
+  [ h3 [class "reflection-preview"]
     [ text "Preview  "
     , span [ style [("font-weight", "normal"), ("font-size", "0.7em")] ] [ text "( published" ]
     , input [ type_ "checkbox"

@@ -696,8 +696,7 @@ if ( ["resources", "humor", "inserts"].indexOf(page) >= 0 ) {
 }
 
 // reflections
-
-if ( page == "reflections" && ["new", "edit"].indexOf(page_parts[1]) >= 0 ) {
+if ( page == "reflections" && (path_parts[1] == "new" || path_parts[2] == "edit") ) {
   var elmReflDiv = document.getElementById("reflection-elm-container")
     , elmReflApp = Elm.NewReflection.embed(elmReflDiv)
     , refl_channel = socket.channel("reflection")
@@ -710,6 +709,7 @@ if ( page == "reflections" && ["new", "edit"].indexOf(page_parts[1]) >= 0 ) {
         , text:   $("reflection").data("text")
         , published: $("reflection").data("published")
       }
+      // refl_channel.push("reset", $("reflection").data('recno') )
       elmReflApp.ports.portReflection.send(refl);
     })
     .receive("error", resp => {console.log("Failed to join reflection")})
@@ -727,6 +727,7 @@ if ( page == "reflections" && ["new", "edit"].indexOf(page_parts[1]) >= 0 ) {
   });
 
   refl_channel.on("reflection", data => {
+    console.log("REFLECTION: ", data)
     elmReflApp.ports.portReflection.send(data)
   })
 

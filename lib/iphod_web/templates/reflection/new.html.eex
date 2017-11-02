@@ -1,4 +1,5 @@
-<h2>New reflection</h2>
+<div id= "header-elm-container"></div>
+<h2 class="reflection-type">New reflection</h2>
 <reflection 
   id="refl"
   data-recno= 0
