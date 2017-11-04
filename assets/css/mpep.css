@@ -124,6 +124,7 @@ ol.fam_ol{
   font-style: italic;
   color: red;
   width: 100%;
+  display: block;
 }
 p.rubric-office {
   padding: 0.5em 0;
@@ -161,6 +162,15 @@ p.rubric-office {
 
 .default {
   font-size: 1.0em;
+  display: block;
+}
+
+.alt_confession {
+  display: block;
+}
+
+div.confession-of-sin {
+  display: block;
 }
 
 ul.psalm {
