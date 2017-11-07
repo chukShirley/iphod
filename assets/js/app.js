@@ -28,10 +28,11 @@ if (page == "office") {
   var now = new moment().local()
     , mid = new moment().local().hour(11).minute(30).second(0)
     , ep = new moment().local().hour(15).minute(0).second(0)
+    , versions = get_version('ps') + "/" + get_version('ot')
     ;
-  if ( now.isBefore(mid)) { window.location.replace("/mp") }
+  if ( now.isBefore(mid)) { window.location.replace("/mp/" + versions ) }
   else if ( now.isBefore(ep) ) { window.location.replace("/midday")}
-  else { window.location.replace("/ep")}
+  else { window.location.replace("/ep/" + versions)}
 }
 
 // $(".day_options").menu();
