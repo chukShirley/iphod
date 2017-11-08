@@ -36,23 +36,23 @@ main =
 
 
 type alias Model =
-    { config : Models.Config
-    , eu : Models.Sunday
-    , mp : Models.DailyMP
-    , ep : Models.DailyEP
+    { month : Models.Month
+    , lesson1 : String
+    , lesson2 : String
+    , lesson3 : String
+    , psalm : String
     , reflection : Models.Reflection
-    , oneLesson : List Models.Lesson
     }
 
 
 initModel : Model
 initModel =
-    { config = Models.configInit
-    , eu = Models.sundayInit
-    , mp = Models.initDailyMP
-    , ep = Models.initDailyEP
+    { month = Models.initMonth
     , reflection = Models.initReflection
-    , oneLesson = []
+    , lesson1 = ""
+    , lesson2 = ""
+    , lesson3 = ""
+    , psalm = ""
     }
 
 

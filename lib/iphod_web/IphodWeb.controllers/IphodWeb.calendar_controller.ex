@@ -5,12 +5,12 @@ defmodule IphodWeb.CalendarController do
 
   def index(conn, params) do
     select_language params
-    render_calendar conn, get_month(Timex.today), nil
+    render_calendar conn, %{}, nil
   end
 
   def mindex(conn, params) do
     select_language params
-    render_calendar conn, get_month(Timex.today), "min"
+    render_calendar conn, %{}, "min"
   end
 
   def prev(conn, params) do

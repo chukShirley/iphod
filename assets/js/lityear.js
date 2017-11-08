@@ -10,6 +10,7 @@
   , January = 0,    February = 1,   March = 2,      April = 3
   , May = 4,        June = 5,       July = 6,       August = 7
   , September = 8,  October = 9,    November = 10,  December = 11
+  , daysInMonth = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
   , mdFormat = "MM-DD"
   ;
 // weak assumption: Object.keys(rlds) will return keys in the order below
@@ -39,6 +40,7 @@ var rlds =
   , '10-18': 'stLuke'
   , '10-23': 'stJamesOfJerusalem'
   , '10-28': 'stsSimonAndJude'
+  , '11-01': 'allSaints'
   , '11-11': 'remembrance'
   , '11-30': 'stAndrew'
   , '12-21': 'stThomas'
@@ -54,8 +56,8 @@ inRange: function (n, min, max) { return n >= Math.min(min, max) && n <= Math.ma
 listContains: function (list, obj) { return list.indexOf(obj) >= 0; },
 // function advDays(d, days) { return new Date( d.valueOf() + oneDay * days ) },
 // function advWeeks(d, weeks) { return advDays(d, weeks * 7) },
-daysTill: function (d1, d2) { return Math.floor( (d2 - d1)/oneDay ); },
-weeksTill: function (d1, d2) { return Math.floor( (d2 - d1)/oneWeek ); },
+daysTill: function (d1, d2) { return Math.floor( moment.duration(d2 - d1).asDays() ); },
+weeksTill: function (d1, d2) { return Math.floor( moment.duration(d2 - d1).asWeeks() ); },
 litYear: function (moment_date) {
   var yr = this.thisYear(moment_date);
   return moment_date.isSameOrAfter(this.advent(moment_date, 1)) ? yr + 1 : yr;
@@ -67,8 +69,23 @@ daysTillSunday: function (moment_date) { return 7 - moment_date.day(); },
 dateNextSunday: function (moment_date) { return moment_date.day(7); },
 dateLastSunday: function (moment_date) { return moment_date.day(0); },
 firstCalendarSunday: function (moment_date) {
-  return moment([moment_date.year(), moment_date.month()]).day(0);
+  var firstOfMonth = moment([moment_date.year(), moment_date.month()])
+  if (firstOfMonth.day() == 0 ) { return firstOfMonth } // it's sunday
+  // find first day of month and then prev sunday
+  return firstOfMonth.day(0);
 }, 
+lastCalendarSaturday: function (moment_date) {
+  var lastOfMonth = moment(  [ moment_date.year(), 
+                    moment_date.month(), 
+                    daysInMonth[moment_date.month()] 
+                  ])
+  if (lastOfMonth.day() == 6 ) { return lastOfMonth } // it's saturday
+  // find last day of month and then next saturday
+  return moment(  [ moment_date.year(), 
+                    moment_date.month(), 
+                    daysInMonth[moment_date.month()] 
+                  ]).day(6);
+},
 // algorithm from http://en.wikipedia.org/wiki/Computus#cite_note-otheralgs-47
 // presumes `d` is either int or date
 easter: function (thisDate) {
@@ -192,7 +209,9 @@ isGoodFriday: function (moment_date) {
   return moment_date.isSame(this.goodFriday(moment_date)) ;
 },
 toSeason: function (moment_date) {
-  var sunday = this.isSunday(moment_date) ? date : this.dateLastSunday(moment(moment_date))
+  // no idea why I have to cast moment_date to a moment in next line
+  // but with out the cast, I get an infinite loop
+  var sunday = this.isSunday(moment_date) ? moment_date : this.dateLastSunday(moment(moment_date))
     , y = this.litYear(sunday)
     , yrABC = this.litYearName(sunday)
     , dOfMonth = (sunday.month() + 1) + "/" + sunday.date()
@@ -206,7 +225,7 @@ toSeason: function (moment_date) {
     , weeksFromEaster = this.weeksTill(this.easter(moment_date), sunday)
     , daysTillEaster = this.daysTill(moment_date, this.easter(moment_date))
     ;
-  
+
   if      (this.rightAfterAshWednesday(moment_date)) { return {season: "ashWednesday", week: "1", year: yrABC, date: moment_date}; }
   else if (this.rightAfterAscension(moment_date))    { return {season: "ascension",    week: "1", year: yrABC, date: moment_date}; }
   else if (isChristmas)                         { return {season: "christmasDay", week: "1", year: yrABC, date: moment_date}; }
@@ -225,7 +244,7 @@ toSeason: function (moment_date) {
   else if (this.inRange(weeksFromEaster, 0, 6))      { return {season: "easter",       week: (1 + weeksFromEaster).toString(), year: yrABC, date: moment_date}; }
   else if (weeksFromEaster == 7)                { return {season: "pentecost",    week: "1", year: yrABC, date: moment_date}; }
   else if (weeksFromEaster == 8)                { return {season: "trinity",      week: "1", year: yrABC, date: moment_date}; }
-  else if (this.inRange(weeksTillAdvent, 1, 27))     { return {season: "proper",       week: (29 - weeksTillAdvent).toString(), year: yrABC, date: moment_date}; }
+  else if (this.inRange(weeksTillAdvent, 1, 27))     { return {season: "proper",       week: (30 - weeksTillAdvent).toString(), year: yrABC, date: moment_date}; }
   else if (this.inRange(weeksTillAdvent, 0, -3))     { return {season: "advent",       week: (1 - weeksTillAdvent).toString(), year: yrABC, date: moment_date}; }
   else if (this.inRange(weeksFromChristmas, 0, 1))   { return {season: "christmas",    week: (weeksFromChristmas + 1).toString(), year: yrABC, date: moment_date}; }
   else if (this.epiphanyBeforeSunday(moment_date))   { return {season: "epiphany",     week: "0", year: yrABC, date: moment_date}; }
@@ -233,6 +252,43 @@ toSeason: function (moment_date) {
   else                                          { return {season: "unknown",      week: "unknown", year: "unknown",date: moment_date}; }
   
 },
+
+getMPEPkey: function(moment_date) {
+  var season = this.toSeason(moment_date)
+    , d = moment_date.format("MM-DD")
+    , dow = moment_date.format("dddd")
+    , key = undefined
+    switch (d) {
+              case "12-24": key = "mpep_christmasEve"; break;
+              case "12-25": key = "mpep_christmasDay"; break;
+              case "12-26": key = "mpep_stJohn"; break;
+              case "12-27": key = "mpep_stStephen"; break;
+              case "12-28": key = "mpep_holyInnocents"; break;
+              case "01-01": key = "mpep_octaveChristmas"; break;
+              case "12-29": key = "mpep_Dec29"; break;
+              case "12-30": key = "mpep_Dec30"; break;
+              case "12-31": key = "mpep_Dec31"; break;
+              case "01-02": key = "mpep_Jan02"; break;
+              case "01-03": key = "mpep_Jan03"; break;
+              case "01-04": key = "mpep_Jan04"; break;
+              case "01-05": key = "mpep_Jan05"; break;
+              default:
+                key = "mpep_" + season.season + season.week + dow
+            }
+    ;
+    season.key = key
+    return season;
+},
+
+getEUkey: function(moment_date) {
+  var season = this.toSeason(moment_date)
+    , [isRLD, rld] = this.holyDay(moment_date)
+    ;
+
+  season.key =  isRLD ? rld : season.season + season.week + season.year;
+  return season;
+},
+
 
 getSeasonName: function (season) {
 return {
@@ -370,7 +426,8 @@ holyDay: function (moment_date) {
   else if ( this.isSunday(moment_date)) {return [false, ""]; }
   else if ( this.isMonday(moment_date)) { 
     // go back and check for translated RLD
-    m_d = moment_date.add(-1, 'days').format(mdFormat);
+    // create a new moment so the original date isn't changed
+    m_d = new moment(moment_date).add(-1, 'days').format(mdFormat);
     rld = rlds[m_d];
   }
   return (rld === undefined) ? [false, ""] : [true, rld];

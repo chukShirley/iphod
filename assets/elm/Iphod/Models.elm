@@ -12,6 +12,10 @@ module Iphod.Models
         , initDaily
         , Day
         , initDay
+        , Week
+        , initWeek
+        , Month
+        , initMonth
         , SectionUpdate
         , initSectionUpdate
         , setSectionUpdate
@@ -193,34 +197,34 @@ userInit =
 
 type alias Lesson =
     { style : String
-    , show : Bool
-    , show_fn : Bool -- show footnotes
-    , show_vn : Bool -- show verse numbers
+    -- , show : Bool
+    -- , show_fn : Bool -- show footnotes
+    -- , show_vn : Bool -- show verse numbers
     , read : String
-    , body : String
-    , id : String
-    , section : String
-    , version : String
-    , altRead : String
-    , notes : List Note
-    , cmd : String
+    -- , body : String
+    -- , id : String
+    -- , section : String
+    -- , version : String
+    -- , altRead : String
+    -- , notes : List Note
+    -- , cmd : String
     }
 
 
 initLesson : Lesson
 initLesson =
     { style = ""
-    , show = False
-    , show_fn = True
-    , show_vn = True
+    -- , show = False
+    -- , show_fn = True
+    -- , show_vn = True
     , read = ""
-    , body = ""
-    , id = ""
-    , section = ""
-    , version = ""
-    , altRead = ""
-    , notes = []
-    , cmd = ""
+    -- , body = ""
+    -- , id = ""
+    -- , section = ""
+    -- , version = ""
+    -- , altRead = ""
+    -- , notes = []
+    -- , cmd = ""
     }
 
 
@@ -291,79 +295,122 @@ setSectionUpdate this_section this_version thisRef =
 
 
 type alias Sunday =
-    { ofType : String
-    , date : String
-    , season : String
-    , week : String
-    , title : String
+    { title : String
     , show : Bool
-    , config : Config
     , colors : List String
-    , collect : SundayCollect
     , ot : List Lesson
     , ps : List Lesson
     , nt : List Lesson
     , gs : List Lesson
-    , sectionUpdate : SectionUpdate
     }
-
 
 sundayInit : Sunday
 sundayInit =
-    { ofType = ""
-    , date = ""
-    , season = ""
-    , week = ""
-    , title = ""
+    { title = ""
     , show = False
-    , config = configInit
     , colors = []
-    , collect = initSundayCollect
     , ot = []
     , ps = []
     , nt = []
     , gs = []
-    , sectionUpdate = initSectionUpdate
     }
+
+
+-- type alias Sunday =
+--     { ofType : String
+--     -- , date : String
+--     -- , season : String
+--     -- , week : String
+--     , title : String
+--     , show : Bool
+--     -- , config : Config
+--     , colors : List String
+--     -- , collect : SundayCollect
+--     , ot : List Lesson
+--     , ps : List Lesson
+--     , nt : List Lesson
+--     , gs : List Lesson
+--     -- , sectionUpdate : SectionUpdate
+--     }
+-- 
+-- 
+-- sundayInit : Sunday
+-- sundayInit =
+--     { ofType = ""
+--     -- , date = ""
+--     -- , season = ""
+--     -- , week = ""
+--     , title = ""
+--     , show = False
+--     -- , config = configInit
+--     , colors = []
+--     -- , collect = initSundayCollect
+--     , ot = []
+--     , ps = []
+--     , nt = []
+--     , gs = []
+--     -- , sectionUpdate = initSectionUpdate
+--     }
 
 
 type alias Daily =
-    { date : String -- "Thursday March 31, 2016"
-    , title : String
-    , collect : SundayCollect
-    , mp1 : List String
-    , mp2 : List String
-    , mpp : List String
-    , ep1 : List String
-    , ep2 : List String
-    , epp : List String
-    , ot : List String
-    , ps : List String
-    , nt : List String
-    , gs : List String
+    { title : String
+    , mp1 : List Lesson
+    , mp2 : List Lesson
+    , ep1 : List Lesson
+    , ep2 : List Lesson
     , show : Bool
-    , sectionUpdate : SectionUpdate
     }
-
 
 initDaily : Daily
 initDaily =
-    { date = ""
-    , title = ""
-    , collect = initSundayCollect
+    { title = ""
     , mp1 = []
     , mp2 = []
-    , mpp = []
     , ep1 = []
     , ep2 = []
-    , epp = []
-    , ot = []
-    , ps = []
-    , nt = []
-    , gs = []
     , show = False
-    , sectionUpdate = initSectionUpdate
     }
+
+
+
+-- type alias Daily =
+--     { title : String
+--     , colors : List String
+--     -- , collect : SundayCollect
+--     , mp1 : List String
+--     , mp2 : List String
+--     -- , mpp : List String
+--     , ep1 : List String
+--     , ep2 : List String
+--     -- , epp : List String
+--     -- , ot : List String
+--     -- , ps : List String
+--     -- , nt : List String
+--     -- , gs : List String
+--     , show : Bool
+--     -- , sectionUpdate : SectionUpdate
+--     }
+-- 
+-- 
+-- initDaily : Daily
+-- initDaily =
+--     { title = ""
+--     , colors = []
+--     -- , collect = initSundayCollect
+--     , mp1 = []
+--     , mp2 = []
+--     -- , mpp = []
+--     , ep1 = []
+--     , ep2 = []
+--     -- , epp = []
+--     -- , ot = []
+--     -- , ps = []
+--     -- , nt = []
+--     -- , gs = []
+--     , show = False
+--     -- , sectionUpdate = initSectionUpdate
+--     }
 
 
 
@@ -386,7 +433,7 @@ type alias DailyMP =
     , mp1 : List Lesson
     , mp2 : List Lesson
     , mpp : List Lesson
-    , sectionUpdate : SectionUpdate
+    -- , sectionUpdate : SectionUpdate
     }
 
 
@@ -404,7 +451,7 @@ initDailyMP =
     , mp1 = []
     , mp2 = []
     , mpp = []
-    , sectionUpdate = initSectionUpdate
+    -- , sectionUpdate = initSectionUpdate
     }
 
 
@@ -421,7 +468,7 @@ type alias DailyEP =
     , ep1 : List Lesson
     , ep2 : List Lesson
     , epp : List Lesson
-    , sectionUpdate : SectionUpdate
+    -- , sectionUpdate : SectionUpdate
     }
 
 
@@ -439,9 +486,36 @@ initDailyEP =
     , ep1 = []
     , ep2 = []
     , epp = []
-    , sectionUpdate = initSectionUpdate
+    -- , sectionUpdate = initSectionUpdate
     }
 
+type alias Day =
+    {   eu: Sunday
+    ,   daily: Daily
+    ,   date: String
+    ,   season: String
+    ,   week: String
+    ,   colors: List String
+    -- ,   order: Int
+    }
+
+initDay =
+    {   eu = sundayInit
+    ,   daily = initDaily
+    ,   date = ""
+    ,   season = ""
+    ,   week = ""
+    ,   colors = []
+    -- ,   order = 0
+    }
+
+type alias Week = {   days: List Day  }
+
+initWeek = { days = []  }
+
+type alias Month = {   weeks: List Week    }
+
+initMonth = { weeks = [] }
 
 type alias Reflection =
     { author : String
@@ -483,30 +557,6 @@ initBiblesOrg =
     , key = "P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT"
     , foot_notes = True
     }
-
-
-type alias Day =
-    { name : String
-    , colors : List String
-    , dayOfMonth : String
-    , date : String
-    , daily : Daily
-    , sunday : Sunday
-    , today : Bool
-    }
-
-
-initDay : Day
-initDay =
-    { name = ""
-    , colors = []
-    , dayOfMonth = ""
-    , date = ""
-    , daily = initDaily
-    , sunday = sundayInit
-    , today = False
-    }
-
 
 type alias Leaflet =
     { reg : String

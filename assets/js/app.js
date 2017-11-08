@@ -13,26 +13,119 @@
 // to also remove its path from "config.paths.watched".
 import "phoenix_html";
 import $ from 'jquery';
-var moment = require('moment');
-var markdown = require('markdown').markdown;
-
-var path = window.location.pathname
+import {LitYear} from "./lityear"
+var moment = require('moment')
+  , markdown = require('markdown').markdown
+  , path = window.location.pathname
   , path_parts = path.split("/").filter( function(el) {return el.length > 0})
   , page = (path_parts.length > 0) ? path_parts[0] : 'office'
   , isOffice = ["mp", "morningPrayer", "midday", "ep", "eveningPrayer"].indexOf(page) >= 0
+  , preferenceList = undefined // set in initElmHeader
+  , preferenceObj = undefined // set in initElmHeader
+  , now = new moment()
+  , date_today = now.format("dddd MMMM D, YYYY")
+  , date_today_short = now.format("ddd MMM DD, YYYY")
+  , tz = now.format("ZZ")
+  , am = now.format("A")
   ;
 
 //  , isOffice = !!(path == "/" || path.match(/office|midday|^\/mp\/|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|^\/ep\/|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/))
 if (page == "office") { 
   // redirect to correct office based on local time
-  var now = new moment().local()
-    , mid = new moment().local().hour(11).minute(30).second(0)
+  var mid = new moment().local().hour(11).minute(30).second(0)
     , ep = new moment().local().hour(15).minute(0).second(0)
+    , versions = "/" + preferences.ps + "/" + preferences.ot
     ;
-  if ( now.isBefore(mid)) { window.location.replace("/mp") }
+  if ( now.isBefore(mid)) { window.location.replace("/mp" + versions) }
   else if ( now.isBefore(ep) ) { window.location.replace("/midday")}
-  else { window.location.replace("/ep")}
+  else { window.location.replace("/ep" + versions)}
 }
+
+var x = new moment();
+console.log("LAST SUNDAY", LitYear.dateLastSunday(x));
+
+// PouchDB ..................................
+var PouchDB = require('pouchdb')
+  , localDB = new PouchDB('preferences')
+  , db = new PouchDB('iphod') // to be synced with main couchDB
+  , remoteCouch = 'http://127.0.0.1:5984/iphod'
+  , dbOpts = {live: true, retry: true}
+  , default_prefs = {
+      _id: 'preferences'
+    , ot: 'ESV'
+    , ps: 'BCP'
+    , nt: 'ESV'
+    , gs: 'ESV'
+    , fnotes: "True"
+    , vers: ["ESV"]
+    , current: "ESV"
+    };
+
+function sync() {
+  // syncDom.setAttribute('data-sync-state', 'syncing');
+  db.replicate.to(remoteCouch, dbOpts, syncError);
+  db.replicate.from(remoteCouch, dbOpts, syncError);
+}
+
+function syncError() {console.log("SYNC ERROR")};
+
+sync();
+
+
+function get_preferences(do_this_too) {
+  localDB.get('preferences').then(function(resp){
+    return do_this_too(resp)
+  }).catch(function(err){
+    console.log("GET PREFERENCE ERR: ", err)
+    return do_this_too(initialize_translations());
+  });
+}
+
+function initialize_translations() {
+  localDB.put( default_prefs ).then(function (resp) {
+    return resp
+  }).catch(function (err) {
+    return prefs;
+  });
+}
+
+function save_preferences(prefs) {
+  prefs._id = "preferences";
+  localDB.put(prefs).then(function(resp) {
+    preferenceObj = {ot: prefs.ot, ps: prefs.ps, nt: prefs.nt, gs: prefs.gs};
+    preferenceList = [prefs.ot, prefs.ps, prefs.nt, prefs.gs];
+    return resp;
+  }).catch(function(err){
+    return prefs;
+  })
+}
+
+function getPreferenceObj() {
+  get_preferences(function(resp) {
+    return {ot: resp.ot, ps: resp.ps, nt: resp.nt, gs: resp.gs}
+  })
+}
+
+function getPreferenceList() {
+  get_preferences(function(resp) {
+    return [resp.ot, resp.ps, resp.nt, resp.gs]
+  })
+}
+
+function preference_for(key) { return preferenceObj[key] }
+
+
+function initElmHeader() { 
+  get_preferences(function(resp) {
+    preferenceList = [resp.ot, resp.ps, resp.nt, resp.gs];
+    preferenceObj = resp
+    console.log("PREF OBJ: ", preferenceObj)
+    elmHeaderApp.ports.portConfig.send(preferenceObj); 
+  })
+}
+
+
+// end of PouchDB......................
 
 // $(".day_options").menu();
 // $(".td-bottom").show();
@@ -65,130 +158,14 @@ $("input[name='vss_show']").click(function() {
   $(this).val() == "show" ? $('.verse-num, .chapter-num').show() : $('.verse-num, .chapter-num').hide();
 })
 
-// LOCAL STORAGE ------------------------
-
-function storageAvailable(of_type) {
-  try {
-    var storage = window[of_type],
-        x = '__storage_test__';
-        storage.setItem(x, x);
-        storage.removeItem(x);
-        return true;
-  }
-  catch(e) { return false;}
-}
-
-function get_init(arg, arg2) {
-  var s = window.localStorage
-    , t = s.getItem(arg)
-  if (t == null) {
-        s.setItem(arg, arg2);
-        t = arg2;
-      }
-  return t;
-}
-function init_config_model() {
-  var m = { ot: "ESV"
-    , ps: "Coverdale"
-    , nt: "ESV"
-    , gs: "ESV"
-    , fnotes: "True"
-    , vers: ["ESV"]
-    , current: "ESV"
-    }
-  if ( storageAvailable('localStorage') ) {
-    m = { ot: get_init("iphod_ot", "ESV")
-        , ps: get_init("iphod_ps", "Coverdale")
-        , nt: get_init("iphod_nt", "ESV")
-        , gs: get_init("iphod_gs", "ESV")
-        , fnotes: get_init("iphod_fnotes", "True")
-        , vers: get_versions("iphod_vers", ["ESV"])
-        , current: get_init("iphod_current", "ESV")
-        }
-  }
-  return m;
-}
-
-function get_versions(arg1, arg2) {
-  var versions = get_init(arg1, arg2)
-    , version_list = versions.split(",");
-  return version_list;
-}
-
-function get_version(arg) {
-  var m = { ot: "ESV"
-  , ps: "BCP"
-  , nt: "ESV"
-  , gs: "ESV"
-  }
-  return get_init("iphod_" + arg, m[arg])
-}
-
-function version_list() {
-  return [ get_version("ps")
-  , get_version("ot")
-  , get_version("nt")
-  , get_version("gs")
-  ]
-}
-
-function save_version(abbr) {
-  var s = window.localStorage
-    , t = s.getItem("iphod_vers");
-  if (t == null) {
-    t = [];
-  }
-  else {
-    t = t.split(",");
-  };
-  if (t.indexOf(abbr) >= 0) {return true;};
-  t.push(abbr);
-  t = t.toString();
-  s.setItem("iphod_vers", t);
-  return true
-}
-
-function unsave_version(abbr) {
-  var s = window.localStorage
-    , t = s.getItem("iphod_vers");
-  if (t == null) return true;
-  t = t.split(",");
-  t = t.filter(remove_abbr, abbr);
-  t = t.toString();
-  s.setItem("iphod_vers", t);
-  return true;
-}
-function remove_abbr(v, i, ary){
-  return v != this;
-}
-
-function save_user_name(name) {
-  if (storageAvailable('localStorage')) {
-    window.localStorage.setItem("user_name", name);
-  }
-}
 
 // HELPERS ------------------------
-
-function date_today() {
-  var d = new Date()
-    , days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    , mons = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
-    , dow = days[d.getDay()]
-    , mon = mons[d.getMonth()]
-  return dow + " " + mon + " " + d.getDate() + ", " + d.getFullYear();
-}
-
 
 
 // SOCKETS ------------------------
 
 import "./menu"
 import socket from "./socket"
-
-var now = new Date()
-  , tz = now.toString().split("GMT")[1].split(" (")[0] // timezone, i.e. -0700
-  , am = now.toString().split(" ")[4] < "12";
 
 if ( page == "stations") {
   var elmStationsDiv = document.getElementById('stations-elm-container')
@@ -227,7 +204,9 @@ channel.join()
 
 elmHeaderApp.ports.portCSRFToken.send($("#csrf_token").val())
 
-elmHeaderApp.ports.portConfig.send(init_config_model());
+initElmHeader();
+
+// elmHeaderApp.ports.portConfig.send(init_config_model());
 
 elmHeaderApp.ports.sendEmail.subscribe( function(email) {
   channel.push("request_send_email", email)
@@ -330,8 +309,54 @@ if (isOffice) {
 // landing page, calendar
 
 if ( page == "calendar" || page == "mindex") {
-  elmHeaderApp.ports.portConfig.send(init_config_model());
+  // elmHeaderApp.ports.portConfig.send(preferenceObj);
   history.pushState(path, "Legereme", "/calendar");
+
+// BUILD ELM CALENDAR MODEL HERE
+  var d = LitYear.firstCalendarSunday(now)
+    , endOfCalendar = LitYear.lastCalendarSaturday(now)
+    , promisesKept = []
+    ;
+
+  while( d.isSameOrBefore(endOfCalendar) ) {
+    var thisDay = d.format("dddd MMMM D, YYYY")
+      , season = LitYear.getEUkey(d)
+      , p1 = db.get(season.key).then(resp => {
+            resp.show = false;
+            return resp;
+          }).catch(function(err){
+            console.log("COULD NOT FIND EU KEY: ", err)
+          })
+      , p2 = db.get(LitYear.getMPEPkey(d).key).then(resp => {
+            resp.show = false;
+            return resp;
+          }).catch(function(err){
+            console.log("COULD NOT FIND MPEP KEY: ", err)
+          })
+      ;
+    promisesKept.push( Promise.all([p1, p2, thisDay, season]).then(values => {
+      var [eu, mpep, date, season] = values
+        , day = { eu: eu
+                , daily: mpep
+                , date: date
+                , season: season.season
+                , week: season.week
+                , colors: eu.colors
+                }
+        ;
+      return day
+      }) // end of Promise.all
+    ); // end of promsesKept.push
+    d = d.add(1, "day")
+  }
+  Promise.all(promisesKept).then(values => {
+    var month = {weeks: []};
+    for( var i=0, j=7; i < values.length; i+=7, j+=7) {
+      month.weeks.push( {days: values.slice(i,j)} );
+    }
+    console.log("MONTH: ", month);
+    elmCalApp.ports.portMonth.send(month);
+  })
 
   // mindex
   if ( page == "mindex" ) {
@@ -340,11 +365,11 @@ if ( page == "calendar" || page == "mindex") {
     , elmMPanelDiv = document.getElementById('m-reading-container')
     , elmMPanelApp = Elm.MPanel.embed(elmMPanelDiv)
     $("#reflection-today-button").click( function() {
-      channel.push("get_text", ["Reflection", (new Date).toDateString(), version_list()])
+      channel.push("get_text", ["Reflection", date_today_short, version_list()])
     });
 
     $("#next-sunday-button").click( function() {
-      channel.push("get_text", ["NextSunday", (new Date).toDateString(), version_list() ] )
+      channel.push("get_text", ["NextSunday", date_today_short, version_list() ] )
     })
 
     $("#m-reading-container").click( function() {
@@ -358,19 +383,19 @@ if ( page == "calendar" || page == "mindex") {
     })
 
     channel.on('eu_today', data => {
-      data.config = init_config_model();
+      data.config = preferenceObj;
       elmMindexApp.ports.portEU.send(data);
       rollup();
     })
 
     channel.on('mp_today', data => {
-      data.config = init_config_model();
+      data.config = preferenceObj;
       elmMindexApp.ports.portMP.send(data)
       rollup();
     })
 
     channel.on('ep_today', data => {
-      data.config = init_config_model();
+      data.config = preferenceObj;
       elmMindexApp.ports.portEP.send(data)
       rollup();
     })
@@ -387,7 +412,7 @@ if ( page == "calendar" || page == "mindex") {
     })
 
     channel.on('update_lesson', data => {
-      data.config = init_config_model();
+      data.config = preferenceObj;
       elmMindexApp.ports.portLesson.send(data.lesson);
     })
 
@@ -482,11 +507,11 @@ if ( page == "calendar" || page == "mindex") {
   })
 
   $("#reflection-today-button").click( function() {
-    channel.push("get_text", ["Reflection", (new Date).toDateString(), version_list() ])
+    channel.push("get_text", ["Reflection", date_today_short, version_list() ])
   });
 
   $("#next-sunday-button").click( function() {
-    channel.push("get_text", ["NextSunday", (new Date).toDateString(), version_list() ] )
+    channel.push("get_text", ["NextSunday", date_today_short, version_list() ] )
   })
 
   channel.on('latest_chats', data => {
@@ -513,7 +538,7 @@ if ( page == "calendar" ) {
   })
 
   channel.on('eu_today', data => {
-    data.config = init_config_model();
+    data.config = preferenceObj;
     $("#readings")
       .data("psalms",       readingList(data.ps) )
       .data("psalms_ver",   data.ps[0].version)
@@ -529,7 +554,7 @@ if ( page == "calendar" ) {
   })
 
   channel.on('mp_today', data => {
-    data.config = init_config_model();
+    data.config = preferenceObj;
     $("#readings")
       .data("psalms",       readingList(data.mpp) )
       .data("psalms_ver",   data.mpp[0].version)
@@ -549,7 +574,7 @@ if ( page == "calendar" ) {
   }
 
   channel.on('ep_today', data => {
-    data.config = init_config_model();
+    data.config = preferenceObj;
     $("#readings")
       .data("psalms",       readingList(data.epp) )
       .data("psalms_ver",   data.epp[0].version)
@@ -569,7 +594,7 @@ if ( page == "calendar" ) {
   })
 
   channel.on('update_lesson', data => {
-    data.config = init_config_model();
+    data.config = preferenceObj;
     elmCalApp.ports.portLesson.send(data.lesson);
   })
 
@@ -585,7 +610,7 @@ if ( page == "calendar" ) {
   $(".reading_menu").click( function() {
     var date = $(this).attr("data-date")
       , of_type = $(this).attr("data-type");
-    if (date == null) { date = date_today(); };
+    if (date == null) { date = date_today; };
     var request = [of_type, date, version_list()];
     channel.push("get_text", request);
   });
@@ -659,7 +684,7 @@ if ( page == "versions" ) {
     , elmTransApp = Elm.Translations.embed(elmTransDiv)
 
   trans_channel.on("all_versions", data => {
-    var saved_vers = init_config_model().vers;
+    var saved_vers = preferenceObj.vers;
     data.list.forEach(function(ver){
       if (saved_vers.includes(ver.abbr)) {ver.selected = true;}
     })
