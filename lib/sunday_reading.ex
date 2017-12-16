@@ -147,16 +147,18 @@ defmodule SundayReading do
   def last_sunday(date),  do: date |> Lityear.last_sunday |> _sunday
   def from_now,           do: Timex.now(@tz) |> this_sunday
 
-  def holy_day_color("epiphany"),   do: identity()["theEpiphany"]["1"]["colors"]
-  def holy_day_color("christmas"),  do: identity()["christmasDay"]["1"]["colors"]
-  def holy_day_color("christmasEve"),  do: identity()["christmasDay"]["1"]["colors"]
-  def holy_day_color("christmasDay"),  do: identity()["christmasDay"]["1"]["colors"]
-  def holy_day_color(title),        do: identity()["redLetter"][title]["colors"]
+  def holy_day_color("epiphany"),     do: identity()["theEpiphany"]["1"]["colors"]
+  def holy_day_color("christmas"),    do: identity()["christmasDay"]["1"]["colors"]
+  def holy_day_color("christmasEve"), do: identity()["christmasDay"]["1"]["colors"]
+  def holy_day_color("advent4ChristmasEve"), do: identity()["advent"]["4"]["colors"]
+  def holy_day_color("christmasDay"), do: identity()["christmasDay"]["1"]["colors"]
+  def holy_day_color(title),          do: identity()["redLetter"][title]["colors"]
 
-  def holy_day_title("epiphany"),   do: identity()["theEpiphany"]["1"]["title"]
-  def holy_day_title("christmasEve"),   do: "Christmas Eve"
-  def holy_day_title("christmasDay"),   do: "Christmas Day"
-  def holy_day_title(title),        do: identity()["redLetter"][title]["title"]
+  def holy_day_title("epiphany"),     do: identity()["theEpiphany"]["1"]["title"]
+  def holy_day_title("christmasEve"), do: "Christmas Eve"
+  def holy_day_title("advent4ChristmasEve"),   do: "Advent 4 - Christmas Eve"
+  def holy_day_title("christmasDay"), do: "Christmas Day"
+  def holy_day_title(title),          do: identity()["redLetter"][title]["title"]
 
   def _sunday({season, wk, yr, sunday}), do: eu_map {season, wk, yr, sunday}
 

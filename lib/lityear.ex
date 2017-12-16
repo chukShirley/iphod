@@ -294,6 +294,8 @@ defmodule  Lityear do
     # since they float around like a holy day
     d = leap_year_correction(date) # d is numerical day of year; 1-365 or 1-366
     cond do
+      (hd_index()[d] == "christmasEve") && (date |> is_sunday?) -> {true, "advent4ChristmasEve"} # don't translate Christmas Eve
+      hd_index()[d] == "christmasDay" -> {true, "christmasDay"} # don't translate Christmas
       hd_index()[d] == "presentation" -> {true, "presentation"} # don't translate The Presentation
       date |> is_sunday? -> {false, ""} # potential problem for feast of Our Lord
 
@@ -352,6 +354,7 @@ defmodule  Lityear do
 
   def leap_year_correction?(date), do: Timex.is_leap?(date) && (date |> Timex.day) > @leap_day
 
+  def namedDayDate("christmasEve", _wk), do: Timex.to_date {Timex.now(@tz).year, 12, 24}
   def namedDayDate("christmasDay", _wk), do: Timex.to_date {Timex.now(@tz).year, 12, 25}
   def namedDayDate("holyName", _wk), do: Timex.to_date {Timex.now(@tz).year, 1, 1}
   def namedDayDate("palmSundayPalms", _wk), do: palm_sunday()
@@ -364,6 +367,9 @@ defmodule  Lityear do
   def namedDayDate("easterWeek", wk) when wk |> is_bitstring, do: namedDayDate("easterWeek", wk |> String.to_integer) 
   def namedDayDate("easterWeek", wk), do: easter() |> date_shift(days: wk)  
 
+  def christmasEve(), do: christmasEve(Timex.now(@tz).year)
+  def christmasEve(year), do: Timex.to_date( {year, 12, 24} )
+    
   def stAndrew(), do: stAndrew(Timex.now(@tz).year)
   def stAndrew(year), do: Timex.to_date( {year, 11, 30} )|> translate_from_sunday
   def stThomas(), do: stThomas(Timex.now(@tz).year)
