@@ -1,48 +1,55 @@
 module Iphod.Models
     exposing
-        ( Resource
-        , initResource
-        , Config
-        , configInit
-        , Lesson
-        , initLesson
-        , Sunday
-        , sundayInit
-        , Daily
-        , initDaily
-        , Day
-        , initDay
-        , Week
-        , initWeek
-        , Month
-        , initMonth
-        , SectionUpdate
-        , initSectionUpdate
-        , setSectionUpdate
-        , Shout
-        , initShout
-        , Email
-        , emailInit
-        , User
-        , userInit
-        , Collect
-        , initCollect
-        , SundayCollect
-        , initSundayCollect
-        , Proper
-        , initProper
-        , DailyMP
-        , initDailyMP
-        , DailyEP
-        , initDailyEP
-        , Reflection
-        , initReflection
-        , CurrentReadings
-        , currentReadingsInit
-        , Leaflet
-        , initLeaflet
+        ( Resource, initResource
+        , Config, configInit
+        , Lesson, initLesson
+        , LessonRequest, initLessonRequest, setLessonRequestSource, newLessonRequest
+        , Psalm, initPsalm
+        , DailyPsalms, initDailyPsalms
+        , Sunday, sundayInit
+        , Daily, initDaily
+        , Day, initDay
+        , Week, initWeek
+        , Month, initMonth
+        , Shout, initShout
+        , Email, emailInit
+        , User, userInit
+        , Collect, initCollect
+        , SundayCollect, initSundayCollect
+        , Proper, initProper
+        , Reflection, initReflection
+        , Leaflet, initLeaflet
+        , ESV, initESV
+        , ESVresp, initESVresp
+        , ESVparsed, initESVparsed
+        , ESVmeta, initESVmeta
         )
 
+-- type alias Reader = 
+--     { name: String
+--     , ref: String -- what they are to read
+--     }
+-- 
+-- type alias Rota = 
+--     { church: String
+--     , time: String
+--     , location: String
+--     , service: String
+--     , color: String
+--     , vestments: String
+--     , celebrant: List String
+--     , preacher: String
+--     , deacon:   List String
+--     , readers: List Reader
+--     , pop: String 
+--     , lem: List String
+--     , acolyte: List String
+--     , crucifer: List String
+--     , thurifer: List String
+--     , altarGuild: List String
+--     , coffee: List String
+--     , music: List String
+--     }
 
 type alias Resource =
     { id : String
@@ -128,33 +135,6 @@ configInit =
     }
 
 
-type alias CurrentReadings =
-    { ps : String
-    , ps_ver : String
-    , reading1 : String
-    , reading1_ver : String
-    , reading2 : String
-    , reading2_ver : String
-    , reading3 : String
-    , reading3_ver : String
-    , reading_date : String
-    }
-
-
-currentReadingsInit : CurrentReadings
-currentReadingsInit =
-    { ps = ""
-    , ps_ver = ""
-    , reading1 = ""
-    , reading1_ver = ""
-    , reading2 = ""
-    , reading2_ver = ""
-    , reading3 = ""
-    , reading3_ver = ""
-    , reading_date = ""
-    }
-
-
 type alias Email =
     { from : String
     , topic : String
@@ -197,34 +177,78 @@ userInit =
 
 type alias Lesson =
     { style : String
-    -- , show : Bool
-    -- , show_fn : Bool -- show footnotes
-    -- , show_vn : Bool -- show verse numbers
     , read : String
-    -- , body : String
-    -- , id : String
-    -- , section : String
-    -- , version : String
-    -- , altRead : String
-    -- , notes : List Note
-    -- , cmd : String
     }
 
 
 initLesson : Lesson
 initLesson =
     { style = ""
-    -- , show = False
-    -- , show_fn = True
-    -- , show_vn = True
     , read = ""
-    -- , body = ""
-    -- , id = ""
-    -- , section = ""
-    -- , version = ""
-    -- , altRead = ""
-    -- , notes = []
-    -- , cmd = ""
+    }
+
+type alias LessonRequest = 
+    { lesson : Int
+    , ref : String
+    , style : String
+    , src : String
+    , text : String
+    }
+
+initLessonRequest : LessonRequest
+initLessonRequest =
+    { lesson = 0
+    , ref = ""
+    , style = ""
+    , src = ""
+    , text = ""
+    }
+
+newLessonRequest : Int -> String -> String -> String -> String -> LessonRequest
+newLessonRequest lesson ref style src text =
+    { lesson = lesson
+    , ref = ref
+    , style = style
+    , src = src
+    , text = text
+    }
+
+
+setLessonRequestSource : String -> LessonRequest -> LessonRequest
+setLessonRequestSource src lesson = {lesson | src = src}
+
+type alias PsVs =
+    { first: String
+    , second: String
+    }
+initPsVs: PsVs
+initPsVs =
+    { first = ""
+    , second = ""
+    }
+
+type alias Psalm =
+    { name: String
+    , title: String
+    , style: String
+    , vss: List PsVs
+    }
+initPsalm: Psalm
+initPsalm =
+    { name = ""
+    , title = ""
+    , style = ""
+    , vss = []
+    }
+
+type alias DailyPsalms =
+    { mp: List Lesson 
+    , ep: List Lesson
+    }
+initDailyPsalms : DailyPsalms
+initDailyPsalms = 
+    { mp = [] 
+    , ep = []
     }
 
 
@@ -270,30 +294,6 @@ initSundayCollect =
     , show = True
     }
 
-
-type alias SectionUpdate =
-    { section : String
-    , version : String
-    , ref : String
-    }
-
-
-initSectionUpdate : SectionUpdate
-initSectionUpdate =
-    { section = ""
-    , version = ""
-    , ref = ""
-    }
-
-
-setSectionUpdate : String -> String -> String -> SectionUpdate
-setSectionUpdate this_section this_version thisRef =
-    { section = this_section
-    , version = this_version
-    , ref = thisRef
-    }
-
-
 type alias Sunday =
     { title : String
     , show : Bool
@@ -316,43 +316,6 @@ sundayInit =
     }
 
 
--- type alias Sunday =
---     { ofType : String
---     -- , date : String
---     -- , season : String
---     -- , week : String
---     , title : String
---     , show : Bool
---     -- , config : Config
---     , colors : List String
---     -- , collect : SundayCollect
---     , ot : List Lesson
---     , ps : List Lesson
---     , nt : List Lesson
---     , gs : List Lesson
---     -- , sectionUpdate : SectionUpdate
---     }
--- 
--- 
--- sundayInit : Sunday
--- sundayInit =
---     { ofType = ""
---     -- , date = ""
---     -- , season = ""
---     -- , week = ""
---     , title = ""
---     , show = False
---     -- , config = configInit
---     , colors = []
---     -- , collect = initSundayCollect
---     , ot = []
---     , ps = []
---     , nt = []
---     , gs = []
---     -- , sectionUpdate = initSectionUpdate
---     }
-
-
 type alias Daily =
     { title : String
     , mp1 : List Lesson
@@ -372,140 +335,31 @@ initDaily =
     , show = False
     }
 
-
-
--- type alias Daily =
---     { title : String
---     , colors : List String
---     -- , collect : SundayCollect
---     , mp1 : List String
---     , mp2 : List String
---     -- , mpp : List String
---     , ep1 : List String
---     , ep2 : List String
---     -- , epp : List String
---     -- , ot : List String
---     -- , ps : List String
---     -- , nt : List String
---     -- , gs : List String
---     , show : Bool
---     -- , sectionUpdate : SectionUpdate
---     }
--- 
--- 
--- initDaily : Daily
--- initDaily =
---     { title = ""
---     , colors = []
---     -- , collect = initSundayCollect
---     , mp1 = []
---     , mp2 = []
---     -- , mpp = []
---     , ep1 = []
---     , ep2 = []
---     -- , epp = []
---     -- , ot = []
---     -- , ps = []
---     -- , nt = []
---     -- , gs = []
---     , show = False
---     -- , sectionUpdate = initSectionUpdate
---     }
-
-
-
--- type alias DailyEU = Sunday
---
--- initDailyEU: DailyEU
--- initDailyEU = sundayInit
-
-
-type alias DailyMP =
-    { colors : List String
-    , date : String
-    , day : String
-    , season : String
-    , title : String
-    , week : String
-    , config : Config
-    , show : Bool
-    , collect : SundayCollect
-    , mp1 : List Lesson
-    , mp2 : List Lesson
-    , mpp : List Lesson
-    -- , sectionUpdate : SectionUpdate
-    }
-
-
-initDailyMP : DailyMP
-initDailyMP =
-    { colors = []
-    , date = ""
-    , day = ""
-    , season = ""
-    , title = ""
-    , week = ""
-    , config = configInit
-    , show = False
-    , collect = initSundayCollect
-    , mp1 = []
-    , mp2 = []
-    , mpp = []
-    -- , sectionUpdate = initSectionUpdate
-    }
-
-
-type alias DailyEP =
-    { colors : List String
-    , date : String
-    , day : String
-    , season : String
-    , title : String
-    , week : String
-    , config : Config
-    , show : Bool
-    , collect : SundayCollect
-    , ep1 : List Lesson
-    , ep2 : List Lesson
-    , epp : List Lesson
-    -- , sectionUpdate : SectionUpdate
-    }
-
-
-initDailyEP : DailyEP
-initDailyEP =
-    { colors = []
-    , date = ""
-    , day = ""
-    , season = ""
-    , title = ""
-    , week = ""
-    , config = configInit
-    , show = False
-    , collect = initSundayCollect
-    , ep1 = []
-    , ep2 = []
-    , epp = []
-    -- , sectionUpdate = initSectionUpdate
-    }
-
 type alias Day =
     {   eu: Sunday
     ,   daily: Daily
+    ,   dailyPsalms: DailyPsalms
     ,   date: String
+    ,   monthDay: String
     ,   season: String
     ,   week: String
     ,   colors: List String
+    ,   rld: Bool
+    ,   title: String
     -- ,   order: Int
     }
 
 initDay =
     {   eu = sundayInit
     ,   daily = initDaily
+    ,   dailyPsalms = []
     ,   date = ""
+    ,   monthDay = 0
     ,   season = ""
     ,   week = ""
     ,   colors = []
+    ,   rld = False
+    ,   title = ""
     -- ,   order = 0
     }
 
@@ -538,9 +392,49 @@ type alias ESV =
 
 initESV : ESV
 initESV =
-    { url = "www.esvapi.org/v2/rest/passageQuery?"
-    , key = "10b28dac7c57fd96"
+    { url = "https://api.esv.org/v3/passage/html/?q="
+    , key = "Token 7d3151fe3a26566aac67ffce393604ac19ef1962"
     , foot_notes = True
+    }
+
+type alias ESVresp = 
+    { query: String
+    , canonical: String
+    , parsed: List ESVparsed
+    , passage_meta: List ESVmeta
+    , passages: List String
+    }
+initESVresp : ESVresp
+initESVresp = 
+    { query = ""
+    , canonical = ""
+    , parsed = []
+    , passage_meta = []
+    , passages = []
+    }
+
+type alias ESVparsed = List Int
+initESVparsed : ESVparsed
+initESVparsed = [0,0]
+    
+type alias ESVmeta = 
+    { canonical: String
+    , chapter_start: ESVparsed
+    , chapter_end: ESVparsed
+    , prev_verse: Int
+    , next_verse: Int
+    , prev_chapter: ESVparsed
+    , next_chapter: ESVparsed
+    }
+initESVmeta : ESVmeta
+initESVmeta = 
+    { canonical = ""
+    , chapter_start = initESVparsed
+    , chapter_end = initESVparsed
+    , prev_verse = 0
+    , next_verse = 0
+    , prev_chapter = initESVparsed
+    , next_chapter = initESVparsed
     }
 
 

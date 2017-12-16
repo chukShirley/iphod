@@ -29,6 +29,35 @@ body.calendar { width: 55em; }
   width: 92%;
 }
 
+/* -----
+, style [("position", "fixed"), ("width", "200px"), ("height", "10px"), ("overflow", "hidden"), ("opicity", "0")] 
+
+#fontsize-slider-input {
+  position: absolute;
+  border: 1px solid red;
+  border-radius: 3px;
+  background: white;
+  color: blue;
+  height: 1em;
+  width: 20em;
+  top: 10px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.rangeslider__handle::after {}
+------ */
+
+/* ---
+.rangeslider__fill { height: 200px; }
+.rangeslider__handle { bottom: 66px;}
+--- */
+
+output {
+  font-size: 0.8em;
+  padding: 0.3em;
+}
+
 @media screen and (max-width: 800px){ 
   body.calendar { 
     width: 98%; 
@@ -45,7 +74,29 @@ body.calendar { width: 55em; }
     font-size: 0.6em;
   }
 }
+/* online / offline status */
+#status {
+  position: fixed;
+  width: 100%;
+  font: bold 1em sans-serif;
+  color: #FFF;
+  padding: 0.5em;
+}
 
+#log {
+  padding: 2.5em 0.5em 0.5em;
+  font: 1em sans-serif;
+}
+
+.online {
+  background: green;
+}
+
+.offline {
+  background: red;
+}
+
+/* login...................................*/
 div.login {
   display: none; /* no login for now */
 }

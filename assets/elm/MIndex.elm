@@ -3,20 +3,23 @@ port module MIndex exposing (..)
 -- where
 
 import Debug
+
+
+-- import StartApp
+
 import Html exposing (..)
 import Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Http exposing (..)
+import Json.Decode exposing (..)
 import Regex
-import Platform.Sub as Sub exposing (batch, none)
+import Platform.Sub as Sub exposing (batch)
 import Platform.Cmd as Cmd exposing (Cmd)
 import String exposing (join)
 import Markdown
 import Iphod.Helper exposing (hideable)
 import Iphod.Models as Models
-import Iphod.Sunday as Sunday
-import Iphod.MPReading as MPReading
-import Iphod.EPReading as EPReading
 
 
 -- MAIN
@@ -37,11 +40,13 @@ main =
 
 type alias Model =
     { month : Models.Month
-    , lesson1 : String
-    , lesson2 : String
-    , lesson3 : String
-    , psalm : String
+    , lesson1 : List Models.LessonRequest
+    , lesson2 : List Models.LessonRequest
+    , lesson3 : List Models.LessonRequest
+    , lessonRequests : List Models.LessonRequest -- in case of query failure, allows trying alternate source
+    , psalm : List Models.LessonRequest -- BTW, no code to load these yet
     , reflection : Models.Reflection
+    , online : Bool
     }
 
 
@@ -49,77 +54,78 @@ initModel : Model
 initModel =
     { month = Models.initMonth
     , reflection = Models.initReflection
-    , lesson1 = ""
-    , lesson2 = ""
-    , lesson3 = ""
-    , psalm = ""
+    , lesson1 = []
+    , lesson2 = []
+    , lesson3 = []
+    , lessonRequests = []
+    , psalm = []
+    , online = True
     }
-
 
 init : ( Model, Cmd Msg )
 init =
     ( initModel, Cmd.none )
 
-
+esvHeader = Models.initESV
 
 -- REQUEST PORTS
 
 
-port requestReading : Models.SectionUpdate -> Cmd msg
+port requestReading : List String -> Cmd msg -- probably not needed
 
+port requestWEB : Models.LessonRequest -> Cmd msg
 
 port requestAltReading : List String -> Cmd msg
+
+port requestScrollTop : String -> Cmd msg
 
 
 
 -- SUBSCRIPTIONS
 
 
-port portEU : (Models.Sunday -> msg) -> Sub msg
+port portMonth : (Models.Month -> msg) -> Sub msg
 
+port portLesson : (List Models.LessonRequest -> msg) -> Sub msg
 
-port portMP : (Models.DailyMP -> msg) -> Sub msg
-
-
-port portEP : (Models.DailyEP -> msg) -> Sub msg
-
-
-port portLesson : (List Models.Lesson -> msg) -> Sub msg
-
+port portWEB : (Models.LessonRequest -> msg) -> Sub msg
 
 port portReflection : (Models.Reflection -> msg) -> Sub msg
 
+port portAddLesson : (Models.Lesson -> msg) -> Sub msg
 
-port portReadings : (Models.Daily -> msg) -> Sub msg
+port portOnline : (Bool -> msg) -> Sub msg
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
-    --  Sub.none
     Sub.batch
-        --  [ portCalendar InitCalendar
-        [ portEU UpdateEU
-        , portMP UpdateMP
-        , portEP UpdateEP
+        [ portMonth InitMonth
         , portLesson UpdateLesson
+        , portWEB UpdateFromWEB
         , portReflection UpdateReflection
+        , portOnline UpdateOnline
         ]
 
 
 
--- UODATE
+-- UPDATE
+
+
+type ShowHide
+    = Show
+    | Hide
 
 
 type Msg
     = NoOp
-    | UpdateEU Models.Sunday
-    | UpdateMP Models.DailyMP
-    | UpdateEP Models.DailyEP
+    | UpdateOnline Bool
+    | InitMonth  Models.Month
     | UpdateReflection Models.Reflection
-    | UpdateLesson (List Models.Lesson)
-    | ModEU Sunday.Msg
-    | ModMP MPReading.Msg
-    | ModEP EPReading.Msg
+    | UpdateLesson (List Models.LessonRequest)
+    | UpdateFromWEB Models.LessonRequest
+    | GetReadings String Models.Day
+    | DecodeESVLesson Models.LessonRequest (Result Http.Error String)
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -128,245 +134,131 @@ update msg model =
         NoOp ->
             ( model, Cmd.none )
 
-        UpdateEU eu ->
-            let
-                tModel =
-                    initModel
-
-                newEU =
-                    { eu | show = True }
-
-                newModel =
-                    { tModel | eu = newEU }
-            in
-                ( newModel, Cmd.none )
-
-        UpdateMP mp ->
-            let
-                tModel =
-                    initModel
-
-                newMP =
-                    { mp | show = True }
-
-                newModel =
-                    { tModel | mp = newMP }
-            in
-                ( newModel, Cmd.none )
-
-        UpdateEP ep ->
-            let
-                tModel =
-                    initModel
-
-                newEP =
-                    { ep | show = True }
-
-                newModel =
-                    { tModel | ep = newEP }
-            in
-                ( newModel, Cmd.none )
+        InitMonth month ->
+          let
+            newModel = {model | month = month}
+          in
+            ( newModel, Cmd.none )
 
         UpdateReflection reflection ->
             let
-                newModel =
-                    { model | reflection = reflection }
+                newModel = { model | reflection = reflection }
             in
                 ( newModel, Cmd.none )
 
-        UpdateLesson lesson ->
-            let
-                section =
-                    (List.head lesson |> Maybe.withDefault Models.initLesson).section
+        UpdateLesson lesson -> (model, Cmd.none)
 
-                _ = Debug.log "UPDATE LESSON" lesson
-                newModel =
-                    setLesson initModel section lesson
-            in
-                ( newModel, Cmd.none )
+        UpdateFromWEB resp ->
+          let
+            newModel = case resp.lesson of
+              1 -> {model | lesson1 = List.append model.lesson1 [resp]} --, lessonRequests = t}
+              2 -> {model | lesson2 = List.append model.lesson2 [resp]} --, lessonRequests = t}
+              3 -> {model | lesson3 = List.append model.lesson3 [resp]} --, lessonRequests = t}
+              _ -> model
+          in
+            (newModel, Cmd.none)  
 
-        ModEU msg ->
-            let
-                newModel =
-                    { model | eu = Sunday.update msg model.eu }
+        GetReadings service day ->
+          let
+            requests = case service of
+              "MP" -> List.concat [toIndexList 1 day.daily.mp1, toIndexList 2 day.daily.mp2]
+              "EP" -> List.concat [toIndexList 1 day.daily.ep1, toIndexList 2 day.daily.ep2]
+              "EU" -> List.concat [toIndexList 1 day.eu.ot, toIndexList 2 day.eu.nt, toIndexList 3 day.eu.gs]
+              _    -> []
+            newModel = { model | lesson1 = [], lesson2 = [], lesson3 = [], psalm = [], lessonRequests = requests }
 
-                newCmd =
-                    if newModel.eu.sectionUpdate.ref |> String.isEmpty then
-                        Cmd.none
-                    else
-                        requestReading newModel.eu.sectionUpdate
-            in
-                ( newModel, newCmd )
+          in  
+            ( newModel, getLessons newModel)
 
-        ModMP msg ->
-            let
-                newModel =
-                    { model | mp = MPReading.update msg model.mp }
-                newCmd =
-                    if newModel.mp.sectionUpdate.ref |> String.isEmpty then
-                        Cmd.none
-                    else
-                        requestReading newModel.mp.sectionUpdate
-            in
-                ( newModel, newCmd )
-
-        ModEP msg ->
-            let
-                newModel =
-                    { model | ep = EPReading.update msg model.ep }
-
-                newCmd =
-                    if newModel.ep.sectionUpdate.ref |> String.isEmpty then
-                        Cmd.none
-                    else
-                        requestReading newModel.ep.sectionUpdate
-            in
-                ( newModel, newCmd )
-
+        DecodeESVLesson request (Ok lesson) ->
+          let
+            esv = decodeString decodeESV lesson |> Result.withDefault Models.initESVresp
+            nextLesson = if String.isEmpty esv.canonical then (model, requestWEB request)
+              else
+                let
+                  thisRequest = [{request | text = (String.join "" esv.passages)}]
+                  newModel = case request.lesson of
+                    1 -> {model | lesson1 = model.lesson1 ++ thisRequest}
+                    2 -> {model | lesson2 = model.lesson2 ++ thisRequest}
+                    3 -> {model | lesson3 = model.lesson3 ++ thisRequest}
+                    _ -> model
+                in
+                  (newModel, Cmd.none)
+          in
+            nextLesson
+        
+        DecodeESVLesson request (Err wtf) -> (model, requestWEB request)       
 
 
 -- HELPERS
 
+getLessons : Model -> Cmd Msg
+getLessons model =
+  let
+    h = List.head model.lessonRequests |> Maybe.withDefault Models.initLessonRequest
+    t = List.tail model.lessonRequests |> Maybe.withDefault []
+    newModel = {model | lessonRequests = t}
+    cmdMsg = case h.src of
+      "ESV" -> Cmd.batch [requestESV h, getLessons newModel]
+      "WEB" -> Cmd.batch [requestWEB h, getLessons newModel]
+      _     -> Cmd.none -- unknown source
+  in
+    cmdMsg
 
-setLesson : Model -> String -> List Models.Lesson -> Model
-setLesson model section lesson =
-    let
-        newModel =
-            case section of
-                "mp1" ->
-                    let
-                        thisMP =
-                            model.mp
+      
+decodeESV: Decoder Models.ESVresp
+decodeESV =
+  map5 Models.ESVresp
+    (field "query" string)
+    (field "canonical" string)
+    (field "parsed" decodeESVparsed )
+    (field "passage_meta" decodeESVmeta)
+    (field "passages" (Json.Decode.list string))
 
-                        newMP =
-                            { thisMP | mp1 = lesson }
 
-                        newModel =
-                            { model | mp = newMP }
-                    in
-                        newModel
+decodeESVparsed: Decoder (List Models.ESVparsed)
+decodeESVparsed = 
+  (Json.Decode.list (Json.Decode.list int))
 
-                "mp2" ->
-                    let
-                        thisMP =
-                            model.mp
+decodeESVmeta: Decoder (List Models.ESVmeta)
+decodeESVmeta =
+  Json.Decode.list (
+    map7 Models.ESVmeta
+      (field "canonical" string)
+      (field "chapter_start" (Json.Decode.list int))
+      (field "chapter_end" (Json.Decode.list int))
+      (field "prev_verse" int)
+      (field "next_verse" int)
+      (field "prev_chapter" (Json.Decode.list int))
+      (field "next_chapter" (Json.Decode.list int))
+  )
 
-                        newMP =
-                            { thisMP | mp2 = lesson }
 
-                        newModel =
-                            { model | mp = newMP }
-                    in
-                        newModel
-
-                "mpp" ->
-                    let
-                        thisMP =
-                            model.mp
-
-                        newMP =
-                            { thisMP | mpp = lesson }
-
-                        newModel =
-                            { model | mp = newMP }
-                    in
-                        newModel
-
-                "ep1" ->
-                    let
-                        thisEP =
-                            model.ep
-
-                        newEP =
-                            { thisEP | ep1 = lesson }
-
-                        newModel =
-                            { model | ep = newEP }
-                    in
-                        newModel
-
-                "ep2" ->
-                    let
-                        thisEP =
-                            model.ep
-
-                        newEP =
-                            { thisEP | ep2 = lesson }
-
-                        newModel =
-                            { model | ep = newEP }
-                    in
-                        newModel
-
-                "epp" ->
-                    let
-                        thisEP =
-                            model.ep
-
-                        newEP =
-                            { thisEP | epp = lesson }
-
-                        newModel =
-                            { model | ep = newEP }
-                    in
-                        newModel
-
-                "ot" ->
-                    let
-                        thisEU =
-                            model.eu
-
-                        newEU =
-                            { thisEU | ot = lesson }
-
-                        newModel =
-                            { model | eu = newEU }
-                    in
-                        newModel
-
-                "ps" ->
-                    let
-                        thisEU =
-                            model.eu
-
-                        newEU =
-                            { thisEU | ps = lesson }
-
-                        newModel =
-                            { model | eu = newEU }
-                    in
-                        newModel
-
-                "nt" ->
-                    let
-                        thisEU =
-                            model.eu
-
-                        newEU =
-                            { thisEU | nt = lesson }
-
-                        newModel =
-                            { model | eu = newEU }
-                    in
-                        newModel
-
-                "gs" ->
-                    let
-                        thisEU =
-                            model.eu
-
-                        newEU =
-                            { thisEU | gs = lesson }
-
-                        newModel =
-                            { model | eu = newEU }
-                    in
-                        newModel
-
-                _ ->
-                    model
-    in
-        newModel
+requestESV: Models.LessonRequest -> Cmd Msg
+requestESV request =
+  let
+    corsGet =
+      { method = "GET"
+      , headers =
+        [ Http.header "Authorization" esvHeader.key
+        ]
+      , url = esvHeader.url ++ request.ref ++ "&include-headings=false"
+      , body = Http.emptyBody
+      , expect = Http.expectString
+      , timeout = Nothing
+      , withCredentials = False
+    }
+  in
+    Http.send (DecodeESVLesson request) (Http.request corsGet)
+        
+toIndexList: Int -> List Models.Lesson -> List Models.LessonRequest
+toIndexList i lessons =
+  let
+    -- will need to change "ESV" to user default pref
+    -- lesson number, text ref, style, text source, text source
+    newList lesson =  Models.newLessonRequest i lesson.read lesson.style "ESV" ""
+  in
+    List.map newList lessons      
 
 
 
@@ -375,78 +267,65 @@ setLesson model section lesson =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ euDiv model
-        , mpDiv model
-        , epDiv model
-        , reflectionDiv model
-        , oneLessonDiv model
-        ]
+  div [ id "calendar-div" ]
+    [ calendarTable model
+    , lesson1Div model.lesson1
+    , psalmDiv model.psalm
+    , lesson2Div model.lesson2
+    , lesson3Div model.lesson3
+    , reflectionDiv model.reflection
+  ] 
+--    div [ id "reading-container" ]
+--        [ euDiv model
+--        , mpDiv model
+--        , epDiv model
+--        , reflectionDiv model
+--        ]
+
+calendarTable : Model -> Html Msg
+calendarTable model =
+    let
+        calendarWeeks week = calendarDays week.days
+    in
+        table [] (List.map calendarWeeks model.month.weeks)
+
+calendarDays : List Models.Day -> Html Msg
+calendarDays days =
+    let
+        thisDay day =
+            td [] [text day.monthDay]
+    in
+        tr [] (List.map thisDay days)
+            
+
+lesson1Div : String -> Html Msg
+lesson1Div vss =
+    div [ id "lesson1" ] [ Markdown.toHtml [] vss ]
 
 
-
--- HELPERS
-
-
-euDiv : Model -> Html Msg
-euDiv model =
-    div [] [ Html.map ModEU (Sunday.view model.eu) ]
+lesson2Div : String -> Html Msg
+lesson2Div vss =
+    div [ id "lesson2" ] [ Markdown.toHtml [] vss ]
 
 
-mpDiv : Model -> Html Msg
-mpDiv model =
-    div []
-        [ Html.map ModMP (MPReading.view model.mp)
-        ]
+lesson3Div : String -> Html Msg
+lesson3Div vss =
+    div [ id "lesson3" ] [ Markdown.toHtml [] vss ]
 
+psalmDiv : String -> Html Msg
+psalmDiv vss =
+    div [ id "psalm" ] [ Markdown.toHtml [] vss ]
 
-epDiv : Model -> Html Msg
-epDiv model =
-    div []
-        [ Html.map ModEP (EPReading.view model.ep)
-        ]
-
-
-reflectionDiv : Model -> Html Msg
+reflectionDiv : Models.Reflection -> Html Msg
 reflectionDiv model =
     let
         author =
-            if String.length model.reflection.author > 0 then
-                "--- " ++ model.reflection.author
+            if String.length model.author > 0 then
+                "--- " ++ model.author
             else
                 ""
     in
         div []
-            [ div [ id "reflection" ] [ Markdown.toHtml [] model.reflection.markdown ]
+            [ div [ id "reflection" ] [ Markdown.toHtml [] model.markdown ]
             , p [ class "author" ] [ text author ]
             ]
-
-
-oneLessonDiv : Model -> Html Msg
-oneLessonDiv model =
-    let
-        putLesson l =
-            p [] [ Markdown.toHtml [] l.body ]
-    in
-        div [] (List.map putLesson model.oneLesson)
-
-
-euReadingStyle : Model -> Attribute msg
-euReadingStyle model =
-    hideable
-        model.eu.show
-        []
-
-
-mpReadingStyle : Model -> Attribute msg
-mpReadingStyle model =
-    hideable
-        model.mp.show
-        []
-
-
-epReadingStyle : Model -> Attribute msg
-epReadingStyle model =
-    hideable
-        model.ep.show
-        []

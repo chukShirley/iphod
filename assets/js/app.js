@@ -13,7 +13,10 @@
 // to also remove its path from "config.paths.watched".
 import "phoenix_html";
 import $ from 'jquery';
-import {LitYear} from "./lityear"
+import {LitYear} from "./lityear";
+import {Web} from "./parseref.js";
+import {rangeslider} from "./rangeslider";
+
 var moment = require('moment')
   , markdown = require('markdown').markdown
   , path = window.location.pathname
@@ -27,7 +30,29 @@ var moment = require('moment')
   , date_today_short = now.format("ddd MMM DD, YYYY")
   , tz = now.format("ZZ")
   , am = now.format("A")
+  , PouchDB = require('pouchdb')
+  , db = new PouchDB('iphod') // to be synced with main couchDB
+  , remoteCouch = 'http://legereme.com:5986/iphod'
   ;
+
+// test for on/off line
+window.addEventListener('load', function() {
+  var status = document.getElementById("status")
+    , log = document.getElementById("log")
+    ;
+  function updateOnlineStatus(event) {
+    var condition = navigator.onLine ? "online" : "offline"
+
+    $("#status").addClass(condition);
+    $("#status").html(condition.toUpperCase());
+
+    elmCalApp.ports.portOnline.send(condition == "online");
+    log.insertAdjacentHTML("beforeend", "Event: " + event.type + "; Status " + condition);
+  }
+
+  window.addEventListener('online', updateOnlineStatus);
+  window.addEventListener('offline', updateOnlineStatus);
+})
 
 //  , isOffice = !!(path == "/" || path.match(/office|midday|^\/mp\/|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|^\/ep\/|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/))
 if (page == "office") { 
@@ -41,14 +66,42 @@ if (page == "office") {
   else { window.location.replace("/ep" + versions)}
 }
 
-var x = new moment();
-console.log("LAST SUNDAY", LitYear.dateLastSunday(x));
+var dailyPsalms = [ undefined // 0th day of month
+  , {mp: ["1", "2", "3", "4", "5"], ep: ["6", "7", "8"]} // 1
+  , {mp: ["9", "10", "11"],         ep: ["12", "13", "14"]} // 2
+  , {mp: ["15", "16", "17"],        ep: ["18"]} // 3
+  , {mp: ["19", "20", "21"],        ep: ["22", "23"]} // 4
+  , {mp: ["24", "25", "26"],        ep: ["27", "28", "29"]} // 5
+  , {mp: ["30", "31"],              ep: ["32", "33", "34"]} // 6
+  , {mp: ["35", "36"],              ep: ["37"]} // 7
+  , {mp: ["38", "39", "40"],        ep: ["41", "42", "43"]} // 8
+  , {mp: ["44", "45", "46"],        ep: ["47", "48", "49"]} // 9
+  , {mp: ["50", "51", "52"],        ep: ["53", "54", "55"]} // 10
+  , {mp: ["56", "57", "58"],        ep: ["59", "60", "61"]} // 11
+  , {mp: ["62", "63", "64"],        ep: ["65", "66", "67"]} // 12
+  , {mp: ["68"],                    ep: ["69", "70"]} // 13
+  , {mp: ["71", "72"],              ep: ["73", "74"]} // 14
+  , {mp: ["75", "76", "77"],        ep: ["78"]} // 15
+  , {mp: ["79", "80", "81"],        ep: ["82", "83", "84", "85"]} // 16
+  , {mp: ["86", "87", "88"],        ep: ["89"]} // 17
+  , {mp: ["90", "91", "92"],        ep: ["93", "94"]} // 18
+  , {mp: ["95", "96", "97"],        ep: ["98", "99", "100", "101"]} // 19
+  , {mp: ["102", "103"],            ep: ["104"]} // 20
+  , {mp: ["105"],                   ep: ["106"]} // 21
+  , {mp: ["107"],                   ep: ["108", "109"]} // 22
+  , {mp: ["110", "111", "112", "113"], ep: ["114", "115"]} // 23
+  , {mp: ["116", "117", "118"],     ep: ["119:1-32"]} // 24
+  , {mp: ["119:33-72"],             ep: ["119:73-104"]} // 25
+  , {mp: ["119:105-144"],           ep: ["119:145-176"]} // 26
+  , {mp: ["120", "121", "122", "123", "124", "125"], ep: ["126", "127", "128", "129", "130", "131"]} // 27
+  , {mp: ["132", "133", "134", "135"], ep: ["136", "137", "138"]} // 28
+  , {mp: ["139", "140"],            ep: ["141", "142", "143"]} // 29
+  , {mp: ["144", "145", "146"],     ep: ["147", "148", "149", "150"]} // 30
+  , {mp: ["120", "121", "122", "123", "124", "125","126", "127"], ep: ["127", "128", "129", "130", "131","132", "133", "134"]} // 31
+]
 
 // PouchDB ..................................
-var PouchDB = require('pouchdb')
-  , localDB = new PouchDB('preferences')
-  , db = new PouchDB('iphod') // to be synced with main couchDB
-  , remoteCouch = 'http://127.0.0.1:5984/iphod'
+var localDB = new PouchDB('preferences')
   , dbOpts = {live: true, retry: true}
   , default_prefs = {
       _id: 'preferences'
@@ -70,7 +123,6 @@ function sync() {
 function syncError() {console.log("SYNC ERROR")};
 
 sync();
-
 
 function get_preferences(do_this_too) {
   localDB.get('preferences').then(function(resp){
@@ -119,7 +171,6 @@ function initElmHeader() {
   get_preferences(function(resp) {
     preferenceList = [resp.ot, resp.ps, resp.nt, resp.gs];
     preferenceObj = resp
-    console.log("PREF OBJ: ", preferenceObj)
     elmHeaderApp.ports.portConfig.send(preferenceObj); 
   })
 }
@@ -127,15 +178,6 @@ function initElmHeader() {
 
 // end of PouchDB......................
 
-// $(".day_options").menu();
-// $(".td-bottom").show();
-
-// console.log("APP.JS CSRF TOKEN: ", $("#csrf_token").val())
-
-// Import local files
-//
-// Local files can be imported directly using relative
-// paths "./socket" or full ones "web/static/js/socket".
 $(".alt_readings-select").click( function() {
   var show_this = "#" + $(this).data("ref");
   $(".this_alt_reading").hide();
@@ -161,6 +203,18 @@ $("input[name='vss_show']").click(function() {
 
 // HELPERS ------------------------
 
+function dailyPsalmsToLessons(n) {
+  var psalms = dailyPsalms[n]
+    , newPs = {mp: [], ep: []}
+    ;
+  for (var i = 0; i < psalms.mp.length; i++) {
+    newPs.mp.push({style: "req", read: "psalm " + psalms.mp[i]})
+  }
+  for (var i = 0; i < psalms.ep.length; i++) {
+    newPs.ep.push({style: "req", read: "psalm " + psalms.ep[i]})
+  }
+  return newPs
+}
 
 // SOCKETS ------------------------
 
@@ -205,6 +259,30 @@ channel.join()
 elmHeaderApp.ports.portCSRFToken.send($("#csrf_token").val())
 
 initElmHeader();
+// window.addEventListener('load', function() {
+$(window).load(function() {
+  var $fontslider = $('[data-rangeslider]');
+  var $output = $('output');
+  
+  console.log("ELEMENT: ", $fontslider);
+  $fontslider.rangeslider({
+        polyfill: false
+  //    , onInit: function() {
+  //        console.log("ON INIT");
+  //        valueOutput(this.$rangeslider[0]);
+  //      }
+      ,  onSlide: function(position, value) {
+        $('output').css('font-size', value + 'em')
+
+        }
+      , onSlideEnd: function(position, value) {
+        $('output').css('font-size', value + 'em')
+        }
+    })
+});
+
+
+
 
 // elmHeaderApp.ports.portConfig.send(init_config_model());
 
@@ -213,7 +291,6 @@ elmHeaderApp.ports.sendEmail.subscribe( function(email) {
 })
 
 elmHeaderApp.ports.saveLogin.subscribe( function(user) {
-  // console.log("APP JS: ", user)
   let ls = window.localStorage
   ls.setItem("user", user.username)
   ls.setItem("token", user.token)
@@ -225,7 +302,6 @@ elmHeaderApp.ports.currentUser.subscribe( function() {
 })
 
 channel.on("current_user", data => {
-  // console.log("CURRENT USER: ", data)
   elmHeaderApp.ports.portUser.send(data)
 })
 
@@ -292,7 +368,6 @@ if (isOffice) {
   })
 
   $(".get-reflection").click( function() {
-    console.log("REFL ID: ", $(this).data('id'))
     $('div.reflection-markdown').toggle();
     if ( $('div.reflection-markdown').text().length == 0) {
       channel.push('get_text', ['Reflection', $(this).data('id')]);
@@ -319,7 +394,7 @@ if ( page == "calendar" || page == "mindex") {
     ;
 
   while( d.isSameOrBefore(endOfCalendar) ) {
-    var thisDay = d.format("dddd MMMM D, YYYY")
+    var thisDay = d.clone()
       , season = LitYear.getEUkey(d)
       , p1 = db.get(season.key).then(resp => {
             resp.show = false;
@@ -336,12 +411,16 @@ if ( page == "calendar" || page == "mindex") {
       ;
     promisesKept.push( Promise.all([p1, p2, thisDay, season]).then(values => {
       var [eu, mpep, date, season] = values
-        , day = { eu: eu
+      var day = { eu: eu
                 , daily: mpep
-                , date: date
+                , dailyPsalms: dailyPsalmsToLessons(date.format("D"))
+                , date: date.format("dddd MMMM D, YYYY")
+                , monthDay: date.format("D")
                 , season: season.season
                 , week: season.week
                 , colors: eu.colors
+                , rld: season.rld
+                , title: season.rld ? eu.title : mpep.title
                 }
         ;
       return day
@@ -354,7 +433,6 @@ if ( page == "calendar" || page == "mindex") {
     for( var i=0, j=7; i < values.length; i+=7, j+=7) {
       month.weeks.push( {days: values.slice(i,j)} );
     }
-    console.log("MONTH: ", month);
     elmCalApp.ports.portMonth.send(month);
   })
 
@@ -630,14 +708,65 @@ if ( page == "calendar" ) {
   }
 
   elmCalApp.ports.requestReading.subscribe(function(request) {
-    let request_list = [request.section, request.version, request.ref]
-    channel.push("get_lesson", request_list)
+    var [service, req_date] = request
+      , thisMoment = moment(req_date, "dddd MMMM D, YYYY")
+      , season = LitYear.toSeason(thisMoment);
+      ;
+    if ( service !== "EU" ) { // it either MP or EP
+      var psalms = dailyPsalms[thisMoment.date()][service.toLowerCase()]
+        , mpepKey = "mpep_" + season.season + season.week + thisMoment.format("dddd") 
+        ;
+      // first get the psalms
+      for (var i=0; i < psalms.length; i++) {
+        var psKey = "bcp" + psalms[i];
+        db.get(psKey).then(resp => {
+          elmCalApp.ports.portAddLesson.send({section: "ps", style: "req", read: resp.formatted});
+        }).catch(err => {
+          console.log("COULD NOT FIND EU KEY: ", err)
+        })
+      }
+      db.get(mpepKey).then( resp => {
+      }).catch( err => {
+        console.log("COULD NOT FIND MPEP KEY: ", err)
+      })
+        
+    } else { // it's eucharist
+      var key = season.season + season.week + season.year
+      db.get(key).then( resp =>{
+      }).catch( err => {
+        console.log("COULD NOT FIND EU KEY: ", err)
+      })
+    }
   })
 
   elmCalApp.ports.requestAltReading.subscribe(function(request) {
     var [section, ver, vss] = request;
     ver = get_version(section)
     channel.push("get_alt_reading", [section, ver, vss])
+  })
+
+  elmCalApp.ports.requestWEB.subscribe(function(request) {
+    console.log("REQUEST WEB: ", request)
+    // var [lesson, style, ref] = request
+    var [startKey, endKey] = Web.refToWEBcodes(request.ref)[0];
+    db.allDocs({
+      include_docs: true,
+      attachments: true,
+      startkey: "web" + startKey,
+      endkey: "web" + endKey
+    }).then(function (result) {
+      var rows = result.rows
+        , newRows = rows.map(function(el) { return el.doc.vss})
+        , vss = newRows.join()
+        ;
+      request.src = "WEB"; // request might have started as request from other source and failed
+      request.text = vss;
+      elmCalApp.ports.portWEB.send(request);
+    }).catch(function (err) {
+      console.log(err);
+    });
+
+
   })
 
   elmCalApp.ports.requestScrollTop.subscribe(function(request) {
@@ -653,7 +782,6 @@ if ( page == "communiontosick" ) {
   let communiontosick_channel = socket.channel("iphod:readings")
   communiontosick_channel.join()
     .receive("ok", resp => {
-      // console.log("Joined Versions successfully", resp);
     })
     .receive("error", resp => { console.log("Unable to join Iphod", resp) })
 
@@ -676,7 +804,6 @@ if ( page == "versions" ) {
   let trans_channel = socket.channel("versions")
   trans_channel.join()
     .receive("ok", resp => {
-      // console.log("Joined Versions successfully", resp);
     })
     .receive("error", resp => { console.log("Unable to join Iphod", resp) })
 
@@ -709,7 +836,6 @@ if ( ["resources", "humor", "inserts"].indexOf(page) >= 0 ) {
   let resc_channel = socket.channel("resources")
   resc_channel.join()
     .receive("ok", resp => {
-      // console.log("Joined Resources successfully");
     })
     .receive("error", resp => { console.log("Unable to join Resources", resp) });
 
@@ -765,7 +891,6 @@ if ( page == "reflections" && (path_parts[1] == "new" || path_parts[2] == "edit"
   });
 
   refl_channel.on("reflection", data => {
-    console.log("REFLECTION: ", data)
     elmReflApp.ports.portReflection.send(data)
   })
 

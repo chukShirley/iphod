@@ -9322,58 +9322,96 @@ var _user$project$Iphod_Helper$hideable = F2(
 
 var _user$project$Iphod_Models$initLeaflet = {reg: '', largePrint: ''};
 var _user$project$Iphod_Models$initBiblesOrg = {url: 'https://bibles.org/v2/passages.js?q[]=', key: 'P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT', foot_notes: true};
-var _user$project$Iphod_Models$initESV = {url: 'www.esvapi.org/v2/rest/passageQuery?', key: '10b28dac7c57fd96', foot_notes: true};
+var _user$project$Iphod_Models$initESVparsed = {
+	ctor: '::',
+	_0: 0,
+	_1: {
+		ctor: '::',
+		_0: 0,
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$Iphod_Models$initESVmeta = {canonical: '', chapter_start: _user$project$Iphod_Models$initESVparsed, chapter_end: _user$project$Iphod_Models$initESVparsed, prev_verse: 0, next_verse: 0, prev_chapter: _user$project$Iphod_Models$initESVparsed, next_chapter: _user$project$Iphod_Models$initESVparsed};
+var _user$project$Iphod_Models$initESVresp = {
+	query: '',
+	canonical: '',
+	parsed: {ctor: '[]'},
+	passage_meta: {ctor: '[]'},
+	passages: {ctor: '[]'}
+};
+var _user$project$Iphod_Models$initESV = {url: 'https://api.esv.org/v3/passage/html/?q=', key: 'Token 7d3151fe3a26566aac67ffce393604ac19ef1962', foot_notes: true};
 var _user$project$Iphod_Models$initReflection = {author: '', markdown: ''};
-var _user$project$Iphod_Models$setSectionUpdate = F3(
-	function (this_section, this_version, thisRef) {
-		return {section: this_section, version: this_version, ref: thisRef};
-	});
-var _user$project$Iphod_Models$initSectionUpdate = {section: '', version: '', ref: ''};
+var _user$project$Iphod_Models$initMonth = {
+	weeks: {ctor: '[]'}
+};
+var _user$project$Iphod_Models$initWeek = {
+	days: {ctor: '[]'}
+};
+var _user$project$Iphod_Models$initDaily = {
+	title: '',
+	mp1: {ctor: '[]'},
+	mp2: {ctor: '[]'},
+	ep1: {ctor: '[]'},
+	ep2: {ctor: '[]'},
+	show: false
+};
+var _user$project$Iphod_Models$sundayInit = {
+	title: '',
+	show: false,
+	colors: {ctor: '[]'},
+	ot: {ctor: '[]'},
+	ps: {ctor: '[]'},
+	nt: {ctor: '[]'},
+	gs: {ctor: '[]'}
+};
+var _user$project$Iphod_Models$initDay = {
+	eu: _user$project$Iphod_Models$sundayInit,
+	daily: _user$project$Iphod_Models$initDaily,
+	dailyPsalms: {ctor: '[]'},
+	date: '',
+	monthDay: 0,
+	season: '',
+	week: '',
+	colors: {ctor: '[]'},
+	rld: false,
+	title: ''
+};
 var _user$project$Iphod_Models$initSundayCollect = {
 	instruction: '',
 	title: '',
 	collects: {ctor: '[]'},
 	show: true
 };
-var _user$project$Iphod_Models$initDaily = {
-	date: '',
-	title: '',
-	collect: _user$project$Iphod_Models$initSundayCollect,
-	mp1: {ctor: '[]'},
-	mp2: {ctor: '[]'},
-	mpp: {ctor: '[]'},
-	ep1: {ctor: '[]'},
-	ep2: {ctor: '[]'},
-	epp: {ctor: '[]'},
-	ot: {ctor: '[]'},
-	ps: {ctor: '[]'},
-	nt: {ctor: '[]'},
-	gs: {ctor: '[]'},
-	show: false,
-	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
-};
 var _user$project$Iphod_Models$initCollect = {
 	collect: '',
 	propers: {ctor: '[]'}
 };
 var _user$project$Iphod_Models$initProper = {title: '', text: ''};
-var _user$project$Iphod_Models$initLesson = {
-	style: '',
-	show: false,
-	show_fn: true,
-	show_vn: true,
-	read: '',
-	body: '',
-	id: '',
-	section: '',
-	version: '',
-	altRead: '',
-	notes: {ctor: '[]'},
-	cmd: ''
+var _user$project$Iphod_Models$initDailyPsalms = {
+	mp: {ctor: '[]'},
+	ep: {ctor: '[]'}
 };
+var _user$project$Iphod_Models$initPsalm = {
+	name: '',
+	title: '',
+	style: '',
+	vss: {ctor: '[]'}
+};
+var _user$project$Iphod_Models$initPsVs = {first: '', second: ''};
+var _user$project$Iphod_Models$setLessonRequestSource = F2(
+	function (src, lesson) {
+		return _elm_lang$core$Native_Utils.update(
+			lesson,
+			{src: src});
+	});
+var _user$project$Iphod_Models$newLessonRequest = F5(
+	function (lesson, ref, style, src, text) {
+		return {lesson: lesson, ref: ref, style: style, src: src, text: text};
+	});
+var _user$project$Iphod_Models$initLessonRequest = {lesson: 0, ref: '', style: '', src: '', text: ''};
+var _user$project$Iphod_Models$initLesson = {style: '', read: ''};
 var _user$project$Iphod_Models$userInit = {username: '', realname: '', email: '', description: '', error_msg: '', token: '', password: '', password_confirmation: ''};
 var _user$project$Iphod_Models$emailInit = {from: '', topic: '', text: ''};
-var _user$project$Iphod_Models$currentReadingsInit = {ps: '', ps_ver: '', reading1: '', reading1_ver: '', reading2: '', reading2_ver: '', reading3: '', reading3_ver: '', reading_date: ''};
 var _user$project$Iphod_Models$configInit = {
 	ot: 'ESV',
 	ps: 'Coverdale',
@@ -9386,61 +9424,6 @@ var _user$project$Iphod_Models$configInit = {
 		_1: {ctor: '[]'}
 	},
 	current: 'ESV'
-};
-var _user$project$Iphod_Models$sundayInit = {
-	ofType: '',
-	date: '',
-	season: '',
-	week: '',
-	title: '',
-	show: false,
-	config: _user$project$Iphod_Models$configInit,
-	colors: {ctor: '[]'},
-	collect: _user$project$Iphod_Models$initSundayCollect,
-	ot: {ctor: '[]'},
-	ps: {ctor: '[]'},
-	nt: {ctor: '[]'},
-	gs: {ctor: '[]'},
-	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
-};
-var _user$project$Iphod_Models$initDay = {
-	name: '',
-	colors: {ctor: '[]'},
-	dayOfMonth: '',
-	date: '',
-	daily: _user$project$Iphod_Models$initDaily,
-	sunday: _user$project$Iphod_Models$sundayInit,
-	today: false
-};
-var _user$project$Iphod_Models$initDailyMP = {
-	colors: {ctor: '[]'},
-	date: '',
-	day: '',
-	season: '',
-	title: '',
-	week: '',
-	config: _user$project$Iphod_Models$configInit,
-	show: false,
-	collect: _user$project$Iphod_Models$initSundayCollect,
-	mp1: {ctor: '[]'},
-	mp2: {ctor: '[]'},
-	mpp: {ctor: '[]'},
-	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
-};
-var _user$project$Iphod_Models$initDailyEP = {
-	colors: {ctor: '[]'},
-	date: '',
-	day: '',
-	season: '',
-	title: '',
-	week: '',
-	config: _user$project$Iphod_Models$configInit,
-	show: false,
-	collect: _user$project$Iphod_Models$initSundayCollect,
-	ep1: {ctor: '[]'},
-	ep2: {ctor: '[]'},
-	epp: {ctor: '[]'},
-	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
 };
 var _user$project$Iphod_Models$initShout = {
 	section: '',
@@ -9469,10 +9452,6 @@ var _user$project$Iphod_Models$Config = F7(
 	function (a, b, c, d, e, f, g) {
 		return {ot: a, ps: b, nt: c, gs: d, fnotes: e, vers: f, current: g};
 	});
-var _user$project$Iphod_Models$CurrentReadings = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {ps: a, ps_ver: b, reading1: c, reading1_ver: d, reading2: e, reading2_ver: f, reading3: g, reading3_ver: h, reading_date: i};
-	});
 var _user$project$Iphod_Models$Email = F3(
 	function (a, b, c) {
 		return {from: a, topic: b, text: c};
@@ -9481,31 +9460,26 @@ var _user$project$Iphod_Models$User = F8(
 	function (a, b, c, d, e, f, g, h) {
 		return {username: a, realname: b, email: c, description: d, error_msg: e, token: f, password: g, password_confirmation: h};
 	});
-var _user$project$Iphod_Models$Lesson = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return {style: a, show: b, show_fn: c, show_vn: d, read: e, body: f, id: g, section: h, version: i, altRead: j, notes: k, cmd: l};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
+var _user$project$Iphod_Models$Lesson = F2(
+	function (a, b) {
+		return {style: a, read: b};
+	});
+var _user$project$Iphod_Models$LessonRequest = F5(
+	function (a, b, c, d, e) {
+		return {lesson: a, ref: b, style: c, src: d, text: e};
+	});
+var _user$project$Iphod_Models$PsVs = F2(
+	function (a, b) {
+		return {first: a, second: b};
+	});
+var _user$project$Iphod_Models$Psalm = F4(
+	function (a, b, c, d) {
+		return {name: a, title: b, style: c, vss: d};
+	});
+var _user$project$Iphod_Models$DailyPsalms = F2(
+	function (a, b) {
+		return {mp: a, ep: b};
+	});
 var _user$project$Iphod_Models$Proper = F2(
 	function (a, b) {
 		return {title: a, text: b};
@@ -9518,11 +9492,15 @@ var _user$project$Iphod_Models$SundayCollect = F4(
 	function (a, b, c, d) {
 		return {instruction: a, title: b, collects: c, show: d};
 	});
-var _user$project$Iphod_Models$SectionUpdate = F3(
-	function (a, b, c) {
-		return {section: a, version: b, ref: c};
+var _user$project$Iphod_Models$Sunday = F7(
+	function (a, b, c, d, e, f, g) {
+		return {title: a, show: b, colors: c, ot: d, ps: e, nt: f, gs: g};
 	});
-var _user$project$Iphod_Models$Sunday = function (a) {
+var _user$project$Iphod_Models$Daily = F6(
+	function (a, b, c, d, e, f) {
+		return {title: a, mp1: b, mp2: c, ep1: d, ep2: e, show: f};
+	});
+var _user$project$Iphod_Models$Day = function (a) {
 	return function (b) {
 		return function (c) {
 			return function (d) {
@@ -9532,15 +9510,7 @@ var _user$project$Iphod_Models$Sunday = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return function (n) {
-														return {ofType: a, date: b, season: c, week: d, title: e, show: f, config: g, colors: h, collect: i, ot: j, ps: k, nt: l, gs: m, sectionUpdate: n};
-													};
-												};
-											};
-										};
+										return {eu: a, daily: b, dailyPsalms: c, date: d, monthDay: e, season: f, week: g, colors: h, rld: i, title: j};
 									};
 								};
 							};
@@ -9551,90 +9521,11 @@ var _user$project$Iphod_Models$Sunday = function (a) {
 		};
 	};
 };
-var _user$project$Iphod_Models$Daily = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return function (n) {
-														return function (o) {
-															return {date: a, title: b, collect: c, mp1: d, mp2: e, mpp: f, ep1: g, ep2: h, epp: i, ot: j, ps: k, nt: l, gs: m, show: n, sectionUpdate: o};
-														};
-													};
-												};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
+var _user$project$Iphod_Models$Week = function (a) {
+	return {days: a};
 };
-var _user$project$Iphod_Models$DailyMP = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, mp1: j, mp2: k, mpp: l, sectionUpdate: m};
-												};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
-var _user$project$Iphod_Models$DailyEP = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, ep1: j, ep2: k, epp: l, sectionUpdate: m};
-												};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
+var _user$project$Iphod_Models$Month = function (a) {
+	return {weeks: a};
 };
 var _user$project$Iphod_Models$Reflection = F2(
 	function (a, b) {
@@ -9644,13 +9535,17 @@ var _user$project$Iphod_Models$ESV = F3(
 	function (a, b, c) {
 		return {url: a, key: b, foot_notes: c};
 	});
+var _user$project$Iphod_Models$ESVresp = F5(
+	function (a, b, c, d, e) {
+		return {query: a, canonical: b, parsed: c, passage_meta: d, passages: e};
+	});
+var _user$project$Iphod_Models$ESVmeta = F7(
+	function (a, b, c, d, e, f, g) {
+		return {canonical: a, chapter_start: b, chapter_end: c, prev_verse: d, next_verse: e, prev_chapter: f, next_chapter: g};
+	});
 var _user$project$Iphod_Models$BiblesOrg = F3(
 	function (a, b, c) {
 		return {url: a, key: b, foot_notes: c};
-	});
-var _user$project$Iphod_Models$Day = F7(
-	function (a, b, c, d, e, f, g) {
-		return {name: a, colors: b, dayOfMonth: c, date: d, daily: e, sunday: f, today: g};
 	});
 var _user$project$Iphod_Models$Leaflet = F2(
 	function (a, b) {
@@ -10408,7 +10303,7 @@ var _user$project$Header$translations = function (model) {
 		_elm_lang$html$Html$a,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$href('versions'),
+			_0: _elm_lang$html$Html_Attributes$href('/versions'),
 			_1: {ctor: '[]'}
 		},
 		{
@@ -11114,7 +11009,8 @@ var _user$project$Header$authUser = F2(
 				withCredentials: true
 			});
 	});
-var _user$project$Header$initModel = {email: _user$project$Iphod_Models$emailInit, config: _user$project$Iphod_Models$configInit, reading: _user$project$Iphod_Models$currentReadingsInit, user: _user$project$Iphod_Models$userInit, csrf_token: ''};
+var _user$project$Header$initModel = {email: _user$project$Iphod_Models$emailInit, config: _user$project$Iphod_Models$configInit, user: _user$project$Iphod_Models$userInit, csrf_token: ''};
+var _user$project$Header$init = {ctor: '_Tuple2', _0: _user$project$Header$initModel, _1: _elm_lang$core$Platform_Cmd$none};
 var _user$project$Header$sendEmail = _elm_lang$core$Native_Platform.outgoingPort(
 	'sendEmail',
 	function (v) {
@@ -11162,11 +11058,6 @@ var _user$project$Header$currentUser = _elm_lang$core$Native_Platform.outgoingPo
 	function (v) {
 		return {username: v.username, realname: v.realname, email: v.email, description: v.description, error_msg: v.error_msg, token: v.token, password: v.password, password_confirmation: v.password_confirmation};
 	});
-var _user$project$Header$init = {
-	ctor: '_Tuple2',
-	_0: _user$project$Header$initModel,
-	_1: _user$project$Header$currentUser(_user$project$Iphod_Models$userInit)
-};
 var _user$project$Header$portConfig = _elm_lang$core$Native_Platform.incomingPort(
 	'portConfig',
 	A2(
@@ -11254,9 +11145,9 @@ var _user$project$Header$portUser = _elm_lang$core$Native_Platform.incomingPort(
 				A2(_elm_lang$core$Json_Decode$field, 'realname', _elm_lang$core$Json_Decode$string));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'username', _elm_lang$core$Json_Decode$string)));
-var _user$project$Header$Model = F5(
-	function (a, b, c, d, e) {
-		return {email: a, config: b, reading: c, user: d, csrf_token: e};
+var _user$project$Header$Model = F4(
+	function (a, b, c, d) {
+		return {email: a, config: b, user: c, csrf_token: d};
 	});
 var _user$project$Header$AuthError = function (a) {
 	return {ctor: 'AuthError', _0: a};
@@ -12062,6 +11953,180 @@ var _user$project$Header$aboutOptions = function (model) {
 			}
 		});
 };
+var _user$project$Header$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('readings'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$input,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('fontsize-slider-input'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$type_('range'),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'min', '0.5'),
+							_1: {
+								ctor: '::',
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'max', '2.5'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'value', '0.8'),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'step', '0.1'),
+										_1: {
+											ctor: '::',
+											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-rangeslider', ''),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$output,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('blork'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$ul,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$id('header-options'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$li,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('option-item'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _user$project$Header$calendar(model),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$li,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('option-item'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _user$project$Header$offices(model),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$li,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('option-item'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _user$project$Header$resources(model),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$li,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('option-item'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _user$project$Header$stations(model),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$li,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('option-item'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _user$project$Header$configModal(model),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$li,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('option-item'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _user$project$Header$translations(model),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$li,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('option-item'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _user$project$Header$aboutOptions(model),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Header$main = _elm_lang$html$Html$program(
+	{init: _user$project$Header$init, update: _user$project$Header$update, view: _user$project$Header$view, subscriptions: _user$project$Header$subscriptions})();
 var _user$project$Header$NoOp = {ctor: 'NoOp'};
 var _user$project$Header$registerUserName = function (user) {
 	return A2(
@@ -12587,278 +12652,6 @@ var _user$project$Header$register = function (user) {
 			}
 		});
 };
-var _user$project$Header$userLogin = function (model) {
-	var these_options = _elm_lang$core$String$isEmpty(model.user.token) ? {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$li,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('pure-menu-item'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _user$project$Header$login(model.user),
-				_1: {ctor: '[]'}
-			}),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$li,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('pure-menu-item'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _user$project$Header$register(model.user),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		}
-	} : {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$li,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('pure-menu-item'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(model.user.username),
-				_1: {ctor: '[]'}
-			}),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$li,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('pure-menu-item'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$a,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$href('/logout'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(_user$project$Header$Logout),
-								_1: {ctor: '[]'}
-							}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Logout'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		}
-	};
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('pure-menu pure-menu-horizontal login'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$ul,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('pure-menu-list'),
-					_1: {ctor: '[]'}
-				},
-				these_options),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Header$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('readings'),
-			_1: {
-				ctor: '::',
-				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-psalms', model.reading.ps),
-				_1: {
-					ctor: '::',
-					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-psalms_ver', model.reading.ps_ver),
-					_1: {
-						ctor: '::',
-						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading1', model.reading.reading1),
-						_1: {
-							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading1_ver', model.reading.reading1_ver),
-							_1: {
-								ctor: '::',
-								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading2', model.reading.reading2),
-								_1: {
-									ctor: '::',
-									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading2_ver', model.reading.reading2_ver),
-									_1: {
-										ctor: '::',
-										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading3', model.reading.reading3),
-										_1: {
-											ctor: '::',
-											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading3_ver', model.reading.reading3_ver),
-											_1: {
-												ctor: '::',
-												_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading_date', model.reading.reading_date),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		},
-		{
-			ctor: '::',
-			_0: _user$project$Header$userLogin(model),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$ul,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$id('header-options'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$li,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('option-item'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _user$project$Header$calendar(model),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$li,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('option-item'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _user$project$Header$offices(model),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$li,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('option-item'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _user$project$Header$resources(model),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$li,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('option-item'),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _user$project$Header$stations(model),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$li,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('option-item'),
-												_1: {ctor: '[]'}
-											},
-											{
-												ctor: '::',
-												_0: _user$project$Header$configModal(model),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$li,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('option-item'),
-													_1: {ctor: '[]'}
-												},
-												{
-													ctor: '::',
-													_0: _user$project$Header$translations(model),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$li,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('option-item'),
-														_1: {ctor: '[]'}
-													},
-													{
-														ctor: '::',
-														_0: _user$project$Header$aboutOptions(model),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							}
-						}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Header$main = _elm_lang$html$Html$program(
-	{init: _user$project$Header$init, update: _user$project$Header$update, view: _user$project$Header$view, subscriptions: _user$project$Header$subscriptions})();
 
 var Elm = {};
 Elm['Header'] = Elm['Header'] || {};

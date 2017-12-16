@@ -42,7 +42,7 @@ main =
 type alias Model =
     { email : Models.Email
     , config : Models.Config
-    , reading : Models.CurrentReadings
+--    , reading : Models.CurrentReadings
     , user : Models.User
     , csrf_token : String
     }
@@ -50,17 +50,15 @@ type alias Model =
 
 initModel : Model
 initModel =
-    { email = Models.emailInit
-    , config = Models.configInit
-    , reading = Models.currentReadingsInit
-    , user = Models.userInit
-    , csrf_token = ""
-    }
+      { email = Models.emailInit
+      , config = Models.configInit
+  --    , reading = Models.currentReadingsInit
+      , user = Models.userInit
+      , csrf_token = ""
+      }
 
-
-init : ( Model, Cmd Msg )
-init =
-    ( initModel, currentUser Models.userInit )
+init : (Model, Cmd Msg)
+init = (initModel, Cmd.none)
 
 
 
@@ -88,12 +86,12 @@ port currentUser : Models.User -> Cmd msg
 
 port portConfig : (Models.Config -> msg) -> Sub msg
 
-
 port portCSRFToken : (String -> msg) -> Sub msg
-
 
 port portUser : (Models.User -> msg) -> Sub msg
 
+-- port percentSlider : (RangeSlider.RangeSlider -> msg) -> Sub msg
+-- 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
@@ -446,17 +444,40 @@ view : Model -> Html Msg
 view model =
     div
         [ id "readings"
-        , attribute "data-psalms" model.reading.ps
-        , attribute "data-psalms_ver" model.reading.ps_ver
-        , attribute "data-reading1" model.reading.reading1
-        , attribute "data-reading1_ver" model.reading.reading1_ver
-        , attribute "data-reading2" model.reading.reading2
-        , attribute "data-reading2_ver" model.reading.reading2_ver
-        , attribute "data-reading3" model.reading.reading3
-        , attribute "data-reading3_ver" model.reading.reading3_ver
-        , attribute "data-reading_date" model.reading.reading_date
+--        , attribute "data-psalms" model.reading.ps
+--        , attribute "data-psalms_ver" model.reading.ps_ver
+--        , attribute "data-reading1" model.reading.reading1
+--        , attribute "data-reading1_ver" model.reading.reading1_ver
+--        , attribute "data-reading2" model.reading.reading2
+--        , attribute "data-reading2_ver" model.reading.reading2_ver
+--        , attribute "data-reading3" model.reading.reading3
+--        , attribute "data-reading3_ver" model.reading.reading3_ver
+--        , attribute "data-reading_date" model.reading.reading_date
         ]
-        [ userLogin model
+        [ input 
+          [ id "fontsize-slider-input"
+          , type_ "range"
+          , attribute "min" "0.5"
+          , attribute "max" "2.5"
+          , attribute "value" "0.8"
+          , attribute "step" "0.1"
+          , attribute "data-rangeslider" ""
+          -- , attribute "data-orientation" "vertical"
+          -- , style [("position", "absolute"), ("width", "1px"), ("height", "1px"), ("overflow", "hidden"), ("opicity", "0")] 
+          ] []
+--        , div [ id "fontsize-slider", class "rangeslider rangeslider--horizontal"]
+--          [ div [class "rangeslider__fill", style [("width", "144.8px")] ] []
+--          , div [class "rangeslider__handle", style [("left", "124.8px")] ] []
+--          ]
+        , output [] [text "blork"]
+--        , div 
+--          [ id "fontsize-slider"
+--          , class "rangeslider rangeslider--vertical" 
+--          ] 
+--          [ div [ class "rangeslider__fill"] [] --, style [("height", "86px")]] []
+--          , div [ class "rangeslider__handle"] [] --, style [("bottom", "66px")]] []
+--          ]
+--        , userLogin model
         , ul [ id "header-options" ]
             [ li [ class "option-item" ] [ calendar model ]
             , li [ class "option-item" ] [ offices model ]
@@ -473,25 +494,25 @@ view model =
 -- HELPERS
 
 
-userLogin : Model -> Html Msg
-userLogin model =
-    let
-        these_options =
-            if model.user.token |> String.isEmpty then
-                [ li [ class "pure-menu-item" ] [ login model.user ]
-                , li [ class "pure-menu-item" ] [ register model.user ]
-                ]
-            else
-                [ li [ class "pure-menu-item" ] [ text model.user.username ]
-                , li [ class "pure-menu-item" ]
-                    [ a [ href "/logout", onClick Logout ]
-                        [ button [] [ text "Logout" ] ]
-                    ]
-                ]
-    in
-        div
-            [ class "pure-menu pure-menu-horizontal login" ]
-            [ ul [ class "pure-menu-list" ] these_options ]
+-- userLogin : Model -> Html Msg
+-- userLogin model =
+--     let
+--         these_options =
+--             if model.user.token |> String.isEmpty then
+--                 [ li [ class "pure-menu-item" ] [ login model.user ]
+--                 , li [ class "pure-menu-item" ] [ register model.user ]
+--                 ]
+--             else
+--                 [ li [ class "pure-menu-item" ] [ text model.user.username ]
+--                 , li [ class "pure-menu-item" ]
+--                     [ a [ href "/logout", onClick Logout ]
+--                         [ button [] [ text "Logout" ] ]
+--                     ]
+--                 ]
+--     in
+--         div
+--             [ class "pure-menu pure-menu-horizontal login" ]
+--             [ ul [ class "pure-menu-list" ] these_options ]
 
 
 calendar : Model -> Html Msg

@@ -9322,58 +9322,96 @@ var _user$project$Iphod_Helper$hideable = F2(
 
 var _user$project$Iphod_Models$initLeaflet = {reg: '', largePrint: ''};
 var _user$project$Iphod_Models$initBiblesOrg = {url: 'https://bibles.org/v2/passages.js?q[]=', key: 'P7jpdltnMhHJYUlx8TZEiwvJHDvSrZ96UCV522kT', foot_notes: true};
-var _user$project$Iphod_Models$initESV = {url: 'www.esvapi.org/v2/rest/passageQuery?', key: '10b28dac7c57fd96', foot_notes: true};
+var _user$project$Iphod_Models$initESVparsed = {
+	ctor: '::',
+	_0: 0,
+	_1: {
+		ctor: '::',
+		_0: 0,
+		_1: {ctor: '[]'}
+	}
+};
+var _user$project$Iphod_Models$initESVmeta = {canonical: '', chapter_start: _user$project$Iphod_Models$initESVparsed, chapter_end: _user$project$Iphod_Models$initESVparsed, prev_verse: 0, next_verse: 0, prev_chapter: _user$project$Iphod_Models$initESVparsed, next_chapter: _user$project$Iphod_Models$initESVparsed};
+var _user$project$Iphod_Models$initESVresp = {
+	query: '',
+	canonical: '',
+	parsed: {ctor: '[]'},
+	passage_meta: {ctor: '[]'},
+	passages: {ctor: '[]'}
+};
+var _user$project$Iphod_Models$initESV = {url: 'https://api.esv.org/v3/passage/html/?q=', key: 'Token 7d3151fe3a26566aac67ffce393604ac19ef1962', foot_notes: true};
 var _user$project$Iphod_Models$initReflection = {author: '', markdown: ''};
-var _user$project$Iphod_Models$setSectionUpdate = F3(
-	function (this_section, this_version, thisRef) {
-		return {section: this_section, version: this_version, ref: thisRef};
-	});
-var _user$project$Iphod_Models$initSectionUpdate = {section: '', version: '', ref: ''};
+var _user$project$Iphod_Models$initMonth = {
+	weeks: {ctor: '[]'}
+};
+var _user$project$Iphod_Models$initWeek = {
+	days: {ctor: '[]'}
+};
+var _user$project$Iphod_Models$initDaily = {
+	title: '',
+	mp1: {ctor: '[]'},
+	mp2: {ctor: '[]'},
+	ep1: {ctor: '[]'},
+	ep2: {ctor: '[]'},
+	show: false
+};
+var _user$project$Iphod_Models$sundayInit = {
+	title: '',
+	show: false,
+	colors: {ctor: '[]'},
+	ot: {ctor: '[]'},
+	ps: {ctor: '[]'},
+	nt: {ctor: '[]'},
+	gs: {ctor: '[]'}
+};
+var _user$project$Iphod_Models$initDay = {
+	eu: _user$project$Iphod_Models$sundayInit,
+	daily: _user$project$Iphod_Models$initDaily,
+	dailyPsalms: {ctor: '[]'},
+	date: '',
+	monthDay: 0,
+	season: '',
+	week: '',
+	colors: {ctor: '[]'},
+	rld: false,
+	title: ''
+};
 var _user$project$Iphod_Models$initSundayCollect = {
 	instruction: '',
 	title: '',
 	collects: {ctor: '[]'},
 	show: true
 };
-var _user$project$Iphod_Models$initDaily = {
-	date: '',
-	title: '',
-	collect: _user$project$Iphod_Models$initSundayCollect,
-	mp1: {ctor: '[]'},
-	mp2: {ctor: '[]'},
-	mpp: {ctor: '[]'},
-	ep1: {ctor: '[]'},
-	ep2: {ctor: '[]'},
-	epp: {ctor: '[]'},
-	ot: {ctor: '[]'},
-	ps: {ctor: '[]'},
-	nt: {ctor: '[]'},
-	gs: {ctor: '[]'},
-	show: false,
-	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
-};
 var _user$project$Iphod_Models$initCollect = {
 	collect: '',
 	propers: {ctor: '[]'}
 };
 var _user$project$Iphod_Models$initProper = {title: '', text: ''};
-var _user$project$Iphod_Models$initLesson = {
-	style: '',
-	show: false,
-	show_fn: true,
-	show_vn: true,
-	read: '',
-	body: '',
-	id: '',
-	section: '',
-	version: '',
-	altRead: '',
-	notes: {ctor: '[]'},
-	cmd: ''
+var _user$project$Iphod_Models$initDailyPsalms = {
+	mp: {ctor: '[]'},
+	ep: {ctor: '[]'}
 };
+var _user$project$Iphod_Models$initPsalm = {
+	name: '',
+	title: '',
+	style: '',
+	vss: {ctor: '[]'}
+};
+var _user$project$Iphod_Models$initPsVs = {first: '', second: ''};
+var _user$project$Iphod_Models$setLessonRequestSource = F2(
+	function (src, lesson) {
+		return _elm_lang$core$Native_Utils.update(
+			lesson,
+			{src: src});
+	});
+var _user$project$Iphod_Models$newLessonRequest = F5(
+	function (lesson, ref, style, src, text) {
+		return {lesson: lesson, ref: ref, style: style, src: src, text: text};
+	});
+var _user$project$Iphod_Models$initLessonRequest = {lesson: 0, ref: '', style: '', src: '', text: ''};
+var _user$project$Iphod_Models$initLesson = {style: '', read: ''};
 var _user$project$Iphod_Models$userInit = {username: '', realname: '', email: '', description: '', error_msg: '', token: '', password: '', password_confirmation: ''};
 var _user$project$Iphod_Models$emailInit = {from: '', topic: '', text: ''};
-var _user$project$Iphod_Models$currentReadingsInit = {ps: '', ps_ver: '', reading1: '', reading1_ver: '', reading2: '', reading2_ver: '', reading3: '', reading3_ver: '', reading_date: ''};
 var _user$project$Iphod_Models$configInit = {
 	ot: 'ESV',
 	ps: 'Coverdale',
@@ -9386,61 +9424,6 @@ var _user$project$Iphod_Models$configInit = {
 		_1: {ctor: '[]'}
 	},
 	current: 'ESV'
-};
-var _user$project$Iphod_Models$sundayInit = {
-	ofType: '',
-	date: '',
-	season: '',
-	week: '',
-	title: '',
-	show: false,
-	config: _user$project$Iphod_Models$configInit,
-	colors: {ctor: '[]'},
-	collect: _user$project$Iphod_Models$initSundayCollect,
-	ot: {ctor: '[]'},
-	ps: {ctor: '[]'},
-	nt: {ctor: '[]'},
-	gs: {ctor: '[]'},
-	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
-};
-var _user$project$Iphod_Models$initDay = {
-	name: '',
-	colors: {ctor: '[]'},
-	dayOfMonth: '',
-	date: '',
-	daily: _user$project$Iphod_Models$initDaily,
-	sunday: _user$project$Iphod_Models$sundayInit,
-	today: false
-};
-var _user$project$Iphod_Models$initDailyMP = {
-	colors: {ctor: '[]'},
-	date: '',
-	day: '',
-	season: '',
-	title: '',
-	week: '',
-	config: _user$project$Iphod_Models$configInit,
-	show: false,
-	collect: _user$project$Iphod_Models$initSundayCollect,
-	mp1: {ctor: '[]'},
-	mp2: {ctor: '[]'},
-	mpp: {ctor: '[]'},
-	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
-};
-var _user$project$Iphod_Models$initDailyEP = {
-	colors: {ctor: '[]'},
-	date: '',
-	day: '',
-	season: '',
-	title: '',
-	week: '',
-	config: _user$project$Iphod_Models$configInit,
-	show: false,
-	collect: _user$project$Iphod_Models$initSundayCollect,
-	ep1: {ctor: '[]'},
-	ep2: {ctor: '[]'},
-	epp: {ctor: '[]'},
-	sectionUpdate: _user$project$Iphod_Models$initSectionUpdate
 };
 var _user$project$Iphod_Models$initShout = {
 	section: '',
@@ -9469,10 +9452,6 @@ var _user$project$Iphod_Models$Config = F7(
 	function (a, b, c, d, e, f, g) {
 		return {ot: a, ps: b, nt: c, gs: d, fnotes: e, vers: f, current: g};
 	});
-var _user$project$Iphod_Models$CurrentReadings = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {ps: a, ps_ver: b, reading1: c, reading1_ver: d, reading2: e, reading2_ver: f, reading3: g, reading3_ver: h, reading_date: i};
-	});
 var _user$project$Iphod_Models$Email = F3(
 	function (a, b, c) {
 		return {from: a, topic: b, text: c};
@@ -9481,31 +9460,26 @@ var _user$project$Iphod_Models$User = F8(
 	function (a, b, c, d, e, f, g, h) {
 		return {username: a, realname: b, email: c, description: d, error_msg: e, token: f, password: g, password_confirmation: h};
 	});
-var _user$project$Iphod_Models$Lesson = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return {style: a, show: b, show_fn: c, show_vn: d, read: e, body: f, id: g, section: h, version: i, altRead: j, notes: k, cmd: l};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
+var _user$project$Iphod_Models$Lesson = F2(
+	function (a, b) {
+		return {style: a, read: b};
+	});
+var _user$project$Iphod_Models$LessonRequest = F5(
+	function (a, b, c, d, e) {
+		return {lesson: a, ref: b, style: c, src: d, text: e};
+	});
+var _user$project$Iphod_Models$PsVs = F2(
+	function (a, b) {
+		return {first: a, second: b};
+	});
+var _user$project$Iphod_Models$Psalm = F4(
+	function (a, b, c, d) {
+		return {name: a, title: b, style: c, vss: d};
+	});
+var _user$project$Iphod_Models$DailyPsalms = F2(
+	function (a, b) {
+		return {mp: a, ep: b};
+	});
 var _user$project$Iphod_Models$Proper = F2(
 	function (a, b) {
 		return {title: a, text: b};
@@ -9518,11 +9492,15 @@ var _user$project$Iphod_Models$SundayCollect = F4(
 	function (a, b, c, d) {
 		return {instruction: a, title: b, collects: c, show: d};
 	});
-var _user$project$Iphod_Models$SectionUpdate = F3(
-	function (a, b, c) {
-		return {section: a, version: b, ref: c};
+var _user$project$Iphod_Models$Sunday = F7(
+	function (a, b, c, d, e, f, g) {
+		return {title: a, show: b, colors: c, ot: d, ps: e, nt: f, gs: g};
 	});
-var _user$project$Iphod_Models$Sunday = function (a) {
+var _user$project$Iphod_Models$Daily = F6(
+	function (a, b, c, d, e, f) {
+		return {title: a, mp1: b, mp2: c, ep1: d, ep2: e, show: f};
+	});
+var _user$project$Iphod_Models$Day = function (a) {
 	return function (b) {
 		return function (c) {
 			return function (d) {
@@ -9532,15 +9510,7 @@ var _user$project$Iphod_Models$Sunday = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return function (n) {
-														return {ofType: a, date: b, season: c, week: d, title: e, show: f, config: g, colors: h, collect: i, ot: j, ps: k, nt: l, gs: m, sectionUpdate: n};
-													};
-												};
-											};
-										};
+										return {eu: a, daily: b, dailyPsalms: c, date: d, monthDay: e, season: f, week: g, colors: h, rld: i, title: j};
 									};
 								};
 							};
@@ -9551,90 +9521,11 @@ var _user$project$Iphod_Models$Sunday = function (a) {
 		};
 	};
 };
-var _user$project$Iphod_Models$Daily = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return function (n) {
-														return function (o) {
-															return {date: a, title: b, collect: c, mp1: d, mp2: e, mpp: f, ep1: g, ep2: h, epp: i, ot: j, ps: k, nt: l, gs: m, show: n, sectionUpdate: o};
-														};
-													};
-												};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
+var _user$project$Iphod_Models$Week = function (a) {
+	return {days: a};
 };
-var _user$project$Iphod_Models$DailyMP = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, mp1: j, mp2: k, mpp: l, sectionUpdate: m};
-												};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
-};
-var _user$project$Iphod_Models$DailyEP = function (a) {
-	return function (b) {
-		return function (c) {
-			return function (d) {
-				return function (e) {
-					return function (f) {
-						return function (g) {
-							return function (h) {
-								return function (i) {
-									return function (j) {
-										return function (k) {
-											return function (l) {
-												return function (m) {
-													return {colors: a, date: b, day: c, season: d, title: e, week: f, config: g, show: h, collect: i, ep1: j, ep2: k, epp: l, sectionUpdate: m};
-												};
-											};
-										};
-									};
-								};
-							};
-						};
-					};
-				};
-			};
-		};
-	};
+var _user$project$Iphod_Models$Month = function (a) {
+	return {weeks: a};
 };
 var _user$project$Iphod_Models$Reflection = F2(
 	function (a, b) {
@@ -9644,3742 +9535,27 @@ var _user$project$Iphod_Models$ESV = F3(
 	function (a, b, c) {
 		return {url: a, key: b, foot_notes: c};
 	});
+var _user$project$Iphod_Models$ESVresp = F5(
+	function (a, b, c, d, e) {
+		return {query: a, canonical: b, parsed: c, passage_meta: d, passages: e};
+	});
+var _user$project$Iphod_Models$ESVmeta = F7(
+	function (a, b, c, d, e, f, g) {
+		return {canonical: a, chapter_start: b, chapter_end: c, prev_verse: d, next_verse: e, prev_chapter: f, next_chapter: g};
+	});
 var _user$project$Iphod_Models$BiblesOrg = F3(
 	function (a, b, c) {
 		return {url: a, key: b, foot_notes: c};
-	});
-var _user$project$Iphod_Models$Day = F7(
-	function (a, b, c, d, e, f, g) {
-		return {name: a, colors: b, dayOfMonth: c, date: d, daily: e, sunday: f, today: g};
 	});
 var _user$project$Iphod_Models$Leaflet = F2(
 	function (a, b) {
 		return {reg: a, largePrint: b};
 	});
 
-var _user$project$Iphod_Sunday$collectStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'font-size', _1: '1em'},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'background-color', _1: 'white'},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'margin', _1: '0em'},
-					_1: {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'padding', _1: '0em'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'list-style-type', _1: 'none'},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}
-			}
-		});
-};
-var _user$project$Iphod_Sunday$textStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'font-size', _1: '1em'},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'background-color', _1: 'white'},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'margin', _1: '0em'},
-					_1: {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'padding', _1: '0em'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'list-style-type', _1: 'none'},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}
-			}
-		});
-};
-var _user$project$Iphod_Sunday$titleStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'font-size', _1: '0.9em'},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'color', _1: 'blue'},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'height', _1: '3em'},
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-};
-var _user$project$Iphod_Sunday$bodyStyle = function (lesson) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		lesson.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'background-color', _1: 'white'},
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Iphod_Sunday$tableStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'width', _1: '100%'},
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Iphod_Sunday$selections = F2(
-	function (model, lesson) {
-		var this_ver = function () {
-			var _p0 = lesson.section;
-			switch (_p0) {
-				case 'ot':
-					return model.config.ot;
-				case 'ps':
-					return model.config.ps;
-				case 'nt':
-					return model.config.nt;
-				case 'gs':
-					return model.config.nt;
-				default:
-					return model.config.current;
-			}
-		}();
-		return {ctor: '::', _0: this_ver, _1: model.config.vers};
-	});
-var _user$project$Iphod_Sunday$hoverable = function (attrs) {
-	return attrs;
-};
-var _user$project$Iphod_Sunday$this_style = function (l) {
-	var _p1 = l.style;
-	switch (_p1) {
-		case 'req':
-			return _elm_lang$html$Html_Attributes$class('req_style');
-		case 'opt':
-			return _elm_lang$html$Html_Attributes$class('opt_style');
-		case 'alt':
-			return _elm_lang$html$Html_Attributes$class('alt_style');
-		case 'alt-req':
-			return _elm_lang$html$Html_Attributes$class('alt_style');
-		case 'alt-opt':
-			return _elm_lang$html$Html_Attributes$class('altOpt_style');
-		default:
-			return _elm_lang$html$Html_Attributes$class('bogis_style');
-	}
-};
-var _user$project$Iphod_Sunday$thisProper = function (proper) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$p,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('proper_title'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(
-						A2(_elm_lang$core$Basics_ops['++'], 'Proper: ', proper.title)),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$p,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('proper_text'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(proper.text),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Iphod_Sunday$thisCollect = function (sundayCollect) {
-	var this_collect = function (c) {
-		return A2(
-			_elm_lang$html$Html$p,
-			{ctor: '[]'},
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(c.collect),
-					_1: {ctor: '[]'}
-				},
-				A2(_elm_lang$core$List$map, _user$project$Iphod_Sunday$thisProper, c.propers)));
-	};
-	return {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$p,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('collect_instruction'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(sundayCollect.instruction),
-				_1: {ctor: '[]'}
-			}),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$p,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('collect_title'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(sundayCollect.title),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('collect_text'),
-						_1: {ctor: '[]'}
-					},
-					A2(_elm_lang$core$List$map, this_collect, sundayCollect.collects)),
-				_1: {ctor: '[]'}
-			}
-		}
-	};
-};
-var _user$project$Iphod_Sunday$updateModel = F3(
-	function (model, lesson, newSection) {
-		var _p2 = lesson.section;
-		switch (_p2) {
-			case 'ot':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{ot: newSection});
-			case 'ps':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{ps: newSection});
-			case 'nt':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{nt: newSection});
-			default:
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{gs: newSection});
-		}
-	});
-var _user$project$Iphod_Sunday$thisSection = F2(
-	function (model, lesson) {
-		var _p3 = lesson.section;
-		switch (_p3) {
-			case 'ot':
-				return model.ot;
-			case 'ps':
-				return model.ps;
-			case 'nt':
-				return model.nt;
-			default:
-				return model.gs;
-		}
-	});
-var _user$project$Iphod_Sunday$changeText = F3(
-	function (model, ver, lessons) {
-		var changeText = function (lesson) {
-			return _elm_lang$core$Native_Utils.update(
-				lesson,
-				{
-					version: ver,
-					cmd: A2(
-						_elm_lang$core$Basics_ops['++'],
-						'new',
-						_elm_lang$core$String$toUpper(lesson.section))
-				});
-		};
-		return A2(_elm_lang$core$List$map, changeText, lessons);
-	});
-var _user$project$Iphod_Sunday$getRef = function (lessons) {
-	var justRefs = function (l) {
-		return l.read;
-	};
-	return A2(
-		_elm_lang$core$String$join,
-		',',
-		A2(_elm_lang$core$List$map, justRefs, lessons));
-};
-var _user$project$Iphod_Sunday$update = F2(
-	function (msg, model) {
-		var _p4 = msg;
-		switch (_p4.ctor) {
-			case 'NoOp':
-				return model;
-			case 'ToggleModelShow':
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{show: !model.show});
-				return newModel;
-			case 'SetReading':
-				return _p4._0;
-			case 'ChangeText':
-				var _p9 = _p4._1;
-				var _p8 = _p4._0;
-				var thisRef = function () {
-					var _p5 = _p8;
-					switch (_p5) {
-						case 'ot':
-							return _user$project$Iphod_Sunday$getRef(model.ot);
-						case 'ps':
-							return _user$project$Iphod_Sunday$getRef(model.ps);
-						case 'nt':
-							return _user$project$Iphod_Sunday$getRef(model.nt);
-						case 'gs':
-							return _user$project$Iphod_Sunday$getRef(model.gs);
-						default:
-							return '';
-					}
-				}();
-				var thisUpdate = A3(_user$project$Iphod_Models$setSectionUpdate, _p8, _p9, thisRef);
-				var thisConfig = model.config;
-				var newConfig = function () {
-					var _p6 = _p8;
-					switch (_p6) {
-						case 'ot':
-							return _elm_lang$core$Native_Utils.update(
-								thisConfig,
-								{ot: _p9});
-						case 'ps':
-							return _elm_lang$core$Native_Utils.update(
-								thisConfig,
-								{ps: _p9});
-						case 'nt':
-							return _elm_lang$core$Native_Utils.update(
-								thisConfig,
-								{nt: _p9});
-						case 'gs':
-							return _elm_lang$core$Native_Utils.update(
-								thisConfig,
-								{gs: _p9});
-						default:
-							return thisConfig;
-					}
-				}();
-				var newModel = function () {
-					var _p7 = _p8;
-					switch (_p7) {
-						case 'ot':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									ot: A3(_user$project$Iphod_Sunday$changeText, model, _p9, model.ot),
-									sectionUpdate: thisUpdate,
-									config: newConfig
-								});
-						case 'ps':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									ps: A3(_user$project$Iphod_Sunday$changeText, model, _p9, model.ps),
-									sectionUpdate: thisUpdate,
-									config: newConfig
-								});
-						case 'nt':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									nt: A3(_user$project$Iphod_Sunday$changeText, model, _p9, model.nt),
-									sectionUpdate: thisUpdate,
-									config: newConfig
-								});
-						default:
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									gs: A3(_user$project$Iphod_Sunday$changeText, model, _p9, model.gs),
-									sectionUpdate: thisUpdate,
-									config: newConfig
-								});
-					}
-				}();
-				return newModel;
-			case 'UpdateAltReading':
-				var _p10 = _p4._0;
-				var update_altReading = function (this_lesson) {
-					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p10.id) ? _elm_lang$core$Native_Utils.update(
-						this_lesson,
-						{altRead: _p4._1}) : this_lesson;
-				};
-				var this_section = A2(_user$project$Iphod_Sunday$thisSection, model, _p10);
-				var newSection = A2(_elm_lang$core$List$map, update_altReading, this_section);
-				var newModel = A3(_user$project$Iphod_Sunday$updateModel, model, _p10, newSection);
-				return newModel;
-			case 'RequestAltReading':
-				var _p12 = _p4._0;
-				var newLesson = {
-					ctor: '::',
-					_0: _elm_lang$core$Native_Utils.update(
-						_p12,
-						{
-							cmd: A2(
-								_elm_lang$core$Basics_ops['++'],
-								'alt',
-								_elm_lang$core$String$toUpper(_p12.section))
-						}),
-					_1: {ctor: '[]'}
-				};
-				var thisUpdate = A3(_user$project$Iphod_Models$setSectionUpdate, _p12.section, _p12.version, _p12.altRead);
-				var newModel = function () {
-					var _p11 = _p12.section;
-					switch (_p11) {
-						case 'ot':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{ot: newLesson, sectionUpdate: thisUpdate});
-						case 'ps':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{ps: newLesson, sectionUpdate: thisUpdate});
-						case 'nt':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{nt: newLesson, sectionUpdate: thisUpdate});
-						default:
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{gs: newLesson, sectionUpdate: thisUpdate});
-					}
-				}();
-				return newModel;
-			case 'ToggleShow':
-				var _p13 = _p4._0;
-				var update_text = function (this_lesson) {
-					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p13.id) ? _elm_lang$core$Native_Utils.update(
-						this_lesson,
-						{show: !this_lesson.show}) : this_lesson;
-				};
-				var this_section = A2(_user$project$Iphod_Sunday$thisSection, model, _p13);
-				var newSection = A2(_elm_lang$core$List$map, update_text, this_section);
-				var newModel = A3(_user$project$Iphod_Sunday$updateModel, model, _p13, newSection);
-				return newModel;
-			default:
-				var collect = model.collect;
-				var newCollect = _elm_lang$core$Native_Utils.update(
-					collect,
-					{show: !collect.show});
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{collect: newCollect});
-				return newModel;
-		}
-	});
-var _user$project$Iphod_Sunday$init = _user$project$Iphod_Models$sundayInit;
-var _user$project$Iphod_Sunday$GS = {ctor: 'GS'};
-var _user$project$Iphod_Sunday$NT = {ctor: 'NT'};
-var _user$project$Iphod_Sunday$PS = {ctor: 'PS'};
-var _user$project$Iphod_Sunday$OT = {ctor: 'OT'};
-var _user$project$Iphod_Sunday$ToggleCollect = {ctor: 'ToggleCollect'};
-var _user$project$Iphod_Sunday$ToggleModelShow = {ctor: 'ToggleModelShow'};
-var _user$project$Iphod_Sunday$ToggleShow = function (a) {
-	return {ctor: 'ToggleShow', _0: a};
-};
-var _user$project$Iphod_Sunday$RequestAltReading = function (a) {
-	return {ctor: 'RequestAltReading', _0: a};
-};
-var _user$project$Iphod_Sunday$ChangeText = F2(
-	function (a, b) {
-		return {ctor: 'ChangeText', _0: a, _1: b};
-	});
-var _user$project$Iphod_Sunday$thisReading = F2(
-	function (model, section) {
-		var ver = function () {
-			var _p14 = section;
-			switch (_p14.ctor) {
-				case 'OT':
-					return model.config.ot;
-				case 'PS':
-					return model.config.ps;
-				case 'NT':
-					return model.config.nt;
-				default:
-					return model.config.gs;
-			}
-		}();
-		var this_lesson = function (l) {
-			return _elm_lang$core$Native_Utils.eq(
-				_elm_lang$core$String$length(l.body),
-				0) ? A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_Sunday$hoverable(
-					{
-						ctor: '::',
-						_0: _user$project$Iphod_Sunday$this_style(l),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(
-								A2(_user$project$Iphod_Sunday$ChangeText, l.section, ver)),
-							_1: {ctor: '[]'}
-						}
-					}),
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(l.read),
-					_1: {ctor: '[]'}
-				}) : A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_Sunday$hoverable(
-					{
-						ctor: '::',
-						_0: _user$project$Iphod_Sunday$this_style(l),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(
-								_user$project$Iphod_Sunday$ToggleShow(l)),
-							_1: {ctor: '[]'}
-						}
-					}),
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(l.read),
-					_1: {ctor: '[]'}
-				});
-		};
-		var lessons = function () {
-			var _p15 = section;
-			switch (_p15.ctor) {
-				case 'OT':
-					return model.ot;
-				case 'PS':
-					return model.ps;
-				case 'NT':
-					return model.nt;
-				default:
-					return model.gs;
-			}
-		}();
-		return A2(_elm_lang$core$List$map, this_lesson, lessons);
-	});
-var _user$project$Iphod_Sunday$versionSelect = F2(
-	function (model, lesson) {
-		var thisVersion = function (ver) {
-			return A2(
-				_elm_lang$html$Html$option,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$value(ver),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$selected(
-							_elm_lang$core$Native_Utils.eq(ver, lesson.version)),
-						_1: {ctor: '[]'}
-					}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(ver),
-					_1: {ctor: '[]'}
-				});
-		};
-		return A2(
-			_elm_lang$html$Html$select,
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html_Events$on,
-					'change',
-					A2(
-						_elm_lang$core$Json_Decode$map,
-						_user$project$Iphod_Sunday$ChangeText(lesson.section),
-						_elm_lang$html$Html_Events$targetValue)),
-				_1: {ctor: '[]'}
-			},
-			A2(
-				_elm_lang$core$List$map,
-				thisVersion,
-				A2(_user$project$Iphod_Sunday$selections, model, lesson)));
-	});
-var _user$project$Iphod_Sunday$UpdateAltReading = F2(
-	function (a, b) {
-		return {ctor: 'UpdateAltReading', _0: a, _1: b};
-	});
-var _user$project$Iphod_Sunday$SetReading = function (a) {
-	return {ctor: 'SetReading', _0: a};
-};
-var _user$project$Iphod_Sunday$NoOp = {ctor: 'NoOp'};
-var _user$project$Iphod_Sunday$onEnter = function (msg) {
-	var tagger = function (code) {
-		return _elm_lang$core$Native_Utils.eq(code, 13) ? msg : _user$project$Iphod_Sunday$NoOp;
-	};
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'keydown',
-		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$keyCode));
-};
-var _user$project$Iphod_Sunday$altReading = F2(
-	function (model, lesson) {
-		return A2(
-			_elm_lang$html$Html$input,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$placeholder('Alt Reading'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$autofocus(true),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$value(lesson.altRead),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$name('altReading'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onInput(
-									_user$project$Iphod_Sunday$UpdateAltReading(lesson)),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Iphod_Sunday$onEnter(
-										_user$project$Iphod_Sunday$RequestAltReading(lesson)),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				}
-			},
-			{ctor: '[]'});
-	});
-var _user$project$Iphod_Sunday$thisText = F2(
-	function (model, lessons) {
-		var this_text = function (l) {
-			var getTranslation = function (s) {
-				return _elm_lang$html$Html_Events$onClick(
-					A2(_user$project$Iphod_Sunday$ChangeText, l.section, s));
-			};
-			return _elm_lang$core$Native_Utils.eq(l.section, 'ps') ? A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id(l.id),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Iphod_Sunday$bodyStyle(l),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('esv_text'),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$span,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'position', _1: 'relative'},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'top', _1: '1em'},
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('translationButton'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(
-											_user$project$Iphod_Sunday$ToggleShow(l)),
-										_1: {ctor: '[]'}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Hide'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('translationButton'),
-										_1: {
-											ctor: '::',
-											_0: getTranslation('Coverdale'),
-											_1: {ctor: '[]'}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Coverdale'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$button,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('translationButton'),
-											_1: {
-												ctor: '::',
-												_0: getTranslation('BCP'),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('BCP'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(_user$project$Iphod_Sunday$versionSelect, model, l),
-										_1: {ctor: '[]'}
-									}
-								}
-							}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_evancz$elm_markdown$Markdown$toHtml,
-							{ctor: '[]'},
-							l.body),
-						_1: {ctor: '[]'}
-					}
-				}) : A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id(l.id),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Iphod_Sunday$bodyStyle(l),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('esv_text'),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$span,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'position', _1: 'relative'},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'top', _1: '1em'},
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('translationButton'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(
-											_user$project$Iphod_Sunday$ToggleShow(l)),
-										_1: {ctor: '[]'}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Hide'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(_user$project$Iphod_Sunday$versionSelect, model, l),
-								_1: {
-									ctor: '::',
-									_0: A2(_user$project$Iphod_Sunday$altReading, model, l),
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_evancz$elm_markdown$Markdown$toHtml,
-							{ctor: '[]'},
-							l.body),
-						_1: {ctor: '[]'}
-					}
-				});
-		};
-		return A2(_elm_lang$core$List$map, this_text, lessons);
-	});
-var _user$project$Iphod_Sunday$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$table,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('readings_table'),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Iphod_Sunday$tableStyle(model),
-						_1: {ctor: '[]'}
-					}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$caption,
-						{
-							ctor: '::',
-							_0: _user$project$Iphod_Sunday$titleStyle(model),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$span,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_user$project$Iphod_Sunday$ToggleModelShow),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(model.title),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$p,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$button,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('button collect-button'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Events$onClick(_user$project$Iphod_Sunday$ToggleCollect),
-													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Collect'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$tr,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('rowStyle'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$th,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('1st Lesson'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$th,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Psalm'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$th,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('2nd Lesson'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$th,
-												{ctor: '[]'},
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html$text('Gospel'),
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$tr,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('rowStyle'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$td,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('tdStyle'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$style(
-													{
-														ctor: '::',
-														_0: {ctor: '_Tuple2', _0: 'width', _1: '20%'},
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$ul,
-												{
-													ctor: '::',
-													_0: _user$project$Iphod_Sunday$textStyle(model),
-													_1: {ctor: '[]'}
-												},
-												A2(_user$project$Iphod_Sunday$thisReading, model, _user$project$Iphod_Sunday$OT)),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$td,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('tdStyle'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$style(
-														{
-															ctor: '::',
-															_0: {ctor: '_Tuple2', _0: 'width', _1: '20%'},
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$ul,
-													{
-														ctor: '::',
-														_0: _user$project$Iphod_Sunday$textStyle(model),
-														_1: {ctor: '[]'}
-													},
-													A2(_user$project$Iphod_Sunday$thisReading, model, _user$project$Iphod_Sunday$PS)),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$td,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('tdStyle'),
-													_1: {
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$style(
-															{
-																ctor: '::',
-																_0: {ctor: '_Tuple2', _0: 'width', _1: '20%'},
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												},
-												{
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html$ul,
-														{
-															ctor: '::',
-															_0: _user$project$Iphod_Sunday$textStyle(model),
-															_1: {ctor: '[]'}
-														},
-														A2(_user$project$Iphod_Sunday$thisReading, model, _user$project$Iphod_Sunday$NT)),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$td,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('tdStyle'),
-														_1: {
-															ctor: '::',
-															_0: _elm_lang$html$Html_Attributes$style(
-																{
-																	ctor: '::',
-																	_0: {ctor: '_Tuple2', _0: 'width', _1: '20%'},
-																	_1: {ctor: '[]'}
-																}),
-															_1: {ctor: '[]'}
-														}
-													},
-													{
-														ctor: '::',
-														_0: A2(
-															_elm_lang$html$Html$ul,
-															{
-																ctor: '::',
-																_0: _user$project$Iphod_Sunday$textStyle(model),
-																_1: {ctor: '[]'}
-															},
-															A2(_user$project$Iphod_Sunday$thisReading, model, _user$project$Iphod_Sunday$GS)),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					A2(_user$project$Iphod_Sunday$thisText, model, model.ot)),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{ctor: '[]'},
-						A2(_user$project$Iphod_Sunday$thisText, model, model.ps)),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							A2(_user$project$Iphod_Sunday$thisText, model, model.nt)),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{ctor: '[]'},
-								A2(_user$project$Iphod_Sunday$thisText, model, model.gs)),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$div,
-									{
-										ctor: '::',
-										_0: _user$project$Iphod_Sunday$collectStyle(model.collect),
-										_1: {ctor: '[]'}
-									},
-									_user$project$Iphod_Sunday$thisCollect(model.collect)),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}
-			}
-		});
-};
-
-var _user$project$Iphod_Config$update = F2(
-	function (msg, model) {
-		var _p0 = msg;
-		switch (_p0.ctor) {
-			case 'NoOp':
-				return model;
-			case 'Checked':
-				var _p2 = _p0._1;
-				var newModel = function () {
-					var _p1 = _p0._0;
-					switch (_p1.ctor) {
-						case 'OT':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{ot: _p2});
-						case 'PS':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{ps: _p2});
-						case 'NT':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{nt: _p2});
-						case 'GS':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{gs: _p2});
-						default:
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{current: _p2});
-					}
-				}();
-				return newModel;
-			case 'ChangeVersion':
-				var _p3 = _p0._0;
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{ot: _p3, ps: _p3, nt: _p3, gs: _p3, current: _p3});
-				return newModel;
-			default:
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{
-						fnotes: _p0._0 ? 'True' : 'False'
-					});
-		}
-	});
-var _user$project$Iphod_Config$init = _user$project$Iphod_Models$configInit;
-var _user$project$Iphod_Config$Current = {ctor: 'Current'};
-var _user$project$Iphod_Config$GS = {ctor: 'GS'};
-var _user$project$Iphod_Config$NT = {ctor: 'NT'};
-var _user$project$Iphod_Config$PS = {ctor: 'PS'};
-var _user$project$Iphod_Config$OT = {ctor: 'OT'};
-var _user$project$Iphod_Config$ChangeFootnote = function (a) {
-	return {ctor: 'ChangeFootnote', _0: a};
-};
-var _user$project$Iphod_Config$ftnoteCheck = F2(
-	function (model, val) {
-		var isChecked = _elm_lang$core$Native_Utils.eq(model.fnotes, 'True');
-		return A2(
-			_elm_lang$html$Html$span,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('config_checkbox'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$input,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_('checkbox'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$id(val),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$checked(isChecked),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onCheck(_user$project$Iphod_Config$ChangeFootnote),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$name(val),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('config_checkbox'),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					},
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$label,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('checkbox_label'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$for(val),
-								_1: {ctor: '[]'}
-							}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Show'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			});
-	});
-var _user$project$Iphod_Config$ChangeVersion = function (a) {
-	return {ctor: 'ChangeVersion', _0: a};
-};
-var _user$project$Iphod_Config$versionSelect = function (model) {
-	var thisVersion = function (ver) {
-		return A2(
-			_elm_lang$html$Html$option,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$value(ver),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$selected(
-						_elm_lang$core$Native_Utils.eq(ver, model.current)),
-					_1: {ctor: '[]'}
-				}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(ver),
-				_1: {ctor: '[]'}
-			});
-	};
-	return A2(
-		_elm_lang$html$Html$select,
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html_Events$on,
-				'change',
-				A2(_elm_lang$core$Json_Decode$map, _user$project$Iphod_Config$ChangeVersion, _elm_lang$html$Html_Events$targetValue)),
-			_1: {ctor: '[]'}
-		},
-		A2(_elm_lang$core$List$map, thisVersion, model.vers));
-};
-var _user$project$Iphod_Config$Checked = F2(
-	function (a, b) {
-		return {ctor: 'Checked', _0: a, _1: b};
-	});
-var _user$project$Iphod_Config$psRadio = F3(
-	function (model, key, val) {
-		var isSelected = _elm_lang$core$Native_Utils.eq(model.ps, val);
-		return A2(
-			_elm_lang$html$Html$span,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('radio_button'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$input,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$type_('radio'),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$checked(isSelected),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onCheck(
-									function (_p4) {
-										return A2(_user$project$Iphod_Config$Checked, key, val);
-									}),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$name('psalm'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('radio_button'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$id(val),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					},
-					{ctor: '[]'}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$label,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('radio_label'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$for(val),
-								_1: {ctor: '[]'}
-							}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text(val),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			});
-	});
-var _user$project$Iphod_Config$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('config'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$p,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Psalms in: '),
-					_1: {
-						ctor: '::',
-						_0: A3(_user$project$Iphod_Config$psRadio, model, _user$project$Iphod_Config$PS, 'Coverdale'),
-						_1: {
-							ctor: '::',
-							_0: A3(_user$project$Iphod_Config$psRadio, model, _user$project$Iphod_Config$PS, 'ESV'),
-							_1: {
-								ctor: '::',
-								_0: A3(_user$project$Iphod_Config$psRadio, model, _user$project$Iphod_Config$PS, 'BCP'),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$p,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$style(
-							{
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'margin-left', _1: '2em'},
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text('FootNotes: '),
-						_1: {
-							ctor: '::',
-							_0: A2(_user$project$Iphod_Config$ftnoteCheck, model, 'fnotes'),
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$p,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'margin-left', _1: '2em'},
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Version: '),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Iphod_Config$versionSelect(model),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-};
-var _user$project$Iphod_Config$NoOp = {ctor: 'NoOp'};
-
-var _user$project$Iphod_MPReading$collectStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'font-size', _1: '1em'},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'background-color', _1: 'white'},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'margin', _1: '0em'},
-					_1: {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'padding', _1: '0em'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'list-style-type', _1: 'none'},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}
-			}
-		});
-};
-var _user$project$Iphod_MPReading$collectButtonStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{ctor: '[]'});
-};
-var _user$project$Iphod_MPReading$textStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'font-size', _1: '1em'},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'margin', _1: '0'},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'padding', _1: '0em'},
-					_1: {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'list-style-type', _1: 'none'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		});
-};
-var _user$project$Iphod_MPReading$titleStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'font-size', _1: '0.9em'},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'color', _1: 'blue'},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'height', _1: '2em'},
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-};
-var _user$project$Iphod_MPReading$bodyStyle = function (lesson) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		lesson.show,
-		{ctor: '[]'});
-};
-var _user$project$Iphod_MPReading$tableStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'width', _1: '100%'},
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Iphod_MPReading$hoverable = function (attrs) {
-	return attrs;
-};
-var _user$project$Iphod_MPReading$this_style = function (l) {
-	var _p0 = l.style;
-	switch (_p0) {
-		case 'req':
-			return _elm_lang$html$Html_Attributes$class('req_style');
-		case 'opt':
-			return _elm_lang$html$Html_Attributes$class('opt_style');
-		case 'alt':
-			return _elm_lang$html$Html_Attributes$class('alt_style');
-		case 'alt-req':
-			return _elm_lang$html$Html_Attributes$class('alt_style');
-		case 'alt-opt':
-			return _elm_lang$html$Html_Attributes$class('altOpt_style');
-		default:
-			return _elm_lang$html$Html_Attributes$class('bogis_style');
-	}
-};
-var _user$project$Iphod_MPReading$thisProper = function (proper) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$p,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('proper_title'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(
-						A2(_elm_lang$core$Basics_ops['++'], 'Proper: ', proper.title)),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$p,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('proper_text'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(proper.text),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Iphod_MPReading$updateModel = F3(
-	function (model, lesson, newSection) {
-		var _p1 = lesson.section;
-		switch (_p1) {
-			case 'mp1':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{mp1: newSection});
-			case 'mp2':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{mp2: newSection});
-			default:
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{mpp: newSection});
-		}
-	});
-var _user$project$Iphod_MPReading$thisSection = F2(
-	function (model, lesson) {
-		var _p2 = lesson.section;
-		switch (_p2) {
-			case 'mp1':
-				return model.mp1;
-			case 'mp2':
-				return model.mp2;
-			default:
-				return model.mpp;
-		}
-	});
-var _user$project$Iphod_MPReading$changeText = F3(
-	function (model, ver, lessons) {
-		var changeText = function (lesson) {
-			return _elm_lang$core$Native_Utils.update(
-				lesson,
-				{version: ver});
-		};
-		return A2(_elm_lang$core$List$map, changeText, lessons);
-	});
-var _user$project$Iphod_MPReading$getRef = function (lessons) {
-	var justRefs = function (l) {
-		return l.read;
-	};
-	return A2(
-		_elm_lang$core$String$join,
-		',',
-		A2(_elm_lang$core$List$map, justRefs, lessons));
-};
-var _user$project$Iphod_MPReading$update = F2(
-	function (msg, model) {
-		var _p3 = msg;
-		switch (_p3.ctor) {
-			case 'NoOp':
-				return model;
-			case 'ToggleModelShow':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{show: !model.show});
-			case 'GetText':
-				return model;
-			case 'ChangeText':
-				var _p7 = _p3._1;
-				var _p6 = _p3._0;
-				var thisRef = function () {
-					var _p4 = _p6;
-					switch (_p4) {
-						case 'mp1':
-							return _user$project$Iphod_MPReading$getRef(model.mp1);
-						case 'mp2':
-							return _user$project$Iphod_MPReading$getRef(model.mp2);
-						default:
-							return '';
-					}
-				}();
-				var thisUpdate = A3(_user$project$Iphod_Models$setSectionUpdate, _p6, _p7, thisRef);
-				var newModel = function () {
-					var _p5 = _p6;
-					switch (_p5) {
-						case 'mp1':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									mp1: A3(_user$project$Iphod_MPReading$changeText, model, _p7, model.mp1),
-									sectionUpdate: thisUpdate
-								});
-						case 'mp2':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									mp2: A3(_user$project$Iphod_MPReading$changeText, model, _p7, model.mp2),
-									sectionUpdate: thisUpdate
-								});
-						default:
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									mpp: A3(_user$project$Iphod_MPReading$changeText, model, _p7, model.mpp),
-									sectionUpdate: thisUpdate
-								});
-					}
-				}();
-				return newModel;
-			case 'SetReading':
-				return _p3._0;
-			case 'ToggleShow':
-				var _p10 = _p3._0;
-				var update_text = function (this_lesson) {
-					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p10.id) ? _elm_lang$core$Native_Utils.update(
-						this_lesson,
-						{show: !this_lesson.show}) : this_lesson;
-				};
-				var this_section = function () {
-					var _p8 = _p10.section;
-					switch (_p8) {
-						case 'mp1':
-							return model.mp1;
-						case 'mp2':
-							return model.mp2;
-						default:
-							return model.mpp;
-					}
-				}();
-				var newSection = A2(_elm_lang$core$List$map, update_text, this_section);
-				var newModel = function () {
-					var _p9 = _p10.section;
-					switch (_p9) {
-						case 'mp1':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{mp1: newSection});
-						case 'mp2':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{mp2: newSection});
-						default:
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{mpp: newSection});
-					}
-				}();
-				return newModel;
-			case 'ToggleCollect':
-				var collect = model.collect;
-				var newCollect = _elm_lang$core$Native_Utils.update(
-					collect,
-					{show: !collect.show});
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{collect: newCollect});
-				return newModel;
-			case 'UpdateAltReading':
-				var _p11 = _p3._0;
-				var update_altReading = function (this_lesson) {
-					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p11.id) ? _elm_lang$core$Native_Utils.update(
-						this_lesson,
-						{altRead: _p3._1}) : this_lesson;
-				};
-				var this_section = A2(_user$project$Iphod_MPReading$thisSection, model, _p11);
-				var newSection = A2(_elm_lang$core$List$map, update_altReading, this_section);
-				var newModel = A3(_user$project$Iphod_MPReading$updateModel, model, _p11, newSection);
-				return newModel;
-			default:
-				var _p13 = _p3._0;
-				var newLesson = {
-					ctor: '::',
-					_0: _elm_lang$core$Native_Utils.update(
-						_p13,
-						{
-							cmd: A2(
-								_elm_lang$core$Basics_ops['++'],
-								'alt',
-								_elm_lang$core$String$toUpper(_p13.section))
-						}),
-					_1: {ctor: '[]'}
-				};
-				var thisUpdate = A3(_user$project$Iphod_Models$setSectionUpdate, _p13.section, _p13.version, _p13.altRead);
-				var newModel = function () {
-					var _p12 = _p13.section;
-					switch (_p12) {
-						case 'mp1':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{mp1: newLesson, sectionUpdate: thisUpdate});
-						case 'mp2':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{mp2: newLesson, sectionUpdate: thisUpdate});
-						case 'mpp':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{mpp: newLesson, sectionUpdate: thisUpdate});
-						default:
-							return model;
-					}
-				}();
-				return newModel;
-		}
-	});
-var _user$project$Iphod_MPReading$init = _user$project$Iphod_Models$initDailyMP;
-var _user$project$Iphod_MPReading$MPP = {ctor: 'MPP'};
-var _user$project$Iphod_MPReading$MP2 = {ctor: 'MP2'};
-var _user$project$Iphod_MPReading$MP1 = {ctor: 'MP1'};
-var _user$project$Iphod_MPReading$RequestAltReading = function (a) {
-	return {ctor: 'RequestAltReading', _0: a};
-};
-var _user$project$Iphod_MPReading$UpdateAltReading = F2(
-	function (a, b) {
-		return {ctor: 'UpdateAltReading', _0: a, _1: b};
-	});
-var _user$project$Iphod_MPReading$SetReading = function (a) {
-	return {ctor: 'SetReading', _0: a};
-};
-var _user$project$Iphod_MPReading$ToggleCollect = {ctor: 'ToggleCollect'};
-var _user$project$Iphod_MPReading$thisCollect = function (sundayCollect) {
-	var this_collect = function (c) {
-		return A2(
-			_elm_lang$html$Html$p,
-			{ctor: '[]'},
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(c.collect),
-					_1: {ctor: '[]'}
-				},
-				A2(_elm_lang$core$List$map, _user$project$Iphod_MPReading$thisProper, c.propers)));
-	};
-	return {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$p,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('collect_instruction'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(sundayCollect.instruction),
-				_1: {ctor: '[]'}
-			}),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$button,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('collect_hide'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_user$project$Iphod_MPReading$ToggleCollect),
-						_1: {ctor: '[]'}
-					}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('hide'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$p,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('collect_title'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(sundayCollect.title),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('collect_text'),
-							_1: {ctor: '[]'}
-						},
-						A2(_elm_lang$core$List$map, this_collect, sundayCollect.collects)),
-					_1: {ctor: '[]'}
-				}
-			}
-		}
-	};
-};
-var _user$project$Iphod_MPReading$ToggleShow = function (a) {
-	return {ctor: 'ToggleShow', _0: a};
-};
-var _user$project$Iphod_MPReading$ToggleModelShow = {ctor: 'ToggleModelShow'};
-var _user$project$Iphod_MPReading$ChangeText = F2(
-	function (a, b) {
-		return {ctor: 'ChangeText', _0: a, _1: b};
-	});
-var _user$project$Iphod_MPReading$versionSelect = F2(
-	function (model, lesson) {
-		var thisVersion = function (ver) {
-			return A2(
-				_elm_lang$html$Html$option,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$value(ver),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$selected(
-							_elm_lang$core$Native_Utils.eq(ver, lesson.version)),
-						_1: {ctor: '[]'}
-					}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(ver),
-					_1: {ctor: '[]'}
-				});
-		};
-		return A2(
-			_elm_lang$html$Html$select,
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html_Events$on,
-					'change',
-					A2(
-						_elm_lang$core$Json_Decode$map,
-						_user$project$Iphod_MPReading$ChangeText(lesson.section),
-						_elm_lang$html$Html_Events$targetValue)),
-				_1: {ctor: '[]'}
-			},
-			A2(_elm_lang$core$List$map, thisVersion, model.config.vers));
-	});
-var _user$project$Iphod_MPReading$GetText = function (a) {
-	return {ctor: 'GetText', _0: a};
-};
-var _user$project$Iphod_MPReading$thisReading = F2(
-	function (model, section) {
-		var req = function (l) {
-			var _p14 = section;
-			switch (_p14.ctor) {
-				case 'MP1':
-					return {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'section', _1: l.section},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'id', _1: l.id},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'read', _1: l.read},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'ver', _1: model.config.ot},
-										_1: {
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes},
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					};
-				case 'MP2':
-					return {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'section', _1: l.section},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'id', _1: l.id},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'read', _1: l.read},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'ver', _1: model.config.nt},
-										_1: {
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes},
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					};
-				default:
-					return {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'section', _1: l.section},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'id', _1: l.id},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'read', _1: l.read},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'ver', _1: model.config.ps},
-										_1: {
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes},
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					};
-			}
-		};
-		var this_lesson = function (l) {
-			return _elm_lang$core$Native_Utils.eq(
-				_elm_lang$core$String$length(l.body),
-				0) ? A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_MPReading$hoverable(
-					{
-						ctor: '::',
-						_0: _user$project$Iphod_MPReading$this_style(l),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(
-								_user$project$Iphod_MPReading$GetText(
-									req(l))),
-							_1: {ctor: '[]'}
-						}
-					}),
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(l.read),
-					_1: {ctor: '[]'}
-				}) : A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_MPReading$hoverable(
-					{
-						ctor: '::',
-						_0: _user$project$Iphod_MPReading$this_style(l),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(
-								_user$project$Iphod_MPReading$ToggleShow(l)),
-							_1: {ctor: '[]'}
-						}
-					}),
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(l.read),
-					_1: {ctor: '[]'}
-				});
-		};
-		var lessons = function () {
-			var _p15 = section;
-			switch (_p15.ctor) {
-				case 'MP1':
-					return model.mp1;
-				case 'MP2':
-					return model.mp2;
-				default:
-					return model.mpp;
-			}
-		}();
-		return A2(_elm_lang$core$List$map, this_lesson, lessons);
-	});
-var _user$project$Iphod_MPReading$NoOp = {ctor: 'NoOp'};
-var _user$project$Iphod_MPReading$onEnter = function (msg) {
-	var tagger = function (code) {
-		return _elm_lang$core$Native_Utils.eq(code, 13) ? msg : _user$project$Iphod_MPReading$NoOp;
-	};
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'keydown',
-		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$keyCode));
-};
-var _user$project$Iphod_MPReading$altReading = F2(
-	function (model, lesson) {
-		return A2(
-			_elm_lang$html$Html$input,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$placeholder('Alt Reading'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$autofocus(true),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$value(lesson.altRead),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$name('altReading'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onInput(
-									_user$project$Iphod_MPReading$UpdateAltReading(lesson)),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Iphod_MPReading$onEnter(
-										_user$project$Iphod_MPReading$RequestAltReading(lesson)),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				}
-			},
-			{ctor: '[]'});
-	});
-var _user$project$Iphod_MPReading$thisText = F2(
-	function (model, lessons) {
-		var this_text = function (l) {
-			var getTranslation = function (s) {
-				return _elm_lang$html$Html_Events$onClick(
-					_user$project$Iphod_MPReading$GetText(
-						{
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'section', _1: l.section},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'id', _1: l.id},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'read', _1: l.read},
-										_1: {
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'ver', _1: s},
-											_1: {
-												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'fnotes', _1: 'True'},
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							}
-						}));
-			};
-			return (_elm_lang$core$Native_Utils.eq(l.section, 'mpp') || _elm_lang$core$Native_Utils.eq(l.section, 'epp')) ? A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id(l.id),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Iphod_MPReading$bodyStyle(l),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('esv_text'),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$span,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'position', _1: 'relative'},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'top', _1: '1em'},
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('translationButton'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(
-											_user$project$Iphod_MPReading$ToggleShow(l)),
-										_1: {ctor: '[]'}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Hide'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('translationButton'),
-										_1: {
-											ctor: '::',
-											_0: getTranslation('Coverdale'),
-											_1: {ctor: '[]'}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Coverdale'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$button,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('translationButton'),
-											_1: {
-												ctor: '::',
-												_0: getTranslation('BCP'),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('BCP'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(_user$project$Iphod_MPReading$versionSelect, model, l),
-										_1: {
-											ctor: '::',
-											_0: A2(_user$project$Iphod_MPReading$altReading, model, l),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_evancz$elm_markdown$Markdown$toHtml,
-							{ctor: '[]'},
-							l.body),
-						_1: {ctor: '[]'}
-					}
-				}) : A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id(l.id),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Iphod_MPReading$bodyStyle(l),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('esv_text'),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$span,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'position', _1: 'relative'},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'top', _1: '1em'},
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('translationButton'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(
-											_user$project$Iphod_MPReading$ToggleShow(l)),
-										_1: {ctor: '[]'}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Hide'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(_user$project$Iphod_MPReading$versionSelect, model, l),
-								_1: {
-									ctor: '::',
-									_0: A2(_user$project$Iphod_MPReading$altReading, model, l),
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_evancz$elm_markdown$Markdown$toHtml,
-							{ctor: '[]'},
-							l.body),
-						_1: {ctor: '[]'}
-					}
-				});
-		};
-		return A2(_elm_lang$core$List$map, this_text, lessons);
-	});
-var _user$project$Iphod_MPReading$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$table,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('readings_table'),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Iphod_MPReading$tableStyle(model),
-						_1: {ctor: '[]'}
-					}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$caption,
-						{
-							ctor: '::',
-							_0: _user$project$Iphod_MPReading$titleStyle(model),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$span,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_user$project$Iphod_MPReading$ToggleModelShow),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(
-										A2(
-											_elm_lang$core$String$join,
-											' ',
-											{
-												ctor: '::',
-												_0: 'Morning Prayer:',
-												_1: {
-													ctor: '::',
-													_0: model.date,
-													_1: {ctor: '[]'}
-												}
-											})),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$br,
-									{ctor: '[]'},
-									{ctor: '[]'}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$button,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('button'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onClick(_user$project$Iphod_MPReading$ToggleCollect),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Collect'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$tr,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('rowStyle'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$th,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Morning 1'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$th,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Morning 2'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$th,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Morning Ps'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$tr,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('rowStyle'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$td,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('tdStyle'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$style(
-													{
-														ctor: '::',
-														_0: {ctor: '_Tuple2', _0: 'width', _1: '16%'},
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$ul,
-												{
-													ctor: '::',
-													_0: _user$project$Iphod_MPReading$textStyle(model),
-													_1: {ctor: '[]'}
-												},
-												A2(_user$project$Iphod_MPReading$thisReading, model, _user$project$Iphod_MPReading$MP1)),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$td,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('tdStyle'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$style(
-														{
-															ctor: '::',
-															_0: {ctor: '_Tuple2', _0: 'width', _1: '16%'},
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$ul,
-													{
-														ctor: '::',
-														_0: _user$project$Iphod_MPReading$textStyle(model),
-														_1: {ctor: '[]'}
-													},
-													A2(_user$project$Iphod_MPReading$thisReading, model, _user$project$Iphod_MPReading$MP2)),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$td,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('tdStyle'),
-													_1: {
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$style(
-															{
-																ctor: '::',
-																_0: {ctor: '_Tuple2', _0: 'width', _1: '16%'},
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												},
-												{
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html$ul,
-														{
-															ctor: '::',
-															_0: _user$project$Iphod_MPReading$textStyle(model),
-															_1: {ctor: '[]'}
-														},
-														A2(_user$project$Iphod_MPReading$thisReading, model, _user$project$Iphod_MPReading$MPP)),
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					A2(_user$project$Iphod_MPReading$thisText, model, model.mp1)),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{ctor: '[]'},
-						A2(_user$project$Iphod_MPReading$thisText, model, model.mp2)),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							A2(_user$project$Iphod_MPReading$thisText, model, model.mpp)),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _user$project$Iphod_MPReading$collectStyle(model.collect),
-									_1: {ctor: '[]'}
-								},
-								_user$project$Iphod_MPReading$thisCollect(model.collect)),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		});
-};
-
-var _user$project$Iphod_EPReading$collectStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'font-size', _1: '1em'},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'background-color', _1: 'white'},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'margin', _1: '0em'},
-					_1: {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'padding', _1: '0em'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'list-style-type', _1: 'none'},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				}
-			}
-		});
-};
-var _user$project$Iphod_EPReading$textStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'font-size', _1: '1em'},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'margin', _1: '0'},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'padding', _1: '0em'},
-					_1: {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'list-style-type', _1: 'none'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'display', _1: 'inline-block'},
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		});
-};
-var _user$project$Iphod_EPReading$titleStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'font-size', _1: '0.9em'},
-			_1: {
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'color', _1: 'blue'},
-				_1: {
-					ctor: '::',
-					_0: {ctor: '_Tuple2', _0: 'height', _1: '2em'},
-					_1: {ctor: '[]'}
-				}
-			}
-		});
-};
-var _user$project$Iphod_EPReading$bodyStyle = function (lesson) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		lesson.show,
-		{ctor: '[]'});
-};
-var _user$project$Iphod_EPReading$tableStyle = function (model) {
-	return A2(
-		_user$project$Iphod_Helper$hideable,
-		model.show,
-		{
-			ctor: '::',
-			_0: {ctor: '_Tuple2', _0: 'width', _1: '100%'},
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Iphod_EPReading$hoverable = function (attrs) {
-	return attrs;
-};
-var _user$project$Iphod_EPReading$this_style = function (l) {
-	var _p0 = l.style;
-	switch (_p0) {
-		case 'req':
-			return _elm_lang$html$Html_Attributes$class('req_style');
-		case 'opt':
-			return _elm_lang$html$Html_Attributes$class('opt_style');
-		case 'alt':
-			return _elm_lang$html$Html_Attributes$class('alt_style');
-		case 'alt-req':
-			return _elm_lang$html$Html_Attributes$class('alt_style');
-		case 'alt-opt':
-			return _elm_lang$html$Html_Attributes$class('altOpt_style');
-		default:
-			return _elm_lang$html$Html_Attributes$class('bogis_style');
-	}
-};
-var _user$project$Iphod_EPReading$thisProper = function (proper) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$p,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('proper_title'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(
-						A2(_elm_lang$core$Basics_ops['++'], 'Proper: ', proper.title)),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$p,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('proper_text'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(proper.text),
-						_1: {ctor: '[]'}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Iphod_EPReading$updateModel = F3(
-	function (model, lesson, newSection) {
-		var _p1 = lesson.section;
-		switch (_p1) {
-			case 'ep1':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{ep1: newSection});
-			case 'ep2':
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{ep2: newSection});
-			default:
-				return _elm_lang$core$Native_Utils.update(
-					model,
-					{epp: newSection});
-		}
-	});
-var _user$project$Iphod_EPReading$thisSection = F2(
-	function (model, lesson) {
-		var _p2 = lesson.section;
-		switch (_p2) {
-			case 'ep1':
-				return model.ep1;
-			case 'ep2':
-				return model.ep2;
-			default:
-				return model.epp;
-		}
-	});
-var _user$project$Iphod_EPReading$changeText = F3(
-	function (model, ver, lessons) {
-		var changeText = function (lesson) {
-			return _elm_lang$core$Native_Utils.update(
-				lesson,
-				{version: ver});
-		};
-		return A2(_elm_lang$core$List$map, changeText, lessons);
-	});
-var _user$project$Iphod_EPReading$getRef = function (lessons) {
-	var justRefs = function (l) {
-		return l.read;
-	};
-	return A2(
-		_elm_lang$core$String$join,
-		',',
-		A2(_elm_lang$core$List$map, justRefs, lessons));
-};
-var _user$project$Iphod_EPReading$update = F2(
-	function (msg, model) {
-		var _p3 = msg;
-		switch (_p3.ctor) {
-			case 'NoOp':
-				return model;
-			case 'GetText':
-				return model;
-			case 'ChangeText':
-				var _p7 = _p3._1;
-				var _p6 = _p3._0;
-				var thisRef = function () {
-					var _p4 = _p6;
-					switch (_p4) {
-						case 'ep1':
-							return _user$project$Iphod_EPReading$getRef(model.ep1);
-						case 'ep2':
-							return _user$project$Iphod_EPReading$getRef(model.ep2);
-						default:
-							return '';
-					}
-				}();
-				var thisUpdate = A3(_user$project$Iphod_Models$setSectionUpdate, _p6, _p7, thisRef);
-				var newModel = function () {
-					var _p5 = _p6;
-					switch (_p5) {
-						case 'ep1':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									ep1: A3(_user$project$Iphod_EPReading$changeText, model, _p7, model.ep1),
-									sectionUpdate: thisUpdate
-								});
-						case 'ep2':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									ep2: A3(_user$project$Iphod_EPReading$changeText, model, _p7, model.ep2),
-									sectionUpdate: thisUpdate
-								});
-						default:
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{
-									epp: A3(_user$project$Iphod_EPReading$changeText, model, _p7, model.epp),
-									sectionUpdate: thisUpdate
-								});
-					}
-				}();
-				return newModel;
-			case 'ToggleModelShow':
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{show: !model.show});
-				return newModel;
-			case 'SetReading':
-				return _p3._0;
-			case 'ToggleShow':
-				var _p10 = _p3._0;
-				var update_text = function (this_lesson) {
-					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p10.id) ? _elm_lang$core$Native_Utils.update(
-						this_lesson,
-						{show: !this_lesson.show}) : this_lesson;
-				};
-				var this_section = function () {
-					var _p8 = _p10.section;
-					switch (_p8) {
-						case 'ep1':
-							return model.ep1;
-						case 'ep2':
-							return model.ep2;
-						default:
-							return model.epp;
-					}
-				}();
-				var newSection = A2(_elm_lang$core$List$map, update_text, this_section);
-				var newModel = function () {
-					var _p9 = _p10.section;
-					switch (_p9) {
-						case 'ep1':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{ep1: newSection});
-						case 'ep2':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{ep2: newSection});
-						default:
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{epp: newSection});
-					}
-				}();
-				return newModel;
-			case 'ToggleCollect':
-				var collect = model.collect;
-				var newCollect = _elm_lang$core$Native_Utils.update(
-					collect,
-					{show: !collect.show});
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{collect: newCollect});
-				return newModel;
-			case 'UpdateAltReading':
-				var _p11 = _p3._0;
-				var update_altReading = function (this_lesson) {
-					return _elm_lang$core$Native_Utils.eq(this_lesson.id, _p11.id) ? _elm_lang$core$Native_Utils.update(
-						this_lesson,
-						{altRead: _p3._1}) : this_lesson;
-				};
-				var this_section = A2(_user$project$Iphod_EPReading$thisSection, model, _p11);
-				var newSection = A2(_elm_lang$core$List$map, update_altReading, this_section);
-				var newModel = A3(_user$project$Iphod_EPReading$updateModel, model, _p11, newSection);
-				return newModel;
-			default:
-				var _p13 = _p3._0;
-				var newLesson = {
-					ctor: '::',
-					_0: _elm_lang$core$Native_Utils.update(
-						_p13,
-						{
-							cmd: A2(
-								_elm_lang$core$Basics_ops['++'],
-								'alt',
-								_elm_lang$core$String$toUpper(_p13.section))
-						}),
-					_1: {ctor: '[]'}
-				};
-				var thisUpdate = A3(_user$project$Iphod_Models$setSectionUpdate, _p13.section, _p13.version, _p13.altRead);
-				var newModel = function () {
-					var _p12 = _p13.section;
-					switch (_p12) {
-						case 'ep1':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{ep1: newLesson, sectionUpdate: thisUpdate});
-						case 'ep2':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{ep2: newLesson, sectionUpdate: thisUpdate});
-						case 'epp':
-							return _elm_lang$core$Native_Utils.update(
-								model,
-								{epp: newLesson, sectionUpdate: thisUpdate});
-						default:
-							return model;
-					}
-				}();
-				return newModel;
-		}
-	});
-var _user$project$Iphod_EPReading$init = _user$project$Iphod_Models$initDailyEP;
-var _user$project$Iphod_EPReading$EPP = {ctor: 'EPP'};
-var _user$project$Iphod_EPReading$EP2 = {ctor: 'EP2'};
-var _user$project$Iphod_EPReading$EP1 = {ctor: 'EP1'};
-var _user$project$Iphod_EPReading$RequestAltReading = function (a) {
-	return {ctor: 'RequestAltReading', _0: a};
-};
-var _user$project$Iphod_EPReading$UpdateAltReading = F2(
-	function (a, b) {
-		return {ctor: 'UpdateAltReading', _0: a, _1: b};
-	});
-var _user$project$Iphod_EPReading$SetReading = function (a) {
-	return {ctor: 'SetReading', _0: a};
-};
-var _user$project$Iphod_EPReading$ToggleCollect = {ctor: 'ToggleCollect'};
-var _user$project$Iphod_EPReading$thisCollect = function (sundayCollect) {
-	var this_collect = function (c) {
-		return A2(
-			_elm_lang$html$Html$p,
-			{ctor: '[]'},
-			A2(
-				_elm_lang$core$Basics_ops['++'],
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(c.collect),
-					_1: {ctor: '[]'}
-				},
-				A2(_elm_lang$core$List$map, _user$project$Iphod_EPReading$thisProper, c.propers)));
-	};
-	return {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$p,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('collect_instruction'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(sundayCollect.instruction),
-				_1: {ctor: '[]'}
-			}),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$button,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('collect_hide'),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Events$onClick(_user$project$Iphod_EPReading$ToggleCollect),
-						_1: {ctor: '[]'}
-					}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('collect'),
-					_1: {ctor: '[]'}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$p,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('collect_title'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html$text(sundayCollect.title),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('collect_text'),
-							_1: {ctor: '[]'}
-						},
-						A2(_elm_lang$core$List$map, this_collect, sundayCollect.collects)),
-					_1: {ctor: '[]'}
-				}
-			}
-		}
-	};
-};
-var _user$project$Iphod_EPReading$ToggleShow = function (a) {
-	return {ctor: 'ToggleShow', _0: a};
-};
-var _user$project$Iphod_EPReading$ToggleModelShow = {ctor: 'ToggleModelShow'};
-var _user$project$Iphod_EPReading$ChangeText = F2(
-	function (a, b) {
-		return {ctor: 'ChangeText', _0: a, _1: b};
-	});
-var _user$project$Iphod_EPReading$versionSelect = F2(
-	function (model, lesson) {
-		var thisVersion = function (ver) {
-			return A2(
-				_elm_lang$html$Html$option,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$value(ver),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$selected(
-							_elm_lang$core$Native_Utils.eq(ver, lesson.version)),
-						_1: {ctor: '[]'}
-					}
-				},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(ver),
-					_1: {ctor: '[]'}
-				});
-		};
-		return A2(
-			_elm_lang$html$Html$select,
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html_Events$on,
-					'change',
-					A2(
-						_elm_lang$core$Json_Decode$map,
-						_user$project$Iphod_EPReading$ChangeText(lesson.section),
-						_elm_lang$html$Html_Events$targetValue)),
-				_1: {ctor: '[]'}
-			},
-			A2(_elm_lang$core$List$map, thisVersion, model.config.vers));
-	});
-var _user$project$Iphod_EPReading$GetText = function (a) {
-	return {ctor: 'GetText', _0: a};
-};
-var _user$project$Iphod_EPReading$thisReading = F2(
-	function (model, section) {
-		var req = function (l) {
-			var _p14 = section;
-			switch (_p14.ctor) {
-				case 'EP1':
-					return {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'section', _1: l.section},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'id', _1: l.id},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'read', _1: l.read},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'ver', _1: model.config.ot},
-										_1: {
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes},
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					};
-				case 'EP2':
-					return {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'section', _1: l.section},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'id', _1: l.id},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'read', _1: l.read},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'ver', _1: model.config.nt},
-										_1: {
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes},
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					};
-				default:
-					return {
-						ctor: '::',
-						_0: {ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-						_1: {
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'section', _1: l.section},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'id', _1: l.id},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'read', _1: l.read},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'ver', _1: model.config.ps},
-										_1: {
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'fnotes', _1: model.config.fnotes},
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					};
-			}
-		};
-		var this_lesson = function (l) {
-			return _elm_lang$core$Native_Utils.eq(
-				_elm_lang$core$String$length(l.body),
-				0) ? A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_EPReading$hoverable(
-					{
-						ctor: '::',
-						_0: _user$project$Iphod_EPReading$this_style(l),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(
-								_user$project$Iphod_EPReading$GetText(
-									req(l))),
-							_1: {ctor: '[]'}
-						}
-					}),
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(l.read),
-					_1: {ctor: '[]'}
-				}) : A2(
-				_elm_lang$html$Html$li,
-				_user$project$Iphod_EPReading$hoverable(
-					{
-						ctor: '::',
-						_0: _user$project$Iphod_EPReading$this_style(l),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Events$onClick(
-								_user$project$Iphod_EPReading$ToggleShow(l)),
-							_1: {ctor: '[]'}
-						}
-					}),
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text(l.read),
-					_1: {ctor: '[]'}
-				});
-		};
-		var lessons = function () {
-			var _p15 = section;
-			switch (_p15.ctor) {
-				case 'EP1':
-					return model.ep1;
-				case 'EP2':
-					return model.ep2;
-				default:
-					return model.epp;
-			}
-		}();
-		return A2(_elm_lang$core$List$map, this_lesson, lessons);
-	});
-var _user$project$Iphod_EPReading$NoOp = {ctor: 'NoOp'};
-var _user$project$Iphod_EPReading$onEnter = function (msg) {
-	var tagger = function (code) {
-		return _elm_lang$core$Native_Utils.eq(code, 13) ? msg : _user$project$Iphod_EPReading$NoOp;
-	};
-	return A2(
-		_elm_lang$html$Html_Events$on,
-		'keydown',
-		A2(_elm_lang$core$Json_Decode$map, tagger, _elm_lang$html$Html_Events$keyCode));
-};
-var _user$project$Iphod_EPReading$altReading = F2(
-	function (model, lesson) {
-		return A2(
-			_elm_lang$html$Html$input,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$placeholder('Alt Reading'),
-				_1: {
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$autofocus(true),
-					_1: {
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$value(lesson.altRead),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$name('altReading'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onInput(
-									_user$project$Iphod_EPReading$UpdateAltReading(lesson)),
-								_1: {
-									ctor: '::',
-									_0: _user$project$Iphod_EPReading$onEnter(
-										_user$project$Iphod_EPReading$RequestAltReading(lesson)),
-									_1: {ctor: '[]'}
-								}
-							}
-						}
-					}
-				}
-			},
-			{ctor: '[]'});
-	});
-var _user$project$Iphod_EPReading$thisText = F2(
-	function (model, lessons) {
-		var this_text = function (l) {
-			var getTranslation = function (s) {
-				return _elm_lang$html$Html_Events$onClick(
-					_user$project$Iphod_EPReading$GetText(
-						{
-							ctor: '::',
-							_0: {ctor: '_Tuple2', _0: 'ofType', _1: 'daily'},
-							_1: {
-								ctor: '::',
-								_0: {ctor: '_Tuple2', _0: 'section', _1: l.section},
-								_1: {
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'id', _1: l.id},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'read', _1: l.read},
-										_1: {
-											ctor: '::',
-											_0: {ctor: '_Tuple2', _0: 'ver', _1: s},
-											_1: {
-												ctor: '::',
-												_0: {ctor: '_Tuple2', _0: 'fnotes', _1: 'True'},
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							}
-						}));
-			};
-			return (_elm_lang$core$Native_Utils.eq(l.section, 'epp') || _elm_lang$core$Native_Utils.eq(l.section, 'epp')) ? A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id(l.id),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Iphod_EPReading$bodyStyle(l),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('esv_text'),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$span,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'position', _1: 'relative'},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'top', _1: '1em'},
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('translationButton'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(
-											_user$project$Iphod_EPReading$ToggleShow(l)),
-										_1: {ctor: '[]'}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Hide'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('translationButton'),
-										_1: {
-											ctor: '::',
-											_0: getTranslation('Coverdale'),
-											_1: {ctor: '[]'}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Coverdale'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$button,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('translationButton'),
-											_1: {
-												ctor: '::',
-												_0: getTranslation('BCP'),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('BCP'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(_user$project$Iphod_EPReading$versionSelect, model, l),
-										_1: {
-											ctor: '::',
-											_0: A2(_user$project$Iphod_EPReading$altReading, model, l),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_evancz$elm_markdown$Markdown$toHtml,
-							{ctor: '[]'},
-							l.body),
-						_1: {ctor: '[]'}
-					}
-				}) : A2(
-				_elm_lang$html$Html$div,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$id(l.id),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Iphod_EPReading$bodyStyle(l),
-						_1: {
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('esv_text'),
-							_1: {ctor: '[]'}
-						}
-					}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$span,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$style(
-								{
-									ctor: '::',
-									_0: {ctor: '_Tuple2', _0: 'position', _1: 'relative'},
-									_1: {
-										ctor: '::',
-										_0: {ctor: '_Tuple2', _0: 'top', _1: '1em'},
-										_1: {ctor: '[]'}
-									}
-								}),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('translationButton'),
-									_1: {
-										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(
-											_user$project$Iphod_EPReading$ToggleShow(l)),
-										_1: {ctor: '[]'}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Hide'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(_user$project$Iphod_EPReading$versionSelect, model, l),
-								_1: {
-									ctor: '::',
-									_0: A2(_user$project$Iphod_EPReading$altReading, model, l),
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_evancz$elm_markdown$Markdown$toHtml,
-							{ctor: '[]'},
-							l.body),
-						_1: {ctor: '[]'}
-					}
-				});
-		};
-		return A2(_elm_lang$core$List$map, this_text, lessons);
-	});
-var _user$project$Iphod_EPReading$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{ctor: '[]'},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$table,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('readings_table'),
-					_1: {
-						ctor: '::',
-						_0: _user$project$Iphod_EPReading$tableStyle(model),
-						_1: {ctor: '[]'}
-					}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$caption,
-						{
-							ctor: '::',
-							_0: _user$project$Iphod_EPReading$titleStyle(model),
-							_1: {ctor: '[]'}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$span,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_user$project$Iphod_EPReading$ToggleModelShow),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text(
-										A2(
-											_elm_lang$core$String$join,
-											' ',
-											{
-												ctor: '::',
-												_0: 'Evening Prayer:',
-												_1: {
-													ctor: '::',
-													_0: model.date,
-													_1: {ctor: '[]'}
-												}
-											})),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$br,
-									{ctor: '[]'},
-									{ctor: '[]'}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$button,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('button'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Events$onClick(_user$project$Iphod_EPReading$ToggleCollect),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Collect'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {ctor: '[]'}
-								}
-							}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$tr,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('rowStyle'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$th,
-									{ctor: '[]'},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Evening 1'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$th,
-										{ctor: '[]'},
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html$text('Evening 2'),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$th,
-											{ctor: '[]'},
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html$text('Evening Ps'),
-												_1: {ctor: '[]'}
-											}),
-										_1: {ctor: '[]'}
-									}
-								}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$tr,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('rowStyle'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$td,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('tdStyle'),
-											_1: {
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$style(
-													{
-														ctor: '::',
-														_0: {ctor: '_Tuple2', _0: 'width', _1: '16%'},
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										},
-										{
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$ul,
-												{
-													ctor: '::',
-													_0: _user$project$Iphod_EPReading$textStyle(model),
-													_1: {ctor: '[]'}
-												},
-												A2(_user$project$Iphod_EPReading$thisReading, model, _user$project$Iphod_EPReading$EP1)),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$td,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('tdStyle'),
-												_1: {
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$style(
-														{
-															ctor: '::',
-															_0: {ctor: '_Tuple2', _0: 'width', _1: '16%'},
-															_1: {ctor: '[]'}
-														}),
-													_1: {ctor: '[]'}
-												}
-											},
-											{
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$ul,
-													{
-														ctor: '::',
-														_0: _user$project$Iphod_EPReading$textStyle(model),
-														_1: {ctor: '[]'}
-													},
-													A2(_user$project$Iphod_EPReading$thisReading, model, _user$project$Iphod_EPReading$EP2)),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$td,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('tdStyle'),
-													_1: {
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$style(
-															{
-																ctor: '::',
-																_0: {ctor: '_Tuple2', _0: 'width', _1: '16%'},
-																_1: {ctor: '[]'}
-															}),
-														_1: {ctor: '[]'}
-													}
-												},
-												{
-													ctor: '::',
-													_0: A2(
-														_elm_lang$html$Html$ul,
-														{
-															ctor: '::',
-															_0: _user$project$Iphod_EPReading$textStyle(model),
-															_1: {ctor: '[]'}
-														},
-														A2(_user$project$Iphod_EPReading$thisReading, model, _user$project$Iphod_EPReading$EPP)),
-													_1: {ctor: '[]'}
-												}),
-											_1: {ctor: '[]'}
-										}
-									}
-								}),
-							_1: {ctor: '[]'}
-						}
-					}
-				}),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					A2(_user$project$Iphod_EPReading$thisText, model, model.ep1)),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{ctor: '[]'},
-						A2(_user$project$Iphod_EPReading$thisText, model, model.ep2)),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							A2(_user$project$Iphod_EPReading$thisText, model, model.epp)),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$div,
-								{
-									ctor: '::',
-									_0: _user$project$Iphod_EPReading$collectStyle(model.collect),
-									_1: {ctor: '[]'}
-								},
-								_user$project$Iphod_EPReading$thisCollect(model.collect)),
-							_1: {ctor: '[]'}
-						}
-					}
-				}
-			}
-		});
-};
-
 var _user$project$Iphod$reflectionDiv = function (model) {
 	var author = (_elm_lang$core$Native_Utils.cmp(
-		_elm_lang$core$String$length(model.reflection.author),
-		0) > 0) ? A2(_elm_lang$core$Basics_ops['++'], '--- ', model.reflection.author) : '';
+		_elm_lang$core$String$length(model.author),
+		0) > 0) ? A2(_elm_lang$core$Basics_ops['++'], '--- ', model.author) : '';
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -13397,7 +9573,7 @@ var _user$project$Iphod$reflectionDiv = function (model) {
 					_0: A2(
 						_evancz$elm_markdown$Markdown$toHtml,
 						{ctor: '[]'},
-						model.reflection.markdown),
+						model.markdown),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -13418,113 +9594,126 @@ var _user$project$Iphod$reflectionDiv = function (model) {
 			}
 		});
 };
-var _user$project$Iphod$setLesson = F3(
-	function (model, section, lesson) {
-		var newModel = function () {
-			var _p0 = section;
-			switch (_p0) {
-				case 'mp1':
-					var thisMP = model.mp;
-					var newMP = _elm_lang$core$Native_Utils.update(
-						thisMP,
-						{mp1: lesson});
-					var newModel = _elm_lang$core$Native_Utils.update(
-						model,
-						{mp: newMP});
-					return newModel;
-				case 'mp2':
-					var thisMP = model.mp;
-					var newMP = _elm_lang$core$Native_Utils.update(
-						thisMP,
-						{mp2: lesson});
-					var newModel = _elm_lang$core$Native_Utils.update(
-						model,
-						{mp: newMP});
-					return newModel;
-				case 'mpp':
-					var thisMP = model.mp;
-					var newMP = _elm_lang$core$Native_Utils.update(
-						thisMP,
-						{mpp: lesson});
-					var newModel = _elm_lang$core$Native_Utils.update(
-						model,
-						{mp: newMP});
-					return newModel;
-				case 'ep1':
-					var thisEP = model.ep;
-					var newEP = _elm_lang$core$Native_Utils.update(
-						thisEP,
-						{ep1: lesson});
-					var newModel = _elm_lang$core$Native_Utils.update(
-						model,
-						{ep: newEP});
-					return newModel;
-				case 'ep2':
-					var thisEP = model.ep;
-					var newEP = _elm_lang$core$Native_Utils.update(
-						thisEP,
-						{ep2: lesson});
-					var newModel = _elm_lang$core$Native_Utils.update(
-						model,
-						{ep: newEP});
-					return newModel;
-				case 'epp':
-					var thisEP = model.ep;
-					var newEP = _elm_lang$core$Native_Utils.update(
-						thisEP,
-						{epp: lesson});
-					var newModel = _elm_lang$core$Native_Utils.update(
-						model,
-						{ep: newEP});
-					return newModel;
-				case 'ot':
-					var thisEU = model.eu;
-					var newEU = _elm_lang$core$Native_Utils.update(
-						thisEU,
-						{ot: lesson});
-					var newModel = _elm_lang$core$Native_Utils.update(
-						model,
-						{eu: newEU});
-					return newModel;
-				case 'ps':
-					var thisEU = model.eu;
-					var newEU = _elm_lang$core$Native_Utils.update(
-						thisEU,
-						{ps: lesson});
-					var newModel = _elm_lang$core$Native_Utils.update(
-						model,
-						{eu: newEU});
-					return newModel;
-				case 'nt':
-					var thisEU = model.eu;
-					var newEU = _elm_lang$core$Native_Utils.update(
-						thisEU,
-						{nt: lesson});
-					var newModel = _elm_lang$core$Native_Utils.update(
-						model,
-						{eu: newEU});
-					return newModel;
-				case 'gs':
-					var thisEU = model.eu;
-					var newEU = _elm_lang$core$Native_Utils.update(
-						thisEU,
-						{gs: lesson});
-					var newModel = _elm_lang$core$Native_Utils.update(
-						model,
-						{eu: newEU});
-					return newModel;
-				default:
-					return model;
-			}
-		}();
-		return newModel;
+var _user$project$Iphod$lessonListToReadingString = function (lessons) {
+	var allReadings = function (lesson) {
+		return lesson.text;
+	};
+	return A2(
+		_elm_lang$core$String$join,
+		' ',
+		A2(_elm_lang$core$List$map, allReadings, lessons));
+};
+var _user$project$Iphod$lessonDiv = F2(
+	function (divName, lessons) {
+		return A2(
+			_elm_lang$html$Html$div,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$id(divName),
+				_1: {ctor: '[]'}
+			},
+			{
+				ctor: '::',
+				_0: A2(
+					_evancz$elm_markdown$Markdown$toHtml,
+					{ctor: '[]'},
+					_user$project$Iphod$lessonListToReadingString(lessons)),
+				_1: {ctor: '[]'}
+			});
 	});
-var _user$project$Iphod$initModel = {eu: _user$project$Iphod_Models$sundayInit, mp: _user$project$Iphod_Models$initDailyMP, ep: _user$project$Iphod_Models$initDailyEP, reflection: _user$project$Iphod_Models$initReflection};
+var _user$project$Iphod$colorClass = function (day) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		'day_',
+		A2(
+			_elm_lang$core$Maybe$withDefault,
+			'green',
+			_elm_lang$core$List$head(day.colors)));
+};
+var _user$project$Iphod$calendarHref = function (day) {
+	return A4(
+		_elm_lang$core$Regex$replace,
+		_elm_lang$core$Regex$All,
+		_elm_lang$core$Regex$regex(','),
+		function (_p0) {
+			return '_';
+		},
+		A4(
+			_elm_lang$core$Regex$replace,
+			_elm_lang$core$Regex$All,
+			_elm_lang$core$Regex$regex(' '),
+			function (_p1) {
+				return '';
+			},
+			A2(_elm_lang$core$Basics_ops['++'], '#', day.date)));
+};
+var _user$project$Iphod$toIndexList = F2(
+	function (i, lessons) {
+		var newList = function (lesson) {
+			return A5(_user$project$Iphod_Models$newLessonRequest, i, lesson.read, lesson.style, 'ESV', '');
+		};
+		return A2(_elm_lang$core$List$map, newList, lessons);
+	});
+var _user$project$Iphod$decodeESVmeta = _elm_lang$core$Json_Decode$list(
+	A8(
+		_elm_lang$core$Json_Decode$map7,
+		_user$project$Iphod_Models$ESVmeta,
+		A2(_elm_lang$core$Json_Decode$field, 'canonical', _elm_lang$core$Json_Decode$string),
+		A2(
+			_elm_lang$core$Json_Decode$field,
+			'chapter_start',
+			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$int)),
+		A2(
+			_elm_lang$core$Json_Decode$field,
+			'chapter_end',
+			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$int)),
+		A2(_elm_lang$core$Json_Decode$field, 'prev_verse', _elm_lang$core$Json_Decode$int),
+		A2(_elm_lang$core$Json_Decode$field, 'next_verse', _elm_lang$core$Json_Decode$int),
+		A2(
+			_elm_lang$core$Json_Decode$field,
+			'prev_chapter',
+			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$int)),
+		A2(
+			_elm_lang$core$Json_Decode$field,
+			'next_chapter',
+			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$int))));
+var _user$project$Iphod$decodeESVparsed = _elm_lang$core$Json_Decode$list(
+	_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$int));
+var _user$project$Iphod$decodeESV = A6(
+	_elm_lang$core$Json_Decode$map5,
+	_user$project$Iphod_Models$ESVresp,
+	A2(_elm_lang$core$Json_Decode$field, 'query', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'canonical', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode$field, 'parsed', _user$project$Iphod$decodeESVparsed),
+	A2(_elm_lang$core$Json_Decode$field, 'passage_meta', _user$project$Iphod$decodeESVmeta),
+	A2(
+		_elm_lang$core$Json_Decode$field,
+		'passages',
+		_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+var _user$project$Iphod$esvHeader = _user$project$Iphod_Models$initESV;
+var _user$project$Iphod$initModel = {
+	month: _user$project$Iphod_Models$initMonth,
+	reflection: _user$project$Iphod_Models$initReflection,
+	lesson1: {ctor: '[]'},
+	lesson2: {ctor: '[]'},
+	lesson3: {ctor: '[]'},
+	lessonRequests: {ctor: '[]'},
+	psalm: {ctor: '[]'},
+	online: true
+};
 var _user$project$Iphod$init = {ctor: '_Tuple2', _0: _user$project$Iphod$initModel, _1: _elm_lang$core$Platform_Cmd$none};
 var _user$project$Iphod$requestReading = _elm_lang$core$Native_Platform.outgoingPort(
 	'requestReading',
 	function (v) {
-		return {section: v.section, version: v.version, ref: v.ref};
+		return _elm_lang$core$Native_List.toArray(v).map(
+			function (v) {
+				return v;
+			});
+	});
+var _user$project$Iphod$requestWEB = _elm_lang$core$Native_Platform.outgoingPort(
+	'requestWEB',
+	function (v) {
+		return {lesson: v.lesson, ref: v.ref, style: v.style, src: v.src, text: v.text};
 	});
 var _user$project$Iphod$requestAltReading = _elm_lang$core$Native_Platform.outgoingPort(
 	'requestAltReading',
@@ -13539,1541 +9728,224 @@ var _user$project$Iphod$requestScrollTop = _elm_lang$core$Native_Platform.outgoi
 	function (v) {
 		return v;
 	});
-var _user$project$Iphod$update = F2(
-	function (msg, model) {
-		var _p1 = msg;
-		switch (_p1.ctor) {
-			case 'NoOp':
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'InitCalendar':
-				return {ctor: '_Tuple2', _0: _p1._0, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'UpdateEU':
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{eu: _p1._0, mp: _user$project$Iphod_Models$initDailyMP, ep: _user$project$Iphod_Models$initDailyEP, reflection: _user$project$Iphod_Models$initReflection});
-				return {
-					ctor: '_Tuple2',
-					_0: newModel,
-					_1: _user$project$Iphod$requestScrollTop('0')
-				};
-			case 'UpdateMP':
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{eu: _user$project$Iphod_Models$sundayInit, mp: _p1._0, ep: _user$project$Iphod_Models$initDailyEP, reflection: _user$project$Iphod_Models$initReflection});
-				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'UpdateEP':
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{eu: _user$project$Iphod_Models$sundayInit, mp: _user$project$Iphod_Models$initDailyMP, ep: _p1._0, reflection: _user$project$Iphod_Models$initReflection});
-				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'UpdateReflection':
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{eu: _user$project$Iphod_Models$sundayInit, mp: _user$project$Iphod_Models$initDailyMP, ep: _user$project$Iphod_Models$initDailyEP, reflection: _p1._0});
-				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'UpdateLesson':
-				var _p2 = _p1._0;
-				var section = A2(
-					_elm_lang$core$Maybe$withDefault,
-					_user$project$Iphod_Models$initLesson,
-					_elm_lang$core$List$head(_p2)).section;
-				var newModel = A3(_user$project$Iphod$setLesson, model, section, _p2);
-				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'ModEU':
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{
-						eu: A2(_user$project$Iphod_Sunday$update, _p1._0, model.eu)
-					});
-				var newCmd = _elm_lang$core$String$isEmpty(newModel.eu.sectionUpdate.ref) ? _elm_lang$core$Platform_Cmd$none : _user$project$Iphod$requestReading(newModel.eu.sectionUpdate);
-				return {ctor: '_Tuple2', _0: newModel, _1: newCmd};
-			case 'ModMP':
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{
-						mp: A2(_user$project$Iphod_MPReading$update, _p1._0, model.mp)
-					});
-				var newCmd = _elm_lang$core$String$isEmpty(newModel.mp.sectionUpdate.ref) ? _elm_lang$core$Platform_Cmd$none : _user$project$Iphod$requestReading(newModel.mp.sectionUpdate);
-				return {ctor: '_Tuple2', _0: newModel, _1: newCmd};
-			default:
-				var newModel = _elm_lang$core$Native_Utils.update(
-					model,
-					{
-						ep: A2(_user$project$Iphod_EPReading$update, _p1._0, model.ep)
-					});
-				var newCmd = _elm_lang$core$String$isEmpty(newModel.ep.sectionUpdate.ref) ? _elm_lang$core$Platform_Cmd$none : _user$project$Iphod$requestReading(newModel.ep.sectionUpdate);
-				return {ctor: '_Tuple2', _0: newModel, _1: newCmd};
-		}
-	});
-var _user$project$Iphod$portCalendar = _elm_lang$core$Native_Platform.incomingPort(
-	'portCalendar',
+var _user$project$Iphod$portMonth = _elm_lang$core$Native_Platform.incomingPort(
+	'portMonth',
 	A2(
 		_elm_lang$core$Json_Decode$andThen,
-		function (eu) {
-			return A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (mp) {
-					return A2(
-						_elm_lang$core$Json_Decode$andThen,
-						function (ep) {
-							return A2(
-								_elm_lang$core$Json_Decode$andThen,
-								function (reflection) {
-									return _elm_lang$core$Json_Decode$succeed(
-										{eu: eu, mp: mp, ep: ep, reflection: reflection});
-								},
-								A2(
-									_elm_lang$core$Json_Decode$field,
-									'reflection',
-									A2(
-										_elm_lang$core$Json_Decode$andThen,
-										function (author) {
-											return A2(
-												_elm_lang$core$Json_Decode$andThen,
-												function (markdown) {
-													return _elm_lang$core$Json_Decode$succeed(
-														{author: author, markdown: markdown});
-												},
-												A2(_elm_lang$core$Json_Decode$field, 'markdown', _elm_lang$core$Json_Decode$string));
-										},
-										A2(_elm_lang$core$Json_Decode$field, 'author', _elm_lang$core$Json_Decode$string))));
-						},
-						A2(
-							_elm_lang$core$Json_Decode$field,
-							'ep',
+		function (weeks) {
+			return _elm_lang$core$Json_Decode$succeed(
+				{weeks: weeks});
+		},
+		A2(
+			_elm_lang$core$Json_Decode$field,
+			'weeks',
+			_elm_lang$core$Json_Decode$list(
+				A2(
+					_elm_lang$core$Json_Decode$andThen,
+					function (days) {
+						return _elm_lang$core$Json_Decode$succeed(
+							{days: days});
+					},
+					A2(
+						_elm_lang$core$Json_Decode$field,
+						'days',
+						_elm_lang$core$Json_Decode$list(
 							A2(
 								_elm_lang$core$Json_Decode$andThen,
-								function (colors) {
+								function (eu) {
 									return A2(
 										_elm_lang$core$Json_Decode$andThen,
-										function (date) {
+										function (daily) {
 											return A2(
 												_elm_lang$core$Json_Decode$andThen,
-												function (day) {
+												function (dailyPsalms) {
 													return A2(
 														_elm_lang$core$Json_Decode$andThen,
-														function (season) {
+														function (date) {
 															return A2(
 																_elm_lang$core$Json_Decode$andThen,
-																function (title) {
+																function (monthDay) {
 																	return A2(
 																		_elm_lang$core$Json_Decode$andThen,
-																		function (week) {
+																		function (season) {
 																			return A2(
 																				_elm_lang$core$Json_Decode$andThen,
-																				function (config) {
+																				function (week) {
+																					return A2(
+																						_elm_lang$core$Json_Decode$andThen,
+																						function (colors) {
+																							return A2(
+																								_elm_lang$core$Json_Decode$andThen,
+																								function (rld) {
+																									return A2(
+																										_elm_lang$core$Json_Decode$andThen,
+																										function (title) {
+																											return _elm_lang$core$Json_Decode$succeed(
+																												{eu: eu, daily: daily, dailyPsalms: dailyPsalms, date: date, monthDay: monthDay, season: season, week: week, colors: colors, rld: rld, title: title});
+																										},
+																										A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
+																								},
+																								A2(_elm_lang$core$Json_Decode$field, 'rld', _elm_lang$core$Json_Decode$bool));
+																						},
+																						A2(
+																							_elm_lang$core$Json_Decode$field,
+																							'colors',
+																							_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+																				},
+																				A2(_elm_lang$core$Json_Decode$field, 'week', _elm_lang$core$Json_Decode$string));
+																		},
+																		A2(_elm_lang$core$Json_Decode$field, 'season', _elm_lang$core$Json_Decode$string));
+																},
+																A2(_elm_lang$core$Json_Decode$field, 'monthDay', _elm_lang$core$Json_Decode$string));
+														},
+														A2(_elm_lang$core$Json_Decode$field, 'date', _elm_lang$core$Json_Decode$string));
+												},
+												A2(
+													_elm_lang$core$Json_Decode$field,
+													'dailyPsalms',
+													A2(
+														_elm_lang$core$Json_Decode$andThen,
+														function (mp) {
+															return A2(
+																_elm_lang$core$Json_Decode$andThen,
+																function (ep) {
+																	return _elm_lang$core$Json_Decode$succeed(
+																		{mp: mp, ep: ep});
+																},
+																A2(
+																	_elm_lang$core$Json_Decode$field,
+																	'ep',
+																	_elm_lang$core$Json_Decode$list(
+																		A2(
+																			_elm_lang$core$Json_Decode$andThen,
+																			function (style) {
+																				return A2(
+																					_elm_lang$core$Json_Decode$andThen,
+																					function (read) {
+																						return _elm_lang$core$Json_Decode$succeed(
+																							{style: style, read: read});
+																					},
+																					A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
+																			},
+																			A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
+														},
+														A2(
+															_elm_lang$core$Json_Decode$field,
+															'mp',
+															_elm_lang$core$Json_Decode$list(
+																A2(
+																	_elm_lang$core$Json_Decode$andThen,
+																	function (style) {
+																		return A2(
+																			_elm_lang$core$Json_Decode$andThen,
+																			function (read) {
+																				return _elm_lang$core$Json_Decode$succeed(
+																					{style: style, read: read});
+																			},
+																			A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
+																	},
+																	A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))))));
+										},
+										A2(
+											_elm_lang$core$Json_Decode$field,
+											'daily',
+											A2(
+												_elm_lang$core$Json_Decode$andThen,
+												function (title) {
+													return A2(
+														_elm_lang$core$Json_Decode$andThen,
+														function (mp1) {
+															return A2(
+																_elm_lang$core$Json_Decode$andThen,
+																function (mp2) {
+																	return A2(
+																		_elm_lang$core$Json_Decode$andThen,
+																		function (ep1) {
+																			return A2(
+																				_elm_lang$core$Json_Decode$andThen,
+																				function (ep2) {
 																					return A2(
 																						_elm_lang$core$Json_Decode$andThen,
 																						function (show) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (collect) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (ep1) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (ep2) {
-																													return A2(
-																														_elm_lang$core$Json_Decode$andThen,
-																														function (epp) {
-																															return A2(
-																																_elm_lang$core$Json_Decode$andThen,
-																																function (sectionUpdate) {
-																																	return _elm_lang$core$Json_Decode$succeed(
-																																		{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, ep1: ep1, ep2: ep2, epp: epp, sectionUpdate: sectionUpdate});
-																																},
-																																A2(
-																																	_elm_lang$core$Json_Decode$field,
-																																	'sectionUpdate',
-																																	A2(
-																																		_elm_lang$core$Json_Decode$andThen,
-																																		function (section) {
-																																			return A2(
-																																				_elm_lang$core$Json_Decode$andThen,
-																																				function (version) {
-																																					return A2(
-																																						_elm_lang$core$Json_Decode$andThen,
-																																						function (ref) {
-																																							return _elm_lang$core$Json_Decode$succeed(
-																																								{section: section, version: version, ref: ref});
-																																						},
-																																						A2(_elm_lang$core$Json_Decode$field, 'ref', _elm_lang$core$Json_Decode$string));
-																																				},
-																																				A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																		},
-																																		A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string))));
-																														},
-																														A2(
-																															_elm_lang$core$Json_Decode$field,
-																															'epp',
-																															_elm_lang$core$Json_Decode$list(
-																																A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (style) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (show) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (show_fn) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (show_vn) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (read) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (body) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (id) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (section) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (version) {
-																																																		return A2(
-																																																			_elm_lang$core$Json_Decode$andThen,
-																																																			function (altRead) {
-																																																				return A2(
-																																																					_elm_lang$core$Json_Decode$andThen,
-																																																					function (notes) {
-																																																						return A2(
-																																																							_elm_lang$core$Json_Decode$andThen,
-																																																							function (cmd) {
-																																																								return _elm_lang$core$Json_Decode$succeed(
-																																																									{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																							},
-																																																							A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																																					},
-																																																					A2(
-																																																						_elm_lang$core$Json_Decode$field,
-																																																						'notes',
-																																																						_elm_lang$core$Json_Decode$list(
-																																																							A2(
-																																																								_elm_lang$core$Json_Decode$andThen,
-																																																								function (reading) {
-																																																									return A2(
-																																																										_elm_lang$core$Json_Decode$andThen,
-																																																										function (text) {
-																																																											return A2(
-																																																												_elm_lang$core$Json_Decode$andThen,
-																																																												function (time) {
-																																																													return _elm_lang$core$Json_Decode$succeed(
-																																																														{reading: reading, text: text, time: time});
-																																																												},
-																																																												A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																										},
-																																																										A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																								},
-																																																								A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																																			},
-																																																			A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																																	},
-																																																	A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																															},
-																																															A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																												},
-																												A2(
-																													_elm_lang$core$Json_Decode$field,
-																													'ep2',
-																													_elm_lang$core$Json_Decode$list(
-																														A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (style) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (show) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (show_fn) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (show_vn) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (read) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (body) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (id) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (section) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (version) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (altRead) {
-																																																		return A2(
-																																																			_elm_lang$core$Json_Decode$andThen,
-																																																			function (notes) {
-																																																				return A2(
-																																																					_elm_lang$core$Json_Decode$andThen,
-																																																					function (cmd) {
-																																																						return _elm_lang$core$Json_Decode$succeed(
-																																																							{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																					},
-																																																					A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																																			},
-																																																			A2(
-																																																				_elm_lang$core$Json_Decode$field,
-																																																				'notes',
-																																																				_elm_lang$core$Json_Decode$list(
-																																																					A2(
-																																																						_elm_lang$core$Json_Decode$andThen,
-																																																						function (reading) {
-																																																							return A2(
-																																																								_elm_lang$core$Json_Decode$andThen,
-																																																								function (text) {
-																																																									return A2(
-																																																										_elm_lang$core$Json_Decode$andThen,
-																																																										function (time) {
-																																																											return _elm_lang$core$Json_Decode$succeed(
-																																																												{reading: reading, text: text, time: time});
-																																																										},
-																																																										A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																								},
-																																																								A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																						},
-																																																						A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																																	},
-																																																	A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																															},
-																																															A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																										},
-																										A2(
-																											_elm_lang$core$Json_Decode$field,
-																											'ep1',
-																											_elm_lang$core$Json_Decode$list(
-																												A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (style) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (show_fn) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (show_vn) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (read) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (body) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (id) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (section) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (version) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (altRead) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (notes) {
-																																																		return A2(
-																																																			_elm_lang$core$Json_Decode$andThen,
-																																																			function (cmd) {
-																																																				return _elm_lang$core$Json_Decode$succeed(
-																																																					{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																			},
-																																																			A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																																	},
-																																																	A2(
-																																																		_elm_lang$core$Json_Decode$field,
-																																																		'notes',
-																																																		_elm_lang$core$Json_Decode$list(
-																																																			A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (reading) {
-																																																					return A2(
-																																																						_elm_lang$core$Json_Decode$andThen,
-																																																						function (text) {
-																																																							return A2(
-																																																								_elm_lang$core$Json_Decode$andThen,
-																																																								function (time) {
-																																																									return _elm_lang$core$Json_Decode$succeed(
-																																																										{reading: reading, text: text, time: time});
-																																																								},
-																																																								A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																						},
-																																																						A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																															},
-																																															A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																								},
-																								A2(
-																									_elm_lang$core$Json_Decode$field,
-																									'collect',
-																									A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (instruction) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (title) {
-																													return A2(
-																														_elm_lang$core$Json_Decode$andThen,
-																														function (collects) {
-																															return A2(
-																																_elm_lang$core$Json_Decode$andThen,
-																																function (show) {
-																																	return _elm_lang$core$Json_Decode$succeed(
-																																		{instruction: instruction, title: title, collects: collects, show: show});
-																																},
-																																A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																														},
-																														A2(
-																															_elm_lang$core$Json_Decode$field,
-																															'collects',
-																															_elm_lang$core$Json_Decode$list(
-																																A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (collect) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (propers) {
-																																				return _elm_lang$core$Json_Decode$succeed(
-																																					{collect: collect, propers: propers});
-																																			},
-																																			A2(
-																																				_elm_lang$core$Json_Decode$field,
-																																				'propers',
-																																				_elm_lang$core$Json_Decode$list(
-																																					A2(
-																																						_elm_lang$core$Json_Decode$andThen,
-																																						function (title) {
-																																							return A2(
-																																								_elm_lang$core$Json_Decode$andThen,
-																																								function (text) {
-																																									return _elm_lang$core$Json_Decode$succeed(
-																																										{title: title, text: text});
-																																								},
-																																								A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																						},
-																																						A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string)))));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'collect', _elm_lang$core$Json_Decode$string)))));
-																												},
-																												A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
-																										},
-																										A2(_elm_lang$core$Json_Decode$field, 'instruction', _elm_lang$core$Json_Decode$string))));
+																							return _elm_lang$core$Json_Decode$succeed(
+																								{title: title, mp1: mp1, mp2: mp2, ep1: ep1, ep2: ep2, show: show});
 																						},
 																						A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
 																				},
 																				A2(
 																					_elm_lang$core$Json_Decode$field,
-																					'config',
-																					A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (ot) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (ps) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (nt) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (gs) {
-																													return A2(
-																														_elm_lang$core$Json_Decode$andThen,
-																														function (fnotes) {
-																															return A2(
-																																_elm_lang$core$Json_Decode$andThen,
-																																function (vers) {
-																																	return A2(
-																																		_elm_lang$core$Json_Decode$andThen,
-																																		function (current) {
-																																			return _elm_lang$core$Json_Decode$succeed(
-																																				{ot: ot, ps: ps, nt: nt, gs: gs, fnotes: fnotes, vers: vers, current: current});
-																																		},
-																																		A2(_elm_lang$core$Json_Decode$field, 'current', _elm_lang$core$Json_Decode$string));
-																																},
-																																A2(
-																																	_elm_lang$core$Json_Decode$field,
-																																	'vers',
-																																	_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
-																														},
-																														A2(_elm_lang$core$Json_Decode$field, 'fnotes', _elm_lang$core$Json_Decode$string));
-																												},
-																												A2(_elm_lang$core$Json_Decode$field, 'gs', _elm_lang$core$Json_Decode$string));
-																										},
-																										A2(_elm_lang$core$Json_Decode$field, 'nt', _elm_lang$core$Json_Decode$string));
-																								},
-																								A2(_elm_lang$core$Json_Decode$field, 'ps', _elm_lang$core$Json_Decode$string));
-																						},
-																						A2(_elm_lang$core$Json_Decode$field, 'ot', _elm_lang$core$Json_Decode$string))));
-																		},
-																		A2(_elm_lang$core$Json_Decode$field, 'week', _elm_lang$core$Json_Decode$string));
-																},
-																A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
-														},
-														A2(_elm_lang$core$Json_Decode$field, 'season', _elm_lang$core$Json_Decode$string));
-												},
-												A2(_elm_lang$core$Json_Decode$field, 'day', _elm_lang$core$Json_Decode$string));
-										},
-										A2(_elm_lang$core$Json_Decode$field, 'date', _elm_lang$core$Json_Decode$string));
-								},
-								A2(
-									_elm_lang$core$Json_Decode$field,
-									'colors',
-									_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)))));
-				},
-				A2(
-					_elm_lang$core$Json_Decode$field,
-					'mp',
-					A2(
-						_elm_lang$core$Json_Decode$andThen,
-						function (colors) {
-							return A2(
-								_elm_lang$core$Json_Decode$andThen,
-								function (date) {
-									return A2(
-										_elm_lang$core$Json_Decode$andThen,
-										function (day) {
-											return A2(
-												_elm_lang$core$Json_Decode$andThen,
-												function (season) {
-													return A2(
-														_elm_lang$core$Json_Decode$andThen,
-														function (title) {
-															return A2(
-																_elm_lang$core$Json_Decode$andThen,
-																function (week) {
-																	return A2(
-																		_elm_lang$core$Json_Decode$andThen,
-																		function (config) {
-																			return A2(
-																				_elm_lang$core$Json_Decode$andThen,
-																				function (show) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (collect) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (mp1) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (mp2) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (mpp) {
-																													return A2(
-																														_elm_lang$core$Json_Decode$andThen,
-																														function (sectionUpdate) {
-																															return _elm_lang$core$Json_Decode$succeed(
-																																{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, mp1: mp1, mp2: mp2, mpp: mpp, sectionUpdate: sectionUpdate});
-																														},
-																														A2(
-																															_elm_lang$core$Json_Decode$field,
-																															'sectionUpdate',
-																															A2(
-																																_elm_lang$core$Json_Decode$andThen,
-																																function (section) {
-																																	return A2(
-																																		_elm_lang$core$Json_Decode$andThen,
-																																		function (version) {
-																																			return A2(
-																																				_elm_lang$core$Json_Decode$andThen,
-																																				function (ref) {
-																																					return _elm_lang$core$Json_Decode$succeed(
-																																						{section: section, version: version, ref: ref});
-																																				},
-																																				A2(_elm_lang$core$Json_Decode$field, 'ref', _elm_lang$core$Json_Decode$string));
-																																		},
-																																		A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																},
-																																A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string))));
-																												},
-																												A2(
-																													_elm_lang$core$Json_Decode$field,
-																													'mpp',
-																													_elm_lang$core$Json_Decode$list(
-																														A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (style) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (show) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (show_fn) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (show_vn) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (read) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (body) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (id) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (section) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (version) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (altRead) {
-																																																		return A2(
-																																																			_elm_lang$core$Json_Decode$andThen,
-																																																			function (notes) {
-																																																				return A2(
-																																																					_elm_lang$core$Json_Decode$andThen,
-																																																					function (cmd) {
-																																																						return _elm_lang$core$Json_Decode$succeed(
-																																																							{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																					},
-																																																					A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																																			},
-																																																			A2(
-																																																				_elm_lang$core$Json_Decode$field,
-																																																				'notes',
-																																																				_elm_lang$core$Json_Decode$list(
-																																																					A2(
-																																																						_elm_lang$core$Json_Decode$andThen,
-																																																						function (reading) {
-																																																							return A2(
-																																																								_elm_lang$core$Json_Decode$andThen,
-																																																								function (text) {
-																																																									return A2(
-																																																										_elm_lang$core$Json_Decode$andThen,
-																																																										function (time) {
-																																																											return _elm_lang$core$Json_Decode$succeed(
-																																																												{reading: reading, text: text, time: time});
-																																																										},
-																																																										A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																								},
-																																																								A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																						},
-																																																						A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																																	},
-																																																	A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																															},
-																																															A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																										},
-																										A2(
-																											_elm_lang$core$Json_Decode$field,
-																											'mp2',
-																											_elm_lang$core$Json_Decode$list(
-																												A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (style) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (show_fn) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (show_vn) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (read) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (body) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (id) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (section) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (version) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (altRead) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (notes) {
-																																																		return A2(
-																																																			_elm_lang$core$Json_Decode$andThen,
-																																																			function (cmd) {
-																																																				return _elm_lang$core$Json_Decode$succeed(
-																																																					{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																			},
-																																																			A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																																	},
-																																																	A2(
-																																																		_elm_lang$core$Json_Decode$field,
-																																																		'notes',
-																																																		_elm_lang$core$Json_Decode$list(
-																																																			A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (reading) {
-																																																					return A2(
-																																																						_elm_lang$core$Json_Decode$andThen,
-																																																						function (text) {
-																																																							return A2(
-																																																								_elm_lang$core$Json_Decode$andThen,
-																																																								function (time) {
-																																																									return _elm_lang$core$Json_Decode$succeed(
-																																																										{reading: reading, text: text, time: time});
-																																																								},
-																																																								A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																						},
-																																																						A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																															},
-																																															A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																								},
-																								A2(
-																									_elm_lang$core$Json_Decode$field,
-																									'mp1',
-																									_elm_lang$core$Json_Decode$list(
-																										A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (style) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (show) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show_fn) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (show_vn) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (read) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (body) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (id) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (section) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (version) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (altRead) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (notes) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (cmd) {
-																																																		return _elm_lang$core$Json_Decode$succeed(
-																																																			{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																	},
-																																																	A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																															},
-																																															A2(
-																																																_elm_lang$core$Json_Decode$field,
-																																																'notes',
-																																																_elm_lang$core$Json_Decode$list(
-																																																	A2(
-																																																		_elm_lang$core$Json_Decode$andThen,
-																																																		function (reading) {
-																																																			return A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (text) {
-																																																					return A2(
-																																																						_elm_lang$core$Json_Decode$andThen,
-																																																						function (time) {
-																																																							return _elm_lang$core$Json_Decode$succeed(
-																																																								{reading: reading, text: text, time: time});
-																																																						},
-																																																						A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																		},
-																																																		A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																						},
+																					'ep2',
+																					_elm_lang$core$Json_Decode$list(
 																						A2(
-																							_elm_lang$core$Json_Decode$field,
-																							'collect',
-																							A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (instruction) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (title) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (collects) {
-																													return A2(
-																														_elm_lang$core$Json_Decode$andThen,
-																														function (show) {
-																															return _elm_lang$core$Json_Decode$succeed(
-																																{instruction: instruction, title: title, collects: collects, show: show});
-																														},
-																														A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																												},
-																												A2(
-																													_elm_lang$core$Json_Decode$field,
-																													'collects',
-																													_elm_lang$core$Json_Decode$list(
-																														A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (collect) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (propers) {
-																																		return _elm_lang$core$Json_Decode$succeed(
-																																			{collect: collect, propers: propers});
-																																	},
-																																	A2(
-																																		_elm_lang$core$Json_Decode$field,
-																																		'propers',
-																																		_elm_lang$core$Json_Decode$list(
-																																			A2(
-																																				_elm_lang$core$Json_Decode$andThen,
-																																				function (title) {
-																																					return A2(
-																																						_elm_lang$core$Json_Decode$andThen,
-																																						function (text) {
-																																							return _elm_lang$core$Json_Decode$succeed(
-																																								{title: title, text: text});
-																																						},
-																																						A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																				},
-																																				A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string)))));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'collect', _elm_lang$core$Json_Decode$string)))));
-																										},
-																										A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
-																								},
-																								A2(_elm_lang$core$Json_Decode$field, 'instruction', _elm_lang$core$Json_Decode$string))));
-																				},
-																				A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																		},
-																		A2(
-																			_elm_lang$core$Json_Decode$field,
-																			'config',
-																			A2(
-																				_elm_lang$core$Json_Decode$andThen,
-																				function (ot) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (ps) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (nt) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (gs) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (fnotes) {
-																													return A2(
-																														_elm_lang$core$Json_Decode$andThen,
-																														function (vers) {
-																															return A2(
-																																_elm_lang$core$Json_Decode$andThen,
-																																function (current) {
-																																	return _elm_lang$core$Json_Decode$succeed(
-																																		{ot: ot, ps: ps, nt: nt, gs: gs, fnotes: fnotes, vers: vers, current: current});
-																																},
-																																A2(_elm_lang$core$Json_Decode$field, 'current', _elm_lang$core$Json_Decode$string));
-																														},
-																														A2(
-																															_elm_lang$core$Json_Decode$field,
-																															'vers',
-																															_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
-																												},
-																												A2(_elm_lang$core$Json_Decode$field, 'fnotes', _elm_lang$core$Json_Decode$string));
-																										},
-																										A2(_elm_lang$core$Json_Decode$field, 'gs', _elm_lang$core$Json_Decode$string));
-																								},
-																								A2(_elm_lang$core$Json_Decode$field, 'nt', _elm_lang$core$Json_Decode$string));
-																						},
-																						A2(_elm_lang$core$Json_Decode$field, 'ps', _elm_lang$core$Json_Decode$string));
-																				},
-																				A2(_elm_lang$core$Json_Decode$field, 'ot', _elm_lang$core$Json_Decode$string))));
-																},
-																A2(_elm_lang$core$Json_Decode$field, 'week', _elm_lang$core$Json_Decode$string));
-														},
-														A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
-												},
-												A2(_elm_lang$core$Json_Decode$field, 'season', _elm_lang$core$Json_Decode$string));
-										},
-										A2(_elm_lang$core$Json_Decode$field, 'day', _elm_lang$core$Json_Decode$string));
-								},
-								A2(_elm_lang$core$Json_Decode$field, 'date', _elm_lang$core$Json_Decode$string));
-						},
-						A2(
-							_elm_lang$core$Json_Decode$field,
-							'colors',
-							_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)))));
-		},
-		A2(
-			_elm_lang$core$Json_Decode$field,
-			'eu',
-			A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (ofType) {
-					return A2(
-						_elm_lang$core$Json_Decode$andThen,
-						function (date) {
-							return A2(
-								_elm_lang$core$Json_Decode$andThen,
-								function (season) {
-									return A2(
-										_elm_lang$core$Json_Decode$andThen,
-										function (week) {
-											return A2(
-												_elm_lang$core$Json_Decode$andThen,
-												function (title) {
-													return A2(
-														_elm_lang$core$Json_Decode$andThen,
-														function (show) {
-															return A2(
-																_elm_lang$core$Json_Decode$andThen,
-																function (config) {
-																	return A2(
-																		_elm_lang$core$Json_Decode$andThen,
-																		function (colors) {
-																			return A2(
-																				_elm_lang$core$Json_Decode$andThen,
-																				function (collect) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (ot) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (ps) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (nt) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (gs) {
-																													return A2(
-																														_elm_lang$core$Json_Decode$andThen,
-																														function (sectionUpdate) {
-																															return _elm_lang$core$Json_Decode$succeed(
-																																{ofType: ofType, date: date, season: season, week: week, title: title, show: show, config: config, colors: colors, collect: collect, ot: ot, ps: ps, nt: nt, gs: gs, sectionUpdate: sectionUpdate});
-																														},
-																														A2(
-																															_elm_lang$core$Json_Decode$field,
-																															'sectionUpdate',
-																															A2(
-																																_elm_lang$core$Json_Decode$andThen,
-																																function (section) {
-																																	return A2(
-																																		_elm_lang$core$Json_Decode$andThen,
-																																		function (version) {
-																																			return A2(
-																																				_elm_lang$core$Json_Decode$andThen,
-																																				function (ref) {
-																																					return _elm_lang$core$Json_Decode$succeed(
-																																						{section: section, version: version, ref: ref});
-																																				},
-																																				A2(_elm_lang$core$Json_Decode$field, 'ref', _elm_lang$core$Json_Decode$string));
-																																		},
-																																		A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																},
-																																A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string))));
-																												},
-																												A2(
-																													_elm_lang$core$Json_Decode$field,
-																													'gs',
-																													_elm_lang$core$Json_Decode$list(
-																														A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (style) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (show) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (show_fn) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (show_vn) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (read) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (body) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (id) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (section) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (version) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (altRead) {
-																																																		return A2(
-																																																			_elm_lang$core$Json_Decode$andThen,
-																																																			function (notes) {
-																																																				return A2(
-																																																					_elm_lang$core$Json_Decode$andThen,
-																																																					function (cmd) {
-																																																						return _elm_lang$core$Json_Decode$succeed(
-																																																							{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																					},
-																																																					A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																																			},
-																																																			A2(
-																																																				_elm_lang$core$Json_Decode$field,
-																																																				'notes',
-																																																				_elm_lang$core$Json_Decode$list(
-																																																					A2(
-																																																						_elm_lang$core$Json_Decode$andThen,
-																																																						function (reading) {
-																																																							return A2(
-																																																								_elm_lang$core$Json_Decode$andThen,
-																																																								function (text) {
-																																																									return A2(
-																																																										_elm_lang$core$Json_Decode$andThen,
-																																																										function (time) {
-																																																											return _elm_lang$core$Json_Decode$succeed(
-																																																												{reading: reading, text: text, time: time});
-																																																										},
-																																																										A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																								},
-																																																								A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																						},
-																																																						A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																																	},
-																																																	A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																															},
-																																															A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																										},
-																										A2(
-																											_elm_lang$core$Json_Decode$field,
-																											'nt',
-																											_elm_lang$core$Json_Decode$list(
-																												A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (style) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (show_fn) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (show_vn) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (read) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (body) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (id) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (section) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (version) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (altRead) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (notes) {
-																																																		return A2(
-																																																			_elm_lang$core$Json_Decode$andThen,
-																																																			function (cmd) {
-																																																				return _elm_lang$core$Json_Decode$succeed(
-																																																					{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																			},
-																																																			A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																																	},
-																																																	A2(
-																																																		_elm_lang$core$Json_Decode$field,
-																																																		'notes',
-																																																		_elm_lang$core$Json_Decode$list(
-																																																			A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (reading) {
-																																																					return A2(
-																																																						_elm_lang$core$Json_Decode$andThen,
-																																																						function (text) {
-																																																							return A2(
-																																																								_elm_lang$core$Json_Decode$andThen,
-																																																								function (time) {
-																																																									return _elm_lang$core$Json_Decode$succeed(
-																																																										{reading: reading, text: text, time: time});
-																																																								},
-																																																								A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																						},
-																																																						A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																															},
-																																															A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																								},
-																								A2(
-																									_elm_lang$core$Json_Decode$field,
-																									'ps',
-																									_elm_lang$core$Json_Decode$list(
-																										A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (style) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (show) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show_fn) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (show_vn) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (read) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (body) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (id) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (section) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (version) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (altRead) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (notes) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (cmd) {
-																																																		return _elm_lang$core$Json_Decode$succeed(
-																																																			{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																	},
-																																																	A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																															},
-																																															A2(
-																																																_elm_lang$core$Json_Decode$field,
-																																																'notes',
-																																																_elm_lang$core$Json_Decode$list(
-																																																	A2(
-																																																		_elm_lang$core$Json_Decode$andThen,
-																																																		function (reading) {
-																																																			return A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (text) {
-																																																					return A2(
-																																																						_elm_lang$core$Json_Decode$andThen,
-																																																						function (time) {
-																																																							return _elm_lang$core$Json_Decode$succeed(
-																																																								{reading: reading, text: text, time: time});
-																																																						},
-																																																						A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																		},
-																																																		A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																						},
-																						A2(
-																							_elm_lang$core$Json_Decode$field,
-																							'ot',
-																							_elm_lang$core$Json_Decode$list(
-																								A2(
+																							_elm_lang$core$Json_Decode$andThen,
+																							function (style) {
+																								return A2(
 																									_elm_lang$core$Json_Decode$andThen,
-																									function (style) {
-																										return A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (show) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (show_fn) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show_vn) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (read) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (body) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (id) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (section) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (version) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (altRead) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (notes) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (cmd) {
-																																																return _elm_lang$core$Json_Decode$succeed(
-																																																	{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																															},
-																																															A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																													},
-																																													A2(
-																																														_elm_lang$core$Json_Decode$field,
-																																														'notes',
-																																														_elm_lang$core$Json_Decode$list(
-																																															A2(
-																																																_elm_lang$core$Json_Decode$andThen,
-																																																function (reading) {
-																																																	return A2(
-																																																		_elm_lang$core$Json_Decode$andThen,
-																																																		function (text) {
-																																																			return A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (time) {
-																																																					return _elm_lang$core$Json_Decode$succeed(
-																																																						{reading: reading, text: text, time: time});
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																		},
-																																																		A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																},
-																																																A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
+																									function (read) {
+																										return _elm_lang$core$Json_Decode$succeed(
+																											{style: style, read: read});
 																									},
-																									A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																				},
-																				A2(
-																					_elm_lang$core$Json_Decode$field,
-																					'collect',
-																					A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (instruction) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (title) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (collects) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (show) {
-																													return _elm_lang$core$Json_Decode$succeed(
-																														{instruction: instruction, title: title, collects: collects, show: show});
-																												},
-																												A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																										},
-																										A2(
-																											_elm_lang$core$Json_Decode$field,
-																											'collects',
-																											_elm_lang$core$Json_Decode$list(
-																												A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (collect) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (propers) {
-																																return _elm_lang$core$Json_Decode$succeed(
-																																	{collect: collect, propers: propers});
-																															},
-																															A2(
-																																_elm_lang$core$Json_Decode$field,
-																																'propers',
-																																_elm_lang$core$Json_Decode$list(
-																																	A2(
-																																		_elm_lang$core$Json_Decode$andThen,
-																																		function (title) {
-																																			return A2(
-																																				_elm_lang$core$Json_Decode$andThen,
-																																				function (text) {
-																																					return _elm_lang$core$Json_Decode$succeed(
-																																						{title: title, text: text});
-																																				},
-																																				A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																		},
-																																		A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string)))));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'collect', _elm_lang$core$Json_Decode$string)))));
-																								},
-																								A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
-																						},
-																						A2(_elm_lang$core$Json_Decode$field, 'instruction', _elm_lang$core$Json_Decode$string))));
+																									A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
+																							},
+																							A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
 																		},
 																		A2(
 																			_elm_lang$core$Json_Decode$field,
-																			'colors',
-																			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+																			'ep1',
+																			_elm_lang$core$Json_Decode$list(
+																				A2(
+																					_elm_lang$core$Json_Decode$andThen,
+																					function (style) {
+																						return A2(
+																							_elm_lang$core$Json_Decode$andThen,
+																							function (read) {
+																								return _elm_lang$core$Json_Decode$succeed(
+																									{style: style, read: read});
+																							},
+																							A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
+																					},
+																					A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
 																},
 																A2(
 																	_elm_lang$core$Json_Decode$field,
-																	'config',
-																	A2(
-																		_elm_lang$core$Json_Decode$andThen,
-																		function (ot) {
-																			return A2(
-																				_elm_lang$core$Json_Decode$andThen,
-																				function (ps) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (nt) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (gs) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (fnotes) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (vers) {
-																													return A2(
-																														_elm_lang$core$Json_Decode$andThen,
-																														function (current) {
-																															return _elm_lang$core$Json_Decode$succeed(
-																																{ot: ot, ps: ps, nt: nt, gs: gs, fnotes: fnotes, vers: vers, current: current});
-																														},
-																														A2(_elm_lang$core$Json_Decode$field, 'current', _elm_lang$core$Json_Decode$string));
-																												},
-																												A2(
-																													_elm_lang$core$Json_Decode$field,
-																													'vers',
-																													_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
-																										},
-																										A2(_elm_lang$core$Json_Decode$field, 'fnotes', _elm_lang$core$Json_Decode$string));
-																								},
-																								A2(_elm_lang$core$Json_Decode$field, 'gs', _elm_lang$core$Json_Decode$string));
-																						},
-																						A2(_elm_lang$core$Json_Decode$field, 'nt', _elm_lang$core$Json_Decode$string));
-																				},
-																				A2(_elm_lang$core$Json_Decode$field, 'ps', _elm_lang$core$Json_Decode$string));
-																		},
-																		A2(_elm_lang$core$Json_Decode$field, 'ot', _elm_lang$core$Json_Decode$string))));
+																	'mp2',
+																	_elm_lang$core$Json_Decode$list(
+																		A2(
+																			_elm_lang$core$Json_Decode$andThen,
+																			function (style) {
+																				return A2(
+																					_elm_lang$core$Json_Decode$andThen,
+																					function (read) {
+																						return _elm_lang$core$Json_Decode$succeed(
+																							{style: style, read: read});
+																					},
+																					A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
+																			},
+																			A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
 														},
-														A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
+														A2(
+															_elm_lang$core$Json_Decode$field,
+															'mp1',
+															_elm_lang$core$Json_Decode$list(
+																A2(
+																	_elm_lang$core$Json_Decode$andThen,
+																	function (style) {
+																		return A2(
+																			_elm_lang$core$Json_Decode$andThen,
+																			function (read) {
+																				return _elm_lang$core$Json_Decode$succeed(
+																					{style: style, read: read});
+																			},
+																			A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
+																	},
+																	A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
 												},
-												A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
-										},
-										A2(_elm_lang$core$Json_Decode$field, 'week', _elm_lang$core$Json_Decode$string));
+												A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string))));
 								},
-								A2(_elm_lang$core$Json_Decode$field, 'season', _elm_lang$core$Json_Decode$string));
-						},
-						A2(_elm_lang$core$Json_Decode$field, 'date', _elm_lang$core$Json_Decode$string));
-				},
-				A2(_elm_lang$core$Json_Decode$field, 'ofType', _elm_lang$core$Json_Decode$string)))));
-var _user$project$Iphod$portEU = _elm_lang$core$Native_Platform.incomingPort(
-	'portEU',
-	A2(
-		_elm_lang$core$Json_Decode$andThen,
-		function (ofType) {
-			return A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (date) {
-					return A2(
-						_elm_lang$core$Json_Decode$andThen,
-						function (season) {
-							return A2(
-								_elm_lang$core$Json_Decode$andThen,
-								function (week) {
-									return A2(
+								A2(
+									_elm_lang$core$Json_Decode$field,
+									'eu',
+									A2(
 										_elm_lang$core$Json_Decode$andThen,
 										function (title) {
 											return A2(
@@ -15081,1485 +9953,157 @@ var _user$project$Iphod$portEU = _elm_lang$core$Native_Platform.incomingPort(
 												function (show) {
 													return A2(
 														_elm_lang$core$Json_Decode$andThen,
-														function (config) {
+														function (colors) {
 															return A2(
 																_elm_lang$core$Json_Decode$andThen,
-																function (colors) {
+																function (ot) {
 																	return A2(
 																		_elm_lang$core$Json_Decode$andThen,
-																		function (collect) {
+																		function (ps) {
 																			return A2(
 																				_elm_lang$core$Json_Decode$andThen,
-																				function (ot) {
+																				function (nt) {
 																					return A2(
 																						_elm_lang$core$Json_Decode$andThen,
-																						function (ps) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (nt) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (gs) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (sectionUpdate) {
-																													return _elm_lang$core$Json_Decode$succeed(
-																														{ofType: ofType, date: date, season: season, week: week, title: title, show: show, config: config, colors: colors, collect: collect, ot: ot, ps: ps, nt: nt, gs: gs, sectionUpdate: sectionUpdate});
-																												},
-																												A2(
-																													_elm_lang$core$Json_Decode$field,
-																													'sectionUpdate',
-																													A2(
-																														_elm_lang$core$Json_Decode$andThen,
-																														function (section) {
-																															return A2(
-																																_elm_lang$core$Json_Decode$andThen,
-																																function (version) {
-																																	return A2(
-																																		_elm_lang$core$Json_Decode$andThen,
-																																		function (ref) {
-																																			return _elm_lang$core$Json_Decode$succeed(
-																																				{section: section, version: version, ref: ref});
-																																		},
-																																		A2(_elm_lang$core$Json_Decode$field, 'ref', _elm_lang$core$Json_Decode$string));
-																																},
-																																A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																														},
-																														A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string))));
-																										},
-																										A2(
-																											_elm_lang$core$Json_Decode$field,
-																											'gs',
-																											_elm_lang$core$Json_Decode$list(
-																												A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (style) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (show_fn) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (show_vn) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (read) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (body) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (id) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (section) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (version) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (altRead) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (notes) {
-																																																		return A2(
-																																																			_elm_lang$core$Json_Decode$andThen,
-																																																			function (cmd) {
-																																																				return _elm_lang$core$Json_Decode$succeed(
-																																																					{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																			},
-																																																			A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																																	},
-																																																	A2(
-																																																		_elm_lang$core$Json_Decode$field,
-																																																		'notes',
-																																																		_elm_lang$core$Json_Decode$list(
-																																																			A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (reading) {
-																																																					return A2(
-																																																						_elm_lang$core$Json_Decode$andThen,
-																																																						function (text) {
-																																																							return A2(
-																																																								_elm_lang$core$Json_Decode$andThen,
-																																																								function (time) {
-																																																									return _elm_lang$core$Json_Decode$succeed(
-																																																										{reading: reading, text: text, time: time});
-																																																								},
-																																																								A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																						},
-																																																						A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																															},
-																																															A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																								},
-																								A2(
-																									_elm_lang$core$Json_Decode$field,
-																									'nt',
-																									_elm_lang$core$Json_Decode$list(
-																										A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (style) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (show) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show_fn) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (show_vn) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (read) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (body) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (id) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (section) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (version) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (altRead) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (notes) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (cmd) {
-																																																		return _elm_lang$core$Json_Decode$succeed(
-																																																			{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																	},
-																																																	A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																															},
-																																															A2(
-																																																_elm_lang$core$Json_Decode$field,
-																																																'notes',
-																																																_elm_lang$core$Json_Decode$list(
-																																																	A2(
-																																																		_elm_lang$core$Json_Decode$andThen,
-																																																		function (reading) {
-																																																			return A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (text) {
-																																																					return A2(
-																																																						_elm_lang$core$Json_Decode$andThen,
-																																																						function (time) {
-																																																							return _elm_lang$core$Json_Decode$succeed(
-																																																								{reading: reading, text: text, time: time});
-																																																						},
-																																																						A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																		},
-																																																		A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
+																						function (gs) {
+																							return _elm_lang$core$Json_Decode$succeed(
+																								{title: title, show: show, colors: colors, ot: ot, ps: ps, nt: nt, gs: gs});
 																						},
 																						A2(
 																							_elm_lang$core$Json_Decode$field,
-																							'ps',
+																							'gs',
 																							_elm_lang$core$Json_Decode$list(
 																								A2(
 																									_elm_lang$core$Json_Decode$andThen,
 																									function (style) {
 																										return A2(
 																											_elm_lang$core$Json_Decode$andThen,
-																											function (show) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (show_fn) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show_vn) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (read) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (body) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (id) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (section) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (version) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (altRead) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (notes) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (cmd) {
-																																																return _elm_lang$core$Json_Decode$succeed(
-																																																	{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																															},
-																																															A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																													},
-																																													A2(
-																																														_elm_lang$core$Json_Decode$field,
-																																														'notes',
-																																														_elm_lang$core$Json_Decode$list(
-																																															A2(
-																																																_elm_lang$core$Json_Decode$andThen,
-																																																function (reading) {
-																																																	return A2(
-																																																		_elm_lang$core$Json_Decode$andThen,
-																																																		function (text) {
-																																																			return A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (time) {
-																																																					return _elm_lang$core$Json_Decode$succeed(
-																																																						{reading: reading, text: text, time: time});
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																		},
-																																																		A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																},
-																																																A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
+																											function (read) {
+																												return _elm_lang$core$Json_Decode$succeed(
+																													{style: style, read: read});
 																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
+																											A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
 																									},
 																									A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
 																				},
 																				A2(
 																					_elm_lang$core$Json_Decode$field,
-																					'ot',
+																					'nt',
 																					_elm_lang$core$Json_Decode$list(
 																						A2(
 																							_elm_lang$core$Json_Decode$andThen,
 																							function (style) {
 																								return A2(
 																									_elm_lang$core$Json_Decode$andThen,
-																									function (show) {
-																										return A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (show_fn) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (show_vn) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (read) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (body) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (id) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (section) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (version) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (altRead) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (notes) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (cmd) {
-																																														return _elm_lang$core$Json_Decode$succeed(
-																																															{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(
-																																												_elm_lang$core$Json_Decode$field,
-																																												'notes',
-																																												_elm_lang$core$Json_Decode$list(
-																																													A2(
-																																														_elm_lang$core$Json_Decode$andThen,
-																																														function (reading) {
-																																															return A2(
-																																																_elm_lang$core$Json_Decode$andThen,
-																																																function (text) {
-																																																	return A2(
-																																																		_elm_lang$core$Json_Decode$andThen,
-																																																		function (time) {
-																																																			return _elm_lang$core$Json_Decode$succeed(
-																																																				{reading: reading, text: text, time: time});
-																																																		},
-																																																		A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																},
-																																																A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																														},
-																																														A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
+																									function (read) {
+																										return _elm_lang$core$Json_Decode$succeed(
+																											{style: style, read: read});
 																									},
-																									A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
+																									A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
 																							},
 																							A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
 																		},
 																		A2(
 																			_elm_lang$core$Json_Decode$field,
-																			'collect',
-																			A2(
-																				_elm_lang$core$Json_Decode$andThen,
-																				function (instruction) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (title) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (collects) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (show) {
-																											return _elm_lang$core$Json_Decode$succeed(
-																												{instruction: instruction, title: title, collects: collects, show: show});
-																										},
-																										A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																								},
-																								A2(
-																									_elm_lang$core$Json_Decode$field,
-																									'collects',
-																									_elm_lang$core$Json_Decode$list(
-																										A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (collect) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (propers) {
-																														return _elm_lang$core$Json_Decode$succeed(
-																															{collect: collect, propers: propers});
-																													},
-																													A2(
-																														_elm_lang$core$Json_Decode$field,
-																														'propers',
-																														_elm_lang$core$Json_Decode$list(
-																															A2(
-																																_elm_lang$core$Json_Decode$andThen,
-																																function (title) {
-																																	return A2(
-																																		_elm_lang$core$Json_Decode$andThen,
-																																		function (text) {
-																																			return _elm_lang$core$Json_Decode$succeed(
-																																				{title: title, text: text});
-																																		},
-																																		A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																},
-																																A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string)))));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'collect', _elm_lang$core$Json_Decode$string)))));
-																						},
-																						A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
-																				},
-																				A2(_elm_lang$core$Json_Decode$field, 'instruction', _elm_lang$core$Json_Decode$string))));
+																			'ps',
+																			_elm_lang$core$Json_Decode$list(
+																				A2(
+																					_elm_lang$core$Json_Decode$andThen,
+																					function (style) {
+																						return A2(
+																							_elm_lang$core$Json_Decode$andThen,
+																							function (read) {
+																								return _elm_lang$core$Json_Decode$succeed(
+																									{style: style, read: read});
+																							},
+																							A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
+																					},
+																					A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
 																},
 																A2(
 																	_elm_lang$core$Json_Decode$field,
-																	'colors',
-																	_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
+																	'ot',
+																	_elm_lang$core$Json_Decode$list(
+																		A2(
+																			_elm_lang$core$Json_Decode$andThen,
+																			function (style) {
+																				return A2(
+																					_elm_lang$core$Json_Decode$andThen,
+																					function (read) {
+																						return _elm_lang$core$Json_Decode$succeed(
+																							{style: style, read: read});
+																					},
+																					A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
+																			},
+																			A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
 														},
 														A2(
 															_elm_lang$core$Json_Decode$field,
-															'config',
-															A2(
-																_elm_lang$core$Json_Decode$andThen,
-																function (ot) {
-																	return A2(
-																		_elm_lang$core$Json_Decode$andThen,
-																		function (ps) {
-																			return A2(
-																				_elm_lang$core$Json_Decode$andThen,
-																				function (nt) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (gs) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (fnotes) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (vers) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (current) {
-																													return _elm_lang$core$Json_Decode$succeed(
-																														{ot: ot, ps: ps, nt: nt, gs: gs, fnotes: fnotes, vers: vers, current: current});
-																												},
-																												A2(_elm_lang$core$Json_Decode$field, 'current', _elm_lang$core$Json_Decode$string));
-																										},
-																										A2(
-																											_elm_lang$core$Json_Decode$field,
-																											'vers',
-																											_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
-																								},
-																								A2(_elm_lang$core$Json_Decode$field, 'fnotes', _elm_lang$core$Json_Decode$string));
-																						},
-																						A2(_elm_lang$core$Json_Decode$field, 'gs', _elm_lang$core$Json_Decode$string));
-																				},
-																				A2(_elm_lang$core$Json_Decode$field, 'nt', _elm_lang$core$Json_Decode$string));
-																		},
-																		A2(_elm_lang$core$Json_Decode$field, 'ps', _elm_lang$core$Json_Decode$string));
-																},
-																A2(_elm_lang$core$Json_Decode$field, 'ot', _elm_lang$core$Json_Decode$string))));
+															'colors',
+															_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
 												},
 												A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
 										},
-										A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
-								},
-								A2(_elm_lang$core$Json_Decode$field, 'week', _elm_lang$core$Json_Decode$string));
-						},
-						A2(_elm_lang$core$Json_Decode$field, 'season', _elm_lang$core$Json_Decode$string));
-				},
-				A2(_elm_lang$core$Json_Decode$field, 'date', _elm_lang$core$Json_Decode$string));
-		},
-		A2(_elm_lang$core$Json_Decode$field, 'ofType', _elm_lang$core$Json_Decode$string)));
-var _user$project$Iphod$portMP = _elm_lang$core$Native_Platform.incomingPort(
-	'portMP',
-	A2(
-		_elm_lang$core$Json_Decode$andThen,
-		function (colors) {
-			return A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (date) {
-					return A2(
-						_elm_lang$core$Json_Decode$andThen,
-						function (day) {
-							return A2(
-								_elm_lang$core$Json_Decode$andThen,
-								function (season) {
-									return A2(
-										_elm_lang$core$Json_Decode$andThen,
-										function (title) {
-											return A2(
-												_elm_lang$core$Json_Decode$andThen,
-												function (week) {
-													return A2(
-														_elm_lang$core$Json_Decode$andThen,
-														function (config) {
-															return A2(
-																_elm_lang$core$Json_Decode$andThen,
-																function (show) {
-																	return A2(
-																		_elm_lang$core$Json_Decode$andThen,
-																		function (collect) {
-																			return A2(
-																				_elm_lang$core$Json_Decode$andThen,
-																				function (mp1) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (mp2) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (mpp) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (sectionUpdate) {
-																											return _elm_lang$core$Json_Decode$succeed(
-																												{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, mp1: mp1, mp2: mp2, mpp: mpp, sectionUpdate: sectionUpdate});
-																										},
-																										A2(
-																											_elm_lang$core$Json_Decode$field,
-																											'sectionUpdate',
-																											A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (section) {
-																													return A2(
-																														_elm_lang$core$Json_Decode$andThen,
-																														function (version) {
-																															return A2(
-																																_elm_lang$core$Json_Decode$andThen,
-																																function (ref) {
-																																	return _elm_lang$core$Json_Decode$succeed(
-																																		{section: section, version: version, ref: ref});
-																																},
-																																A2(_elm_lang$core$Json_Decode$field, 'ref', _elm_lang$core$Json_Decode$string));
-																														},
-																														A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																												},
-																												A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string))));
-																								},
-																								A2(
-																									_elm_lang$core$Json_Decode$field,
-																									'mpp',
-																									_elm_lang$core$Json_Decode$list(
-																										A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (style) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (show) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show_fn) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (show_vn) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (read) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (body) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (id) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (section) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (version) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (altRead) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (notes) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (cmd) {
-																																																		return _elm_lang$core$Json_Decode$succeed(
-																																																			{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																	},
-																																																	A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																															},
-																																															A2(
-																																																_elm_lang$core$Json_Decode$field,
-																																																'notes',
-																																																_elm_lang$core$Json_Decode$list(
-																																																	A2(
-																																																		_elm_lang$core$Json_Decode$andThen,
-																																																		function (reading) {
-																																																			return A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (text) {
-																																																					return A2(
-																																																						_elm_lang$core$Json_Decode$andThen,
-																																																						function (time) {
-																																																							return _elm_lang$core$Json_Decode$succeed(
-																																																								{reading: reading, text: text, time: time});
-																																																						},
-																																																						A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																		},
-																																																		A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																						},
-																						A2(
-																							_elm_lang$core$Json_Decode$field,
-																							'mp2',
-																							_elm_lang$core$Json_Decode$list(
-																								A2(
-																									_elm_lang$core$Json_Decode$andThen,
-																									function (style) {
-																										return A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (show) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (show_fn) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show_vn) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (read) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (body) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (id) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (section) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (version) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (altRead) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (notes) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (cmd) {
-																																																return _elm_lang$core$Json_Decode$succeed(
-																																																	{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																															},
-																																															A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																													},
-																																													A2(
-																																														_elm_lang$core$Json_Decode$field,
-																																														'notes',
-																																														_elm_lang$core$Json_Decode$list(
-																																															A2(
-																																																_elm_lang$core$Json_Decode$andThen,
-																																																function (reading) {
-																																																	return A2(
-																																																		_elm_lang$core$Json_Decode$andThen,
-																																																		function (text) {
-																																																			return A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (time) {
-																																																					return _elm_lang$core$Json_Decode$succeed(
-																																																						{reading: reading, text: text, time: time});
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																		},
-																																																		A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																},
-																																																A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																									},
-																									A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																				},
-																				A2(
-																					_elm_lang$core$Json_Decode$field,
-																					'mp1',
-																					_elm_lang$core$Json_Decode$list(
-																						A2(
-																							_elm_lang$core$Json_Decode$andThen,
-																							function (style) {
-																								return A2(
-																									_elm_lang$core$Json_Decode$andThen,
-																									function (show) {
-																										return A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (show_fn) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (show_vn) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (read) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (body) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (id) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (section) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (version) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (altRead) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (notes) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (cmd) {
-																																														return _elm_lang$core$Json_Decode$succeed(
-																																															{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(
-																																												_elm_lang$core$Json_Decode$field,
-																																												'notes',
-																																												_elm_lang$core$Json_Decode$list(
-																																													A2(
-																																														_elm_lang$core$Json_Decode$andThen,
-																																														function (reading) {
-																																															return A2(
-																																																_elm_lang$core$Json_Decode$andThen,
-																																																function (text) {
-																																																	return A2(
-																																																		_elm_lang$core$Json_Decode$andThen,
-																																																		function (time) {
-																																																			return _elm_lang$core$Json_Decode$succeed(
-																																																				{reading: reading, text: text, time: time});
-																																																		},
-																																																		A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																},
-																																																A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																														},
-																																														A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																									},
-																									A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																							},
-																							A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																		},
-																		A2(
-																			_elm_lang$core$Json_Decode$field,
-																			'collect',
-																			A2(
-																				_elm_lang$core$Json_Decode$andThen,
-																				function (instruction) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (title) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (collects) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (show) {
-																											return _elm_lang$core$Json_Decode$succeed(
-																												{instruction: instruction, title: title, collects: collects, show: show});
-																										},
-																										A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																								},
-																								A2(
-																									_elm_lang$core$Json_Decode$field,
-																									'collects',
-																									_elm_lang$core$Json_Decode$list(
-																										A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (collect) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (propers) {
-																														return _elm_lang$core$Json_Decode$succeed(
-																															{collect: collect, propers: propers});
-																													},
-																													A2(
-																														_elm_lang$core$Json_Decode$field,
-																														'propers',
-																														_elm_lang$core$Json_Decode$list(
-																															A2(
-																																_elm_lang$core$Json_Decode$andThen,
-																																function (title) {
-																																	return A2(
-																																		_elm_lang$core$Json_Decode$andThen,
-																																		function (text) {
-																																			return _elm_lang$core$Json_Decode$succeed(
-																																				{title: title, text: text});
-																																		},
-																																		A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																},
-																																A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string)))));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'collect', _elm_lang$core$Json_Decode$string)))));
-																						},
-																						A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
-																				},
-																				A2(_elm_lang$core$Json_Decode$field, 'instruction', _elm_lang$core$Json_Decode$string))));
-																},
-																A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-														},
-														A2(
-															_elm_lang$core$Json_Decode$field,
-															'config',
-															A2(
-																_elm_lang$core$Json_Decode$andThen,
-																function (ot) {
-																	return A2(
-																		_elm_lang$core$Json_Decode$andThen,
-																		function (ps) {
-																			return A2(
-																				_elm_lang$core$Json_Decode$andThen,
-																				function (nt) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (gs) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (fnotes) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (vers) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (current) {
-																													return _elm_lang$core$Json_Decode$succeed(
-																														{ot: ot, ps: ps, nt: nt, gs: gs, fnotes: fnotes, vers: vers, current: current});
-																												},
-																												A2(_elm_lang$core$Json_Decode$field, 'current', _elm_lang$core$Json_Decode$string));
-																										},
-																										A2(
-																											_elm_lang$core$Json_Decode$field,
-																											'vers',
-																											_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
-																								},
-																								A2(_elm_lang$core$Json_Decode$field, 'fnotes', _elm_lang$core$Json_Decode$string));
-																						},
-																						A2(_elm_lang$core$Json_Decode$field, 'gs', _elm_lang$core$Json_Decode$string));
-																				},
-																				A2(_elm_lang$core$Json_Decode$field, 'nt', _elm_lang$core$Json_Decode$string));
-																		},
-																		A2(_elm_lang$core$Json_Decode$field, 'ps', _elm_lang$core$Json_Decode$string));
-																},
-																A2(_elm_lang$core$Json_Decode$field, 'ot', _elm_lang$core$Json_Decode$string))));
-												},
-												A2(_elm_lang$core$Json_Decode$field, 'week', _elm_lang$core$Json_Decode$string));
-										},
-										A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
-								},
-								A2(_elm_lang$core$Json_Decode$field, 'season', _elm_lang$core$Json_Decode$string));
-						},
-						A2(_elm_lang$core$Json_Decode$field, 'day', _elm_lang$core$Json_Decode$string));
-				},
-				A2(_elm_lang$core$Json_Decode$field, 'date', _elm_lang$core$Json_Decode$string));
-		},
-		A2(
-			_elm_lang$core$Json_Decode$field,
-			'colors',
-			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string))));
-var _user$project$Iphod$portEP = _elm_lang$core$Native_Platform.incomingPort(
-	'portEP',
-	A2(
-		_elm_lang$core$Json_Decode$andThen,
-		function (colors) {
-			return A2(
-				_elm_lang$core$Json_Decode$andThen,
-				function (date) {
-					return A2(
-						_elm_lang$core$Json_Decode$andThen,
-						function (day) {
-							return A2(
-								_elm_lang$core$Json_Decode$andThen,
-								function (season) {
-									return A2(
-										_elm_lang$core$Json_Decode$andThen,
-										function (title) {
-											return A2(
-												_elm_lang$core$Json_Decode$andThen,
-												function (week) {
-													return A2(
-														_elm_lang$core$Json_Decode$andThen,
-														function (config) {
-															return A2(
-																_elm_lang$core$Json_Decode$andThen,
-																function (show) {
-																	return A2(
-																		_elm_lang$core$Json_Decode$andThen,
-																		function (collect) {
-																			return A2(
-																				_elm_lang$core$Json_Decode$andThen,
-																				function (ep1) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (ep2) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (epp) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (sectionUpdate) {
-																											return _elm_lang$core$Json_Decode$succeed(
-																												{colors: colors, date: date, day: day, season: season, title: title, week: week, config: config, show: show, collect: collect, ep1: ep1, ep2: ep2, epp: epp, sectionUpdate: sectionUpdate});
-																										},
-																										A2(
-																											_elm_lang$core$Json_Decode$field,
-																											'sectionUpdate',
-																											A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (section) {
-																													return A2(
-																														_elm_lang$core$Json_Decode$andThen,
-																														function (version) {
-																															return A2(
-																																_elm_lang$core$Json_Decode$andThen,
-																																function (ref) {
-																																	return _elm_lang$core$Json_Decode$succeed(
-																																		{section: section, version: version, ref: ref});
-																																},
-																																A2(_elm_lang$core$Json_Decode$field, 'ref', _elm_lang$core$Json_Decode$string));
-																														},
-																														A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																												},
-																												A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string))));
-																								},
-																								A2(
-																									_elm_lang$core$Json_Decode$field,
-																									'epp',
-																									_elm_lang$core$Json_Decode$list(
-																										A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (style) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (show) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show_fn) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (show_vn) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (read) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (body) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (id) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (section) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (version) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (altRead) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (notes) {
-																																																return A2(
-																																																	_elm_lang$core$Json_Decode$andThen,
-																																																	function (cmd) {
-																																																		return _elm_lang$core$Json_Decode$succeed(
-																																																			{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																																	},
-																																																	A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																															},
-																																															A2(
-																																																_elm_lang$core$Json_Decode$field,
-																																																'notes',
-																																																_elm_lang$core$Json_Decode$list(
-																																																	A2(
-																																																		_elm_lang$core$Json_Decode$andThen,
-																																																		function (reading) {
-																																																			return A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (text) {
-																																																					return A2(
-																																																						_elm_lang$core$Json_Decode$andThen,
-																																																						function (time) {
-																																																							return _elm_lang$core$Json_Decode$succeed(
-																																																								{reading: reading, text: text, time: time});
-																																																						},
-																																																						A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																		},
-																																																		A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																						},
-																						A2(
-																							_elm_lang$core$Json_Decode$field,
-																							'ep2',
-																							_elm_lang$core$Json_Decode$list(
-																								A2(
-																									_elm_lang$core$Json_Decode$andThen,
-																									function (style) {
-																										return A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (show) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (show_fn) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (show_vn) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (read) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (body) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (id) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (section) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (version) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (altRead) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (notes) {
-																																														return A2(
-																																															_elm_lang$core$Json_Decode$andThen,
-																																															function (cmd) {
-																																																return _elm_lang$core$Json_Decode$succeed(
-																																																	{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																															},
-																																															A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																													},
-																																													A2(
-																																														_elm_lang$core$Json_Decode$field,
-																																														'notes',
-																																														_elm_lang$core$Json_Decode$list(
-																																															A2(
-																																																_elm_lang$core$Json_Decode$andThen,
-																																																function (reading) {
-																																																	return A2(
-																																																		_elm_lang$core$Json_Decode$andThen,
-																																																		function (text) {
-																																																			return A2(
-																																																				_elm_lang$core$Json_Decode$andThen,
-																																																				function (time) {
-																																																					return _elm_lang$core$Json_Decode$succeed(
-																																																						{reading: reading, text: text, time: time});
-																																																				},
-																																																				A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																		},
-																																																		A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																																},
-																																																A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																											},
-																																											A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																									},
-																									A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																				},
-																				A2(
-																					_elm_lang$core$Json_Decode$field,
-																					'ep1',
-																					_elm_lang$core$Json_Decode$list(
-																						A2(
-																							_elm_lang$core$Json_Decode$andThen,
-																							function (style) {
-																								return A2(
-																									_elm_lang$core$Json_Decode$andThen,
-																									function (show) {
-																										return A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (show_fn) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (show_vn) {
-																														return A2(
-																															_elm_lang$core$Json_Decode$andThen,
-																															function (read) {
-																																return A2(
-																																	_elm_lang$core$Json_Decode$andThen,
-																																	function (body) {
-																																		return A2(
-																																			_elm_lang$core$Json_Decode$andThen,
-																																			function (id) {
-																																				return A2(
-																																					_elm_lang$core$Json_Decode$andThen,
-																																					function (section) {
-																																						return A2(
-																																							_elm_lang$core$Json_Decode$andThen,
-																																							function (version) {
-																																								return A2(
-																																									_elm_lang$core$Json_Decode$andThen,
-																																									function (altRead) {
-																																										return A2(
-																																											_elm_lang$core$Json_Decode$andThen,
-																																											function (notes) {
-																																												return A2(
-																																													_elm_lang$core$Json_Decode$andThen,
-																																													function (cmd) {
-																																														return _elm_lang$core$Json_Decode$succeed(
-																																															{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																																													},
-																																													A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																																											},
-																																											A2(
-																																												_elm_lang$core$Json_Decode$field,
-																																												'notes',
-																																												_elm_lang$core$Json_Decode$list(
-																																													A2(
-																																														_elm_lang$core$Json_Decode$andThen,
-																																														function (reading) {
-																																															return A2(
-																																																_elm_lang$core$Json_Decode$andThen,
-																																																function (text) {
-																																																	return A2(
-																																																		_elm_lang$core$Json_Decode$andThen,
-																																																		function (time) {
-																																																			return _elm_lang$core$Json_Decode$succeed(
-																																																				{reading: reading, text: text, time: time});
-																																																		},
-																																																		A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																																																},
-																																																A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																														},
-																																														A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																																									},
-																																									A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																																							},
-																																							A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																																					},
-																																					A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-																																			},
-																																			A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-																																	},
-																																	A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
-																															},
-																															A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
-																													},
-																													A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
-																									},
-																									A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																							},
-																							A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)))));
-																		},
-																		A2(
-																			_elm_lang$core$Json_Decode$field,
-																			'collect',
-																			A2(
-																				_elm_lang$core$Json_Decode$andThen,
-																				function (instruction) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (title) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (collects) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (show) {
-																											return _elm_lang$core$Json_Decode$succeed(
-																												{instruction: instruction, title: title, collects: collects, show: show});
-																										},
-																										A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-																								},
-																								A2(
-																									_elm_lang$core$Json_Decode$field,
-																									'collects',
-																									_elm_lang$core$Json_Decode$list(
-																										A2(
-																											_elm_lang$core$Json_Decode$andThen,
-																											function (collect) {
-																												return A2(
-																													_elm_lang$core$Json_Decode$andThen,
-																													function (propers) {
-																														return _elm_lang$core$Json_Decode$succeed(
-																															{collect: collect, propers: propers});
-																													},
-																													A2(
-																														_elm_lang$core$Json_Decode$field,
-																														'propers',
-																														_elm_lang$core$Json_Decode$list(
-																															A2(
-																																_elm_lang$core$Json_Decode$andThen,
-																																function (title) {
-																																	return A2(
-																																		_elm_lang$core$Json_Decode$andThen,
-																																		function (text) {
-																																			return _elm_lang$core$Json_Decode$succeed(
-																																				{title: title, text: text});
-																																		},
-																																		A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																																},
-																																A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string)))));
-																											},
-																											A2(_elm_lang$core$Json_Decode$field, 'collect', _elm_lang$core$Json_Decode$string)))));
-																						},
-																						A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
-																				},
-																				A2(_elm_lang$core$Json_Decode$field, 'instruction', _elm_lang$core$Json_Decode$string))));
-																},
-																A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
-														},
-														A2(
-															_elm_lang$core$Json_Decode$field,
-															'config',
-															A2(
-																_elm_lang$core$Json_Decode$andThen,
-																function (ot) {
-																	return A2(
-																		_elm_lang$core$Json_Decode$andThen,
-																		function (ps) {
-																			return A2(
-																				_elm_lang$core$Json_Decode$andThen,
-																				function (nt) {
-																					return A2(
-																						_elm_lang$core$Json_Decode$andThen,
-																						function (gs) {
-																							return A2(
-																								_elm_lang$core$Json_Decode$andThen,
-																								function (fnotes) {
-																									return A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (vers) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (current) {
-																													return _elm_lang$core$Json_Decode$succeed(
-																														{ot: ot, ps: ps, nt: nt, gs: gs, fnotes: fnotes, vers: vers, current: current});
-																												},
-																												A2(_elm_lang$core$Json_Decode$field, 'current', _elm_lang$core$Json_Decode$string));
-																										},
-																										A2(
-																											_elm_lang$core$Json_Decode$field,
-																											'vers',
-																											_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string)));
-																								},
-																								A2(_elm_lang$core$Json_Decode$field, 'fnotes', _elm_lang$core$Json_Decode$string));
-																						},
-																						A2(_elm_lang$core$Json_Decode$field, 'gs', _elm_lang$core$Json_Decode$string));
-																				},
-																				A2(_elm_lang$core$Json_Decode$field, 'nt', _elm_lang$core$Json_Decode$string));
-																		},
-																		A2(_elm_lang$core$Json_Decode$field, 'ps', _elm_lang$core$Json_Decode$string));
-																},
-																A2(_elm_lang$core$Json_Decode$field, 'ot', _elm_lang$core$Json_Decode$string))));
-												},
-												A2(_elm_lang$core$Json_Decode$field, 'week', _elm_lang$core$Json_Decode$string));
-										},
-										A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string));
-								},
-								A2(_elm_lang$core$Json_Decode$field, 'season', _elm_lang$core$Json_Decode$string));
-						},
-						A2(_elm_lang$core$Json_Decode$field, 'day', _elm_lang$core$Json_Decode$string));
-				},
-				A2(_elm_lang$core$Json_Decode$field, 'date', _elm_lang$core$Json_Decode$string));
-		},
-		A2(
-			_elm_lang$core$Json_Decode$field,
-			'colors',
-			_elm_lang$core$Json_Decode$list(_elm_lang$core$Json_Decode$string))));
+										A2(_elm_lang$core$Json_Decode$field, 'title', _elm_lang$core$Json_Decode$string)))))))))));
 var _user$project$Iphod$portLesson = _elm_lang$core$Native_Platform.incomingPort(
 	'portLesson',
 	_elm_lang$core$Json_Decode$list(
 		A2(
 			_elm_lang$core$Json_Decode$andThen,
-			function (style) {
+			function (lesson) {
 				return A2(
 					_elm_lang$core$Json_Decode$andThen,
-					function (show) {
+					function (ref) {
 						return A2(
 							_elm_lang$core$Json_Decode$andThen,
-							function (show_fn) {
+							function (style) {
 								return A2(
 									_elm_lang$core$Json_Decode$andThen,
-									function (show_vn) {
+									function (src) {
 										return A2(
 											_elm_lang$core$Json_Decode$andThen,
-											function (read) {
-												return A2(
-													_elm_lang$core$Json_Decode$andThen,
-													function (body) {
-														return A2(
-															_elm_lang$core$Json_Decode$andThen,
-															function (id) {
-																return A2(
-																	_elm_lang$core$Json_Decode$andThen,
-																	function (section) {
-																		return A2(
-																			_elm_lang$core$Json_Decode$andThen,
-																			function (version) {
-																				return A2(
-																					_elm_lang$core$Json_Decode$andThen,
-																					function (altRead) {
-																						return A2(
-																							_elm_lang$core$Json_Decode$andThen,
-																							function (notes) {
-																								return A2(
-																									_elm_lang$core$Json_Decode$andThen,
-																									function (cmd) {
-																										return _elm_lang$core$Json_Decode$succeed(
-																											{style: style, show: show, show_fn: show_fn, show_vn: show_vn, read: read, body: body, id: id, section: section, version: version, altRead: altRead, notes: notes, cmd: cmd});
-																									},
-																									A2(_elm_lang$core$Json_Decode$field, 'cmd', _elm_lang$core$Json_Decode$string));
-																							},
-																							A2(
-																								_elm_lang$core$Json_Decode$field,
-																								'notes',
-																								_elm_lang$core$Json_Decode$list(
-																									A2(
-																										_elm_lang$core$Json_Decode$andThen,
-																										function (reading) {
-																											return A2(
-																												_elm_lang$core$Json_Decode$andThen,
-																												function (text) {
-																													return A2(
-																														_elm_lang$core$Json_Decode$andThen,
-																														function (time) {
-																															return _elm_lang$core$Json_Decode$succeed(
-																																{reading: reading, text: text, time: time});
-																														},
-																														A2(_elm_lang$core$Json_Decode$field, 'time', _elm_lang$core$Json_Decode$string));
-																												},
-																												A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
-																										},
-																										A2(_elm_lang$core$Json_Decode$field, 'reading', _elm_lang$core$Json_Decode$string)))));
-																					},
-																					A2(_elm_lang$core$Json_Decode$field, 'altRead', _elm_lang$core$Json_Decode$string));
-																			},
-																			A2(_elm_lang$core$Json_Decode$field, 'version', _elm_lang$core$Json_Decode$string));
-																	},
-																	A2(_elm_lang$core$Json_Decode$field, 'section', _elm_lang$core$Json_Decode$string));
-															},
-															A2(_elm_lang$core$Json_Decode$field, 'id', _elm_lang$core$Json_Decode$string));
-													},
-													A2(_elm_lang$core$Json_Decode$field, 'body', _elm_lang$core$Json_Decode$string));
+											function (text) {
+												return _elm_lang$core$Json_Decode$succeed(
+													{lesson: lesson, ref: ref, style: style, src: src, text: text});
 											},
-											A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
+											A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
 									},
-									A2(_elm_lang$core$Json_Decode$field, 'show_vn', _elm_lang$core$Json_Decode$bool));
+									A2(_elm_lang$core$Json_Decode$field, 'src', _elm_lang$core$Json_Decode$string));
 							},
-							A2(_elm_lang$core$Json_Decode$field, 'show_fn', _elm_lang$core$Json_Decode$bool));
+							A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string));
 					},
-					A2(_elm_lang$core$Json_Decode$field, 'show', _elm_lang$core$Json_Decode$bool));
+					A2(_elm_lang$core$Json_Decode$field, 'ref', _elm_lang$core$Json_Decode$string));
 			},
-			A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string))));
+			A2(_elm_lang$core$Json_Decode$field, 'lesson', _elm_lang$core$Json_Decode$int))));
+var _user$project$Iphod$portWEB = _elm_lang$core$Native_Platform.incomingPort(
+	'portWEB',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (lesson) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (ref) {
+					return A2(
+						_elm_lang$core$Json_Decode$andThen,
+						function (style) {
+							return A2(
+								_elm_lang$core$Json_Decode$andThen,
+								function (src) {
+									return A2(
+										_elm_lang$core$Json_Decode$andThen,
+										function (text) {
+											return _elm_lang$core$Json_Decode$succeed(
+												{lesson: lesson, ref: ref, style: style, src: src, text: text});
+										},
+										A2(_elm_lang$core$Json_Decode$field, 'text', _elm_lang$core$Json_Decode$string));
+								},
+								A2(_elm_lang$core$Json_Decode$field, 'src', _elm_lang$core$Json_Decode$string));
+						},
+						A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string));
+				},
+				A2(_elm_lang$core$Json_Decode$field, 'ref', _elm_lang$core$Json_Decode$string));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'lesson', _elm_lang$core$Json_Decode$int)));
 var _user$project$Iphod$portReflection = _elm_lang$core$Native_Platform.incomingPort(
 	'portReflection',
 	A2(
@@ -16574,69 +10118,920 @@ var _user$project$Iphod$portReflection = _elm_lang$core$Native_Platform.incoming
 				A2(_elm_lang$core$Json_Decode$field, 'markdown', _elm_lang$core$Json_Decode$string));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'author', _elm_lang$core$Json_Decode$string)));
-var _user$project$Iphod$Model = F4(
-	function (a, b, c, d) {
-		return {eu: a, mp: b, ep: c, reflection: d};
+var _user$project$Iphod$portAddLesson = _elm_lang$core$Native_Platform.incomingPort(
+	'portAddLesson',
+	A2(
+		_elm_lang$core$Json_Decode$andThen,
+		function (style) {
+			return A2(
+				_elm_lang$core$Json_Decode$andThen,
+				function (read) {
+					return _elm_lang$core$Json_Decode$succeed(
+						{style: style, read: read});
+				},
+				A2(_elm_lang$core$Json_Decode$field, 'read', _elm_lang$core$Json_Decode$string));
+		},
+		A2(_elm_lang$core$Json_Decode$field, 'style', _elm_lang$core$Json_Decode$string)));
+var _user$project$Iphod$portOnline = _elm_lang$core$Native_Platform.incomingPort('portOnline', _elm_lang$core$Json_Decode$bool);
+var _user$project$Iphod$Model = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {month: a, lesson1: b, lesson2: c, lesson3: d, lessonRequests: e, psalm: f, reflection: g, online: h};
 	});
 var _user$project$Iphod$Hide = {ctor: 'Hide'};
 var _user$project$Iphod$Show = {ctor: 'Show'};
-var _user$project$Iphod$ModEP = function (a) {
-	return {ctor: 'ModEP', _0: a};
-};
-var _user$project$Iphod$epDiv = function (model) {
+var _user$project$Iphod$DecodeESVLesson = F2(
+	function (a, b) {
+		return {ctor: 'DecodeESVLesson', _0: a, _1: b};
+	});
+var _user$project$Iphod$requestESV = function (request) {
+	var corsGet = {
+		method: 'GET',
+		headers: {
+			ctor: '::',
+			_0: A2(_elm_lang$http$Http$header, 'Authorization', _user$project$Iphod$esvHeader.key),
+			_1: {ctor: '[]'}
+		},
+		url: A2(
+			_elm_lang$core$Basics_ops['++'],
+			_user$project$Iphod$esvHeader.url,
+			A2(_elm_lang$core$Basics_ops['++'], request.ref, '&include-headings=false')),
+		body: _elm_lang$http$Http$emptyBody,
+		expect: _elm_lang$http$Http$expectString,
+		timeout: _elm_lang$core$Maybe$Nothing,
+		withCredentials: false
+	};
 	return A2(
-		_elm_lang$html$Html$div,
+		_elm_lang$http$Http$send,
+		_user$project$Iphod$DecodeESVLesson(request),
+		_elm_lang$http$Http$request(corsGet));
+};
+var _user$project$Iphod$getLessons = function (model) {
+	var t = A2(
+		_elm_lang$core$Maybe$withDefault,
+		{ctor: '[]'},
+		_elm_lang$core$List$tail(model.lessonRequests));
+	var newModel = _elm_lang$core$Native_Utils.update(
+		model,
+		{lessonRequests: t});
+	var h = A2(
+		_elm_lang$core$Maybe$withDefault,
+		_user$project$Iphod_Models$initLessonRequest,
+		_elm_lang$core$List$head(model.lessonRequests));
+	var cmdMsg = function () {
+		var _p2 = h.src;
+		switch (_p2) {
+			case 'ESV':
+				return _elm_lang$core$Platform_Cmd$batch(
+					{
+						ctor: '::',
+						_0: _user$project$Iphod$requestESV(h),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Iphod$getLessons(newModel),
+							_1: {ctor: '[]'}
+						}
+					});
+			case 'WEB':
+				return _elm_lang$core$Platform_Cmd$batch(
+					{
+						ctor: '::',
+						_0: _user$project$Iphod$requestWEB(h),
+						_1: {
+							ctor: '::',
+							_0: _user$project$Iphod$getLessons(newModel),
+							_1: {ctor: '[]'}
+						}
+					});
+			default:
+				return _elm_lang$core$Platform_Cmd$none;
+		}
+	}();
+	return cmdMsg;
+};
+var _user$project$Iphod$update = F2(
+	function (msg, model) {
+		var _p3 = msg;
+		switch (_p3.ctor) {
+			case 'NoOp':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'UpdateOnline':
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{online: _p3._0}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'InitMonth':
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{month: _p3._0});
+				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'UpdateReflection':
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{reflection: _p3._0});
+				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'UpdateLesson':
+				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'UpdateFromWEB':
+				var _p5 = _p3._0;
+				var newModel = function () {
+					var _p4 = _p5.lesson;
+					switch (_p4) {
+						case 1:
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									lesson1: A2(
+										_elm_lang$core$List$append,
+										model.lesson1,
+										{
+											ctor: '::',
+											_0: _p5,
+											_1: {ctor: '[]'}
+										})
+								});
+						case 2:
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									lesson2: A2(
+										_elm_lang$core$List$append,
+										model.lesson2,
+										{
+											ctor: '::',
+											_0: _p5,
+											_1: {ctor: '[]'}
+										})
+								});
+						case 3:
+							return _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									lesson3: A2(
+										_elm_lang$core$List$append,
+										model.lesson3,
+										{
+											ctor: '::',
+											_0: _p5,
+											_1: {ctor: '[]'}
+										})
+								});
+						default:
+							return model;
+					}
+				}();
+				return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
+			case 'GetReadings':
+				var _p7 = _p3._1;
+				var requests = function () {
+					var _p6 = _p3._0;
+					switch (_p6) {
+						case 'MP':
+							return _elm_lang$core$List$concat(
+								{
+									ctor: '::',
+									_0: A2(_user$project$Iphod$toIndexList, 1, _p7.daily.mp1),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Iphod$toIndexList, 2, _p7.daily.mp2),
+										_1: {ctor: '[]'}
+									}
+								});
+						case 'EP':
+							return _elm_lang$core$List$concat(
+								{
+									ctor: '::',
+									_0: A2(_user$project$Iphod$toIndexList, 1, _p7.daily.ep1),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Iphod$toIndexList, 2, _p7.daily.ep2),
+										_1: {ctor: '[]'}
+									}
+								});
+						case 'EU':
+							return _elm_lang$core$List$concat(
+								{
+									ctor: '::',
+									_0: A2(_user$project$Iphod$toIndexList, 1, _p7.eu.ot),
+									_1: {
+										ctor: '::',
+										_0: A2(_user$project$Iphod$toIndexList, 2, _p7.eu.nt),
+										_1: {
+											ctor: '::',
+											_0: A2(_user$project$Iphod$toIndexList, 3, _p7.eu.gs),
+											_1: {ctor: '[]'}
+										}
+									}
+								});
+						default:
+							return {ctor: '[]'};
+					}
+				}();
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						lesson1: {ctor: '[]'},
+						lesson2: {ctor: '[]'},
+						lesson3: {ctor: '[]'},
+						psalm: {ctor: '[]'},
+						lessonRequests: requests
+					});
+				return {
+					ctor: '_Tuple2',
+					_0: newModel,
+					_1: _user$project$Iphod$getLessons(newModel)
+				};
+			default:
+				if (_p3._1.ctor === 'Ok') {
+					var _p9 = _p3._0;
+					var esv = A2(
+						_elm_lang$core$Result$withDefault,
+						_user$project$Iphod_Models$initESVresp,
+						A2(_elm_lang$core$Json_Decode$decodeString, _user$project$Iphod$decodeESV, _p3._1._0));
+					var nextLesson = function () {
+						if (_elm_lang$core$String$isEmpty(esv.canonical)) {
+							return {
+								ctor: '_Tuple2',
+								_0: model,
+								_1: _user$project$Iphod$requestWEB(_p9)
+							};
+						} else {
+							var thisRequest = {
+								ctor: '::',
+								_0: _elm_lang$core$Native_Utils.update(
+									_p9,
+									{
+										text: A2(_elm_lang$core$String$join, '', esv.passages)
+									}),
+								_1: {ctor: '[]'}
+							};
+							var newModel = function () {
+								var _p8 = _p9.lesson;
+								switch (_p8) {
+									case 1:
+										return _elm_lang$core$Native_Utils.update(
+											model,
+											{
+												lesson1: A2(_elm_lang$core$Basics_ops['++'], model.lesson1, thisRequest)
+											});
+									case 2:
+										return _elm_lang$core$Native_Utils.update(
+											model,
+											{
+												lesson2: A2(_elm_lang$core$Basics_ops['++'], model.lesson2, thisRequest)
+											});
+									case 3:
+										return _elm_lang$core$Native_Utils.update(
+											model,
+											{
+												lesson3: A2(_elm_lang$core$Basics_ops['++'], model.lesson3, thisRequest)
+											});
+									default:
+										return model;
+								}
+							}();
+							return {ctor: '_Tuple2', _0: newModel, _1: _elm_lang$core$Platform_Cmd$none};
+						}
+					}();
+					return nextLesson;
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: model,
+						_1: _user$project$Iphod$requestWEB(_p3._0)
+					};
+				}
+		}
+	});
+var _user$project$Iphod$GetReadings = F2(
+	function (a, b) {
+		return {ctor: 'GetReadings', _0: a, _1: b};
+	});
+var _user$project$Iphod$calendarDays = function (days) {
+	var thisDay = function (day) {
+		return A2(
+			_elm_lang$html$Html$td,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('td-top'),
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$a,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$href(
+									_user$project$Iphod$calendarHref(day)),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('color_options'),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$p,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class(
+											A2(
+												_elm_lang$core$Basics_ops['++'],
+												'day_of_month ',
+												_user$project$Iphod$colorClass(day))),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text(day.monthDay),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text(day.title),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('td-bottom flyoutmenu'),
+								_1: {ctor: '[]'}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$ul,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('day_options'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$li,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('active has-sub'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$a,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$href('#'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: A2(
+															_elm_lang$html$Html$span,
+															{ctor: '[]'},
+															{
+																ctor: '::',
+																_0: _elm_lang$html$Html$text('Readings'),
+																_1: {ctor: '[]'}
+															}),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$ul,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: A2(
+																_elm_lang$html$Html$li,
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html_Attributes$class('reading_menu'),
+																	_1: {
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Events$onClick(
+																			A2(_user$project$Iphod$GetReadings, 'MP', day)),
+																		_1: {ctor: '[]'}
+																	}
+																},
+																{
+																	ctor: '::',
+																	_0: _elm_lang$html$Html$text('Morning Prayer'),
+																	_1: {ctor: '[]'}
+																}),
+															_1: {
+																ctor: '::',
+																_0: A2(
+																	_elm_lang$html$Html$li,
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html_Attributes$class('reading_menu'),
+																		_1: {
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Events$onClick(
+																				A2(_user$project$Iphod$GetReadings, 'EP', day)),
+																			_1: {ctor: '[]'}
+																		}
+																	},
+																	{
+																		ctor: '::',
+																		_0: _elm_lang$html$Html$text('Evening Prayer'),
+																		_1: {ctor: '[]'}
+																	}),
+																_1: {
+																	ctor: '::',
+																	_0: A2(
+																		_elm_lang$html$Html$li,
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html_Attributes$class('reading_menu'),
+																			_1: {
+																				ctor: '::',
+																				_0: _elm_lang$html$Html_Events$onClick(
+																					A2(_user$project$Iphod$GetReadings, 'EU', day)),
+																				_1: {ctor: '[]'}
+																			}
+																		},
+																		{
+																			ctor: '::',
+																			_0: _elm_lang$html$Html$text('Eucharist'),
+																			_1: {ctor: '[]'}
+																		}),
+																	_1: {ctor: '[]'}
+																}
+															}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				}
+			});
+	};
+	return A2(
+		_elm_lang$html$Html$tr,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('ep'),
+			_0: _elm_lang$html$Html_Attributes$class('calendar-week'),
+			_1: {ctor: '[]'}
+		},
+		A2(_elm_lang$core$List$map, thisDay, days));
+};
+var _user$project$Iphod$calendarTable = function (model) {
+	var calendarHeader = {
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$tr,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$th,
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$class('mpep_link'),
+						_1: {
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$colspan(7),
+							_1: {ctor: '[]'}
+						}
+					},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('Today'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$tr,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$th,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('mpep_link'),
+							_1: {
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$colspan(2),
+								_1: {ctor: '[]'}
+							}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$button,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('prayer-button quick-options'),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prayer', 'morningPrayer'),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Morning Prayer'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$th,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('mpep_link'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$colspan(3),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$id('next-sunday-button'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('quick-options'),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Next Sunday'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$id('reflection-today-button'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('quick-options'),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Reflection'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$th,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('mpep_link'),
+									_1: {
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$colspan(2),
+										_1: {ctor: '[]'}
+									}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('prayer-button quick-options'),
+											_1: {
+												ctor: '::',
+												_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-prayer', 'eveningPrayer'),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Evening Prayer'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {ctor: '[]'}
+						}
+					}
+				}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$tr,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$th,
+							{
+								ctor: '::',
+								_0: _elm_lang$html$Html_Attributes$class('season_link'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$colspan(2),
+									_1: {ctor: '[]'}
+								}
+							},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('quick-options'),
+										_1: {
+											ctor: '::',
+											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-season', 'Advent'),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Advent'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$th,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('season_link'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('quick-options'),
+											_1: {
+												ctor: '::',
+												_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-season', 'Epiphany'),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Epiphany'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$th,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('season_link'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$button,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('quick-options'),
+												_1: {
+													ctor: '::',
+													_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-season', 'Lent'),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Lent'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$th,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('season_link'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$button,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('quick-options'),
+													_1: {
+														ctor: '::',
+														_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-season', 'Easter'),
+														_1: {ctor: '[]'}
+													}
+												},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Easter'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$th,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('season_link'),
+												_1: {
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$colspan(2),
+													_1: {ctor: '[]'}
+												}
+											},
+											{
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$button,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('quick-options'),
+														_1: {
+															ctor: '::',
+															_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-season', 'Pentecost'),
+															_1: {ctor: '[]'}
+														}
+													},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Pentecost'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {ctor: '[]'}
+											}),
+										_1: {ctor: '[]'}
+									}
+								}
+							}
+						}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$tr,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$class('calendar-week'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$th,
+								{ctor: '[]'},
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html$text('Sun'),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$th,
+									{ctor: '[]'},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Mon'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$th,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Tue'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$th,
+											{ctor: '[]'},
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html$text('Wed'),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$th,
+												{ctor: '[]'},
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html$text('Thu'),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$th,
+													{ctor: '[]'},
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html$text('Fri'),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$th,
+														{ctor: '[]'},
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html$text('Sat'),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		}
+	};
+	var calendarWeeks = function (week) {
+		return _user$project$Iphod$calendarDays(week.days);
+	};
+	return A2(
+		_elm_lang$html$Html$table,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('calendar'),
 			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
 			_0: A2(
-				_elm_lang$html$Html$map,
-				_user$project$Iphod$ModEP,
-				_user$project$Iphod_EPReading$view(model.ep)),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Iphod$ModMP = function (a) {
-	return {ctor: 'ModMP', _0: a};
-};
-var _user$project$Iphod$mpDiv = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('mp'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$map,
-				_user$project$Iphod$ModMP,
-				_user$project$Iphod_MPReading$view(model.mp)),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Iphod$ModEU = function (a) {
-	return {ctor: 'ModEU', _0: a};
-};
-var _user$project$Iphod$euDiv = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('eu'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$map,
-				_user$project$Iphod$ModEU,
-				_user$project$Iphod_Sunday$view(model.eu)),
+				_elm_lang$html$Html$tbody,
+				{ctor: '[]'},
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					calendarHeader,
+					A2(_elm_lang$core$List$map, calendarWeeks, model.month.weeks))),
 			_1: {ctor: '[]'}
 		});
 };
@@ -16645,26 +11040,37 @@ var _user$project$Iphod$view = function (model) {
 		_elm_lang$html$Html$div,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('reading-container'),
+			_0: _elm_lang$html$Html_Attributes$id('calendar-div'),
 			_1: {ctor: '[]'}
 		},
 		{
 			ctor: '::',
-			_0: _user$project$Iphod$euDiv(model),
+			_0: _user$project$Iphod$calendarTable(model),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Iphod$mpDiv(model),
+				_0: A2(_user$project$Iphod$lessonDiv, 'lesson1', model.lesson1),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Iphod$epDiv(model),
+					_0: A2(_user$project$Iphod$lessonDiv, 'psalm', model.psalm),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Iphod$reflectionDiv(model),
-						_1: {ctor: '[]'}
+						_0: A2(_user$project$Iphod$lessonDiv, 'lesson2', model.lesson2),
+						_1: {
+							ctor: '::',
+							_0: A2(_user$project$Iphod$lessonDiv, 'lesson3', model.lesson3),
+							_1: {
+								ctor: '::',
+								_0: _user$project$Iphod$reflectionDiv(model.reflection),
+								_1: {ctor: '[]'}
+							}
+						}
 					}
 				}
 			}
 		});
+};
+var _user$project$Iphod$UpdateFromWEB = function (a) {
+	return {ctor: 'UpdateFromWEB', _0: a};
 };
 var _user$project$Iphod$UpdateLesson = function (a) {
 	return {ctor: 'UpdateLesson', _0: a};
@@ -16672,40 +11078,30 @@ var _user$project$Iphod$UpdateLesson = function (a) {
 var _user$project$Iphod$UpdateReflection = function (a) {
 	return {ctor: 'UpdateReflection', _0: a};
 };
-var _user$project$Iphod$UpdateEP = function (a) {
-	return {ctor: 'UpdateEP', _0: a};
+var _user$project$Iphod$InitMonth = function (a) {
+	return {ctor: 'InitMonth', _0: a};
 };
-var _user$project$Iphod$UpdateMP = function (a) {
-	return {ctor: 'UpdateMP', _0: a};
-};
-var _user$project$Iphod$UpdateEU = function (a) {
-	return {ctor: 'UpdateEU', _0: a};
-};
-var _user$project$Iphod$InitCalendar = function (a) {
-	return {ctor: 'InitCalendar', _0: a};
+var _user$project$Iphod$UpdateOnline = function (a) {
+	return {ctor: 'UpdateOnline', _0: a};
 };
 var _user$project$Iphod$subscriptions = function (model) {
 	return _elm_lang$core$Platform_Sub$batch(
 		{
 			ctor: '::',
-			_0: _user$project$Iphod$portCalendar(_user$project$Iphod$InitCalendar),
+			_0: _user$project$Iphod$portMonth(_user$project$Iphod$InitMonth),
 			_1: {
 				ctor: '::',
-				_0: _user$project$Iphod$portEU(_user$project$Iphod$UpdateEU),
+				_0: _user$project$Iphod$portLesson(_user$project$Iphod$UpdateLesson),
 				_1: {
 					ctor: '::',
-					_0: _user$project$Iphod$portMP(_user$project$Iphod$UpdateMP),
+					_0: _user$project$Iphod$portWEB(_user$project$Iphod$UpdateFromWEB),
 					_1: {
 						ctor: '::',
-						_0: _user$project$Iphod$portEP(_user$project$Iphod$UpdateEP),
+						_0: _user$project$Iphod$portReflection(_user$project$Iphod$UpdateReflection),
 						_1: {
 							ctor: '::',
-							_0: _user$project$Iphod$portLesson(_user$project$Iphod$UpdateLesson),
-							_1: {
-								ctor: '::',
-								_0: _user$project$Iphod$portReflection(_user$project$Iphod$UpdateReflection),
-								_1: {ctor: '[]'}
-							}
+							_0: _user$project$Iphod$portOnline(_user$project$Iphod$UpdateOnline),
+							_1: {ctor: '[]'}
 						}
 					}
 				}

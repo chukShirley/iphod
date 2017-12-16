@@ -1,3 +1,5 @@
+<div id= "status"></div>
+<div id= "log"></div>
 <div id= "header-elm-container"></div>
 
 <div id="cal-elm-container"></div>

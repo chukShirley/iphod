@@ -8677,7 +8677,11 @@ var _user$project$NewReflection$showText = function (model) {
 			ctor: '::',
 			_0: A2(
 				_elm_lang$html$Html$h3,
-				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('reflection-preview'),
+					_1: {ctor: '[]'}
+				},
 				{
 					ctor: '::',
 					_0: _elm_lang$html$Html$text('Preview  '),

@@ -249,7 +249,7 @@ var _user$project$Header$translations = function (model) {
 		_elm_lang$html$Html$a,
 		{
 			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$href('versions'),
+			_0: _elm_lang$html$Html_Attributes$href('/versions'),
 			_1: {ctor: '[]'}
 		},
 		{
@@ -955,7 +955,8 @@ var _user$project$Header$authUser = F2(
 				withCredentials: true
 			});
 	});
-var _user$project$Header$initModel = {email: _user$project$Iphod_Models$emailInit, config: _user$project$Iphod_Models$configInit, reading: _user$project$Iphod_Models$currentReadingsInit, user: _user$project$Iphod_Models$userInit, csrf_token: ''};
+var _user$project$Header$initModel = {email: _user$project$Iphod_Models$emailInit, config: _user$project$Iphod_Models$configInit, user: _user$project$Iphod_Models$userInit, csrf_token: ''};
+var _user$project$Header$init = {ctor: '_Tuple2', _0: _user$project$Header$initModel, _1: _elm_lang$core$Platform_Cmd$none};
 var _user$project$Header$sendEmail = _elm_lang$core$Native_Platform.outgoingPort(
 	'sendEmail',
 	function (v) {
@@ -1003,11 +1004,6 @@ var _user$project$Header$currentUser = _elm_lang$core$Native_Platform.outgoingPo
 	function (v) {
 		return {username: v.username, realname: v.realname, email: v.email, description: v.description, error_msg: v.error_msg, token: v.token, password: v.password, password_confirmation: v.password_confirmation};
 	});
-var _user$project$Header$init = {
-	ctor: '_Tuple2',
-	_0: _user$project$Header$initModel,
-	_1: _user$project$Header$currentUser(_user$project$Iphod_Models$userInit)
-};
 var _user$project$Header$portConfig = _elm_lang$core$Native_Platform.incomingPort(
 	'portConfig',
 	A2(
@@ -1095,9 +1091,9 @@ var _user$project$Header$portUser = _elm_lang$core$Native_Platform.incomingPort(
 				A2(_elm_lang$core$Json_Decode$field, 'realname', _elm_lang$core$Json_Decode$string));
 		},
 		A2(_elm_lang$core$Json_Decode$field, 'username', _elm_lang$core$Json_Decode$string)));
-var _user$project$Header$Model = F5(
-	function (a, b, c, d, e) {
-		return {email: a, config: b, reading: c, user: d, csrf_token: e};
+var _user$project$Header$Model = F4(
+	function (a, b, c, d) {
+		return {email: a, config: b, user: c, csrf_token: d};
 	});
 var _user$project$Header$AuthError = function (a) {
 	return {ctor: 'AuthError', _0: a};
@@ -1903,6 +1899,180 @@ var _user$project$Header$aboutOptions = function (model) {
 			}
 		});
 };
+var _user$project$Header$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{
+			ctor: '::',
+			_0: _elm_lang$html$Html_Attributes$id('readings'),
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$input,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$id('fontsize-slider-input'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Attributes$type_('range'),
+						_1: {
+							ctor: '::',
+							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'min', '0.5'),
+							_1: {
+								ctor: '::',
+								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'max', '2.5'),
+								_1: {
+									ctor: '::',
+									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'value', '0.8'),
+									_1: {
+										ctor: '::',
+										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'step', '0.1'),
+										_1: {
+											ctor: '::',
+											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-rangeslider', ''),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
+							}
+						}
+					}
+				},
+				{ctor: '[]'}),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$output,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: _elm_lang$html$Html$text('blork'),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$ul,
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html_Attributes$id('header-options'),
+							_1: {ctor: '[]'}
+						},
+						{
+							ctor: '::',
+							_0: A2(
+								_elm_lang$html$Html$li,
+								{
+									ctor: '::',
+									_0: _elm_lang$html$Html_Attributes$class('option-item'),
+									_1: {ctor: '[]'}
+								},
+								{
+									ctor: '::',
+									_0: _user$project$Header$calendar(model),
+									_1: {ctor: '[]'}
+								}),
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$li,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('option-item'),
+										_1: {ctor: '[]'}
+									},
+									{
+										ctor: '::',
+										_0: _user$project$Header$offices(model),
+										_1: {ctor: '[]'}
+									}),
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$li,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('option-item'),
+											_1: {ctor: '[]'}
+										},
+										{
+											ctor: '::',
+											_0: _user$project$Header$resources(model),
+											_1: {ctor: '[]'}
+										}),
+									_1: {
+										ctor: '::',
+										_0: A2(
+											_elm_lang$html$Html$li,
+											{
+												ctor: '::',
+												_0: _elm_lang$html$Html_Attributes$class('option-item'),
+												_1: {ctor: '[]'}
+											},
+											{
+												ctor: '::',
+												_0: _user$project$Header$stations(model),
+												_1: {ctor: '[]'}
+											}),
+										_1: {
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$li,
+												{
+													ctor: '::',
+													_0: _elm_lang$html$Html_Attributes$class('option-item'),
+													_1: {ctor: '[]'}
+												},
+												{
+													ctor: '::',
+													_0: _user$project$Header$configModal(model),
+													_1: {ctor: '[]'}
+												}),
+											_1: {
+												ctor: '::',
+												_0: A2(
+													_elm_lang$html$Html$li,
+													{
+														ctor: '::',
+														_0: _elm_lang$html$Html_Attributes$class('option-item'),
+														_1: {ctor: '[]'}
+													},
+													{
+														ctor: '::',
+														_0: _user$project$Header$translations(model),
+														_1: {ctor: '[]'}
+													}),
+												_1: {
+													ctor: '::',
+													_0: A2(
+														_elm_lang$html$Html$li,
+														{
+															ctor: '::',
+															_0: _elm_lang$html$Html_Attributes$class('option-item'),
+															_1: {ctor: '[]'}
+														},
+														{
+															ctor: '::',
+															_0: _user$project$Header$aboutOptions(model),
+															_1: {ctor: '[]'}
+														}),
+													_1: {ctor: '[]'}
+												}
+											}
+										}
+									}
+								}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
+			}
+		});
+};
+var _user$project$Header$main = _elm_lang$html$Html$program(
+	{init: _user$project$Header$init, update: _user$project$Header$update, view: _user$project$Header$view, subscriptions: _user$project$Header$subscriptions})();
 var _user$project$Header$NoOp = {ctor: 'NoOp'};
 var _user$project$Header$registerUserName = function (user) {
 	return A2(
@@ -2428,275 +2598,3 @@ var _user$project$Header$register = function (user) {
 			}
 		});
 };
-var _user$project$Header$userLogin = function (model) {
-	var these_options = _elm_lang$core$String$isEmpty(model.user.token) ? {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$li,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('pure-menu-item'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _user$project$Header$login(model.user),
-				_1: {ctor: '[]'}
-			}),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$li,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('pure-menu-item'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: _user$project$Header$register(model.user),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		}
-	} : {
-		ctor: '::',
-		_0: A2(
-			_elm_lang$html$Html$li,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('pure-menu-item'),
-				_1: {ctor: '[]'}
-			},
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html$text(model.user.username),
-				_1: {ctor: '[]'}
-			}),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$li,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('pure-menu-item'),
-					_1: {ctor: '[]'}
-				},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$a,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$href('/logout'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(_user$project$Header$Logout),
-								_1: {ctor: '[]'}
-							}
-						},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{ctor: '[]'},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Logout'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		}
-	};
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$class('pure-menu pure-menu-horizontal login'),
-			_1: {ctor: '[]'}
-		},
-		{
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$ul,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('pure-menu-list'),
-					_1: {ctor: '[]'}
-				},
-				these_options),
-			_1: {ctor: '[]'}
-		});
-};
-var _user$project$Header$view = function (model) {
-	return A2(
-		_elm_lang$html$Html$div,
-		{
-			ctor: '::',
-			_0: _elm_lang$html$Html_Attributes$id('readings'),
-			_1: {
-				ctor: '::',
-				_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-psalms', model.reading.ps),
-				_1: {
-					ctor: '::',
-					_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-psalms_ver', model.reading.ps_ver),
-					_1: {
-						ctor: '::',
-						_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading1', model.reading.reading1),
-						_1: {
-							ctor: '::',
-							_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading1_ver', model.reading.reading1_ver),
-							_1: {
-								ctor: '::',
-								_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading2', model.reading.reading2),
-								_1: {
-									ctor: '::',
-									_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading2_ver', model.reading.reading2_ver),
-									_1: {
-										ctor: '::',
-										_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading3', model.reading.reading3),
-										_1: {
-											ctor: '::',
-											_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading3_ver', model.reading.reading3_ver),
-											_1: {
-												ctor: '::',
-												_0: A2(_elm_lang$html$Html_Attributes$attribute, 'data-reading_date', model.reading.reading_date),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		},
-		{
-			ctor: '::',
-			_0: _user$project$Header$userLogin(model),
-			_1: {
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$ul,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$id('header-options'),
-						_1: {ctor: '[]'}
-					},
-					{
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$li,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('option-item'),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _user$project$Header$calendar(model),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$li,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('option-item'),
-									_1: {ctor: '[]'}
-								},
-								{
-									ctor: '::',
-									_0: _user$project$Header$offices(model),
-									_1: {ctor: '[]'}
-								}),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$li,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('option-item'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _user$project$Header$resources(model),
-										_1: {ctor: '[]'}
-									}),
-								_1: {
-									ctor: '::',
-									_0: A2(
-										_elm_lang$html$Html$li,
-										{
-											ctor: '::',
-											_0: _elm_lang$html$Html_Attributes$class('option-item'),
-											_1: {ctor: '[]'}
-										},
-										{
-											ctor: '::',
-											_0: _user$project$Header$stations(model),
-											_1: {ctor: '[]'}
-										}),
-									_1: {
-										ctor: '::',
-										_0: A2(
-											_elm_lang$html$Html$li,
-											{
-												ctor: '::',
-												_0: _elm_lang$html$Html_Attributes$class('option-item'),
-												_1: {ctor: '[]'}
-											},
-											{
-												ctor: '::',
-												_0: _user$project$Header$configModal(model),
-												_1: {ctor: '[]'}
-											}),
-										_1: {
-											ctor: '::',
-											_0: A2(
-												_elm_lang$html$Html$li,
-												{
-													ctor: '::',
-													_0: _elm_lang$html$Html_Attributes$class('option-item'),
-													_1: {ctor: '[]'}
-												},
-												{
-													ctor: '::',
-													_0: _user$project$Header$translations(model),
-													_1: {ctor: '[]'}
-												}),
-											_1: {
-												ctor: '::',
-												_0: A2(
-													_elm_lang$html$Html$li,
-													{
-														ctor: '::',
-														_0: _elm_lang$html$Html_Attributes$class('option-item'),
-														_1: {ctor: '[]'}
-													},
-													{
-														ctor: '::',
-														_0: _user$project$Header$aboutOptions(model),
-														_1: {ctor: '[]'}
-													}),
-												_1: {ctor: '[]'}
-											}
-										}
-									}
-								}
-							}
-						}
-					}),
-				_1: {ctor: '[]'}
-			}
-		});
-};
-var _user$project$Header$main = _elm_lang$html$Html$program(
-	{init: _user$project$Header$init, update: _user$project$Header$update, view: _user$project$Header$view, subscriptions: _user$project$Header$subscriptions})();

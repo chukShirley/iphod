@@ -20,7 +20,7 @@ defmodule BibleVersions do
   def build do
     auth = [basic_auth: {@username, @password}]
     {_ok, resp} = try do
-      HTTPoison.get(@url, [{"Accept", "application/jsonrequest"}], [hackney: auth, follow_redirect: true])
+      HTTPoison.get(@url, [{"Accept", "application/jsonrequest"}], [hackney: auth, follow_redirect: true,timeout: 50_000, recv_timeout: 50_000])
     rescue
       _e in RuntimeError -> 
         {:error, %{status_code: 500}} # call it `internal server error`
