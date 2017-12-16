@@ -259,8 +259,8 @@ channel.join()
 elmHeaderApp.ports.portCSRFToken.send($("#csrf_token").val())
 
 initElmHeader();
-// window.addEventListener('load', function() {
-$(window).load(function() {
+// jquery $(window).load() has some issues
+window.addEventListener('load', function() {
   var $fontslider = $('[data-rangeslider]');
   var $output = $('output');
   
