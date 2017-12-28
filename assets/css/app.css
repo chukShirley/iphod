@@ -34,7 +34,7 @@ button {
 #m-elm-container {
   position: relative;
   top: -3em;
-  margin-left: 0.3em;
+  margin-left: 2em;
   width: 92%;
 }
 
@@ -61,6 +61,7 @@ ul#font-sizer-id {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  z-index: 9999;
 }
 
 ul#font-sizer-id li {
@@ -633,7 +634,7 @@ li.offices-item {
   main div table#calendar{
     position: relative;
     top: -4em;
-    margin-left: 1em;
+    margin-left: 2em;
     width: 90%;
   }
 

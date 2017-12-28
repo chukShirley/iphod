@@ -72,8 +72,6 @@ defmodule  Lityear do
                                   {"ashWednesday", "1", yrABC, day}
       day |> right_after_ascension?     -> 
                                   {"ascension", "1", yrABC, day}
-      doy == "1225"            -> {"christmasDay", "1", yrABC, day}
-      doy == "0101"            -> {"holyName", "1", yrABC, day}
       day == christmas(y-1)    -> {"christmas", "1", yrABC, day}
       is_christmas2            -> {"christmas", "2", yrABC, day} 
       is_christmas1            -> {"christmas", "1", yrABC, day}
