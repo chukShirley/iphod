@@ -55,6 +55,7 @@ defmodule  Lityear do
     from_christmas = Timex.diff(christmas(1, y), sunday, :weeks)
     # is_christmas = (day |> is_sunday?) && (dOfMon == "12/25")
     # is_holy_name = (day |> is_sunday?) && (dOfMon == "1/1")
+    is_christmas1 = dOfMon in ~w(12/25 12/26 12/27 12/28 12/29 12/30 12/31)
     is_christmas2 = cond do
       dOfMon in ~w(1/2 1/3 1/4 1/5) -> true
       till_epiphany in 1..4         -> true
@@ -75,6 +76,7 @@ defmodule  Lityear do
       doy == "0101"            -> {"holyName", "1", yrABC, day}
       day == christmas(y-1)    -> {"christmas", "1", yrABC, day}
       is_christmas2            -> {"christmas", "2", yrABC, day} 
+      is_christmas1            -> {"christmas", "1", yrABC, day}
       till_epiphany in 6..11   -> {"christmas", "1", yrABC, day}
       days_till_easter == 2    -> {"goodFriday", "1", yrABC, day}
       days_till_easter in 1..6 -> {"holyWeek", to_string(7 - days_till_easter), yrABC, day}
@@ -139,6 +141,12 @@ defmodule  Lityear do
     christmas() |> date_next_sunday |> date_shift( weeks: n - 1)
   end
   def christmas(n,y),   do: christmas(y) |> date_shift( weeks: n)
+
+  def christmasDay?(d), do: d.year |> christmas == d
+  def inChristmas?(date) do
+    ( date |> Timex.format!("%m\/%d", :strftime))  in ~w(12/25 12/26 12/27 12/28 12/29 12/30 12/31 1/1 1/2 1/3 1/4 1/5)
+  end
+     
   
   def epiphany(),   do: Timex.to_date({lityear(), 1, 6})
   def epiphany(n) when n < 1,         do: {:error, "There is no Epiphany before year 0."}

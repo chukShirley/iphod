@@ -81,6 +81,8 @@ port saveLogin : Models.User -> Cmd msg
 
 port currentUser : Models.User -> Cmd msg
 
+port saveFontSize : Models.Config -> Cmd msg
+
 
 
 -- SUBSCRIPTIONS
@@ -120,6 +122,7 @@ type Msg
     | ModConfig Config.Msg
     | ModLogin Login.Msg
     | ModRegister Login.Msg
+    | ModFontSize String
     | SetRegisterPassword String
     | SetRegisterPasswordConfirmation String
     | SetRegisterUserName String
@@ -274,6 +277,21 @@ update msg model =
                     { model | user = newUser }
             in
                 ( newModel, Cmd.none )
+
+        ModFontSize msg ->
+          let
+            fsz = String.toInt model.config.fontSize |> Result.withDefault 12
+            config = model.config
+            newFsz = case (msg) of
+              "f" -> if fsz >= 8 then fsz - 4 else 8
+              "F" -> if fsz <= 25 then fsz + 4 else 24
+              _   -> fsz
+            newConfig = {config | fontSize = toString newFsz }
+            newModel = {model | config = newConfig}
+
+              
+          in
+            (newModel, saveFontSize newModel.config)
 
         SetRegisterPassword s ->
             let
@@ -456,8 +474,7 @@ view model =
         , attribute "data-reading3_ver" model.reading.reading3_ver
         , attribute "data-reading_date" model.reading.reading_date
         ]
-        [ userLogin model
-        , ul [ id "header-options" ]
+        [ ul [ id "header-options" ]
             [ li [ class "option-item" ] [ calendar model ]
             , li [ class "option-item" ] [ offices model ]
             , li [ class "option-item" ] [ resources model ]
@@ -465,6 +482,7 @@ view model =
             , li [ class "option-item" ] [ configModal model ]
             , li [ class "option-item" ] [ translations model ]
             , li [ class "option-item" ] [ aboutOptions model ]
+            , li [ class "font-sizer"  ] [ fontSizer model ]
             ]
         ]
 
@@ -807,6 +825,15 @@ inputMessage model =
             ]
             []
         ]
+
+
+fontSizer : Model -> Html Msg
+fontSizer model =
+  ul [ id "font-sizer-id"]
+    [ li [] [ button [ onClick (ModFontSize "f") ] [ text "f" ] ]
+    , li [] [ button [ onClick (ModFontSize "F") ] [ text "F" ] ]
+    ]
+
 
 
 registerUserName : Models.User -> Html Msg

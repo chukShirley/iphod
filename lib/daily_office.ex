@@ -86,6 +86,8 @@ defmodule DailyReading do
     dow = date |> Timex.format!("{WDfull}")
     dec_n =  date |> Timex.format!("{D}")
     cond do
+      dec_n == "24" -> {"christmas", "1", "christmasEve", date}
+      dec_n == "25" -> {"christmas", "1", "christmasDay", date}
       dow == "Sunday" -> {"christmas", "1", "Sunday", date}
       dec_n == "26" -> {"christmas", "1", "stStephen", date}
       dec_n == "27" -> {"christmas", "1", "stJohn", date}
@@ -137,6 +139,8 @@ defmodule DailyReading do
     # if date == Timex.date({2016, 12, 25}), do: IEx.pry
     {season, wk, lityr, _sundayDate} = 
       cond do
+        date |> Lityear.christmasDay?           -> date |> Lityear.to_season
+        date |> Lityear.inChristmas?            -> date |> Lityear.to_season
         date |> Lityear.is_sunday?              -> date |> Lityear.to_season
         date |> Lityear.epiphany_before_sunday? -> date |> Lityear.to_season
         date |> right_after_ash_wednesday?      -> date |> Lityear.to_season
@@ -144,13 +148,8 @@ defmodule DailyReading do
         date |> right_after_ascension?          -> date |> Lityear.to_season
         true                                    -> date |> Lityear.last_sunday
       end
-    {check_christmas(season), wk, lityr, date}
   end
 
-  def check_christmas("christmasDay"), do: "christmas"
-  def check_christmas("holyName"), do: "christmas"
-  def check_christmas(season), do: season
-    
   def add_psalms(map, day) do
     map
       |> Map.put(:mpp, Psalms.morning(day) |> psalm_map )

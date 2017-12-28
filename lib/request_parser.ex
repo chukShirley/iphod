@@ -43,6 +43,7 @@ defmodule RequestParser do
     ]
   end
 
+  def ref_to_tup(v1, "end"), do: {nil, String.to_integer(v1), 999}
   def ref_to_tup(v1, v2), do: {nil, String.to_integer(v1), String.to_integer(v2)}
   def ref_to_tup(chap, 1, 999), do: {String.to_integer(chap), 1, 999}
   def ref_to_tup(chap, 1, v2), do: {String.to_integer(chap), 1, String.to_integer(v2)}
@@ -55,6 +56,9 @@ defmodule RequestParser do
   end
 
   def all_vss([], list), do: list |> List.flatten |> Enum.reverse
+  def all_vss([[first, "-", "end"]|t], []) do
+    all_vss t, [{nil, String.to_integer(first), 999}]
+  end
   def all_vss([[first, "-", last]|t], []) do
     all_vss t, [{nil, String.to_integer(first), String.to_integer(last)}]
   end

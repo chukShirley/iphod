@@ -1,9 +1,0 @@
-var _user$project$Iphod_Helper$hideable = F2(
-	function (show, attr) {
-		return show ? _elm_lang$html$Html_Attributes$style(attr) : _elm_lang$html$Html_Attributes$style(
-			{
-				ctor: '::',
-				_0: {ctor: '_Tuple2', _0: 'display', _1: 'none'},
-				_1: {ctor: '[]'}
-			});
-	});

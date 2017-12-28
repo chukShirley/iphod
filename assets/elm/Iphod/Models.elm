@@ -109,6 +109,7 @@ type alias Config =
     , fnotes : String
     , vers : List String
     , current : String
+    , fontSize : String
     }
 
 
@@ -121,6 +122,7 @@ configInit =
     , fnotes = "True"
     , vers = [ "ESV" ]
     , current = "ESV"
+    , fontSize = "0.8"
     }
 
 

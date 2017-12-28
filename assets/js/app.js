@@ -13,6 +13,7 @@
 // to also remove its path from "config.paths.watched".
 import "phoenix_html";
 import $ from 'jquery';
+
 var moment = require('moment');
 var markdown = require('markdown').markdown;
 
@@ -96,6 +97,7 @@ function init_config_model() {
     , fnotes: "True"
     , vers: ["ESV"]
     , current: "ESV"
+    , fontSize: "12"
     }
   if ( storageAvailable('localStorage') ) {
     m = { ot: get_init("iphod_ot", "ESV")
@@ -105,6 +107,7 @@ function init_config_model() {
         , fnotes: get_init("iphod_fnotes", "True")
         , vers: get_versions("iphod_vers", ["ESV"])
         , current: get_init("iphod_current", "ESV")
+        , fontSize: get_init("fontSize", "12")
         }
   }
   return m;
@@ -249,6 +252,10 @@ elmHeaderApp.ports.currentUser.subscribe( function() {
 channel.on("current_user", data => {
   // console.log("CURRENT USER: ", data)
   elmHeaderApp.ports.portUser.send(data)
+})
+
+elmHeaderApp.ports.saveFontSize.subscribe( function(config) {
+  $('body').css('font-size', config.fontSize + "px");
 })
 
 elmHeaderApp.ports.saveConfig.subscribe( function(config) {

@@ -78,22 +78,14 @@ defmodule Psalms do
   end
 
   def vs_to_html({key, val}) when key |> is_integer do
-#    ~s( <p class="ps_first">
-#          <sup class="verse-num">#{key}</sup>
-#          #{val.first}</p>
-#        <p class="ps_second">#{val.second}</p>
-#    )
-    ~s( <p>
-          <span class="ps_first">
-            <sup class="verse-num">#{key}</sup>
-            #{val.first}
-          </span>
-          <br>
-          <span class="ps_second">
-            #{val.second}
-          </span>
-        </p>
-    ) 
+    ~s( <ul class="psalm">
+          <li class="ps_num"><sup>#{key}</sup></li>
+          <li class="ps_first">#{val.first}</li>
+        </ul>
+        <ul class="psalm">
+          <li class="ps_second">#{val.second}</li>
+        </ul>
+    )
   end
   def vs_to_html(_), do: ""
 
@@ -127,7 +119,7 @@ defmodule Psalms do
             26 => %{ mp: [{119,105,144}], ep: [{119,145,176}] },
             27 => %{ mp: [120,121,122,123,124,125], ep: [126,127,128,129,130,131] },
             28 => %{ mp: [132,133,134,135], ep: [136,137,138] },
-            29 => %{ mp: [139,140], ep: [141,143] },
+            29 => %{ mp: [139,140], ep: [141,142,143] },
             30 => %{ mp: [144,145,146], ep: [147,148,149,150] },
             31 => %{ mp: [120,121,122,123,124,125,126,127], ep: [128,129,130,130,132,133,134] }
         },
