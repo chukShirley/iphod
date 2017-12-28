@@ -73,3 +73,9 @@ ecce_deus.mo
 .deliver/releases/
 priv
 assets/elm/elm-stuff/build-artifacts
+
+*.elmi
+
+*.elmo
+
+assets/package-lock\.json
