@@ -4,7 +4,7 @@
 body {
   min-width: 21em;
   max-width: 100%;
-  font-size: 0.9em;
+  font-size: 1.0em;
 }
 button.more-options {
   border-color: lightblue;
@@ -120,7 +120,7 @@ ol.fam_ol{
 
 .rubric {
   padding: 0.5em 0;
-  font-size: 0.8em;
+  font-size: 1.0em;
   font-style: italic;
   color: red;
   width: 100%;
@@ -128,7 +128,7 @@ ol.fam_ol{
 }
 p.rubric-office {
   padding: 0.5em 0;
-  font-size: 0.8em;
+  font-size: 1.0em;
   font-style: italic;
   color: red;
   width: 100%;  
@@ -136,26 +136,25 @@ p.rubric-office {
 .rubric-newline {
   top: -0.6em;
   padding: 0 0 0.5em 0;
-  font-size: 0.8em;
+  font-size: 1.0em;
   font-style: italic;
   color: red;
 }
 
 .rubric_black {
-  font-siz: 0.8em;
+  font-siz: 1.0em;
   font-style: italic;
   color: black;
 }
 
 .bible_ref {
-  font-size: 0.8em;
+  font-size: 1.0em;
   font-style: italic;
   margin: -1em 0 1em 0;
   padding: 0;
 }
 
 .section {
-  padding-top: 0.5em;
   font-size: 1.0em;
   font-weight: bold;
 }
@@ -174,20 +173,33 @@ div.confession-of-sin {
 }
 
 ul.psalm {
-  list-style: none;
   position: relative;
+  list-style: none;
+  margin: 0;
 }
 ul.psalm li{
   position: relative;
   left: -2em;
+  display:  inline;
 }
-li.ps_first_cont {
-  margin-left: 0.7em;
-  top: -0.1em;
+
+.ps_vs_num {
+  color: blue;
+  width: 2em;
 }
-li.ps_second_cont {
-  margin-left: 2.5em;
-  top: -0.4em;
+
+.ps_first {
+    position: relative;
+    padding-left: 0.5em;
+    padding-bottom: 0.9;
+    text-indent: -1.5em;
+}
+
+.ps_second {
+    position: relative;
+    top: -0.2em;
+    padding-left: 3em;
+    text-indent: -0.5em;
 }
 
 .reading { font-size: 1.0em }
@@ -232,7 +244,7 @@ li.ps_second_cont {
   position: relative;
   top: -0.3em;
   padding-right: 0.3em;
-  font-size: 0.8em;
+  font-size: 1.0em;
   color: darkred;
 }
 
@@ -297,25 +309,6 @@ li.ps_second_cont {
 }
 */
 
-.ps_vs_num {
-  color: blue;
-  width: 2em;
-}
-
-.ps_first {
-    position: relative;
-    padding-left: 1.5em;
-    padding-bottom: 0.8;
-    text-indent: -1.5em;
-}
-
-.ps_second {
-    position: relative;
-    top: -0.2em;
-    padding-left: 4em;
-    text-indent: -1.5em;
-}
-
 .np_collect {
   padding-bottom: 1.5em;
 }
@@ -324,14 +317,14 @@ ul.versicals {
   width: 70%;
   overflow: hidden;
   padding-left: 0em;
-  margin-top: 0em;
+  margin: 0em;
 }
 
 li.speaker {
   float: left;
   line-height: 1.2em;
   display: inline;
-  width: 25%;
+  width: 5em;
   font-style: italic;  
 }
 
@@ -350,7 +343,7 @@ li.ref-button {
 }
 
 button.text_button {
-  font-size: 0.9em;
+  font-size: 1.0em;
   cursor: pointer;
   box-shadow: -2px 3px 8px #888888;
   border-radius: 5px;
@@ -376,7 +369,7 @@ div.text {
 
 li.litany1 {
   position: relative;
-  margin: 0.8em 0;
+  margin: 1.0em 0;
   line-height: 0.5em;
 }
 
@@ -405,7 +398,7 @@ li.litany2 {
 
 .s_ref {
   font-style: italic;
-  font-size: 0.8em;
+  font-size: 1.0em;
 }
 
 .prayer-type {
@@ -443,7 +436,7 @@ ul.appro_readings{
 
 .alt_readings-button{ /* dropbtn */
   padding: 0.5em;
-  font-size: 0.8em;
+  font-size: 1.0em;
   border: none;
   cursor: pointer;
   background-color: white;
@@ -453,7 +446,7 @@ ul.appro_readings{
 .alt_readings-options { /* dropdown-content */
   position: absolute;
   display: none;
-  top: 0.8em;
+  top: 1.0em;
   z-index: 9;
   padding-left: 1em;
   min-width: 12em;
@@ -554,7 +547,7 @@ p.family_section_title{
       position: fixed; 
       display: block;
       margin-left: 0;
-      top: 0.8em;
+      top: 1.0em;
       z-index: 9;
       padding-left: 1em;
       min-width: 7.5em;
@@ -568,7 +561,7 @@ p.family_section_title{
       position: fixed;
       display: block;
       margin-left: 0;
-      top: 0.8em;
+      top: 1.0em;
       z-index: 9;
       padding-left: 1em;
       min-width: 7.5em;
@@ -623,28 +616,8 @@ p.family_section_title{
       margin-bottom: 0.2em;
     }
   
-  /*
-    li.speaker {width: 25%;}
-    li.says {width: 75%;}
-  */
   
     .canticle { padding-bottom: 0;}
-/* ---
-    ul.psalm { 
-      width: 100%;
-      margin-top: 0;
-    }
-    .ps_first {
-      width: 92%;
-    }
-    .ps_second {
-      padding-left: 1em;
-      text-indent: -0.5em;
-      width: 90%;
-    }
-    li.ps_second_cont { padding-left: 1.5em; }
---- */
-
     @media screen and (max-width: 320px) {
       .mpep { margin-top: 2.5em;}
       button.more-options { top: -0.5em;}

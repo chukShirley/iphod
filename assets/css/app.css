@@ -22,6 +22,15 @@ body, form, ul, table {
 }
 body.calendar { width: 55em; }
 
+button {    
+  box-shadow: -2px 3px 8px #888888;
+  border-radius: 5px;
+  border: solid 2px darkred;
+  background-color: darkred;
+  color: honeydew;
+  text-align: center;
+}
+
 #m-elm-container {
   position: relative;
   top: -3em;
@@ -44,6 +53,30 @@ body.calendar { width: 55em; }
   body.calendar {
     font-size: 0.6em;
   }
+}
+
+ul#font-sizer-id {
+  position: fixed;
+  left: 3px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul#font-sizer-id li {
+  display: block;
+  text-decoration: none;
+  margin: 10px 0;
+}
+
+ul#font-sizer-id button {
+  color: honeydew;
+  width: 1.5em;
+  padding: 0;
+}
+
+ul#font-sizer-id button:hover {
+  color: honeydew;
 }
 
 div.login {
