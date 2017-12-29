@@ -397,7 +397,7 @@ userDecoder =
     Decode.map8 Models.User
         (field "username" Decode.string)
         (field "realname" Decode.string)
-        (field "password" Decode.string)
+        (field "register-password" Decode.string)
         (field "password_confirmation" Decode.string)
         (field "email" Decode.string)
         (field "description" Decode.string)
@@ -880,11 +880,11 @@ registerPassword : Models.User -> Html Msg
 registerPassword user =
     p []
         [ input
-            [ id "password"
+            [ id "register-password"
             , type_ "password"
             , placeholder "Password"
             , autofocus True
-            , name "password"
+            , name "register-password"
             , onInput SetRegisterPassword
             , onEnter Login
             , onWithOptions "click"

@@ -58,11 +58,7 @@ priv/static/css/app-2e5ec257671e1ed1b938b47ed0c0fa14.css.gz
 priv/static/css/app-c70ce8894a063aa7b798b2281b7acd7c.css
 priv/static/css/esv-a843464081d242d4125dd1fea7068de8.css
 priv/static/js/app-76e72f711d1da02c32a99a45bf8e9844.js
-Iphod.elmo
-Iphod.elmi
-Helper.elmo
 exact-dependencies.json
-Helper.elmi
 deploy
 
 .DS_Store
@@ -77,5 +73,8 @@ assets/elm/elm-stuff/build-artifacts
 *.elmi
 
 *.elmo
+
+assets/node_modules/
+assets/vendor/
 
 assets/package-lock\.json

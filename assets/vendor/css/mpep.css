@@ -126,23 +126,6 @@ p.rubric-office {
   font-size: 1.0em;
 }
 
-ul.psalm {
-  list-style: none;
-  position: relative;
-}
-ul.psalm li{
-  position: relative;
-  left: -2em;
-}
-li.ps_first_cont {
-  margin-left: 0.7em;
-  top: -0.1em;
-}
-li.ps_second_cont {
-  margin-left: 2.5em;
-  top: -0.4em;
-}
-
 .reading { font-size: 1.0em }
 .alt_reading {
   margin-left: 2em;
