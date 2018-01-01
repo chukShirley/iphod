@@ -3,10 +3,8 @@ module Iphod.Config exposing (..) -- where
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (on, onCheck, onClick, targetValue)
-import String exposing (join)
 import Json.Decode as Json
 
-import Iphod.Helper exposing (hideable)
 import Iphod.Models exposing (Config, configInit)
 
 -- MODEL

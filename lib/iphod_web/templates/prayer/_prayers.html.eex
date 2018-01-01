@@ -1,30 +1,56 @@
-<ul class="versicals" style="margin-top: 1em;">
+<ul class="versicals">
   <li class="speaker"><%= gettext "Officiant"%></li>
   <li class="says"><%= dgettext "prayers", "O Lord, show us your mercy;"%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "People"%></li>
   <li class="says"><%= dgettext "prayers", "And grant us your salvation."%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "Officiant"%></li>
   <li class="says"><%= dgettext "prayers", "O Lord, save our nations;"%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "People"%></li>
   <li class="says"><%= dgettext "prayers", "And guide us in the way of justice and truth."%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "Officiant"%></li>
   <li class="says"><%= dgettext "prayers", "Clothe your ministers with righteousness;"%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "People"%></li>
   <li class="says"><%= dgettext "prayers", "And make your chosen people joyful."%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "Officiant"%></li>
   <li class="says"><%= dgettext "prayers", "O Lord, save your people;"%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "People"%></li>
   <li class="says"><%= dgettext "prayers", "And bless your inheritance."%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "Officiant"%></li>
   <li class="says"><%= dgettext "prayers", "Give peace in our time, O Lord;"%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "People"%></li>
   <li class="says"><%= dgettext "prayers", "For only in you can we live in safety."%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "Officiant"%></li>
   <li class="says"><%= dgettext "prayers", "Let not the needy, O Lord, be forgotten;"%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "People"%></li>
   <li class="says"><%= dgettext "prayers", "Nor the hope of the poor be taken away."%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "Officiant"%></li>
   <li class="says"><%= dgettext "prayers", "Create in us clean hearts, O God;"%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "People"%></li>
   <li class="says"><%= dgettext "prayers", "And take not your Holy Spirit from us."%></li>
 </ul>

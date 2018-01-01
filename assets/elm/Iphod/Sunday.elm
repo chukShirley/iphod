@@ -5,9 +5,8 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
 import String exposing (join)
-import Regex exposing (..)
 import Markdown
-import Debug
+-- import Debug
 
 import Iphod.Helper exposing (hideable)
 import Iphod.Models as Models

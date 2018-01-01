@@ -9,15 +9,12 @@ import Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Http exposing (..)
-import Task exposing (Task)
 import Json.Decode as Decode exposing (..)
 import Json.Encode as Encode exposing (..)
 import Platform.Sub as Sub exposing (batch, none)
 import Platform.Cmd as Cmd exposing (Cmd)
 import String exposing (join)
 import Markdown
-import Regex
-import Iphod.Helper exposing (hideable)
 import Iphod.Models as Models
 import Iphod.Config as Config
 import Iphod.Login as Login
@@ -25,7 +22,7 @@ import Iphod.Login as Login
 
 -- MAIN
 
-
+main : Program Never Model Msg
 main =
     Html.program
         { init = init
@@ -964,7 +961,7 @@ onEnter msg =
     in
         on "keydown" (Decode.map tagger keyCode)
 
-
+howToUse : String
 howToUse =
     """
 
@@ -998,7 +995,7 @@ howToUse =
 
 """
 
-
+about : String
 about =
     """
 #### About Iphod

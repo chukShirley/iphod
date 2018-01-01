@@ -3,10 +3,7 @@ module Iphod.Login exposing (Model, init, Msg, update, view)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import String exposing (join)
 import Json.Decode as Decode exposing (..)
-import Json.Encode as Encode exposing (..)
-import Iphod.Helper exposing (hideable)
 import Iphod.Models exposing (User, userInit)
 
 

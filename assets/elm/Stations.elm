@@ -6,7 +6,6 @@ import Html exposing (..)
 import Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Json.Decode as Json
 import String exposing (toInt)
 
 
@@ -15,12 +14,12 @@ import String exposing (toInt)
 import Platform.Sub as Sub exposing (batch)
 import Platform.Cmd as Cmd exposing (Cmd)
 import Markdown
-import Debug
+-- import Debug
 
 
 -- MAIN
 
-
+main : Program Never Model Msg
 main =
     Html.program
         { init = init

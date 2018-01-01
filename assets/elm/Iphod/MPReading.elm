@@ -4,12 +4,10 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
-import Http
 import String
 import Markdown
 
 import Iphod.Models as Models
-import Iphod.Config as Config
 import Iphod.Helper exposing (hideable)
 
 

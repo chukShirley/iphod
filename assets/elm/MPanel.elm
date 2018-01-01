@@ -1,5 +1,5 @@
 port module MPanel exposing (..) -- where
-import Debug
+-- import Debug
 
 import Html exposing (..)
 import Html
@@ -11,6 +11,7 @@ import Iphod.Helper exposing (hideable)
 
 -- MAIN
 
+main : Program Never Model Msg
 main =
   Html.program
     { init = init
@@ -23,6 +24,7 @@ main =
 -- MODEL
 
 type alias Model = Models.Daily
+initModel : Models.Daily
 initModel = Models.initDaily
 
 init: (Model, Cmd Msg)

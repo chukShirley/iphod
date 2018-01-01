@@ -142,7 +142,7 @@ defmodule  Lityear do
 
   def christmasDay?(d), do: d.year |> christmas == d
   def inChristmas?(date) do
-    ( date |> Timex.format!("%m\/%d", :strftime))  in ~w(12/25 12/26 12/27 12/28 12/29 12/30 12/31 1/1 1/2 1/3 1/4 1/5)
+    "#{date.month}/#{date.day}"  in ~w(12/25 12/26 12/27 12/28 12/29 12/30 12/31 1/1 1/2 1/3 1/4 1/5)
   end
      
   

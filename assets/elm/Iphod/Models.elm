@@ -451,6 +451,7 @@ type alias Reflection =
     }
 
 
+initReflection : Reflection
 initReflection =
     { author = ""
     , markdown = ""
@@ -515,7 +516,7 @@ type alias Leaflet =
     , largePrint : String
     }
 
-
+initLeaflet : Leaflet
 initLeaflet =
     { reg = ""
     , largePrint = ""

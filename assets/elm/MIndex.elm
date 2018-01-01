@@ -6,8 +6,6 @@ import Debug
 import Html exposing (..)
 import Html
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Regex
 import Platform.Sub as Sub exposing (batch, none)
 import Platform.Cmd as Cmd exposing (Cmd)
 import String exposing (join)
@@ -21,7 +19,7 @@ import Iphod.EPReading as EPReading
 
 -- MAIN
 
-
+main : Program Never Model Msg
 main =
     Html.program
         { init = init

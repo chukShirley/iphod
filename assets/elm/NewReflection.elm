@@ -1,19 +1,16 @@
 port module NewReflection exposing (..) -- where
 
-import Debug
+-- import Debug
 
 import Html exposing (..)
 import Html
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Regex exposing (regex, contains, caseInsensitive)
-import Json.Decode as Json
 import Markdown exposing (..)
-
-import Iphod.Helper exposing (hideable)
 
 -- MAIN
 
+main : Program Never Model Msg
 main =
   Html.program
     { init = init
@@ -98,7 +95,7 @@ update msg model =
 
     Published bool ->
       let
-        foo = Debug.log "PUBLISHED" bool
+        -- foo = Debug.log "PUBLISHED" bool
         newModel = { model | published = bool }
       in
         ( newModel, portSubmit newModel)

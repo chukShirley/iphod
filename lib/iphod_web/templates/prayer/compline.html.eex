@@ -9,6 +9,7 @@
   <ul class="versicals">
     <li class="speaker">&nbsp;</li>
     <li class="says">Our help is in the Name of the Lord;</li>
+  <ul class="versicals">
     <li class="speaker">People</li>
     <li class="says">The maker of heaven and earth.</li>
   </ul>
@@ -37,12 +38,20 @@
   <ul class="versicals">
     <li class="speaker">Officiant</li>
     <li class="says">O God, make speed to save us.</li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker">People</li>
     <li class="says">O Lord, make haste to help us.</li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker">Officiant</li>
     <li class="says">Glory to the Father, and to the Son, and to the Holy Spirit;</li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker">People</li>
     <li class="says">as it was in the beginning, is now, and ever shall be,</li>
+  </ul>
+  <ul class="versicals">
     <li class="extra_indent">&nbsp;</li>
     <li class="extra_indent_says">world without end. Amen.</li>
   </ul>
@@ -212,10 +221,16 @@
   <ul class="versicals">
     <li class="speaker">Officiant</li>
     <li class="says">Into your hands, O Lord, I commend my spirit;</li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker">People</li>
     <li class="says">For you have redeemed me, O Lord, O God of truth.</li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker">Officiant</li>
     <li class="says">Keep me as the apple of your eye;</li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker">People</li>
     <li class="says">Hide me under the shadow of your wings.</li>
   </ul>
@@ -233,8 +248,12 @@
   <ul class="versicals" style="margin-top: 1em;">
     <li class="speaker">Officiant</li>
     <li class="says">O Lord, hear our prayer;</li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker">People</li>
     <li class="says">And let our cry come to you.</li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker">Officiant</li>
     <li class="says">Let us pray.</li>
   </ul>
@@ -337,6 +356,8 @@
   <ul class="versicals">
     <li class="speaker">Officiant</li>
     <li class="says">Let us bless the Lord.</li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker">People</li>
     <li class="says">Thanks be to God.</li>
   </ul>

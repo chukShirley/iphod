@@ -37,3 +37,9 @@ erl_crash.dump
 *.elmo
 
 assets/package-lock\.json
+
+assets/elm-stuff/
+
+assets/node_modules/
+
+assets/elm/vendor/

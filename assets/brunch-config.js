@@ -55,6 +55,8 @@ exports.config = {
   // Configure your plugins
   plugins: {
     elmBrunch: {
+      // saying "elmFolder: 'elm'", sort of does a cd elm for what follows
+      // thus the executablePath needs to back up with '..'
       elmFolder: 'elm',
       mainModules: [
         'Iphod.elm', 
@@ -67,7 +69,10 @@ exports.config = {
         'Stations.elm'
       ],
       executablePath: '../node_modules/elm/binwrappers',
-      outputFolder: '../vendor'
+      // executablePath: '/usr/local/bin',
+      outputFolder: 'vendor/js',
+      // outputFile: 'bundle.js',
+      makeParameters: ['--warn']
     },
     babel: {
       // Do not use ES6 compiler in vendor code
@@ -76,9 +81,9 @@ exports.config = {
     sass: {
       options: {
         includePaths: [
-          "assets/node_modules/bootstrap-sass/assets/stylesheets",
-          "assets/node_modules/font-awesome/scss",
-          "assets/node_modules/toastr"
+          "node_modules/bootstrap-sass/assets/stylesheets",
+          "node_modules/font-awesome/scss",
+          "node_modules/toastr"
         ], // tell sass-brunch where to look for files to @import
       },
       precision: 8 // minimum precision required by bootstrap-sass

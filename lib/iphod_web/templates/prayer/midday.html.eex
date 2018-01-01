@@ -6,13 +6,21 @@
   <ul class="versicals">
     <li class="speaker"><%= gettext "Officiant"%></li>
     <li class="says"><%= dgettext "np_start", "O God, make speed to save us. "%></li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker"><%= gettext "People"%></li>
     <li class="says"><%= dgettext "np_start", "O Lord, make haste to help us. "%></li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker"><%= gettext "Officiant"%></li>
     <li class="says"><%= dgettext "np_start", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker"><%= gettext "People"%></li>
     <li class="says"><%= dgettext "np_start", "as it was in the beginning, is now, and ever shall be, world without end. Amen."%></li>
+  </ul>
     <p class='rubric'><%= gettext "Except in Lent, add"%></li>
+  <ul class="versicals">
     <li class="speaker">&nbsp;</li>
     <li class="says"><%= dgettext "np_start", "Alleluia."%></li>
   </ul>
@@ -141,6 +149,8 @@
   <ul class="versicals" style="margin-top: 1em;">
     <li class="speaker"><%= gettext "Officiant"%></li>
     <li class="says"><%= dgettext "prayers", "I will bless the Lord at all times."%></li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker"><%= gettext "People"%></li>
     <li class="says"><%= dgettext "prayers", "His praise shall continually be in my mouth."%></li>
   </ul>
@@ -158,8 +168,12 @@
   <ul class="versicals" style="margin-top: 1em;">
     <li class="speaker"><%= gettext "Officiant"%></li>
     <li class="says"><%= dgettext "np_start", "O Lord, hear our prayer;"%></li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker"><%= gettext "People"%></li>
     <li class="says"><%= dgettext "np_start", "And let our cry come to you."%></li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker"><%= gettext "Officiant"%></li>
     <li class="says"><%= dgettext "np_start", "Let us pray."%></li>
   </ul>
@@ -206,6 +220,8 @@
   <ul class="versicals" style="margin-top: 1em;">
     <li class="speaker"><%= gettext "Officiant"%></li>
     <li class="says"><%= dgettext "np_start", "Let us bless the Lord."%></li>
+  </ul>
+  <ul class="versicals">
     <li class="speaker"><%= gettext "People"%></li>
     <li class="says"><%= dgettext "np_start", "Thanks be to God."%></li>
   </ul>

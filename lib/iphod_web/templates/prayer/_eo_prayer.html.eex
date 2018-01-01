@@ -1,6 +1,8 @@
-<ul class="versicals" style="margin-top: 1em;">
+<ul class="versicals">
   <li class="speaker">&nbsp;</li>
   <li class="says"><%= gettext "Let us bless the Lord"%></li>
+</ul>
+<ul class="versicals">
   <li class="speaker"><%= gettext "People"%></li>
   <li class="says"><%= gettext "Thanks be to God"%></li>
 </ul>

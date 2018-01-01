@@ -1,6 +1,6 @@
 port module Translations exposing (..) -- where
 
-import Debug
+-- import Debug
 
 import Html exposing (..)
 import Html
@@ -14,6 +14,7 @@ import Iphod.Helper exposing (hideable)
 
 -- MAIN
 
+main : Program Never Model Msg
 main =
   Html.program
     { init = init

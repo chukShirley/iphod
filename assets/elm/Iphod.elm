@@ -2,7 +2,7 @@ port module Iphod exposing (..)
 
 -- where
 
-import Debug
+-- import Debug
 
 
 -- import StartApp
@@ -10,13 +10,9 @@ import Debug
 import Html exposing (..)
 import Html
 import Html.Attributes exposing (..)
-import Html.Events exposing (..)
-import Regex
 import Platform.Sub as Sub exposing (batch)
 import Platform.Cmd as Cmd exposing (Cmd)
-import String exposing (join)
 import Markdown
-import Iphod.Helper exposing (hideable)
 import Iphod.Models as Models
 import Iphod.Sunday as Sunday
 import Iphod.MPReading as MPReading
@@ -25,7 +21,7 @@ import Iphod.EPReading as EPReading
 
 -- MAIN
 
-
+main : Program Never Model Msg
 main =
     Html.program
         { init = init

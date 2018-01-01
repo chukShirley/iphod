@@ -17,6 +17,7 @@ import Iphod.Models as Models
 
 -- MAIN
 
+main : Program Never Model Msg
 main =
   Html.program
     { init = init
