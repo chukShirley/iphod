@@ -70,7 +70,7 @@ exports.config = {
       ],
       executablePath: '../node_modules/elm/binwrappers',
       // executablePath: '/usr/local/bin',
-      outputFolder: 'vendor/js',
+      outputFolder: '../vendor/js',
       // outputFile: 'bundle.js',
       makeParameters: ['--warn']
     },
