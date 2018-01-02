@@ -981,9 +981,14 @@ li.offices-item {
 
   #howTo-text {
     text-align: left;
+    height: 90%;
+    overflow: scroll;
   }
+
   #about-text {
     text-align: left;
+    height: 90%;
+    overflow: scroll;
   }
   
   .close {

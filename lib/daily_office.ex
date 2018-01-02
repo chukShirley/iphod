@@ -68,17 +68,17 @@ defmodule DailyReading do
   end
 
   def _readings({season, wk, litYr, date}) do
-    {season, wk, dow, date} = day_of_week({season, wk, litYr, date})
-    if readings(season, wk, dow, date) |> is_nil, do: IEx.pry
-    readings(season, wk, dow, date)
-      |> add_psalms(date.day)
+    {new_season, new_wk, dow, new_date} = day_of_week({season, wk, litYr, date})
+    if readings(new_season, new_wk, dow, new_date) |> is_nil, do: IEx.pry
+    readings(new_season, new_wk, dow, new_date)
+      |> add_psalms(new_date.day)
       |> to_lessons
       |> Map.merge( %{  
-                season: date_to_season(date, season),
-                week:   wk, 
+                season: date_to_season(new_date, season),
+                week:   new_wk, 
                 day:    dow,
-                title:  update_title(date, identity()[season][wk][dow].title), 
-                date:   date |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
+                title:  update_title(new_date, identity()[new_season][new_wk][dow].title), 
+                date:   new_date |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
             })
   end
 
@@ -125,6 +125,12 @@ defmodule DailyReading do
     end
   end
 
+  def day_of_week({"redLetter", wk, litYr, date}) do
+    dow = date |> Timex.format!("{WDfull}")
+    {new_season, new_wk, _litYr, _date} = date |> Lityear.last_sunday
+    {new_season, new_wk, dow, date}
+  end
+
   def day_of_week({season, wk, _litYr, date}) do
     dow = date |> Timex.format!("{WDfull}")
     {season, wk, dow, date}
@@ -136,18 +142,19 @@ defmodule DailyReading do
   end
 
   def select_season(date) do
+    date |> Lityear.to_season
     # if date == Timex.date({2016, 12, 25}), do: IEx.pry
-    {season, wk, lityr, _sundayDate} = 
-      cond do
-        date |> Lityear.christmasDay?           -> date |> Lityear.to_season
-        date |> Lityear.inChristmas?            -> date |> Lityear.to_season
-        date |> Lityear.is_sunday?              -> date |> Lityear.to_season
-        date |> Lityear.epiphany_before_sunday? -> date |> Lityear.to_season
-        date |> right_after_ash_wednesday?      -> date |> Lityear.to_season
-        date |> good_friday?                    -> date |> Lityear.to_season
-        date |> right_after_ascension?          -> date |> Lityear.to_season
-        true                                    -> date |> Lityear.last_sunday
-      end
+    # {season, wk, lityr, _sundayDate} = 
+    #   cond do
+    #     date |> Lityear.christmasDay?           -> date |> Lityear.to_season
+    #     date |> Lityear.inChristmas?            -> date |> Lityear.to_season
+    #     date |> Lityear.is_sunday?              -> date |> Lityear.to_season
+    #     date |> Lityear.epiphany_before_sunday? -> date |> Lityear.to_season
+    #     date |> right_after_ash_wednesday?      -> date |> Lityear.to_season
+    #     date |> good_friday?                    -> date |> Lityear.to_season
+    #     date |> right_after_ascension?          -> date |> Lityear.to_season
+    #     true                                    -> date |> Lityear.to_season
+    #   end
   end
 
   def add_psalms(map, day) do
