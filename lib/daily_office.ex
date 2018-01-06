@@ -36,6 +36,7 @@ defmodule DailyReading do
   def _opening_sentence(mpep, "palmSunday"),    do: identity()["#{mpep}_opening"]["lent"]
   def _opening_sentence(mpep, "easterDay"),     do: identity()["#{mpep}_opening"]["easter"]
   def _opening_sentence(mpep, "ascension"),     do: identity()["#{mpep}_opening"]["easter"]
+  def _opening_sentence(mpep, "theEpiphany"),   do: identity()["#{mpep}_opening"]["epiphany"]
   def _opening_sentence(mpep, season),          do: identity()["#{mpep}_opening"][season]
     
   def antiphon(date) do
@@ -45,6 +46,7 @@ defmodule DailyReading do
   def _antiphon("ashWednesday"),  do: identity()["antiphon"]["lent"]
   def _antiphon("goodFriday"),    do: identity()["antiphon"]["lent"]
   def _antiphon("ascension"),     do: identity()["antiphon"]["easter"]
+  def _antiphon("theEpiphany"),   do: identity()["antiphon"]["epiphany"]
   def _antiphon(season),          do: identity()["antiphon"][season]
 
 
@@ -59,6 +61,7 @@ defmodule DailyReading do
   def readings({"ashWednesday", _wk, litYr, date}),  do: _readings({"epiphany", "9", litYr, date})
   def readings({"goodFriday", _wk, litYr, date}),    do: _readings({"palmSunday", "1", litYr, date})
   def readings({"ascension", _wk, litYr, date}),     do: _readings({"easter", "6", litYr, date})
+  def readings({"theEpiphany", _wk, litYr, date}),     do: _readings({"epiphany", "0", litYr, date})
   def readings({season, wk, litYr, date}),          do: _readings({season, wk, litYr, date})
 
   # readings(d) is last otherwise there will be confusion between

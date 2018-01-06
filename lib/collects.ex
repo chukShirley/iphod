@@ -134,7 +134,7 @@ defmodule Collects do
             }
           ]
         },
-      "epiphany0" =>
+      "theEpiphany1" =>
         { "The Collect, with the Psalm and Lessons for the Epiphany, or those for the Second Sunday after Christmas, serves for
             weekdays between the Epiphany and the following Sunday.
             When the Epiphany falls on a Sunday, subsequent Sundays are Sundays after Epiphany.",
