@@ -145,19 +145,7 @@ defmodule DailyReading do
   end
 
   def select_season(date) do
-    date |> Lityear.to_season
-    # if date == Timex.date({2016, 12, 25}), do: IEx.pry
-    # {season, wk, lityr, _sundayDate} = 
-    #   cond do
-    #     date |> Lityear.christmasDay?           -> date |> Lityear.to_season
-    #     date |> Lityear.inChristmas?            -> date |> Lityear.to_season
-    #     date |> Lityear.is_sunday?              -> date |> Lityear.to_season
-    #     date |> Lityear.epiphany_before_sunday? -> date |> Lityear.to_season
-    #     date |> right_after_ash_wednesday?      -> date |> Lityear.to_season
-    #     date |> good_friday?                    -> date |> Lityear.to_season
-    #     date |> right_after_ascension?          -> date |> Lityear.to_season
-    #     true                                    -> date |> Lityear.to_season
-    #   end
+    {season, _wk, _lityr, _date} = date |> Lityear.to_season(true) # true arg tells to_season this is daily office
   end
 
   def add_psalms(map, day) do
