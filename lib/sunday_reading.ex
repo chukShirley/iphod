@@ -113,30 +113,11 @@ defmodule SundayReading do
         collect:  Collects.get(season, wk),
         leaflet:  Leaflets.for_this_sunday(season, wk, yr)
     }
-    # should check for red letter day first
-    # doy = date |> Timex.format!("%m%d", :strftime)
-    # {season, week, lityear, _date} = date |> Lityear.to_season
-    # {hd, title} = Lityear.next_holy_day date
-    # cond do
-      # doy == "0101" ->
-      #   _sunday {"holyName", "1", lityear, date}
-      # doy == "1225" ->
-      #   _sunday {"christmasDay", "1", lityear, date}
-      # date |> right_after_ash_wednesday? ->
-      #   _sunday {"ashWednesday", "1", lityear, date}
-      # season == "holyWeek" ->
-      #   _sunday {season, week, lityear, date}
-      # season == "easterWeek" ->
-      #   _sunday {season, week, lityear, date}
-      # date |> right_after_ascension? ->
-      #   _sunday {"ascension", "1", lityear, date}
-      # hd == date ->
-      #   holy_day title, date
-      # date |> Lityear.is_sunday? ->
-      #   this_sunday(date)
-      # true ->
-      #   last_sunday(date)
-    # end
+  end
+
+  def colors(date) do
+    {season, wk, yr, _} = Lityear.to_season(date)
+    identity()[season][wk]["colors"]
   end
 
   def holy_day(title, date),    do:  eu_map {"redLetter", title, "a", date}

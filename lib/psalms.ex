@@ -46,8 +46,8 @@ defmodule Psalms do
   def morning(n), do: identity().day[n].mp
   def evening(n), do: identity().day[n].ep
 
-  def morning_psalms(n, ver \\ "Coverdale"), do: morning(n) |> Enum.map(&(psalm &1, ver))
-  def evening_psalms(n, ver \\ "Coverdale"), do: evening(n) |> Enum.map(&(psalm &1, ver))
+  def morning_psalms(n, ver \\ "BCP"), do: morning(n) |> Enum.map(&(psalm &1, ver))
+  def evening_psalms(n, ver \\ "BCP"), do: evening(n) |> Enum.map(&(psalm &1, ver))
 
   def to_html(s, ver) when s |> is_bitstring do
     s |> String.split([" ", ".", "-", ":"]) |> List.to_tuple |> _to_html(ver)

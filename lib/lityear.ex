@@ -39,9 +39,8 @@ defmodule  Lityear do
   def next_sunday(),        do: date_next_sunday(Timex.now(@tz))  |> to_season
   def next_sunday(d),       do: date_next_sunday(d)           |> to_season
   def from_now(), do: to_season Timex.now(@tz)
-  def to_season(day, mpep \\ true) do
+  def to_season(day, mpep \\ false) do
     sunday = if day |> is_sunday?, do: day, else: day |> date_last_sunday()
-    doy = day |> Timex.format!("%m%d", :strftime)
     {hd, hd_title} = next_holy_day(day)
     y = lityear sunday
     yrABC = abc sunday

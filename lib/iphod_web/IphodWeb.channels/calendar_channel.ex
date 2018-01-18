@@ -81,7 +81,7 @@ defmodule IphodWeb.CalendarChannel do
     day = %{  date: start_date |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"),
               name: start_date |> Timex.format!("{WDfull}"),
               dayOfMonth: start_date |> Timex.format!("{D}"),
-              colors: DailyReading.color_for(start_date),
+              colors: SundayReading.colors(start_date),
               daily: DailyReading.readings(start_date),
               sunday: SundayReading.readings(start_date),
               today: start_date == Timex.now

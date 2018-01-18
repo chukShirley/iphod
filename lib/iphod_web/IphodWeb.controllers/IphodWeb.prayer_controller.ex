@@ -139,7 +139,9 @@ defmodule IphodWeb.PrayerController do
   end
 
   def prayer_model("mp", psalm_translation, text_translation) do
-    day = Timex.now(@tz) |> Timex.to_date
+    rightNow = Timex.now(@tz)
+    day = rightNow |> Timex.to_date
+    {season, _wk, _lityr, _date} = rightNow |> Lityear.to_season
     day_of_week = day |> Timex.weekday |> Timex.day_name
     {sent, ref} = DailyReading.opening_sentence("mp", day)
     dreading = DailyReading.readings(day)
@@ -152,15 +154,17 @@ defmodule IphodWeb.PrayerController do
       |> put_reading(dreading[:mpp], psalm_translation)
       |> put_reading(dreading[:mp1], text_translation)
       |> put_reading(dreading[:mp2], text_translation)
-      |> Map.put(:ot_canticle, put_canticle("mp", "ot", dreading.season, day_of_week))
-      |> Map.put(:nt_canticle, put_canticle("mp", "nt", dreading.season, day_of_week))
+      |> Map.put(:ot_canticle, put_canticle("mp", "ot", season, day_of_week))
+      |> Map.put(:nt_canticle, put_canticle("mp", "nt", season, day_of_week))
       |> Map.put(:collect_of_week, collect)
       |> Map.put(:day, day_of_week)
       |> Map.put(:reflID, reflectionID(day))
   end
   
   def prayer_model("ep", psalm_translation, text_translation) do
-    day = Timex.now(@tz) |> Timex.to_date
+    rightNow = Timex.now(@tz)
+    day = rightNow |> Timex.to_date
+    {season, _wk, _lityr, _date} = rightNow |> Lityear.to_season
     day_of_week = day |> Timex.weekday |> Timex.day_name
     {sent, ref} = DailyReading.opening_sentence("ep", day)
     dreading = DailyReading.readings(day)
@@ -173,8 +177,8 @@ defmodule IphodWeb.PrayerController do
       |> put_reading(dreading[:epp], psalm_translation)
       |> put_reading(dreading[:ep1], text_translation)
       |> put_reading(dreading[:ep2], text_translation)
-      |> Map.put(:ot_canticle, put_canticle("ep", "ot", dreading.season, day_of_week))
-      |> Map.put(:nt_canticle, put_canticle("ep", "nt", dreading.season, day_of_week))
+      |> Map.put(:ot_canticle, put_canticle("ep", "ot", season, day_of_week))
+      |> Map.put(:nt_canticle, put_canticle("ep", "nt", season, day_of_week))
       |> Map.put(:collect_of_week, collect)
       |> Map.put(:day, day_of_week)
       |> Map.put(:reflID, reflectionID(day))
