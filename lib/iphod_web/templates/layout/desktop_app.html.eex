@@ -31,7 +31,7 @@
 
   <body class= <%= @page_controller %> >
     <input id="csrf_token" type="hidden" name="csrf-token" value="<%= get_csrf_token() %>" >
-    <div id="ardf-donation">
+    <<div id="ardf-donation">
       <style>
         p.banner {
           color: black;
@@ -46,8 +46,11 @@
       </style>
 
       <p class="banner"> 
-        <span style="font-size: 1.2em;">COB 2018 PB Updates Progress... </span>
-        1) Daily Office Lectionary completed
+        <span style="font-size: 1.2em;">COB 2018 PB Updates: </span>
+        <span style="font-size: 0.9em;">The Daily Office readings are in place, but because of the amount and details in 
+        the other changes, I have decided not to make any other changes before version 2 (before Easter). Thank you for your patience - Paul+ (St. Elizabeth's Anglican Mission)
+        <br /> For more frequent updates, join the Iphod Facebook group
+      </span>
       </p>
     </div>
     <div id="header">
