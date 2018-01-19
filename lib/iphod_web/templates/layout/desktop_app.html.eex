@@ -34,7 +34,7 @@
     <div id="ardf-donation">
       <style>
         p.banner {
-          color: mintcream;
+          color: black;
           border-style: solid;
           border-width: 4pt;
           border-color: darkblue;
@@ -46,7 +46,10 @@
         }
       </style>
 
-      <!-- <p class="banner"> </p> -->
+      <p class="banner"> 
+        <span style="font-size: 1.2em;">COB 2018 PB Updates Progress... </span>
+        1) Daily Office Lectionary completed
+      </p>
     </div>
     <div id="header">
       <a href= "/calendar" class="home_link"><span>Legereme</span></a>
