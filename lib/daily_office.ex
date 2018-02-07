@@ -484,7 +484,7 @@ defmodule DailyReading do
       "January01" => %{
         title: "Holy Name",
         mp1: "Gen 1",
-        mp2: "John 1.1-28",
+        mp2: "John 1:1-28",
         ep1: "Gen 2",
         ep2: "Gal 1"
         },
@@ -542,7 +542,7 @@ defmodule DailyReading do
         mp1: "Gen 17",
         mp2: "John 5:24-end",
         ep1: "Gen 18",
-        ep2: "1 Thess 2:17-3 end"
+        ep2: "1 Thess 2:17-end,3:1-end"
         },
       "January10" => %{
         title: "",
@@ -598,7 +598,7 @@ defmodule DailyReading do
         mp1: "Gen 33",
         mp2: "John 9",
         ep1: "Gen 34",
-        ep2: "1 Cor 1:26-2 end"
+        ep2: "1 Cor 1:26-end, 2:1-end"
         },
       "January18" => %{
         title: "Confession of St. Peter",
@@ -743,7 +743,7 @@ defmodule DailyReading do
       "February07" => %{
         title: "",
         mp1: "Exod 25",
-        mp2: "Mark 1.1-13",
+        mp2: "Mark 1:1-13",
         ep1: "Exod 25",
         ep2: "2 Cor 6:1-19"
         },
@@ -801,7 +801,7 @@ defmodule DailyReading do
         mp1: "Exod 40",
         mp2: "Mark 5:21-end",
         ep1: "Lev 1",
-        ep2: "2 Cor 12:14-13 end"
+        ep2: "2 Cor 12:14-end, 13-end"
         },
       "February16" => %{
         title: "",
@@ -820,7 +820,7 @@ defmodule DailyReading do
       "February18" => %{
         title: "",
         mp1: "Lev 20",
-        mp2: "Mark 7.1-23",
+        mp2: "Mark 7:1-23",
         ep1: "Lev 23",
         ep2: "Rom 3"
         },
@@ -1028,8 +1028,7 @@ defmodule DailyReading do
         ep2: "Eph 1:15-end"
         },
       "March19" => %{
-        title: "St. Jos
-        eph",
+        title: "St. Joseph",
         mp1: "Josh 13",
         mp2: "Matt 9:18-34",
         ep1: "Josh 14",
@@ -1103,7 +1102,7 @@ defmodule DailyReading do
         mp1: "Judg 9",
         mp2: "Matt 15:1-28",
         ep1: "Judg 10",
-        ep2: "1 Tim 1:18-2 end"
+        ep2: "1 Tim 1:18-end, 2:1-end"
         },
       "March30" => %{
         title: "",
@@ -1115,35 +1114,35 @@ defmodule DailyReading do
       "March31" => %{
         title: "",
         mp1: "Judg 13",
-        mp2: "Matt.16:13-end",
+        mp2: "Matt 16:13-end",
         ep1: "Judg 14",
         ep2: "1 Tim 4"
         },
       "April01" => %{
         title: "",
         mp1: "Judg 15",
-        mp2: "Matt.17:1-23",
+        mp2: "Matt 17:1-23",
         ep1: "Judg 16",
         ep2: "1 Tim 5"
         },
       "April02" => %{
         title: "",
         mp1: "Ruth 1",
-        mp2: "Matt.17:24-18:14",
+        mp2: "Matt 17:24-18:14",
         ep1: "Ruth 2",
         ep2: "1 Tim 6"
         },
       "April03" => %{
         title: "",
         mp1: "Ruth 3",
-        mp2: "Matt.18:15-end",
+        mp2: "Matt 18:15-end",
         ep1: "Ruth 4",
         ep2: "Titus 1"
         },
       "April04" => %{
         title: "",
         mp1: "1 Sam 1",
-        mp2: "Matt.19:1-15",
+        mp2: "Matt 19:1-15",
         ep1: "1 Sam 2",
         ep2: "Titus 2"
         },
@@ -1185,7 +1184,7 @@ defmodule DailyReading do
       "April10" => %{
         title: "",
         mp1: "1 Sam 13",
-        mp2: "Matt.22:34-23:12",
+        mp2: "Matt 22:34-23:12",
         ep1: "1 Sam 14",
         ep2: "Heb 1"
         },
@@ -1222,7 +1221,7 @@ defmodule DailyReading do
         mp1: "1 Sam 23",
         mp2: "Matt 25:31-end",
         ep1: "1 Sam 24",
-        ep2: "Heb 5:11-6 end"
+        ep2: "Heb 5:11-end, 6:1-end"
         },
       "April16" => %{
         title: "",
@@ -1311,7 +1310,7 @@ defmodule DailyReading do
       "April28" => %{
         title: "",
         mp1: "2 Sam 18",
-        mp2: "Luke 3.23-end",
+        mp2: "Luke 323-end",
         ep1: "2 Sam 19",
         ep2: "Jas 2:14-end"
         },
@@ -1523,7 +1522,7 @@ defmodule DailyReading do
         mp1: "2 Kings 21",
         mp2: "Luke 18:31-19:10",
         ep1: "2 Kings 22",
-        ep2: "1 Thess 2:17-3 end"
+        ep2: "1 Thess 2:17-end, 3:1-end"
         },
       "May29" => %{
         title: "",
@@ -1579,7 +1578,7 @@ defmodule DailyReading do
         mp1: "Jer 12",
         mp2: "Luke 22:54-end",
         ep1: "Jer 13",
-        ep2: "1 Cor 1:26-2 end"
+        ep2: "1 Cor 1:26-end, 2:1-end"
         },
       "June06" => %{
         title: "",
@@ -1600,7 +1599,7 @@ defmodule DailyReading do
         mp1: "Jer 18",
         mp2: "Luke 23:50-24:12",
         ep1: "Jer 19",
-        ep2: "1 Cor 4:18-5 end"
+        ep2: "1 Cor 4:18-end, 5:1-end"
         },
       "June09" => %{
         title: "",
@@ -1705,7 +1704,7 @@ defmodule DailyReading do
         mp1: "Jer 48",
         mp2: "Acts 9:1-31",
         ep1: "Jer 49",
-        ep2: "2 Cor 2 12-3 end"
+        ep2: "2 Cor 2 12-end, 3:1-end"
         },
       "June24" => %{
         title: "Nativity of John the Baptist",
@@ -1782,7 +1781,7 @@ defmodule DailyReading do
         mp1: "Ezek 14",
         mp2: "Acts 15:1-21",
         ep1: "Ezek 15",
-        ep2: "2 Cor 12:14-13 end"
+        ep2: "2 Cor 12:14-end, 13:1-end"
         },
       "July05" => %{
         title: "",
@@ -2181,7 +2180,7 @@ defmodule DailyReading do
         mp1: "Mic 4 2",
         mp2: "Tim 3",
         ep1: "Mic 5",
-        ep2: "Mark 1.1-13"
+        ep2: "Mark 1:1-13"
         },
       "August31" => %{
         title: "",
@@ -2258,7 +2257,7 @@ defmodule DailyReading do
         mp1: "Zech 8",
         mp2: "Heb 9:15-end",
         ep1: "Zech 9",
-        ep2: "Mark 7.1-23"
+        ep2: "Mark 7:1-23"
         },
       "September11" => %{
         title: "",
@@ -2552,35 +2551,35 @@ defmodule DailyReading do
         mp1: "Baruch 3",
         mp2: "Acts 8:4-25",
         ep1: "Baruch 4",
-        ep2: "Matt.16:13-end"
+        ep2: "Matt 16:13-end"
         },
       "October23" => %{
         title: "St. James of Jerusalem",
         mp1: "Baruch 5",
         mp2: "Acts 8:26-end",
         ep1: "Ecclesiasticus 1",
-        ep2: "Matt.17:1-23"
+        ep2: "Matt 17:1-23"
         },
       "October24" => %{
         title: "",
         mp1: "Ecclesiasticus 2",
         mp2: "Acts 9:1-31",
         ep1: "Ecclesiasticus 4",
-        ep2: "Matt.17:24-18:14"
+        ep2: "Matt 17:24-18:14"
         },
       "October25" => %{
         title: "",
         mp1: "Ecclesiasticus 6",
         mp2: "Acts 9:32-end",
         ep1: "Ecclesiasticus 7",
-        ep2: "Matt.18:15-end"
+        ep2: "Matt 18:15-end"
         },
       "October26" => %{
         title: "",
         mp1: "Ecclesiasticus 9",
         mp2: "Acts 10:1-23",
         ep1: "Ecclesiasticus 10",
-        ep2: "Matt.19:1-15"
+        ep2: "Matt 19:1-15"
         },
       "October27" => %{
         title: "",
@@ -2622,7 +2621,7 @@ defmodule DailyReading do
         mp1: "Ecclesiasticus 39",
         mp2: "Acts 13:13-43",
         ep1: "Ecclesiasticus 43",
-        ep2: "Matt.22:34-23:12"
+        ep2: "Matt 22:34-23:12"
         },
       "November02" => %{
         title: "",
@@ -2699,7 +2698,7 @@ defmodule DailyReading do
         mp1: "Bel and the Dragon",
         mp2: "Acts 19:8-20 1",
         ep1: "Maccabees 1",
-        ep2: "Matt 27:57-28 end"
+        ep2: "Matt 27:57-end, 28:1-end"
         },
       "November13" => %{
         title: "",
@@ -2748,7 +2747,7 @@ defmodule DailyReading do
         mp1: "Wisdom 4",
         mp2: "Acts 22:23-23:11",
         ep1: "Wisdom 5",
-        ep2: "Luke 3.23-end"
+        ep2: "Luke 3:23-end"
         },
       "November20" => %{
         title: "",
