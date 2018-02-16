@@ -801,7 +801,7 @@ defmodule DailyReading do
         mp1: "Exod 40",
         mp2: "Mark 5:21-end",
         ep1: "Lev 1",
-        ep2: "2 Cor 12:14-end, 13-end"
+        ep2: "2 Cor 12:14-end, 13:1-end"
         },
       "February16" => %{
         title: "",
