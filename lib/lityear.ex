@@ -76,7 +76,7 @@ defmodule  Lityear do
       is_christmas2            -> {"christmas", "2", yrABC, day} 
       is_christmas1            -> {"christmas", "1", yrABC, day}
       till_epiphany in 6..11   -> {"christmas", "1", yrABC, day}
-      days_till_easter == 2    -> {"goodFriday", "1", yrABC, day}
+      # days_till_easter == 2    -> {"goodFriday", "1", yrABC, day}
       days_till_easter in 1..6 -> {"holyWeek", to_string(7 - days_till_easter), yrABC, day}
       days_till_easter in -1..-6 -> {"easterWeek", to_string(0 - days_till_easter), yrABC, day}
       from_easter in -2..-6    -> {"lent", to_string(7 + from_easter), yrABC, day}
