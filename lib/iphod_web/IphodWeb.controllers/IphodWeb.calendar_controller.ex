@@ -106,13 +106,16 @@ defmodule IphodWeb.CalendarController do
     resp = Repo.one(from r in Iphod.Reflection, where: [date: ^reflDate, published: true], select: {r.id})
     {reflID} = if resp, do: resp, else: {0}
     readings = DailyReading.readings(start_date)
+    title = if start_date |> Lityear.is_sunday?, 
+            do: start_date |> Lityear.to_season |> Lityear.sundayTitle, 
+            else: DailyReading.title_for(start_date)
 
     day = %{  date: start_date |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}"),
               id: start_date |> Timex.format!("{WDfull}{Mfull}{D}_{YYYY}"),
               name: start_date |> Timex.format!("{WDfull}"),
               dayOfMonth: start_date |> Timex.format!("{D}"),
               colors: SundayReading.colors(start_date),
-              title: DailyReading.title_for(start_date),
+              title: title,
               mp_reading: DailyReading.reading_map("mp", start_date),
               ep_reading: DailyReading.reading_map("ep", start_date),
               eu_reading: SundayReading.reading_map(start_date),

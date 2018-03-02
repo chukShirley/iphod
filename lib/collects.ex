@@ -147,6 +147,19 @@ defmodule Collects do
             }
           ]
         },
+      "epiphany0" =>
+        { "The Collect, with the Psalm and Lessons for the Epiphany, or those for the Second Sunday after Christmas, serves for
+            weekdays between the Epiphany and the following Sunday.
+            When the Epiphany falls on a Sunday, subsequent Sundays are Sundays after Epiphany.",
+            "The Epiphany, or the Manifestation of Christ to the Gentiles [January 6]",
+          [ { "O God, by the leading of a star you manifested your only Son to the peoples of the earth: Lead us,
+                who know you now by faith, to your presence, where we may see your glory face to face; through
+                Jesus Christ our Lord, who lives and reigns with you and the Holy Spirit, one God, now and forever.
+                Amen.",
+              [:epiphany]
+            }
+          ]
+        },
       "epiphany1" =>
         { "",
           "The First Sunday of Epiphany [Baptism of Our Lord]",

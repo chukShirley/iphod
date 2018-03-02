@@ -475,7 +475,26 @@ defmodule SundayReading do
       }
     },
   "epiphany" =>
-    %{  "1" =>
+    %{ "0" =>
+        %{  "title" => "The Epiphany (January 6)",
+            "colors" => ["white", "gold"],
+            "a" => %{ ot: [%{style: "req", read: "Isaiah 60:1-9"}],
+                      ps: [%{style: "req", read: "Psalm 72"},%{style: "alt", read: "Psalm 72:1-15"}],
+                      nt: [%{style: "req", read: "Eph 3:1-13"}],
+                      gs: [%{style: "req", read: "Mt 2:1-12"}]
+                      },
+            "b" => %{ ot: [%{style: "req", read: "Isaiah 60:1-9"}],
+                      ps: [%{style: "req", read: "Psalm 72"},%{style: "alt", read: "Psalm 72:1-11"}],
+                      nt: [%{style: "req", read: "Eph 3:1-13"}],
+                      gs: [%{style: "req", read: "Mt 2:1-12"}]
+                      },
+            "c" => %{ ot: [%{style: "req", read: "Isaiah 60:1-9"}],
+                      ps: [%{style: "req", read: "Psalm 72"},%{style: "alt", read: "Psalm 72:1-11"}],
+                      nt: [%{style: "req", read: "Eph 3:1-13"}],
+                      gs: [%{style: "req", read: "Mt 2:1-12"}]
+                    }
+        },
+      "1" =>
         %{  "title" => "The First Sunday of Epiphany [Baptism of our Lord]",
             "colors" => ["white", "gold"],
             "a" => %{ ot: [%{style: "req", read: "Isaiah 42:1-9"}],

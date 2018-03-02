@@ -7,6 +7,13 @@ defmodule  Lityear do
   @monday 1
 #  @thursday 4
   @tz "America/Los_Angeles"
+  @ordinals %{"1" => "1st", "2" => "2nd", "3" => "3rd", "4" => "4th", "5" => "5th", 
+ "6" => "6th", "7" => "7th", "8" => "8th", "9" => "9th", "10" => "10th", 
+ "11" => "11th", "12" => "12th", "13" => "13th", "14" => "14th", "15" => "15th",
+  "16" => "16th", "17" => "17th", "18" => "18th", "19" => "19th", 
+ "20" => "20th", "21" => "21st", "22" => "22nd", "23" => "23rd", "24" => "24th",
+  "25" => "25th", "26" => "26th", "27" => "27th", "28" => "28th", 
+ "29" => "29th"}
 
   def bad_arg(), do: bad_arg('')
   def bad_arg(s), do: "Eh? " <> s
@@ -96,6 +103,100 @@ defmodule  Lityear do
       true -> {"unknown", "unknown", :unknown, day}
     end
    end
+
+  def sundayTitle({season, wk, yr, date}) do
+    case season do
+      "redLetter" -> wk # for RLD's wk is the RLD title
+      "ashWednesday" -> "Ash Wednesday"
+      "ascension" ->  "Sunday after Ascension"
+      "theEpiphany" -> "The Epiphany"
+      "christmas" -> 
+        case wk do
+          "0" -> ""
+          _   -> @ordinals[wk] <> " Sunday of Christmas"
+        end
+      "holyWeek" ->
+        case wk do
+          "1" -> "Monday in Holy Week"
+          "2" -> "Tuesday in Holy Week"
+          "3" -> "Wednesday in Holy Week"
+          "4" -> "Maunday Thursday"
+          "5" -> "Good Friday"
+          "6" -> "Holy Saturday"
+          _ -> ""
+        end
+      "easterWeek" ->
+        case wk do
+          "1" -> "Monday of Easter Week"
+          "2" -> "Tuesday of Easter Week"
+          "3" -> "Wednesday of Easter Week"
+          "4" -> "Thursday of Easter Week"
+          "5" -> "Friday of Easter Week"
+          "6" -> "Saturday of Easter Week"
+          _ -> ""
+        end
+      "lent" -> @ordinals[wk] <> " Sunday in Lent"
+      "palmSunday" -> "Palm Sunday"
+      "epiphany" -> 
+        case wk do
+          "8" -> "Mission Sunday"
+          "9" -> "Last Sunday of Epiphany"
+          "0" -> "" # days following epiphany and before sunday
+          _   -> @ordinals[wk] <> " Sunday of Epiphany"
+        end
+      "easterDay" -> "Easter Day"
+      "easter" -> @ordinals[wk] <> " Sunday of Easter"
+      "pentecost" -> "Pentecost"
+      "trinity" -> "Trinity Sunday"
+      "proper" -> sundayBetween(date)
+      "advent" -> @ordinals[wk] <> " Sunday in Advent"
+      _ -> ""
+    end
+  end
+    
+  
+
+
+  def sundayBetween(date) do
+    sb = "Sunday between "
+    cond do
+      date |> date_in_range(Date.from_erl!({date.year, 5, 8}), Date.from_erl!({date.year, 5, 14})) -> sb <> "May 8 and May 14" 
+      date |> date_in_range(Date.from_erl!({date.year, 5, 15}), Date.from_erl!({date.year, 5, 21})) -> sb <> "May 15 and May 21 " 
+      date |> date_in_range(Date.from_erl!({date.year, 5, 22}), Date.from_erl!({date.year, 5, 28})) -> sb <> "May 22 and May 28 " 
+      date |> date_in_range(Date.from_erl!({date.year, 5, 29}), Date.from_erl!({date.year, 6, 4})) -> sb <> "May 29 and June 4" 
+      date |> date_in_range(Date.from_erl!({date.year, 6, 5}), Date.from_erl!({date.year, 6, 11})) -> sb <> "June 5 and June 11" 
+      date |> date_in_range(Date.from_erl!({date.year, 6, 12}), Date.from_erl!({date.year, 6, 18})) -> sb <> "June 12 and June 18" 
+      date |> date_in_range(Date.from_erl!({date.year, 6, 19}), Date.from_erl!({date.year, 6, 25})) -> sb <> "June 19 and June 25" 
+      date |> date_in_range(Date.from_erl!({date.year, 6, 26}), Date.from_erl!({date.year, 7, 2})) -> sb <> "June 26 and July 2"
+      date |> date_in_range(Date.from_erl!({date.year, 7, 3}), Date.from_erl!({date.year, 7, 9})) -> sb <> "July 3 and July 9" 
+      date |> date_in_range(Date.from_erl!({date.year, 7, 10}), Date.from_erl!({date.year, 7, 16})) -> sb <> "July 10 and July 16" 
+      date |> date_in_range(Date.from_erl!({date.year, 7, 17}), Date.from_erl!({date.year, 7, 23})) -> sb <> "July 17 and July 23" 
+      date |> date_in_range(Date.from_erl!({date.year, 7, 24}), Date.from_erl!({date.year, 7, 30})) -> sb <> "July 24 and July 30" 
+      date |> date_in_range(Date.from_erl!({date.year, 7, 31}), Date.from_erl!({date.year, 8, 6})) -> sb <> "July 31 and August 6" 
+      date |> date_in_range(Date.from_erl!({date.year, 8, 7}), Date.from_erl!({date.year, 8, 13})) -> sb <> "August 7 and August 13" 
+      date |> date_in_range(Date.from_erl!({date.year, 8, 14}), Date.from_erl!({date.year, 8, 20})) -> sb <> "August 14 and August 20" 
+      date |> date_in_range(Date.from_erl!({date.year, 8, 21}), Date.from_erl!({date.year, 8, 27})) -> sb <> "August 21 and August 27" 
+      date |> date_in_range(Date.from_erl!({date.year, 8, 28}), Date.from_erl!({date.year, 9, 3})) -> sb <> "August 28 and September 3" 
+      date |> date_in_range(Date.from_erl!({date.year, 9, 4}), Date.from_erl!({date.year, 9, 10})) -> sb <> "September 4 and September 10" 
+      date |> date_in_range(Date.from_erl!({date.year, 9, 11}), Date.from_erl!({date.year, 9, 17})) -> sb <> "September 11 and September 17" 
+      date |> date_in_range(Date.from_erl!({date.year, 9, 18}), Date.from_erl!({date.year, 9, 24})) -> sb <> "September 18 and September 24" 
+      date |> date_in_range(Date.from_erl!({date.year, 9, 25}), Date.from_erl!({date.year, 10, 1})) -> sb <> "September 25 and October 1" 
+      date |> date_in_range(Date.from_erl!({date.year, 10, 2}), Date.from_erl!({date.year, 10, 8})) -> sb <> "October 2 and October 8" 
+      date |> date_in_range(Date.from_erl!({date.year, 10, 9}), Date.from_erl!({date.year, 10, 15})) -> sb <> "October 9 and October 15" 
+      date |> date_in_range(Date.from_erl!({date.year, 10, 16}), Date.from_erl!({date.year, 10, 22})) -> sb <> "October 16 and October 22" 
+      date |> date_in_range(Date.from_erl!({date.year, 10, 23}), Date.from_erl!({date.year, 10, 29})) -> sb <> "October 23 and October 29" 
+      date |> date_in_range(Date.from_erl!({date.year, 10, 30}), Date.from_erl!({date.year, 11, 5})) -> sb <> "October 30 and November 5" 
+      date |> date_in_range(Date.from_erl!({date.year, 11, 6}), Date.from_erl!({date.year, 11, 12})) -> sb <> "November 6 and November 12" 
+      date |> date_in_range(Date.from_erl!({date.year, 11, 13}), Date.from_erl!({date.year, 11, 19})) -> sb <> "November 13 and November 19" 
+      date |> date_in_range(Date.from_erl!({date.year, 11, 20}), Date.from_erl!({date.year, 11, 26})) -> sb <> "November 20 and November 26" 
+      true -> ""
+    end
+  end
+
+  def date_in_range(date, first, last) do
+    Date.range(first, last) |> Enum.member?(date)
+  end
+
 
   def epiphany_before_sunday?(date) do
     before_epiphany = Date.compare(date, epiphany(date.year) )   == :lt
@@ -237,6 +338,45 @@ defmodule  Lityear do
   def sunday_to_date('epiphany', week, year),   do: epiphany(week, year)
   def sunday_to_date('lent', week, year),       do: epiphany(week, year)
 
+  def hd_title(key) do
+    %{  "epiphany" => "The Epiphany",
+        "confessionOfStPeter" => "Confession Of St. Peter",
+        # "confessionOfStPeter" => "confessionOfStPeter", # for dates at end of dec
+        "conversionOfStPaul" => "Conversion Of St. Paul",
+        "presentation" => "Presentation",
+        "stMatthias" => "St. Matthias",
+        "stJoseph" => "St. Joseph",
+        "annunciation" => "Annunciation",
+        "stMark" => "St. Mark",
+        "stsPhilipAndJames" => "Sts. Philip And James",
+        "visitation" => "Visitation",
+        "stBarnabas" => "St. Barnabas",
+        "nativityOfJohnTheBaptist" => "Nativity Of John The Baptist",
+        "stPeterAndPaul" => "Sts. Peter And Paul",
+        "dominion" => "Dominion Day",
+        "independence" => "Independence Day",
+        "stMaryMagdalene" => "St. Mary Magdalene",
+        "stJames" => "St. James",
+        "transfiguration" => "Transfiguration",
+        "bvm" => "Blessed Virgin Mary",
+        "stBartholomew" => "St. Bartholomew",
+        "holyCross" => "Holy Cross",
+        "stMatthew" => "St. Matthew",
+        "michaelAllAngels" => "Michael and All Angels",
+        "stLuke" => "St. Luke",
+        "stJames" => "St. James",
+        "stsSimonAndJude" => "Sts. Simon And Jude",
+        "allSaints" => "All Saints",
+        "remembrance" => "Remembrance Day",
+        "stAndrew" => "St. Andrew",
+        "stThomas" => "St. Thomas",
+        "christmasEve" => "Christmas Eve",
+        "christmasDay" => "Christmas Day",
+        "stStephen" => "St. Stephen",
+        "stJohn" => "St. John",
+        "holyInnocents" => "Holy Innocents"
+    }[key]
+  end
   def hd_index() do
     %{  6   => "epiphany",
         18  => "confessionOfStPeter",

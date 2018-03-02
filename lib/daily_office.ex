@@ -50,25 +50,11 @@ defmodule DailyReading do
     at = rem Timex.day(date), len
     Enum.at list, at
   end
-  # def readings(season, wk, day, _date), do: identity()[season][wk][day]
-  # def readings({"ashWednesday", _wk, litYr, date}),  do: _readings({"epiphany", "9", litYr, date})
-  # def readings({"goodFriday", _wk, litYr, date}),    do: _readings({"palmSunday", "1", litYr, date})
-  # def readings({"ascension", _wk, litYr, date}),     do: _readings({"easter", "6", litYr, date})
-  # def readings({"theEpiphany", _wk, litYr, date}),     do: _readings({"epiphany", "0", litYr, date})
-  # def readings({season, wk, litYr, date}),          do: _readings({season, wk, litYr, date})
-  # readings(d) is last otherwise there will be confusion between
-  # Timex.Date tuple of {season, wk, _litYr, date}
+
   def readings(date) do
     day = date |> Timex.format!("%B%d", :strftime)
     dayName = date |> Timex.format!("%A", :strftime)
     {season, wk, _litYr, _date} = date |> to_season
-    # identity()[day]
-    #   |> add_psalms(date)
-    #   |> Map.put(:sectionUpdate, %{section: "", version: "", ref: ""})
-
-
-    # {new_season, new_wk, dow, new_date} = day_of_week({season, wk, litYr, date})
-    # if readings(new_season, new_wk, dow, new_date) |> is_nil, do: IEx.pry
     r = identity()[day]
     if !r, do: IEx.pry
 
@@ -87,20 +73,7 @@ defmodule DailyReading do
       }
 
   end
-  # def _readings({season, wk, litYr, date}) do
-  #   {new_season, new_wk, dow, new_date} = day_of_week({season, wk, litYr, date})
-  #   if readings(new_season, new_wk, dow, new_date) |> is_nil, do: IEx.pry
-  #   readings(new_season, new_wk, dow, new_date)
-  #     |> add_psalms(new_date.day)
-  #     |> to_lessons
-  #     |> Map.merge( %{
-  #               season: date_to_season(new_date, season),
-  #               week:   new_wk,
-  #               day:    dow,
-  #               title:  update_title(new_date, identity()[new_season][new_wk][dow].title),
-  #               date:   new_date |> Timex.format!("{WDfull} {Mfull} {D}, {YYYY}")
-  #           })
-  # end
+  
   def day_of_week({"christmas", "1", _litYr, date}) do
     dow = date |> Timex.format!("{WDfull}")
     dec_n =  date |> Timex.format!("{D}")
@@ -265,7 +238,8 @@ defmodule DailyReading do
     }
   end
   def title_for(date) do
-    readings(date).title
+    {rldDate, rldName} = Lityear.next_holy_day(date)
+    if date == rldDate, do: Lityear.hd_title(rldName), else: readings(date).title
   end
 
   def build do

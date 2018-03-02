@@ -80,7 +80,7 @@
                 </div>
               </div>
               </a>
-              <p><%= day.title %></p>
+              <p class= "day-title"><%= day.title %></p>
             </div>
             <%# render "_reading_table.html", day: day %>
             <div class= "td-bottom flyoutmenu">

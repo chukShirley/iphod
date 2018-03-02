@@ -615,6 +615,11 @@ li.offices-item {
     width: 14%;
   }
 
+  #calendar p.day-title { 
+    margin-top: 0; 
+    margin-bottom: 0;
+  }
+
   #calendar th.mpep_link {
     text-decoration: none;
     font-size: 1em;
