@@ -10,7 +10,7 @@ TEST_AT="/home/frpaulas/iphod_stage"
 
 PRODUCTION_HOSTS="104.131.112.206"
 PRODUCTION_USER="frpaulas"
-DELIVER_TO="/home/frpaulas/iphod"
+DELIVER_TO="/home/frpaulas"
 
 pre_erlang_get_and_update_deps() {
   local _prod_secret_path="/home/frpaulas/iphod/app_config/prod.secret.exs"
