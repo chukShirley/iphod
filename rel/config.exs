@@ -34,7 +34,7 @@ environment :dev do
 end
 
 environment :prod do
-  set include_erts: false
+  set include_erts: true
   set include_src: false
   set cookie: :"S`p%FFkM_5Wb/Q<sTH4OITT@=_zb;2k@`MUnq^@ObzAs7?@XKz$8JIZ3uwOWtHNM"
   set output_dir: "rel/iphod"
