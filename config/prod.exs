@@ -13,10 +13,10 @@ use Mix.Config
 # which you typically run after static files are built.
 config :iphod, IphodWeb.Endpoint,
   load_from_system_env: true,
-  http: [port: 80],
+  http: [port: "PORT"],
   url: [  scheme: "http",
           host: "legereme.com", 
-          port: 80
+          port: "PORT"
        ],
   root: ".",
   cache_static_manifest: "priv/static/cache_manifest.json",
