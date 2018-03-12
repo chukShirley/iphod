@@ -1,16 +1,16 @@
 APP="iphod"
 
-BUILD_HOST="legereme.com"
+BUILD_HOST="104.131.112.206"
 BUILD_USER="frpaulas"
-BUILD_AT="104.131.112.206"
+BUILD_AT="/home/frpaulas/iphod_build"
 
-STAGING_HOSTS="legereme.com"
+STAGING_HOSTS="104.131.112.206"
 STAGING_USER="frpaulas"
-TEST_AT="104.131.112.206"
+TEST_AT="/home/frpaulas/iphod_stage"
 
-PRODUCTION_HOSTS="legereme.com"
+PRODUCTION_HOSTS="104.131.112.206"
 PRODUCTION_USER="frpaulas"
-DELIVER_TO="104.131.112.206"
+DELIVER_TO="/home/frpaulas/iphod"
 
 pre_erlang_get_and_update_deps() {
   local _prod_secret_path="/home/frpaulas/iphod/app_config/prod.secret.exs"
