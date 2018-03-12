@@ -15,8 +15,8 @@ config :iphod, IphodWeb.Endpoint,
   load_from_system_env: true,
   http: [port: "PORT"],
   url: [  scheme: "http",
-          host: "legereme.com", 
-          port: "PORT"
+          host: "localhost", 
+          port: {:system "PORT"}
        ],
   root: ".",
   cache_static_manifest: "priv/static/cache_manifest.json",
@@ -24,7 +24,7 @@ config :iphod, IphodWeb.Endpoint,
   secret_key_base:  "!jy!R95NwKCk&=kXD_h9+_sUdgY2P_Iu9Db$MM6KdDmsWEV!QS#1Emguzxt#hCrL",
   server: true,
   code_reloader: false,
-  version: Mix.Project.config[:version]
+  version: Application.spec(:iphod, :vsn)
 
 config :phoenix_distillery, PhoenixDistillery.Endpoint,
   http: [port: {:system, "PORT"}],
