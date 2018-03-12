@@ -10,7 +10,7 @@ use Mix.Releases.Config,
     # This sets the default release built by `mix release`
     default_release: :default,
     # This sets the default environment used by `mix release`
-    default_environment: :dev
+    default_environment: Mix.env()
 
 # For a full list of config options for both releases
 # and environments, visit https://hexdocs.pm/distillery/configuration.html
@@ -22,15 +22,22 @@ use Mix.Releases.Config,
 # and environment configuration is called a profile
 
 environment :dev do
+  # If you are running Phoenix, you should make sure that
+  # server: true is set and the code reloader is disabled,
+  # even in dev mode.
+  # It is recommended that you build with MIX_ENV=prod and pass
+  # the --env flag to Distillery explicitly if you want to use
+  # dev mode.
   set dev_mode: true
-  set include_erts: true
-  set cookie: :">wuU~BKu7;I7pr|0D|~1^3aZ{uMD@WlVBz2t$uGL(5Izu26>w$qc%j~6s4:035X|"
+  set include_erts: false
+  set cookie: :"8cbaC;>c55jy(43BvW~?A21b=ut,:OHT08J1B:J}WO>hA*.eLyYv,Y!o6n0dYp/t"
 end
 
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: :"z[3q.D.TPIX,z&OK1MF_kIOu{TSRAwxz}$Q,7m*e2m~]B>rhB/6L~RI!r/ASun?I"
+  set cookie: :"S`p%FFkM_5Wb/Q<sTH4OITT@=_zb;2k@`MUnq^@ObzAs7?@XKz$8JIZ3uwOWtHNM"
+  set output_dir: "rel/iphod"
 end
 
 # You may define one or more releases in this file.
@@ -40,5 +47,8 @@ end
 
 release :iphod do
   set version: current_version(:iphod)
+  set applications: [
+    :runtime_tools
+  ]
 end
 

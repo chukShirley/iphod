@@ -23,6 +23,7 @@ config :iphod, IphodWeb.Endpoint,
   # secret_key_base: System.get_env("SECRET_KEYBASE"),
   secret_key_base:  "!jy!R95NwKCk&=kXD_h9+_sUdgY2P_Iu9Db$MM6KdDmsWEV!QS#1Emguzxt#hCrL",
   server: true,
+  code_reloader: false,
   version: Mix.Project.config[:version]
 
 config :phoenix_distillery, PhoenixDistillery.Endpoint,
@@ -35,13 +36,13 @@ config :phoenix_distillery, PhoenixDistillery.Endpoint,
   server: true,
   version: Mix.Project.config[:version]
 
-config :iphod,    Iphod.Repo,
-       adapter:   Ecto.Adapters.Postgres,
-       hostname:  "localhost",
-       username:  "frpaulas",
-       password:  "Barafundle1570",
-       database:  "legereme",
-       pool_size: 10
+#config :iphod,    Iphod.Repo,
+#       adapter:   Ecto.Adapters.Postgres,
+#       hostname:  "localhost",
+#       username:  "frpaulas",
+#       password:  "Barafundle1570",
+#       database:  "legereme",
+#       pool_size: 10
 # 
 #
 # Where those two env variables return an absolute path to
@@ -83,4 +84,4 @@ config :iphod,    Iphod.Repo,
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-# import_config "prod.secret.exs"
+import_config "prod.secret.exs"

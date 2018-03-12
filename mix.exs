@@ -45,16 +45,17 @@ defmodule Iphod.Mixfile do
       {:postgrex, ">= 0.13.3"},
       {:gettext, "~> 0.13.1"},
       {:cowboy, "~> 1.0"},
-      {:timex, "~> 3.1.22"},
+      {:timex, "~> 3.2.1"},
       {:poison, "~> 2.1", override: true},
       {:httpoison, "~> 0.11.0"},
       {:mailgun, "~> 0.1.2"},
       {:earmark, "~> 1.0.1"},
       {:dogma, "~> 0.1", only: :dev},
       {:mix_test_watch, "~> 0.2.6", only: :dev},
-      {:distillery, "~> 1.1"},
       {:comeonin, "~> 3.0"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
+      {:edeliver, "~> 1.4.6"},
+      {:distillery, "~> 1.4"}
     ]
   end
 

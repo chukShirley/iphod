@@ -1,13 +1,22 @@
 APP="iphod"
 
 BUILD_HOST="legereme.com"
-BUILD_USER="elixir_builder"
-BUILD_AT="/home/frpaulas/iphod_build"
+BUILD_USER="frpaulas"
+BUILD_AT="104.131.112.206"
 
 STAGING_HOSTS="legereme.com"
-STAGING_USER="elixir_builder"
-TEST_AT="/home/frpaulas/iphod_stage"
+STAGING_USER="frpaulas"
+TEST_AT="104.131.112.206"
 
 PRODUCTION_HOSTS="legereme.com"
-PRODUCTION_USER="elixir_builder"
-DELIVER_TO="/home/frpaulas/legereme"
+PRODUCTION_USER="frpaulas"
+DELIVER_TO="104.131.112.206"
+
+pre_erlang_get_and_update_deps() {
+  local _prod_secret_path="/home/frpaulas/iphod/app_config/prod.secret.exs"
+  if [ "$TARGET_MIX_ENV" = "prod" ]; then
+    __sync_remote "
+      ln -sfn '$_prod_secret_path' '$BUILD_AT/config/prod.secret.exs'
+    "
+  fi
+}
