@@ -25,7 +25,7 @@ defmodule BibleVersions do
       _e in RuntimeError -> 
         {:error, %{status_code: 500}} # call it `internal server error`
     end
-    status_code = if resp |> is_nil, do: nil, else: resp.status_code
+    status_code = if resp.id |> is_nil, do: nil, else: resp.status_code
     map = case status_code do
       200 ->
         body = resp.body |> Poison.decode!

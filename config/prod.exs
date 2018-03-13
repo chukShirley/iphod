@@ -16,7 +16,7 @@ config :iphod, IphodWeb.Endpoint,
   http: [port: 4000],
   url: [  scheme: "http",
           host: "localhost", 
-          port: 4000
+          port: 80
        ],
   root: ".",
   cache_static_manifest: "priv/static/cache_manifest.json",
@@ -29,7 +29,7 @@ config :iphod, IphodWeb.Endpoint,
 config :phoenix_distillery, PhoenixDistillery.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [  host: "localhost", 
-          port: 4000
+          port: 80
        ],
   root: ".",
   cache_static_manifest: "priv/static/manifest.json",

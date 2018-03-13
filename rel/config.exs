@@ -30,13 +30,13 @@ environment :dev do
   # dev mode.
   set dev_mode: true
   set include_erts: false
-  set cookie: :"8cbaC;>c55jy(43BvW~?A21b=ut,:OHT08J1B:J}WO>hA*.eLyYv,Y!o6n0dYp/t"
+  set cookie: :"T@Q(u8^Brs3xsaPN,yhaOvt>$1ol}8z6`GRSikOmnzk,|y].Hg]}XG,t1RlvoRpg"
 end
 
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: :"S`p%FFkM_5Wb/Q<sTH4OITT@=_zb;2k@`MUnq^@ObzAs7?@XKz$8JIZ3uwOWtHNM"
+  set cookie: :"0E<a}Qx(}v_%7uD0u?sFhivDlD*;a&/;evY>f@3(K5mF1VU2bM{En.4f9%KKiE`^"
   set output_dir: "rel/iphod"
 end
 
