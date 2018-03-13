@@ -22,7 +22,7 @@ defmodule Iphod.Mixfile do
                     # :phoenix_live_reload, 
                     :cowboy, :logger, :gettext, :comeonin,
                     :phoenix_ecto, :postgrex, :timex, :httpoison,
-                    :mailgun, :earmark, :floki
+                    :mailgun, :earmark, :floki, :exactor, :edeliver
                   ]
     ]
   end
@@ -55,7 +55,8 @@ defmodule Iphod.Mixfile do
       {:comeonin, "~> 3.0"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:edeliver, "~> 1.4.6"},
-      {:distillery, "~> 1.4"}
+      {:exactor, "~> 2.2.4"},
+      {:distillery, "~> 1.5"}
     ]
   end
 
