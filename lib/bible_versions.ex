@@ -25,8 +25,8 @@ defmodule BibleVersions do
       _e in RuntimeError -> 
         {:error, %{status_code: 500}} # call it `internal server error`
     end
-
-    map = case resp.status_code do
+    status_code = if resp |> is_nil, do: nil, else: resp.status_code
+    map = case status_code do
       200 ->
         body = resp.body |> Poison.decode!
         body["response"]["versions"]
@@ -34,7 +34,7 @@ defmodule BibleVersions do
             new_ver = ver |> Map.put("source", "bibles.org")
             acc |> Map.put_new(ver["abbreviation"], new_ver) end)
       _ ->
-        IO.puts ">>>>> Bibles.org failed with status code: #{inspect resp.status_code}"
+        IO.puts ">>>>> Bibles.org failed with status code: #{inspect status_code}"
         %{}
     end
     map2 = 
