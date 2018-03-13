@@ -32,6 +32,7 @@ pre_erlang_clean_compile() {
     "
 
     status "Building static files"
+    status $BUILD_AT
     __sync_remote "
       [ -f ~/.profile ]
       set -e
