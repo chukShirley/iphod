@@ -10,7 +10,7 @@ TEST_AT="/home/frpaulas/iphod_stage"
 
 PRODUCTION_HOSTS="104.131.112.206"
 PRODUCTION_USER="frpaulas"
-DELIVER_TO="/home/frpaulas"
+DELIVER_TO="/home/frpaulas/iphod_prod"
 
 pre_erlang_get_and_update_deps() {
   local _prod_secret_path="/home/frpaulas/iphod/app_config/prod.secret.exs"
@@ -28,8 +28,11 @@ pre_erlang_clean_compile() {
       set -e # fail if any command fails
 
       cd '$BUILD_AT' # go to the build directory on the build host
+      cd assets
       npm install $SILENCE
+
     "
+
 
     status "Building static files"
     status $BUILD_AT

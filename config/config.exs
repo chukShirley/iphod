@@ -13,14 +13,14 @@ config :iphod, IphodWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
-  http: [port: {:system, "PORT"}],
+  http: [port: System.get_env("PORT") || 4000],
   url: [host: "localhost",
         scheme: "http",
-        port: {:system, "PORT"}
+        port: System.get_env("PORT") || 4000
       ],
   # secret_key_base: "supersecretlongkey",
   # to generate a super secret long key: `mix phoenix.gen.secret`
-  secret_key_base: {:system, "KEY"},
+  secret_key_base: System.get_env("SECRET_KEYBASE"),
   root: Path.dirname(__DIR__),
   server: true,
   render_errors: [view: IphodWeb.ErrorView, accepts: ~w(html json)],

@@ -7,8 +7,8 @@ use Mix.Config
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
 config :iphod, IphodWeb.Endpoint,
-  http: [port: 4000],
-  url: [host: "localhost", port: 4000],
+  http: [port: System.get_env("PORT") || 4000],
+  url: [host: "localhost", port: System.get_env("PORT") || 4000],
   root: ".",
   # server: true,
   version: "0.0.1", #Mix.Project.config[:version],
