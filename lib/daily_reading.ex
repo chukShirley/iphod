@@ -31,6 +31,7 @@ defmodule DailyReading do
   end
   def _opening_sentence(mpep, "ashWednesday"),  do: identity()["#{mpep}_opening"]["lent"]
   def _opening_sentence(mpep, "palmSunday"),    do: identity()["#{mpep}_opening"]["lent"]
+  def _opening_sentence(mpep, "holyWeek"),      do: identity()["#{mpep}_opening"]["lent"]
   def _opening_sentence(mpep, "easterDay"),     do: identity()["#{mpep}_opening"]["easter"]
   def _opening_sentence(mpep, "ascension"),     do: identity()["#{mpep}_opening"]["easter"]
   def _opening_sentence(mpep, "theEpiphany"),   do: identity()["#{mpep}_opening"]["epiphany"]
@@ -40,6 +41,7 @@ defmodule DailyReading do
     _antiphon(season) |> pick_one(date)
   end
   def _antiphon("ashWednesday"),  do: identity()["antiphon"]["lent"]
+  def _antiphon("holyWeek"),    do: identity()["antiphon"]["lent"]
   def _antiphon("goodFriday"),    do: identity()["antiphon"]["lent"]
   def _antiphon("ascension"),     do: identity()["antiphon"]["easter"]
   def _antiphon("theEpiphany"),   do: identity()["antiphon"]["epiphany"]
