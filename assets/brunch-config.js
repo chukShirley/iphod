@@ -2,9 +2,7 @@ exports.config = {
   // See http://brunch.io/#documentation for docs.
   files: {
     javascripts: {
-      joinTo: { "js/app.js": /^(?!local_office)/
-                // 'js/local_office.js': /local_office.?/,
-              },
+      joinTo: "js/app.js"
 
       // To use a separate vendor.js bundle, specify two files path
       // https://github.com/brunch/brunch/blob/stable/docs/config.md#files
