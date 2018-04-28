@@ -1239,7 +1239,7 @@ defmodule DailyReading do
       "April21" => %{
         title: "",
         mp1: "2 Sam 4",
-        mp2: "Matt 27:57 & 28",
+        mp2: "Matt 27:57-end, Matt 28",
         ep1: "2 Sam 5",
         ep2: "Heb 10:19-end"
         },
@@ -1682,7 +1682,7 @@ defmodule DailyReading do
         mp1: "Jer 48",
         mp2: "Acts 9:1-31",
         ep1: "Jer 49",
-        ep2: "2 Cor 2 12-end, 3:1-end"
+        ep2: "2 Cor 2:12-end, 3:1-end"
         },
       "June24" => %{
         title: "Nativity of John the Baptist",
@@ -1707,7 +1707,7 @@ defmodule DailyReading do
         },
       "June27" => %{
         title: "",
-        mp1: "Lam 4 & 5",
+        mp1: "Lam 4, 5",
         mp2: "Acts 11:1-18",
         ep1: "Ezek 1",
         ep2: "2 Cor 6:20-end"
@@ -2086,7 +2086,7 @@ defmodule DailyReading do
       "August20" => %{
         title: "",
         mp1: "Joel 1",
-        mp2: "1 Tim 1:18-end & 2",
+        mp2: "1 Tim 1:18-end, 2",
         ep1: "Joel 2",
         ep2: "John 15:17-end"
         },
@@ -2148,21 +2148,21 @@ defmodule DailyReading do
         },
       "August29" => %{
         title: "",
-        mp1: "Mic 2 2",
+        mp1: "Mic 2",
         mp2: "Tim 2",
         ep1: "Mic 3",
         ep2: "John 21"
         },
       "August30" => %{
         title: "",
-        mp1: "Mic 4 2",
+        mp1: "Mic 4",
         mp2: "Tim 3",
         ep1: "Mic 5",
         ep2: "Mark 1:1-13"
         },
       "August31" => %{
         title: "",
-        mp1: "Mic 6 2",
+        mp1: "Mic 6",
         mp2: "Tim 4",
         ep1: "Mic 7",
         ep2: "Mark 1:14-31"
@@ -2205,7 +2205,7 @@ defmodule DailyReading do
       "September06" => %{
         title: "",
         mp1: "Hag 2",
-        mp2: "Heb 5:11-end & 6",
+        mp2: "Heb 5:11-end, 6",
         ep1: "Zech 1",
         ep2: "Mark 4:35-5:20"
         },
