@@ -1288,7 +1288,7 @@ defmodule DailyReading do
       "April28" => %{
         title: "",
         mp1: "2 Sam 18",
-        mp2: "Luke 323-end",
+        mp2: "Luke 3:23-end",
         ep1: "2 Sam 19",
         ep2: "Jas 2:14-end"
         },
