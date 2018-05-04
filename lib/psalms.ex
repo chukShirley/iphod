@@ -50,12 +50,22 @@ defmodule Psalms do
   def evening_psalms(n, ver \\ "BCP"), do: evening(n) |> Enum.map(&(psalm &1, ver))
 
   def to_html(s, ver) when s |> is_bitstring do
-    s |> String.split([" ", ".", "-", ":"]) |> List.to_tuple |> _to_html(ver)
+    s |> String.split([" ", ".", "-", ":", ","], trim: true) |> List.to_tuple |> _to_html(ver)
   end
   def _to_html({_, ps}, ver), do: ps |> String.to_integer |> _to_html(ver)
   def _to_html({_, ps, v1, v2}, ver) do
     psalm(String.to_integer(ps), String.to_integer(v1), String.to_integer(v2), ver )
     |> _to_html(ver)
+  end
+  def _to_html({_, ps, v1, v2, _ps, v3, v4}, ver) do
+    Map.merge(
+      psalm(String.to_integer(ps), String.to_integer(v1), String.to_integer(v2), ver ),
+      psalm(String.to_integer(ps), String.to_integer(v3), String.to_integer(v4), ver )
+      ) |> _to_html(ver)
+  end
+  def _to_html({_, ps, v1, v2}, ver) do
+      psalm(String.to_integer(ps), String.to_integer(v1), String.to_integer(v2), ver )
+      |> _to_html(ver)
   end
   def _to_html(n, ver) when n |> is_integer, do: _to_html(psalm(n, ver), ver)
 
