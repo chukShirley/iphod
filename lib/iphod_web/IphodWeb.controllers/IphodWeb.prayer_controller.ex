@@ -63,7 +63,7 @@ defmodule IphodWeb.PrayerController do
 
     conn
     |> put_layout("app.html")
-    |> render("mp.html", model: model, page_controller: "prayer")
+    |> render("ep.html", model: model, page_controller: "prayer")
   end
 
   def compline(conn, _params) do

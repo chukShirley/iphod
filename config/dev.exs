@@ -11,14 +11,22 @@ config :iphod, IphodWeb.Endpoint,
   url: [host: "localhost", port: System.get_env("PORT") || 4000],
   root: ".",
   # server: true,
-  version: "0.0.1", #Mix.Project.config[:version],
+  # Mix.Project.config[:version],
+  version: "0.0.1",
   debug_errors: true,
   code_reloader: true,
   # cache_static_lookup: false,
   check_origin: false,
-  secret_key_base: System.get_env("SECRET_KEYBASE"),
-  watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin", 
-                    cd: Path.expand("../assets", __DIR__)]]
+  secret_key_base: "!jy!R95NwKCk&=kXD_h9+_sUdgY2P_Iu9Db$MM6KdDmsWEV!QS#1Emguzxt#hCrL",
+  #  secret_key_base: System.get_env("SECRET_KEYBASE"),
+  watchers: [
+    node: [
+      "node_modules/brunch/bin/brunch",
+      "watch",
+      "--stdin",
+      cd: Path.expand("../assets", __DIR__)
+    ]
+  ]
 
 # Watch static and templates for browser reloading.
 config :iphod, IphodWeb.Endpoint,
@@ -47,10 +55,10 @@ config :phoenix, :stacktrace_depth, 20
 # config :phoenix, :serve_end_points, true
 
 # Configure your database
-config :iphod,    Iphod.Repo,
-       adapter:   Ecto.Adapters.Postgres,
-       hostname:  "legereme.com",
-       username:  "frpaulas",
-       password:  "Barafundle1570",
-       database:  "legereme",
-       pool_size: 10
+config :iphod, Iphod.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  hostname: "legereme.com",
+  username: "frpaulas",
+  password: "Barafundle1570",
+  database: "legereme",
+  pool_size: 10
