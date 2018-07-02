@@ -34,19 +34,25 @@ sudo MIX_ENV=prod PORT=80 KEY=eI1yJowF9lFwygysQ/hV9pi9BbiRpcT+rsv5AK3HI0B84CHf3H
 restart couchdb...
   sudo /etc/sv/couchdb/run restart
 
+// use the src/iphod directory
+
 #!/bin/bash
 sudo git stash clear
 sudo git stash
 sudo rm -rf web/elm/elm-stuff
 sudo git pull
-sudo mix deps.get
-sudo npm install
+sudo git pull
+??? sudo mix deps.update phoenix phoenix_html
+??? LIBSASS_EXT=no npm install
+??? maybe use yarn
+??? and `sudo node node_modules/brunch/bin/brunch build`
+cd assets && npm install && cd ..
 sudo MIX_ENV=prod mix compile
 sudo MIX_ENV=prod mix ecto.migrate
 sudo MIX_ENV=prod mix phx.digest
 sudo MIX_ENV=prod mix release
 sudo # sudo PORT=4000 MIX_ENV=prod _build/prod/rel/iphod/bin/iphod console
 sudo mix phx.gen.secret
-sudo MIX_ENV=prod PORT=80 KEY=FDrYDbqcY2AUzCqIo8SFelXIM26iozCzASb1AsZM4IZUUSn6pz9TuB+GeGvRPEqJ elixir --detached -S mix do compile, phx.server
+sudo MIX_ENV=prod PORT=80 KEY=I/qZc9/YhiPY6PPUr8eUeopCAY4zC8l1WsUufJLEv3xIJhjplgKiz9KR/DFVEODD elixir --detached -S mix do compile, phx.server
 frpaulas@iphod:~/iphod$
 

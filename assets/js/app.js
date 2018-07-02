@@ -222,6 +222,7 @@ if ( page == "stations") {
 var elmHeaderDiv = document.getElementById('header-elm-container')
   , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
   , channel = socket.channel("iphod:readings")
+  ;
 
 channel.join()
   .receive("ok", resp => {
