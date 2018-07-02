@@ -59,7 +59,7 @@ defmodule IphodWeb.PrayerController do
 
   def ep_for(conn, params) do
     date = params["date"] |> Timex.parse!("{YYYY}-{0M}-{0D}")
-    model = prayer_model("mp", "BCP", "ESV", date)
+    model = prayer_model("ep", "BCP", "ESV", date)
 
     conn
     |> put_layout("app.html")
