@@ -38,6 +38,11 @@ button {
   width: 92%;
 }
 
+.opt {
+  background-color: #e0e0e0;
+  color: #300000;
+}
+
 @media screen and (max-width: 800px){ 
   body.calendar { 
     width: 98%; 

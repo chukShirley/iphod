@@ -47,9 +47,10 @@
 
       <p class="banner"> 
         <span style="font-size: 1.2em;">New Feature: </span>
-        <span style="font-size: 0.9em;">You can now ask for MP/EP on any date (users outside of UTC-5 through UTC-8 may find this handy)
-        by using this form: "legereme.com/mpfor/YYYY-MM-DD" (or "epfor"). For example legereme.com/mpfor/2018-06-29 gets you
-        MP for June 29, 2018. You must include the leading zeros for numbers less than 10.
+        <span style="font-size: 0.9em;">You can ask for MP/EP on any date 
+          by using this form: "legereme.com/mpfor/YYYY-MM-DD" (or "epfor"). 
+          <br /> Switched over to "St Barnabas Day Revision" DOL.
+          Comment on styling for optional readings on the Iphod Facebook group
         <br /> For more frequent updates, join the Iphod Facebook group
       </span>
       </p>

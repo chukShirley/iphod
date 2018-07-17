@@ -287,11 +287,21 @@ defmodule IphodWeb.PrayerController do
   # stub
   def put_canticle1("ep", _), do: ""
 
-  def reading_names(reading) do
+  # this is for pslams
+  # psalms is a list of models with a single read element
+  def reading_names(reading) when reading |> is_list do
     reading |> Enum.map(& &1.read) |> Enum.join(", ")
   end
 
+  # this is for the lessons
+  # lessons (mp1, mp2, ep1, ep2) has field `read` which is a list of readings
+  def reading_names(reading) do
+    reading.read |> Enum.map(& &1.read) |> Enum.join(", ")
+  end
+
   def put_reading(map, lesson, translation) do
+    this_section = if lesson |> is_list, do: hd(lesson).section, else: lesson.section
+
     {section_names, section} =
       %{
         "mpp" => {:mpp_names, :mpp},
@@ -300,7 +310,7 @@ defmodule IphodWeb.PrayerController do
         "epp" => {:epp_names, :epp},
         "ep1" => {:ep1_names, :ep1},
         "ep2" => {:ep2_names, :ep2}
-      }[hd(lesson).section]
+      }[this_section]
 
     map
     |> Map.put(section_names, reading_names(lesson))
