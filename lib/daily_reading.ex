@@ -352,8 +352,8 @@ defmodule DailyReading do
     r = readings(date)
 
     %{
-      mp1: r.mp1 |> Enum.map(& &1.read),
-      mp2: r.mp2 |> Enum.map(& &1.read),
+      mp1: r.mp1.read |> Enum.map(& &1.read),
+      mp2: r.mp2.read |> Enum.map(& &1.read),
       mpp: r.mpp |> Enum.map(& &1.read)
     }
   end
@@ -362,8 +362,8 @@ defmodule DailyReading do
     r = readings(date)
 
     %{
-      ep1: r.ep1 |> Enum.map(& &1.read),
-      ep2: r.ep2 |> Enum.map(& &1.read),
+      ep1: r.ep1.read |> Enum.map(& &1.read),
+      ep2: r.ep2.read |> Enum.map(& &1.read),
       epp: r.epp |> Enum.map(& &1.read)
     }
   end
