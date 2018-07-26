@@ -2705,7 +2705,7 @@ defmodule DailyReading do
         mp1: [%{style: "req", read: "Acts 22:23-end, 23:1-11"}],
         mp2: [%{style: "req", read: "Mark 1:16-20"}],
         mpp: [{68, 1, 18}],
-        ep1: [%{style: "req", read: "Neh 3:1-15"}, %{style: "opt", read: "Neg 3:16-999"}],
+        ep1: [%{style: "req", read: "Neh 3:1-15"}, %{style: "opt", read: "Neh 3:16-999"}],
         ep2: [%{style: "req", read: "John 3:1-21"}],
         epp: [{68, 19, 36}]
       },
