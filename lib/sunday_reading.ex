@@ -2154,7 +2154,7 @@ defmodule SundayReading do
             gs: [%{style: "req", read: "Mt 16:13-20"}]
           },
           "b" => %{
-            ot: [%{style: "req", read: "Josh 24:1-2a 24:14-25"}],
+            ot: [%{style: "req", read: "Josh 24:1-2a, 24:14-25"}],
             ps: [%{style: "req", read: "Psalm 16"}],
             nt: [%{style: "req", read: "Eph 5:21-33"}],
             gs: [%{style: "req", read: "Jn 6:60-69"}]
