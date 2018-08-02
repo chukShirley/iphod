@@ -17,7 +17,7 @@ use Mix.Config
 config :iphod, IphodWeb.Endpoint,
   load_from_system_env: true,
   # http: [port: 4000],
-  url: [scheme: "http", host: "legereme.com", port: 5000],
+  url: [scheme: "http", host: "legereme.com", port: 80],
   root: ".",
   cache_static_manifest: "priv/static/cache_manifest.json",
   # secret_key_base: System.get_env("SECRET_KEYBASE"),
