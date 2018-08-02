@@ -1,3 +1,4 @@
+# function Mix.Config.Agent.start_link/0 is undefined
 # Import all plugins from `rel/plugins`
 # They can then be used by adding `plugin MyPlugin` to
 # either an environment, or release definition, where
@@ -30,14 +31,15 @@ environment :dev do
   # dev mode.
   set dev_mode: true
   set include_erts: false
-  set cookie: :"$>u5p2EOh7e16HJ;f|>{}PGDk41>C`ZpF=])U>M1nP{6fRA(:zJ?0S%>jew3tRUF"
+  set cookie: :dev
+  set vm_args: "rel/vm.args.eex"
 end
 
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: :"AxZv5/@O{~Bq056D,n{vg1d}HB~XaEuaLZPwIe;=htHNhDW%j~,Onpd&>mPj6d4/"
-  set output_dir: "rel/iphod"
+  set cookie: File.read!("config/cookie.txt") |> String.to_atom
+  set vm_args: "rel/vm.args.eex"
 end
 
 # You may define one or more releases in this file.
@@ -50,5 +52,6 @@ release :iphod do
   set applications: [
     :runtime_tools
   ]
+  plugin Conform.ReleasePlugin
 end
 
