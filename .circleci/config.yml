@@ -33,4 +33,4 @@ deployment:
     branch: master
     commands:
       - echo 'deploying master branch'
-      - ssh -v $DROPLET_USER@$DROPLET_IP "cd ~/mywell-server; ./circle_deployer.sh"
+      - ssh -v $DROPLET_USER@$DROPLET_IP "cd ~/iphod-server; ./circle_deployer.sh"
