@@ -5,7 +5,7 @@ defmodule Iphod.Mixfile do
     [
       app: :iphod,
       version: "0.0.1",
-      elixir: ">= 1.5.0",
+      elixir: ">= 1.6.0",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       build_embedded: Mix.env() == :prod,
@@ -76,7 +76,8 @@ defmodule Iphod.Mixfile do
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
       {:edeliver, "~> 1.4.6"},
       {:exactor, "~> 2.2.4"},
-      {:distillery, "~> 1.5"}
+      {:distillery, "~> 1.5", runtime: false},
+      {:conform, "~> 2.2"}
     ]
   end
 

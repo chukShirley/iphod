@@ -1,0 +1,47 @@
+APP="iphod"
+
+BUILD_HOST="104.131.112.206"
+BUILD_USER="frpaulas"
+BUILD_AT="/home/frpaulas/iphod_build"
+
+STAGING_HOSTS="104.131.112.206"
+STAGING_USER="frpaulas"
+TEST_AT="/home/frpaulas/iphod_stage"
+
+PRODUCTION_HOSTS="104.131.112.206"
+PRODUCTION_USER="frpaulas"
+DELIVER_TO="/home/frpaulas/iphod_prod"
+
+pre_erlang_clean_compile() {
+    status "Installing NPM dependencies"
+    __sync_remote "  # runs the commands on the build host
+      [ -f ~/.profile ] && source ~/.profile # load profile
+      set -e # fail if any command fails
+
+      cd '$BUILD_AT' # go to the build directory on the build host
+      cd assets
+      npm install $SILENCE
+
+    "
+
+
+    status "Building static files"
+    status $BUILD_AT
+    __sync_remote "
+      [ -f ~/.profile ]
+      set -e
+
+      cd '$BUILD_AT'
+      mkdir -p priv/static
+      npm run deploy $SILENCE
+    "
+
+    status "Running phoenix.digest"
+    __sync_remote "
+      [ -f ~/.profile ] && source ~/.profile
+      set -e
+
+      cd '$BUILD_AT'
+      APP='$APP' MIX_ENV='$TARGET_MIX_ENV' $MIX_CMD phoenix.digest $SILENCE
+    "
+  }
