@@ -87,12 +87,11 @@ defmodule Mix.Tasks.Deploy do
     # end
 
     def parse_args(argv) do
-      IO.puts(">>>>> PARSE ARGS: #{inspect(argv)}")
       {args, _, _} = OptionParser.parse(argv)
 
       app_name = Mix.Project.config()[:app] |> Atom.to_string()
       version = Mix.Project.config()[:version]
-      deploy_base = Mix.Project.config()[:deploy_base] || "/opt/StEAM"
+      deploy_base = Mix.Project.config()[:deploy_base] || "/opt"
       deploy_dir = Mix.Project.config()[:deploy_dir] || Path.join(deploy_base, app_name)
       release_base = Path.join(deploy_dir, "releases")
       current_link = Path.join(deploy_dir, "current")
