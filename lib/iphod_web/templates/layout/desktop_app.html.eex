@@ -46,12 +46,14 @@
       </style>
 
       <p class="banner"> 
-        <span style="font-size: 1.2em;">New Feature: </span>
-        <span style="font-size: 0.9em;">You can ask for MP/EP on any date 
-          by using this form: "legereme.com/mpfor/YYYY-MM-DD" (or "epfor"). 
-          <br /> Switched over to "St Barnabas Day Revision" DOL.
-          Comment on styling for optional readings on the Iphod Facebook group
-        <br /> For more frequent updates, join the Iphod Facebook group
+        <span style="font-size: 1.2em;">Fund Raiser: </span>
+        <span style="font-size: 0.9em;">Fr Ed McNeill, Christ Church Oahu,
+          is raising funds to pay professionals to create native iOS/Android
+          versions of Legereme. 
+          <a class="plain" href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=wWsk24ZWJSTZKsGd1RMKlg0BDvsSG3VIWQCPJNNxD8upkiY7JlDavDsozUE7KG0nFx2NSo8LdUKGuGuF396vbYpNR6KLbIm7-8a5LvxWeNqXHubq5Z7ap5JVmPErc4ZeYHCKCZhESjGNQmZ5B-6dx3fUKzMwTT4PN_4L7gA7wLc=&ver=3" >
+            <button class= "donation">Click to Donate</button>
+          </a>
+        <br /> For more information or ask questions, join the Iphod Facebook group
       </span>
       </p>
     </div>

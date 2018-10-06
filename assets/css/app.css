@@ -31,6 +31,18 @@ button {
   text-align: center;
 }
 
+a.plain {
+  text-decoration: none;
+}
+
+.donation {
+  background-color: honeydew;
+  box-shadow: -2px 3px 8px #888888;
+  border-radius: 5px;
+  border: solid 2px green;
+  font-style: normal;
+}
+
 #m-elm-container {
   position: relative;
   top: -3em;
