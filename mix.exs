@@ -78,7 +78,7 @@ defmodule Iphod.Mixfile do
       {:edeliver, "~> 1.6.0"},
       {:distillery, "~> 2.0", warn_missing: false},
       {:exactor, "~> 2.2.4"},
-      {:conform, "~> 2.2"}
+      {:conform, "~> 2.5.2"}
     ]
   end
 
