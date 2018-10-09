@@ -1,11 +1,16 @@
+#!/usr/bin/env bash
+
 APP="iphod"
 
 BUILD_HOST="104.131.112.206"
 BUILD_USER="frpaulas"
 BUILD_AT="/home/frpaulas/iphod_build"
+DELEASE_DIR="/tmp/edeliver/iphod/builds"
 
 STAGING_HOSTS="104.131.112.206"
 STAGING_USER="frpaulas"
+DELIVER_TO="/home/web"
+
 TEST_AT="/home/frpaulas/iphod_stage"
 
 PRODUCTION_HOSTS="104.131.112.206"

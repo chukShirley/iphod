@@ -75,9 +75,8 @@ defmodule Iphod.Mixfile do
       {:mix_test_watch, "~> 0.2.6", only: :dev},
       {:comeonin, "~> 3.0"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
-      {:edeliver, "~> 1.4.6"},
+      {:edeliver, "~> 1.6.0"},
       {:exactor, "~> 2.2.4"},
-      {:distillery, "~> 1.5", runtime: false},
       {:conform, "~> 2.2"}
     ]
   end
