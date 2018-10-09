@@ -16,24 +16,25 @@ config :iphod, IphodWeb.Endpoint,
   code_reloader: true,
   check_origin: false,
   http: [port: System.get_env("PORT") || 4000],
-  url: [host: "localhost",
-        scheme: "http",
-        port: System.get_env("PORT") || 4000
-      ],
+  url: [host: "localhost", scheme: "http", port: System.get_env("PORT") || 4000],
   # secret_key_base: "supersecretlongkey",
   # to generate a super secret long key: `mix phoenix.gen.secret`
-  secret_key_base: System.get_env("SECRET_KEYBASE"),
+  # secret_key_base: System.get_env("SECRET_KEYBASE"),
   root: Path.dirname(__DIR__),
   server: true,
   render_errors: [view: IphodWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: IphodWeb.PubSub,
-           adapter: Phoenix.PubSub.PG2
-          ],
+  pubsub: [name: IphodWeb.PubSub, adapter: Phoenix.PubSub.PG2],
   # watchers: [node: ["run", "watch", cd: Path.expand("../assets", __DIR__)]]
-  watchers: [node: ["node_modules/brunch/bin/brunch", "watch", "--stdin",
-                    cd: Path.expand("../assets", __DIR__)]]
+  watchers: [
+    node: [
+      "node_modules/brunch/bin/brunch",
+      "watch",
+      "--stdin",
+      cd: Path.expand("../assets", __DIR__)
+    ]
+  ]
 
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -43,7 +44,7 @@ config :logger, :console,
 # for automagic running of tests
 # `$> mix test.watch`
 
-if Mix.env == :dev do
+if Mix.env() == :dev do
   config :mix_test_watch,
     clear: true,
     tasks: ~w(test dogma)
