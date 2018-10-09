@@ -62,14 +62,6 @@ config :phoenix_distillery, PhoenixDistillery.Endpoint,
   server: true,
   version: Mix.Project.config()[:version]
 
-config :iphod, Iphod.Repo,
-  adapter: Ecto.Adapters.Postgres,
-  hostname: "localhost",
-  username: "frpaulas",
-  password: "Barafundle1570",
-  database: "legereme",
-  pool_size: 10
-
 # 
 #
 # Where those two env variables return an absolute path to
