@@ -3426,7 +3426,7 @@ defmodule DailyReading do
       },
       "October09" => %{
         title: "",
-        mp1: [%{style: "req", read: "1 Kings 23"}],
+        mp1: [%{style: "req", read: "2 Chron 20"}],
         mp2: [%{style: "req", read: "2 Pet 2"}],
         mpp: [{99, 1, 999}, {100, 1, 999}, {101, 1, 999}],
         ep1: [%{style: "req", read: "1 Maccabees 1"}],
