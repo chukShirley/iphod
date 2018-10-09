@@ -75,10 +75,11 @@ defmodule Iphod.Mixfile do
       {:mix_test_watch, "~> 0.2.6", only: :dev},
       {:comeonin, "~> 3.0"},
       {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
-      {:edeliver, "~> 1.6.0"},
-      {:distillery, "~> 2.0", warn_missing: false},
+      {:edeliver, "~> 1.4.0"},
+      {:distillery, "~> 1.2"},
       {:exactor, "~> 2.2.4"},
-      {:conform, "~> 2.5.2"}
+      {:conform, "~> 2.5.2"},
+      {:mix_docker, "~> 0.5.0"}
     ]
   end
 

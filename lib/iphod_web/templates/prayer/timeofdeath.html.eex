@@ -4,14 +4,14 @@
 <div class= "mpep">
   <p class= "midday"><%= dgettext "np", "Ministration at the Time of Death (BCP)"%></p>
   <p class= "rubric-office"><%= dgettext "tod", """
-    When a person is near death, the Minister of the Congregation should be
-    notified, in order that the ministrations of the Church may be provided.
+      When a person is near death, the Minister of the Congregation should be
+      notified, in order that the ministrations of the Church may be provided.
     """%>
   </p>
   <p class="italic">A Prayer for a Person near Death</p>
   <p class="office"><%= dgettext "tod", """
-      Almighty God, look on this your servant, lying in great
-      weakness, and comfort 
+        Almighty God, look on this your servant, lying in great
+        weakness, and comfort 
       """%>
       <span class="italic"><%= dgettext "tod", "him"%></span> 
       <%= dgettext "tod", """
@@ -23,8 +23,8 @@
 
   <h3>Litany at the Time of Death</h3>
   <p class= "rubric-office"><%= dgettext "tod", """
-    When possible, it is desirable that members of the family and friends
-    come together to join in the Litany.
+      When possible, it is desirable that members of the family and friends
+      come together to join in the Litany.
     """%>
   </p>
   <ul class="versicals">
@@ -96,8 +96,8 @@
   <p class="rubric-office"><%= dgettext "tod", "The Officiant says this Collect"%></p>
   <p class= "rubric-office"><%= dgettext "tod", "Let us pray."%></p>
   <p class="office"><%= dgettext "tod", """
-      Deliver your servant, N., O Sovereign Lord Christ, from all
-    evil, and set 
+        Deliver your servant, N., O Sovereign Lord Christ, from all
+        evil, and set 
       """%>
       <span class="italic"><%= dgettext "tod", "him"%></span>
       <%= dgettext "tod", "free from every bond; that"%>
@@ -114,54 +114,54 @@
   <h3>A Commendation at the Time of Death</h3>
   <p class="office"><%= dgettext "tod", """
       Depart, O Christian soul, out of this world;
-    In the Name of God the Father Almighty who created you;
-    In the Name of Jesus Christ who redeemed you;
-    In the Name of the Holy Spirit who sanctifies you.
-    May your rest be this day in peace,
-    and your dwelling place in the Paradise of God.
+      In the Name of God the Father Almighty who created you;
+      In the Name of Jesus Christ who redeemed you;
+      In the Name of the Holy Spirit who sanctifies you.
+      May your rest be this day in peace,
+      and your dwelling place in the Paradise of God.
     """%>
   </p>
 
   <h3 class="italic">A Commendatory Prayer</h3>
   <p class="office"><%= dgettext "tod", """
       Into your hands, O merciful Savior, we commend your
-    servant N. Acknowledge, we humbly beseech you, a sheep of
-    your own fold, a lamb of your own flock, a sinner of your
-    own redeeming. Receive 
+      servant N. Acknowledge, we humbly beseech you, a sheep of
+      your own fold, a lamb of your own flock, a sinner of your
+      own redeeming. Receive 
     """%>
       <span class="italic"><%= dgettext "tod", "him"%></span>
     <%= dgettext "tod", """
       into the arms of your mercy,
-    into the blessed rest of everlasting peace, and into the
-    glorious company of the saints in light.
+      into the blessed rest of everlasting peace, and into the
+      glorious company of the saints in light.
     """%>
     <span class="italic"> Amen.</span>
   </p>
   <p class="office"><%= dgettext "tod", """
-    May his soul and the souls of all the departed, through the
-    mercy of God, rest in peace.
+      May his soul and the souls of all the departed, through the
+      mercy of God, rest in peace.
     """%>
     <span class="italic"> Amen.</span>
   </p>
 
   <h3>Prayers for a Vigil</h3>
   <p class= "rubric-office"><%= dgettext "tod", """
-    It is appropriate that the family and friends come together for prayers
-    prior to the funeral. Suitable Psalms, Lessons, and Collects (such as those
-    in the Burial service) may be used. The Litany at the Time of Death may
-    be said, or the following
+      It is appropriate that the family and friends come together for prayers
+      prior to the funeral. Suitable Psalms, Lessons, and Collects (such as those
+      in the Burial service) may be used. The Litany at the Time of Death may
+      be said, or the following
     """%>
   </p>
   <p class="office"><%= dgettext "tod", """
       Dear Friends: It was our Lord Jesus himself who said,
-    “Come to me, all you who labor and are burdened, and I will
-    give you rest.” Let us pray, then, for our brother (sister) N.,
-    that 
+      “Come to me, all you who labor and are burdened, and I will
+      give you rest.” Let us pray, then, for our brother (sister) N.,
+      that 
     """%>
       <span class="italic"><%= dgettext "tod", "he"%></span>
     <%= dgettext "tod", """
-    may rest from his labors, and enter into the light
-    of God’s eternal sabbath rest.
+      may rest from his labors, and enter into the light
+      of God’s eternal sabbath rest.
     """%>
   </p>
   <ul class="versicals">
@@ -192,7 +192,7 @@
       <%= dgettext "tod", "May" %>
       <span class="italic"><%= dgettext "tod", "he"%></span>
       <%= dgettext "tod", """
-        hear your words of invitation, “Come, you blessed of"
+          hear your words of invitation, “Come, you blessed of"
         """%>
       </li>
     <li class="litany1"><%= dgettext "tod", "my Father.”"%></li>
@@ -226,17 +226,17 @@
   <p class= "rubric-office"><%= dgettext "tod", "The Officiant concludes"%></p>
   <p class="office"><%= dgettext "tod", """
       Almighty God, our Father in heaven, before whom live all
-    who die in the Lord: Receive our brother N. into the courts of
-    your heavenly dwelling place. Let his heart and soul now ring
-    out in joy to you, O Lord, the living God, and the God of
-    those who live. This we ask through Christ our Lord.
+      who die in the Lord: Receive our brother N. into the courts of
+      your heavenly dwelling place. Let his heart and soul now ring
+      out in joy to you, O Lord, the living God, and the God of
+      those who live. This we ask through Christ our Lord.
     """%>
     <span class="italic"> Amen.</span>
   </p>
 
   <p class="office"><%= dgettext "tod", "Reception of the Body"%></p>
   <p class= "rubric-office"><%= dgettext "tod", """
-    The following form may be used at whatever time the body is brought to the church.
+      The following form may be used at whatever time the body is brought to the church.
     """%>
   </p>
   <p class= "rubric-office"><%= dgettext "tod", """
@@ -246,8 +246,8 @@
   <p class="office">
     <%= dgettext "tod", """
         With faith in Jesus Christ, we receive the body of our brother
-      (sister) N. for burial. Let us pray with confidence to God, the
-      Giver of life, that 
+        (sister) N. for burial. Let us pray with confidence to God, the
+        Giver of life, that 
       """%>
       <span class="italic"><%= dgettext "tod", "he"%></span>
       <%= dgettext "tod", "will raise"%>
@@ -257,49 +257,49 @@
   <p class= "rubric-office"><%= dgettext "tod", "Silence may be kept; after which the Celebrant says"%></p>
   <p class="office"><%= dgettext "tod", """
       Deliver your servant, N., O Sovereign Lord Christ, from all
-    evil, and set 
+      evil, and set 
     """%>
     <span class="italic"><%= dgettext "tod", "him"%></span>
     <%= dgettext "tod", "free from every bond; that"%>
     <span class="italic"><%= dgettext "tod", "he"%></span>
     <%= dgettext "tod", """
-      may rest with
-      all your saints in the eternal habitations; where with the
-      Father and the Holy Spirit you live and reign, one God, for
-      ever and ever.
+        may rest with
+        all your saints in the eternal habitations; where with the
+        Father and the Holy Spirit you live and reign, one God, for
+        ever and ever.
       """%>
     <span class="italic"> Amen.</span>
   </p>
   <p class="office", style="padding-top: 1em;"><%= dgettext "tod", """
       Let us also pray for all who mourn, that they may cast their
-    care on God, and know the consolation of his love.
+      care on God, and know the consolation of his love.
     """%>
   </p>
   <p class= "rubric-office"><%= dgettext "tod", "Silence may be kept; after which the Celebrant says"%></p>
   <p class="office"><%= dgettext "tod", """
       Almighty God, look with pity upon the sorrows of your
-    servants for whom we pray. Remember them, Lord, in mercy;
-    nourish them with patience; comfort them with a sense of your
-    goodness; lift up your countenance upon them; and give them
-    peace; through Jesus Christ our Lord.
+      servants for whom we pray. Remember them, Lord, in mercy;
+      nourish them with patience; comfort them with a sense of your
+      goodness; lift up your countenance upon them; and give them
+      peace; through Jesus Christ our Lord.
     """%>
     <span class="italic"> Amen.</span>
   </p>
   <p class= "rubric-office"><%= dgettext "tod", """
-    If the Burial service is not to follow immediately, the body is then
-    brought into the church, during which time a suitable psalm or anthem
-    may be sung or said. Appropriate devotions, such as those appointed for
-    the Vigil on page 465, may follow.
+      If the Burial service is not to follow immediately, the body is then
+      brought into the church, during which time a suitable psalm or anthem
+      may be sung or said. Appropriate devotions, such as those appointed for
+      the Vigil on page 465, may follow.
     """%>
   </p>
   <p class= "rubric-office"><%= dgettext "tod", """
-    When the order for the Burial of the Dead follows immediately, the
-    service continues on page 469 or 491.
+      When the order for the Burial of the Dead follows immediately, the
+      service continues on page 469 or 491.
     """%>
   </p>
   <p class= "rubric-office"><%= dgettext "tod", """
-    A member of the congregation bearing the lighted Paschal Candle may
-    lead the procession into the church.
+      A member of the congregation bearing the lighted Paschal Candle may
+      lead the procession into the church.
     """%>
   </p>
 </div>

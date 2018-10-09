@@ -1,4 +1,3 @@
-# function Mix.Config.Agent.start_link/0 is undefined
 # Import all plugins from `rel/plugins`
 # They can then be used by adding `plugin MyPlugin` to
 # either an environment, or release definition, where
@@ -11,7 +10,7 @@ use Mix.Releases.Config,
     # This sets the default release built by `mix release`
     default_release: :default,
     # This sets the default environment used by `mix release`
-    default_environment: Mix.env()
+    default_environment: :prod
 
 # For a full list of config options for both releases
 # and environments, visit https://hexdocs.pm/distillery/configuration.html
@@ -31,15 +30,13 @@ environment :dev do
   # dev mode.
   set dev_mode: true
   set include_erts: false
-  set cookie: :dev
-  set vm_args: "rel/vm.args.eex"
+  set cookie: :"55@5:6_1Pb6Pga^BC)>:hp9sNHgjd4=HJ.lY5o1hk[%X&TtDz|2)S7tQK=Mf2Gs="
 end
 
 environment :prod do
   set include_erts: true
   set include_src: false
-  set cookie: File.read!("config/cookie.txt") |> String.to_atom
-  set vm_args: "rel/vm.args.eex"
+  set cookie: :"/OE3ij4FpXw>oalrwdKnA|r!r6$uF7kmy4J;w_)6~VFWqp}P/y.|D>qJ1y<&n]h6"
 end
 
 # You may define one or more releases in this file.
@@ -52,6 +49,5 @@ release :iphod do
   set applications: [
     :runtime_tools
   ]
-  plugin Conform.ReleasePlugin
 end
 

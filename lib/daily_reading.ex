@@ -210,7 +210,7 @@ defmodule DailyReading do
     end
   end
 
-  def day_of_week({"redLetter", wk, litYr, date}) do
+  def day_of_week({"redLetter", _wk, _litYr, date}) do
     dow = date |> Timex.format!("{WDfull}")
     {new_season, new_wk, _litYr, _date} = date |> Lityear.last_sunday()
     {new_season, new_wk, dow, date}
@@ -264,9 +264,9 @@ defmodule DailyReading do
     end)
   end
 
-  defp vssToId(vss) do
-    Regex.replace(~r/[\s\.\:\,]/, vss, "_")
-  end
+  #   defp vssToId(vss) do
+  #     Regex.replace(~r/[\s\.\:\,]/, vss, "_")
+  #   end
 
   defp to_lessons(map) do
     map
@@ -278,25 +278,25 @@ defmodule DailyReading do
     |> Map.update(:epp, [], fn el -> _to_lessons_for("epp", el) end)
   end
 
-  defp _to_lessons_for(_section, []), do: []
+  #   defp _to_lessons_for(_section, []), do: []
 
-  defp _to_lessons_for(section, list) do
-    list |> Enum.map(fn el -> _add_keys_for(section, el) end)
-  end
+  #   defp _to_lessons_for(section, list) do
+  #     list |> Enum.map(fn el -> _add_keys_for(section, el) end)
+  #   end
 
-  defp _add_keys_for(section, map) do
-    if map |> Map.has_key?(:read) do
-      map |> Map.put_new(:id, vssToId(map.read))
-    else
-      map
-    end
-    |> Map.put_new(:section, section)
-    |> Map.put_new(:body, "")
-    |> Map.put_new(:show, false)
-    |> Map.put_new(:show_fn, true)
-    |> Map.put_new(:show_vn, true)
-    |> Map.put_new(:version, "")
-  end
+  #   defp _add_keys_for(section, map) do
+  #     if map |> Map.has_key?(:read) do
+  #       map |> Map.put_new(:id, vssToId(map.read))
+  #     else
+  #       map
+  #     end
+  #     |> Map.put_new(:section, section)
+  #     |> Map.put_new(:body, "")
+  #     |> Map.put_new(:show, false)
+  #     |> Map.put_new(:show_fn, true)
+  #     |> Map.put_new(:show_vn, true)
+  #     |> Map.put_new(:version, "")
+  #   end
 
   def mp_today(date) do
     r = readings(date)
@@ -1581,7 +1581,7 @@ defmodule DailyReading do
       "easterDay" => %{
         title: "Easter Day",
         mp1: [%{style: "req", read: "Exod 15"}],
-        mp1: [%{style: "req", read: "Acts 2:22-32"}],
+        mp2: [%{style: "req", read: "Acts 2:22-32"}],
         mpp: [{118, 1, 999}],
         ep1: [%{style: "req", read: "Rom 6"}],
         ep2: [%{style: "req", read: "Luke 24:13-43"}],

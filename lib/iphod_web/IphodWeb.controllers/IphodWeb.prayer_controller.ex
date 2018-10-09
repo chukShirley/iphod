@@ -182,6 +182,10 @@ defmodule IphodWeb.PrayerController do
     prayer_model("mp", psalm_translation, text_translation, Timex.now(@tz))
   end
 
+  def prayer_model("ep", psalm_translation, text_translation) do
+    prayer_model("ep", psalm_translation, text_translation, Timex.now(@tz))
+  end
+
   def prayer_model("mp", psalm_translation, text_translation, rightNow) do
     day = rightNow |> Timex.to_date()
     {season, _wk, _lityr, _date} = rightNow |> Lityear.to_season()
@@ -203,10 +207,6 @@ defmodule IphodWeb.PrayerController do
     |> Map.put(:collect_of_week, collect)
     |> Map.put(:day, day_of_week)
     |> Map.put(:reflID, reflectionID(day))
-  end
-
-  def prayer_model("ep", psalm_translation, text_translation) do
-    prayer_model("ep", psalm_translation, text_translation, Timex.now(@tz))
   end
 
   def prayer_model("ep", psalm_translation, text_translation, rightNow) do

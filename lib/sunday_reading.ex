@@ -160,7 +160,7 @@ defmodule SundayReading do
   end
 
   def colors(date) do
-    {season, wk, yr, _} = Lityear.to_season(date)
+    {season, wk, _yr, _} = Lityear.to_season(date)
     identity()[season][wk]["colors"]
   end
 

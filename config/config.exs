@@ -5,6 +5,8 @@
 # is restricted to this project.
 use Mix.Config
 
+config :mix_docker, image: "iphod/legereme"
+
 config :iphod,
   ecto_repos: [Iphod.Repo]
 

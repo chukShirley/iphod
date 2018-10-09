@@ -42,10 +42,6 @@ defmodule BibleText do
     end)
   end
 
-  def ref_to_id(ref) do
-    Regex.replace(~r/[\s\.\:\,]/, ref, "_")
-  end
-
   def lesson_with_body(list, ver) do
     lesson_with_body(list, ver, BibleVersions.source(ver))
   end
@@ -103,6 +99,10 @@ defmodule BibleText do
       |> Map.put(:version, ver)
       |> other_init_values
     end)
+  end
+
+  def ref_to_id(ref) do
+    Regex.replace(~r/[\s\.\:\,]/, ref, "_")
   end
 
   def other_init_values(map, show \\ true) do

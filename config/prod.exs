@@ -15,16 +15,16 @@ use Mix.Config
 # which you typically run after static files are built.
 
 config :iphod, IphodWeb.Endpoint,
-  load_from_system_env: true,
-  # http: [port: 4000],
-  url: [scheme: "http", host: "legereme.com", port: 80],
+  # load_from_system_env: true,
+  http: [port: {:system, "PORT"}],
+  url: [host: "localhost", port: {:system, "PORT"}],
   root: ".",
   cache_static_manifest: "priv/static/cache_manifest.json",
   # secret_key_base: System.get_env("SECRET_KEYBASE"),
   # secret_key_base: "!jy!R95NwKCk&=kXD_h9+_sUdgY2P_Iu9Db$MM6KdDmsWEV!QS#1Emguzxt#hCrL",
   server: true,
   code_reloader: false,
-  version: Application.spec(:iphod, :vsn)
+  version: Mix.Project.config[:version]
 
 # ## SSL Support
 #

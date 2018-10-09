@@ -6,10 +6,11 @@ BUILD_HOST="104.131.112.206"
 BUILD_USER="frpaulas"
 BUILD_AT="/tmp/edeliver/iphod/builds"
 RELEASE_DIR="/home/frpaulas/iphod_prod"
+RELEASE_STORE=frpaulas@legereme.com:/home/iphod/legereme.com/iphod_release_store
 
 STAGING_HOSTS="104.131.112.206"
 STAGING_USER="frpaulas"
-DELIVER_TO="/home/web"
+DELIVER_TO="/home/frpaulas/iphod/legereme.com"
 
 TEST_AT="/home/frpaulas/iphod_stage"
 
