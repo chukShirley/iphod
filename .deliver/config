@@ -4,13 +4,13 @@ APP="iphod"
 
 BUILD_HOST="104.131.112.206"
 BUILD_USER="frpaulas"
-BUILD_AT="/tmp/edeliver/iphod/builds"
-RELEASE_DIR="/home/frpaulas/iphod_prod"
-RELEASE_STORE=frpaulas@legereme.com:/home/iphod/legereme.com/iphod_release_store
+BUILD_AT="/home/frpaulas/legereme.com/iphod_build"
+# RELEASE_DIR="/home/frpaulas/iphod_prod"
+RELEASE_STORE=frpaulas@legereme.com:/home/frpaulas/legereme.com/iphod_release_store
 
 STAGING_HOSTS="104.131.112.206"
 STAGING_USER="frpaulas"
-DELIVER_TO="/home/frpaulas/iphod/legereme.com"
+DELIVER_TO="/home/frpaulas/legereme.com"
 
 TEST_AT="/home/frpaulas/iphod_stage"
 
