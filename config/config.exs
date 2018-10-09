@@ -20,6 +20,8 @@ config :iphod, IphodWeb.Endpoint,
   # secret_key_base: "supersecretlongkey",
   # to generate a super secret long key: `mix phoenix.gen.secret`
   # secret_key_base: System.get_env("SECRET_KEYBASE"),
+  secret_key_base: "Ave4O7mnepk50TgDq4VWa32gCLGYVDqd+DHOZLYFGEsKZIlCeocth2XH5r2rQkz7"
+
   root: Path.dirname(__DIR__),
   server: true,
   render_errors: [view: IphodWeb.ErrorView, accepts: ~w(html json)],

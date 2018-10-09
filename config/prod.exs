@@ -60,8 +60,7 @@ config :phoenix_distillery, PhoenixDistillery.Endpoint,
   root: ".",
   cache_static_manifest: "priv/static/manifest.json",
   server: true,
-  version: Mix.Project.config()[:version],
-  secret_key_base: "Ave4O7mnepk50TgDq4VWa32gCLGYVDqd+DHOZLYFGEsKZIlCeocth2XH5r2rQkz7"
+  version: Mix.Project.config()[:version]
 
 # 
 #
