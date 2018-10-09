@@ -24,7 +24,7 @@ config :iphod, IphodWeb.Endpoint,
   # secret_key_base: "!jy!R95NwKCk&=kXD_h9+_sUdgY2P_Iu9Db$MM6KdDmsWEV!QS#1Emguzxt#hCrL",
   server: true,
   code_reloader: false,
-  version: Mix.Project.config[:version]
+  version: Mix.Project.config()[:version]
 
 # ## SSL Support
 #
@@ -60,7 +60,8 @@ config :phoenix_distillery, PhoenixDistillery.Endpoint,
   root: ".",
   cache_static_manifest: "priv/static/manifest.json",
   server: true,
-  version: Mix.Project.config()[:version]
+  version: Mix.Project.config()[:version],
+  secret_key_base: "Ave4O7mnepk50TgDq4VWa32gCLGYVDqd+DHOZLYFGEsKZIlCeocth2XH5r2rQkz7"
 
 # 
 #
@@ -89,10 +90,20 @@ config :phoenix, :serve_endpoints, true
 #     config :deploy_template, DeployTemplateWeb.Endpoint, server: true
 #
 
+# Configure your database
+config :iphod, Iphod.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  hostname: "localhost",
+  username: "frpaulas",
+  password: "Barafundle1570",
+  database: "legereme",
+  # The amount of database connections in the pool
+  size: 20
+
 config :shutdown_flag,
   flag_file: "/var/tmp/deploy/deploy-template/shutdown.flag",
   check_delay: 10_000
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"
