@@ -3435,7 +3435,7 @@ defmodule DailyReading do
       },
       "October10" => %{
         title: "",
-        mp1: [%{style: "req", read: "1 Kings 25"}],
+        mp1: [%{style: "req", read: "2 Kings 1"}],
         mp2: [%{style: "req", read: "2 Pet 3"}],
         mpp: [{103, 1, 999}],
         ep1: [%{style: "req", read: "2 Maccabees 6"}],
@@ -3444,7 +3444,7 @@ defmodule DailyReading do
       },
       "October11" => %{
         title: "",
-        mp1: [%{style: "req", read: "2 Chron 20"}],
+        mp1: [%{style: "req", read: "2 Kings 2"}],
         mp2: [%{style: "req", read: "Jude"}],
         mpp: [{105, 1, 22}],
         ep1: [%{style: "req", read: "2 Maccabees 7"}],
@@ -3453,7 +3453,7 @@ defmodule DailyReading do
       },
       "October12" => %{
         title: "",
-        mp1: [%{style: "req", read: "2 Kings 1"}],
+        mp1: [%{style: "req", read: "2 Kings 3"}],
         mp2: [%{style: "req", read: "1 John 1:1-end, 2:1-6"}],
         mpp: [{106, 1, 18}],
         ep1: [%{style: "req", read: "2 Maccabees 8"}],
@@ -3462,7 +3462,7 @@ defmodule DailyReading do
       },
       "October13" => %{
         title: "",
-        mp1: [%{style: "req", read: "2 Kings 2"}],
+        mp1: [%{style: "req", read: "2 Kings 4"}],
         mp2: [%{style: "req", read: "1 John 2:7-end"}],
         mpp: [{107, 1, 22}],
         ep1: [%{style: "req", read: "2 Maccabees 9"}],
