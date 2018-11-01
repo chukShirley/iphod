@@ -31,6 +31,7 @@ erl_crash.dump
 
 .DS_Store
 /assets/elm/elm-stuff/build-artifacts/
+.idea/
 
 *.elmi
 
