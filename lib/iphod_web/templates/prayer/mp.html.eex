@@ -1,19 +1,19 @@
 <button class="more-options" type="button">Options</button>
-<div id= "header-elm-container"></div>
+<!-- <div id= "header-elm-container"></div> -->
 <br>
 <div class= "mpep">
-  <p class= "title1"><%= dgettext "mp", "Daily Morning Prayer"%></p>
-  <p class= "title1"><%=@model.date%></p>
+  <h1 class= "title1"><%= dgettext "mp", "Daily Morning Prayer"%></h1>
+  <H3 class= "title1"><%=@model.date%></H3>
   <p class= "title2 italic"><%= dgettext "mp", "Approved for Provincial Use"%></p>
   <p class= "title2"><%= dgettext "mp", "The Anglican Church in North America"%></p>
   <p class= "title2 italic"><%= dgettext "mp", "Petertide, A.D. 2013"%></p>
   <br/>
-  <p class= "rubric"><%= dgettext "mp", """
+  <p class= "rubric"><em><%= dgettext "mp", """
         The Officiant may begin Morning Prayer by reading an opening sentence 
         of Scripture found on pages 17-19 or another appropriate Scripture. 
         The Confession of Sin may be said, or the Office may continue with 
         “O Lord, open our lips.”
-        """%>
+        """%></em>
   </p>
   <p id="opening_scripture" class= "section"><%= dgettext "mp", "Opening Sentences of Scripture"%></p>
   <br/>
