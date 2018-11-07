@@ -1,26 +1,25 @@
-<p class= "canticle">
-  <span class= "canticle_title"><%= dgettext "magnif", "Magnificat"%></span>
-  <span class= "canticle_name"><%= dgettext "magnif", "The Song of Mary"%></span>
-</p>
-<p class= "rubric_black"><%= dgettext "magnif", "Luke 1:46-55"%></p>
-<p class= "pb_vs"><%= dgettext "magnif", "My soul magnifies the Lord,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "magnif", "and my spirit rejoices in God my Savior."%></p>
-<p class= "pb_vs"><%= dgettext "magnif", "For he has regarded"%></p>
-<p class= "pb_vs_indent"><%= dgettext "magnif", "the lowliness of his handmaiden."%></p>
-<p class= "pb_vs"><%= dgettext "magnif", "For behold, from now on,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "magnif", "all generations will call me blessed."%></p>
-<p class= "pb_vs"><%= dgettext "magnif", "For he that is mighty has magnified me,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "magnif", "and holy is his Name."%></p>
-<p class= "pb_vs"><%= dgettext "magnif", "And his mercy is on those who fear him,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "magnif", "throughout all generations."%></p>
-<p class= "pb_vs"><%= dgettext "magnif", "He has shown the strength of his arm;"%></p>
-<p class= "pb_vs_indent"><%= dgettext "magnif", "he has scattered the proud in the imagination of their hearts."%></p>
-<p class= "pb_vs"><%= dgettext "magnif", "He has brought down the mighty from their thrones,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "magnif", "and has exalted the humble and meek."%></p>
-<p class= "pb_vs"><%= dgettext "magnif", "He has filled the hungry with good things,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "magnif", "and the rich he has sent empty away."%></p>
-<p class= "pb_vs"><%= dgettext "magnif", "He, remembering his mercy, has helped his servant Israel,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "magnif", "as he promised to our fathers, Abraham and his seed forever."%></p>
-<p class= "pb_vs"><%= dgettext "magnif", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
-<p class= "pb_vs_indent"><%= dgettext "magnif", "as it was in the beginning, is now, and ever shall be,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "magnif", "world without end. Amen."%></p>
+<h4><%= dgettext "magnif", "Magnificat"%> &nbsp;&nbsp;&nbsp;&nbsp;<small><em><%= dgettext "magnif", "The Song of Mary"%></em></small></h4>
+<p>
+    <em><%= dgettext "magnif", "Luke 1:46-55"%></em><br>
+    <%= dgettext "magnif", "My soul magnifies the Lord,"%><br>
+    <span class= "pb_vs_indent"><%= dgettext "magnif", "and my spirit rejoices in God my Savior."%></span><br>
+    <%= dgettext "magnif", "For he has regarded"%><br>
+    <span class= "pb_vs_indent"><%= dgettext "magnif", "the lowliness of his handmaiden."%></span><br>
+    <%= dgettext "magnif", "For behold, from now on,"%><br>
+    <span class= "pb_vs_indent"><%= dgettext "magnif", "all generations will call me blessed."%></span><br>
+    <%= dgettext "magnif", "For he that is mighty has magnified me,"%><br>
+    <span class= "pb_vs_indent"><%= dgettext "magnif", "and holy is his Name."%></span><br>
+    <%= dgettext "magnif", "And his mercy is on those who fear him,"%><br>
+    <span class= "pb_vs_indent"><%= dgettext "magnif", "throughout all generations."%></span><br>
+    <%= dgettext "magnif", "He has shown the strength of his arm;"%><br>
+    <span class= "pb_vs_indent"><%= dgettext "magnif", "he has scattered the proud in the imagination of their hearts."%></span><br>
+    <%= dgettext "magnif", "He has brought down the mighty from their thrones,"%><br>
+    <span class= "pb_vs_indent"><%= dgettext "magnif", "and has exalted the humble and meek."%></span><br>
+    <%= dgettext "magnif", "He has filled the hungry with good things,"%><br>
+    <span class= "pb_vs_indent"><%= dgettext "magnif", "and the rich he has sent empty away."%></span><br>
+    <%= dgettext "magnif", "He, remembering his mercy, has helped his servant Israel,"%><br>
+    <span class= "pb_vs_indent"><%= dgettext "magnif", "as he promised to our fathers, Abraham and his seed forever."%></span><br>
+    <%= dgettext "magnif", "Glory to the Father, and to the Son, and to the Holy Spirit;"%><br>
+    <span class= "pb_vs_indent"><%= dgettext "magnif", "as it was in the beginning, is now, and ever shall be,"%></span><br>
+    <span class= "pb_vs_indent"><%= dgettext "magnif", "world without end. Amen."%></span><br>
+</span>

@@ -1,9 +1,9 @@
-<br/>
-<p class= "section"><%= dgettext "ep_wed", "A Collect for Protection (Wednesday)"%></p>
+<h4><%= dgettext "ep_wed", "A Collect for Protection (Wednesday)"%></h4>
 <p class= "default"><%= dgettext "ep_wed", "O God, the life of all who live, the light of the faithful, the strength
 of those who labor, and the repose of the dead: We thank you for the
 blessings of the day that is past, and humbly ask for your protection
 through the coming night. Bring us in safety to the morning hours;
 through him who died and rose again for us, your Son our Savior
 Jesus Christ."%>
-<span class= "italic"> <%= gettext "Amen"%>.</span></p>
+<em> <%= gettext "Amen"%>.</em>
+</p>

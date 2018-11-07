@@ -1,5 +1,4 @@
-<br/>
-<p class= "section"><%= dgettext "ep_mis", "Collect for Mission"%></p>
+<h4><%= dgettext "ep_mis", "Collect for Mission"%></h4>
 <p><%=  [ dgettext( "ep_mis", """
     O God and Father of all, whom the whole heavens adore: Let the
     whole earth also worship you, all nations obey you, all tongues

@@ -1,139 +1,127 @@
 <button class="more-options" type="button">Options</button>
 <div id= "header-elm-container"></div>
-<br>
-<div class= "mpep">
-  <p class= "title1"><%= dgettext "ep", "Daily Evening Prayer"%></p>
-  <p class= "title1"><%=@model.date%></p>
-  <p class= "title2 italic"><%= dgettext "ep", "Approved for Provincial Use"%></p>
-  <p class= "title2"><%= dgettext "ep", "The Anglican Church in North America"%></p>
-  <p class= "title2 italic"><%= dgettext "ep", "Petertide, A.D. 2013"%></p>
-  <p class= "rubric"><%= dgettext "ep", """
-    The Officiant may begin Evening Prayer by reading an opening sentence 
-    of Scripture found on pages 17-19 or another appropriate Scripture. 
-    The Confession of Sin may be said, or the Office may continue with 
-    “O Lord, open our lips.”
-    """
-    %>
-  </p>
-  <p class= "section"><%= dgettext "ep", "Opening Sentences of Scripture"%></p>
-  <br/>
-  <p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
-  <p class= "default">
+<h1><%= dgettext "ep", "Daily Evening Prayer"%></h1>
+<h5><%=@model.date%></h5>
+<p class="title2">
+    <em><%= dgettext "ep", "Approved for Provincial Use"%></em>
+    <%= dgettext "ep", "The Anglican Church in North America"%><br>
+    <em><%= dgettext "ep", "Petertide, A.D. 2013"%></em>
+</p>
+
+<p class= "rubric"><%= dgettext "ep", """
+The Officiant may begin Evening Prayer by reading an opening sentence
+of Scripture found on pages 17-19 or another appropriate Scripture.
+The Confession of Sin may be said, or the Office may continue with
+“O Lord, open our lips.”
+"""
+%>
+</p>
+
+<p id="opening_scripture" class= "section"><%= dgettext "ep", "Opening Sentences of Scripture"%></p>
+<p class= "rubric_black"><%=@model.season |> String.capitalize%></p>
+<p>
     <%= Gettext.dgettext IphodWeb.Gettext, "ep_opening", @model.opening_sentence %>
-    <br/>
     <span class= "bible_ref"><%= Gettext.dgettext IphodWeb.Gettext, "ep_opening", @model.opening_sentence_ref %></span>
-  </p>
-  <br/>
-  <%= render "_confession.html" %>
-  <p class= "section"> <%= dgettext "ep", "The Invitatory"%></p>
-  <p class= "rubric"><%= dgettext "ep", "All stand"%></p>
-  <%= render "_invitatory.html" %>
-  <p class= "rubric"><%= dgettext "ep", "The following or some other suitable hymn or Psalm may be sung or said"%></p>
-  <%= render "_phos_hilaron.html" %>
-  <br/>
-  <p class= "rubric"><%= dgettext "ep", "Then follows"%></p>
-  <p class= "section"><%= dgettext "ep", "The Psalm or Psalms Appointed"%></p>
+</p>
+<%= render "_confession.html" %>
+<p class= "section"> <%= dgettext "ep", "The Invitatory"%></p>
+<p class= "rubric"><%= dgettext "ep", "All stand"%></p>
+<%= render "_invitatory.html" %>
+<p class= "rubric"><%= dgettext "ep", "The following or some other suitable hymn or Psalm may be sung or said"%></p>
+<%= render "_phos_hilaron.html" %>
+<br/>
+<p class= "rubric"><%= dgettext "ep", "Then follows"%></p>
+<p class= "section"><%= dgettext "ep", "The Psalm or Psalms Appointed"%></p>
 
-  <p  id= "psalms" 
-      class= "reading" 
-      data-psalms= '<%= @model.epp_names %>' 
-      data-psalms_ver= '<%= (@model.epp |> hd).version %>'
-  >
-    <%= @model.epp |> text_list_to_html %>
-  </p> 
+<p  id= "psalms"
+  class= "reading"
+  data-psalms= '<%= @model.epp_names %>'
+  data-psalms_ver= '<%= (@model.epp |> hd).version %>'
+>
+<%= @model.epp |> text_list_to_html %>
+</p>
 
-  <p class= "rubric"><%= dgettext "ep", "At the end of the Psalms is sung or said"%></p>
-  <p class= "pb_vs"><%= dgettext "ep", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
-  <p class= "pb_vs_indent"><%= dgettext "ep", "as it was in the beginning, is now, and ever shall be,"%></p>
-  <p class= "pb_vs_indent"><%= dgettext "ep", "world without end. Amen."%></p>
-  <br/>
+<p class= "rubric"><%= dgettext "ep", "At the end of the Psalms is sung or said"%></p>
+<p class= "pb_vs"><%= dgettext "ep", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "ep", "as it was in the beginning, is now, and ever shall be,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "ep", "world without end. Amen."%></p>
+<br/>
 
-  <p class= "section"><%= dgettext "ep", "The Lessons"%></p>
-  <p><%= dgettext "ep", "The First Lesson from"%>
-    <input  id="first_reading_alt" 
-            class="alt_reading" 
-            type="text" 
-            name="first_reading_alt" 
-            data-reading_target="reading1" 
-            placeholder="<%= dgettext "ep", "Alt Reading"%>">    
-  </p>
+<h4><%= dgettext "ep", "The Lessons"%></h4>
+<p><%= dgettext "ep", "The First Lesson from"%>
+<input  id="first_reading_alt"
+        class="alt_reading"
+        type="text"
+        name="first_reading_alt"
+        data-reading_target="reading1"
+        placeholder="<%= dgettext "ep", "Alt Reading"%>">
+</p>
 
-  <p  id="reading1" 
-      class= "reading" 
-      data-reading1= '<%= @model.ep1_names %>' 
-      data-reading1_ver= '<%= (@model.ep1 |> hd).version %>'
-  > 
-    <%= @model.ep1 |> text_list_to_html %>
-  </p>
+<p  id="reading1"
+  class= "reading"
+  data-reading1= '<%= @model.ep1_names %>'
+  data-reading1_ver= '<%= (@model.ep1 |> hd).version %>'
+>
+<%= @model.ep1 |> text_list_to_html %>
+</p>
 
-  <p class= "rubric"><%= dgettext "ep", "A citation giving chapter and verse may be added."%></p>
-  <p class= "rubric"><%= dgettext "ep", "After each Lesson the Reader may say"%></p>
-  <%= render "_the_word_of_the_lord.html" %>
-  <br/>
+<p class= "rubric"><%= dgettext "ep", "A citation giving chapter and verse may be added."%></p>
+<p class= "rubric"><%= dgettext "ep", "After each Lesson the Reader may say"%></p>
+<%= render "_the_word_of_the_lord.html" %>
+<br/>
 
-  <p class= "rubric"><%= dgettext "ep", "Or the Reader may say"%></p>
-  <p class= "versical"><%= dgettext "ep", "Here ends the Reading."%></p>
-  <br/>
+<p class= "rubric"><%= dgettext "ep", "Or the Reader may say"%></p>
+<p class= "versical"><%= dgettext "ep", "Here ends the Reading."%></p>
+<br/>
 
-  <p class= "rubric"><%= dgettext "ep", "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."%></p>
-  <br/>
-  <%# <%= render "_#{@model.ot_canticle}.html" %> 
-  <%= render "_magnificat.html" %>
-  <br/>
+<p class= "rubric"><%= dgettext "ep", "The following Canticles are normally sung or said aftereach of the lessons. The Officiant may also use a Canticle drawn from those on pages 35-43 or an appropriate song of praise."%></p>
+<br/>
+<%# <%= render "_#{@model.ot_canticle}.html" %>
+<%= render "_magnificat.html" %>
+<br/>
 
-  <p><%= dgettext "ep", "The Second Lesson from"%>
-    <input  id="second_reading_alt" 
-            class="alt_reading" 
-            type="text" 
-            name="second_reading_alt" 
-            data-reading_target="reading2" 
-            placeholder="<%= dgettext "ep", "Alt Reading"%>"> 
-  </p>
+<p><%= dgettext "ep", "The Second Lesson from"%>
+<input  id="second_reading_alt"
+        class="alt_reading"
+        type="text"
+        name="second_reading_alt"
+        data-reading_target="reading2"
+        placeholder="<%= dgettext "ep", "Alt Reading"%>">
+</p>
 
-  <p  id="reading2" 
-      class= "reading" 
-      data-reading2= '<%= @model.ep2_names %>' 
-      data-reading2_ver= '<%= (@model.ep2 |> hd).version %>'
-  > 
-    <%= @model.ep2 |> text_list_to_html %>
-  </p>
+<p  id="reading2"
+  class= "reading"
+  data-reading2= '<%= @model.ep2_names %>'
+  data-reading2_ver= '<%= (@model.ep2 |> hd).version %>'
+>
+<%= @model.ep2 |> text_list_to_html %>
+</p>
 
-  <%= if @model.reflID > 0 do %>
-    <div class= "reflection">
-      <button class= "get-reflection" data-id="<%= @model.reflID %>" >Reflection</button>
-      <div class='reflection-markdown'></div>
-    </div>  
-  <% end %>
-
-  <br/>
-  <%# <%= render "_#{@model.nt_canticle}.html" %>
-  <%= render "_nunc_dimittis.html" %>
-  <br/>
-  <p class= "rubric"><%= dgettext "ep", "If desired, a sermon on the Evening Lessons may be preached."%></p>
-  <%= render "_apostles_creed.html" %>
-  <br/>
-  <p class= "section"><%= dgettext "ep", "The Prayers"%></p>
-  <p class= "rubric"><%= dgettext "ep", "The People kneel or stand."%></p>
-  <%= render "_prayer_intro.html" %>
-  <br/>
-  <%= render "_mercy3.html" %>
-  <br/>
-  <p class= "rubric"><%= dgettext "ep", "Officiant and People"%></p>
-  <%= render "_lords_prayer_trad.html" %>
-  <p class= "rubric"><%= dgettext "ep", "or this"%></p>
-  <%= render "_lords_prayer_modern.html" %>
-  <br/>
-  <%= render "_prayers.html" %>
-  <br/>
-  <p class= "section"><%= dgettext "ep", "The Collect of the Day"%></p>
-  <p><%= @model.collect_of_week %></p>
-  <%= render "_ep_#{@model.day}.html" %> <%# collect for this day %>
-  <%= render "_ep_for_mission.html" %>
-  <%= render "_general_thanksgiving.html" %>
-  <%= render "_chrysostom.html" %>
-  <br/>
-  <%= render "_eo_prayer.html" %>
-  <%= render "_graces.html" %>
-
-
+<%= if @model.reflID > 0 do %>
+<div class= "reflection">
+  <button class= "get-reflection" data-id="<%= @model.reflID %>" >Reflection</button>
+  <div class='reflection-markdown'></div>
 </div>
+<% end %>
+
+<%# <%= render "_#{@model.nt_canticle}.html" %>
+<%= render "_nunc_dimittis.html" %>
+<p class= "rubric"><%= dgettext "ep", "If desired, a sermon on the Evening Lessons may be preached."%></p>
+<%= render "_apostles_creed.html" %>
+<h4><%= dgettext "ep", "The Prayers"%></h4>
+<p class= "rubric"><%= dgettext "ep", "The People kneel or stand."%></p>
+<%= render "_prayer_intro.html" %>
+<%= render "_mercy3.html" %>
+<p class= "rubric"><%= dgettext "ep", "Officiant and People"%></p>
+<%= render "_lords_prayer_trad.html" %>
+<p class= "rubric"><%= dgettext "ep", "or this"%></p>
+<%= render "_lords_prayer_modern.html" %>
+<%= render "_prayers.html" %>
+<h4><%= dgettext "ep", "The Collect of the Day"%></h4>
+<p><%= @model.collect_of_week %></p>
+<%= render "_ep_#{@model.day}.html" %> <%# collect for this day %>
+<%= render "_ep_for_mission.html" %>
+<%= render "_general_thanksgiving.html" %>
+<%= render "_chrysostom.html" %>
+<%= render "_eo_prayer.html" %>
+<%= render "_graces.html" %>
