@@ -1,39 +1,32 @@
-<div class="confession-of-sin">  
-  <p class= "section"><%= dgettext "conf", "Confession of Sin"%></p>
-  <br/>
-  <p class ="rubric"><%= dgettext "conf", "The Officiant says to the People"%></p>
+<h4><%= dgettext "conf", "Confession of Sin"%></h4>
+<p class ="rubric"><%= dgettext "conf", "The Officiant says to the People"%></p>
 
-  <p class= "default"><%= dgettext "conf", """
+<p><%= dgettext "conf", """
     Dearly beloved, the Scriptures teach us to acknowledge our many sins and offenses, not concealing them from our heavenly Father, but confessing them with humble and obedient hearts that we may obtain forgiveness by his infinite goodness and mercy. We ought at all times humbly to acknowledge our sins before Almighty God, but especially when we come together in his presence to give thanks for the great benefits we have received at his hands, to declare his most worthy praise, to hear his holy Word, and to ask, for ourselves and others, those things necessary for our life and our salvation. Therefore, come with me to the throne of heavenly grace.
-    """ %></p>
-  <p class= "alt_confession rubric"><%= dgettext "conf", "or this"%></p>
-  <p class= "alt_confession default"><%= dgettext "conf", "Let us humbly confess our sins to Almighty God."%></p>
-  <p class= "alt_confession rubric"><%= dgettext "conf", "Silence is kept. All kneeling the Officiant and People say"%></p>
-  <p class= "alt_confession pb_vs"><%= dgettext "conf", "Almighty and most merciful Father,"%></p>
-  <p class= "alt_confession pb_vs"><%= dgettext "conf", "we have erred and strayed from your ways like lost sheep."%></p>
-  <p class= "alt_confession pb_vs"><%= dgettext "conf", "we have followed too much the deceits and desires of our"%></p>
-  <p class= "alt_confession pb_vs_indent"><%= dgettext "conf", "own hearts."%></p>
-  <p class= "alt_confession pb_vs"><%= dgettext "conf", "we have offended against your holy laws."%></p>
-  <p class= "alt_confession pb_vs"><%= dgettext "conf", "we have left undone those things which we ought to have done"%></p>
-  <p class= "alt_confession pb_vs"><%= dgettext "conf", "and we have done those things which we ought not to have done;"%></p>
-  <p class= "alt_confession pb_vs"><%= dgettext "conf", "and apart from your grace, there is no health in us."%></p>
-  <p class= "alt_confession pb_vs"><%= dgettext "conf", "O Lord, have mercy upon us."%></p>
-  <p class= "alt_confession pb_vs"><%= dgettext "conf", "Spare those who confess their faults."%></p>
-  <p class= "alt_confession pb_vs"><%= dgettext "conf", "Restore those who are penitent, according to your promises declared"%></p>
-  <p class= "alt_confession pb_vsIndent"><%= dgettext "conf", "to all people in Christ Jesus our Lord;"%></p>
-  <p class= "alt_confession pb_vs"><%= dgettext "conf", "And grant, O most merciful Father, for his sake,"%></p>
-  <p class= "alt_confession pb_vs_indent"><%= dgettext "conf", "that we may now live a godly, righteous, and sober life,"%></p>
-  <p class= "alt_confession pb_vs_indent"><%= dgettext "conf", "to the glory of your holy Name. Amen."%></p>
-  <br/>
-  <p class= "rubric"><%= dgettext "conf", "The Priest alone stands and says"%></p>
+""" %></p>
+<p class= "rubric"><%= dgettext "conf", "or this"%></p>
+<p><%= dgettext "conf", "Let us humbly confess our sins to Almighty God."%></p>
+<p class= "rubric"><%= dgettext "conf", "Silence is kept. All kneeling the Officiant and People say"%></p>
+<p>
+    <%= dgettext "conf", "Almighty and most merciful Father,"%><br>
+    <%= dgettext "conf", "we have erred and strayed from your ways like lost sheep."%><br>
+    <%= dgettext "conf", "we have followed too much the deceits and desires of our own hearts."%><br>
+    <%= dgettext "conf", "we have offended against your holy laws."%><br>
+    <%= dgettext "conf", "we have left undone those things which we ought to have done"%><br>
+    <%= dgettext "conf", "and we have done those things which we ought not to have done;"%><br>
+    <%= dgettext "conf", "and apart from your grace, there is no health in us."%><br>
+    <%= dgettext "conf", "O Lord, have mercy upon us."%><br>
+    <%= dgettext "conf", "Spare those who confess their faults."%><br>
+    <%= dgettext "conf", "Restore those who are penitent, according to your promises declared"%><br>
+    <span class= "pb_vs_indent"><%= dgettext "conf", "to all people in Christ Jesus our Lord;"%></span><br>
+    <%= dgettext "conf", "And grant, O most merciful Father, for his sake,"%><br>
+    <span class= "pb_vs_indent"><%= dgettext "conf", "that we may now live a godly, righteous, and sober life,"%></span><br>
+    <span class= "pb_vs_indent"><%= dgettext "conf", "to the glory of your holy Name. Amen."%></span>
+</p>
 
-  <p class= "priest_alone default"><%= dgettext "conf", "Almighty God, the Father of our Lord Jesus Christ, desires not the death of sinners, but that they may turn from their wickedness and live. He has empowered and commanded his ministers to pronounce to his people, being penitent, the absolution and remission of their sins. He pardons all who truly repent and genuinely believe his holy Gospel. For this reason, we beseech him to grant us true repentance and his Holy Spirit, that our present deeds may please him, the rest of our lives may be pure and holy, and that at the last we may come to his eternal joy; through Jesus Christ our Lord. Amen."%></p>
-  <p class= "rubric"><%= dgettext "conf", "or this"%></p>
-
-  <p class= "default"><%= dgettext "conf", "The Almighty and merciful Lord grant you absolution and remission of all your sins, true repentance, amendment of life, and the grace and consolation of his Holy Spirit. Amen."%></p>
-
-  <p class= "rubric"><%= dgettext "conf", "A deacon or layperson remains kneeling and prays"%></p>
-
-  <p class= "default"><%= dgettext "conf", "Grant your faithful people, merciful Lord, pardon and peace; that we may be cleansed from all our sins, and serve you with a quiet mind; through Jesus Christ our Lord. Amen."%></p>
-  <br/>
-</div>
+<p class= "rubric"><%= dgettext "conf", "The Priest alone stands and says"%></p>
+<p class= "priest_alone default"><%= dgettext "conf", "Almighty God, the Father of our Lord Jesus Christ, desires not the death of sinners, but that they may turn from their wickedness and live. He has empowered and commanded his ministers to pronounce to his people, being penitent, the absolution and remission of their sins. He pardons all who truly repent and genuinely believe his holy Gospel. For this reason, we beseech him to grant us true repentance and his Holy Spirit, that our present deeds may please him, the rest of our lives may be pure and holy, and that at the last we may come to his eternal joy; through Jesus Christ our Lord. Amen."%></p>
+<p class= "rubric"><%= dgettext "conf", "or this"%></p>
+<p><%= dgettext "conf", "The Almighty and merciful Lord grant you absolution and remission of all your sins, true repentance, amendment of life, and the grace and consolation of his Holy Spirit. Amen."%></p>
+<p class= "rubric"><%= dgettext "conf", "A deacon or layperson remains kneeling and prays"%></p>
+<p><%= dgettext "conf", "Grant your faithful people, merciful Lord, pardon and peace; that we may be cleansed from all our sins, and serve you with a quiet mind; through Jesus Christ our Lord. Amen."%></p>

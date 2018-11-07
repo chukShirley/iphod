@@ -1,3 +1,4 @@
+<p>
 <ul class="versicals">
   <li class="speaker"><%= gettext "Officiant"%></li>
   <li class="says"><%= gettext "The Lord be with you."%></li>
@@ -10,3 +11,4 @@
   <li class="speaker"><%= gettext "Officiant"%></li>
   <li class="says"><%= gettext "Let us pray."%></li>
 </ul>
+</p>

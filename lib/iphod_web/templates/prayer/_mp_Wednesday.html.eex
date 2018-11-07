@@ -1,6 +1,5 @@
-<br/>
-<p class= "section"><%= dgettext "mp_wed", "A Collect for Grace (Wednesday)"%></p>
-<p class= "default"><%= dgettext "mp_wed", "O Lord, our heavenly Father, almighty and everlasting God, you have
+<h4><%= dgettext "mp_wed", "A Collect for Grace (Wednesday)"%></h4>
+<p><%= dgettext "mp_wed", "O Lord, our heavenly Father, almighty and everlasting God, you have
 brought us safely to the beginning of this day: Defend us by your
 mighty power, that we may not fall into sin nor run into any danger;
 and that guided by your Spirit, we may do what is righteous in your

@@ -1,3 +1,5 @@
-<p><%= gettext "Lord, have mercy [upon us]."%></p>
-<p class= "italic"><%= gettext "Christ, have mercy [upon us]."%></p>
-<p><%= gettext "Lord, have mercy [upon us]."%></p>
+<p>
+<%= gettext "Lord, have mercy [upon us]."%><br>
+<em><%= gettext "Christ, have mercy [upon us]."%></em><br>
+<%= gettext "Lord, have mercy [upon us]."%>
+</p>

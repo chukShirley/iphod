@@ -1,4 +1,4 @@
-<p class= "section"><%= dgettext "apcreed", "The Apostles’ Creed"%></p>
+<h4><%= dgettext "apcreed", "The Apostles’ Creed"%></h4>
 <p class= "rubric"><%= dgettext "apcreed", "Officiant and People together, all standing"%></p>
 <p class= "pb_vs"><%= dgettext "apcreed", "I believe in God, the Father almighty,"%></p>
 <p class= "pb_vs_indent"><%= dgettext "apcreed", "creator of heaven and earth."%></p>

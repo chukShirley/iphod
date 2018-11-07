@@ -1,21 +1,17 @@
-<p class="canticle">
-  <span class= "canticle_title"><%= dgettext "ven", "Venite"%></span>
-  <span class= "canticle_name"><%= dgettext "ven", "O Come"%></span>
-</p>
-<p class= "rubric_black"><%= dgettext "ven", "Psalm 95:1-7; 8-11"%></p>
-<br/>
-<p class= "pb_vs"><%= dgettext "ven", "O come, let us sing to the Lord;"%></p>
-<p class= "pb_vs"><%= dgettext "ven", "Let us make a joyful noise to the rock of our salvation!"%></p>
-<p class= "pb_vs"><%= dgettext "ven", "Let us come into his presence with thanksgiving;"%></p>
-<p class= "pb_vs"><%= dgettext "ven", "Let us make a joyful noise to him with songs of praise!"%></p>
-<p class= "pb_vs"><%= dgettext "ven", "For the Lord is a great God, and a great King above all gods."%></p>
-<p class= "pb_vs"><%= dgettext "ven", "In his hand are the depths of the earth;"%></p>
-<p class= "pb_vs_indent"><%= dgettext "ven", "the heights of the mountains are his also."%></p>
-<p class= "pb_vs"><%= dgettext "ven", "The sea is his, for he made it,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "ven", "and his hands formed the dry land."%></p>
-<p class= "pb_vs"><%= dgettext "ven", "O come, let us worship and bow down;"%></p>
-<p class= "pb_vs_indent"><%= dgettext "ven", "Let us kneel before the Lord, our Maker!"%></p>
-<p class= "pb_vs"><%= dgettext "ven", "For he is our God, and we are the people of his pasture,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "ven", "and the sheep of his hand."%></p>
-<p class= "pb_vs"><%= dgettext "ven", "O, that today you would hearken to his voice!"%></p>
-<p class= "blankline"></p>
+<h4><%= dgettext "ven", "Venite"%> &nbsp;&nbsp;&nbsp;&nbsp;<small><em><%= dgettext "ven", "O Come"%></em></small></h4>
+
+<p class="rubric_black"><%= dgettext "ven", "Psalm 95:1-7; 8-11"%></p>
+<p class="pb_vs"><%= dgettext "ven", "O come, let us sing to the Lord;"%></p>
+<p class="pb_vs"><%= dgettext "ven", "Let us make a joyful noise to the rock of our salvation!"%></p>
+<p class="pb_vs"><%= dgettext "ven", "Let us come into his presence with thanksgiving;"%></p>
+<p class="pb_vs"><%= dgettext "ven", "Let us make a joyful noise to him with songs of praise!"%></p>
+<p class="pb_vs"><%= dgettext "ven", "For the Lord is a great God, and a great King above all gods."%></p>
+<p class="pb_vs"><%= dgettext "ven", "In his hand are the depths of the earth;"%></p>
+<p class="pb_vs_indent"><%= dgettext "ven", "the heights of the mountains are his also."%></p>
+<p class="pb_vs"><%= dgettext "ven", "The sea is his, for he made it,"%></p>
+<p class="pb_vs_indent"><%= dgettext "ven", "and his hands formed the dry land."%></p>
+<p class="pb_vs"><%= dgettext "ven", "O come, let us worship and bow down;"%></p>
+<p class="pb_vs_indent"><%= dgettext "ven", "Let us kneel before the Lord, our Maker!"%></p>
+<p class="pb_vs"><%= dgettext "ven", "For he is our God, and we are the people of his pasture,"%></p>
+<p class="pb_vs_indent"><%= dgettext "ven", "and the sheep of his hand."%></p>
+<p class="pb_vs"><%= dgettext "ven", "O, that today you would hearken to his voice!"%></p>

@@ -1,32 +1,37 @@
-<ul class="versicals">
-  <li class="speaker"><%= gettext "Officiant"%></li>
-  <li class="says"><%= dgettext "invit", "O Lord, open our lips;"%></li>
-</ul>
-<ul class="versicals">
-  <li class="speaker"><%= gettext "People"%></li>
-  <li class="says"><%= dgettext "invit", "And our mouth shall proclaim your praise."%></li>
-</ul>
-<ul class="versicals">
-  <li class="speaker"><%= gettext "Officiant"%></li>
-  <li class="says"><%= dgettext "invit", "O God, make speed to save us;"%></li>
-</ul>
-<ul class="versicals">
-  <li class="speaker"><%= gettext "People"%></li>
-  <li class="says"><%= dgettext "invit", "O Lord, make haste to help us."%></li>
-</ul>
-<ul class="versicals">
-  <li class="speaker"><%= gettext "Officiant"%></li>
-  <li class="says"><%= dgettext "invit", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></li>
-</ul>
-<ul class="versicals">
-  <li class="speaker"><%= gettext "People"%></li>
-  <li class="says"><%= dgettext "invit", "As it was in the beginning, is now, and ever shall be, world without end. Amen."%></li>
-</ul>
-<ul class="versicals">
-  <li class="speaker"><%= gettext "Officiant"%></li>
-  <li class="says"><%= dgettext "invit", "Praise the Lord."%></li>
-</ul>
-<ul class="versicals">
-  <li class="speaker"><%= gettext "People"%></li>
-  <li class="says"><%= dgettext "invit", "The Lord’s name be praised."%></li>
-</ul>
+<h4><%= dgettext "mp", "The Invitatory" %></h4>
+<p class= "rubric"><%= dgettext "mp", "All stand"%></p>
+
+<p>
+    <ul class="versicals">
+      <li class="speaker"><%= gettext "Officiant"%></li>
+      <li class="says"><%= dgettext "invit", "O Lord, open our lips;"%></li>
+    </ul>
+    <ul class="versicals">
+      <li class="speaker"><%= gettext "People"%></li>
+      <li class="says"><%= dgettext "invit", "And our mouth shall proclaim your praise."%></li>
+    </ul>
+    <ul class="versicals">
+      <li class="speaker"><%= gettext "Officiant"%></li>
+      <li class="says"><%= dgettext "invit", "O God, make speed to save us;"%></li>
+    </ul>
+    <ul class="versicals">
+      <li class="speaker"><%= gettext "People"%></li>
+      <li class="says"><%= dgettext "invit", "O Lord, make haste to help us."%></li>
+    </ul>
+    <ul class="versicals">
+      <li class="speaker"><%= gettext "Officiant"%></li>
+      <li class="says"><%= dgettext "invit", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></li>
+    </ul>
+    <ul class="versicals">
+      <li class="speaker"><%= gettext "People"%></li>
+      <li class="says"><%= dgettext "invit", "As it was in the beginning, is now, and ever shall be, world without end. Amen."%></li>
+    </ul>
+    <ul class="versicals">
+      <li class="speaker"><%= gettext "Officiant"%></li>
+      <li class="says"><%= dgettext "invit", "Praise the Lord."%></li>
+    </ul>
+    <ul class="versicals">
+      <li class="speaker"><%= gettext "People"%></li>
+      <li class="says"><%= dgettext "invit", "The Lord’s name be praised."%></li>
+    </ul>
+</p>

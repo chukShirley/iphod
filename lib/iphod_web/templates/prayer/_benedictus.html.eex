@@ -1,31 +1,29 @@
-<p class= "canticle">
-  <span class= "canticle_title"><%= dgettext "bene", "Benedictus"%></span>
-  <span class= "canticle_name"><%= dgettext "bene", "The Song of Zechariah"%></span>
+<h4><%= dgettext "bene", "Benedictus"%> &nbsp;&nbsp;&nbsp;&nbsp;<small><em><%= dgettext "bene", "The Song of Zechariah"%></em></small></h4>
+<em><%= dgettext "bene", "Luke 1:68-79"%></em><br>
+<p>
+    <%= dgettext "bene", "Blessed be the Lord, the God of Israel;"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "he has come to his people and set them free."%><br>
+    <%= dgettext "bene", "He has raised up for us a mighty savior,"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "born of the house of his servant David."%><br>
+    <%= dgettext "bene", "Through his holy prophets he promised of old,"%><br>
+    <%= dgettext "bene", "that he would save us from our enemies,"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "from the hands of all who hate us."%><br>
+    <%= dgettext "bene", "He promised to show mercy to our fathers"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "and to remember his holy covenant."%><br>
+    <%= dgettext "bene", "This was the oath he swore to our father Abraham,"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "to set us free from the hands of our enemies,"%><br>
+    <%= dgettext "bene", "Free to worship him without fear,"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "holy and righteous in his sight"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "all the days of our life."%><br>
+    <%= dgettext "bene", "You, my child, shall be called the prophet of the Most High,"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "for you will go before the Lord to prepare his way,"%><br>
+    <%= dgettext "bene", "To give his people knowledge of salvation"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "by the forgiveness of their sins."%><br>
+    <%= dgettext "bene", "In the tender compassion of our God"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "the dawn from on high shall break upon us,"%><br>
+    <%= dgettext "bene", "To shine on those who dwell in darkness and the shadow of death,"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "and to guide our feet into the way of peace."%><br>
+    <%= dgettext "bene", "Glory to the Father, and to the Son, and to the Holy Spirit;"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "as it was in the beginning, is now, and ever shall be,"%><br>
+    <span class="pb_vs_indent"><%= dgettext "bene", "world without end. Amen."%><br>
 </p>
-<p class= "rubric_black"><%= dgettext "bene", "Luke 1:68-79"%></p>
-<p class= "pb_vs"><%= dgettext "bene", "Blessed be the Lord, the God of Israel;"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "he has come to his people and set them free."%></p>
-<p class= "pb_vs"><%= dgettext "bene", "He has raised up for us a mighty savior,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "born of the house of his servant David."%></p>
-<p class= "pb_vs"><%= dgettext "bene", "Through his holy prophets he promised of old,"%></p>
-<p class= "pb_vs"><%= dgettext "bene", "that he would save us from our enemies,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "from the hands of all who hate us."%></p>
-<p class= "pb_vs"><%= dgettext "bene", "He promised to show mercy to our fathers"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "and to remember his holy covenant."%></p>
-<p class= "pb_vs"><%= dgettext "bene", "This was the oath he swore to our father Abraham,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "to set us free from the hands of our enemies,"%></p>
-<p class= "pb_vs"><%= dgettext "bene", "Free to worship him without fear,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "holy and righteous in his sight"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "all the days of our life."%></p>
-<p class= "pb_vs"><%= dgettext "bene", "You, my child, shall be called the prophet of the Most High,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "for you will go before the Lord to prepare his way,"%></p>
-<p class= "pb_vs"><%= dgettext "bene", "To give his people knowledge of salvation"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "by the forgiveness of their sins."%></p>
-<p class= "pb_vs"><%= dgettext "bene", "In the tender compassion of our God"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "the dawn from on high shall break upon us,"%></p>
-<p class= "pb_vs"><%= dgettext "bene", "To shine on those who dwell in darkness and the shadow of death,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "and to guide our feet into the way of peace."%></p>
-<p class= "pb_vs"><%= dgettext "bene", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "as it was in the beginning, is now, and ever shall be,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "bene", "world without end. Amen."%></p>
-<br/>

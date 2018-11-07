@@ -1,29 +1,29 @@
 <p class= "rubric"><%= dgettext "surge", "Especially suitable for use during the season after Epiphany"%></p>
-<p class= "canticle">
-  <span class= "canticle_title"><%= dgettext "surge", "Surge, illuminare"%></span>
-  <span class= "canticle_name"><%= dgettext "surge", "Arise, shine, for your light has come"%></span>
+<h4><%= dgettext "surge", "Surge, illuminare"%> &nbsp;&nbsp;&nbsp;&nbsp;<small><em><%= dgettext "surge", "Arise, shine, for your light has come"%></em></small></h4>
+
+<p>
+<%= dgettext "surge", "Isaiah 60:1-3, 11a, 14c, 18-19"%><br>
+<%= dgettext "surge", "Arise, shine, for your light has come,"%><br>
+<span class="pb_vs_indent"><%= dgettext "surge", "and the glory of the Lord has dawned upon you."%></span><br>
+<%= dgettext "surge", "For behold, darkness covers the land;"%><br>
+<span class="pb_vs_indent"><%= dgettext "surge", "deep gloom enshrouds the peoples."%><br>
+<%= dgettext "surge", "But over you the Lord will rise,"%><br>
+<span class="pb_vs_indent"><%= dgettext "surge", "and his glory will appear upon you."%><br>
+<%= dgettext "surge", "Nations will stream to your light,"%><br>
+<span class="pb_vs_indent"><%= dgettext "surge", "and kings to the brightness of your dawning."%><br>
+<%= dgettext "surge", "Your gates will always be open;"%><br>
+<span class="pb_vs_indent"><%= dgettext "surge", "by day or night they will never be shut."%><br>
+<%= dgettext "surge", "They will call you, The City of the Lord,"%><br>
+<span class="pb_vs_indent"><%= dgettext "surge", "the Zion of the Holy One of Israel."%><br>
+<%= dgettext "surge", "Violence will no more be heard in your land,"%><br>
+<span class="pb_vs_indent"><%= dgettext "surge", "ruin or destruction within your borders."%><br>
+<%= dgettext "surge", "You will call your walls, Salvation,"%><br>
+<span class="pb_vs_indent"><%= dgettext "surge", "and all your portals, Praise."%><br>
+<%= dgettext "surge", "The sun will no more be your light by day;"%><br>
+<span class="pb_vs_indent"><%= dgettext "surge", "by night you will not need the brightness of the moon."%><br>
+<%= dgettext "surge", "The Lord will be your everlasting light,"%><br>
+<span class="pb_vs_indent"><%= dgettext "surge", "and your God will be your glory."%><br>
+<%= dgettext "surge", "Glory to the Father, and to the Son, and to the Holy Spirit;"%><br>
+<span class="pb_vs_indent"><%= dgettext "surge", "as it was in the beginning, is now, and ever shall be,"%><br>
+<%= dgettext "surge", "world without end. Amen."%><br>
 </p>
-<p class= "black_rubric"><%= dgettext "surge", "Isaiah 60:1-3, 11a, 14c, 18-19"%></p>
-<p class= "pb_vs"><%= dgettext "surge", "Arise, shine, for your light has come,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "surge", "and the glory of the Lord has dawned upon you."%></p>
-<p class= "pb_vs"><%= dgettext "surge", "For behold, darkness covers the land;"%></p>
-<p class= "pb_vs_indent"><%= dgettext "surge", "deep gloom enshrouds the peoples."%></p>
-<p class= "pb_vs"><%= dgettext "surge", "But over you the Lord will rise,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "surge", "and his glory will appear upon you."%></p>
-<p class= "pb_vs"><%= dgettext "surge", "Nations will stream to your light,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "surge", "and kings to the brightness of your dawning."%></p>
-<p class= "pb_vs"><%= dgettext "surge", "Your gates will always be open;"%></p>
-<p class= "pb_vs_indent"><%= dgettext "surge", "by day or night they will never be shut."%></p>
-<p class= "pb_vs"><%= dgettext "surge", "They will call you, The City of the Lord,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "surge", "the Zion of the Holy One of Israel."%></p>
-<p class= "pb_vs"><%= dgettext "surge", "Violence will no more be heard in your land,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "surge", "ruin or destruction within your borders."%></p>
-<p class= "pb_vs"><%= dgettext "surge", "You will call your walls, Salvation,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "surge", "and all your portals, Praise."%></p>
-<p class= "pb_vs"><%= dgettext "surge", "The sun will no more be your light by day;"%></p>
-<p class= "pb_vs_indent"><%= dgettext "surge", "by night you will not need the brightness of the moon."%></p>
-<p class= "pb_vs"><%= dgettext "surge", "The Lord will be your everlasting light,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "surge", "and your God will be your glory."%></p>
-<p class= "pb_vs"><%= dgettext "surge", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
-<p class= "pb_vs_indent"><%= dgettext "surge", "as it was in the beginning, is now, and ever shall be,"%></p>
-<p class= "pb_vs"><%= dgettext "surge", "world without end. Amen."%></p>

@@ -1,5 +1,4 @@
-<br/>
-<p class= "section"><%= dgettext "mp_miss", "Collect for Mission"%></p>
+<h4><%= dgettext "mp_miss", "Collect for Mission"%></h4>
 <p><%=  [
       dgettext( "mp_miss", """
             Almighty and everlasting God, who alone works great marvels: Send

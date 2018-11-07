@@ -29,21 +29,21 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="#">Calendar <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="/calendar">Calendar <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="officesDropdown" role="button" data-toggle="dropdown" aria=haspopup="true" aria=expanded="false">Offices</a>
                             <div class="dropdown-menu" aria=labelledby="officesDropdown">
-                                <a class="dropdown-item" href="#">Current Office</a>
-                                <a class="dropdown-item" href="#">Morning Prayer</a>
-                                <a class="dropdown-item" href="#">Midday Prayer</a>
-                                <a class="dropdown-item" href="#">Evening Prayer</a>
-                                <a class="dropdown-item" href="#">Compline</a>
-                                <a class="dropdown-item" href="#">Family Prayer</a>
-                                <a class="dropdown-item" href="#">Reconciliation</a>
-                                <a class="dropdown-item" href="#">To the Sick</a>
-                                <a class="dropdown-item" href="#">Communion to the Sick</a>
-                                <a class="dropdown-item" href="#">Time of Death</a>
+                                <a class="dropdown-item" href="/office">Current Office</a>
+                                <a class="dropdown-item" href="/morningPrayer">Morning Prayer</a>
+                                <a class="dropdown-item" href="/midday">Midday Prayer</a>
+                                <a class="dropdown-item" href="/ep">Evening Prayer</a>
+                                <a class="dropdown-item" href="/compline">Compline</a>
+                                <a class="dropdown-item" href="/family">Family Prayer</a>
+                                <a class="dropdown-item" href="/reconciliation">Reconciliation</a>
+                                <a class="dropdown-item" href="/tothesick">To the Sick</a>
+                                <a class="dropdown-item" href="/communiontosick">Communion to the Sick</a>
+                                <a class="dropdown-item" href="/timeofdeath">Time of Death</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -51,27 +51,27 @@
                                 Resources
                             </a>
                             <div class="dropdown-menu" aria-labelledby="resourcesDropdown">
-                                <a class="dropdown-item" href="#">Print Resources</a>
-                                <a class="dropdown-item" href="#">Link Resources</a>
-                                <a class="dropdown-item" href="#">Bulletin Inserts</a>
-                                <a class="dropdown-item" href="#">Humor</a>
+                                <a class="dropdown-item" href="/printresources">Print Resources</a>
+                                <a class="dropdown-item" href="/linkresources">Link Resources</a>
+                                <a class="dropdown-item" href="/inserts">Bulletin Inserts</a>
+                                <a class="dropdown-item" href="/humor">Humor</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Stations</a>
+                            <a class="nav-link" href="/stations">Stations</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">Config</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Translations</a>
+                            <a class="nav-link" href="/versions">Translations</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
                             <div class="dropdown-menu" aria-labelledby="aboutDropdown">
-                                <a class="dropdown-item" href="#">About</a>
-                                <a class="dropdown-item" href="#">Contact</a>
-                                <a class="dropdown-item" href="#">How to Use</a>
+                                <a class="dropdown-item" href="#about-text">About</a>
+                                <a class="dropdown-item" href="#email-create">Contact</a>
+                                <a class="dropdown-item" href="#howTo-text">How to Use</a>
                             </div>
                         </li>
                     </ul>
@@ -79,7 +79,6 @@
             </nav>
         </div>
     </div>
-    <hr>
     <div class="row">
         <div class="col-12">
             <div class="alert alert-primary alert-dismissable fade show" role="alert">
@@ -94,20 +93,16 @@
             </div>
             </div>
         </div>
-        <hr>
     </div>
     <input id="csrf_token" type="hidden" name="csrf-token" value="<%= get_csrf_token() %>" >
-    <div id="header">
+    <div id="header" class="hidden">
       <a href= "/calendar" class="home_link"><span>Legereme</span></a>
     </div>
     <div class="row">
-        <div class="col-xs-12 col-sm-10 offset-smead-1 col-md-8 offset-md-2">
-            <div id="container">
-              <main role="main">
-                <%= render @view_module, @view_template, assigns %>
-              </main>
-
-            </div> <!-- /container -->
+        <div class="col-xs-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <main role="main">
+            <%= render @view_module, @view_template, assigns %>
+          </main>
         </div>
     </div>
     

@@ -1,9 +1,10 @@
-<p class= "pb_vs"><%= dgettext "lp", "Our Father, who art in heaven, hallowed be thy Name."%></p>
-<p class= "pb_vs"><%= dgettext "lp", "Thy kingdom come, thy will be done, on earth as it is in heaven."%></p>
-<p class= "pb_vs"><%= dgettext "lp", "Give us this day our daily bread."%></p>
-<p class= "pb_vs"><%= dgettext "lp", "And forgive us our trespasses, as we forgive those who trespass"%></p>
-<p class= "pb_vs_indent"><%= dgettext "lp", "against us."%></p>
-<p class= "pb_vs"><%= dgettext "lp", "And lead us not into temptation, but deliver us from evil."%></p>
-<p class= "pb_vs"><%= dgettext "lp", "For thine is the kingdom, and the power, and the glory,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "lp", "forever and ever. Amen."%></p>
-
+<p>
+<%= dgettext "lp", "Our Father, who art in heaven, hallowed be thy Name."%><br>
+<%= dgettext "lp", "Thy kingdom come, thy will be done, on earth as it is in heaven."%><br>
+<%= dgettext "lp", "Give us this day our daily bread."%><br>
+<%= dgettext "lp", "And forgive us our trespasses, as we forgive those who trespass"%><br>
+<span class= "pb_vs_indent"><%= dgettext "lp", "against us."%></span><br>
+<%= dgettext "lp", "And lead us not into temptation, but deliver us from evil."%><br>
+<%= dgettext "lp", "For thine is the kingdom, and the power, and the glory,"%><br>
+<span class= "pb_vs_indent"><%= dgettext "lp", "forever and ever. Amen."%></span>
+</p>

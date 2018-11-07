@@ -1,7 +1,9 @@
-<p class= "pb_vs"><%= dgettext "lp_mod", "Our Father in heaven, hallowed be your Name."%></p>
-<p class= "pb_vs"><%= dgettext "lp_mod", "Your kingdom come, your will be done, on earth as it is in heaven."%></p>
-<p class= "pb_vs"><%= dgettext "lp_mod", "Give us today our daily bread."%></p>
-<p class= "pb_vs"><%= dgettext "lp_mod", "And forgive us our sins as we forgive those who sin against us."%></p>
-<p class= "pb_vs"><%= dgettext "lp_mod", "Save us from the time of trial, and deliver us from evil."%></p>
-<p class= "pb_vs"><%= dgettext "lp_mod", "For the kingdom, the power, and the glory are yours,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "lp_mod", "now and forever. Amen."%></p>
+<p>
+<%= dgettext "lp_mod", "Our Father in heaven, hallowed be your Name."%><br>
+<%= dgettext "lp_mod", "Your kingdom come, your will be done, on earth as it is in heaven."%><br>
+<%= dgettext "lp_mod", "Give us today our daily bread."%><br>
+<%= dgettext "lp_mod", "And forgive us our sins as we forgive those who sin against us."%><br>
+<%= dgettext "lp_mod", "Save us from the time of trial, and deliver us from evil."%><br>
+<%= dgettext "lp_mod", "For the kingdom, the power, and the glory are yours,"%><br>
+<span class= "pb_vs_indent"><%= dgettext "lp_mod", "now and forever. Amen."%></span>
+</p>

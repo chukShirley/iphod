@@ -1,3 +1,4 @@
+<p>
 <ul class="versicals">
   <li class="speaker"><%= gettext "Officiant"%></li>
   <li class="says"><%= dgettext "prayers", "O Lord, show us your mercy;"%></li>
@@ -54,3 +55,4 @@
   <li class="speaker"><%= gettext "People"%></li>
   <li class="says"><%= dgettext "prayers", "And take not your Holy Spirit from us."%></li>
 </ul>
+</p>

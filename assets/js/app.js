@@ -24,7 +24,7 @@ var path = window.location.pathname
   ;
 
 //  , isOffice = !!(path == "/" || path.match(/office|midday|^\/mp\/|morningPrayer|mp_cutrad|mp_cusimp|晨禱傳統|晨禱簡化|^\/ep\/|eveningPrayer|ep_cutrad|ep_cusimp|晚報傳統祈禱|晚祷简化/))
-if (page == "office") { 
+if (page == "office") {
   // redirect to correct office based on local time
   var now = new moment().local()
     , mid = new moment().local().hour(11).minute(30).second(0)
@@ -219,10 +219,9 @@ if ( page == "stations") {
 
 // HEADER ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-var elmHeaderDiv = document.getElementById('header-elm-container')
-  , elmHeaderApp = Elm.Header.embed(elmHeaderDiv)
-  , channel = socket.channel("iphod:readings")
-  ;
+var elmHeaderDiv = document.getElementById('header-elm-container');
+var elmHeaderApp = Elm.Header.embed(elmHeaderDiv);
+var channel = socket.channel("iphod:readings");
 
 channel.join()
   .receive("ok", resp => {
@@ -230,13 +229,13 @@ channel.join()
   })
   .receive("error", resp => { console.log("Unable to join Iphod", resp) })
 
-elmHeaderApp.ports.portCSRFToken.send($("#csrf_token").val())
+elmHeaderApp.ports.portCSRFToken.send($("#csrf_token").val());
 
 elmHeaderApp.ports.portConfig.send(init_config_model());
 
 elmHeaderApp.ports.sendEmail.subscribe( function(email) {
   channel.push("request_send_email", email)
-})
+});
 
 elmHeaderApp.ports.saveLogin.subscribe( function(user) {
   // console.log("APP JS: ", user)

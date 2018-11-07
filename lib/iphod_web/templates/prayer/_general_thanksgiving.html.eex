@@ -1,22 +1,23 @@
-<br/>
-<p class= "section"><%= dgettext "gen_tks", "The General Thanksgiving"%></p>
-<p class= "rubric"><%= dgettext "gen_tks", "Officiant and People"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "Almighty God, Father of all mercies,"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "we your unworthy servants give you humble thanks"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "for all your goodness and loving-kindness"%></p>
-<p class= "pb_vs_indent"><%= dgettext "gen_tks", "to us and to all whom you have made."%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "We bless you for our creation, preservation,"%></p>
-<p class= "pb_vs_indent"><%= dgettext "gen_tks", "and all the blessings of this life;"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "but above all for your immeasurable love"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "in the redemption of the world by our Lord Jesus Christ;"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "for the means of grace, and for the hope of glory."%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "And, we pray, give us such an awareness of your mercies,"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "that with truly thankful hearts we may show forth your praise,"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "not only with our lips, but in our lives,"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "by giving up our selves to your service,"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "and by walking before you"%></p>
-<p class= "pb_vs_indent"><%= dgettext "gen_tks", "in holiness and righteousness all our days;"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "through Jesus Christ our Lord,"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "to whom, with you and the Holy Spirit,"%></p>
-<p class= "pb_vs"><%= dgettext "gen_tks", "be honor and glory throughout all ages. Amen."%></p>
-<br/>
+<h4><%= dgettext "gen_tks", "The General Thanksgiving"%></h4>
+<p>
+    <span class= "rubric"><%= dgettext "gen_tks", "Officiant and People"%></span>
+    <%= dgettext "gen_tks", "Almighty God, Father of all mercies,"%><br>
+    <%= dgettext "gen_tks", "we your unworthy servants give you humble thanks"%><br>
+    <%= dgettext "gen_tks", "for all your goodness and loving-kindness"%><br>
+    <span class="pb_vs_indent"><%= dgettext "gen_tks", "to us and to all whom you have made."%><br>
+    <%= dgettext "gen_tks", "We bless you for our creation, preservation,"%><br>
+    <span class="pb_vs_indent"><%= dgettext "gen_tks", "and all the blessings of this life;"%><br>
+    <%= dgettext "gen_tks", "but above all for your immeasurable love"%><br>
+    <%= dgettext "gen_tks", "in the redemption of the world by our Lord Jesus Christ;"%><br>
+    <%= dgettext "gen_tks", "for the means of grace, and for the hope of glory."%><br>
+    <%= dgettext "gen_tks", "And, we pray, give us such an awareness of your mercies,"%><br>
+    <%= dgettext "gen_tks", "that with truly thankful hearts we may show forth your praise,"%><br>
+    <%= dgettext "gen_tks", "not only with our lips, but in our lives,"%><br>
+    <%= dgettext "gen_tks", "by giving up our selves to your service,"%><br>
+    <%= dgettext "gen_tks", "and by walking before you"%><br>
+    <span class="pb_vs_indent"><%= dgettext "gen_tks", "in holiness and righteousness all our days;"%><br>
+    <%= dgettext "gen_tks", "through Jesus Christ our Lord,"%><br>
+    <%= dgettext "gen_tks", "to whom, with you and the Holy Spirit,"%><br>
+    <%= dgettext "gen_tks", "be honor and glory throughout all ages. Amen."%><br>
+    <br/>
+</p>
