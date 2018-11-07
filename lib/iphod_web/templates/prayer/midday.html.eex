@@ -1,245 +1,228 @@
 <button class="more-options" type="button">Options</button>
 <div id= "header-elm-container"></div>
-<br>
-<div class= "mpep">
-  <p class= "midday"><%= dgettext "np", "Midday Prayer"%></p>
-  <ul class="versicals">
-    <li class="speaker"><%= gettext "Officiant"%></li>
-    <li class="says"><%= dgettext "np_start", "O God, make speed to save us. "%></li>
-  </ul>
-  <ul class="versicals">
-    <li class="speaker"><%= gettext "People"%></li>
-    <li class="says"><%= dgettext "np_start", "O Lord, make haste to help us. "%></li>
-  </ul>
-  <ul class="versicals">
-    <li class="speaker"><%= gettext "Officiant"%></li>
-    <li class="says"><%= dgettext "np_start", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></li>
-  </ul>
-  <ul class="versicals">
-    <li class="speaker"><%= gettext "People"%></li>
-    <li class="says"><%= dgettext "np_start", "as it was in the beginning, is now, and ever shall be, world without end. Amen."%></li>
-  </ul>
+<h1><%= dgettext "mp", "Midday Prayer"%></h1>
+<p>
+    <ul class="versicals">
+        <li class="speaker"><%= gettext "Officiant"%></li>
+        <li class="says"><%= dgettext "np_start", "O God, make speed to save us. "%></li>
+        <li class="speaker"><%= gettext "People"%></li>
+        <li class="says"><%= dgettext "np_start", "O Lord, make haste to help us. "%></li>
+        <li class="speaker"><%= gettext "Officiant"%></li>
+        <li class="says"><%= dgettext "np_start", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></li>
+        <li class="speaker"><%= gettext "People"%></li>
+        <li class="says"><%= dgettext "np_start", "as it was in the beginning, is now, and ever shall be, world without end. Amen."%></li>
+    </ul>
     <p class='rubric'><%= gettext "Except in Lent, add"%></li>
-  <ul class="versicals">
-    <li class="speaker">&nbsp;</li>
-    <li class="says"><%= dgettext "np_start", "Alleluia."%></li>
-  </ul>
-  <p class="rubric"><%= dgettext "np", "One or more of the following Psalms is sung or said. Other suitable selections include Psalms 19, 67, one or more sections of Psalm 119, or a selection from Psalms 120 through 133." %>
-  </p>
+    <ul class="versicals">
+        <li class="speaker">&nbsp;</li>
+        <li class="says"><%= dgettext "np_start", "Alleluia."%></li>
+    </ul>
+</p>
+<div class="rubric"><%= dgettext "np", "One or more of the following Psalms is sung or said. Other suitable selections include Psalms 19, 67, one or more sections of Psalm 119, or a selection from Psalms 120 through 133." %></div>
 
-  <p class= "canticle">
-    <span class= "canticle_title"><%= dgettext "np_ps", "Psalm 119"%></span><%= dgettext "np_ps"," " %>
-    <span class= "canticle_name"><%= dgettext "np_ps", "Lucerna pedibus meis"%></span><%= dgettext "np_ps"," " %>
-  </p>
+<h4><%= dgettext "np_ps", "Psalm 119"%> &nbsp;&nbsp;&nbsp;&nbsp;<small><em><%= dgettext "np_ps", "Lucerna pedibus meis"%></em></small></h4>
+<p>
+    <sup class="ps_vs_num">105 </sup><%= dgettext "np_ps", "Your word is a lantern to my feet *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps", "and a light upon my path." %></span><br>
+    <sup class="ps_vs_num">106 </sup><%= dgettext "np_ps", "I have sworn and am determined *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps", "to keep your righteous judgments." %></span><br>
+    <sup class="ps_vs_num">107 </sup><%= dgettext "np_ps", "I am deeply troubled; *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps", "preserve my life, O Lord, according to your word." %></span><br>
+    <sup class="ps_vs_num">108 </sup><%= dgettext "np_ps", "Accept, O Lord, the willing tribute of </my lips, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps", "and teach me your judgments." %></span><br>
+    <sup class="ps_vs_num">109 </sup><%= dgettext "np_ps", "My life is always in my hand, *</my>" %><br>
+    <span class="ps_second"><%= dgettext "np_ps", "yet I do not forget your law." %></span><br>
+    <sup class="ps_vs_num">110 </sup><%= dgettext "np_ps", "The wicked have set a trap for me, *<br>" %><br>
+    <span class="ps_second"><%= dgettext "np_ps", "but I have not strayed from your commandments." %></span><br>
+    <sup class="ps_vs_num">111 </sup><%= dgettext "np_ps", "Your decrees are my inheritance for ever; *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps", "truly, they are the joy of my heart." %></span><br>
+    <sup class="ps_vs_num">112 </sup><%= dgettext "np_ps", "I have applied my heart to fulfill your *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps", "for ever and to the end." %></span><br>
+</p>
 
-  <p class="ps_first"><sup class="ps_vs_num">105 </sup><%= dgettext "np_ps", "Your word is a lantern to my feet *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps", "and a light upon my path." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">106 </sup><%= dgettext "np_ps", "I have sworn and am determined *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps", "to keep your righteous judgments." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">107 </sup><%= dgettext "np_ps", "I am deeply troubled; *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps", "preserve my life, O Lord, according to your word." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">108 </sup><%= dgettext "np_ps", "Accept, O Lord, the willing tribute of </my lips, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps", "and teach me your judgments." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">109 </sup><%= dgettext "np_ps", "My life is always in my hand, *</my>" %></p>
-  <p class="ps_second"><%= dgettext "np_ps", "yet I do not forget your law." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">110 </sup><%= dgettext "np_ps", "The wicked have set a trap for me, *</p>" %></p>
-  <p class="ps_second"><%= dgettext "np_ps", "but I have not strayed from your commandments." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">111 </sup><%= dgettext "np_ps", "Your decrees are my inheritance for ever; *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps", "truly, they are the joy of my heart." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">112 </sup><%= dgettext "np_ps", "I have applied my heart to fulfill your *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps", "for ever and to the end." %></p>
+<h4><%= dgettext "np_ps", "Psalm 121"%> &nbsp;&nbsp;&nbsp;&nbsp;<small><em><%= dgettext "np_ps", "Levavi oculos"%></em></small></h4>
+<p>
+    <sup class="ps_vs_num">1 </sup><%= dgettext "np_ps", "I lift up my eyes to the hills; *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps", "from where is my help to come? " %></span><br>
+    <sup class="ps_vs_num">2 </sup><%= dgettext "np_ps", "My help comes from the Lord, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "the maker of heaven and earth." %></span><br>
+    <sup class="ps_vs_num">3 </sup><%= dgettext "np_ps", "He will not let your foot be moved *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "and he who watches over you will not fall asleep." %></span><br>
+    <sup class="ps_vs_num">4 </sup><%= dgettext "np_ps", "Behold, he who keeps watch over Israel *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "shall neither slumber nor sleep;" %></span><br>
+    <sup class="ps_vs_num">5 </sup><%= dgettext "np_ps", "The Lord himself watches over you; *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "the Lord is your shade at your right hand," %></span><br>
+    <sup class="ps_vs_num">6 </sup><%= dgettext "np_ps", "So that the sun shall not strike you by day, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "nor the moon by night." %></span><br>
+    <sup class="ps_vs_num">7 </sup><%= dgettext "np_ps", "The Lord shall preserve you from all evil; *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "it is he who shall keep you safe." %></span><br>
+    <sup class="ps_vs_num">8 </sup><%= dgettext "np_ps", "The Lord shall watch over your going out and your coming in, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "from this time forth for evermore." %></span><br>
+</p>
 
-  <p class= "canticle">
-    <span class= "canticle_title"><%= dgettext "np_ps", "Psalm 121"%>
-    <span class= "canticle_name"><%= dgettext "np_ps", "Levavi oculos"%>
-  </p>
+<h4><%= dgettext "np_ps", "Psalm 124"%> &nbsp;&nbsp;&nbsp;&nbsp;<small><em><%= dgettext "np_ps", "Nisi quia Dominus"%></em></small></h4>
+<p>
+    <sup class="ps_vs_num">1 </sup><%= dgettext "np_ps", "If the Lord had not been on our side, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "let Israel now say;" %></span><br>
+    <sup class="ps_vs_num">2 </sup><%= dgettext "np_ps", "If the Lord had not been on our side, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "when enemies rose up against us;" %></span><br>
+    <sup class="ps_vs_num">3 </sup><%= dgettext "np_ps", "Then would they have swallowed us up alive *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "in their fierce anger toward us;" %></span><br>
+    <sup class="ps_vs_num">4 </sup><%= dgettext "np_ps", "Then would the waters have overwhelmed us *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "and the torrent gone over us;" %></span><br>
+    <sup class="ps_vs_num">5 </sup><%= dgettext "np_ps", "Then would the raging waters *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "have gone right over us." %></span><br>
+    <sup class="ps_vs_num">6 </sup><%= dgettext "np_ps", "Blessed be the Lord! *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "he has not given us over to be a prey for their teeth." %></span><br>
+    <sup class="ps_vs_num">7 </sup><%= dgettext "np_ps", "We have escaped like a bird from the snare of the fowler; *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "the snare is broken, and we have escaped." %></span><br>
+    <sup class="ps_vs_num">8 </sup><%= dgettext "np_ps", "Our help is in the Name of the Lord, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "the maker of heaven and earth." %></span><br>
+</p>
 
-  <p class="ps_first"><sup class="ps_vs_num">1 </sup><%= dgettext "np_ps", "I lift up my eyes to the hills; *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps", "from where is my help to come? " %></p>
-  <p class="ps_first"><sup class="ps_vs_num">2 </sup><%= dgettext "np_ps", "My help comes from the Lord, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "the maker of heaven and earth." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">3 </sup><%= dgettext "np_ps", "He will not let your foot be moved *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "and he who watches over you will not fall asleep." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">4 </sup><%= dgettext "np_ps", "Behold, he who keeps watch over Israel *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "shall neither slumber nor sleep;" %></p>
-  <p class="ps_first"><sup class="ps_vs_num">5 </sup><%= dgettext "np_ps", "The Lord himself watches over you; *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "the Lord is your shade at your right hand," %></p>
-  <p class="ps_first"><sup class="ps_vs_num">6 </sup><%= dgettext "np_ps", "So that the sun shall not strike you by day, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "nor the moon by night." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">7 </sup><%= dgettext "np_ps", "The Lord shall preserve you from all evil; *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "it is he who shall keep you safe." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">8 </sup><%= dgettext "np_ps", "The Lord shall watch over your going out and your coming in, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "from this time forth for evermore." %></p>
+<h4><%= dgettext "np_ps", "Psalm 126"%> &nbsp;&nbsp;&nbsp;&nbsp;<small><em><%= dgettext "np_ps", "In convertendo"%></em></small></h4>
+<p>
+    <sup class="ps_vs_num">1 </sup><%= dgettext "np_ps", "When the Lord restored the fortunes of Zion, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "then were we like those who dream." %></span><br>
+    <sup class="ps_vs_num">2 </sup><%= dgettext "np_ps", "Then was our mouth filled with laughter, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "and our tongue with shouts of joy."%></span><br>
+    <sup class="ps_vs_num">3 </sup><%= dgettext "np_ps", "Then they said among the nations, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "“The Lord has done great things for them.”" %></span><br>
+    <sup class="ps_vs_num">4 </sup><%= dgettext "np_ps", "The Lord has done great things for us, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "and we are glad indeed." %></span><br>
+    <sup class="ps_vs_num">5 </sup><%= dgettext "np_ps", "Restore our fortunes, O Lord, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "like the watercourses of the Negev." %></span><br>
+    <sup class="ps_vs_num">6 </sup><%= dgettext "np_ps", "Those who sowed with tears *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "will reap with songs of joy." %></span><br>
+    <sup class="ps_vs_num">7 </sup><%= dgettext "np_ps", "Those who go out weeping, carrying the seed, *" %><br>
+    <span class="ps_second"><%= dgettext "np_ps",  "will come again with joy, shouldering their sheaves." %></span><br>
+</p>
 
-  <p class= "canticle">
-    <span class= "canticle_title"><%= dgettext "np_ps", "Psalm 124"%>
-    <span class= "canticle_name"><%= dgettext "np_ps", "Nisi quia Dominus"%>
-  </p>
+<p class= "rubric"><%= dgettext "np", "At the end of the Psalms is sung or said"%></p>
 
-  <p class="ps_first"><sup class="ps_vs_num">1 </sup><%= dgettext "np_ps", "If the Lord had not been on our side, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "let Israel now say;" %></p>
-  <p class="ps_first"><sup class="ps_vs_num">2 </sup><%= dgettext "np_ps", "If the Lord had not been on our side, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "when enemies rose up against us;" %></p>
-  <p class="ps_first"><sup class="ps_vs_num">3 </sup><%= dgettext "np_ps", "Then would they have swallowed us up alive *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "in their fierce anger toward us;" %></p>
-  <p class="ps_first"><sup class="ps_vs_num">4 </sup><%= dgettext "np_ps", "Then would the waters have overwhelmed us *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "and the torrent gone over us;" %></p>
-  <p class="ps_first"><sup class="ps_vs_num">5 </sup><%= dgettext "np_ps", "Then would the raging waters *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "have gone right over us." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">6 </sup><%= dgettext "np_ps", "Blessed be the Lord! *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "he has not given us over to be a prey for their teeth." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">7 </sup><%= dgettext "np_ps", "We have escaped like a bird from the snare of the fowler; *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "the snare is broken, and we have escaped." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">8 </sup><%= dgettext "np_ps", "Our help is in the Name of the Lord, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "the maker of heaven and earth." %></p>
+<p>
+    <%= dgettext "mp", "Glory to the Father, and to the Son, and to the Holy Spirit;"%><br>
+    <span class="pb_vs_indent"><%= dgettext "mp", "as it was in the beginning, is now, and ever shall be,"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "mp", "world without end. Amen."%></span>
+</p>
 
-  <p class= "canticle">
-    <span class= "canticle_title"><%= dgettext "np_ps", "Psalm 126"%>
-    <span class= "canticle_name"><%= dgettext "np_ps", "In convertendo"%>
-  </p>
-
-  <p class="ps_first"><sup class="ps_vs_num">1 </sup><%= dgettext "np_ps", "When the Lord restored the fortunes of Zion, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "then were we like those who dream." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">2 </sup><%= dgettext "np_ps", "Then was our mouth filled with laughter, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "and our tongue with shouts of joy."%></p>
-  <p class="ps_first"><sup class="ps_vs_num">3 </sup><%= dgettext "np_ps", "Then they said among the nations, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "“The Lord has done great things for them.”" %></p>
-  <p class="ps_first"><sup class="ps_vs_num">4 </sup><%= dgettext "np_ps", "The Lord has done great things for us, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "and we are glad indeed." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">5 </sup><%= dgettext "np_ps", "Restore our fortunes, O Lord, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "like the watercourses of the Negev." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">6 </sup><%= dgettext "np_ps", "Those who sowed with tears *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "will reap with songs of joy." %></p>
-  <p class="ps_first"><sup class="ps_vs_num">7 </sup><%= dgettext "np_ps", "Those who go out weeping, carrying the seed, *" %></p>
-  <p class="ps_second"><%= dgettext "np_ps",  "will come again with joy, shouldering their sheaves." %></p>
-
-  <p class= "rubric"><%= dgettext "np", "At the end of the Psalms is sung or said"%>
-  <p class= "pb_vs"><%= dgettext "mp", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
-  <p class= "pb_vs_indent"><%= dgettext "mp", "as it was in the beginning, is now, and ever shall be,"%></p>
-  <p class= "pb_vs_indent"><%= dgettext "mp", "world without end. Amen."%></p>
-
-  <p class= "rubric"><%= dgettext "np", "One of the following, or some other suitable passage of Scripture, is read"%>
-  <p class="np_scripture"><%= dgettext "np_scripture", """
-    Jesus said,
-    “Now is the judgment of this world; now will the ruler of this world be cast out. And I,
-    when I am lifted up from the earth, will draw all people to myself.” 
-    """%>
+<p class= "rubric"><%= dgettext "np", "One of the following, or some other suitable passage of Scripture, is read"%>
+<p class="np_scripture"><%= dgettext "np_scripture", """
+Jesus said,
+“Now is the judgment of this world; now will the ruler of this world be cast out. And I,
+when I am lifted up from the earth, will draw all people to myself.”
+"""%>
     <span class="s_ref">John 12:31-32</span>
-  </p>
-  <p class="np_scripture"><%= dgettext "np_scripture", """
-    If anyone is in Christ, he is a new creation. The old has passed away; behold, the new has
-    come. All this is from God, who through Christ reconciled us to himself and gave us the 
-    ministry of reconciliation. 
-    """%>
+</p>
+<p class="np_scripture"><%= dgettext "np_scripture", """
+If anyone is in Christ, he is a new creation. The old has passed away; behold, the new has
+come. All this is from God, who through Christ reconciled us to himself and gave us the
+ministry of reconciliation.
+"""%>
     <span class="s_ref">2 Corinthians 5:17-18</span>
-  </p>
-  <p class="np_scripture"><%= dgettext "np_scripture", """
-    From the rising of the sun to its setting my Name will be great among the nations, 
-    and in every place incense will be offered to my Name, and a pure offering. For my Name 
-    will be great among the nations, says the Lord of Hosts.
-    """%>
+</p>
+<p class="np_scripture"><%= dgettext "np_scripture", """
+From the rising of the sun to its setting my Name will be great among the nations,
+and in every place incense will be offered to my Name, and a pure offering. For my Name
+will be great among the nations, says the Lord of Hosts.
+"""%>
     <span class="s_ref">Malachi 1:11</span>
-  </p>
-  <p class= "rubric"><%= dgettext "np", "At the end of the reading is said"%></p>
-  <%= render "_the_word_of_the_lord.html" %>
-  <br/>
+</p>
+<p class= "rubric"><%= dgettext "np", "At the end of the reading is said"%></p>
+<%= render "_the_word_of_the_lord.html" %>
 
-  <p class= "rubric"><%= dgettext "np", "A meditation, silent or spoken, may follow."%>
-  <p class= "rubric"><%= dgettext "np", "The Officiant then begins the Prayers"%>
-  <ul class="versicals" style="margin-top: 1em;">
-    <li class="speaker"><%= gettext "Officiant"%></li>
-    <li class="says"><%= dgettext "prayers", "I will bless the Lord at all times."%></li>
-  </ul>
+<p class= "rubric"><%= dgettext "np", "A meditation, silent or spoken, may follow."%></p>
+<p class= "rubric"><%= dgettext "np", "The Officiant then begins the Prayers"%>
+    <ul class="versicals" style="margin-top: 1em;">
+        <li class="speaker"><%= gettext "Officiant"%></li>
+        <li class="says"><%= dgettext "prayers", "I will bless the Lord at all times."%></li>
+        <li class="speaker"><%= gettext "People"%></li>
+        <li class="says"><%= dgettext "prayers", "His praise shall continually be in my mouth."%></li>
+    </ul>
+</p>
+
+<p>Lord, have mercy [upon us].<br>
+    <em>Christ, have mercy [upon us].</em><br>
+    Lord, have mercy [upon us].
+</p>
+
+<p class= "rubric"><%= dgettext "mp", "Officiant and People"%></p>
+
+<%= render "_lords_prayer_trad.html" %>
+
+<p class= "rubric"><%= dgettext "mp", "or this"%></p>
+
+<%= render "_lords_prayer_modern.html" %>
+<p>
   <ul class="versicals">
-    <li class="speaker"><%= gettext "People"%></li>
-    <li class="says"><%= dgettext "prayers", "His praise shall continually be in my mouth."%></li>
-  </ul>
-
-  <p>Lord, have mercy [upon us].</p>
-  <p class="italic">Christ, have mercy [upon us].</p>
-  <p>Lord, have mercy [upon us].</p>
-  <p class= "rubric"><%= dgettext "mp", "Officiant and People"%></p>
-
-  <%= render "_lords_prayer_trad.html" %>
-  
-  <p class= "rubric"><%= dgettext "mp", "or this"%></p>
-
-  <%= render "_lords_prayer_modern.html" %>
-  <ul class="versicals" style="margin-top: 1em;">
     <li class="speaker"><%= gettext "Officiant"%></li>
     <li class="says"><%= dgettext "np_start", "O Lord, hear our prayer;"%></li>
-  </ul>
-  <ul class="versicals">
     <li class="speaker"><%= gettext "People"%></li>
     <li class="says"><%= dgettext "np_start", "And let our cry come to you."%></li>
-  </ul>
-  <ul class="versicals">
     <li class="speaker"><%= gettext "Officiant"%></li>
     <li class="says"><%= dgettext "np_start", "Let us pray."%></li>
   </ul>
+</p>
 
-  <p class= "rubric"><%= dgettext "np", "The Officiant then says one or more of the following Collects. Other appropriate Collects may also be used."%></p>
-  <p class="np_collect"><%= dgettext "np", """ 
-    Blessed Savior, at this hour you hung upon the cross, 
-    stretching out your loving arms: Grant that all
-    the peoples of the earth may look to you and be saved; 
-    for your tender mercies’ sake.
-    """%> 
-    <span class="italic">Amen.</span>
-  </p>
-  <p class="np_collect"><%= dgettext "np", """
-    Almighty Savior, who at mid-day called your servant Saint Paul to be an 
-    apostle to the Gentiles: We pray you to illumine the world with the
-    radiance of your glory, that all nations may come and worship you; for
-    you live and reign with the Father and the Holy Spirit, one God, for ever
-    and ever.
-    """%>
-    <span class="italic">Amen.</span>
-  </p>
-  <p class="np_collect"><%= dgettext "np", """
-    Father of all mercies, you revealed your boundless compassion to your 
-    apostle Saint Peter in a threefold vision: Forgive our unbelief, we 
-    pray, and so strengthen our hearts and enkindle our zeal, that we may 
-    fervently desire the salvation of all people, and diligently labor in 
-    the extension of your kingdom; through him who gave himself for the life
-    of the world, your Son our Savior Jesus Christ.
-    """%>
-    <span class="italic">Amen.</span>
-  </p>
-  <p class="np_collect"><%= dgettext "np", """
-    Pour your grace into our hearts, O Lord, that we who have known the 
-    incarnation of your Son Jesus Christ, announced by an angel to the 
-    Virgin Mary, may by his cross and passion be brought to the glory of 
-    his resurrection; who lives and reigns with you, in the unity of the 
-    Holy Spirit, one God, now and for ever. 
-    """%>
-    <span class="italic">Amen.</span>
-  </p>
-  
-  <p class= "rubric"><%= dgettext "np", "Silence may be kept, and other intercessions and thanksgivings may be offered."%></p>
-  <ul class="versicals" style="margin-top: 1em;">
+<p class= "rubric"><%= dgettext "np", "The Officiant then says one or more of the following Collects. Other appropriate Collects may also be used."%></p>
+<p class="np_collect"><%= dgettext "np", """
+Blessed Savior, at this hour you hung upon the cross,
+stretching out your loving arms: Grant that all
+the peoples of the earth may look to you and be saved;
+for your tender mercies’ sake.
+"""%>
+<span class="italic">Amen.</span>
+</p>
+<p class="np_collect"><%= dgettext "np", """
+Almighty Savior, who at mid-day called your servant Saint Paul to be an
+apostle to the Gentiles: We pray you to illumine the world with the
+radiance of your glory, that all nations may come and worship you; for
+you live and reign with the Father and the Holy Spirit, one God, for ever
+and ever.
+"""%>
+<span class="italic">Amen.</span>
+</p>
+<p class="np_collect"><%= dgettext "np", """
+Father of all mercies, you revealed your boundless compassion to your
+apostle Saint Peter in a threefold vision: Forgive our unbelief, we
+pray, and so strengthen our hearts and enkindle our zeal, that we may
+fervently desire the salvation of all people, and diligently labor in
+the extension of your kingdom; through him who gave himself for the life
+of the world, your Son our Savior Jesus Christ.
+"""%>
+<span class="italic">Amen.</span>
+</p>
+<p class="np_collect"><%= dgettext "np", """
+Pour your grace into our hearts, O Lord, that we who have known the
+incarnation of your Son Jesus Christ, announced by an angel to the
+Virgin Mary, may by his cross and passion be brought to the glory of
+his resurrection; who lives and reigns with you, in the unity of the
+Holy Spirit, one God, now and for ever.
+"""%>
+<span class="italic">Amen.</span>
+</p>
+
+<p class= "rubric"><%= dgettext "np", "Silence may be kept, and other intercessions and thanksgivings may be offered."%></p>
+<ul class="versicals" style="margin-top: 1em;">
     <li class="speaker"><%= gettext "Officiant"%></li>
     <li class="says"><%= dgettext "np_start", "Let us bless the Lord."%></li>
-  </ul>
-  <ul class="versicals">
     <li class="speaker"><%= gettext "People"%></li>
     <li class="says"><%= dgettext "np_start", "Thanks be to God."%></li>
-  </ul>
-  <p class= "rubric"><%= dgettext "np", """
-    From Easter Day through the Day of Pentecost “Alleluia, alleluia” may be added to 
-    the preceding versicle and response.
-    """%>
-  </p>
-  <p class= "rubric"><%= dgettext "np", """
-    The Officiant may conclude with this, or one of the other Graces from Morning and Evening Prayer.
-    """%>
-  </p>
-  <p> The grace of our Lord Jesus Christ, and the love of God, and the fellowship of the Holy
-      Spirit, be with us all evermore. <span class="italic">Amen.</span>
-  </p>
-  <p class="rubric_black">2 Corinthians 13:14</p>
-  <h3>Additional Directions</h3>
-  <p> If desired, either version of the Lord’s Prayer may conclude with the phrase, 
-      “deliver us from evil,” omitting the doxology.
-  </p>
-</div>
+</ul>
+<p class= "rubric"><%= dgettext "np", """
+From Easter Day through the Day of Pentecost “Alleluia, alleluia” may be added to
+the preceding versicle and response.
+"""%>
+</p>
+<p class= "rubric"><%= dgettext "np", """
+The Officiant may conclude with this, or one of the other Graces from Morning and Evening Prayer.
+"""%>
+</p>
+<p> The grace of our Lord Jesus Christ, and the love of God, and the fellowship of the Holy
+  Spirit, be with us all evermore. <em>Amen.</em></span>
+</p>
+<p class="rubric_black">2 Corinthians 13:14</p>
+<h4>Additional Directions</h4>
+<p> If desired, either version of the Lord’s Prayer may conclude with the phrase,
+  “deliver us from evil,” omitting the doxology.
+</p>

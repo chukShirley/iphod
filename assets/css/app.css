@@ -8,22 +8,9 @@
 
 /* Set default font */
 body {
-  font-family: "Georgia, Times New Roman, Times, serif";
+  font-family: 'Garamond', serif !important;
 }
 body.calendar { width: 55em; }
-
-button {    
-  box-shadow: -2px 3px 8px #888888;
-  border-radius: 5px;
-  border: solid 2px darkred;
-  background-color: darkred;
-  color: honeydew;
-  text-align: center;
-}
-
-a.plain {
-  text-decoration: none;
-}
 
 .donation {
   background-color: honeydew;
@@ -45,99 +32,9 @@ a.plain {
   color: #300000;
 }
 
-@media screen and (max-width: 800px){ 
-  body.calendar { 
-    width: 98%; 
-    font-size: 0.8em;
-  } 
-  div.m-options1 {
-    position: relative;
-    top: -5em;
-  }
-
-}
-@media screen and (max-width: 600px) {
-  body.calendar {
-    font-size: 0.6em;
-  }
-}
-
-ul#font-sizer-id {
-  position: fixed;
-  left: 3px;
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  z-index: 9999;
-}
-
-ul#font-sizer-id li {
-  display: block;
-  text-decoration: none;
-  margin: 10px 0;
-}
-
-ul#font-sizer-id button {
-  color: honeydew;
-  width: 1.5em;
-  padding: 0;
-}
-
-ul#font-sizer-id button:hover {
-  color: honeydew;
-}
-
-div.login {
-  display: none; /* no login for now */
-}
-
-div.login ul{
-  position: absolute;
-  float: right;
-  top: -6em;
-  right: 2%;
-  height: 1em;
-  font-size: 1em;
-}
-div.login ul li {
-  padding: 1em;
-}
-
-/* jquery-ui */
-
-.ui-menu .ui-menu-item { 
-  padding: 0px;
-  margin: 0px;
-  width: 100%; 
-}
-
-.ui-menu .ui-menu-item .ui-menu { width: 150px;}
-.ui-widget { font-size: 0.8em; }
-
-.ui-menu .ui-icon { 
-  margin: 0;
-  position: absolute;
-}
-
 .readings-list { width: 90%; }
-/* end of jquery-ui */
-
-.help-block, .alert-danger {
-  color: darkred;
-  margin-left: 2em;
-}
-
-/* Phoenix flash messages */
-.alert:empty { display: none; }
 
 #these_readings { visibility: hidden }
-
-/* Phoenix inline forms in links and buttons */
-form.link, form.button {
-  display: inline;
-}
-
-/* Custom page header */
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
 .header,
@@ -261,29 +158,6 @@ li.offices-item {
     margin-bottom: 0.1em;
     line-height: 50px;
   }
-    
-  .home_link {
-    position: relative;
-    background-image: url("/images/leg.jpg");
-    background-repeat: no-repeat;
-    background-position: 0em 1em;
-    margin-left: 1em;
-    display: block;
-    height:4.5em;
-    text-indent: 100%;
-    margin-top: 1em;
-  }
-
-  .home_link span {
-    position: absolute;
-    left: -999em;
-  }
-  @media screen and (max-width: 500px) { 
-    .home_link { background-image: none; }
-    .home_link span {
-      left: -100%;
-    }
-  }
 
   #menu1 {
     z-index: 201;
@@ -379,86 +253,6 @@ li.offices-item {
   }
 
   .period { display: hide; }
-
-/*  
-  .ps_title {
-    font-size: 0.9em;
-    font-style: italic;
-  }
-  
-  .ps_vs_num {
-    margin-top: -2em;
-    margin-bottom: 1.3em;
-    width: 4em;
-    color: blue;
-  }
-  
-  .ps_first {
-    position: relative;
-    top: -2.2em;
-    padding-left: 2.8em ;
-    text-indent: -1.5em ;
-  }
-  
-  .ps_second {
-    position: relative;
-    top: -3.2em;
-    padding-left: 3em ;
-    text-indent: -1.5em ;
-    margin-bottom: -2.8em;
-  }
-  */
-  
-  .rowStyle {
-    text-align: left;
-  }
-  
-  .tdStyle {
-    vertical-align: top;
-    text-align: left;
-  }
-  
-  .req_style {
-      color: black;
-      display: inline-block;
-      padding-right: 1em;
-      cursor: pointer;
-      list-style-type: none;
-  }
-  
-  .opt_style {
-      color: grey;
-      display: inline-block;
-      padding-right: 1em;
-      cursor: pointer;
-      list-style-type: none;
-  }
-  
-  
-  .alt_style {
-      color: darkblue;
-      display: inline-block;
-      padding-right: 1em;
-      cursor: pointer;
-      list-style-type: none;
-  }
-  
-  .altOpt_style {
-      color: indego;
-      display: inline-block;
-      padding-right: 1em;
-      cursor: pointer;
-      list-style-type: none;
-  }
-  
-  
-  .bogis_style {
-      color: red;
-      display: inline-block;
-      padding-right: 1em;
-      cursor: pointer;
-      list-style-type: none;
-  }
       
   .translationButton {
     font-size: 0.8em;
@@ -474,48 +268,6 @@ li.offices-item {
     font-size: 0.8em;
     font-weight: 700;
     color: black;
-  }
-  
-  .radio_button {
-    padding-left: 1em;
-  }
-  input[type=radio].radio_button {
-    position:absolute; 
-    z-index:-1000; 
-    left:-1000px; 
-    overflow: hidden; 
-    clip: rect(0 0 0 0); 
-    height:1px; 
-    width:1px; 
-    margin:-1px; 
-    padding:0; 
-    border:0;
-  }
-  
-  input[type=radio].radio_button + label.radio_label {
-    padding-left: 25px;
-    height: 20px; 
-    line-height: 20px;
-    background-repeat: no-repeat;
-    background-position: 0 0;
-    font-size: 0.8em;
-    vertical-align: middle;
-    cursor: pointer;
-    padding-bottom: 8px;
-  }
-  
-  input[type=radio].radio_button:checked + label.radio_label {
-    background-position: 0 -20px;
-  }
-  label.radio_label {
-    margin-right: 2px;
-    background-image: url("/images/checkbox.png");
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
   }
   
   .pdescription {
@@ -677,9 +429,6 @@ li.offices-item {
     color: black;
   }
   
-  table.reading {
-  }
-  
   table.reading_table th {
     font-size: 1.5em;
     text-align: center;
@@ -690,7 +439,6 @@ li.offices-item {
     position: relative;
     vertical-align: top;
   }
-/* end of large screen */
   
 
   .day_gold {

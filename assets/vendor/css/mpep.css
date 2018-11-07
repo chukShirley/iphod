@@ -1,14 +1,6 @@
 /*!
  * styles for morning and evening prayer
 */
-body {
-  min-width: 35em;
-  max-width: 100%;
-  font-size: 14px;
-}
-@media screen and (max-width: 550px) { 
-  body { width: 92%; } 
-}
 
 #header     { 
   position: relative;

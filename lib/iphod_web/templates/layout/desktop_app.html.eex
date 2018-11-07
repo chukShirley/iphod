@@ -57,9 +57,6 @@
       </span>
       </p>
     </div>
-    <div id="header">
-      <a href= "/calendar" class="home_link"><span>Legereme</span></a>
-    </div>
     <div id="container">
       <main role="main">
         <%= render @view_module, @view_template, assigns %>

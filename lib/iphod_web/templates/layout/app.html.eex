@@ -12,99 +12,97 @@
 
     <link rel="apple-touch-icon-precomposed" href="/priv/apple-touch-icon-precomposed.png" />
     <link rel="apple-touch-icon" href="/priv/apple-touch-icon.png" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Garamond">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="<%= static_path(@conn, "/css/app.css") %>" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 </head>
 
-<body class= <%= @page_controller %> >
+<body class=<%= @page_controller %>>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Legereme</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/calendar">Calendar <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="officesDropdown" role="button" data-toggle="dropdown" aria=haspopup="true" aria=expanded="false">Offices</a>
+                    <div class="dropdown-menu" aria=labelledby="officesDropdown">
+                        <a class="dropdown-item" href="/office">Current Office</a>
+                        <a class="dropdown-item" href="/morningPrayer">Morning Prayer</a>
+                        <a class="dropdown-item" href="/midday">Midday Prayer</a>
+                        <a class="dropdown-item" href="/ep">Evening Prayer</a>
+                        <a class="dropdown-item" href="/compline">Compline</a>
+                        <a class="dropdown-item" href="/family">Family Prayer</a>
+                        <a class="dropdown-item" href="/reconciliation">Reconciliation</a>
+                        <a class="dropdown-item" href="/tothesick">To the Sick</a>
+                        <a class="dropdown-item" href="/communiontosick">Communion to the Sick</a>
+                        <a class="dropdown-item" href="/timeofdeath">Time of Death</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Resources
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="resourcesDropdown">
+                        <a class="dropdown-item" href="/printresources">Print Resources</a>
+                        <a class="dropdown-item" href="/linkresources">Link Resources</a>
+                        <a class="dropdown-item" href="/inserts">Bulletin Inserts</a>
+                        <a class="dropdown-item" href="/humor">Humor</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/stations">Stations</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Config</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/versions">Translations</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
+                    <div class="dropdown-menu" aria-labelledby="aboutDropdown">
+                        <a class="dropdown-item" href="#about-text">About</a>
+                        <a class="dropdown-item" href="#email-create">Contact</a>
+                        <a class="dropdown-item" href="#howTo-text">How to Use</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<main role="main">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-12 no-gutter">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                    <a class="navbar-brand" href="#">Legereme</a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
+            <div class="col-xs-12">
+                <div class="alert alert-primary alert-dismissable fade show" role="alert">
+                    <strong>Fund Raiser: </strong>
+                    Fr Ed McNeill, Christ Church Oahu, is raising funds to pay professionals to create native iOS/Android versions of Legereme.
+                    <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=wWsk24ZWJSTZKsGd1RMKlg0BDvsSG3VIWQCPJNNxD8upkiY7JlDavDsozUE7KG0nFx2NSo8LdUKGuGuF396vbYpNR6KLbIm7-8a5LvxWeNqXHubq5Z7ap5JVmPErc4ZeYHCKCZhESjGNQmZ5B-6dx3fUKzMwTT4PN_4L7gA7wLc=&ver=3" class="alert-link">
+                        Click to Donate
+                    </a>For more information or ask questions, join the Iphod Facebook group
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times</span>
                     </button>
-
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="/calendar">Calendar <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="officesDropdown" role="button" data-toggle="dropdown" aria=haspopup="true" aria=expanded="false">Offices</a>
-                            <div class="dropdown-menu" aria=labelledby="officesDropdown">
-                                <a class="dropdown-item" href="/office">Current Office</a>
-                                <a class="dropdown-item" href="/morningPrayer">Morning Prayer</a>
-                                <a class="dropdown-item" href="/midday">Midday Prayer</a>
-                                <a class="dropdown-item" href="/ep">Evening Prayer</a>
-                                <a class="dropdown-item" href="/compline">Compline</a>
-                                <a class="dropdown-item" href="/family">Family Prayer</a>
-                                <a class="dropdown-item" href="/reconciliation">Reconciliation</a>
-                                <a class="dropdown-item" href="/tothesick">To the Sick</a>
-                                <a class="dropdown-item" href="/communiontosick">Communion to the Sick</a>
-                                <a class="dropdown-item" href="/timeofdeath">Time of Death</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="resourcesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Resources
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="resourcesDropdown">
-                                <a class="dropdown-item" href="/printresources">Print Resources</a>
-                                <a class="dropdown-item" href="/linkresources">Link Resources</a>
-                                <a class="dropdown-item" href="/inserts">Bulletin Inserts</a>
-                                <a class="dropdown-item" href="/humor">Humor</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/stations">Stations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Config</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/versions">Translations</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
-                            <div class="dropdown-menu" aria-labelledby="aboutDropdown">
-                                <a class="dropdown-item" href="#about-text">About</a>
-                                <a class="dropdown-item" href="#email-create">Contact</a>
-                                <a class="dropdown-item" href="#howTo-text">How to Use</a>
-                            </div>
-                        </li>
-                    </ul>
                 </div>
-            </nav>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="alert alert-primary alert-dismissable fade show" role="alert">
-                <strong>Fund Raiser: </strong>
-                Fr Ed McNeill, Christ Church Oahu, is raising funds to pay professionals to create native iOS/Android versions of Legereme.
-                <a href="https://www.eservicepayments.com/cgi-bin/Vanco_ver3.vps?appver3=wWsk24ZWJSTZKsGd1RMKlg0BDvsSG3VIWQCPJNNxD8upkiY7JlDavDsozUE7KG0nFx2NSo8LdUKGuGuF396vbYpNR6KLbIm7-8a5LvxWeNqXHubq5Z7ap5JVmPErc4ZeYHCKCZhESjGNQmZ5B-6dx3fUKzMwTT4PN_4L7gA7wLc=&ver=3" class="alert-link">
-                    Click to Donate
-                </a>For more information or ask questions, join the Iphod Facebook group
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <input id="csrf_token" type="hidden" name="csrf-token" value="<%= get_csrf_token() %>" >
             </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+                <main role="main">
+                <%= render @view_module, @view_template, assigns %>
+                </main>
             </div>
         </div>
     </div>
-    <input id="csrf_token" type="hidden" name="csrf-token" value="<%= get_csrf_token() %>" >
-    <div id="header" class="hidden">
-      <a href= "/calendar" class="home_link"><span>Legereme</span></a>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-          <main role="main">
-            <%= render @view_module, @view_template, assigns %>
-          </main>
-        </div>
-    </div>
+</main>
     
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

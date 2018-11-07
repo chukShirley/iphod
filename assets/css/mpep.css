@@ -1,11 +1,7 @@
 /*!
  * styles for morning and evening prayer
 */
-body {
-  min-width: 21em;
-  max-width: 100%;
-  font-size: 1.0em;
-}
+
 button.more-options {
   border-color: lightblue;
   border-width: 2px;
@@ -21,13 +17,6 @@ button.more-options {
   background-color: lightgrey;
   margin-bottom: 2em;
   padding-top: 0.4em;
-}
-@media screen and (max-width: 550px) { 
-  body { width: 92%; } 
-}
-
-@media screen and (max-width: 320px) { 
-  body { width: 92%; } 
 }
 
 #header     { 

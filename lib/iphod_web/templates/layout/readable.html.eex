@@ -28,9 +28,6 @@
   </head>
 
   <body class= <%= @page_controller %> >
-    <div id="header">
-      <a href= "/calendar" class="home_link">Legereme</a>
-    </div>
     <div class="container">
       <main role="main">
         <%= render @view_module, @view_template, assigns %>

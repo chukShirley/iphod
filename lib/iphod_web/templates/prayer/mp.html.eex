@@ -1,7 +1,8 @@
 <button class="more-options" type="button">Options</button>
 <div id= "header-elm-container" class="hidden"></div>
 <div class= "mpep">
-    <h1><%= dgettext "mp", "Daily Morning Prayer"%> <small><%=@model.date%></small></h1>
+    <h1><%= dgettext "mp", "Daily Morning Prayer"%></h1>
+    <h5><%=@model.date%></h5>
     <p class= "title2">
         <em><%= dgettext "mp", "Approved for Provincial Use"%></em><br>
         <%= dgettext "mp", "The Anglican Church in North America"%><br>
