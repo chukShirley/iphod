@@ -1,25 +1,25 @@
 <button class="more-options" type="button">Options</button>
 <div id= "header-elm-container"></div>
-<br>
-<div class= "mpep">
-  <p class= "midday"><%= dgettext "comp", "Compline"%></p>
+<h1><%= dgettext "comp", "Compline"%></h1>
 
-  <p class="rubric"><%= dgettext "comp", "The Officiant begins"%></p>
+<p class="rubric"><%= dgettext "comp", "The Officiant begins"%></p>
 
+<p>
   <ul class="versicals">
     <li class="speaker">&nbsp;</li>
     <li class="says">Our help is in the Name of the Lord;</li>
-  <ul class="versicals">
     <li class="speaker">People</li>
     <li class="says">The maker of heaven and earth.</li>
   </ul>
+</p>
 
-  <p class="rubric"><%= dgettext "comp", "The Officiant continues"%></p>
-  <p>Let us humbly confess our sins to Almighty God.</p>
-  <p class="rubric"><%= dgettext "comp", "Silence may be kept. The Officiant and People then say"%>
-  </p>
+<p class="rubric"><%= dgettext "comp", "The Officiant continues"%></p>
 
-  <p> Almighty God and Father, we confess to you,<br>
+<p>Let us humbly confess our sins to Almighty God.</p>
+
+<p class="rubric"><%= dgettext "comp", "Silence may be kept. The Officiant and People then say"%></p>
+
+<p> Almighty God and Father, we confess to you,<br>
       to one another, and to the whole company of heaven,<br>
       that we have sinned, through our own fault,<br>
       in thought, and word, and deed,<br>
@@ -28,171 +28,151 @@
       have mercy upon us, forgive us all our sins,<br>
       and by the power of your Holy Spirit<br>
       raise us up to serve you in newness of life,<br>
-      to the glory of your Name. Amen.<br>
-  </p>
-  <p class="rubric"><%= dgettext "comp", "The Officiant alone says"%></p>
-  <p style="margin-bottom: 2em;"> May Almighty God grant us forgiveness of our sins,<br>
-      and the grace and comfort of his Holy Spirit. <span class="italic">Amen.</span>
-  </p>
+      to the glory of your Name. Amen.
+</p>
 
-  <ul class="versicals">
+<p class="rubric"><%= dgettext "comp", "The Officiant alone says"%></p>
+
+<p>May Almighty God grant us forgiveness of our sins,<br>
+and the grace and comfort of his Holy Spirit. <em>Amen.</em>
+</p>
+
+<ul class="versicals">
     <li class="speaker">Officiant</li>
     <li class="says">O God, make speed to save us.</li>
-  </ul>
-  <ul class="versicals">
     <li class="speaker">People</li>
     <li class="says">O Lord, make haste to help us.</li>
-  </ul>
-  <ul class="versicals">
     <li class="speaker">Officiant</li>
     <li class="says">Glory to the Father, and to the Son, and to the Holy Spirit;</li>
-  </ul>
-  <ul class="versicals">
     <li class="speaker">People</li>
-    <li class="says">as it was in the beginning, is now, and ever shall be,</li>
-  </ul>
-  <ul class="versicals">
-    <li class="extra_indent">&nbsp;</li>
-    <li class="extra_indent_says">world without end. Amen.</li>
-  </ul>
-   <p class="rubric"><%= dgettext "comp", "Except in Lent, add "%><span class="default">Alleluia.</span></p>
-  <p class="rubric"><%= dgettext "comp", """
-    One or more of the following Psalms are sung or said. 
-    Traditionally three are used: 4, 91, and 134. Other suitable
-    selections from the Psalms may be substituted.
-    """%>
-  </p>
+    <li class="says">as it was in the beginning, is now, and ever shall be, world without end. Amen.</li>
+</ul>
 
-  <p class= "canticle">
-    <span class= "canticle_title"><%= dgettext "np_ps", "Psalm 4"%>
-    <span class= "canticle_name"><%= dgettext "np_ps", "Cum invocarem"%>
-  </p>
+<p class="rubric"><%= dgettext "comp", "Except in Lent, add Alleluia."%></p>
 
-  <ul class="psalm">
-    <li class="ps_first"><sup class="ps_vs_num">1</sup><%= dgettext "comp", " Answer me when I call, O God, defender of my cause; *"%></li>
-    <li class="ps_second"><%= dgettext "comp", " you set me free when I am hard-pressed;"%></li>
-    <li class="ps_second_cont"><%= dgettext "comp", " have mercy on me and hear my prayer."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">2</sup><%= dgettext "comp", " “You mortals, how long will you dishonor my glory? *"%></li>
-    <li class="ps_second"><%= dgettext "comp", " how long will you worship dumb idols"%></li>
-    <li class="ps_second_cont"><%= dgettext "comp", " and run after false gods?”"%></li>
-    <li class="ps_first"><sup class="ps_vs_num">3</sup><%= dgettext "comp", " Know that the Lord does wonders for the faithful; *"%></li>
-    <li class="ps_second"><%= dgettext "comp", " when I call upon the Lord, he will hear me."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">4</sup><%= dgettext "comp", " Tremble, then, and do not sin; *"%></li>
-    <li class="ps_second"><%= dgettext "comp", " speak to your heart in silence upon your bed."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">5</sup><%= dgettext "comp", " Offer the appointed sacrifices *"%></li>
-    <li class="ps_second"><%= dgettext "comp", " and put your trust in the Lord."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">6</sup><%= dgettext "comp", " Many are saying,"%></li>
-    <li class="ps_second"><%= dgettext "comp", "“Oh, that we might see better times!”"%></li>
-    <li class="ps_second_cont"><%= dgettext "comp", "Lift up the light of your countenance upon us, O Lord."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">7</sup><%= dgettext "comp", " You have put gladness in my heart, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", " more than when grain and wine and oil increase."%>></li>
-    <li class="ps_first"><sup class="ps_vs_num">8</sup><%= dgettext "comp", " I lie down in peace; at once I fall asleep; *"%></li>
-    <li class="ps_second"><%= dgettext "comp", " for only you, Lord, make me dwell in safety."%></li>
-  </ul>
+<p class="rubric"><%= dgettext "comp", """
+One or more of the following Psalms are sung or said.
+Traditionally three are used: 4, 91, and 134. Other suitable
+selections from the Psalms may be substituted.
+"""%>
+</p>
 
-  <p class= "canticle">
-    <span class= "canticle_title"><%= dgettext "np_ps", "Psalm 31:1-5"%>
-    <span class= "canticle_name"><%= dgettext "np_ps", "In te, Domine, speravi"%>
-  </p>
+<h4><%= dgettext "np_ps", "Psalm 4"%> &nbsp;&nbsp;&nbsp;&nbsp;<small><em><%= dgettext "np_ps", "Cum invocarem"%></em></small></h4>
 
-  <ul class="psalm">
-    <li class="ps_first"><sup class="ps_vs_num">1</sup><%= dgettext "comp", " In you, O Lord, have I taken refuge;"%></li>
-    <li class="ps_first_cont"><%= dgettext "comp", "let me never be put to shame: *"%></li>
-    <li class="ps_second"><%= dgettext "comp", " deliver me in your righteousness."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">2</sup><%= dgettext "comp", " Incline your ear to me; *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  make haste to deliver me."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">3</sup><%= dgettext "comp", " Be my strong rock, a castle to keep me safe,"%></li>
-    <li class="ps_first_cont"><%= dgettext "comp", "for you are my crag and my stronghold; *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  for the sake of your Name, lead me and guide me."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">4</sup><%= dgettext "comp", " Take me out of the net that they have secretly set for me, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  for you are my tower of strength."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">5</sup><%= dgettext "comp", " Into your hands I commend my spirit, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  for you have redeemed me,"%></li>
-    <li class="ps_second_cont"><%= dgettext "comp", " O Lord, O God of truth."%></li>
-  </ul>
+<p>
+    <sup class="pb_vs_num">1</sup><%= dgettext "comp", " Answer me when I call, O God, defender of my cause; *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " you set me free when I am hard-pressed;"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " have mercy on me and hear my prayer."%><br>
+    <sup class="ps_vs_num">2</sup><%= dgettext "comp", " “You mortals, how long will you dishonor my glory? *"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " how long will you worship dumb idols"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " and run after false gods?”"%></span><br>
+    <sup class="ps_vs_num">3</sup><%= dgettext "comp", " Know that the Lord does wonders for the faithful; *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " when I call upon the Lord, he will hear me."%></span><br>
+    <sup class="ps_vs_num">4</sup><%= dgettext "comp", " Tremble, then, and do not sin; *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " speak to your heart in silence upon your bed."%></span><br>
+    <sup class="ps_vs_num">5</sup><%= dgettext "comp", " Offer the appointed sacrifices *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " and put your trust in the Lord."%></span><br>
+    <sup class="ps_vs_num">6</sup><%= dgettext "comp", " Many are saying,"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "“Oh, that we might see better times!” *"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "Lift up the light of your countenance upon us, O Lord."%></span><br>
+    <sup class="ps_vs_num">7</sup><%= dgettext "comp", " You have put gladness in my heart, *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " more than when grain and wine and oil increase."%></span><br>
+    <sup class="ps_vs_num">8</sup><%= dgettext "comp", " I lie down in peace; at once I fall asleep; *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " for only you, Lord, make me dwell in safety."%></span><br>
+</p>
 
-  <p class= "canticle">
-    <span class= "canticle_title"><%= dgettext "np_ps", "Psalm 91"%>
-    <span class= "canticle_name"><%= dgettext "np_ps", "Qui habitat"%>
-  </p>
+<h4><%= dgettext "np_ps", "Psalm 31:1-5"%> &nbsp;&nbsp;&nbsp;&nbsp;<small><em><%= dgettext "np_ps", "In te, Domine, speravi"%></em></small></h4>
 
-  <ul class="psalm">
-    <li class="ps_first"><sup class="ps_vs_num">1</sup><%= dgettext "comp", " He who dwells in the shelter of the Most High *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  abides under the shadow of the Almighty."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">2</sup><%= dgettext "comp", " He shall say to the Lord,"%></li>
-    <li class="ps_first_cont"><%= dgettext "comp", "“You are my refuge and my stronghold, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  my God in whom I put my trust.”"%></li>
-    <li class="ps_first"><sup class="ps_vs_num">3</sup><%= dgettext "comp", " He shall deliver you from the snare of the hunter *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  and from the deadly pestilence."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">4</sup><%= dgettext "comp", " He shall cover you with his pinions,"%></li>
-    <li class="ps_first_cont"><%= dgettext "comp", "and you shall find refuge under his wings; *"%></li>
-    <li class="ps_second"><%= dgettext "comp", " his faithfulness shall be a shield and buckler."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">5</sup><%= dgettext "comp", " You shall not be afraid of any terror by night, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  nor of the arrow that flies by day;"%></li>
-    <li class="ps_first"><sup class="ps_vs_num">6</sup><%= dgettext "comp", " Of the plague that stalks in the darkness, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  nor of the sickness that lays waste at mid-day."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">7</sup><%= dgettext "comp", " A thousand shall fall at your side"%></li>
-    <li class="ps_first_cont"><%= dgettext "comp", "and ten thousand at your right hand, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  but it shall not come near you."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">8</sup><%= dgettext "comp", " Your eyes have only to behold *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  to see the reward of the wicked."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">9</sup><%= dgettext "comp", " Because you have made the Lord your refuge, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  and the Most High your habitation,"%></li>
-    <li class="ps_first"><sup class="ps_vs_num">10</sup><%= dgettext "comp", " There shall no evil happen to you, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  neither shall any plague come near your dwelling."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">11</sup><%= dgettext "comp", " For he shall give his angels charge over you, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  to keep you in all your ways."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">11</sup><%= dgettext "comp", " They shall bear you in their hands, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", " lest you dash your foot against a stone."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">13</sup><%= dgettext "comp", " You shall tread upon the lion and adder; *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  you shall trample the young lion and the serpent"%></li>
-    <li class="ps_second_cont"><%= dgettext "comp", "under your feet."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">14</sup><%= dgettext "comp", " Because he is bound to me in love,"%></li>
-    <li class="ps_first_cont"><%= dgettext "comp", "therefore will I deliver him; *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  I will protect him, because he knows my Name."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">15</sup><%= dgettext "comp", " He shall call upon me, and I will answer him; *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  I am with him in trouble;"%></li>
-    <li class="ps_second_cont"><%= dgettext "comp", " I will rescue him and bring him to honor."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">16</sup><%= dgettext "comp", " With long life will I satisfy him, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  and show him my salvation."%></li>
-  </ul>
+<p>
+    <sup class="ps_vs_num">1</sup><%= dgettext "comp", " In you, O Lord, have I taken refuge;"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "let me never be put to shame: *"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " deliver me in your righteousness."%></span><br>
+    <sup class="ps_vs_num">2</sup><%= dgettext "comp", " Incline your ear to me; *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  make haste to deliver me."%></span><br>
+    <sup class="ps_vs_num">3</sup><%= dgettext "comp", " Be my strong rock, a castle to keep me safe,"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "for you are my crag and my stronghold; *"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  for the sake of your Name, lead me and guide me."%></span><br>
+    <sup class="ps_vs_num">4</sup><%= dgettext "comp", " Take me out of the net that they have secretly set for me, *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  for you are my tower of strength."%></span><br>
+    <sup class="ps_vs_num">5</sup><%= dgettext "comp", " Into your hands I commend my spirit, *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  for you have redeemed me,"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " O Lord, O God of truth."%></span>
+</p>
 
-  <p class= "canticle">
-    <span class= "canticle_title"><%= dgettext "np_ps", "Psalm 134"%>
-    <span class= "canticle_name"><%= dgettext "np_ps", "Ecce nunc"%>
-  </p>
+<h4><%= dgettext "np_ps", "Psalm 91"%> &nbsp;&nbsp;&nbsp;&nbsp;<small><em><%= dgettext "np_ps", "Qui habitat"%></em></small></h4>
 
-  <ul class="psalm">
-    <li class="ps_first"><sup class="ps_vs_num">1</sup><%= dgettext "comp", " Behold now, bless the Lord, all you servants of the Lord, *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  you that stand by night in the house of the Lord."%></li>
-    <li class="ps_first"><sup class="ps_vs_num">2</sup><%= dgettext "comp", " Lift up your hands in the holy place and bless the Lord; *"%></li>
-    <li class="ps_second"><%= dgettext "comp", "  the Lord who made heaven and earth bless you out of Zion."%></li>
-  </ul>
+<p>
+    <sup class="ps_vs_num">1</sup><%= dgettext "comp", " He who dwells in the shelter of the Most High *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  abides under the shadow of the Almighty."%></span><br>
+    <sup class="ps_vs_num">2</sup><%= dgettext "comp", " He shall say to the Lord,"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "“You are my refuge and my stronghold, *"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  my God in whom I put my trust.”"%></span><br>
+    <sup class="ps_vs_num">3</sup><%= dgettext "comp", " He shall deliver you from the snare of the hunter *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  and from the deadly pestilence."%></span><br>
+    <sup class="ps_vs_num">4</sup><%= dgettext "comp", " He shall cover you with his pinions,"%><br>
+    <span class="pb-vs-indent"><%= dgettext "comp", "and you shall find refuge under his wings; *"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " his faithfulness shall be a shield and buckler."%></span><br>
+    <sup class="ps_vs_num">5</sup><%= dgettext "comp", " You shall not be afraid of any terror by night, *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  nor of the arrow that flies by day;"%></span><br>
+    <sup class="ps_vs_num">6</sup><%= dgettext "comp", " Of the plague that stalks in the darkness, *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  nor of the sickness that lays waste at mid-day."%></span><br>
+    <sup class="ps_vs_num">7</sup><%= dgettext "comp", " A thousand shall fall at your side"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "and ten thousand at your right hand, *"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  but it shall not come near you."%></span><br>
+    <sup class="ps_vs_num">8</sup><%= dgettext "comp", " Your eyes have only to behold *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  to see the reward of the wicked."%></span><br>
+    <sup class="ps_vs_num">9</sup><%= dgettext "comp", " Because you have made the Lord your refuge, *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  and the Most High your habitation,"%></span><br>
+    <sup class="ps_vs_num">10</sup><%= dgettext "comp", " There shall no evil happen to you, *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  neither shall any plague come near your dwelling."%></span><br>
+    <sup class="ps_vs_num">11</sup><%= dgettext "comp", " For he shall give his angels charge over you, *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  to keep you in all your ways."%></span><br>
+    <sup class="ps_vs_num">11</sup><%= dgettext "comp", " They shall bear you in their hands, *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " lest you dash your foot against a stone."%></span><br>
+    <sup class="ps_vs_num">13</sup><%= dgettext "comp", " You shall tread upon the lion and adder; *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  you shall trample the young lion and the serpent"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "under your feet."%></span><br>
+    <sup class="ps_vs_num">14</sup><%= dgettext "comp", " Because he is bound to me in love,"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "therefore will I deliver him; *"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  I will protect him, because he knows my Name."%></span><br>
+    <sup class="ps_vs_num">15</sup><%= dgettext "comp", " He shall call upon me, and I will answer him; *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  I am with him in trouble;"%></span><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", " I will rescue him and bring him to honor."%></span><br>
+    <sup class="ps_vs_num">16</sup><%= dgettext "comp", " With long life will I satisfy him, *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  and show him my salvation."%></span><br>
+</p>
 
-"""
-  <p class="rubric"><%= dgettext "comp", "At the end of the Psalms is sung or said"%></p>
-  <p class= "pb_vs"><%= dgettext "mp", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
-  <p class= "pb_vs_indent"><%= dgettext "mp", "as it was in the beginning, is now, and ever shall be,"%></p>
-  <p class= "pb_vs_indent"><%= dgettext "mp", "world without end. Amen."%></p>
+<h4><%= dgettext "np_ps", "Psalm 134"%> &nbsp;&nbsp;&nbsp;&nbsp;<small><em><%= dgettext "np_ps", "Ecce nunc"%></em></small></h4>
+<p>
+    <sup class="ps_vs_num">1</sup><%= dgettext "comp", " Behold now, bless the Lord, all you servants of the Lord, *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  you that stand by night in the house of the Lord."%></span><br>
+    <sup class="ps_vs_num">2</sup><%= dgettext "comp", " Lift up your hands in the holy place and bless the Lord; *"%><br>
+    <span class="pb_vs_indent"><%= dgettext "comp", "  the Lord who made heaven and earth bless you out of Zion."%></span>
+</p>
 
-  <p class="rubric"><%= dgettext "comp", "One of the following, or some other suitable passage of Scripture, is read."%></p>
+<p class="rubric"><%= dgettext "comp", "At the end of the Psalms is sung or said"%></p>
+<p class= "pb_vs"><%= dgettext "mp", "Glory to the Father, and to the Son, and to the Holy Spirit;"%></p>
+<p class= "pb_vs_indent"><%= dgettext "mp", "as it was in the beginning, is now, and ever shall be,"%></p>
+<p class= "pb_vs_indent"><%= dgettext "mp", "world without end. Amen."%></p>
 
-  <p class="comp_scripture"><%= dgettext "comp_scripture", """
+<p class="rubric"><%= dgettext "comp", "One of the following, or some other suitable passage of Scripture, is read."%></p>
+
+<p class="comp_scripture"><%= dgettext "comp_scripture", """
     You, O Lord, are in the midst of us, and we are called by your Name: do not forsake us. 
     """%>
     <span class="s_ref">Jeremiah 14:9</span>
-  </p>
+</p>
 
-  <p class="comp_scripture"><%= dgettext "comp_scripture", """
+<p class="comp_scripture"><%= dgettext "comp_scripture", """
     Come to me, all who labor and are heavy-laden, and I will give you rest. 
     Take my yoke upon you, and learn from me, for I am gentle and lowly in 
     heart, and you will find rest for your souls. For my yoke is easy, and 
     my burden is light. 
     """%>
     <span class="s_ref">Matthew 11:28-30</span>
-  </p>
+</p>
 
-  <p class="comp_scripture"><%= dgettext "comp_scripture", """
+<p class="comp_scripture"><%= dgettext "comp_scripture", """
     Now may the God of peace who brought again from the dead our Lord Jesus, 
     the great shepherd of the sheep, by the blood of the eternal covenant, 
     equip you with everything good that you may do his will, working in us 
@@ -200,180 +180,180 @@
     forever and ever. Amen.
     """%>
     <span class="s_ref">Hebrews 13:20-21</span>
-  </p>
+</p>
 
-  <p class="comp_scripture"><%= dgettext "comp_scripture", """
+<p class="comp_scripture"><%= dgettext "comp_scripture", """
     Be sober-minded, be watchful. Your adversary the devil prowls around 
     like a roaring lion, seeking someone to devour. Resist him, firm in 
     your faith. 
     """%>
     <span class="s_ref">1 Peter 5:8-9a</span>
-  </p>
+</p>
 
-  <%= render "_comp_alt_readings.html" %>
+<%= render "_comp_alt_readings.html" %>
 
-  <p class="rubric"><%= dgettext "comp", "At the end of the reading is said"%></p>
+<p class="rubric"><%= dgettext "comp", "At the end of the reading is said"%></p>
 
-  <%= render "_the_word_of_the_lord.html" %>
-  <br/>
-  <p class="rubric"><%= dgettext "comp", "A period of silence may follow. A suitable hymn may be sung."%></p>
+<%= render "_the_word_of_the_lord.html" %>
 
-  <ul class="versicals">
-    <li class="speaker">Officiant</li>
-    <li class="says">Into your hands, O Lord, I commend my spirit;</li>
-  </ul>
-  <ul class="versicals">
-    <li class="speaker">People</li>
-    <li class="says">For you have redeemed me, O Lord, O God of truth.</li>
-  </ul>
-  <ul class="versicals">
-    <li class="speaker">Officiant</li>
-    <li class="says">Keep me as the apple of your eye;</li>
-  </ul>
-  <ul class="versicals">
-    <li class="speaker">People</li>
-    <li class="says">Hide me under the shadow of your wings.</li>
-  </ul>
+<p class="rubric"><%= dgettext "comp", "A period of silence may follow. A suitable hymn may be sung."%></p>
 
-  <p>Lord, have mercy [upon us].</p>
-  <p class="italic">Christ, have mercy [upon us].</p>
-  <p>Lord, have mercy [upon us].</p>
-  <p class= "rubric"><%= dgettext "mp", "Officiant and People"%></p>
-  <%= render "_lords_prayer_trad.html" %>
+<p>
+    <ul class="versicals">
+        <li class="speaker">Officiant</li>
+        <li class="says">Into your hands, O Lord, I commend my spirit;</li>
+        <li class="speaker">People</li>
+        <li class="says">For you have redeemed me, O Lord, O God of truth.</li>
+        <li class="speaker">Officiant</li>
+        <li class="says">Keep me as the apple of your eye;</li>
+        <li class="speaker">People</li>
+        <li class="says">Hide me under the shadow of your wings.</li>
+    </ul>
+</p>
+
+<p>
+    Lord, have mercy [upon us].<br>
+    <em>Christ, have mercy [upon us].</em><br>
+    Lord, have mercy [upon us].
+</p>
+
+<p class= "rubric"><%= dgettext "mp", "Officiant and People"%></p>
+
+<%= render "_lords_prayer_trad.html" %>
   
-  <p class= "rubric"><%= dgettext "mp", "or this"%></p>
+<p class= "rubric"><%= dgettext "mp", "or this"%></p>
 
-  <%= render "_lords_prayer_modern.html" %>
+<%= render "_lords_prayer_modern.html" %>
 
-  <ul class="versicals" style="margin-top: 1em;">
-    <li class="speaker">Officiant</li>
-    <li class="says">O Lord, hear our prayer;</li>
-  </ul>
-  <ul class="versicals">
-    <li class="speaker">People</li>
-    <li class="says">And let our cry come to you.</li>
-  </ul>
-  <ul class="versicals">
-    <li class="speaker">Officiant</li>
-    <li class="says">Let us pray.</li>
-  </ul>
+<p>
+    <ul class="versicals">
+        <li class="speaker">Officiant</li>
+        <li class="says">O Lord, hear our prayer;</li>
+        <li class="speaker">People</li>
+        <li class="says">And let our cry come to you.</li>
+        <li class="speaker">Officiant</li>
+        <li class="says">Let us pray.</li>
+    </ul>
+</p>
 
-  <p class= "rubric"><%= dgettext "comp", "The Officiant then says one or more of the following Collects. Other appropriate Collects may also be used."%></p>
-  <p class="comp_collect"><%= dgettext "comp", """
+<p class= "rubric"><%= dgettext "comp", "The Officiant then says one or more of the following Collects. Other appropriate Collects may also be used."%></p>
+<p class="comp_collect"><%= dgettext "comp", """
     Visit this place, O Lord, and drive far from it all snares of the enemy; let your
     holy angels dwell with us to preserve us in peace; and let your blessing be upon 
     us always; through Jesus Christ our Lord.
     """%>
-    <span class="italic">Amen.</span>
-  </p>
-  <p class="comp_collect"><%= dgettext "comp", """
+    <em>Amen.</em>
+</p>
+<p class="comp_collect"><%= dgettext "comp", """
     Lighten our darkness, we beseech you, O Lord; and by your great mercy defend us
     from all perils and dangers of this night; for the love of your only Son, our 
     Savior Jesus Christ.
     """%>
-    <span class="italic">Amen.</span>
-  </p>
-  <p class="comp_collect"><%= dgettext "comp", """
+    <em>Amen.</em>
+</p>
+<p class="comp_collect"><%= dgettext "comp", """
     Be present, O merciful God, and protect us through the hours of this night, 
     so that we who are wearied by the changes and chances of this life may rest 
     in your eternal changelessness; through Jesus Christ our Lord. 
     """%>
-    <span class="italic">Amen.</span>
-  </p>
-  <p class="comp_collect"><%= dgettext "comp", """
+    <em>Amen.</em>
+</p>
+<p class="comp_collect"><%= dgettext "comp", """
     Look down, O Lord, from your heavenly throne, illumine this night with your 
     celestial brightness, and from the children of light banish the deeds of 
     darkness; through Jesus Christ our Lord. 
     """%>
-    <span class="italic">Amen.</span>
-  </p>
+    <em>Amen.</em>
+</p>
 
-  <p class="comp_collect"><%= dgettext "comp", "A Collect for Saturdays"%></p>
-  <p class="comp_collect"><%= dgettext "comp", """
+<h4><%= dgettext "comp", "A Collect for Saturdays"%></h4>
+
+<p class="comp_collect"><%= dgettext "comp", """
     We give you thanks, O God, for revealing your Son Jesus Christ to us by the light 
     of his resurrection: Grant that as we sing your glory at the close of this day, 
     our joy may abound in the morning as we celebrate the Paschal mystery; through 
     Jesus Christ our Lord. 
     """%>
-    <span class="italic">Amen.</span>
-  </p>
+    <em>Amen.</em>
+</p>
 
-  <p class= "rubric"><%= dgettext "comp", "One of the following prayers may be added"%></p>
+<p class= "rubric"><%= dgettext "comp", "One of the following prayers may be added"%></p>
 
-  <p class="comp_collect"><%= dgettext "comp", """
+<p class="comp_collect"><%= dgettext "comp", """
     Keep watch, dear Lord, with those who work, or watch, or weep this night, and 
     give your angels charge over those who sleep. Tend the sick, Lord Christ; give 
     rest to the weary, bless the dying, soothe the suffering, pity the afflicted, 
     shield the joyous; and all for your love’s sake. 
     """%>
-    <span class="italic">Amen.</span>
-  </p>
+    <em>Amen.</em>
+</p>
 
-  <p class= "rubric"><%= dgettext "comp", "or this"%></p>
+<p class= "rubric"><%= dgettext "comp", "or this"%></p>
 
-  <p class="comp_collect"><%= dgettext "comp", """
+<p class="comp_collect"><%= dgettext "comp", """
     O God, your unfailing providence sustains the world we live in and the life we 
     live: Watch over those, both night and day, who work while others sleep, and 
     grant that we may never forget that our common life depends upon each other’s 
     toil; through Jesus Christ our Lord.
     """%>
-    <span class="italic">Amen.</span>
-  </p>
+    <em>Amen.</em>
+</p>
 
-  <p class= "rubric"><%= dgettext "comp", """
+<p class= "rubric"><%= dgettext "comp", """
     Silence may be kept, and free intercessions and thanksgivings may be offered.
     """%>
-  </p>
-  <p class= "rubric"><%= dgettext "comp", """
+</p>
+<p class= "rubric"><%= dgettext "comp", """
     The Officiant and People say or sing the Song of Simeon (Luke 2:29-32) 
     with this Antiphon
     """%>
-  </p>
+</p>
 
-  <p>Guide us waking, O Lord, and guard us sleeping; that awake</p>
-  <p>we may watch with Christ, and asleep we may rest in peace.</p>
+<p>Guide us waking, O Lord, and guard us sleeping; that awake we may watch with Christ, and asleep we may rest in peace.</p>
 
-  <p class= "rubric"><%= dgettext "np", "In Easter Season, add "%>
+<p class= "rubric"><%= dgettext "np", "In Easter Season, add "%>
     <span class="default">Alleluia, alleluia, alleluia.</span>
-  </p>
+</p>
 
-  <p class="song_sim_1">Lord, now let your servant depart in peace,
-  <p class="song_sim_2">according to your word.
-  <p class="song_sim_1">For my eyes have seen your salvation,
-  <p class="song_sim_2">which you have prepared before the face of all people;
-  <p class="song_sim_1">to be a light to lighten the Gentiles,
-  <p class="song_sim_2">and to be the glory of your people Israel.
-  <p class="song_sim_1">Glory to the Father, and to the Son, and to the Holy Spirit;
-  <p class="song_sim_2">as it was in the beginning, is now, and ever shall be, world
-  <p class="song_sim_2">without end. Amen.
-  <p>Guide us waking, O Lord, and guard us sleeping; that awake</p>
-  <p>we may watch with Christ, and asleep we may rest in peace.</p>
+<p>
+  Lord, now let your servant depart in peace, *<br>
+  <span class="pb_vs_indent">according to your word.</span><br>
+  For my eyes have seen your salvation, *<br>
+  <span class="pb_vs_indent">which you have prepared before the face of all people;</span><br>
+  to be a light to lighten the Gentiles, *<br>
+  <span class="pb_vs_indent">and to be the glory of your people Israel.</span><br>
+  Glory to the Father, and to the Son, and to the Holy Spirit; *<br>
+  <span class="pb_vs_indent">as it was in the beginning, is now, and ever shall be, world</span><br>
+  <span class="pb_vs_indent">without end. Amen.</span>
+</p>
 
-  <p class= "rubric"><%= dgettext "np", "In Easter Season, add "%>
+<p>Guide us waking, O Lord, and guard us sleeping; that awake we may watch with Christ, and asleep we may rest in peace.</p>
+
+<p class= "rubric"><%= dgettext "np", "In Easter Season, add "%>
     <span class="default">Alleluia, alleluia, alleluia.</span>
-  </p>
+</p>
 
-  <ul class="versicals">
-    <li class="speaker">Officiant</li>
-    <li class="says">Let us bless the Lord.</li>
-  </ul>
-  <ul class="versicals">
-    <li class="speaker">People</li>
-    <li class="says">Thanks be to God.</li>
-  </ul>
+<p>
+    <ul class="versicals">
+        <li class="speaker">Officiant</li>
+        <li class="says">Let us bless the Lord.</li>
+        <li class="speaker">People</li>
+        <li class="says">Thanks be to God.</li>
+    </ul>
+</p>
 
-  <p class= "rubric"><%= dgettext "np", "The Officiant concludes with the following"%></p>
-  <p>The Lord Almighty grant us a peaceful night and a perfect end. <span class="italic">Amen.</span></p>
-  <p class= "rubric"><%= dgettext "np", "Or this"%></p>
-  <p> The almighty and merciful Lord, Father, Son, and Holy Spirit,
-      bless us and keep us, this night and evermore. <span class="italic">Amen.</span>
-  </p>
 
-  <h3>Additional Directions</h3>
-  <p> For those saying Compline every day, particularly in families or other communities, additional
-      short Scriptural readings may be desired. Some appropriate readings include:
-  </p>
-  <ul class="appro_readings">
+<p class= "rubric"><%= dgettext "np", "The Officiant concludes with the following"%></p>
+
+<p>The Lord Almighty grant us a peaceful night and a perfect end. <em>Amen.</em></p>
+<p class= "rubric"><%= dgettext "np", "Or this"%></p>
+<p>The almighty and merciful Lord, Father, Son, and Holy Spirit, bless us and keep us, this night and evermore. <em>Amen.</em></p>
+
+<h3>Additional Directions</h3>
+
+<p>For those saying Compline every day, particularly in families or other communities, additional short Scriptural readings may be desired. Some appropriate readings include:</p>
+
+<ul class="appro_readings">
     <li>Isaiah 26:3-4</li>
     <li>Isaiah 30:15a</li>
     <li>Matthew 6:31-34</li>
@@ -381,8 +361,6 @@
     <li>1 Thessalonians 5:9-10</li>
     <li>1 Thessalonians 5:23</li>
     <li>Ephesians 4:26-27</li>
-  </ul>
-  <p> If desired, either version of the Lord’s Prayer may conclude with the phrase, “deliver us from evil,”
-      omitting the doxology.
-  </p>
-</div>
+</ul>
+
+<p>If desired, either version of the Lord’s Prayer may conclude with the phrase, “deliver us from evil,” omitting the doxology.</p>

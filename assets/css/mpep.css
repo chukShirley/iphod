@@ -127,14 +127,7 @@ p.rubric-office {
   display: block;
 }
 
-ul.psalm {
-  position: relative;
-  list-style: none;
-  margin: 0;
-}
 ul.psalm li{
-  position: relative;
-  left: -2em;
   display:  inline;
 }
 
